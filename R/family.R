@@ -1,31 +1,35 @@
-# I NEED TO:
-
-# 1. IMPORT/EXPORT
-# 2. VALIDATE
-# 3. INTERROGATE
-# 4. VISUALISE
-# 5. EDIT
-  # add/remove/update individual/family/source/repo/note
-# 6. DEFINE STRUCTURES
-# 7 TEST
 
 # Need helpers for dates and notes
 
 library(tidyverse)
 library(testthat)
-source("helpers.R")
-source("parms.R")
-source("structures.R")
-source("records.R")
-source("import_export.R")
-source("interrogate.R")
-source("visualise.R")
-source("edit.R")
+source("R/helpers.R")
+source("R/params.R")
+source("R/structures.R")
+source("R/records.R")
+source("R/import_export.R")
+source("R/validate.R")
+source("R/interrogate.R")
+source("R/visualise.R")
+source("R/edit.R")
 
 
 
-test = import_gedcom(file.choose())
-
+test = import_gedcom("Franklins.ged")
+royals = import_gedcom("royal92.ged")
 
 export_gedcom(test, "test.txt")
 
+gedcom() %>% 
+  # add_individual function will need to bring up a level some of these params
+  add_individual(name = "Jamie Lendrum", given = "Jamie", surname = "Lendrum", sex = "M",
+                 address_lines = c("6 Widgeon Court", "Fareham", "Hampshire", "PO16 8PW")) %>%
+  add_family() %>%
+  add_note("Blah de blah")
+  update_individual(dob = "fwefe")
+  
+  
+  
+  
+  
+ 

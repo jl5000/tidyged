@@ -1,5 +1,7 @@
 
 
+`%nin%` <- Negate(`%in%`)
+
 #' Title
 #' 
 #' @description 
@@ -7,25 +9,24 @@
 #' @details
 #'
 #' @param df 
-#' @param start_offset 
+#' @param start_level 
 #'
 #' @return
 #' @export
 #'
 #' @examples
-add_offsets <- function(df, start_offset) {
+add_levels <- function(df, start_level) {
   
   if (nrow(df) == 0) return(df)
   
   df %>% 
-    mutate(offset = start_offset + offset)
+    mutate(level = start_level + level)
   
 }
 
 finalise <- function(df, global_start_level = 0) {
   
   df %>% 
-    rename(level = offset) %>% 
     mutate(level = global_start_level + level) %>%
     fill(id)
   
@@ -34,18 +35,39 @@ finalise <- function(df, global_start_level = 0) {
 
 ref_to_xref <- function(ref, type) {
   
+  if (length(ref) == 0) return(character())
   paste0("@", toupper(type), ref, "@")
   
 }
 
 
-split_text <- function(text, char_limit) {
-  # 248 character limit  
-  if (nchar(text) <= char_limit) return(text)
+split_text <- function(text, top_tag, char_limit = 248, start_level = 0) {
+   
+  map_dfr(text, function(txt) {
+    
+    
+    
+    num_pieces <- ceiling(nchar(txt) / char_limit)
+    
+    for (i in seq_len(num_pieces)) {
+      if (i == 1) {
+        return_df <- tibble(level = start_level, tag = top_tag, 
+                            value = stringr::str_sub(txt, 1, char_limit))
+      } else {
+        return_df <- 
+          bind_rows(return_df,
+                    tibble(level = start_level + 1, tag = "CONC", 
+                           value = stringr::str_sub(txt, 
+                                                    char_limit*(i-1) + 1,
+                                                    char_limit*i))) 
+      }
+      
+    }
+    return_df
+    
+  })
   
-  num_pieces <- nchar(text) %/% char_limit + 1
-  stri_split_boundaries(text, num_pieces)
 }
-
+  
 
 #dates/times

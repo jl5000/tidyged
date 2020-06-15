@@ -20,13 +20,7 @@ royals = import_gedcom("royal92.ged")
 
 export_gedcom(test, "test.txt")
 
-gedcom() %>% 
-  # add_individual function will need to bring up a level some of these params
-  add_individual(name = "Jamie Lendrum", given = "Jamie", surname = "Lendrum", sex = "M",
-                 address_lines = c("6 Widgeon Court", "Fareham", "Hampshire", "PO16 8PW")) %>%
-  add_family() %>%
-  add_note("Blah de blah")
-  update_individual(dob = "fwefe")
+
   
   
   

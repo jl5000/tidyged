@@ -7,6 +7,21 @@ check_gedcom_file <- function(gedcom) {
 }
 
 
+validate_input_size <- function(input, max_dim, min_char = NULL, max_char = NULL) {
+  if (length(input) > max_dim)
+    stop("Input ", input, " has too many dimensions. The limit is ", max_dim)
+  
+  if (length(input) > 0 && !is.null(max_char) && max(nchar(input)) > max_char)
+    stop("Input ", input, " has too many characters. The limit is ", max_char)
+  
+  if (length(input) > 0 && !is.null(min_char) && min(nchar(input)) < min_char)
+    stop("Input ", input, " has too few characters. The minimum is ", min_char)
+}
+
+check_gedcom_line_size <- function() {
+  
+}
+
 
 validate_input <- function(input, choices) {
   if (length(input) == 1 && input %nin% choices) 

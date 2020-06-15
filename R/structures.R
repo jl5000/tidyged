@@ -14,14 +14,16 @@ address_structure <- function(all_address_lines,
   phone_numbers <- as.character(phone_numbers)
   fax_numbers <- as.character(fax_numbers)
   
-  if (length(all_address_lines) > 4) stop("Maximum of 4 address lines allowed")
-  if (length(city) > 1) stop("Maximum of one city allowed")
-  if (length(state) > 1) stop("Maximum of one state allowed")
-  if (length(postal_code) > 1) stop("Maximum of one postal code allowed")
-  if (length(phone_numbers) > 3) stop("Maximum of 3 phone numbers allowed")
-  if (length(emails) > 3) stop("Maximum of 3 email addresses allowed")
-  if (length(fax_numbers) > 3) stop("Maximum of 3 fax numbers allowed")
-  if (length(web_pages) > 3) stop("Maximum of 3 web pages allowed")
+  validate_input_size(all_address_lines, 4, 1, 60)
+  validate_input_size(city, 1, 1, 60)
+  validate_input_size(state, 1, 1, 60)
+  validate_input_size(postal_code, 1, 1, 10)
+  validate_input_size(country, 1, 1, 60)
+  validate_input_size(phone_numbers, 3, 1, 25)
+  validate_input_size(emails, 3, 5, 120)
+  validate_input_size(fax_numbers, 3, 5, 60)
+  validate_input_size(web_pages, 3, 5, 120)
+  
   
   address_lines_all <- tibble()
   
@@ -77,8 +79,8 @@ association_structure <- function(individual_ref,
   if (length(individual_ref) == 0) return(tibble())
   if (length(relation_is) == 0) return(tibble())
   
-  if (length(individual_ref) > 1) stop("Maximum of one individual reference allowed")
-  if (length(relation_is) > 1) stop("Maximum of one relation allowed")
+  validate_input_size(individual_ref, 1, 1, 18)
+  validate_input_size(relation_is, 1, 1, 25)
   
   bind_rows(
     tibble(level = 0, tag = "ASSO", value = ref_to_xref(individual_ref, "I")),
@@ -110,8 +112,13 @@ child_to_family_link <- function(family_ref,
                                 notes = list()) {
   
   if (length(family_ref) == 0) return(tibble())
+  
+  validate_input_size(family_ref, 1, 1, 18)
+  validate_input_size(pedigree_linkage_type, 1)
+  validate_input_size(child_linkage_status, 1)
   check_pedigree_linkage_type(pedigree_linkage_type)
   check_child_linkage_status(child_linkage_status)
+  
   
   bind_rows(
     tibble(level = 0, tag = "FAMC", value = ref_to_xref(family_ref, "F")),
@@ -135,6 +142,12 @@ event_detail <- function(event_classification = character(),
                          source_citations = list(),
                          multimedia_links = list()) {
   
+  validate_input_size(event_classification, 1, 1, 90)
+  validate_input_size(date, 1, 1, 35)
+  validate_input_size(responsible_agency, 1, 1, 120)
+  validate_input_size(religious_affiliation, 1, 1, 90)
+  validate_input_size(cause_of_event, 1, 1, 90)
+  validate_input_size(restriction_notice, 1)
   check_restriction_notice(restriction_notice)
   
   bind_rows(
@@ -161,6 +174,9 @@ family_event_detail <- function(husband_age = character(),
   husband_age <- as.character(husband_age)
   wife_age <- as.character(wife_age)
   
+  validate_input_size(husband_age, 1, 1, 12)
+  validate_input_size(wife_age, 1, 1, 12)
+  
   temp = bind_rows(
     tibble(level = 0, tag = "HUSB", value = ""),
     tibble(level = 1, tag = "HAGE", value = husband_age),
@@ -182,6 +198,8 @@ family_event_structure <- function(family_event,
                                    family_event_details = family_event_detail()) {
   
   if (length(family_event) == 0) return(tibble())
+  
+  validate_input_size(family_event, 1)
   check_family_event(family_event)
   
   bind_rows(
@@ -194,37 +212,41 @@ family_event_structure <- function(family_event,
 
 individual_attribute_structure <- function(individual_attribute,
                                            attribute_description,
-                                           individual_event_details = list()) {
+                                           individual_event_details = individual_event_detail()) {
   
   if (length(individual_attribute) == 0) return(tibble())
   
-  walk(individual_attribute, check_individual_attribute)
+  validate_input_size(individual_attribute, 1)
+  check_individual_attribute(individual_attribute)
   
-  if (length(individual_attribute) != length(attribute_description))
-    stop("A description needs to be provided for each attribute")
-  
-  if (length(individual_event_details) > 0 & 
-      length(individual_attribute) != length(individual_event_details))
-    stop("The size of the event details list needs to be the same size as the number of individual attributes")
-  
-  temp <- tibble()
-  for (i in seq_along(individual_attribute)) {
-    if (individual_attribute[i] == "DSCR") {
-      temp <- bind_rows(
-        temp,
-        split_text(start_level = 0, top_tag = "DSCR", text = attribute_description[i]),
-      )  
-    } else {
-      temp <- bind_rows(
-        temp,
-        tibble(level = 0, tag = individual_attribute[i], value = attribute_description[i]),
-      )
-    }
-    if (length(individual_event_details) > 0)
-    temp <- bind_rows(temp, individual_event_details[[i]] %>% add_levels(1)
-    )
+  if (individual_attribute %in% c("CAST","OCCU","RELI","FACT")) {
+      validate_input_size(attribute_description, 1, 1, 90)
+  } else if (individual_attribute %in% c("EDUC","PROP")) {
+    validate_input_size(attribute_description, 1, 1, 248)
+  } else if (individual_attribute == "IDNO") {
+    validate_input_size(attribute_description, 1, 1, 30)
+  } else if (individual_attribute %in% c("NATI","TITL")) {
+    validate_input_size(attribute_description, 1, 1, 120)
+  } else if (individual_attribute %in% c("NCHI","NMR")) {
+    validate_input_size(attribute_description, 1, 1, 3)
+  } else if (individual_attribute == "SSN") {
+    validate_input_size(attribute_description, 1, 9, 11)
   }
-  temp
+  
+  
+  if (individual_attribute == "DSCR") {
+    
+    temp <- split_text(start_level = 0, top_tag = "DSCR", text = attribute_description)
+    
+  } else {
+    
+    temp <- tibble(level = 0, tag = individual_attribute, value = attribute_description)
+    
+  }
+  
+  bind_rows(temp, 
+            individual_event_details %>% add_levels(1)
+  )
   
 }
 
@@ -233,6 +255,8 @@ individual_event_detail <- function(event_details = event_detail(),
                                     age = character()) {
   
   age <- as.character(age)
+  
+  validate_input_size(age, 1, 1, 12)
   
   bind_rows(
     event_details %>% add_levels(0),
@@ -249,6 +273,10 @@ individual_event_structure <- function(individual_event,
                                        adoptive_parent = character()) {
   
   if (length(individual_event) == 0) return(tibble())
+  
+  validate_input_size(individual_event, 1)
+  validate_input_size(family_ref, 1, 1, 18)
+  validate_input_size(adoptive_parent, 1)
   check_individual_event(individual_event)
   check_adoptive_parent(adoptive_parent)
   
@@ -293,11 +321,19 @@ multimedia_link <- function(file_ref,
                             title = character()) {
   
   if (length(file_ref) == 0) return(tibble())
+  
+  if_else(is.numeric(file_ref),
+          validate_input_size(file_ref, 1, 1, 18),
+          validate_input_size(file_ref, 1000, 1, 30))
+  # Is it one format per file?
+  validate_input_size(media_format, 1)
+  validate_input_size(media_type, 1)
+  validate_input_size(title, 1, 1, 248)
   check_media_format(media_format)
   check_media_type(media_type)
   
   if (is.numeric(file_ref)) {
-    
+  
     tibble(level = 0, tag = "OBJE", value = ref_to_xref(file_ref, "M"))
   
   } else {
@@ -319,12 +355,15 @@ multimedia_link <- function(file_ref,
 note_structure <- function(notes) {
   
   if (length(notes) == 0) return(tibble())
-  if (length(notes) > 1)
-    stop("Input should not be a vector of length greater than 1")
   
   if (is.numeric(notes)) {
+    
+    validate_input_size(notes, 1, 1, 18)
     tibble(level = 0, tag = "NOTE", value = ref_to_xref(notes, "T"))
+  
   } else {
+  
+    validate_input_size(notes, 1)
     split_text(start_level = 0, top_tag = "NOTE", text = notes)  
   }
   
@@ -342,6 +381,13 @@ personal_name_pieces <- function(prefix = character(),
                                  suffix = character(),
                                  notes = list(),
                                  source_citations = list()) {
+  
+  validate_input_size(prefix, 1, 1, 30)
+  validate_input_size(given, 1, 1, 120)
+  validate_input_size(nickname, 1, 1, 30)
+  validate_input_size(surname_prefix, 1, 1, 30)
+  validate_input_size(surname, 1, 1, 120)
+  validate_input_size(suffix, 1, 1, 30)
   
   bind_rows(
     tibble(level = 0, tag = "NPFX", value = prefix),
@@ -368,6 +414,15 @@ personal_name_structure <- function(name,
                                     romanized_name_pieces = list()) {
   
   if (length(name) == 0) return(tibble())
+  
+  validate_input_size(name, 1, 1, 120)
+  validate_input_size(type, 1, 5, 30)
+  validate_input_size(phonetic_variation, 1000, 5, 120)
+  validate_input_size(phonetic_type, 1000, 5, 30)
+  validate_input_size(romanized_variation, 1000, 5, 120)
+  validate_input_size(romanized_type, 1000, 5, 30)
+  
+  # ARE THESE NEEDED? - SPEC IS UNCLEAR
   if (length(phonetic_variation) != length(phonetic_type))
     stop("Each phonetic variation requires a phonetic type")
   if (length(phonetic_variation) != length(phonetic_name_pieces) &
@@ -420,6 +475,17 @@ place_structure <- function(place,
                             notes = list()) {
 
   if (length(place) == 0) return(tibble())
+  
+  validate_input_size(place, 1, 1, 120)
+  validate_input_size(place_hierarchy, 1, 1, 120)
+  validate_input_size(phonetic_variation, 1000, 1, 120)
+  validate_input_size(phonetic_type, 1000, 5, 30)
+  validate_input_size(romanized_variation, 1000, 1, 120)
+  validate_input_size(romanized_type, 1000, 5, 30)
+  validate_input_size(latitude, 1, 5, 8)
+  validate_input_size(longitude, 1, 5, 8)
+  
+  # ARE THESE NEEDED? - SPEC IS UNCLEAR
   if (length(phonetic_variation) != length(phonetic_type))
     stop("Each phonetic variation requires a phonetic type")
   if (length(romanized_variation) != length(romanized_type))
@@ -474,6 +540,15 @@ source_citation <- function(source_ref,
   
   page <- as.character(page)
   certainty_assessment <- as.character(certainty_assessment)
+  
+  if_else(is.numeric(source_ref), 
+          validate_input_size(source_ref, 1, 1, 18),
+          validate_input_size(source_ref, 1))
+  validate_input_size(page, 1, 1, 248)
+  validate_input_size(event_type, 1, 1, 15)
+  validate_input_size(role, 1, 1, 15)
+  validate_input_size(entry_recording_date, 1, 1, 90)
+  validate_input_size(certainty_assessment, 1)
   check_certainty_assessment(certainty_assessment)
   
   if (is.numeric(source_ref)) {
@@ -518,6 +593,10 @@ source_repository_citation <- function(repo_ref,
                                        media_type = character()) {
   
   if (length(repo_ref) == 0) return(tibble())
+  
+  validate_input_size(repo_ref, 1, 1, 18)
+  validate_input_size(call_numbers, 1000, 1, 120)
+  validate_input_size(media_type, 1)
   check_media_type(media_type)
   
   bind_rows(
@@ -535,6 +614,8 @@ spouse_to_family_link <- function(family_ref,
                                   notes = list()) {
   
   if (length(family_ref) == 0) return(tibble())
+  
+  validate_input_size(family_ref, 1, 1, 18)
   
   bind_rows(
     tibble(level = 0, tag = "FAMS", value = ref_to_xref(family_ref, "F")),

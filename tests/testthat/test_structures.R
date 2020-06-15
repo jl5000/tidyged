@@ -12,6 +12,12 @@ test_that("address_structure gives expected values", {
   expect_error(address_structure("address", emails = 1:4))
   expect_error(address_structure("address", fax_numbers = 1:4))
   expect_error(address_structure("address", web_pages = 1:4))
+  expect_error(address_structure(paste0(rep("a", 61), collapse = "")))
+  expect_error(address_structure("address", city = paste0(rep("a", 61), collapse = "")))
+  expect_error(address_structure("address", state = paste0(rep("a", 61), collapse = "")))
+  expect_error(address_structure("address", postal_code = paste0(rep("a", 11), collapse = "")))
+  expect_error(address_structure("address", country = paste0(rep("a", 61), collapse = "")))
+  expect_error(address_structure("address", web_pages = paste0(rep("a", 121), collapse = "")))
   
   df1 <- address_structure("Road name")
   df2 <- tibble::tribble(
@@ -181,9 +187,6 @@ test_that("individual_attribute_structure gives expected values", {
   expect_error(individual_attribute_structure("TEST"))
   expect_error(individual_attribute_structure("FACT"))
   expect_error(individual_attribute_structure(c("FACT", "EDUC"), "This is a fact"))
-  expect_error(
-    individual_attribute_structure(c("NATI", "OCCU"), c("British", "Banker"),
-                                   list(individual_event_detail(age = 10))))
   
   df1 <- individual_attribute_structure("NATI", "British")
   df2 <- tibble::tribble(
@@ -192,44 +195,16 @@ test_that("individual_attribute_structure gives expected values", {
   )
   expect_equal(df1, df2)
   
-  df1 <- individual_attribute_structure(c("NATI", "OCCU"), c("British", "Banker"))
+  df1 <- individual_attribute_structure("NATI", "British", individual_event_detail(age = 0))
   df2 <- tibble::tribble(
-    ~level,   ~tag,     ~value,
-    0, "NATI", "British",
-    0, "OCCU",  "Banker"
+    ~level,   ~tag, ~value,
+    0, "NATI",     "British",
+    1,  "AGE",           "0"
   )
   expect_equal(df1, df2)
   
-  df1 <- individual_attribute_structure(c("NATI", "OCCU"), c("British", "Banker"),
-                                        list(individual_event_detail(age = 0),
-                                             individual_event_detail(age = 20)))
-  df2 <- tibble::tribble(
-    ~level,   ~tag,    ~value,
-    0, "NATI", "British",
-    1,  "AGE",       "0",
-    0, "OCCU",  "Banker",
-    1,  "AGE",      "20"
-  )
-  expect_equal(df1, df2)
   
-  df1 <- individual_attribute_structure(c("NATI", "OCCU"), c("British", "Banker"),
-                                        list(individual_event_detail(age = 0,
-                                                                     event_detail(event_classification = "test1")),
-                                             individual_event_detail(age = 20,
-                                                                     event_detail(event_classification = "test2"))))
-  df2 <- tibble::tribble(
-    ~level,   ~tag,    ~value,
-    0, "NATI", "British",
-    1, "TYPE",   "test1",
-    1,  "AGE",       "0",
-    0, "OCCU",  "Banker",
-    1, "TYPE",   "test2",
-    1,  "AGE",      "20"
-  )
-  expect_equal(df1, df2)
 })
-
-
 
 # individual_event_detail ---------------------------------------------------
 test_that("individual_event_detail gives expected values", {

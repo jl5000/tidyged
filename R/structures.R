@@ -92,9 +92,15 @@ association_structure <- function(individual_ref,
 }
 
 
-change_date <- function(date,
+change_date <- function(date = date_exact(),
                         time = character(),
                         notes = list()) {
+  
+  if (length(date) == 0) 
+    date <- toupper(format(Sys.Date(), "%d %b %Y"))
+  
+  validate_input_size(date, 1, 10, 11)
+  validate_input_size(time, 1, 1, 12)
   
   bind_rows(
     tibble(level = 0, tag = "CHAN", value = ""),
@@ -598,7 +604,7 @@ source_repository_citation <- function(repo_ref,
   validate_input_size(call_numbers, 1000, 1, 120)
   validate_input_size(media_type, 1)
   check_media_type(media_type)
-  
+  # A MEDIA TYPE FOR EVERY CALL NUMBER?
   bind_rows(
     tibble(level = 0, tag = "REPO", value = ref_to_xref(repo_ref, "R")),
     notes %>% bind_rows() %>% add_levels(1),

@@ -77,7 +77,33 @@ test_that("association_structure gives expected values", {
 
 # change_date ---------------------------------------------------
 test_that("change_date gives expected values", {
-  expect_error(change_date())
+  df1 <- change_date()
+  df2 <- tibble::tribble(
+    ~level,   ~tag, ~value,
+    0, "CHAN", "",
+    1, "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+  )
+  expect_equal(df1, df2)
+  
+  df1 <- change_date(date_exact(5, 10, 1990))
+  df2 <- tibble::tribble(
+    ~level,   ~tag, ~value,
+    0, "CHAN", "",
+    1, "DATE", "5 OCT 1990"
+  )
+  expect_equal(df1, df2)
+  
+  df1 <- change_date(date_exact(5, 10, 1990), "10:34:56", notes = list(note_structure("Note 1"),
+                                                                       note_structure("Note 2")))
+  df2 <- tibble::tribble(
+    ~level,   ~tag, ~value,
+    0, "CHAN", "",
+    1, "DATE", "5 OCT 1990",
+    2, "TIME", "10:34:56",
+    1, "NOTE", "Note 1",
+    1, "NOTE", "Note 2"
+  )
+  expect_equal(df1, df2)
   
 })
 

@@ -71,3 +71,12 @@ split_text <- function(text, top_tag, char_limit = 248, start_level = 0) {
   
 
 #dates/times
+date_exact <- function(day = numeric(), 
+                       month = numeric(), 
+                       year = numeric()) {
+  
+  if (length(day) + length(month) + length(year) < 3) return(character())
+  
+  paste(day, toupper(month.abb[month]), year)
+  
+}

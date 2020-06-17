@@ -18,7 +18,7 @@ source("R/edit.R")
 test = import_gedcom("Franklins.ged")
 royals = import_gedcom("royal92.ged")
 
-export_gedcom(test, "test.txt")
+export_gedcom(test, "test.ged")
 
 
   

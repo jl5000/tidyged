@@ -15,53 +15,50 @@
 # For records
 
 
-header_section <- function(submitter_ref,
+header_section <- function(xref_subm,
                            approved_system_id,
                            character_set,
-                           submission_ref = character(),
+                           xref_subn = character(),
                            system_version_number = character(),
                            name_of_product = character(),
                            name_of_business = character(),
                            business_address = address_structure(character()),
-                           source_data_name = character(),
-                           source_data_publication_date = date_exact(),
-                           source_data_copyright = character(),
-                           receiving_system = character(),
+                           name_of_source_data = character(),
+                           publication_date_source_data = date_exact(),
+                           copyright_source_data = character(),
+                           receiving_system_name = character(),
                            transmission_date = date_exact(),
                            transmission_time = character(),
                            file_name = character(),
-                           gedcom_copyright = character(),
+                           copyright_gedcom_file = character(),
                            character_set_version_number = character(),
-                           language = character(),
-                           place = character(),
-                           gedcom_description = character()) {
+                           language_of_text = character(),
+                           place_hierarchy = character(),
+                           gedcom_content_description = character()) {
   
   system_version_number <- as.character(system_version_number)
   character_set_version_number <- as.character(character_set_version_number)
   
-  validate_input_size(submitter_ref, 1, 1, 18)
-  validate_input_size(approved_system_id, 1, 1, 20)
+  validate_xref(xref_subm, 1)
+  validate_xref(xref_subn, 1)
+  validate_approved_system_id(approved_system_id, 1)
   approved_system_id <- str_replace_all(approved_system_id, " ", "_")
-  validate_input_size(character_set, 1)
-  validate_input_size(submission_ref, 1, 1, 18)
-  validate_input_size(system_version_number, 1, 1, 15)
-  validate_input_size(name_of_product, 1, 1, 90)
-  validate_input_size(name_of_business, 1, 1, 90)
-  validate_input_size(business_address, 1)
-  validate_input_size(source_data_name, 1, 1, 90)
-  validate_input_size(source_data_publication_date, 1, 10, 11)
-  validate_input_size(source_data_copyright, 1)
-  validate_input_size(receiving_system, 1, 1, 20)
-  validate_input_size(transmission_date, 1, 10, 11)
-  validate_input_size(transmission_time, 1, 1, 12)
-  validate_input_size(file_name, 1, 1, 90)
-  validate_input_size(gedcom_copyright, 1, 1, 90)
-  validate_input_size(character_set_version_number, 1, 1, 15)
-  validate_input_size(language, 1, 1, 15)
-  validate_input_size(place, 1, 1, 120)
-  validate_input_size(gedcom_description, 1)
-  
-  check_character_set(character_set)
+  validate_character_set(character_set, 1)
+  validate_version_number(system_version_number, 1)
+  validate_version_number(character_set_version_number, 1)
+  validate_name_of_product(name_of_product, 1)
+  validate_name_of_business(name_of_business, 1)
+  validate_name_of_source_data(name_of_source_data, 1)
+  validate_publication_date_source_data(publication_date_source_data, 1)
+  validate_copyright_source_data(copyright_source_data, 1)
+  validate_receiving_system_name(receiving_system_name, 1)
+  validate_transmission_date(transmission_date, 1)
+  validate_transmission_time(transmission_time, 1)
+  validate_file_name(file_name, 1)
+  validate_copyright_gedcom_file(copyright_gedcom_file, 1)
+  validate_language_of_text(language_of_text, 1)
+  validate_place_hierarchy(place_hierarchy, 1)
+  validate_gedcom_content_description(gedcom_content_description, 1)
   
   temp <- bind_rows(
     tibble(level = 0, id = "HD", tag = "HEAD", value = ""),
@@ -116,7 +113,7 @@ family_record <- function(family_ref,
                           user_reference_number = character(),
                           user_reference_type = character(),
                           automated_record_id = character(),
-                          change_date = change_date(),
+                          last_modified = change_date(),
                           notes = list(),
                           source_citations = list(),
                           multimedia_links = list()){
@@ -134,7 +131,7 @@ family_record <- function(family_ref,
   validate_input_size(user_reference_number, 1000, 1, 20)
   validate_input_size(user_reference_type, 1, 1, 40)
   validate_input_size(automated_record_id, 1, 1, 12)
-  validate_input_size(change_date, 1, 10, 11)
+  validate_input_size(last_modified, 1, 10, 11)
   
   check_restriction_notice(restriction_notice)
   
@@ -151,7 +148,7 @@ family_record <- function(family_ref,
     tibble(level = 1, tag = "REFN", value = user_reference_number),
     tibble(level = 2, tag = "TYPE", value = user_reference_type),
     tibble(level = 1, tag = "RIN", value = automated_record_id),
-    change_date %>% add_levels(1),
+    last_modified %>% add_levels(1),
     notes %>% bind_rows() %>% add_levels(1),
     source_citations %>% bind_rows() %>% add_levels(1),
     multimedia_links %>% bind_rows() %>% add_levels(1)
@@ -180,7 +177,7 @@ individual_record <- function(individual_ref,
                               user_reference_number = character(),
                               user_reference_type = character(),
                               automated_record_id = character(),
-                              change_date = change_date(),
+                              last_modified = change_date(),
                               notes = list(),
                               source_citations = list(),
                               multimedia_links = list()) {
@@ -202,7 +199,7 @@ individual_record <- function(individual_ref,
   validate_input_size(user_reference_number, 1000, 1, 20) # QUERY
   validate_input_size(user_reference_type, 1, 1, 40)
   validate_input_size(automated_record_id, 1, 1, 12)
-  validate_input_size(change_date, 1, 10, 11)
+  validate_input_size(last_modified, 1, 10, 11)
     
   check_restriction_notice(restriction_notice)
   check_sex(sex)
@@ -227,7 +224,7 @@ individual_record <- function(individual_ref,
     tibble(level = 1, tag = "REFN", value = user_reference_number),
     tibble(level = 2, tag = "TYPE", value = user_reference_type),
     tibble(level = 1, tag = "RIN", value = automated_record_id),
-    change_date %>% add_levels(1),
+    last_modified %>% add_levels(1),
     notes %>% bind_rows() %>% add_levels(1),
     source_citations %>% bind_rows() %>% add_levels(1),
     multimedia_links %>% bind_rows() %>% add_levels(1)
@@ -248,7 +245,7 @@ multimedia_record <- function(object_ref,
                               automated_record_id = character(),
                               notes = list(),
                               source_citations = list(),
-                              change_date = change_date()){
+                              last_modified = change_date()){
   
   file_reference <- as.character(file_reference)
   user_ref_number <- as.character(user_ref_number)
@@ -264,7 +261,7 @@ multimedia_record <- function(object_ref,
   validate_input_size(user_ref_number, 1000, 1, 20)
   validate_input_size(user_ref_type, 1000, 1, 40)
   validate_input_size(automated_record_id, 1, 1, 12)
-  validate_input_size(change_date, 1, 10, 11)
+  validate_input_size(last_modified, 1, 10, 11)
   
   check_media_format(media_format)
   check_media_type(media_type)
@@ -280,7 +277,7 @@ multimedia_record <- function(object_ref,
     tibble(level = 1, tag = "RIN", value = automated_record_id),
     notes %>% bind_rows() %>% add_levels(1),
     source_citations %>% bind_rows() %>% add_levels(1),
-    change_date %>% add_levels(1)
+    last_modified %>% add_levels(1)
   ) %>% 
     finalise()
   
@@ -295,7 +292,7 @@ note_record <- function(note_ref,
                         user_ref_type = character(),
                         automated_record_id = character(),
                         source_citations = list(),
-                        change_date = change_date()){
+                        last_modified = change_date()){
   
   user_ref_number <- as.character(user_ref_number)
   
@@ -304,7 +301,7 @@ note_record <- function(note_ref,
   validate_input_size(user_ref_number, 1000, 1, 20)
   validate_input_size(user_ref_type, 1, 1, 40)
   validate_input_size(automated_record_id, 1, 1, 12)
-  validate_input_size(change_date, 1, 10, 11)
+  validate_input_size(last_modified, 1, 10, 11)
   
   bind_rows(
     split_text(start_level = 0, top_tag = "NOTE", text = submitter_text),
@@ -312,7 +309,7 @@ note_record <- function(note_ref,
     tibble(level = 2, tag = "TYPE", value = user_ref_type),
     tibble(level = 1, tag = "RIN", value = automated_record_id),
     source_citations %>% bind_rows() %>% add_levels(1),
-    change_date %>% add_levels(1)
+    last_modified %>% add_levels(1)
   ) %>% 
     mutate(id = if_else(tag == "NOTE", ref_to_xref(note_ref, "T"), NA_character_)) %>% 
     finalise()
@@ -328,7 +325,7 @@ repository_record <- function(repo_ref,
                               user_ref_number = character(),
                               user_ref_type = character(),
                               automated_record_id = character(),
-                              change_date = change_date()){
+                              last_modified = change_date()){
 
   user_ref_number <- as.character(user_ref_number)
   
@@ -337,7 +334,7 @@ repository_record <- function(repo_ref,
   validate_input_size(user_ref_number, 1000, 1, 20)
   validate_input_size(user_ref_type, 1, 1, 40)
   validate_input_size(automated_record_id, 1, 1, 12)
-  validate_input_size(change_date, 1, 10, 11)
+  validate_input_size(last_modified, 1, 10, 11)
   
   bind_rows(
     tibble(level = 0, id = ref_to_xref(repo_ref, "R"), tag = "REPO"),
@@ -347,7 +344,7 @@ repository_record <- function(repo_ref,
     tibble(level = 1, tag = "REFN", value = user_ref_number),
     tibble(level = 2, tag = "TYPE", value = user_ref_type),
     tibble(level = 1, tag = "RIN", value = automated_record_id),
-    change_date %>% add_levels(1)
+    last_modified %>% add_levels(1)
   ) %>% 
     finalise()
   
@@ -371,11 +368,14 @@ source_record <- function(source_ref,
                           user_ref_number = character(),
                           user_ref_type = character(),
                           automated_record_id = character(),
-                          change_date = change_date(),
+                          last_modified = change_date(),
                           notes = list(),
                           multimedia_links = list()){
   
   user_ref_number <- as.character(user_ref_number)
+  
+  validate_input_size()
+  
   
   bind_rows(
     tibble(level = 0, id = ref_to_xref(source_ref, "S"), tag = "SOUR"),
@@ -394,7 +394,7 @@ source_record <- function(source_ref,
     tibble(level = 1, tag = "REFN", value = user_ref_number),
     tibble(level = 2, tag = "TYPE", value = user_ref_type),
     tibble(level = 1, tag = "RIN", value = automated_record_id),
-    change_date %>% add_levels(1),
+    last_modified %>% add_levels(1),
     notes %>% bind_rows() %>% add_levels(1),
     multimedia_links %>% bind_rows() %>% add_levels(1)
   ) %>% 
@@ -413,7 +413,7 @@ submission_record <- function(submission_ref,
                               ordinance_flag = character(),
                               automated_record_id = character(),
                               notes = list(),
-                              change_date = change_date(character())){
+                              last_modified = change_date()){
  
   num_anc_generations <- as.character(num_anc_generations)
   num_des_generations <- as.character(num_des_generations)
@@ -429,7 +429,7 @@ submission_record <- function(submission_ref,
     tibble(level = 1, tag = "ORDI", value = ordinance_flag),
     tibble(level = 1, tag = "RIN", value = automated_record_id),
     notes %>% bind_rows() %>% add_levels(1),
-    change_date %>% add_levels(1)
+    last_modified %>% add_levels(1)
   ) %>% 
     finalise()
   
@@ -445,7 +445,7 @@ submitter_record <- function(submitter_ref,
                              submitter_registered_rfn = character(),
                              automated_record_id = character(),
                              notes = list(),
-                             change_date = change_date(character())){
+                             last_modified = change_date()){
   
   submitter_registered_rfn <- as.character(submitter_registered_rfn)
   
@@ -458,7 +458,7 @@ submitter_record <- function(submitter_ref,
     tibble(level = 1, tag = "RFN", value = submitter_registered_rfn),
     tibble(level = 1, tag = "RIN", value = automated_record_id),
     notes %>% bind_rows() %>% add_levels(1),
-    change_date %>% add_levels(1)
+    last_modified %>% add_levels(1)
   ) %>% 
     finalise()
   

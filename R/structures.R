@@ -1,29 +1,29 @@
 
 address_structure <- function(all_address_lines,
-                              city = character(),
-                              state = character(),
-                              postal_code = character(),
-                              country = character(),
-                              phone_numbers = character(),
-                              emails = character(),
-                              fax_numbers = character(),
-                              web_pages = character()) {
+                              address_city = character(),
+                              address_state = character(),
+                              address_postal_code = character(),
+                              address_country = character(),
+                              phone_number = character(),
+                              address_email = character(),
+                              address_fax = character(),
+                              address_web_page = character()) {
   
   if (length(all_address_lines) == 0) return(tibble())
-  postal_code <- as.character(postal_code)
-  phone_numbers <- as.character(phone_numbers)
-  fax_numbers <- as.character(fax_numbers)
   
-  validate_input_size(all_address_lines, 4, 1, 60)
-  validate_input_size(city, 1, 1, 60)
-  validate_input_size(state, 1, 1, 60)
-  validate_input_size(postal_code, 1, 1, 10)
-  validate_input_size(country, 1, 1, 60)
-  validate_input_size(phone_numbers, 3, 1, 25)
-  validate_input_size(emails, 3, 5, 120)
-  validate_input_size(fax_numbers, 3, 5, 60)
-  validate_input_size(web_pages, 3, 5, 120)
+  address_postal_code <- as.character(address_postal_code)
+  phone_number <- as.character(phone_number)
+  address_fax <- as.character(address_fax)
   
+  validate_address_lines(all_address_lines, 4)
+  validate_address_city(address_city, 1)
+  validate_address_state(address_state, 1)
+  validate_address_postal_code(address_postal_code, 1)
+  validate_address_country(address_country, 1)
+  validate_phone_number(phone_number, 3)
+  validate_address_email(address_email, 3)
+  validate_address_fax(address_fax, 3)
+  validate_address_web_page(address_web_page, 3)
   
   address_lines_all <- tibble()
   
@@ -57,14 +57,14 @@ address_structure <- function(all_address_lines,
   
   bind_rows(
     address_lines_all,
-    tibble(level = 1, tag = "CITY", value = city),
-    tibble(level = 1, tag = "STAE", value = state),
-    tibble(level = 1, tag = "POST", value = postal_code),
-    tibble(level = 1, tag = "CTRY", value = country),
-    tibble(level = 0, tag = "PHON", value = phone_numbers),
-    tibble(level = 0, tag = "EMAIL", value = emails),
-    tibble(level = 0, tag = "FAX", value = fax_numbers),
-    tibble(level = 0, tag = "WWW", value = web_pages)
+    tibble(level = 1, tag = "CITY", value = address_city),
+    tibble(level = 1, tag = "STAE", value = address_state),
+    tibble(level = 1, tag = "POST", value = address_postal_code),
+    tibble(level = 1, tag = "CTRY", value = address_country),
+    tibble(level = 0, tag = "PHON", value = phone_number),
+    tibble(level = 0, tag = "EMAIL", value = address_email),
+    tibble(level = 0, tag = "FAX", value = address_fax),
+    tibble(level = 0, tag = "WWW", value = address_web_page)
   )
   
   
@@ -321,14 +321,15 @@ lds_spouse_sealing <- function() {
 }
 
 
-multimedia_link <- function(file_ref,
-                            media_format = character(),
-                            media_type = character(),
-                            title = character()) {
+multimedia_link <- function(xref_obje = character(),
+                            multimedia_file_refn = character(),
+                            multimedia_format = character(),
+                            source_media_type = character(),
+                            descriptive_title = character()) {
   
-  if (length(file_ref) == 0) return(tibble())
+  if (length(xref_obje) + length(multimedia_file_refn) == 0) return(tibble())
   
-  if_else(is.numeric(file_ref),
+  if_else(str_detect(xref_obje, "@"),
           validate_input_size(file_ref, 1, 1, 18),
           validate_input_size(file_ref, 1000, 1, 30))
   # Is it one format per file?
@@ -338,21 +339,21 @@ multimedia_link <- function(file_ref,
   check_media_format(media_format)
   check_media_type(media_type)
   
-  if (is.numeric(file_ref)) {
+  if (length(xref_obje) > 0) {
   
-    tibble(level = 0, tag = "OBJE", value = ref_to_xref(file_ref, "M"))
+    tibble(level = 0, tag = "OBJE", value = xref_obje)
   
   } else {
     
     #file and form are needed
-    if (length(media_format) == 0) stop("Media format required")
+    if (length(multimedia_format) == 0) stop("Media format required")
     
     bind_rows(
       tibble(level = 0, tag = "OBJE", value = ""),
-      tibble(level = 1, tag = "FILE", value = file_ref),
-      tibble(level = 2, tag = "FORM", value = media_format),
-      tibble(level = 3, tag = "MEDI", value = media_type),
-      tibble(level = 1, tag = "TITL", value = title)
+      tibble(level = 1, tag = "FILE", value = multimedia_file_refn),
+      tibble(level = 2, tag = "FORM", value = multmedia_format),
+      tibble(level = 3, tag = "MEDI", value = source_media_type),
+      tibble(level = 1, tag = "TITL", value = descriptive_title)
     )
   }
 }

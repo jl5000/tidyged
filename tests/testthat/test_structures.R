@@ -5,19 +5,19 @@
 test_that("address_structure gives expected values", {
   expect_error(address_structure())
   expect_error(address_structure(letters[1:5]))
-  expect_error(address_structure("address", city = 1:2))
-  expect_error(address_structure("address", state = 1:2))
-  expect_error(address_structure("address", postal_code = 1:2))
-  expect_error(address_structure("address", phone_numbers = 1:4))
-  expect_error(address_structure("address", emails = 1:4))
-  expect_error(address_structure("address", fax_numbers = 1:4))
-  expect_error(address_structure("address", web_pages = 1:4))
+  expect_error(address_structure("address", address_city = 1:2))
+  expect_error(address_structure("address", address_state = 1:2))
+  expect_error(address_structure("address", address_postal_code = 1:2))
+  expect_error(address_structure("address", phone_number = 1:4))
+  expect_error(address_structure("address", address_email = 1:4))
+  expect_error(address_structure("address", address_fax = 1:4))
+  expect_error(address_structure("address", address_web_page = 1:4))
   expect_error(address_structure(paste0(rep("a", 61), collapse = "")))
-  expect_error(address_structure("address", city = paste0(rep("a", 61), collapse = "")))
-  expect_error(address_structure("address", state = paste0(rep("a", 61), collapse = "")))
-  expect_error(address_structure("address", postal_code = paste0(rep("a", 11), collapse = "")))
-  expect_error(address_structure("address", country = paste0(rep("a", 61), collapse = "")))
-  expect_error(address_structure("address", web_pages = paste0(rep("a", 121), collapse = "")))
+  expect_error(address_structure("address", address_city = paste0(rep("a", 61), collapse = "")))
+  expect_error(address_structure("address", address_state = paste0(rep("a", 61), collapse = "")))
+  expect_error(address_structure("address", address_postal_code = paste0(rep("a", 11), collapse = "")))
+  expect_error(address_structure("address", address_country = paste0(rep("a", 61), collapse = "")))
+  expect_error(address_structure("address", address_web_page = paste0(rep("a", 121), collapse = "")))
   
   df1 <- address_structure("Road name")
   df2 <- tibble::tribble(
@@ -39,7 +39,7 @@ test_that("address_structure gives expected values", {
   )
   expect_equal(df1, df2)
   
-  df1 <- address_structure(letters[1:2], country = "UK")
+  df1 <- address_structure(letters[1:2], address_country = "UK")
   df2 <- tibble::tribble(
     ~level,   ~tag, ~value,
     0, "ADDR",    "a",
@@ -54,10 +54,10 @@ test_that("address_structure gives expected values", {
 # association_structure ---------------------------------------------------
 test_that("association_structure gives expected values", {
   expect_error(association_structure())
-  expect_error(association_structure(1))
-  expect_error(association_structure(1:2, "Godfather"))
+  expect_error(association_structure("@1@"))
+  expect_error(association_structure(c("@1@", "@2@"), "Godfather"))
   
-  df1 <- association_structure(1, "Godfather")
+  df1 <- association_structure("@I1@", "Godfather")
   df2 <- tibble::tribble(
     ~level,   ~tag,      ~value,
     0, "ASSO",      "@I1@",
@@ -65,7 +65,7 @@ test_that("association_structure gives expected values", {
   )
   expect_equal(df1, df2)
   
-  df1 <- association_structure(1, "Father", notes = list(note_structure("This is a note")))
+  df1 <- association_structure("@I1@", "Father", notes = list(note_structure("This is a note")))
   df2 <- tibble::tribble(
     ~level,   ~tag,              ~value,
     0, "ASSO",              "@I1@",
@@ -93,6 +93,15 @@ test_that("change_date gives expected values", {
   )
   expect_equal(df1, df2)
   
+  df1 <- change_date(date_exact(18, 12, 2008), time_value = "11:00:08.563")
+  df2 <- tibble::tribble(
+    ~level,   ~tag, ~value,
+    0, "CHAN", "",
+    1, "DATE", "18 DEC 2008",
+    2, "TIME", "11:00:08.563"
+  )
+  expect_equal(df1, df2)
+  
   df1 <- change_date(date_exact(5, 10, 1990), "10:34:56", notes = list(note_structure("Note 1"),
                                                                        note_structure("Note 2")))
   df2 <- tibble::tribble(
@@ -110,17 +119,17 @@ test_that("change_date gives expected values", {
 # child_to_family_link ---------------------------------------------------
 test_that("child_to_family_link gives expected values", {
   expect_error(child_to_family_link())
-  expect_error(child_to_family_link(1, pedigree_linkage_type = "foste"))
-  expect_error(child_to_family_link(1, child_linkage_status = "challenge"))
+  expect_error(child_to_family_link("@1@", pedigree_linkage_type = "foste"))
+  expect_error(child_to_family_link("@1@", child_linkage_status = "challenge"))
   
-  df1 <- child_to_family_link(1)
+  df1 <- child_to_family_link("@F1@")
   df2 <- tibble::tribble(
     ~level,   ~tag, ~value,
     0, "FAMC", "@F1@"
   )
   expect_equal(df1, df2)
   
-  df1 <- child_to_family_link(1, "birth", "proven")
+  df1 <- child_to_family_link("@F1@", "birth", "proven")
   df2 <- tibble::tribble(
     ~level,   ~tag,   ~value,
     0, "FAMC",   "@F1@",

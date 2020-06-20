@@ -71,20 +71,20 @@ address_structure <- function(all_address_lines,
 }
 
 
-association_structure <- function(individual_ref,
-                                  relation_is,
+association_structure <- function(xref_indi,
+                                  relation_is_descriptor,
                                   source_citations = list(),
                                   notes = list()) {
   
-  if (length(individual_ref) == 0) return(tibble())
-  if (length(relation_is) == 0) return(tibble())
+  if (length(xref_indi) == 0) return(tibble())
+  if (length(relation_is_descriptor) == 0) return(tibble())
   
-  validate_input_size(individual_ref, 1, 1, 18)
-  validate_input_size(relation_is, 1, 1, 25)
+  validate_xref(xref_indi, 1)
+  validate_relation_is_descriptor(relation_is_descriptor, 1)
   
   bind_rows(
-    tibble(level = 0, tag = "ASSO", value = ref_to_xref(individual_ref, "I")),
-    tibble(level = 1, tag = "RELA", value = relation_is),
+    tibble(level = 0, tag = "ASSO", value = xref_indi),
+    tibble(level = 1, tag = "RELA", value = relation_is_descriptor),
     source_citations %>% bind_rows() %>% add_levels(1),
     notes %>% bind_rows() %>% add_levels(1)
   )
@@ -92,42 +92,39 @@ association_structure <- function(individual_ref,
 }
 
 
-change_date <- function(date = date_exact(),
-                        time = character(),
+change_date <- function(change_date = date_exact(),
+                        time_value = character(),
                         notes = list()) {
   
-  if (length(date) == 0) 
-    date <- toupper(format(Sys.Date(), "%d %b %Y"))
+  if (length(change_date) == 0) 
+    change_date <- toupper(format(Sys.Date(), "%d %b %Y"))
   
-  validate_input_size(date, 1, 10, 11)
-  validate_input_size(time, 1, 1, 12)
+  validate_change_date(change_date, 1)
+  validate_time_value(time_value, 1)
   
   bind_rows(
     tibble(level = 0, tag = "CHAN", value = ""),
-    tibble(level = 1, tag = "DATE", value = date),
-    tibble(level = 2, tag = "TIME", value = time),
+    tibble(level = 1, tag = "DATE", value = change_date),
+    tibble(level = 2, tag = "TIME", value = time_value),
     notes %>% bind_rows() %>% add_levels(1)
   )
   
 }
 
 
-child_to_family_link <- function(family_ref,
+child_to_family_link <- function(xref_fam,
                                 pedigree_linkage_type = character(),
                                 child_linkage_status = character(),
                                 notes = list()) {
   
-  if (length(family_ref) == 0) return(tibble())
+  if (length(xref_fam) == 0) return(tibble())
   
-  validate_input_size(family_ref, 1, 1, 18)
-  validate_input_size(pedigree_linkage_type, 1)
-  validate_input_size(child_linkage_status, 1)
-  check_pedigree_linkage_type(pedigree_linkage_type)
-  check_child_linkage_status(child_linkage_status)
-  
+  validate_xref(xref_fam, 1)
+  validate_pedigree_linkage_type(pedigree_linkage_type, 1)
+  validate_child_linkage_status(child_linkage_status, 1)
   
   bind_rows(
-    tibble(level = 0, tag = "FAMC", value = ref_to_xref(family_ref, "F")),
+    tibble(level = 0, tag = "FAMC", value = xref_fam),
     tibble(level = 1, tag = "PEDI", value = pedigree_linkage_type),
     tibble(level = 1, tag = "STAT", value = child_linkage_status),
     notes %>% bind_rows() %>% add_levels(1)

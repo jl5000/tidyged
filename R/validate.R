@@ -19,9 +19,10 @@ validate_input_size <- function(input, max_dim, min_char = NULL, max_char = NULL
 }
 
 validate_input_pattern <- function(input, pattern) {
-  if (!grepl("\\^.+\\$", pattern)) pattern <- paste0("^", pattern, "$")
-  if (!grepl(pattern, input))
-    stop("Input ", input, " is in an unexpected format")
+  for (i in input) {
+    if (!grepl(pattern, i))
+      stop("Input ", i, " is in an unexpected format")
+  }
 }
 
 validate_input_choice <- function(input, choices) {
@@ -65,16 +66,16 @@ validate_adopted_by_which_parent <- function(input, max_dim) {
 validate_age_at_event <- function(input, max_dim) {
   validate_input_size(input, max_dim, 2, 15) # 5.5.1L
   validate_input_pattern(input, paste0("[<>]?", #TODO: handle the extra space
-                                       "\\d{1,3}y \\d{1,2}m \\d{1,3}d|",
-                                       "\\d{1,3}y \\d{1,2}m|",
-                                       "\\d{1,3}y \\d{1,3}d|",
-                                       "\\d{1,2}m \\d{1,3}d|",
-                                       "\\d{1,3}y|",
-                                       "\\d{1,2}m|",
-                                       "\\d{1,3}d|",
-                                       "CHILD|",
-                                       "INFANT|",
-                                       "STILLBORN"))
+                                       "\\d{1,3}y \\d{1,2}m \\d{1,3}d$|",
+                                       "\\d{1,3}y \\d{1,2}m$|",
+                                       "\\d{1,3}y \\d{1,3}d$|",
+                                       "\\d{1,2}m \\d{1,3}d$|",
+                                       "\\d{1,3}y$|",
+                                       "\\d{1,2}m$|",
+                                       "\\d{1,3}d$|",
+                                       "^CHILD$|",
+                                       "^INFANT$|",
+                                       "^STILLBORN$"))
 }
 validate_ancestral_file_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 12)
@@ -109,8 +110,8 @@ validate_certainty_assessment <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 1)
 }
 validate_change_date <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 10, 11)
-  validate_input_pattern(input, "\\d{1,2} \\w{3} \\d{4}")
+  validate_input_size(input, max_dim, 10, 14)
+  validate_input_pattern(input, "^\\d{1,2} \\w{3} \\d{4}(/\\d{2})?$")  
 }
 validate_character_set <- function(input, max_dim) {
   choices <- c("ANSEL", "UTF-8", "UNICODE", "ASCII")
@@ -304,14 +305,14 @@ validate_place_hierarchy <- function(input, max_dim) {
 }
 validate_place_latitude <- function(input, max_dim) {
   validate_input_size(input, max_dim, 5, 10) # 5.5.1L
-  validate_input_pattern(input, "[NS]\\d{1,2}\\.\\d{2,6}")
+  validate_input_pattern(input, "^[NS]\\d{1,2}\\.\\d{2,6}$")
 }
 validate_place_living_ordinance <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
 validate_place_longitude <- function(input, max_dim) {
   validate_input_size(input, max_dim, 5, 11) # 5.5.1L
-  validate_input_pattern(input, "[EW]\\d{1,3}\\.\\d{2,6}")
+  validate_input_pattern(input, "^[EW]\\d{1,3}\\.\\d{2,6}$")
 }
 validate_place_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
@@ -419,8 +420,10 @@ validate_text_from_source <- function(input, max_dim) {
   validate_text(input, max_dim, 1, 248)
 }
 validate_time_value <- function(input, max_dim) {
-  #TODO
   validate_input_size(input, max_dim, 1, 12)
+  validate_input_pattern(input, paste0("^\\d\\d:\\d\\d:\\d\\d.\\d{1,3}$|",
+                                       "^\\d\\d:\\d\\d:\\d\\d$|",
+                                       "^\\d\\d:\\d\\d$"))
 }
 validate_transmission_date <- function(input, max_dim) {
   validate_date_exact(input, max_dim)
@@ -440,6 +443,7 @@ validate_where_within_source <- function(input, max_dim) {
 }
 validate_xref <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 22)
+  validate_input_pattern(input, "@.{1,20}@")
 }
 validate_year <- function(input, max_dim) {
   validate_input_size(input, max_dim, 3, 4)

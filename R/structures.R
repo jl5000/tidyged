@@ -134,7 +134,7 @@ child_to_family_link <- function(xref_fam,
 
 
 event_detail <- function(event_or_fact_classification = character(),
-                         date_value = character(),
+                         date = date_value(),
                          place = place_structure(character()),
                          address = address_structure(character()),
                          responsible_agency = character(),
@@ -146,7 +146,7 @@ event_detail <- function(event_or_fact_classification = character(),
                          multimedia_links = list()) {
   
   validate_event_or_fact_classification(event_or_fact_classification, 1)
-  validate_date_value(date_value, 1)
+  validate_date_value(date, 1)
   validate_responsible_agency(responsible_agency, 1)
   validate_religious_affiliation(religious_affiliation, 1)
   validate_cause_of_event(cause_of_event, 1)
@@ -154,7 +154,7 @@ event_detail <- function(event_or_fact_classification = character(),
   
   bind_rows(
     tibble(level = 0, tag = "TYPE", value = event_or_fact_classification),
-    tibble(level = 0, tag = "DATE", value = date_value),
+    tibble(level = 0, tag = "DATE", value = date),
     place %>% add_levels(0),
     address %>% add_levels(0),
     tibble(level = 0, tag = "AGNC", value = responsible_agency),
@@ -169,21 +169,21 @@ event_detail <- function(event_or_fact_classification = character(),
 }
 
 
-family_event_detail <- function(husband_age = character(),
-                                wife_age = character(),
+family_event_detail <- function(husband_age_at_event = character(),
+                                wife_age_at_event = character(),
                                 event_details = event_detail()) {
   
-  husband_age <- as.character(husband_age)
-  wife_age <- as.character(wife_age)
+  husband_age_at_event <- as.character(husband_age_at_event)
+  wife_age_at_event <- as.character(wife_age_at_event)
   
-  validate_input_size(husband_age, 1, 1, 12)
-  validate_input_size(wife_age, 1, 1, 12)
+  validate_age_at_event(husband_age_at_event, 1)
+  validate_age_at_event(wife_age_at_event, 1)
   
   temp = bind_rows(
     tibble(level = 0, tag = "HUSB", value = ""),
-    tibble(level = 1, tag = "HAGE", value = husband_age),
+    tibble(level = 1, tag = "HAGE", value = husband_age_at_event),
     tibble(level = 0, tag = "WIFE", value = ""),
-    tibble(level = 1, tag = "WAGE", value = wife_age),
+    tibble(level = 1, tag = "WAGE", value = wife_age_at_event),
     event_details %>% add_levels(0),
   )
   

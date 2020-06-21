@@ -144,7 +144,7 @@ test_that("event_detail gives expected values", {
   expect_error(event_detail(restriction_notice = "something"))
   expect_equal(dim(event_detail()), c(0, 3))
   
-  df1 <- event_detail(event_classification = "Woodworking")
+  df1 <- event_detail(event_or_fact_classification = "Woodworking")
   df2 <- tibble::tribble(
     ~level,   ~tag,        ~value,
     0, "TYPE", "Woodworking"
@@ -158,6 +158,14 @@ test_that("event_detail gives expected values", {
   )
   expect_equal(df1, df2)
   
+  df1 <- event_detail(place = place_structure("Somewhere"), 
+                      date = date_value(2008, 4, 9, about = TRUE))
+  df2 <- tibble::tribble(
+    ~level,   ~tag,      ~value,
+    0, "DATE", "ABT 9 APR 2008",
+    0, "PLAC", "Somewhere"
+  )
+  expect_equal(df1, df2)
   
   df1 <- event_detail(address = address_structure(c("House name", "Road")))
   df2 <- tibble::tribble(
@@ -174,29 +182,29 @@ test_that("event_detail gives expected values", {
 test_that("family_event_detail gives expected values", {
   expect_equal(dim(family_event_detail()), c(0, 3))  
 
-  df1 <- family_event_detail(husband_age = 42)
+  df1 <- family_event_detail(husband_age_at_event = "42y")
   df2 <- tibble::tribble(
     ~level,   ~tag, ~value,
     0, "HUSB",     "",
-    1,  "AGE",   "42"
+    1,  "AGE",   "42y"
   )
   expect_equal(df1, df2)
   
-  df1 <- family_event_detail(wife_age = 40)
+  df1 <- family_event_detail(wife_age_at_event = "40y")
   df2 <- tibble::tribble(
     ~level,   ~tag, ~value,
     0, "WIFE",     "",
-    1,  "AGE",   "40"
+    1,  "AGE",   "40y"
   )
   expect_equal(df1, df2)
   
-  df1 <- family_event_detail(husband_age = 42, wife_age = 40)
+  df1 <- family_event_detail(husband_age_at_event = "42y", wife_age_at_event = "40y")
   df2 <- tibble::tribble(
     ~level,   ~tag, ~value,
     0, "HUSB",     "",
-    1,  "AGE",   "42",
+    1,  "AGE",   "42y",
     0, "WIFE",     "",
-    1,  "AGE",   "40"
+    1,  "AGE",   "40y"
   )
   expect_equal(df1, df2)
   

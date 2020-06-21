@@ -133,8 +133,8 @@ child_to_family_link <- function(xref_fam,
 }
 
 
-event_detail <- function(event_classification = character(),
-                         date = character(),
+event_detail <- function(event_or_fact_classification = character(),
+                         date_value = character(),
                          place = place_structure(character()),
                          address = address_structure(character()),
                          responsible_agency = character(),
@@ -145,17 +145,16 @@ event_detail <- function(event_classification = character(),
                          source_citations = list(),
                          multimedia_links = list()) {
   
-  validate_input_size(event_classification, 1, 1, 90)
-  validate_input_size(date, 1, 1, 35)
-  validate_input_size(responsible_agency, 1, 1, 120)
-  validate_input_size(religious_affiliation, 1, 1, 90)
-  validate_input_size(cause_of_event, 1, 1, 90)
-  validate_input_size(restriction_notice, 1)
-  check_restriction_notice(restriction_notice)
+  validate_event_or_fact_classification(event_or_fact_classification, 1)
+  validate_date_value(date_value, 1)
+  validate_responsible_agency(responsible_agency, 1)
+  validate_religious_affiliation(religious_affiliation, 1)
+  validate_cause_of_event(cause_of_event, 1)
+  validate_restriction_notice(restriction_notice, 1)
   
   bind_rows(
-    tibble(level = 0, tag = "TYPE", value = event_classification),
-    tibble(level = 0, tag = "DATE", value = date),
+    tibble(level = 0, tag = "TYPE", value = event_or_fact_classification),
+    tibble(level = 0, tag = "DATE", value = date_value),
     place %>% add_levels(0),
     address %>% add_levels(0),
     tibble(level = 0, tag = "AGNC", value = responsible_agency),

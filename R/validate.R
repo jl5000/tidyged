@@ -111,7 +111,7 @@ validate_certainty_assessment <- function(input, max_dim) {
 }
 validate_change_date <- function(input, max_dim) {
   validate_input_size(input, max_dim, 10, 14)
-  validate_input_pattern(input, "^\\d{1,2} \\w{3} \\d{4}(/\\d{2})?$")  
+  validate_input_pattern(input, date_exact_pattern())  
 }
 validate_character_set <- function(input, max_dim) {
   choices <- c("ANSEL", "UTF-8", "UNICODE", "ASCII")
@@ -147,9 +147,10 @@ validate_date_calendar <- function(input, max_dim) {
   #TODO
   validate_input_size(input, max_dim, 4, 35)
 }
-validate_date_calendar_escape <- function(input, max_dim) {
-  #TODO
-  validate_input_size(input, max_dim, 4, 15)
+validate_date_value <- function(input, max_dim) {
+  validate_input_size(input, max_dim, 1, 35)
+  validate_input_pattern(input, date_value_pattern())
+  #TODO: ensure year 1 is before year 2 etc.
 }
 validate_descriptive_title <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)

@@ -196,18 +196,22 @@ family_event_detail <- function(husband_age_at_event = character(),
 }
 
 
-family_event_structure <- function(family_event,
+family_event_structure <- function(event_type_family,
+                                   event_descriptor = character(),
                                    family_event_details = family_event_detail()) {
   
-  if (length(family_event) == 0) return(tibble())
+  if (length(event_type_family) == 0) return(tibble())
   
-  validate_input_size(family_event, 1)
-  check_family_event(family_event)
+  validate_event_type_family(event_type_family, 1)
+  validate_event_descriptor(event_descriptor, 1)
   
   bind_rows(
-    tibble(level = 0, tag = family_event, value = ""),
+    tibble(level = 0, tag = event_type_family, value = ""),
     family_event_details %>% add_levels(1),
-  )
+  ) %>% 
+  mutate(value = ifelse(tag == "EVEN" & length(event_descriptor) == 1,
+                         event_descriptor,
+                         value))
   
 }
 

@@ -222,6 +222,29 @@ test_that("family_event_structure gives expected values", {
   )
   expect_equal(df1, df2)
   
+  df1 <- family_event_structure("EVEN")
+  df2 <- tibble::tribble(
+    ~level,   ~tag, ~value,
+    0, "EVEN",     ""
+  )
+  expect_equal(df1, df2)
+  
+  df1 <- family_event_structure("EVEN", "Random event")
+  df2 <- tibble::tribble(
+    ~level,   ~tag, ~value,
+    0, "EVEN",     "Random event"
+  )
+  expect_equal(df1, df2)
+  
+  df1 <- family_event_structure("ENGA", 
+                                family_event_details = family_event_detail(wife_age_at_event = "20y"))
+  df2 <- tibble::tribble(
+    ~level,   ~tag, ~value,
+    0, "ENGA",     "",
+    1, "WIFE",     "",
+    2, "AGE",   "20y"
+  )
+  expect_equal(df1, df2)
 })
 
 # individual_attribute_structure ---------------------------------------------------

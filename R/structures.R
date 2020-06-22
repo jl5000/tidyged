@@ -211,7 +211,8 @@ family_event_structure <- function(event_type_family,
   ) %>% 
   mutate(value = ifelse(tag == "EVEN" & length(event_descriptor) == 1,
                          event_descriptor,
-                         value))
+                         value),
+         value = ifelse(tag == "MARR", "Y", value))
   
 }
 

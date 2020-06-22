@@ -236,11 +236,11 @@ test_that("family_event_structure gives expected values", {
   )
   expect_equal(df1, df2)
   
-  df1 <- family_event_structure("ENGA", 
+  df1 <- family_event_structure("MARR", 
                                 family_event_details = family_event_detail(wife_age_at_event = "20y"))
   df2 <- tibble::tribble(
     ~level,   ~tag, ~value,
-    0, "ENGA",     "",
+    0, "MARR",     "Y",
     1, "WIFE",     "",
     2, "AGE",   "20y"
   )

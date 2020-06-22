@@ -87,7 +87,7 @@ validate_attribute_descriptor <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
 validate_attribute_type <- function(input, max_dim) {
-  #TODO: Why is it not the full list?
+  #TODO: Why is it not the full list? DSCR IDNO NCHI NMR SSN
   choices <- c("CAST", "DSCR", "EDUC", "IDNO",
                "NATI", "NCHI", "NMR", "OCCU",
                "PROP", "RELI", "RESI", "SSN",
@@ -299,7 +299,8 @@ validate_phonetic_type <- function(input, max_dim) {
   validate_input_size(input, max_dim, 5, 30)
 }
 validate_physical_description <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 248)
+  # character limits not checked as it is split over several lines if too long
+  validate_input_size(input, max_dim)
 }
 validate_place_hierarchy <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
@@ -453,24 +454,4 @@ validate_year_greg <- function(input, max_dim) {
   #TODO
   validate_input_size(input, max_dim, 3, 7)
 }
-
-
-
-
-check_individual_attribute <- function(input) {
-  
-  choices <- c("CAST", "DSCR", "EDUC", "IDNO",
-               "NATI", "NCHI", "NMR", "OCCU",
-               "PROP", "RELI", "RESI", "SSN",
-               "TITL", "FACT")
-  validate_input_choice(input, choices)
-}
-
-
-
-
-
-
-
-
 

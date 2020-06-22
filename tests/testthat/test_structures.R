@@ -253,6 +253,8 @@ test_that("individual_attribute_structure gives expected values", {
   expect_error(individual_attribute_structure("TEST"))
   expect_error(individual_attribute_structure("FACT"))
   expect_error(individual_attribute_structure(c("FACT", "EDUC"), "This is a fact"))
+  expect_error(individual_attribute_structure("FACT", "This is a fact"))
+  expect_error(individual_attribute_structure("IDNO", 123456))
   
   df1 <- individual_attribute_structure("NATI", "British")
   df2 <- tibble::tribble(
@@ -261,11 +263,11 @@ test_that("individual_attribute_structure gives expected values", {
   )
   expect_equal(df1, df2)
   
-  df1 <- individual_attribute_structure("NATI", "British", individual_event_detail(age = 0))
+  df1 <- individual_attribute_structure("NATI", "British", individual_event_detail(age = "0y"))
   df2 <- tibble::tribble(
     ~level,   ~tag, ~value,
     0, "NATI",     "British",
-    1,  "AGE",           "0"
+    1,  "AGE",           "0y"
   )
   expect_equal(df1, df2)
   
@@ -276,10 +278,10 @@ test_that("individual_attribute_structure gives expected values", {
 test_that("individual_event_detail gives expected values", {
   expect_equal(dim(individual_event_detail()), c(0, 3))  
   
-  df1 <- individual_event_detail(age = 5)
+  df1 <- individual_event_detail(age = "5y")
   df2 <- tibble::tribble(
     ~level,  ~tag, ~value,
-    0, "AGE",    "5"
+    0, "AGE",    "5y"
   )
   expect_equal(df1, df2)
   

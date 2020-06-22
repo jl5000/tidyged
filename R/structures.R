@@ -217,57 +217,62 @@ family_event_structure <- function(event_type_family,
 }
 
 
-individual_attribute_structure <- function(individual_attribute,
+individual_attribute_structure <- function(attribute_type,
                                            attribute_description,
                                            individual_event_details = individual_event_detail()) {
   
-  if (length(individual_attribute) == 0) return(tibble())
+  if (length(attribute_type) == 0) return(tibble())
   
-  validate_input_size(individual_attribute, 1)
-  check_individual_attribute(individual_attribute)
+  validate_attribute_type(attribute_type, 1)
+  if (attribute_type %in% c("IDNO", "NCHI", "NMR", "SSN")) 
+    attribute_description <- as.character(attribute_description) 
   
-  if (individual_attribute %in% c("CAST","OCCU","RELI","FACT")) {
-      validate_input_size(attribute_description, 1, 1, 90)
-  } else if (individual_attribute %in% c("EDUC","PROP")) {
-    validate_input_size(attribute_description, 1, 1, 248)
-  } else if (individual_attribute == "IDNO") {
-    validate_input_size(attribute_description, 1, 1, 30)
-  } else if (individual_attribute %in% c("NATI","TITL")) {
-    validate_input_size(attribute_description, 1, 1, 120)
-  } else if (individual_attribute %in% c("NCHI","NMR")) {
-    validate_input_size(attribute_description, 1, 1, 3)
-  } else if (individual_attribute == "SSN") {
-    validate_input_size(attribute_description, 1, 9, 11)
-  }
+  if (attribute_type == "CAST") validate_caste_name(attribute_description, 1)
+  if (attribute_type == "DSCR") validate_physical_description(attribute_description, 1)
+  if (attribute_type == "EDUC") validate_scholastic_achievement(attribute_description, 1)
+  if (attribute_type == "IDNO") validate_national_id_number(attribute_description, 1)
+  if (attribute_type == "NATI") validate_national_or_tribal_origin(attribute_description, 1)
+  if (attribute_type == "NCHI") validate_count_of_children(attribute_description, 1)
+  if (attribute_type == "NMR") validate_count_of_marriages(attribute_description, 1)
+  if (attribute_type == "OCCU") validate_occupation(attribute_description, 1)
+  if (attribute_type == "PROP") validate_possessions(attribute_description, 1)
+  if (attribute_type == "RELI") validate_religious_affiliation(attribute_description, 1)
+  if (attribute_type == "RESI") 1
+  if (attribute_type == "SSN") validate_social_security_number(attribute_description, 1)
+  if (attribute_type == "TITL") validate_nobility_type_title(attribute_description, 1)
+  if (attribute_type == "FACT") validate_attribute_descriptor(attribute_description, 1)
   
-  
-  if (individual_attribute == "DSCR") {
+  if (attribute_type == "DSCR") {
     
     temp <- split_text(start_level = 0, top_tag = "DSCR", text = attribute_description)
     
   } else {
     
-    temp <- tibble(level = 0, tag = individual_attribute, value = attribute_description)
+    temp <- tibble(level = 0, tag = attribute_type, value = attribute_description)
     
   }
   
-  bind_rows(temp, 
+  temp <- bind_rows(temp, 
             individual_event_details %>% add_levels(1)
   )
   
+  if (sum(temp$tag %in% c("IDNO", "FACT")) == 1 & sum(temp$tag == "TYPE") == 0)
+    stop("IDNO and FACT tags require a event_or_fact_classification to be defined in the event detail.")
+  
+  temp
 }
 
 
 individual_event_detail <- function(event_details = event_detail(),
-                                    age = character()) {
+                                    age_at_event = character()) {
   
-  age <- as.character(age)
+  age_at_event <- as.character(age_at_event)
   
-  validate_input_size(age, 1, 1, 12)
+  validate_age_at_event(age_at_event, 1)
   
   bind_rows(
     event_details %>% add_levels(0),
-    tibble(level = 0, tag = "AGE", value = age),
+    tibble(level = 0, tag = "AGE", value = age_at_event)
   )
   
   

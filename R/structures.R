@@ -203,13 +203,14 @@ family_event_structure <- function(event_type_family,
   if (length(event_type_family) == 0) return(tibble())
   
   validate_event_type_family(event_type_family, 1)
-  validate_event_descriptor(event_descriptor, 1)
+  if (event_type_family == "RESI") validate_residence_descriptor(event_descriptor, 1)
+  if (event_type_family == "EVEN") validate_event_descriptor(event_descriptor, 1)
   
   bind_rows(
     tibble(level = 0, tag = event_type_family, value = ""),
     family_event_details %>% add_levels(1),
   ) %>% 
-  mutate(value = ifelse(tag == "EVEN" & length(event_descriptor) == 1,
+  mutate(value = ifelse(tag %in% c("EVEN", "RESI") & length(event_descriptor) == 1,
                          event_descriptor,
                          value),
          value = ifelse(tag == "MARR", "Y", value))
@@ -237,7 +238,7 @@ individual_attribute_structure <- function(attribute_type,
   if (attribute_type == "OCCU") validate_occupation(attribute_description, 1)
   if (attribute_type == "PROP") validate_possessions(attribute_description, 1)
   if (attribute_type == "RELI") validate_religious_affiliation(attribute_description, 1)
-  if (attribute_type == "RESI") 1
+  if (attribute_type == "RESI") validate_residence_descriptor(attribute_description, 1)
   if (attribute_type == "SSN") validate_social_security_number(attribute_description, 1)
   if (attribute_type == "TITL") validate_nobility_type_title(attribute_description, 1)
   if (attribute_type == "FACT") validate_attribute_descriptor(attribute_description, 1)
@@ -279,34 +280,32 @@ individual_event_detail <- function(event_details = event_detail(),
 }
 
 
-individual_event_structure <- function(individual_event,
+individual_event_structure <- function(event_type_individual,
                                        individual_event_details = individual_event_detail(),
-                                       family_ref = character(),
-                                       adoptive_parent = character()) {
+                                       xref_fam = character(),
+                                       adopted_by_which_parent = character()) {
   
-  if (length(individual_event) == 0) return(tibble())
+  if (length(event_type_individual) == 0) return(tibble())
   
-  validate_input_size(individual_event, 1)
-  validate_input_size(family_ref, 1, 1, 18)
-  validate_input_size(adoptive_parent, 1)
-  check_individual_event(individual_event)
-  check_adoptive_parent(adoptive_parent)
+  validate_event_type_individual(event_type_individual, 1)
+  validate_xref(xref_fam, 1)
+  validate_adopted_by_which_parent(adopted_by_which_parent, 1)
   
   temp <- bind_rows(
-    tibble(level = 0, tag = individual_event, value = ""),
+    tibble(level = 0, tag = event_type_individual, value = ""),
     individual_event_details %>% add_levels(1)
   )
     
   if (sum(temp$tag %in% c("BIRT", "CHR", "ADOP")) == 1)
     temp <- bind_rows(
       temp,
-      tibble(level = 1, tag = "FAMC", value = ref_to_xref(family_ref, "F"))
+      tibble(level = 1, tag = "FAMC", value = xref_fam)
     )
   
   if (sum(temp$tag == "ADOP") == 1)
     temp <- bind_rows(
       temp,
-      tibble(level = 2, tag = "ADOP", value = adoptive_parent)
+      tibble(level = 2, tag = "ADOP", value = adopted_by_which_parent)
     )
     
   temp %>% 

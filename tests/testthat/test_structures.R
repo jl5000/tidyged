@@ -291,7 +291,7 @@ test_that("individual_event_detail gives expected values", {
 test_that("individual_event_structure gives expected values", {
   expect_error(individual_event_structure())
   expect_error(individual_event_structure("BLAH"))
-  expect_error(individual_event_structure("ADOP", adoptive_parent = "WHO"))
+  expect_error(individual_event_structure("ADOP", adopted_by_which_parent = "WHO"))
   
   df1 <- individual_event_structure("BIRT")
   df2 <- tibble::tribble(
@@ -307,7 +307,7 @@ test_that("individual_event_structure gives expected values", {
   )
   expect_equal(df1, df2)
   
-  df1 <- individual_event_structure("BIRT", family_ref = 4)
+  df1 <- individual_event_structure("BIRT", xref_fam = "@F4@")
   df2 <- tibble::tribble(
     ~level,   ~tag, ~value,
     0, "BIRT",    "Y",
@@ -315,7 +315,7 @@ test_that("individual_event_structure gives expected values", {
   )
   expect_equal(df1, df2)
   
-  df1 <- individual_event_structure("ADOP", family_ref = 4, adoptive_parent = "BOTH")
+  df1 <- individual_event_structure("ADOP", xref_fam = "@F4@", adopted_by_which_parent = "BOTH")
   df2 <- tibble::tribble(
     ~level,   ~tag, ~value,
     0, "ADOP",     "",

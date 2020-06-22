@@ -60,7 +60,7 @@ validate_address_country <- function(input, max_dim) {
 }
 validate_adopted_by_which_parent <- function(input, max_dim) {
   choices <- c("HUSB", "WIFE", "BOTH")
-  validate_input(input, choices)
+  validate_input_choice(input, choices)
   validate_input_size(input, max_dim, 1, 4)
 }
 validate_age_at_event <- function(input, max_dim) {
@@ -348,6 +348,9 @@ validate_relation_is_descriptor <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 25)
 }
 validate_religious_affiliation <- function(input, max_dim) {
+  validate_input_size(input, max_dim, 1, 90)
+}
+validate_residence_descriptor <- function(input, max_dim) { # 5.5.1L
   validate_input_size(input, max_dim, 1, 90)
 }
 validate_responsible_agency <- function(input, max_dim) {

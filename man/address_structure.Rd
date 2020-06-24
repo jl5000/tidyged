@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{address_structure}
 \alias{address_structure}
-\title{fgdfgdfgfdgdfg}
+\title{Constructs the ADDRESS_STRUCTURE from the GEDCOM specification}
 \usage{
 address_structure(
   all_address_lines,
@@ -42,5 +42,5 @@ sorting or indexing. Used in most cases to facilitate automatic sorting of mail.
 
 }
 \description{
-dfgdfgdfg
+Constructs the ADDRESS_STRUCTURE from the GEDCOM specification
 }

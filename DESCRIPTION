@@ -6,9 +6,15 @@ Authors@R:
            family = "Lendrum",
            role = c("aut", "cre"),
            email = "jalendrum@gmail.com")
-Description: Import/exort, validate, interrogate, visualise, and edit family tree GEDCOM files using tidy dataframes.
+Description: Import/export, validate, interrogate, visualise, and edit family tree GEDCOM files using tidy dataframes.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("namespace", "rd", "roxytest::testthat_roclet"))
 RoxygenNote: 7.1.0
+Imports: 
+    dplyr,
+    magrittr,
+    readr,
+    tidyr,
+    stringr

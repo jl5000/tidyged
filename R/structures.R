@@ -18,14 +18,14 @@
 #' expect_error(address_structure("address", address_postal_code = paste0(rep("a", 11), collapse = "")))
 #' expect_error(address_structure("address", address_country = paste0(rep("a", 61), collapse = "")))
 #' expect_error(address_structure("address", address_web_page = paste0(rep("a", 121), collapse = "")))
+#' 
 #' expect_equal(address_structure("Road name"),
-#'              tibble::tribble(
-#'                              ~level,   ~tag,      ~value,
+#'              tibble::tribble(~level,   ~tag,      ~value,
 #'                              0, "ADDR", "Road name"
-#'                              ))
+#'              ))
+#' 
 #' expect_equal(address_structure(letters[1:4]),
-#'              tibble::tribble(
-#'                              ~level,   ~tag, ~value,
+#'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "ADDR",    "a",
 #'                              1, "CONT",    "b",
 #'                              1, "CONT",    "c",
@@ -33,15 +33,15 @@
 #'                              1, "ADR1",    "b",
 #'                              1, "ADR2",    "c",
 #'                              1, "ADR3",    "d"
-#'                              ))
+#'              ))
+#' 
 #' expect_equal(address_structure(letters[1:2], address_country = "UK"),
-#'              tibble::tribble(
-#'                              ~level,   ~tag, ~value,
+#'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "ADDR",    "a",
 #'                              1, "CONT",    "b",
 #'                              1, "ADR1",    "b",
 #'                              1, "CTRY",   "UK"
-#'                              )) 
+#'              )) 
 #' @return
 #' @export
 address_structure <- function(all_address_lines,
@@ -122,19 +122,19 @@ address_structure <- function(all_address_lines,
 #' expect_error(association_structure())
 #' expect_error(association_structure("@1@"))
 #' expect_error(association_structure(c("@1@", "@2@"), "Godfather"))
+#' 
 #' expect_equal(association_structure("@I1@", "Godfather"),
-#'              tibble::tribble(
-#'                              ~level,   ~tag,      ~value,
+#'              tibble::tribble(~level,   ~tag,      ~value,
 #'                              0, "ASSO",      "@I1@",
 #'                              1, "RELA", "Godfather"
-#'                              ))
+#'              ))
+#' 
 #' expect_equal(association_structure("@I1@", "Father", notes = list(note_structure("This is a note"))), 
-#'              tibble::tribble(
-#'                              ~level,   ~tag,              ~value,
+#'              tibble::tribble(~level,   ~tag,              ~value,
 #'                              0, "ASSO",              "@I1@",
 #'                              1, "RELA",            "Father",
 #'                              1, "NOTE",    "This is a note"
-#'                              ))
+#'              ))
 #' @return
 #' @export
 association_structure <- function(xref_indi,
@@ -162,34 +162,33 @@ association_structure <- function(xref_indi,
 #' @inheritParams parameter_definitions
 #' @tests
 #' expect_equal(change_date(),
-#'              tibble::tribble(
-#'                              ~level,   ~tag, ~value,
+#'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
-#'                              ))
+#'              ))
+#'                              
 #' expect_equal(change_date(date_exact(5, 10, 1990)),
-#'              tibble::tribble(
-#'                              ~level,   ~tag, ~value,
+#'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", "5 OCT 1990"
-#'                              ))
+#'              ))
+#'                              
 #' expect_equal(change_date(date_exact(18, 12, 2008), time_value = "11:00:08.563")
-#'              tibble::tribble(
-#'                              ~level,   ~tag, ~value,
+#'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", "18 DEC 2008",
 #'                              2, "TIME", "11:00:08.563"
-#'                              ))
+#'              ))
+#'                              
 #' expect_equal(change_date(date_exact(5, 10, 1990), "10:34:56", notes = list(note_structure("Note 1"),
 #'                                                                            note_structure("Note 2"))),
-#'              tibble::tribble(
-#'                              ~level,   ~tag, ~value,
+#'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", "5 OCT 1990",
 #'                              2, "TIME", "10:34:56",
 #'                              1, "NOTE", "Note 1",
 #'                              1, "NOTE", "Note 2"
-#'                              ))
+#'              ))
 #' @return
 #' @export
 change_date <- function(change_date = date_exact(),
@@ -215,7 +214,21 @@ change_date <- function(change_date = date_exact(),
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_error(child_to_family_link())
+#' expect_error(child_to_family_link("@1@", pedigree_linkage_type = "foste"))
+#' expect_error(child_to_family_link("@1@", child_linkage_status = "challenge"))
 #' 
+#' expect_equal(child_to_family_link("@F1@"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "FAMC", "@F1@"
+#'              ))
+#' 
+#' expect_equal(child_to_family_link("@F1@", "birth", "proven"),
+#'              tibble::tribble(~level,   ~tag,   ~value,
+#'                              0, "FAMC",   "@F1@",
+#'                              1, "PEDI",  "birth",
+#'                              1, "STAT", "proven"
+#'              ))
 #' @return
 #' @export
 child_to_family_link <- function(xref_fam,
@@ -242,7 +255,32 @@ child_to_family_link <- function(xref_fam,
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_error(event_detail(restriction_notice = "something"))
+#' expect_equal(dim(event_detail()), c(0, 3))
 #' 
+#' expect_equal(event_detail(event_or_fact_classification = "Woodworking"),
+#'              tibble::tribble(~level,   ~tag,        ~value,
+#'                              0, "TYPE", "Woodworking"
+#'              ))
+#' 
+#' expect_equal(event_detail(place = place_structure("Somewhere")),
+#'              tibble::tribble(~level,   ~tag,      ~value,
+#'                              0, "PLAC", "Somewhere"
+#'              ))
+#' 
+#' expect_equal(event_detail(place = place_structure("Somewhere"), 
+#'                           date = date_value(2008, 4, 9, about = TRUE)),
+#'              tibble::tribble(~level,   ~tag,      ~value,
+#'                              0, "DATE", "ABT 9 APR 2008",
+#'                              0, "PLAC", "Somewhere"
+#'              ))
+#' 
+#' expect_equal(event_detail(address = address_structure(c("House name", "Road"))),
+#'              tibble::tribble(~level,   ~tag,       ~value,
+#'                              0, "ADDR", "House name",
+#'                              1, "CONT",       "Road",
+#'                              1, "ADR1",       "Road"
+#'              ))
 #' @return
 #' @export
 event_detail <- function(event_or_fact_classification = character(),
@@ -284,7 +322,27 @@ event_detail <- function(event_or_fact_classification = character(),
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_equal(dim(family_event_detail()), c(0, 3))  
 #' 
+#' expect_equal(family_event_detail(husband_age_at_event = "42y"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "HUSB",     "",
+#'                              1,  "AGE",   "42y"
+#'              ))
+#' 
+#' expect_equal(family_event_detail(wife_age_at_event = "40y"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "WIFE",     "",
+#'                              1,  "AGE",   "40y"
+#'              ))
+#' 
+#' expect_equal(family_event_detail(husband_age_at_event = "42y", wife_age_at_event = "40y"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "HUSB",     "",
+#'                              1,  "AGE",   "42y",
+#'                              0, "WIFE",     "",
+#'                              1,  "AGE",   "40y"
+#'              ))
 #' @return
 #' @export
 family_event_detail <- function(husband_age_at_event = character(),
@@ -317,7 +375,31 @@ family_event_detail <- function(husband_age_at_event = character(),
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_error(family_event_structure())
+#' expect_error(family_event_structure("TEST"))
 #' 
+#' expect_equal(family_event_structure("CENS"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "CENS",     ""
+#'              ))
+#' 
+#' expect_equal(family_event_structure("EVEN"), 
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "EVEN",     ""
+#'              ))
+#' 
+#' expect_equal(family_event_structure("EVEN", "Random event"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "EVEN",     "Random event"
+#'              ))
+#' 
+#' expect_equal(family_event_structure("MARR", 
+#'                                     family_event_details = family_event_detail(wife_age_at_event = "20y")),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "MARR",     "Y",
+#'                              1, "WIFE",     "",
+#'                              2, "AGE",   "20y"
+#'              ))
 #' @return
 #' @export
 family_event_structure <- function(event_type_family,
@@ -345,7 +427,23 @@ family_event_structure <- function(event_type_family,
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_error(individual_attribute_structure())
+#' expect_error(individual_attribute_structure("TEST"))
+#' expect_error(individual_attribute_structure("FACT"))
+#' expect_error(individual_attribute_structure(c("FACT", "EDUC"), "This is a fact"))
+#' expect_error(individual_attribute_structure("FACT", "This is a fact"))
+#' expect_error(individual_attribute_structure("IDNO", 123456))
 #' 
+#' expect_equal(individual_attribute_structure("NATI", "British"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "NATI",     "British"
+#'              ))
+#' 
+#' expect_equal(individual_attribute_structure("NATI", "British", individual_event_detail(age = "0y")),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "NATI",     "British",
+#'                              1,  "AGE",           "0y"
+#'              ))
 #' @return
 #' @export
 individual_attribute_structure <- function(attribute_type,

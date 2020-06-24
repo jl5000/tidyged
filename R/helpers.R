@@ -2,19 +2,6 @@
 
 `%nin%` <- Negate(`%in%`)
 
-#' Title
-#' 
-#' @description 
-#' 
-#' @details
-#'
-#' @param df 
-#' @param start_level 
-#'
-#' @return
-#' @export
-#'
-#' @examples
 add_levels <- function(df, start_level) {
   
   if (nrow(df) == 0) return(df)

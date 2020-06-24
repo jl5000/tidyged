@@ -3,6 +3,7 @@
 
 library(tidyverse)
 library(testthat)
+library(roxytest)
 source("R/helpers.R")
 source("R/params.R")
 source("R/structures.R")

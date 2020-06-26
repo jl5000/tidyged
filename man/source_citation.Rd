@@ -51,7 +51,7 @@ eliminate the receiver's need to evaluate the evidence for themselves.
 3 = Direct and primary evidence used, or by dominance of the evidence}
 }
 \value{
-
+A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file
 }
 \description{
 Constructs the SOURCE_CITATION from the GEDCOM specification

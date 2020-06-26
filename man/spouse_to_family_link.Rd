@@ -10,7 +10,7 @@ spouse_to_family_link(xref_fam, notes = list())
 \item{xref_fam}{Either a pointer or an unique cross-reference identifier.}
 }
 \value{
-
+A tidy tibble containing the SPOUSE_TO_FAMILY_LINK part of a GEDCOM file
 }
 \description{
 Constructs the SPOUSE_TO_FAMILY_LINK from the GEDCOM specification

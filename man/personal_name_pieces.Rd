@@ -32,7 +32,7 @@ articles are separated by a comma, for example in the name "de la Cruz", this va
 Different name suffix parts are separated by a comma.}
 }
 \value{
-
+A tidy tibble containing the PERSONAL_NAME_PIECES part of a GEDCOM file
 }
 \description{
 Constructs the PERSONAL_NAME_PIECES from the GEDCOM specification

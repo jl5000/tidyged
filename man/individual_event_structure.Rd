@@ -17,7 +17,7 @@ individual_event_structure(
 \item{xref_fam}{Either a pointer or an unique cross-reference identifier.}
 }
 \value{
-
+A tidy tibble containing the INDIVIDUAL_EVENT_STRUCTURE part of a GEDCOM file
 }
 \description{
 Constructs the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM specification

@@ -39,7 +39,7 @@ sorting or indexing. Used in most cases to facilitate automatic sorting of mail.
 \item{address_web_page}{The world wide web page address.}
 }
 \value{
-
+A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file
 }
 \description{
 Constructs the ADDRESS_STRUCTURE from the GEDCOM specification

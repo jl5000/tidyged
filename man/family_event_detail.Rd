@@ -11,7 +11,7 @@ family_event_detail(
 )
 }
 \value{
-
+A tidy tibble containing the FAMILY_EVENT_DETAIL part of a GEDCOM file
 }
 \description{
 Constructs the FAMILY_EVENT_DETAIL from the GEDCOM specification

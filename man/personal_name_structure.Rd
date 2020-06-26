@@ -32,7 +32,7 @@ have used when giving it to a recorder.}
 \item{romanized_type}{Indicates the method used in transforming the text to a romanized variation.}
 }
 \value{
-
+A tidy tibble containing the PERSONAL_NAME_STRUCTURE part of a GEDCOM file
 }
 \description{
 Constructs the PERSONAL_NAME_STRUCTURE from the GEDCOM specification

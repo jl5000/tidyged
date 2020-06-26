@@ -27,7 +27,7 @@ the linkage has been disproven.
 but the linkage has been proven.}
 }
 \value{
-
+A tidy tibble containing the CHILD_TO_FAMILY_LINK part of a GEDCOM file
 }
 \description{
 Constructs the CHILD_TO_FAMILY_LINK from the GEDCOM specification

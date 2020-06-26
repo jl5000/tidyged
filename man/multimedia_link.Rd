@@ -29,7 +29,7 @@ that indicates the type of material in which the referenced source is stored.}
 \item{descriptive_title}{The title of a work, record, item, or object.}
 }
 \value{
-
+A tidy tibble containing the MULTIMEDIA_LINK part of a GEDCOM file
 }
 \description{
 Constructs the MULTIMEDIA_LINK from the GEDCOM specification

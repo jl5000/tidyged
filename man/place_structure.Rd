@@ -42,7 +42,7 @@ The longitude coordinate is Degrees and fraction of degrees east or west of the 
 meridian coordinate. For example: 168 degrees, 9 minutes, and 3.4 seconds East would be formatted as E168.150944.}
 }
 \value{
-
+A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file
 }
 \description{
 Constructs the PLACE_STRUCTURE from the GEDCOM specification

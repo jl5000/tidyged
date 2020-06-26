@@ -15,7 +15,7 @@ individual_attribute_structure(
 family listings to be recorded. Its application is in helping to classify sources used for information.}
 }
 \value{
-
+A tidy tibble containing the INDIVIDUAL_ATTRIBUTE_STRUCTURE part of a GEDCOM file
 }
 \description{
 Constructs the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM specification

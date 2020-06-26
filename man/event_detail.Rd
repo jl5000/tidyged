@@ -38,7 +38,7 @@ might be listed on a death certificate.}
 download GEDCOM files may contain this data.}
 }
 \value{
-
+A tidy tibble containing the EVENT_DETAIL part of a GEDCOM file
 }
 \description{
 Constructs the EVENT_DETAIL from the GEDCOM specification

@@ -15,7 +15,7 @@ principal was at the time of the associated event. Any labels must come after th
 corresponding number, for example; 4y 8m 10d.}
 }
 \value{
-
+A tidy tibble containing the INDIVIDUAL_EVENT_DETAIL part of a GEDCOM file
 }
 \description{
 Constructs the INDIVIDUAL_EVENT_DETAIL from the GEDCOM specification

@@ -17,7 +17,7 @@ association_structure(
 \item{relation_is_descriptor}{A word or phrase that states object 1's relation is object 2.}
 }
 \value{
-
+A tidy tibble containing the ASSOCIATION_STRUCTURE part of a GEDCOM file
 }
 \description{
 Constructs the ASSOCIATION_STRUCTURE from the GEDCOM specification

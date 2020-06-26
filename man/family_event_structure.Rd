@@ -19,7 +19,7 @@ between this specific event and other occurrences of the EVENt tag is indicated 
 a subordinate TYPE tag selected from the EVENT_DETAIL structure.}
 }
 \value{
-
+A tidy tibble containing the FAMILY_EVENT_STRUCTURE part of a GEDCOM file
 }
 \description{
 Constructs the FAMILY_EVENT_STRUCTURE from the GEDCOM specification

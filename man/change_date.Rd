@@ -16,7 +16,7 @@ change_date(
 \item{time_value}{The time of a specific event.}
 }
 \value{
-
+A tidy tibble containing the CHANGE_DATE part of a GEDCOM file
 }
 \description{
 Constructs the CHANGE_DATE from the GEDCOM specification

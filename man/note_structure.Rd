@@ -10,7 +10,7 @@ note_structure(xref_note = character(), submitter_text = character())
 \item{submitter_text}{Comments or opinions from the submitter.}
 }
 \value{
-
+A tidy tibble containing the NOTE_STRUCTURE part of a GEDCOM file
 }
 \description{
 Constructs the NOTE_STRUCTURE from the GEDCOM specification

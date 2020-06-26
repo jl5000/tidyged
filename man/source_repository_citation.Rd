@@ -21,7 +21,7 @@ from the holdings of a repository.}
 that indicates the type of material in which the referenced source is stored.}
 }
 \value{
-
+A tidy tibble containing the SOURCE_REPOSITORY_CITATION part of a GEDCOM file
 }
 \description{
 Constructs the SOURCE_REPOSITORY_CITATION from the GEDCOM specification

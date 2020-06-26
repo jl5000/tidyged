@@ -5,19 +5,29 @@
 \title{Constructs the PERSONAL_NAME_STRUCTURE from the GEDCOM specification}
 \usage{
 personal_name_structure(
-  name,
-  type = character(),
+  name_personal,
+  name_type = character(),
   name_pieces = personal_name_pieces(),
-  phonetic_variation = character(),
+  name_phonetic_variation = character(),
   phonetic_type = character(),
   phonetic_name_pieces = list(),
-  romanized_variation = character(),
+  name_romanized_variation = character(),
   romanized_type = character(),
   romanized_name_pieces = list()
 )
 }
 \arguments{
+\item{name_personal}{The surname of an individual, if known, is enclosed between two slash (/) characters.
+The order of the name parts should be the order that the person would, by custom of their culture,
+have used when giving it to a recorder.}
+
+\item{name_type}{Indicates the name type, for example the name issued or assumed as an immigrant.}
+
+\item{name_phonetic_variation}{The phonetic variation of the name.}
+
 \item{phonetic_type}{Indicates the method used in transforming the text to the phonetic variation.}
+
+\item{name_romanized_variation}{The romanized variation of the name.}
 
 \item{romanized_type}{Indicates the method used in transforming the text to a romanized variation.}
 }

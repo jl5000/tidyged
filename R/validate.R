@@ -19,9 +19,11 @@ validate_input_size <- function(input, max_dim, min_char = NULL, max_char = NULL
 }
 
 validate_input_pattern <- function(input, pattern) {
-  for (i in input) {
-    if (!grepl(pattern, i))
-      stop("Input ", i, " is in an unexpected format")
+  if (length(input) > 0) {
+    for (i in input) {
+      if (!grepl(pattern, i))
+        stop("Input ", i, " is in an unexpected format")
+    }
   }
 }
 
@@ -154,6 +156,10 @@ validate_date_value <- function(input, max_dim) {
 }
 validate_descriptive_title <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
+}
+validate_entry_recording_date <- function(input, max_dim) {
+  validate_input_size(input, max_dim, 1, 90)
+  validate_input_pattern(input, date_value_pattern())
 }
 validate_event_attribute_type <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 15)
@@ -307,7 +313,7 @@ validate_place_hierarchy <- function(input, max_dim) {
 }
 validate_place_latitude <- function(input, max_dim) {
   validate_input_size(input, max_dim, 5, 10) # 5.5.1L
-  validate_input_pattern(input, "^[NS]\\d{1,2}\\.\\d{2,6}$")
+  validate_input_pattern(input, "^[NS]\\d{1,2}\\.\\d{1,6}$")
 }
 validate_place_living_ordinance <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
@@ -385,7 +391,7 @@ validate_source_call_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
 validate_source_description <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 248)
+  validate_input_size(input, max_dim)
 }
 validate_source_descriptive_title <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
@@ -416,13 +422,13 @@ validate_submitter_registered_rfn <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 30)
 }
 validate_submitter_text <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 248)
+  validate_input_size(input, max_dim)
 }
 validate_temple_code <- function(input, max_dim) {
   validate_input_size(input, max_dim, 4, 5)
 }
 validate_text_from_source <- function(input, max_dim) {
-  validate_text(input, max_dim, 1, 248)
+  validate_text(input, max_dim)
 }
 validate_time_value <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 12)

@@ -4,7 +4,10 @@
 \alias{note_structure}
 \title{Constructs the NOTE_STRUCTURE from the GEDCOM specification}
 \usage{
-note_structure(notes)
+note_structure(xref_note = character(), submitter_text = character())
+}
+\arguments{
+\item{submitter_text}{Comments or opinions from the submitter.}
 }
 \value{
 

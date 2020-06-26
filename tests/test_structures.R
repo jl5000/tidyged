@@ -342,19 +342,18 @@ test_that("lds_spouse_sealing gives expected values", {
 
 # multimedia_link ---------------------------------------------------
 test_that("multimedia_link gives expected values", {
-  expect_error(multimedia_link())
   expect_error(multimedia_link("ref"))
-  expect_error(multimedia_link(1, media_type = "carrier pigeon"))
-  expect_error(multimedia_link(1, media_format = "jpeg"))
+  expect_error(multimedia_link(multimedia_file_reference = "ref", source_media_type = "carrier pigeon"))
+  expect_error(multimedia_link(multimedia_file_reference = "ref", multimedia_format = "jpeg"))
   
-  df1 <- multimedia_link(1)
+  df1 <- multimedia_link("@M1@")
   df2 <- tibble::tribble(
     ~level,   ~tag, ~value,
     0, "OBJE", "@M1@"
   )
   expect_equal(df1, df2)
   
-  df1 <- multimedia_link("ref", media_format = "jpg", media_type = "electronic")
+  df1 <- multimedia_link(multimedia_file_reference = "ref", multimedia_format = "jpg", source_media_type = "electronic")
   df2 <- tibble::tribble(
     ~level,   ~tag,       ~value,
     0, "OBJE",           "",

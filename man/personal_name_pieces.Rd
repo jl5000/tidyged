@@ -5,15 +5,31 @@
 \title{Constructs the PERSONAL_NAME_PIECES from the GEDCOM specification}
 \usage{
 personal_name_pieces(
-  prefix = character(),
-  given = character(),
-  nickname = character(),
-  surname_prefix = character(),
-  surname = character(),
-  suffix = character(),
+  name_piece_prefix = character(),
+  name_piece_given = character(),
+  name_piece_nickname = character(),
+  name_piece_surname_prefix = character(),
+  name_piece_surname = character(),
+  name_piece_suffix = character(),
   notes = list(),
   source_citations = list()
 )
+}
+\arguments{
+\item{name_piece_prefix}{Non indexing name piece that appears preceding the given name and surname parts.
+Different name prefix parts are separated by a comma.}
+
+\item{name_piece_given}{Given name or earned name. Different given names are separated by a comma.}
+
+\item{name_piece_nickname}{A descriptive or familiar name used in connection with one's proper name.}
+
+\item{name_piece_surname_prefix}{Surname prefix or article used in a family name. Different surname
+articles are separated by a comma, for example in the name "de la Cruz", this value would be "de, la".}
+
+\item{name_piece_surname}{Surname or family name. Different surnames are separated by a comma.}
+
+\item{name_piece_suffix}{Non-indexing name piece that appears after the given name and surname parts.
+Different name suffix parts are separated by a comma.}
 }
 \value{
 

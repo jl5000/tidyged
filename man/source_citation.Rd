@@ -5,19 +5,41 @@
 \title{Constructs the SOURCE_CITATION from the GEDCOM specification}
 \usage{
 source_citation(
-  source_ref,
-  page = character(),
-  event_type = character(),
-  role = character(),
-  entry_recording_date = character(),
-  source_text = character(),
+  xref_sour = character(),
+  source_description = character(),
+  where_within_source = character(),
+  event_type_cited_from = character(),
+  role_in_event = character(),
+  entry_recording_date = date_value(),
+  text_from_source = character(),
   certainty_assessment = character(),
   multimedia_links = list(),
   notes = list()
 )
 }
 \arguments{
+\item{xref_sour}{Either a pointer or an unique cross-reference identifier.}
+
+\item{source_description}{A free form text block used to describe the source from which information was
+obtained. This text block is used by those systems which cannot use a pointer to a source record.
+It must contain a descriptive title, who created the work, where and when it was created, and where
+the source data stored.}
+
+\item{where_within_source}{Specific location with in the information referenced.}
+
+\item{event_type_cited_from}{A code that indicates the type of event which was responsible for the
+source entry being recorded. For example, if the entry was created to record a birth of a child,
+then the type would be BIRT regardless of the assertions made from that record, such as the mother's
+name or mother's birth date. This will allow a prioritized best view choice and a determination of
+the certainty associated with the source used in asserting the cited fact.}
+
+\item{role_in_event}{Indicates what role this person played in the event that is being cited in this context.}
+
 \item{entry_recording_date}{The date that this event data was entered into the original source document.}
+
+\item{text_from_source}{A verbatim copy of any description contained within the source.
+This indicates notes or text that are actually contained in the source document, not the submitter's
+opinion about the source.}
 
 \item{certainty_assessment}{A quantitative evaluation of the credibility of a piece of
 information, based upon its supporting evidence. Some systems use this feature to rank multiple

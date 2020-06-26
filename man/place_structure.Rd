@@ -5,25 +5,41 @@
 \title{Constructs the PLACE_STRUCTURE from the GEDCOM specification}
 \usage{
 place_structure(
-  place,
+  place_name,
   place_hierarchy = character(),
-  phonetic_variation = character(),
+  place_phonetic_variation = character(),
   phonetic_type = character(),
-  romanized_variation = character(),
+  place_romanized_variation = character(),
   romanized_type = character(),
-  latitude = character(),
-  longitude = character(),
+  place_latitude = character(),
+  place_longitude = character(),
   notes = list()
 )
 }
 \arguments{
+\item{place_name}{The jurisdictional name of the place where the event took place.
+Jurisdictions are separated by commas.}
+
 \item{place_hierarchy}{This shows the jurisdictional entities that are named in a sequence from the
 lowest to the highest jurisdiction. The jurisdictions are separated by commas, and any jurisdiction's
 name that is missing is still accounted for by a comma.}
 
+\item{place_phonetic_variation}{The phonetic variation of the place name.}
+
 \item{phonetic_type}{Indicates the method used in transforming the text to the phonetic variation.}
 
+\item{place_romanized_variation}{The romanized variation of the place name.}
+
 \item{romanized_type}{Indicates the method used in transforming the text to a romanized variation.}
+
+\item{place_latitude}{The value specifying the latitudinal coordinate of the place name.
+The latitude coordinate is the direction North or South from the equator in degrees and fraction of
+degrees carried out to give the desired accuracy. For example: 18 degrees, 9 minutes, and 3.4 seconds North
+would be formatted as N18.150944.}
+
+\item{place_longitude}{The value specifying the longitudinal coordinate of the place name.
+The longitude coordinate is Degrees and fraction of degrees east or west of the zero or base
+meridian coordinate. For example: 168 degrees, 9 minutes, and 3.4 seconds East would be formatted as E168.150944.}
 }
 \value{
 

@@ -42,7 +42,7 @@
 #'                              1, "ADR1",    "b",
 #'                              1, "CTRY",   "UK"
 #'              )) 
-#' @return
+#' @return A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file
 #' @export
 address_structure <- function(all_address_lines,
                               address_city = character(),
@@ -129,13 +129,14 @@ address_structure <- function(all_address_lines,
 #'                              1, "RELA", "Godfather"
 #'              ))
 #' 
-#' expect_equal(association_structure("@I1@", "Father", notes = list(note_structure("This is a note"))), 
+#' expect_equal(association_structure("@I1@", "Father", 
+#'                                    notes = list(note_structure(submitter_text = "This is a note"))), 
 #'              tibble::tribble(~level,   ~tag,              ~value,
 #'                              0, "ASSO",              "@I1@",
 #'                              1, "RELA",            "Father",
 #'                              1, "NOTE",    "This is a note"
 #'              ))
-#' @return
+#' @return A tidy tibble containing the ASSOCIATION_STRUCTURE part of a GEDCOM file
 #' @export
 association_structure <- function(xref_indi,
                                   relation_is_descriptor,
@@ -173,15 +174,16 @@ association_structure <- function(xref_indi,
 #'                              1, "DATE", "5 OCT 1990"
 #'              ))
 #'                              
-#' expect_equal(change_date(date_exact(18, 12, 2008), time_value = "11:00:08.563")
+#' expect_equal(change_date(date_exact(18, 12, 2008), time_value = "11:00:08.563"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", "18 DEC 2008",
 #'                              2, "TIME", "11:00:08.563"
 #'              ))
 #'                              
-#' expect_equal(change_date(date_exact(5, 10, 1990), "10:34:56", notes = list(note_structure("Note 1"),
-#'                                                                            note_structure("Note 2"))),
+#' expect_equal(change_date(date_exact(5, 10, 1990), "10:34:56", 
+#'                          notes = list(note_structure(submitter_text = "Note 1"),
+#'                                       note_structure(submitter_text = "Note 2"))),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", "5 OCT 1990",
@@ -189,7 +191,7 @@ association_structure <- function(xref_indi,
 #'                              1, "NOTE", "Note 1",
 #'                              1, "NOTE", "Note 2"
 #'              ))
-#' @return
+#' @return A tidy tibble containing the CHANGE_DATE part of a GEDCOM file
 #' @export
 change_date <- function(change_date = date_exact(),
                         time_value = character(),
@@ -229,12 +231,12 @@ change_date <- function(change_date = date_exact(),
 #'                              1, "PEDI",  "birth",
 #'                              1, "STAT", "proven"
 #'              ))
-#' @return
+#' @return A tidy tibble containing the CHILD_TO_FAMILY_LINK part of a GEDCOM file
 #' @export
 child_to_family_link <- function(xref_fam,
-                                pedigree_linkage_type = character(),
-                                child_linkage_status = character(),
-                                notes = list()) {
+                                 pedigree_linkage_type = character(),
+                                 child_linkage_status = character(),
+                                 notes = list()) {
   
   if (length(xref_fam) == 0) return(tibble())
   
@@ -281,7 +283,7 @@ child_to_family_link <- function(xref_fam,
 #'                              1, "CONT",       "Road",
 #'                              1, "ADR1",       "Road"
 #'              ))
-#' @return
+#' @return A tidy tibble containing the EVENT_DETAIL part of a GEDCOM file
 #' @export
 event_detail <- function(event_or_fact_classification = character(),
                          date = date_value(),
@@ -343,7 +345,7 @@ event_detail <- function(event_or_fact_classification = character(),
 #'                              0, "WIFE",     "",
 #'                              1,  "AGE",   "40y"
 #'              ))
-#' @return
+#' @return A tidy tibble containing the FAMILY_EVENT_DETAIL part of a GEDCOM file
 #' @export
 family_event_detail <- function(husband_age_at_event = character(),
                                 wife_age_at_event = character(),
@@ -400,7 +402,7 @@ family_event_detail <- function(husband_age_at_event = character(),
 #'                              1, "WIFE",     "",
 #'                              2, "AGE",   "20y"
 #'              ))
-#' @return
+#' @return A tidy tibble containing the FAMILY_EVENT_STRUCTURE part of a GEDCOM file
 #' @export
 family_event_structure <- function(event_type_family,
                                    event_descriptor = character(),
@@ -444,13 +446,14 @@ family_event_structure <- function(event_type_family,
 #'                              0, "NATI",     "British",
 #'                              1,  "AGE",           "0y"
 #'              ))
-#' @return
+#' @return A tidy tibble containing the INDIVIDUAL_ATTRIBUTE_STRUCTURE part of a GEDCOM file
 #' @export
 individual_attribute_structure <- function(attribute_type,
                                            attribute_description,
                                            individual_event_details = individual_event_detail()) {
   
   if (length(attribute_type) == 0) return(tibble())
+  if (length(attribute_description) == 0) return(tibble())
   
   validate_attribute_type(attribute_type, 1)
   if (attribute_type %in% c("IDNO", "NCHI", "NMR", "SSN")) 
@@ -495,8 +498,13 @@ individual_attribute_structure <- function(attribute_type,
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_equal(dim(individual_event_detail()), c(0, 3))  
 #' 
-#' @return
+#' expect_equal(individual_event_detail(age = "5y"),
+#'              tibble::tribble(~level,  ~tag, ~value,
+#'                              0, "AGE",    "5y"
+#'              ))
+#' @return A tidy tibble containing the INDIVIDUAL_EVENT_DETAIL part of a GEDCOM file
 #' @export
 individual_event_detail <- function(event_details = event_detail(),
                                     age_at_event = character()) {
@@ -517,8 +525,33 @@ individual_event_detail <- function(event_details = event_detail(),
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_error(individual_event_structure())
+#' expect_error(individual_event_structure("BLAH"))
+#' expect_error(individual_event_structure("ADOP", adopted_by_which_parent = "WHO"))
 #' 
-#' @return
+#' expect_equal(individual_event_structure("BIRT"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "BIRT",    "Y"
+#'              ))
+#' 
+#' expect_equal(individual_event_structure("CHRA"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "CHRA",     ""
+#'              ))
+#' 
+#' expect_equal(individual_event_structure("BIRT", xref_fam = "@F4@"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "BIRT",    "Y",
+#'                              1, "FAMC", "@F4@"
+#'              ))
+#' 
+#' expect_equal(individual_event_structure("ADOP", xref_fam = "@F4@", adopted_by_which_parent = "BOTH"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "ADOP",     "",
+#'                              1, "FAMC", "@F4@",
+#'                              2, "ADOP", "BOTH"
+#'              ))
+#' @return A tidy tibble containing the INDIVIDUAL_EVENT_STRUCTURE part of a GEDCOM file
 #' @export
 individual_event_structure <- function(event_type_individual,
                                        individual_event_details = individual_event_detail(),
@@ -569,42 +602,67 @@ lds_spouse_sealing <- function() {
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_error(multimedia_link("ref"))
+#' expect_error(multimedia_link(multimedia_file_reference = "ref", source_media_type = "carrier pigeon"))
+#' expect_error(multimedia_link(multimedia_file_reference = "ref", multimedia_format = "jpeg"))
 #' 
-#' @return
+#' expect_equal(multimedia_link("@M1@"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "OBJE", "@M1@"
+#'              ))
+#' 
+#' expect_equal(multimedia_link(multimedia_file_reference = "ref", multimedia_format = "jpg", 
+#'                              source_media_type = "electronic"),
+#'              tibble::tribble(~level,   ~tag,       ~value,
+#'                              0, "OBJE",           "",
+#'                              1, "FILE",        "ref",
+#'                              2, "FORM",        "jpg",
+#'                              3, "MEDI", "electronic"
+#'              ))
+#' @return A tidy tibble containing the MULTIMEDIA_LINK part of a GEDCOM file
 #' @export
 multimedia_link <- function(xref_obje = character(),
-                            multimedia_file_refn = character(),
+                            multimedia_file_reference = character(),
                             multimedia_format = character(),
                             source_media_type = character(),
                             descriptive_title = character()) {
   
-  if (length(xref_obje) + length(multimedia_file_refn) == 0) return(tibble())
+  if (length(xref_obje) + length(multimedia_file_reference) == 0) return(tibble())
   
-  if_else(str_detect(xref_obje, "@"),
-          validate_input_size(file_ref, 1, 1, 18),
-          validate_input_size(file_ref, 1000, 1, 30))
-  # Is it one format per file?
-  validate_input_size(media_format, 1)
-  validate_input_size(media_type, 1)
-  validate_input_size(title, 1, 1, 248)
-  check_media_format(media_format)
-  check_media_type(media_type)
+  if (length(multimedia_format) != length(multimedia_file_reference) &
+      length(multimedia_file_reference) > 0)
+    stop("Each file reference requires a file format")
   
-  if (length(xref_obje) > 0) {
+  if (length(source_media_type) != length(multimedia_file_reference) &
+      length(multimedia_file_reference) > 0 & length(source_media_type) > 0)
+    stop("Each file reference requires a source media type (even if it's blank)")
   
+  validate_xref(xref_obje, 1)
+  
+  if (length(xref_obje) == 1) {
+    
     tibble(level = 0, tag = "OBJE", value = xref_obje)
   
   } else {
+  
+    validate_multimedia_file_reference(multimedia_file_reference, 1000)
+    validate_multimedia_format(multimedia_format, 1000)
+    validate_source_media_type(source_media_type, 1000)
+    validate_descriptive_title(descriptive_title, 1)
     
-    #file and form are needed
-    if (length(multimedia_format) == 0) stop("Media format required")
+    temp <- tibble(level = 0, tag = "OBJE", value = "")
     
-    bind_rows(
-      tibble(level = 0, tag = "OBJE", value = ""),
-      tibble(level = 1, tag = "FILE", value = multimedia_file_refn),
-      tibble(level = 2, tag = "FORM", value = multmedia_format),
-      tibble(level = 3, tag = "MEDI", value = source_media_type),
-      tibble(level = 1, tag = "TITL", value = descriptive_title)
+    for (i in seq_along(multimedia_file_reference)) {
+      
+      temp <- bind_rows(temp,
+                        tibble(level = 1, tag = "FILE", value = multimedia_file_reference[i]),
+                        tibble(level = 2, tag = "FORM", value = multimedia_format[i]),
+                        tibble(level = 3, tag = "MEDI", value = source_media_type[i])
+      )
+    }
+    
+    bind_rows(temp,
+              tibble(level = 1, tag = "TITL", value = descriptive_title)
     )
   }
 }
@@ -613,22 +671,54 @@ multimedia_link <- function(xref_obje = character(),
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_error(note_structure(submitter_text = c("test1", "test2")))
 #' 
-#' @return
+#' expect_equal(note_structure("@T1@"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "NOTE", "@T1@"
+#'              ))
+#' 
+#' expect_equal(note_structure(submitter_text = "test text"),
+#'              tibble::tribble(~level,   ~tag,      ~value,
+#'                              0, "NOTE", "test text"
+#'              ))
+#' 
+#' expect_equal(note_structure(submitter_text = paste0(rep("a", 248), collapse="")),
+#'              tibble::tribble(~level,   ~tag,      ~value,
+#'                              0, "NOTE", paste0(rep("a", 248), collapse="")
+#'              ))
+#' 
+#' expect_equal(note_structure(submitter_text = paste0(rep("a", 249), collapse="")),
+#'              tibble::tribble(~level,   ~tag,      ~value,
+#'                              0, "NOTE", paste0(rep("a", 248), collapse=""),
+#'                              1, "CONC", "a"
+#'              ))
+#' 
+#' expect_equal(note_structure(submitter_text = paste0(rep("a", 992), collapse="")),
+#'              tibble::tribble(~level,   ~tag,      ~value,
+#'                              0, "NOTE", paste0(rep("a", 248), collapse=""),
+#'                              1, "CONC", paste0(rep("a", 248), collapse=""),
+#'                              1, "CONC", paste0(rep("a", 248), collapse=""),
+#'                              1, "CONC", paste0(rep("a", 248), collapse="")
+#'              ))
+#' @return A tidy tibble containing the NOTE_STRUCTURE part of a GEDCOM file
 #' @export
-note_structure <- function(notes) {
+note_structure <- function(xref_note = character(),
+                           submitter_text = character()) {
   
-  if (length(notes) == 0) return(tibble())
+  if (length(xref_note) + length(submitter_text) == 0) return(tibble())
   
-  if (is.numeric(notes)) {
+  validate_xref(xref_note, 1)
+  
+  if (length(xref_note) == 1) {
     
-    validate_input_size(notes, 1, 1, 18)
-    tibble(level = 0, tag = "NOTE", value = ref_to_xref(notes, "T"))
+    tibble(level = 0, tag = "NOTE", value = xref_note)
   
   } else {
   
-    validate_input_size(notes, 1)
-    split_text(start_level = 0, top_tag = "NOTE", text = notes)  
+    validate_submitter_text(submitter_text, 1)
+    
+    split_text(start_level = 0, top_tag = "NOTE", text = submitter_text)  
   }
   
 }
@@ -640,32 +730,54 @@ note_structure <- function(notes) {
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_equal(dim(personal_name_pieces()), c(0, 3))
 #' 
-#' @return
+#' expect_equal(personal_name_pieces(name_piece_prefix = "Mr", name_piece_nickname = "J"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "NPFX",   "Mr",
+#'                              0, "NICK",    "J"
+#'              ))
+#' 
+#' expect_equal(personal_name_pieces(name_piece_prefix = "Mr", name_piece_nickname = "J",
+#'                                   notes = list(note_structure(submitter_text = paste0(rep("a", 992), collapse="")),
+#'                                                note_structure(submitter_text = paste0(rep("b", 992), collapse="")))),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "NPFX",   "Mr",
+#'                              0, "NICK",    "J",
+#'                              0, "NOTE", paste0(rep("a", 248), collapse=""),
+#'                              1, "CONC", paste0(rep("a", 248), collapse=""),
+#'                              1, "CONC", paste0(rep("a", 248), collapse=""),
+#'                              1, "CONC", paste0(rep("a", 248), collapse=""),
+#'                              0, "NOTE", paste0(rep("b", 248), collapse=""),
+#'                              1, "CONC", paste0(rep("b", 248), collapse=""),
+#'                              1, "CONC", paste0(rep("b", 248), collapse=""),
+#'                              1, "CONC", paste0(rep("b", 248), collapse="")
+#'              ))
+#' @return A tidy tibble containing the PERSONAL_NAME_PIECES part of a GEDCOM file
 #' @export
-personal_name_pieces <- function(prefix = character(),
-                                 given = character(), 
-                                 nickname = character(), 
-                                 surname_prefix = character(),
-                                 surname = character(),
-                                 suffix = character(),
+personal_name_pieces <- function(name_piece_prefix = character(),
+                                 name_piece_given = character(), 
+                                 name_piece_nickname = character(), 
+                                 name_piece_surname_prefix = character(),
+                                 name_piece_surname = character(),
+                                 name_piece_suffix = character(),
                                  notes = list(),
                                  source_citations = list()) {
   
-  validate_input_size(prefix, 1, 1, 30)
-  validate_input_size(given, 1, 1, 120)
-  validate_input_size(nickname, 1, 1, 30)
-  validate_input_size(surname_prefix, 1, 1, 30)
-  validate_input_size(surname, 1, 1, 120)
-  validate_input_size(suffix, 1, 1, 30)
+  validate_name_piece_suffix(name_piece_prefix, 1)
+  validate_name_piece_given(name_piece_given, 1)
+  validate_name_piece_nickname(name_piece_nickname, 1)
+  validate_name_piece_surname_prefix(name_piece_surname_prefix, 1)
+  validate_name_piece_surname(name_piece_surname, 1)
+  validate_name_piece_suffix(name_piece_suffix, 1)
   
   bind_rows(
-    tibble(level = 0, tag = "NPFX", value = prefix),
-    tibble(level = 0, tag = "GIVN", value = given),
-    tibble(level = 0, tag = "NICK", value = nickname),
-    tibble(level = 0, tag = "SPFX", value = surname_prefix),
-    tibble(level = 0, tag = "SURN", value = surname),
-    tibble(level = 0, tag = "NSFX", value = suffix),
+    tibble(level = 0, tag = "NPFX", value = name_piece_prefix),
+    tibble(level = 0, tag = "GIVN", value = name_piece_given),
+    tibble(level = 0, tag = "NICK", value = name_piece_nickname),
+    tibble(level = 0, tag = "SPFX", value = name_piece_surname_prefix),
+    tibble(level = 0, tag = "SURN", value = name_piece_surname),
+    tibble(level = 0, tag = "NSFX", value = name_piece_suffix),
     notes %>% bind_rows() %>% add_levels(0),
     source_citations %>% bind_rows() %>% add_levels(0)
   ) 
@@ -676,59 +788,116 @@ personal_name_pieces <- function(prefix = character(),
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_error(personal_name_structure())
+#' expect_error(
+#'   personal_name_structure("Joe Bloggs", 
+#'                           name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"))
+#' )
+#' expect_error(
+#'   personal_name_structure("Joe Bloggs", 
+#'                           name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
+#'                           phonetic_type = "Can't spell")
+#' )
+#' expect_error(
+#'   personal_name_structure("Joe Bloggs", 
+#'                           name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
+#'                           phonetic_type = c("Can't spell", "Can't spell"),
+#'                           phonetic_name_pieces = list(personal_name_pieces(name_piece_given = "Joe", 
+#'                                                                            name_piece_surname = "Blogs")))
+#' )
 #' 
-#' @return
+#' expect_equal(personal_name_structure("Joe /Bloggs/", 
+#'                                      name_pieces = personal_name_pieces(name_piece_prefix = "Mr",
+#'                                                                         name_piece_surname = "Bloggs")),
+#'              tibble::tribble(~level,   ~tag,         ~value,
+#'                              0, "NAME", "Joe /Bloggs/",
+#'                              1, "NPFX",           "Mr",
+#'                              1, "SURN",       "Bloggs"
+#'              ))
+#' 
+#' expect_equal(personal_name_structure("Joe Bloggs", 
+#'                                      name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
+#'                                      phonetic_type = c("Can't spell", "Can't spell")),
+#'              tibble::tribble(~level,   ~tag,         ~value,
+#'                              0, "NAME",   "Joe Bloggs",
+#'                              1, "FONE",    "Joe Blogs",
+#'                              2, "TYPE",  "Can't spell",
+#'                              1, "FONE",    "Jo Bloggs",
+#'                              2, "TYPE",  "Can't spell"
+#'              ))
+#' 
+#' expect_equal(personal_name_structure("Joe Bloggs", 
+#'                                      name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
+#'                                      phonetic_type = c("Can't spell", "Can't spell"),
+#'                                      phonetic_name_pieces = 
+#'                                        list(personal_name_pieces(name_piece_given = "Joe", 
+#'                                                                  name_piece_surname = "Blogs"),
+#'                                             personal_name_pieces(name_piece_given = "Jo",
+#'                                                                  name_piece_surname = "Bloggs"))),
+#'              tibble::tribble(~level,   ~tag,         ~value,
+#'                              0, "NAME",   "Joe Bloggs",
+#'                              1, "FONE",    "Joe Blogs",
+#'                              2, "TYPE",  "Can't spell",
+#'                              2, "GIVN",          "Joe",
+#'                              2, "SURN",        "Blogs",
+#'                              1, "FONE",    "Jo Bloggs",
+#'                              2, "TYPE",  "Can't spell",
+#'                              2, "GIVN",           "Jo",
+#'                              2, "SURN",       "Bloggs"
+#'              ))
+#' @return A tidy tibble containing the PERSONAL_NAME_STRUCTURE part of a GEDCOM file
 #' @export
-personal_name_structure <- function(name,
-                                    type = character(),
+personal_name_structure <- function(name_personal,
+                                    name_type = character(),
                                     name_pieces = personal_name_pieces(), 
-                                    phonetic_variation = character(),
+                                    name_phonetic_variation = character(),
                                     phonetic_type = character(),
                                     phonetic_name_pieces = list(),
-                                    romanized_variation = character(),
+                                    name_romanized_variation = character(),
                                     romanized_type = character(),
                                     romanized_name_pieces = list()) {
   
-  if (length(name) == 0) return(tibble())
+  if (length(name_personal) == 0) return(tibble())
   
-  validate_input_size(name, 1, 1, 120)
-  validate_input_size(type, 1, 5, 30)
-  validate_input_size(phonetic_variation, 1000, 5, 120)
-  validate_input_size(phonetic_type, 1000, 5, 30)
-  validate_input_size(romanized_variation, 1000, 5, 120)
-  validate_input_size(romanized_type, 1000, 5, 30)
+  validate_name_personal(name_personal, 1)
+  validate_name_type(name_type, 1)
+  validate_name_phonetic_variation(name_phonetic_variation, 1000)
+  validate_phonetic_type(phonetic_type, 1000)
+  validate_name_romanized_variation(name_romanized_variation, 1000)
+  validate_romanized_type(romanized_type, 1000)
   
-  # ARE THESE NEEDED? - SPEC IS UNCLEAR
-  if (length(phonetic_variation) != length(phonetic_type))
+  if (length(name_phonetic_variation) != length(phonetic_type))
     stop("Each phonetic variation requires a phonetic type")
-  if (length(phonetic_variation) != length(phonetic_name_pieces) &
-      length(phonetic_name_pieces) > 0)
-    stop("Each phonetic variation requires a set of phonetic name pieces")
-  if (length(romanized_variation) != length(romanized_type))
+  if (length(name_romanized_variation) != length(romanized_type))
     stop("Each romanized variation requires a romanized type")
-  if (length(romanized_variation) != length(romanized_name_pieces) &
-      length(romanized_name_pieces) > 0)
-    stop("Each romanized variation requires a set of romanized name pieces")
+  
+  if (length(name_phonetic_variation) != length(phonetic_name_pieces) &
+      length(name_phonetic_variation) > 0 & length(phonetic_name_pieces) > 0)
+    stop("Each phonetic variation requires a set of phonetic name pieces (even if empty)")
+  
+  if (length(name_romanized_variation) != length(romanized_name_pieces) &
+      length(name_romanized_variation) > 0 & length(romanized_name_pieces) > 0)
+    stop("Each romanized variation requires a set of romanized name pieces (even if empty)")
   
   temp <- bind_rows(
-    tibble(level = 0, tag = "NAME", value = name),
-    tibble(level = 1, tag = "TYPE", value = type),
+    tibble(level = 0, tag = "NAME", value = name_personal),
+    tibble(level = 1, tag = "TYPE", value = name_type),
     name_pieces %>% add_levels(1)
   )
   
-  for (i in seq_along(phonetic_variation)) {
+  for (i in seq_along(name_phonetic_variation)) {
     temp <- bind_rows(
       temp,
-      tibble(level = 1, tag = "FONE", value = phonetic_variation[i]),
+      tibble(level = 1, tag = "FONE", value = name_phonetic_variation[i]),
       tibble(level = 2, tag = "TYPE", value = phonetic_type[i])
     )
     if (length(phonetic_name_pieces) > 0)
       temp <- bind_rows(temp, phonetic_name_pieces[[i]] %>% add_levels(2))
   }
-  for (i in seq_along(romanized_variation)) {
+  for (i in seq_along(name_romanized_variation)) {
     temp <- bind_rows(
      temp,
-     tibble(level = 1, tag = "ROMN", value = romanized_variation[i]),
+     tibble(level = 1, tag = "ROMN", value = name_romanized_variation[i]),
      tibble(level = 2, tag = "TYPE", value = romanized_type[i])
     )
     if (length(romanized_name_pieces) > 0)
@@ -743,52 +912,77 @@ personal_name_structure <- function(name,
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_error(place_structure())
+#' expect_error(place_structure("Here", place_latitude = "N51.5", place_longitude = "E0.0"))
+#' expect_error(
+#'   place_structure("London", 
+#'                   place_phonetic_variation = c("Lundon", "Lundun"))
+#' )
+#' expect_error(
+#'   place_structure("London", 
+#'                   place_phonetic_variation = c("Lundon", "Lundun"),
+#'                   phonetic_type = "English accent")
+#' )
 #' 
-#' @return
+#' expect_equal(place_structure("Greenwich", 
+#'                              place_phonetic_variation = c("Grenidge", "Grenich"),
+#'                              phonetic_type = c("English accent", "English accent"),
+#'                              place_latitude = "N51.5",
+#'                              place_longitude = "E0.00"),
+#'              tibble::tribble(~level,   ~tag,           ~value,
+#'                              0, "PLAC",      "Greenwich",
+#'                              1, "FONE",       "Grenidge",
+#'                              2, "TYPE", "English accent",
+#'                              1, "FONE",        "Grenich",
+#'                              2, "TYPE", "English accent",
+#'                              1,  "MAP",               "",
+#'                              2, "LATI",          "N51.5",
+#'                              2, "LONG",           "E0.00"
+#'              ))
+#' @return A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file
 #' @export
-place_structure <- function(place,
+place_structure <- function(place_name,
                             place_hierarchy = character(),
-                            phonetic_variation = character(),
+                            place_phonetic_variation = character(),
                             phonetic_type = character(),
-                            romanized_variation = character(),
+                            place_romanized_variation = character(),
                             romanized_type = character(),
-                            latitude = character(),
-                            longitude = character(),
+                            place_latitude = character(),
+                            place_longitude = character(),
                             notes = list()) {
 
-  if (length(place) == 0) return(tibble())
+  if (length(place_name) == 0) return(tibble())
   
-  validate_input_size(place, 1, 1, 120)
-  validate_input_size(place_hierarchy, 1, 1, 120)
-  validate_input_size(phonetic_variation, 1000, 1, 120)
-  validate_input_size(phonetic_type, 1000, 5, 30)
-  validate_input_size(romanized_variation, 1000, 1, 120)
-  validate_input_size(romanized_type, 1000, 5, 30)
-  validate_input_size(latitude, 1, 5, 8)
-  validate_input_size(longitude, 1, 5, 8)
+  validate_place_name(place_name, 1)
+  validate_place_hierarchy(place_hierarchy, 1)
+  validate_place_phonetic_variation(place_phonetic_variation, 1000)
+  validate_phonetic_type(phonetic_type, 1000)
+  validate_place_romanized_variation(place_romanized_variation, 1000)
+  validate_romanized_type(romanized_type, 1000)
+  validate_place_latitude(place_latitude, 1)
+  validate_place_longitude(place_longitude, 1)
   
-  # ARE THESE NEEDED? - SPEC IS UNCLEAR
-  if (length(phonetic_variation) != length(phonetic_type))
+  if (length(place_phonetic_variation) != length(phonetic_type))
     stop("Each phonetic variation requires a phonetic type")
-  if (length(romanized_variation) != length(romanized_type))
+  if (length(place_romanized_variation) != length(romanized_type))
     stop("Each romanized variation requires a romanized type")
   
   temp <- bind_rows(
-    tibble(level = 0, tag = "PLAC", value = place),
+    tibble(level = 0, tag = "PLAC", value = place_name),
     tibble(level = 1, tag = "FORM", value = place_hierarchy)
     )
   
-  for (i in seq_along(phonetic_variation)) {
+  for (i in seq_along(place_phonetic_variation)) {
     temp <- bind_rows(
       temp,
-      tibble(level = 1, tag = "FONE", value = phonetic_variation[i]),
+      tibble(level = 1, tag = "FONE", value = place_phonetic_variation[i]),
       tibble(level = 2, tag = "TYPE", value = phonetic_type[i])
     )
   }
-  for (i in seq_along(romanized_variation)) {
+  for (i in seq_along(place_romanized_variation)) {
     temp <- bind_rows(
       temp,
-      tibble(level = 1, tag = "ROMN", value = romanized_variation[i]),
+      tibble(level = 1, tag = "ROMN", value = place_romanized_variation[i]),
       tibble(level = 2, tag = "TYPE", value = romanized_type[i])
     )
   }
@@ -796,8 +990,8 @@ place_structure <- function(place,
   temp <- bind_rows(
     temp,
     tibble(level = 1, tag = "MAP", value = ""),
-    tibble(level = 2, tag = "LATI", value = latitude),
-    tibble(level = 2, tag = "LONG", value = longitude),
+    tibble(level = 2, tag = "LATI", value = place_latitude),
+    tibble(level = 2, tag = "LONG", value = place_longitude),
     notes %>% bind_rows() %>% add_levels(1)
   )
   
@@ -811,44 +1005,69 @@ place_structure <- function(place,
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_equal(source_citation("@S1@"),
+#'              tibble::tribble(
+#'                ~level,   ~tag, ~value,
+#'                0, "SOUR", "@S1@"
+#'              ))
 #' 
-#' @return
+#' expect_equal(source_citation("@S1@", where_within_source = 3, event_type_cited_from = "event"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "SOUR",  "@S1@",
+#'                              1, "PAGE",     "3",
+#'                              1, "EVEN", "event"
+#'              ))
+#' 
+#' expect_equal(source_citation("@S1@", where_within_source = 3, role_in_event = "a role"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "SOUR",  "@S1@",
+#'                              1, "PAGE",     "3"
+#'              ))
+#' 
+#' expect_equal(source_citation("@S1@", where_within_source = 3, 
+#'                              event_type_cited_from = "event", 
+#'                              role_in_event = "a role"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "SOUR",   "@S1@",
+#'                              1, "PAGE",      "3",
+#'                              1, "EVEN",  "event",
+#'                              2, "ROLE", "a role"
+#'              ))
+#' @return A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file
 #' @export
-source_citation <- function(source_ref,
-                            page = character(),
-                            event_type = character(),
-                            role = character(),
-                            entry_recording_date = character(),
-                            source_text = character(),
+source_citation <- function(xref_sour = character(),
+                            source_description = character(),
+                            where_within_source = character(),
+                            event_type_cited_from = character(),
+                            role_in_event = character(),
+                            entry_recording_date = date_value(),
+                            text_from_source = character(),
                             certainty_assessment = character(),
                             multimedia_links = list(),
                             notes = list()) {
   
-  if (length(source_ref) == 0) return(tibble())
+  if (length(xref_sour) + length(source_description) == 0) return(tibble())
   
-  page <- as.character(page)
+  where_within_source <- as.character(where_within_source)
   certainty_assessment <- as.character(certainty_assessment)
   
-  if_else(is.numeric(source_ref), 
-          validate_input_size(source_ref, 1, 1, 18),
-          validate_input_size(source_ref, 1))
-  validate_input_size(page, 1, 1, 248)
-  validate_input_size(event_type, 1, 1, 15)
-  validate_input_size(role, 1, 1, 15)
-  validate_input_size(entry_recording_date, 1, 1, 90)
-  validate_input_size(certainty_assessment, 1)
-  check_certainty_assessment(certainty_assessment)
+  validate_xref(xref_sour, 1)
   
-  if (is.numeric(source_ref)) {
+  if (length(xref_sour) == 1) {
+    
+    validate_where_within_source(where_within_source, 1)
+    validate_event_type_cited_from(event_type_cited_from, 1)
+    validate_role_in_event(role_in_event, 1)
+    validate_entry_recording_date(entry_recording_date, 1)
     
     temp <- bind_rows(
-      tibble(level = 0, tag = "SOUR", value = ref_to_xref(source_ref, "S")),
-      tibble(level = 1, tag = "PAGE", value = page),
-      tibble(level = 1, tag = "EVEN", value = event_type),
-      tibble(level = 2, tag = "ROLE", value = role),
+      tibble(level = 0, tag = "SOUR", value = xref_sour),
+      tibble(level = 1, tag = "PAGE", value = where_within_source),
+      tibble(level = 1, tag = "EVEN", value = event_type_cited_from),
+      tibble(level = 2, tag = "ROLE", value = role_in_event),
       tibble(level = 1, tag = "DATA", value = ""),
       tibble(level = 1, tag = "DATE", value = entry_recording_date),
-      split_text(start_level = 2, top_tag = "TEXT", text = source_text),
+      split_text(start_level = 2, top_tag = "TEXT", text = text_from_source),
       multimedia_links %>% bind_rows() %>% add_levels(1),
       notes %>% bind_rows() %>% add_levels(1),
       tibble(level = 1, tag = "QUAY", value = certainty_assessment)
@@ -863,8 +1082,8 @@ source_citation <- function(source_ref,
   } else {
     
     bind_rows(
-      split_text(start_level = 0, top_tag = "SOUR", text = source_ref),
-      split_text(start_level = 1, top_tag = "TEXT", text = source_text),
+      split_text(start_level = 0, top_tag = "SOUR", text = source_description),
+      split_text(start_level = 1, top_tag = "TEXT", text = text_from_source),
       multimedia_links %>% bind_rows() %>% add_levels(1),
       notes %>% bind_rows() %>% add_levels(1),
       tibble(level = 1, tag = "QUAY", value = certainty_assessment)
@@ -878,28 +1097,37 @@ source_citation <- function(source_ref,
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_error(source_repository_citation())
+#' expect_error(source_repository_citation("@R1@", source_media_type = "carrier pigeon"))
 #' 
-#' @return
+#' expect_equal(source_repository_citation("@R1@", source_call_number = c("123", "456"), 
+#'                                         source_media_type = "map"),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "REPO", "@R1@",
+#'                              1, "CALN",  "123",
+#'                              1, "CALN",  "456",
+#'                              2, "MEDI",  "map"
+#'              ))
+#' @return A tidy tibble containing the SOURCE_REPOSITORY_CITATION part of a GEDCOM file
 #' @export
-source_repository_citation <- function(repo_ref,
+source_repository_citation <- function(xref_repo,
                                        notes = list(),
-                                       call_numbers = character(),
-                                       media_type = character()) {
+                                       source_call_number = character(),
+                                       source_media_type = character()) {
   
-  if (length(repo_ref) == 0) return(tibble())
+  if (length(xref_repo) == 0) return(tibble())
   
-  validate_input_size(repo_ref, 1, 1, 18)
-  validate_input_size(call_numbers, 1000, 1, 120)
-  validate_input_size(media_type, 1)
-  check_media_type(media_type)
-  # A MEDIA TYPE FOR EVERY CALL NUMBER?
+  validate_xref(xref_repo, 1)
+  validate_source_call_number(source_call_number, 1000)
+  validate_source_media_type(source_media_type, 1)
+  
   bind_rows(
-    tibble(level = 0, tag = "REPO", value = ref_to_xref(repo_ref, "R")),
+    tibble(level = 0, tag = "REPO", value = xref_repo),
     notes %>% bind_rows() %>% add_levels(1),
-    tibble(level = 1, tag = "CALN", value = call_numbers),
-    tibble(level = 2, tag = "MEDI", value = media_type)
-  )
-  
+    tibble(level = 1, tag = "CALN", value = source_call_number),
+    tibble(level = 2, tag = "MEDI", value = source_media_type)
+    )
+    
 }
 
 
@@ -907,18 +1135,18 @@ source_repository_citation <- function(repo_ref,
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' 
-#' @return
+#' expect_error(spouse_to_family_link())
+#' @return A tidy tibble containing the SPOUSE_TO_FAMILY_LINK part of a GEDCOM file
 #' @export
-spouse_to_family_link <- function(family_ref,
+spouse_to_family_link <- function(xref_fam,
                                   notes = list()) {
   
-  if (length(family_ref) == 0) return(tibble())
+  if (length(xref_fam) == 0) return(tibble())
   
-  validate_input_size(family_ref, 1, 1, 18)
+  validate_xref(xref_fam, 1)
   
   bind_rows(
-    tibble(level = 0, tag = "FAMS", value = ref_to_xref(family_ref, "F")),
+    tibble(level = 0, tag = "FAMS", value = xref_fam),
     notes %>% bind_rows() %>% add_levels(1)
   )
 }

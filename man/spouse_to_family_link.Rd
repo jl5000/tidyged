@@ -4,7 +4,10 @@
 \alias{spouse_to_family_link}
 \title{Constructs the SPOUSE_TO_FAMILY_LINK from the GEDCOM specification}
 \usage{
-spouse_to_family_link(family_ref, notes = list())
+spouse_to_family_link(xref_fam, notes = list())
+}
+\arguments{
+\item{xref_fam}{Either a pointer or an unique cross-reference identifier.}
 }
 \value{
 

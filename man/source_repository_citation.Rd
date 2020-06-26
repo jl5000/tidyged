@@ -5,11 +5,20 @@
 \title{Constructs the SOURCE_REPOSITORY_CITATION from the GEDCOM specification}
 \usage{
 source_repository_citation(
-  repo_ref,
+  xref_repo,
   notes = list(),
-  call_numbers = character(),
-  media_type = character()
+  source_call_number = character(),
+  source_media_type = character()
 )
+}
+\arguments{
+\item{xref_repo}{Either a pointer or an unique cross-reference identifier.}
+
+\item{source_call_number}{An identification or reference description used to file and retrieve items
+from the holdings of a repository.}
+
+\item{source_media_type}{A code, selected from one of the media classifications choices above,
+that indicates the type of material in which the referenced source is stored.}
 }
 \value{
 

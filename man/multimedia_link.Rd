@@ -6,7 +6,7 @@
 \usage{
 multimedia_link(
   xref_obje = character(),
-  multimedia_file_refn = character(),
+  multimedia_file_reference = character(),
   multimedia_format = character(),
   source_media_type = character(),
   descriptive_title = character()
@@ -14,6 +14,10 @@ multimedia_link(
 }
 \arguments{
 \item{xref_obje}{Either a pointer or an unique cross-reference identifier.}
+
+\item{multimedia_file_reference}{A complete local or remote file reference to the auxiliary data
+to be linked to the GEDCOM context. Remote reference would include a network address where the multimedia
+data may be obtained.}
 
 \item{multimedia_format}{Indicates the format of the multimedia data associated with the specific
 GEDCOM context. This allows processors to determine whether they can process the data object.

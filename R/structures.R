@@ -54,7 +54,7 @@ address_structure <- function(all_address_lines,
                               address_fax = character(),
                               address_web_page = character()) {
   
-  if (length(all_address_lines) == 0) return(tibble())
+  if (length(all_address_lines) == 0) return(tibble::tibble())
   
   address_postal_code <- as.character(address_postal_code)
   phone_number <- as.character(phone_number)
@@ -70,20 +70,20 @@ address_structure <- function(all_address_lines,
   validate_address_fax(address_fax, 3)
   validate_address_web_page(address_web_page, 3)
   
-  address_lines_all <- tibble()
+  address_lines_all <- tibble::tibble()
   
   # First populate the ADDR and CONT lines (mandatory)
   for (i in seq_along(all_address_lines)) {
       
     if (i == 1) {
-      address_lines_all <- bind_rows(
+      address_lines_all <- dplyr::bind_rows(
         address_lines_all,
-        tibble(level = 0, tag = "ADDR", value = all_address_lines[i])
+        tibble::tibble(level = 0, tag = "ADDR", value = all_address_lines[i])
       )
     } else {
-      address_lines_all <- bind_rows(
+      address_lines_all <- dplyr::bind_rows(
         address_lines_all,
-        tibble(level = 1, tag = "CONT", value = all_address_lines[i])
+        tibble::tibble(level = 1, tag = "CONT", value = all_address_lines[i])
       )
     }
       
@@ -93,23 +93,23 @@ address_structure <- function(all_address_lines,
   if (length(all_address_lines) > 1) {
     for (i in 2:length(all_address_lines)) {
       
-      address_lines_all <- bind_rows(
+      address_lines_all <- dplyr::bind_rows(
         address_lines_all,
-        tibble(level = 1, tag = paste0("ADR", i-1), value = all_address_lines[i])
+        tibble::tibble(level = 1, tag = paste0("ADR", i-1), value = all_address_lines[i])
       )
     }
   }
   
-  bind_rows(
+  dplyr::bind_rows(
     address_lines_all,
-    tibble(level = 1, tag = "CITY", value = address_city),
-    tibble(level = 1, tag = "STAE", value = address_state),
-    tibble(level = 1, tag = "POST", value = address_postal_code),
-    tibble(level = 1, tag = "CTRY", value = address_country),
-    tibble(level = 0, tag = "PHON", value = phone_number),
-    tibble(level = 0, tag = "EMAIL", value = address_email),
-    tibble(level = 0, tag = "FAX", value = address_fax),
-    tibble(level = 0, tag = "WWW", value = address_web_page)
+    tibble::tibble(level = 1, tag = "CITY", value = address_city),
+    tibble::tibble(level = 1, tag = "STAE", value = address_state),
+    tibble::tibble(level = 1, tag = "POST", value = address_postal_code),
+    tibble::tibble(level = 1, tag = "CTRY", value = address_country),
+    tibble::tibble(level = 0, tag = "PHON", value = phone_number),
+    tibble::tibble(level = 0, tag = "EMAIL", value = address_email),
+    tibble::tibble(level = 0, tag = "FAX", value = address_fax),
+    tibble::tibble(level = 0, tag = "WWW", value = address_web_page)
   )
   
   
@@ -143,17 +143,17 @@ association_structure <- function(xref_indi,
                                   source_citations = list(),
                                   notes = list()) {
   
-  if (length(xref_indi) == 0) return(tibble())
-  if (length(relation_is_descriptor) == 0) return(tibble())
+  if (length(xref_indi) == 0) return(tibble::tibble())
+  if (length(relation_is_descriptor) == 0) return(tibble::tibble())
   
   validate_xref(xref_indi, 1)
   validate_relation_is_descriptor(relation_is_descriptor, 1)
   
-  bind_rows(
-    tibble(level = 0, tag = "ASSO", value = xref_indi),
-    tibble(level = 1, tag = "RELA", value = relation_is_descriptor),
-    source_citations %>% bind_rows() %>% add_levels(1),
-    notes %>% bind_rows() %>% add_levels(1)
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "ASSO", value = xref_indi),
+    tibble::tibble(level = 1, tag = "RELA", value = relation_is_descriptor),
+    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
+    notes %>% dplyr::bind_rows() %>% add_levels(1)
   )
   
 }
@@ -203,11 +203,11 @@ change_date <- function(change_date = date_exact(),
   validate_change_date(change_date, 1)
   validate_time_value(time_value, 1)
   
-  bind_rows(
-    tibble(level = 0, tag = "CHAN", value = ""),
-    tibble(level = 1, tag = "DATE", value = change_date),
-    tibble(level = 2, tag = "TIME", value = time_value),
-    notes %>% bind_rows() %>% add_levels(1)
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "CHAN", value = ""),
+    tibble::tibble(level = 1, tag = "DATE", value = change_date),
+    tibble::tibble(level = 2, tag = "TIME", value = time_value),
+    notes %>% dplyr::bind_rows() %>% add_levels(1)
   )
   
 }
@@ -238,17 +238,17 @@ child_to_family_link <- function(xref_fam,
                                  child_linkage_status = character(),
                                  notes = list()) {
   
-  if (length(xref_fam) == 0) return(tibble())
+  if (length(xref_fam) == 0) return(tibble::tibble())
   
   validate_xref(xref_fam, 1)
   validate_pedigree_linkage_type(pedigree_linkage_type, 1)
   validate_child_linkage_status(child_linkage_status, 1)
   
-  bind_rows(
-    tibble(level = 0, tag = "FAMC", value = xref_fam),
-    tibble(level = 1, tag = "PEDI", value = pedigree_linkage_type),
-    tibble(level = 1, tag = "STAT", value = child_linkage_status),
-    notes %>% bind_rows() %>% add_levels(1)
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "FAMC", value = xref_fam),
+    tibble::tibble(level = 1, tag = "PEDI", value = pedigree_linkage_type),
+    tibble::tibble(level = 1, tag = "STAT", value = child_linkage_status),
+    notes %>% dplyr::bind_rows() %>% add_levels(1)
   )
   
 }
@@ -304,18 +304,18 @@ event_detail <- function(event_or_fact_classification = character(),
   validate_cause_of_event(cause_of_event, 1)
   validate_restriction_notice(restriction_notice, 1)
   
-  bind_rows(
-    tibble(level = 0, tag = "TYPE", value = event_or_fact_classification),
-    tibble(level = 0, tag = "DATE", value = date),
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "TYPE", value = event_or_fact_classification),
+    tibble::tibble(level = 0, tag = "DATE", value = date),
     place %>% add_levels(0),
     address %>% add_levels(0),
-    tibble(level = 0, tag = "AGNC", value = responsible_agency),
-    tibble(level = 0, tag = "RELI", value = religious_affiliation),
-    tibble(level = 0, tag = "CAUS", value = cause_of_event),
-    tibble(level = 0, tag = "RESN", value = restriction_notice),
-    notes %>% bind_rows() %>% add_levels(0),
-    source_citations %>% bind_rows() %>% add_levels(0),
-    multimedia_links %>% bind_rows() %>% add_levels(0)
+    tibble::tibble(level = 0, tag = "AGNC", value = responsible_agency),
+    tibble::tibble(level = 0, tag = "RELI", value = religious_affiliation),
+    tibble::tibble(level = 0, tag = "CAUS", value = cause_of_event),
+    tibble::tibble(level = 0, tag = "RESN", value = restriction_notice),
+    notes %>% dplyr::bind_rows() %>% add_levels(0),
+    source_citations %>% dplyr::bind_rows() %>% add_levels(0),
+    multimedia_links %>% dplyr::bind_rows() %>% add_levels(0)
   )
   
 }
@@ -357,19 +357,19 @@ family_event_detail <- function(husband_age_at_event = character(),
   validate_age_at_event(husband_age_at_event, 1)
   validate_age_at_event(wife_age_at_event, 1)
   
-  temp = bind_rows(
-    tibble(level = 0, tag = "HUSB", value = ""),
-    tibble(level = 1, tag = "HAGE", value = husband_age_at_event),
-    tibble(level = 0, tag = "WIFE", value = ""),
-    tibble(level = 1, tag = "WAGE", value = wife_age_at_event),
+  temp = dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "HUSB", value = ""),
+    tibble::tibble(level = 1, tag = "HAGE", value = husband_age_at_event),
+    tibble::tibble(level = 0, tag = "WIFE", value = ""),
+    tibble::tibble(level = 1, tag = "WAGE", value = wife_age_at_event),
     event_details %>% add_levels(0),
   )
   
-  if (sum(temp$tag == "HAGE") == 0) temp <- filter(temp, tag != "HUSB")
-  if (sum(temp$tag == "WAGE") == 0) temp <- filter(temp, tag != "WIFE")  
-  mutate(temp,
-         tag = if_else(tag == "HAGE", "AGE", tag),
-         tag = if_else(tag == "WAGE", "AGE", tag))
+  if (sum(temp$tag == "HAGE") == 0) temp <- dplyr::filter(temp, tag != "HUSB")
+  if (sum(temp$tag == "WAGE") == 0) temp <- dplyr::filter(temp, tag != "WIFE")  
+  dplyr::mutate(temp,
+                tag = if_else(tag == "HAGE", "AGE", tag),
+                tag = if_else(tag == "WAGE", "AGE", tag))
   
 }
 
@@ -408,20 +408,20 @@ family_event_structure <- function(event_type_family,
                                    event_descriptor = character(),
                                    family_event_details = family_event_detail()) {
   
-  if (length(event_type_family) == 0) return(tibble())
+  if (length(event_type_family) == 0) return(tibble::tibble())
   
   validate_event_type_family(event_type_family, 1)
   if (event_type_family == "RESI") validate_residence_descriptor(event_descriptor, 1)
   if (event_type_family == "EVEN") validate_event_descriptor(event_descriptor, 1)
   
-  bind_rows(
-    tibble(level = 0, tag = event_type_family, value = ""),
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = event_type_family, value = ""),
     family_event_details %>% add_levels(1),
   ) %>% 
-  mutate(value = ifelse(tag %in% c("EVEN", "RESI") & length(event_descriptor) == 1,
+  dplyr::mutate(value = ifelse(tag %in% c("EVEN", "RESI") & length(event_descriptor) == 1,
                          event_descriptor,
                          value),
-         value = ifelse(tag == "MARR", "Y", value))
+                value = ifelse(tag == "MARR", "Y", value))
   
 }
 
@@ -452,8 +452,8 @@ individual_attribute_structure <- function(attribute_type,
                                            attribute_description,
                                            individual_event_details = individual_event_detail()) {
   
-  if (length(attribute_type) == 0) return(tibble())
-  if (length(attribute_description) == 0) return(tibble())
+  if (length(attribute_type) == 0) return(tibble::tibble())
+  if (length(attribute_description) == 0) return(tibble::tibble())
   
   validate_attribute_type(attribute_type, 1)
   if (attribute_type %in% c("IDNO", "NCHI", "NMR", "SSN")) 
@@ -480,11 +480,11 @@ individual_attribute_structure <- function(attribute_type,
     
   } else {
     
-    temp <- tibble(level = 0, tag = attribute_type, value = attribute_description)
+    temp <- tibble::tibble(level = 0, tag = attribute_type, value = attribute_description)
     
   }
   
-  temp <- bind_rows(temp, 
+  temp <- dplyr::bind_rows(temp, 
             individual_event_details %>% add_levels(1)
   )
   
@@ -513,9 +513,9 @@ individual_event_detail <- function(event_details = event_detail(),
   
   validate_age_at_event(age_at_event, 1)
   
-  bind_rows(
+  dplyr::bind_rows(
     event_details %>% add_levels(0),
-    tibble(level = 0, tag = "AGE", value = age_at_event)
+    tibble::tibble(level = 0, tag = "AGE", value = age_at_event)
   )
   
   
@@ -558,44 +558,44 @@ individual_event_structure <- function(event_type_individual,
                                        xref_fam = character(),
                                        adopted_by_which_parent = character()) {
   
-  if (length(event_type_individual) == 0) return(tibble())
+  if (length(event_type_individual) == 0) return(tibble::tibble())
   
   validate_event_type_individual(event_type_individual, 1)
   validate_xref(xref_fam, 1)
   validate_adopted_by_which_parent(adopted_by_which_parent, 1)
   
-  temp <- bind_rows(
-    tibble(level = 0, tag = event_type_individual, value = ""),
+  temp <- dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = event_type_individual, value = ""),
     individual_event_details %>% add_levels(1)
   )
     
   if (sum(temp$tag %in% c("BIRT", "CHR", "ADOP")) == 1)
-    temp <- bind_rows(
+    temp <- dplyr::bind_rows(
       temp,
-      tibble(level = 1, tag = "FAMC", value = xref_fam)
+      tibble::tibble(level = 1, tag = "FAMC", value = xref_fam)
     )
   
   if (sum(temp$tag == "ADOP") == 1)
-    temp <- bind_rows(
+    temp <- dplyr::bind_rows(
       temp,
-      tibble(level = 2, tag = "ADOP", value = adopted_by_which_parent)
+      tibble::tibble(level = 2, tag = "ADOP", value = adopted_by_which_parent)
     )
     
   temp %>% 
-    mutate(value = if_else(tag %in% c("BIRT", "CHR", "DEAT"), "Y", value))
+    dplyr::mutate(value = if_else(tag %in% c("BIRT", "CHR", "DEAT"), "Y", value))
   
 }
 
 
 lds_individual_ordinance <- function() {
   
-  tibble()
+  tibble::tibble()
 }
 
 
 lds_spouse_sealing <- function() {
   
-  tibble()
+  tibble::tibble()
 }
 
 #' Constructs the MULTIMEDIA_LINK from the GEDCOM specification
@@ -627,7 +627,8 @@ multimedia_link <- function(xref_obje = character(),
                             source_media_type = character(),
                             descriptive_title = character()) {
   
-  if (length(xref_obje) + length(multimedia_file_reference) == 0) return(tibble())
+  if (length(xref_obje) + length(multimedia_file_reference) == 0) 
+    return(tibble::tibble())
   
   if (length(multimedia_format) != length(multimedia_file_reference) &
       length(multimedia_file_reference) > 0)
@@ -641,7 +642,7 @@ multimedia_link <- function(xref_obje = character(),
   
   if (length(xref_obje) == 1) {
     
-    tibble(level = 0, tag = "OBJE", value = xref_obje)
+    tibble::tibble(level = 0, tag = "OBJE", value = xref_obje)
   
   } else {
   
@@ -650,19 +651,19 @@ multimedia_link <- function(xref_obje = character(),
     validate_source_media_type(source_media_type, 1000)
     validate_descriptive_title(descriptive_title, 1)
     
-    temp <- tibble(level = 0, tag = "OBJE", value = "")
+    temp <- tibble::tibble(level = 0, tag = "OBJE", value = "")
     
     for (i in seq_along(multimedia_file_reference)) {
       
-      temp <- bind_rows(temp,
-                        tibble(level = 1, tag = "FILE", value = multimedia_file_reference[i]),
-                        tibble(level = 2, tag = "FORM", value = multimedia_format[i]),
-                        tibble(level = 3, tag = "MEDI", value = source_media_type[i])
+      temp <- dplyr::bind_rows(temp,
+                        tibble::tibble(level = 1, tag = "FILE", value = multimedia_file_reference[i]),
+                        tibble::tibble(level = 2, tag = "FORM", value = multimedia_format[i]),
+                        tibble::tibble(level = 3, tag = "MEDI", value = source_media_type[i])
       )
     }
     
-    bind_rows(temp,
-              tibble(level = 1, tag = "TITL", value = descriptive_title)
+    dplyr::bind_rows(temp,
+              tibble::tibble(level = 1, tag = "TITL", value = descriptive_title)
     )
   }
 }
@@ -706,13 +707,14 @@ multimedia_link <- function(xref_obje = character(),
 note_structure <- function(xref_note = character(),
                            submitter_text = character()) {
   
-  if (length(xref_note) + length(submitter_text) == 0) return(tibble())
+  if (length(xref_note) + length(submitter_text) == 0) 
+    return(tibble::tibble())
   
   validate_xref(xref_note, 1)
   
   if (length(xref_note) == 1) {
     
-    tibble(level = 0, tag = "NOTE", value = xref_note)
+    tibble::tibble(level = 0, tag = "NOTE", value = xref_note)
   
   } else {
   
@@ -771,15 +773,15 @@ personal_name_pieces <- function(name_piece_prefix = character(),
   validate_name_piece_surname(name_piece_surname, 1)
   validate_name_piece_suffix(name_piece_suffix, 1)
   
-  bind_rows(
-    tibble(level = 0, tag = "NPFX", value = name_piece_prefix),
-    tibble(level = 0, tag = "GIVN", value = name_piece_given),
-    tibble(level = 0, tag = "NICK", value = name_piece_nickname),
-    tibble(level = 0, tag = "SPFX", value = name_piece_surname_prefix),
-    tibble(level = 0, tag = "SURN", value = name_piece_surname),
-    tibble(level = 0, tag = "NSFX", value = name_piece_suffix),
-    notes %>% bind_rows() %>% add_levels(0),
-    source_citations %>% bind_rows() %>% add_levels(0)
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "NPFX", value = name_piece_prefix),
+    tibble::tibble(level = 0, tag = "GIVN", value = name_piece_given),
+    tibble::tibble(level = 0, tag = "NICK", value = name_piece_nickname),
+    tibble::tibble(level = 0, tag = "SPFX", value = name_piece_surname_prefix),
+    tibble::tibble(level = 0, tag = "SURN", value = name_piece_surname),
+    tibble::tibble(level = 0, tag = "NSFX", value = name_piece_suffix),
+    notes %>% dplyr::bind_rows() %>% add_levels(0),
+    source_citations %>% dplyr::bind_rows() %>% add_levels(0)
   ) 
   
 }
@@ -857,7 +859,7 @@ personal_name_structure <- function(name_personal,
                                     romanized_type = character(),
                                     romanized_name_pieces = list()) {
   
-  if (length(name_personal) == 0) return(tibble())
+  if (length(name_personal) == 0) return(tibble::tibble())
   
   validate_name_personal(name_personal, 1)
   validate_name_type(name_type, 1)
@@ -879,29 +881,29 @@ personal_name_structure <- function(name_personal,
       length(name_romanized_variation) > 0 & length(romanized_name_pieces) > 0)
     stop("Each romanized variation requires a set of romanized name pieces (even if empty)")
   
-  temp <- bind_rows(
-    tibble(level = 0, tag = "NAME", value = name_personal),
-    tibble(level = 1, tag = "TYPE", value = name_type),
+  temp <- dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "NAME", value = name_personal),
+    tibble::tibble(level = 1, tag = "TYPE", value = name_type),
     name_pieces %>% add_levels(1)
   )
   
   for (i in seq_along(name_phonetic_variation)) {
-    temp <- bind_rows(
+    temp <- dplyr::bind_rows(
       temp,
-      tibble(level = 1, tag = "FONE", value = name_phonetic_variation[i]),
-      tibble(level = 2, tag = "TYPE", value = phonetic_type[i])
+      tibble::tibble(level = 1, tag = "FONE", value = name_phonetic_variation[i]),
+      tibble::tibble(level = 2, tag = "TYPE", value = phonetic_type[i])
     )
     if (length(phonetic_name_pieces) > 0)
-      temp <- bind_rows(temp, phonetic_name_pieces[[i]] %>% add_levels(2))
+      temp <- dplyr::bind_rows(temp, phonetic_name_pieces[[i]] %>% add_levels(2))
   }
   for (i in seq_along(name_romanized_variation)) {
-    temp <- bind_rows(
+    temp <- dplyr::bind_rows(
      temp,
-     tibble(level = 1, tag = "ROMN", value = name_romanized_variation[i]),
-     tibble(level = 2, tag = "TYPE", value = romanized_type[i])
+     tibble::tibble(level = 1, tag = "ROMN", value = name_romanized_variation[i]),
+     tibble::tibble(level = 2, tag = "TYPE", value = romanized_type[i])
     )
     if (length(romanized_name_pieces) > 0)
-      temp <- bind_rows(temp, romanized_name_pieces[[i]] %>% add_levels(2))
+      temp <- dplyr::bind_rows(temp, romanized_name_pieces[[i]] %>% add_levels(2))
   }
   
   temp
@@ -951,7 +953,7 @@ place_structure <- function(place_name,
                             place_longitude = character(),
                             notes = list()) {
 
-  if (length(place_name) == 0) return(tibble())
+  if (length(place_name) == 0) return(tibble::tibble())
   
   validate_place_name(place_name, 1)
   validate_place_hierarchy(place_hierarchy, 1)
@@ -967,36 +969,36 @@ place_structure <- function(place_name,
   if (length(place_romanized_variation) != length(romanized_type))
     stop("Each romanized variation requires a romanized type")
   
-  temp <- bind_rows(
-    tibble(level = 0, tag = "PLAC", value = place_name),
-    tibble(level = 1, tag = "FORM", value = place_hierarchy)
+  temp <- dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "PLAC", value = place_name),
+    tibble::tibble(level = 1, tag = "FORM", value = place_hierarchy)
     )
   
   for (i in seq_along(place_phonetic_variation)) {
-    temp <- bind_rows(
+    temp <- dplyr::bind_rows(
       temp,
-      tibble(level = 1, tag = "FONE", value = place_phonetic_variation[i]),
-      tibble(level = 2, tag = "TYPE", value = phonetic_type[i])
+      tibble::tibble(level = 1, tag = "FONE", value = place_phonetic_variation[i]),
+      tibble::tibble(level = 2, tag = "TYPE", value = phonetic_type[i])
     )
   }
   for (i in seq_along(place_romanized_variation)) {
-    temp <- bind_rows(
+    temp <- dplyr::bind_rows(
       temp,
-      tibble(level = 1, tag = "ROMN", value = place_romanized_variation[i]),
-      tibble(level = 2, tag = "TYPE", value = romanized_type[i])
+      tibble::tibble(level = 1, tag = "ROMN", value = place_romanized_variation[i]),
+      tibble::tibble(level = 2, tag = "TYPE", value = romanized_type[i])
     )
   }
   
-  temp <- bind_rows(
+  temp <- dplyr::bind_rows(
     temp,
-    tibble(level = 1, tag = "MAP", value = ""),
-    tibble(level = 2, tag = "LATI", value = place_latitude),
-    tibble(level = 2, tag = "LONG", value = place_longitude),
-    notes %>% bind_rows() %>% add_levels(1)
+    tibble::tibble(level = 1, tag = "MAP", value = ""),
+    tibble::tibble(level = 2, tag = "LATI", value = place_latitude),
+    tibble::tibble(level = 2, tag = "LONG", value = place_longitude),
+    notes %>% dplyr::bind_rows() %>% add_levels(1)
   )
   
-  if (sum(temp$tag == "LATI") == 0) temp <- filter(temp, tag != "MAP")
-  if (sum(temp$tag == "LONG") == 0) temp <- filter(temp, tag != "MAP")
+  if (sum(temp$tag == "LATI") == 0) temp <- dplyr::filter(temp, tag != "MAP")
+  if (sum(temp$tag == "LONG") == 0) temp <- dplyr::filter(temp, tag != "MAP")
   temp
   
 }
@@ -1046,7 +1048,8 @@ source_citation <- function(xref_sour = character(),
                             multimedia_links = list(),
                             notes = list()) {
   
-  if (length(xref_sour) + length(source_description) == 0) return(tibble())
+  if (length(xref_sour) + length(source_description) == 0) 
+    return(tibble::tibble())
   
   where_within_source <- as.character(where_within_source)
   certainty_assessment <- as.character(certainty_assessment)
@@ -1060,33 +1063,33 @@ source_citation <- function(xref_sour = character(),
     validate_role_in_event(role_in_event, 1)
     validate_entry_recording_date(entry_recording_date, 1)
     
-    temp <- bind_rows(
-      tibble(level = 0, tag = "SOUR", value = xref_sour),
-      tibble(level = 1, tag = "PAGE", value = where_within_source),
-      tibble(level = 1, tag = "EVEN", value = event_type_cited_from),
-      tibble(level = 2, tag = "ROLE", value = role_in_event),
-      tibble(level = 1, tag = "DATA", value = ""),
-      tibble(level = 1, tag = "DATE", value = entry_recording_date),
+    temp <- dplyr::bind_rows(
+      tibble::tibble(level = 0, tag = "SOUR", value = xref_sour),
+      tibble::tibble(level = 1, tag = "PAGE", value = where_within_source),
+      tibble::tibble(level = 1, tag = "EVEN", value = event_type_cited_from),
+      tibble::tibble(level = 2, tag = "ROLE", value = role_in_event),
+      tibble::tibble(level = 1, tag = "DATA", value = ""),
+      tibble::tibble(level = 1, tag = "DATE", value = entry_recording_date),
       split_text(start_level = 2, top_tag = "TEXT", text = text_from_source),
-      multimedia_links %>% bind_rows() %>% add_levels(1),
-      notes %>% bind_rows() %>% add_levels(1),
-      tibble(level = 1, tag = "QUAY", value = certainty_assessment)
+      multimedia_links %>% dplyr::bind_rows() %>% add_levels(1),
+      notes %>% dplyr::bind_rows() %>% add_levels(1),
+      tibble::tibble(level = 1, tag = "QUAY", value = certainty_assessment)
     ) 
     
-    if (sum(temp$tag == "EVEN") == 0) temp <- filter(temp, tag != "ROLE")
+    if (sum(temp$tag == "EVEN") == 0) temp <- dplyr::filter(temp, tag != "ROLE")
     if (sum(temp$tag == "DATE") == 0 & sum(temp$tag == "TEXT") == 0) 
-      temp <- filter(temp, tag != "DATA")
+      temp <- dplyr::filter(temp, tag != "DATA")
     
     temp
     
   } else {
     
-    bind_rows(
+    dplyr::bind_rows(
       split_text(start_level = 0, top_tag = "SOUR", text = source_description),
       split_text(start_level = 1, top_tag = "TEXT", text = text_from_source),
-      multimedia_links %>% bind_rows() %>% add_levels(1),
-      notes %>% bind_rows() %>% add_levels(1),
-      tibble(level = 1, tag = "QUAY", value = certainty_assessment)
+      multimedia_links %>% dplyr::bind_rows() %>% add_levels(1),
+      notes %>% dplyr::bind_rows() %>% add_levels(1),
+      tibble::tibble(level = 1, tag = "QUAY", value = certainty_assessment)
     )
     
   }
@@ -1121,11 +1124,11 @@ source_repository_citation <- function(xref_repo,
   validate_source_call_number(source_call_number, 1000)
   validate_source_media_type(source_media_type, 1)
   
-  bind_rows(
-    tibble(level = 0, tag = "REPO", value = xref_repo),
-    notes %>% bind_rows() %>% add_levels(1),
-    tibble(level = 1, tag = "CALN", value = source_call_number),
-    tibble(level = 2, tag = "MEDI", value = source_media_type)
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "REPO", value = xref_repo),
+    notes %>% dplyr::bind_rows() %>% add_levels(1),
+    tibble::tibble(level = 1, tag = "CALN", value = source_call_number),
+    tibble::tibble(level = 2, tag = "MEDI", value = source_media_type)
     )
     
 }
@@ -1145,9 +1148,9 @@ spouse_to_family_link <- function(xref_fam,
   
   validate_xref(xref_fam, 1)
   
-  bind_rows(
-    tibble(level = 0, tag = "FAMS", value = xref_fam),
-    notes %>% bind_rows() %>% add_levels(1)
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "FAMS", value = xref_fam),
+    notes %>% dplyr::bind_rows() %>% add_levels(1)
   )
 }
 

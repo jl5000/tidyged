@@ -60,38 +60,38 @@ header_section <- function(xref_subm,
   validate_place_hierarchy(place_hierarchy, 1)
   validate_gedcom_content_description(gedcom_content_description, 1)
   
-  temp <- bind_rows(
-    tibble(level = 0, id = "HD", tag = "HEAD", value = ""),
-    tibble(level = 1, tag = "SOUR", value = approved_system_id),
-    tibble(level = 2, tag = "VERS", value = system_version_number),
-    tibble(level = 2, tag = "NAME", value = name_of_product),
-    tibble(level = 2, tag = "CORP", value = name_of_business),
+  temp <- dplyr::bind_rows(
+    tibble::tibble(level = 0, id = "HD", tag = "HEAD", value = ""),
+    tibble::tibble(level = 1, tag = "SOUR", value = approved_system_id),
+    tibble::tibble(level = 2, tag = "VERS", value = system_version_number),
+    tibble::tibble(level = 2, tag = "NAME", value = name_of_product),
+    tibble::tibble(level = 2, tag = "CORP", value = name_of_business),
     business_address %>% add_levels(3),
-    tibble(level = 2, tag = "DATA", value = source_data_name),
-    tibble(level = 3, tag = "DATE", value = source_data_publication_date),
+    tibble::tibble(level = 2, tag = "DATA", value = source_data_name),
+    tibble::tibble(level = 3, tag = "DATE", value = source_data_publication_date),
     split_text(start_level = 3, top_tag = "COPR", text = source_data_copyright, char_limit = 90),
-    tibble(level = 1, tag = "DEST", value = receiving_system),
-    tibble(level = 1, tag = "DATE", value = transmission_date),
-    tibble(level = 2, tag = "TIME", value = transmission_time),
-    tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_ref, "U")),
-    tibble(level = 1, tag = "SUBN", value = ref_to_xref(submission_ref, "SU")),
-    tibble(level = 1, tag = "FILE", value = file_name),
-    tibble(level = 1, tag = "COPR", value = gedcom_copyright),
-    tibble(level = 1, tag = "GEDC", value = ""),
-    tibble(level = 2, tag = "VERS", value = "5.5.1"),
-    tibble(level = 2, tag = "FORM", value = "Lineage-Linked"),
-    tibble(level = 1, tag = "CHAR", value = character_set),
-    tibble(level = 2, tag = "VERS", value = character_set_version_number),
-    tibble(level = 1, tag = "LANG", value = language),
-    tibble(level = 1, tag = "PLAC", value = ""),
-    tibble(level = 2, tag = "FORM", value = place),
+    tibble::tibble(level = 1, tag = "DEST", value = receiving_system),
+    tibble::tibble(level = 1, tag = "DATE", value = transmission_date),
+    tibble::tibble(level = 2, tag = "TIME", value = transmission_time),
+    tibble::tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_ref, "U")),
+    tibble::tibble(level = 1, tag = "SUBN", value = ref_to_xref(submission_ref, "SU")),
+    tibble::tibble(level = 1, tag = "FILE", value = file_name),
+    tibble::tibble(level = 1, tag = "COPR", value = gedcom_copyright),
+    tibble::tibble(level = 1, tag = "GEDC", value = ""),
+    tibble::tibble(level = 2, tag = "VERS", value = "5.5.1"),
+    tibble::tibble(level = 2, tag = "FORM", value = "Lineage-Linked"),
+    tibble::tibble(level = 1, tag = "CHAR", value = character_set),
+    tibble::tibble(level = 2, tag = "VERS", value = character_set_version_number),
+    tibble::tibble(level = 1, tag = "LANG", value = language),
+    tibble::tibble(level = 1, tag = "PLAC", value = ""),
+    tibble::tibble(level = 2, tag = "FORM", value = place),
     split_text(start_level = 1, top_tag = "NOTE", text = gedcom_description)
   ) %>% 
     finalise()
   
   # There should only be one FORM (Lineage linked) if no place defined
   if (sum(temp$tag == "FORM") == 1) {
-    filter(temp, tag != "PLAC")
+    dplyr::filter(temp, tag != "PLAC")
   } else {
     temp
   }
@@ -135,23 +135,23 @@ family_record <- function(family_ref,
   
   check_restriction_notice(restriction_notice)
   
-  bind_rows(
-    tibble(level = 0, id = ref_to_xref(family_ref, "F"), tag = "FAM"),
-    tibble(level = 1, tag = "RESN", value = restriction_notice),
-    events %>% bind_rows() %>% add_levels(1),
-    tibble(level = 1, tag = "HUSB", value = ref_to_xref(husband_ref, "I")),
-    tibble(level = 1, tag = "WIFE", value = ref_to_xref(wife_ref, "I")),
-    tibble(level = 1, tag = "CHIL", value = ref_to_xref(children_ref, "I")),
-    tibble(level = 1, tag = "NCHI", value = children_count),
-    tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_refs, "U")),
-    lds_sealings %>% bind_rows() %>% add_levels(1),
-    tibble(level = 1, tag = "REFN", value = user_reference_number),
-    tibble(level = 2, tag = "TYPE", value = user_reference_type),
-    tibble(level = 1, tag = "RIN", value = automated_record_id),
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, id = ref_to_xref(family_ref, "F"), tag = "FAM"),
+    tibble::tibble(level = 1, tag = "RESN", value = restriction_notice),
+    events %>% dplyr::bind_rows() %>% add_levels(1),
+    tibble::tibble(level = 1, tag = "HUSB", value = ref_to_xref(husband_ref, "I")),
+    tibble::tibble(level = 1, tag = "WIFE", value = ref_to_xref(wife_ref, "I")),
+    tibble::tibble(level = 1, tag = "CHIL", value = ref_to_xref(children_ref, "I")),
+    tibble::tibble(level = 1, tag = "NCHI", value = children_count),
+    tibble::tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_refs, "U")),
+    lds_sealings %>% dplyr::bind_rows() %>% add_levels(1),
+    tibble::tibble(level = 1, tag = "REFN", value = user_reference_number),
+    tibble::tibble(level = 2, tag = "TYPE", value = user_reference_type),
+    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
     last_modified %>% add_levels(1),
-    notes %>% bind_rows() %>% add_levels(1),
-    source_citations %>% bind_rows() %>% add_levels(1),
-    multimedia_links %>% bind_rows() %>% add_levels(1)
+    notes %>% dplyr::bind_rows() %>% add_levels(1),
+    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
+    multimedia_links %>% dplyr::bind_rows() %>% add_levels(1)
   ) %>% 
     finalise()
   
@@ -204,30 +204,30 @@ individual_record <- function(individual_ref,
   check_restriction_notice(restriction_notice)
   check_sex(sex)
   
-  bind_rows(
-    tibble(level = 0, id = ref_to_xref(individual_ref, "I"), tag = "INDI"),
-    tibble(level = 1, tag = "RESN", value = restriction_notice),
-    names %>% bind_rows() %>% add_levels(1),
-    tibble(level = 1, tag = "SEX", value = sex),
-    events %>% bind_rows() %>% add_levels(1),
-    attributes %>% bind_rows() %>% add_levels(1),
-    ordinance %>% bind_rows() %>% add_levels(1),
-    child_to_family_links %>% bind_rows() %>% add_levels(1),
-    spouse_to_family_links %>% bind_rows() %>% add_levels(1),
-    tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_refs, "U")),
-    associations %>% bind_rows() %>%  add_levels(1),
-    tibble(level = 1, tag = "ALIA", value = ref_to_xref(alias_refs, "I")),
-    tibble(level = 1, tag = "ANCI", value = ref_to_xref(submitters_interested_in_ancestors, "U")),
-    tibble(level = 1, tag = "DESI", value = ref_to_xref(submitters_interested_in_descendents, "U")),
-    tibble(level = 1, tag = "RFN", value = record_file_number),
-    tibble(level = 1, tag = "AFN", value = ancestral_file_number),
-    tibble(level = 1, tag = "REFN", value = user_reference_number),
-    tibble(level = 2, tag = "TYPE", value = user_reference_type),
-    tibble(level = 1, tag = "RIN", value = automated_record_id),
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, id = ref_to_xref(individual_ref, "I"), tag = "INDI"),
+    tibble::tibble(level = 1, tag = "RESN", value = restriction_notice),
+    names %>% dplyr::bind_rows() %>% add_levels(1),
+    tibble::tibble(level = 1, tag = "SEX", value = sex),
+    events %>% dplyr::bind_rows() %>% add_levels(1),
+    attributes %>% dplyr::bind_rows() %>% add_levels(1),
+    ordinance %>% dplyr::bind_rows() %>% add_levels(1),
+    child_to_family_links %>% dplyr::bind_rows() %>% add_levels(1),
+    spouse_to_family_links %>% dplyr::bind_rows() %>% add_levels(1),
+    tibble::tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_refs, "U")),
+    associations %>% dplyr::bind_rows() %>%  add_levels(1),
+    tibble::tibble(level = 1, tag = "ALIA", value = ref_to_xref(alias_refs, "I")),
+    tibble::tibble(level = 1, tag = "ANCI", value = ref_to_xref(submitters_interested_in_ancestors, "U")),
+    tibble::tibble(level = 1, tag = "DESI", value = ref_to_xref(submitters_interested_in_descendents, "U")),
+    tibble::tibble(level = 1, tag = "RFN", value = record_file_number),
+    tibble::tibble(level = 1, tag = "AFN", value = ancestral_file_number),
+    tibble::tibble(level = 1, tag = "REFN", value = user_reference_number),
+    tibble::tibble(level = 2, tag = "TYPE", value = user_reference_type),
+    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
     last_modified %>% add_levels(1),
-    notes %>% bind_rows() %>% add_levels(1),
-    source_citations %>% bind_rows() %>% add_levels(1),
-    multimedia_links %>% bind_rows() %>% add_levels(1)
+    notes %>% dplyr::bind_rows() %>% add_levels(1),
+    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
+    multimedia_links %>% dplyr::bind_rows() %>% add_levels(1)
   ) %>% 
     finalise()
   
@@ -266,17 +266,17 @@ multimedia_record <- function(object_ref,
   check_media_format(media_format)
   check_media_type(media_type)
   
-  bind_rows(
-    tibble(level = 0, id = ref_to_xref(object_ref, "M"), tag = "OBJE"),
-    tibble(level = 1, tag = "FILE", value = file_reference),
-    tibble(level = 2, tag = "FORM", value = media_format),
-    tibble(level = 3, tag = "TYPE", value = media_type),
-    tibble(level = 2, tag = "TITL", value = title),
-    tibble(level = 1, tag = "REFN", value = user_ref_number),
-    tibble(level = 2, tag = "TYPE", value = user_ref_type),
-    tibble(level = 1, tag = "RIN", value = automated_record_id),
-    notes %>% bind_rows() %>% add_levels(1),
-    source_citations %>% bind_rows() %>% add_levels(1),
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, id = ref_to_xref(object_ref, "M"), tag = "OBJE"),
+    tibble::tibble(level = 1, tag = "FILE", value = file_reference),
+    tibble::tibble(level = 2, tag = "FORM", value = media_format),
+    tibble::tibble(level = 3, tag = "TYPE", value = media_type),
+    tibble::tibble(level = 2, tag = "TITL", value = title),
+    tibble::tibble(level = 1, tag = "REFN", value = user_ref_number),
+    tibble::tibble(level = 2, tag = "TYPE", value = user_ref_type),
+    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
+    notes %>% dplyr::bind_rows() %>% add_levels(1),
+    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
     last_modified %>% add_levels(1)
   ) %>% 
     finalise()
@@ -303,15 +303,15 @@ note_record <- function(note_ref,
   validate_input_size(automated_record_id, 1, 1, 12)
   validate_input_size(last_modified, 1, 10, 11)
   
-  bind_rows(
+  dplyr::bind_rows(
     split_text(start_level = 0, top_tag = "NOTE", text = submitter_text),
-    tibble(level = 1, tag = "REFN", value = user_ref_number),
-    tibble(level = 2, tag = "TYPE", value = user_ref_type),
-    tibble(level = 1, tag = "RIN", value = automated_record_id),
-    source_citations %>% bind_rows() %>% add_levels(1),
+    tibble::tibble(level = 1, tag = "REFN", value = user_ref_number),
+    tibble::tibble(level = 2, tag = "TYPE", value = user_ref_type),
+    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
+    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
     last_modified %>% add_levels(1)
   ) %>% 
-    mutate(id = if_else(tag == "NOTE", ref_to_xref(note_ref, "T"), NA_character_)) %>% 
+    dplyr::mutate(id = if_else(tag == "NOTE", ref_to_xref(note_ref, "T"), NA_character_)) %>% 
     finalise()
   
 }
@@ -336,14 +336,14 @@ repository_record <- function(repo_ref,
   validate_input_size(automated_record_id, 1, 1, 12)
   validate_input_size(last_modified, 1, 10, 11)
   
-  bind_rows(
-    tibble(level = 0, id = ref_to_xref(repo_ref, "R"), tag = "REPO"),
-    tibble(level = 1, tag = "NAME", value = repo_name),
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, id = ref_to_xref(repo_ref, "R"), tag = "REPO"),
+    tibble::tibble(level = 1, tag = "NAME", value = repo_name),
     repo_address %>% add_levels(1),
-    repo_notes %>% bind_rows() %>% add_levels(1),
-    tibble(level = 1, tag = "REFN", value = user_ref_number),
-    tibble(level = 2, tag = "TYPE", value = user_ref_type),
-    tibble(level = 1, tag = "RIN", value = automated_record_id),
+    repo_notes %>% dplyr::bind_rows() %>% add_levels(1),
+    tibble::tibble(level = 1, tag = "REFN", value = user_ref_number),
+    tibble::tibble(level = 2, tag = "TYPE", value = user_ref_type),
+    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
     last_modified %>% add_levels(1)
   ) %>% 
     finalise()
@@ -377,26 +377,26 @@ source_record <- function(source_ref,
   validate_input_size()
   
   
-  bind_rows(
-    tibble(level = 0, id = ref_to_xref(source_ref, "S"), tag = "SOUR"),
-    tibble(level = 1, tag = "DATA", value = ""),
-    tibble(level = 2, tag = "EVEN", value = events_recorded),
-    tibble(level = 3, tag = "DATE", value = date_period),
-    tibble(level = 3, tag = "PLAC", value = source_jurisdiction_place),
-    tibble(level = 2, tag = "AGNC", value = responsible_agency),
-    data_notes %>% bind_rows() %>% add_levels(2),
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, id = ref_to_xref(source_ref, "S"), tag = "SOUR"),
+    tibble::tibble(level = 1, tag = "DATA", value = ""),
+    tibble::tibble(level = 2, tag = "EVEN", value = events_recorded),
+    tibble::tibble(level = 3, tag = "DATE", value = date_period),
+    tibble::tibble(level = 3, tag = "PLAC", value = source_jurisdiction_place),
+    tibble::tibble(level = 2, tag = "AGNC", value = responsible_agency),
+    data_notes %>% dplyr::bind_rows() %>% add_levels(2),
     split_text(start_level = 1, top_tag = "AUTH", text = source_originator),
     split_text(start_level = 1, top_tag = "TITL", text = source_title),
-    tibble(level = 1, tag = "ABBR", value = source_filed_by),
+    tibble::tibble(level = 1, tag = "ABBR", value = source_filed_by),
     split_text(start_level = 1, top_tag = "PUBL", text = source_publ_facts),
     split_text(start_level = 1, top_tag = "TEXT", text = source_text),
-    source_repo_citations %>% bind_rows() %>% add_levels(1),
-    tibble(level = 1, tag = "REFN", value = user_ref_number),
-    tibble(level = 2, tag = "TYPE", value = user_ref_type),
-    tibble(level = 1, tag = "RIN", value = automated_record_id),
+    source_repo_citations %>% dplyr::bind_rows() %>% add_levels(1),
+    tibble::tibble(level = 1, tag = "REFN", value = user_ref_number),
+    tibble::tibble(level = 2, tag = "TYPE", value = user_ref_type),
+    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
     last_modified %>% add_levels(1),
-    notes %>% bind_rows() %>% add_levels(1),
-    multimedia_links %>% bind_rows() %>% add_levels(1)
+    notes %>% dplyr::bind_rows() %>% add_levels(1),
+    multimedia_links %>% dplyr::bind_rows() %>% add_levels(1)
   ) %>% 
     finalise()
   
@@ -419,16 +419,16 @@ submission_record <- function(submission_ref,
   num_des_generations <- as.character(num_des_generations)
   check_ordinance_flag(ordinance_flag)
   
-  bind_rows(
-    tibble(level = 0, id = ref_to_xref(submission_ref, "SN"), tag = "SUBN"),
-    tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_ref, "U")),
-    tibble(level = 1, tag = "FAMF", value = name_of_family_file),
-    tibble(level = 1, tag = "TEMP", value = temple_code),
-    tibble(level = 1, tag = "ANCE", value = num_anc_generations),
-    tibble(level = 1, tag = "DESC", value = num_des_generations),
-    tibble(level = 1, tag = "ORDI", value = ordinance_flag),
-    tibble(level = 1, tag = "RIN", value = automated_record_id),
-    notes %>% bind_rows() %>% add_levels(1),
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, id = ref_to_xref(submission_ref, "SN"), tag = "SUBN"),
+    tibble::tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_ref, "U")),
+    tibble::tibble(level = 1, tag = "FAMF", value = name_of_family_file),
+    tibble::tibble(level = 1, tag = "TEMP", value = temple_code),
+    tibble::tibble(level = 1, tag = "ANCE", value = num_anc_generations),
+    tibble::tibble(level = 1, tag = "DESC", value = num_des_generations),
+    tibble::tibble(level = 1, tag = "ORDI", value = ordinance_flag),
+    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
+    notes %>% dplyr::bind_rows() %>% add_levels(1),
     last_modified %>% add_levels(1)
   ) %>% 
     finalise()
@@ -449,15 +449,15 @@ submitter_record <- function(submitter_ref,
   
   submitter_registered_rfn <- as.character(submitter_registered_rfn)
   
-  bind_rows(
-    tibble(level = 0, id = ref_to_xref(submitter_ref, "U"), tag = "SUBM"),
-    tibble(level = 1, tag = "NAME", value = submitter_name),
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, id = ref_to_xref(submitter_ref, "U"), tag = "SUBM"),
+    tibble::tibble(level = 1, tag = "NAME", value = submitter_name),
     submitter_address %>% add_levels(1),
-    multimedia_links %>% bind_rows() %>% add_levels(1),
-    tibble(level = 1, tag = "LANG", value = language_preference),
-    tibble(level = 1, tag = "RFN", value = submitter_registered_rfn),
-    tibble(level = 1, tag = "RIN", value = automated_record_id),
-    notes %>% bind_rows() %>% add_levels(1),
+    multimedia_links %>% dplyr::bind_rows() %>% add_levels(1),
+    tibble::tibble(level = 1, tag = "LANG", value = language_preference),
+    tibble::tibble(level = 1, tag = "RFN", value = submitter_registered_rfn),
+    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
+    notes %>% dplyr::bind_rows() %>% add_levels(1),
     last_modified %>% add_levels(1)
   ) %>% 
     finalise()
@@ -468,6 +468,6 @@ submitter_record <- function(submitter_ref,
 
 
 footer_section <- function(){
-  tibble(level = 0, id = "TR", tag = "TRLR", value = "") %>% 
+  tibble::tibble(level = 0, id = "TR", tag = "TRLR", value = "") %>% 
     finalise()
 }

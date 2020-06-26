@@ -314,6 +314,6 @@ date_value <- function(start_year = numeric(),
     val <- paste(val, end_year)
   }
   
-  str_trim(val)
+  stringr::str_trim(val)
 }
 

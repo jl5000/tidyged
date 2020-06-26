@@ -1,12 +1,11 @@
 
 # Need helpers for dates and notes
 
-library(tidyverse)
+
 library(testthat)
 library(roxytest)
 
-list.files("R", full.names = TRUE, pattern = "[.]R$") %>% 
-  walk(source)
+purrr::walk(list.files("R", full.names = TRUE, pattern = "[.]R$"), source)
 
 
 test = import_gedcom("Franklins.ged")

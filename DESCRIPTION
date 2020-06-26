@@ -17,4 +17,5 @@ Imports:
     magrittr,
     readr,
     tidyr,
-    stringr
+    stringr,
+    purrr

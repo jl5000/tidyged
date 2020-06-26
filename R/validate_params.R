@@ -1,12 +1,5 @@
 
 
-check_gedcom_file <- function(gedcom) {
-  
-  
-  
-}
-
-
 validate_input_size <- function(input, max_dim, min_char = NULL, max_char = NULL) {
   if (length(input) > max_dim)
     stop("Input ", input, " has too many dimensions. The limit is ", max_dim)
@@ -89,7 +82,6 @@ validate_attribute_descriptor <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
 validate_attribute_type <- function(input, max_dim) {
-  #TODO: Why is it not the full list? DSCR IDNO NCHI NMR SSN
   choices <- c("CAST", "DSCR", "EDUC", "IDNO",
                "NATI", "NCHI", "NMR", "OCCU",
                "PROP", "RELI", "RESI", "SSN",
@@ -138,16 +130,12 @@ validate_count_of_marriages <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 3)
 }
 validate_date <- function(input, max_dim) {
-  #TODO
   validate_input_size(input, max_dim, 4, 35)
+  validate_input_pattern(inputs, date_pattern())
 }
 validate_date_approximated <- function(input, max_dim) {
-  #TODO
   validate_input_size(input, max_dim, 4, 35)
-}
-validate_date_calendar <- function(input, max_dim) {
-  #TODO
-  validate_input_size(input, max_dim, 4, 35)
+  validate_input_pattern(input, date_approximated_pattern())
 }
 validate_date_value <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 35)
@@ -210,7 +198,6 @@ validate_language_of_text <- function(input, max_dim) {
 validate_language_preference <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
-#TODO Month stuff
 validate_multimedia_file_reference <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 30)
 }
@@ -459,8 +446,5 @@ validate_xref <- function(input, max_dim) {
 validate_year <- function(input, max_dim) {
   validate_input_size(input, max_dim, 3, 4)
 }
-validate_year_greg <- function(input, max_dim) {
-  #TODO
-  validate_input_size(input, max_dim, 3, 7)
-}
+
 

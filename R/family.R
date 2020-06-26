@@ -4,17 +4,9 @@
 library(tidyverse)
 library(testthat)
 library(roxytest)
-source("R/helpers.R")
-source("R/helpers_dates.R")
-source("R/params.R")
-source("R/structures.R")
-source("R/records.R")
-source("R/import_export.R")
-source("R/validate.R")
-source("R/interrogate.R")
-source("R/visualise.R")
-source("R/edit.R")
 
+list.files("R", full.names = TRUE, pattern = "[.]R$") %>% 
+  walk(source)
 
 
 test = import_gedcom("Franklins.ged")

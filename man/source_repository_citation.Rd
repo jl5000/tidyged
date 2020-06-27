@@ -14,6 +14,8 @@ source_repository_citation(
 \arguments{
 \item{xref_repo}{Either a pointer or an unique cross-reference identifier.}
 
+\item{notes}{A list of note_structure() objects.}
+
 \item{source_call_number}{An identification or reference description used to file and retrieve items
 from the holdings of a repository.}
 

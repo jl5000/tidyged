@@ -13,6 +13,8 @@ individual_attribute_structure(
 \arguments{
 \item{attribute_type}{An attribute which may have caused name, addresses, phone numbers,
 family listings to be recorded. Its application is in helping to classify sources used for information.}
+
+\item{individual_event_details}{An individual_event_detail() object giving details of the attribute.}
 }
 \value{
 A tidy tibble containing the INDIVIDUAL_ATTRIBUTE_STRUCTURE part of a GEDCOM file

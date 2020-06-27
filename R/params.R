@@ -11,8 +11,6 @@
 #' sorting or indexing. Used in most cases to facilitate automatic sorting of mail.
 #' @param address_email An electronic address that can be used for contact such as an email address.
 #' @param address_fax A FAX telephone number appropriate for sending data facsimiles.
-#' @param all_address_lines The address lines usually contain the addressee’s street and city 
-#' information so that it forms an address that meets mailing requirements. 
 #' @param address_postal_code The ZIP or postal code used by the various localities in handling of mail. 
 #' Isolated for sorting or indexing.
 #' @param address_state The name of the US state/UK county used in the address. Isolated for sorting or indexing.
@@ -46,7 +44,7 @@
 #' 1 = Questionable reliability of evidence 
 #' 2 = Secondary evidence, data officially recorded sometime after event
 #' 3 = Direct and primary evidence used, or by dominance of the evidence
-#' @param change_date The date that this data was changed.
+#' @param change_date A date_exact() object giving the date that this data was changed.
 #' @param character_set A code value that represents the character set to be used to 
 #' interpret this data. Currently, the preferred character set is ANSEL, which 
 #' includes ASCII as a subset. UNICODE is not widely supported by most operating systems; 
@@ -75,7 +73,8 @@
 #' been a member of as a spouse or parent, regardless of whether the associated families are 
 #' represented in the GEDCOM file.
 #' @param descriptive_title The title of a work, record, item, or object.
-#' @param entry_recording_date The date that this event data was entered into the original source document. 
+#' @param entry_recording_date A date_value() object giving the date that this event data 
+#' was entered into the original source document. 
 #' @param event_attribute_type A code that classifies the principal event or happening that caused the 
 #' source record entry to be created. If the event or attribute doesn't translate to one of these tag codes, 
 #' then a user supplied value is expected and will be generally classified in the category of other. 
@@ -232,7 +231,9 @@
 #' @param xref_repo Either a pointer or an unique cross-reference identifier. 
 #' @param xref_obje Either a pointer or an unique cross-reference identifier. 
 #' @param xref_subm Either a pointer or an unique cross-reference identifier.
-#' @param xref_subn
-#'  Either a pointer or an unique cross-reference identifier. 
+#' @param xref_subn Either a pointer or an unique cross-reference identifier.
+#' @param notes A list of note_structure() objects.
+#' @param source_citations A list of source_citation() objects.
+#' @param multimedia_links A list of multimedia_link() objects
 parameter_definitions <- function() {return(0)}
 

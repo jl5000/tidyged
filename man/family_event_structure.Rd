@@ -17,6 +17,8 @@ family_event_structure(
 This event value is usually assigned to the EVEN tag. The classification as to the difference
 between this specific event and other occurrences of the EVENt tag is indicated by the use of
 a subordinate TYPE tag selected from the EVENT_DETAIL structure.}
+
+\item{family_event_details}{A family_event_detail() object giving details of the event.}
 }
 \value{
 A tidy tibble containing the FAMILY_EVENT_STRUCTURE part of a GEDCOM file

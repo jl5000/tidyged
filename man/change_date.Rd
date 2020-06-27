@@ -11,9 +11,11 @@ change_date(
 )
 }
 \arguments{
-\item{change_date}{The date that this data was changed.}
+\item{change_date}{A date_exact() object giving the date that this data was changed.}
 
 \item{time_value}{The time of a specific event.}
+
+\item{notes}{A list of note_structure() objects.}
 }
 \value{
 A tidy tibble containing the CHANGE_DATE part of a GEDCOM file

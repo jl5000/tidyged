@@ -28,6 +28,18 @@ ref_to_xref <- function(ref, type) {
 }
 
 
+#' Split a vector of free text into separate rows of a GEDCOM file
+#' 
+#' This function only uses the CONC(atenation) tag for splitting free text, and does
+#' not use the CONT(inuation) tag. This is because it is easier to implement.
+#'
+#' @param text A character vector of free text.
+#' @param top_tag The GEDCOM tag of the first line.
+#' @param char_limit The maximum number of characters allowed on each line. Defaults to 248.
+#' @param start_level The level of the first line. Defaults to 0.
+#' @tests
+#' @return A tidy tibble containing the GEDCOM representation of the character vector.
+#' @export
 split_text <- function(text, top_tag, char_limit = 248, start_level = 0) {
    
   purrr::map_dfr(text, function(txt) {

@@ -1,18 +1,15 @@
 # The structure of the functions in this file and the structures file all have a similar pattern
 # First any inputs that could be numbers are converted to characters
 # Then inputs are then checked to ensure they do not breach size limits
-#   Refs generally have a maximum of one dimension, with 1-18 characters
-#   Inputs which are checked for specific values below are not checked for character length
 #   Structures are not checked for character length
 #   Note values which could be split up over several lines are not checked for character length
-# Then inputs which take specific values are checked
 # Then the outputs dataframe is constructed:
 # Inputs which are not structures or lists are placed straight into tibbles
 # Inputs which are lists of dataframes are first binded by row, and then levels pushed down
 # Inputs which are structures have their levels pushed down
 # Inputs which are long text strings are split up intow several rows using split_text
 # Finally, if certain subordinate tags are not used, the parent tags are removed
-# For records
+# For records, an additional finalising step is performed which fills missing ids
 
 
 header_section <- function(xref_subm,

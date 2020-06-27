@@ -23,13 +23,21 @@ have used when giving it to a recorder.}
 
 \item{name_type}{Indicates the name type, for example the name issued or assumed as an immigrant.}
 
+\item{name_pieces}{A personal_name_pieces() object giving the components of the name.}
+
 \item{name_phonetic_variation}{The phonetic variation of the name.}
 
 \item{phonetic_type}{Indicates the method used in transforming the text to the phonetic variation.}
 
+\item{phonetic_name_pieces}{A list of personal_name_pieces() objects giving the components
+of the phonetic name variations.}
+
 \item{name_romanized_variation}{The romanized variation of the name.}
 
 \item{romanized_type}{Indicates the method used in transforming the text to a romanized variation.}
+
+\item{romanized_name_pieces}{A list of personal_name_pieces() objects giving the components
+of the romanized name variations.}
 }
 \value{
 A tidy tibble containing the PERSONAL_NAME_STRUCTURE part of a GEDCOM file

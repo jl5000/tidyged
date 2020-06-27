@@ -10,6 +10,9 @@ family_event_detail(
   event_details = event_detail()
 )
 }
+\arguments{
+\item{event_details}{An event_detail() object giving details of the event.}
+}
 \value{
 A tidy tibble containing the FAMILY_EVENT_DETAIL part of a GEDCOM file
 }

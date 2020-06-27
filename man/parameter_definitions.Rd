@@ -16,9 +16,6 @@ sorting or indexing. Used in most cases to facilitate automatic sorting of mail.
 
 \item{address_fax}{A FAX telephone number appropriate for sending data facsimiles.}
 
-\item{all_address_lines}{The address lines usually contain the addressee’s street and city
-information so that it forms an address that meets mailing requirements.}
-
 \item{address_postal_code}{The ZIP or postal code used by the various localities in handling of mail.
 Isolated for sorting or indexing.}
 
@@ -65,7 +62,7 @@ eliminate the receiver's need to evaluate the evidence for themselves.
 2 = Secondary evidence, data officially recorded sometime after event
 3 = Direct and primary evidence used, or by dominance of the evidence}
 
-\item{change_date}{The date that this data was changed.}
+\item{change_date}{A date_exact() object giving the date that this data was changed.}
 
 \item{character_set}{A code value that represents the character set to be used to
 interpret this data. Currently, the preferred character set is ANSEL, which
@@ -102,7 +99,8 @@ represented in the GEDCOM file.}
 
 \item{descriptive_title}{The title of a work, record, item, or object.}
 
-\item{entry_recording_date}{The date that this event data was entered into the original source document.}
+\item{entry_recording_date}{A date_value() object giving the date that this event data
+was entered into the original source document.}
 
 \item{event_attribute_type}{A code that classifies the principal event or happening that caused the
 source record entry to be created. If the event or attribute doesn't translate to one of these tag codes,
@@ -345,6 +343,12 @@ It is defined and changed by the creators of the product.}
 \item{xref_subm}{Either a pointer or an unique cross-reference identifier.}
 
 \item{xref_subn}{Either a pointer or an unique cross-reference identifier.}
+
+\item{notes}{A list of note_structure() objects.}
+
+\item{source_citations}{A list of source_citation() objects.}
+
+\item{multimedia_links}{A list of multimedia_link() objects}
 }
 \description{
 

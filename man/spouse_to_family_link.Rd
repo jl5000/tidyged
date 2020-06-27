@@ -8,6 +8,8 @@ spouse_to_family_link(xref_fam, notes = list())
 }
 \arguments{
 \item{xref_fam}{Either a pointer or an unique cross-reference identifier.}
+
+\item{notes}{A list of note_structure() objects.}
 }
 \value{
 A tidy tibble containing the SPOUSE_TO_FAMILY_LINK part of a GEDCOM file

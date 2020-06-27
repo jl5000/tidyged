@@ -35,7 +35,8 @@ the certainty associated with the source used in asserting the cited fact.}
 
 \item{role_in_event}{Indicates what role this person played in the event that is being cited in this context.}
 
-\item{entry_recording_date}{The date that this event data was entered into the original source document.}
+\item{entry_recording_date}{A date_value() object giving the date that this event data
+was entered into the original source document.}
 
 \item{text_from_source}{A verbatim copy of any description contained within the source.
 This indicates notes or text that are actually contained in the source document, not the submitter's
@@ -49,6 +50,10 @@ eliminate the receiver's need to evaluate the evidence for themselves.
 1 = Questionable reliability of evidence
 2 = Secondary evidence, data officially recorded sometime after event
 3 = Direct and primary evidence used, or by dominance of the evidence}
+
+\item{multimedia_links}{A list of multimedia_link() objects}
+
+\item{notes}{A list of note_structure() objects.}
 }
 \value{
 A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file

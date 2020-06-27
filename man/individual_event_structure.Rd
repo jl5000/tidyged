@@ -14,6 +14,8 @@ individual_event_structure(
 \arguments{
 \item{event_type_individual}{A code used to indicate the type of individual event.}
 
+\item{individual_event_details}{An individual_event_detail() object giving details of the event.}
+
 \item{xref_fam}{Either a pointer or an unique cross-reference identifier.}
 }
 \value{

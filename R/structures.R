@@ -2,6 +2,8 @@
 #' Constructs the ADDRESS_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
+#' @param all_address_lines The address lines usually contain the addressee’s street and city 
+#' information so that it forms an address that meets mailing requirements.
 #' @tests
 #' expect_error(address_structure())
 #' expect_error(address_structure(letters[1:5]))
@@ -256,6 +258,9 @@ child_to_family_link <- function(xref_fam,
 #' Constructs the EVENT_DETAIL from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
+#' @param date A date_value() object giving the date of the event.
+#' @param place A place_structure() object giving the location of the event.
+#' @param address An address_structure() object giving the address of the event.
 #' @tests
 #' expect_error(event_detail(restriction_notice = "something"))
 #' expect_equal(dim(event_detail()), c(0, 3))
@@ -323,6 +328,7 @@ event_detail <- function(event_or_fact_classification = character(),
 #' Constructs the FAMILY_EVENT_DETAIL from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
+#' @param event_details An event_detail() object giving details of the event.
 #' @tests
 #' expect_equal(dim(family_event_detail()), c(0, 3))  
 #' 
@@ -376,6 +382,7 @@ family_event_detail <- function(husband_age_at_event = character(),
 #' Constructs the FAMILY_EVENT_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
+#' @param family_event_details A family_event_detail() object giving details of the event.
 #' @tests
 #' expect_error(family_event_structure())
 #' expect_error(family_event_structure("TEST"))
@@ -428,6 +435,7 @@ family_event_structure <- function(event_type_family,
 #' Constructs the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
+#' @param individual_event_details An individual_event_detail() object giving details of the attribute.
 #' @tests
 #' expect_error(individual_attribute_structure())
 #' expect_error(individual_attribute_structure("TEST"))
@@ -497,6 +505,7 @@ individual_attribute_structure <- function(attribute_type,
 #' Constructs the INDIVIDUAL_EVENT_DETAIL from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
+#' @param event_details An event_detail() object giving details of the event.
 #' @tests
 #' expect_equal(dim(individual_event_detail()), c(0, 3))  
 #' 
@@ -524,6 +533,7 @@ individual_event_detail <- function(event_details = event_detail(),
 #' Constructs the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
+#' @param individual_event_details An individual_event_detail() object giving details of the event.
 #' @tests
 #' expect_error(individual_event_structure())
 #' expect_error(individual_event_structure("BLAH"))
@@ -789,6 +799,11 @@ personal_name_pieces <- function(name_piece_prefix = character(),
 #' Constructs the PERSONAL_NAME_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
+#' @param name_pieces A personal_name_pieces() object giving the components of the name.
+#' @param phonetic_name_pieces A list of personal_name_pieces() objects giving the components 
+#' of the phonetic name variations.
+#' @param romanized_name_pieces A list of personal_name_pieces() objects giving the components 
+#' of the romanized name variations.
 #' @tests
 #' expect_error(personal_name_structure())
 #' expect_error(

@@ -10,6 +10,8 @@ individual_event_detail(
 )
 }
 \arguments{
+\item{event_details}{An event_detail() object giving details of the event.}
+
 \item{age_at_event}{A string that indicates the age in years, months, and days that the
 principal was at the time of the associated event. Any labels must come after their
 corresponding number, for example; 4y 8m 10d.}

@@ -25,6 +25,8 @@ neither proven nor disproven.
 the linkage has been disproven.
 "proven" = There has been a claim by some that this child does not belongs to this family,
 but the linkage has been proven.}
+
+\item{notes}{A list of note_structure() objects.}
 }
 \value{
 A tidy tibble containing the CHILD_TO_FAMILY_LINK part of a GEDCOM file

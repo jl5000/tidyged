@@ -23,6 +23,12 @@ event_detail(
 event or attribute tag. This should be used whenever either of the generic EVEN or FACT tags are used.
 The value of this primative is responsible for classifying the generic event or fact being cited.}
 
+\item{date}{A date_value() object giving the date of the event.}
+
+\item{place}{A place_structure() object giving the location of the event.}
+
+\item{address}{An address_structure() object giving the address of the event.}
+
 \item{responsible_agency}{The organization, institution, corporation, person, or other entity that has
 responsibility for the associated context. For example, an employer of a person of an associated occupation,
 or a church that administered rites or events, or an organization responsible for creating and/or archiving
@@ -36,6 +42,12 @@ might be listed on a death certificate.}
 
 \item{restriction_notice}{The restriction notice is defined for Ancestral File usage. Ancestral File
 download GEDCOM files may contain this data.}
+
+\item{notes}{A list of note_structure() objects.}
+
+\item{source_citations}{A list of source_citation() objects.}
+
+\item{multimedia_links}{A list of multimedia_link() objects}
 }
 \value{
 A tidy tibble containing the EVENT_DETAIL part of a GEDCOM file

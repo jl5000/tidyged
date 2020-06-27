@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{personal_name_pieces}
 \alias{personal_name_pieces}
-\title{Constructs the PERSONAL_NAME_PIECES from the GEDCOM specification}
+\title{Construct the PERSONAL_NAME_PIECES from the GEDCOM specification}
 \usage{
 personal_name_pieces(
   name_piece_prefix = character(),
@@ -36,8 +36,8 @@ Different name suffix parts are separated by a comma.}
 \item{source_citations}{A list of source_citation() objects.}
 }
 \value{
-A tidy tibble containing the PERSONAL_NAME_PIECES part of a GEDCOM file
+A tidy tibble containing the PERSONAL_NAME_PIECES part of a GEDCOM file.
 }
 \description{
-Constructs the PERSONAL_NAME_PIECES from the GEDCOM specification
+Construct the PERSONAL_NAME_PIECES from the GEDCOM specification
 }

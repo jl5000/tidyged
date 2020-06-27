@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{family_event_structure}
 \alias{family_event_structure}
-\title{Constructs the FAMILY_EVENT_STRUCTURE from the GEDCOM specification}
+\title{Construct the FAMILY_EVENT_STRUCTURE from the GEDCOM specification}
 \usage{
 family_event_structure(
   event_type_family,
@@ -21,8 +21,8 @@ a subordinate TYPE tag selected from the EVENT_DETAIL structure.}
 \item{family_event_details}{A family_event_detail() object giving details of the event.}
 }
 \value{
-A tidy tibble containing the FAMILY_EVENT_STRUCTURE part of a GEDCOM file
+A tidy tibble containing the FAMILY_EVENT_STRUCTURE part of a GEDCOM file.
 }
 \description{
-Constructs the FAMILY_EVENT_STRUCTURE from the GEDCOM specification
+Construct the FAMILY_EVENT_STRUCTURE from the GEDCOM specification
 }

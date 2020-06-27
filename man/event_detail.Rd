@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{event_detail}
 \alias{event_detail}
-\title{Constructs the EVENT_DETAIL from the GEDCOM specification}
+\title{Construct the EVENT_DETAIL from the GEDCOM specification}
 \usage{
 event_detail(
   event_or_fact_classification = character(),
@@ -50,8 +50,8 @@ download GEDCOM files may contain this data.}
 \item{multimedia_links}{A list of multimedia_link() objects}
 }
 \value{
-A tidy tibble containing the EVENT_DETAIL part of a GEDCOM file
+A tidy tibble containing the EVENT_DETAIL part of a GEDCOM file.
 }
 \description{
-Constructs the EVENT_DETAIL from the GEDCOM specification
+Construct the EVENT_DETAIL from the GEDCOM specification
 }

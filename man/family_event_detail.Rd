@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{family_event_detail}
 \alias{family_event_detail}
-\title{Constructs the FAMILY_EVENT_DETAIL from the GEDCOM specification}
+\title{Construct the FAMILY_EVENT_DETAIL from the GEDCOM specification}
 \usage{
 family_event_detail(
   husband_age_at_event = character(),
@@ -22,8 +22,8 @@ corresponding number, for example; 4y 8m 10d.}
 \item{event_details}{An event_detail() object giving details of the event.}
 }
 \value{
-A tidy tibble containing the FAMILY_EVENT_DETAIL part of a GEDCOM file
+A tidy tibble containing the FAMILY_EVENT_DETAIL part of a GEDCOM file.
 }
 \description{
-Constructs the FAMILY_EVENT_DETAIL from the GEDCOM specification
+Construct the FAMILY_EVENT_DETAIL from the GEDCOM specification
 }

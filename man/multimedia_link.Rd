@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{multimedia_link}
 \alias{multimedia_link}
-\title{Constructs the MULTIMEDIA_LINK from the GEDCOM specification}
+\title{Construct the MULTIMEDIA_LINK from the GEDCOM specification}
 \usage{
 multimedia_link(
   xref_obje = character(),
@@ -13,7 +13,7 @@ multimedia_link(
 )
 }
 \arguments{
-\item{xref_obje}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_obje}{An xref ID of a multimedia record.}
 
 \item{multimedia_file_reference}{A complete local or remote file reference to the auxiliary data
 to be linked to the GEDCOM context. Remote reference would include a network address where the multimedia
@@ -29,8 +29,8 @@ that indicates the type of material in which the referenced source is stored.}
 \item{descriptive_title}{The title of a work, record, item, or object.}
 }
 \value{
-A tidy tibble containing the MULTIMEDIA_LINK part of a GEDCOM file
+A tidy tibble containing the MULTIMEDIA_LINK part of a GEDCOM file.
 }
 \description{
-Constructs the MULTIMEDIA_LINK from the GEDCOM specification
+Construct the MULTIMEDIA_LINK from the GEDCOM specification
 }

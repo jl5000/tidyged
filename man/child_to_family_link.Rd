@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{child_to_family_link}
 \alias{child_to_family_link}
-\title{Constructs the CHILD_TO_FAMILY_LINK from the GEDCOM specification}
+\title{Construct the CHILD_TO_FAMILY_LINK from the GEDCOM specification}
 \usage{
 child_to_family_link(
   xref_fam,
@@ -12,7 +12,7 @@ child_to_family_link(
 )
 }
 \arguments{
-\item{xref_fam}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_fam}{An xref ID of a family record.}
 
 \item{pedigree_linkage_type}{A code used to indicate the child to family relationship for pedigree navigation
 purposes.}
@@ -29,8 +29,8 @@ but the linkage has been proven.}
 \item{notes}{A list of note_structure() objects.}
 }
 \value{
-A tidy tibble containing the CHILD_TO_FAMILY_LINK part of a GEDCOM file
+A tidy tibble containing the CHILD_TO_FAMILY_LINK part of a GEDCOM file.
 }
 \description{
-Constructs the CHILD_TO_FAMILY_LINK from the GEDCOM specification
+Construct the CHILD_TO_FAMILY_LINK from the GEDCOM specification
 }

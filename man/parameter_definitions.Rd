@@ -330,21 +330,21 @@ It is defined and changed by the creators of the product.}
 
 \item{where_within_source}{Specific location with in the information referenced.}
 
-\item{xref_fam}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_fam}{An xref ID of a family record.}
 
-\item{xref_indi}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_indi}{An xref ID of an individual record.}
 
-\item{xref_sour}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_sour}{An xref ID of a source record.}
 
-\item{xref_repo}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_repo}{An xref ID of a repository record.}
 
-\item{xref_obje}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_obje}{An xref ID of a multimedia record.}
 
-\item{xref_note}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_note}{An xref ID of a note record.}
 
-\item{xref_subm}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_subm}{An xref ID of a submitter record.}
 
-\item{xref_subn}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_subn}{An xref ID of a submission record.}
 
 \item{notes}{A list of note_structure() objects.}
 

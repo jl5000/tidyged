@@ -2,18 +2,18 @@
 % Please edit documentation in R/structures.R
 \name{note_structure}
 \alias{note_structure}
-\title{Constructs the NOTE_STRUCTURE from the GEDCOM specification}
+\title{Construct the NOTE_STRUCTURE from the GEDCOM specification}
 \usage{
 note_structure(xref_note = character(), submitter_text = character())
 }
 \arguments{
-\item{xref_note}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_note}{An xref ID of a note record.}
 
 \item{submitter_text}{Comments or opinions from the submitter.}
 }
 \value{
-A tidy tibble containing the NOTE_STRUCTURE part of a GEDCOM file
+A tidy tibble containing the NOTE_STRUCTURE part of a GEDCOM file.
 }
 \description{
-Constructs the NOTE_STRUCTURE from the GEDCOM specification
+Construct the NOTE_STRUCTURE from the GEDCOM specification
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{individual_event_detail}
 \alias{individual_event_detail}
-\title{Constructs the INDIVIDUAL_EVENT_DETAIL from the GEDCOM specification}
+\title{Construct the INDIVIDUAL_EVENT_DETAIL from the GEDCOM specification}
 \usage{
 individual_event_detail(
   event_details = event_detail(),
@@ -17,8 +17,8 @@ principal was at the time of the associated event. Any labels must come after th
 corresponding number, for example; 4y 8m 10d.}
 }
 \value{
-A tidy tibble containing the INDIVIDUAL_EVENT_DETAIL part of a GEDCOM file
+A tidy tibble containing the INDIVIDUAL_EVENT_DETAIL part of a GEDCOM file.
 }
 \description{
-Constructs the INDIVIDUAL_EVENT_DETAIL from the GEDCOM specification
+Construct the INDIVIDUAL_EVENT_DETAIL from the GEDCOM specification
 }

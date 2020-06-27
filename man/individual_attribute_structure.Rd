@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{individual_attribute_structure}
 \alias{individual_attribute_structure}
-\title{Constructs the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM specification}
+\title{Construct the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM specification}
 \usage{
 individual_attribute_structure(
   attribute_type,
@@ -19,8 +19,8 @@ family listings to be recorded. Its application is in helping to classify source
 \item{individual_event_details}{An individual_event_detail() object giving details of the attribute.}
 }
 \value{
-A tidy tibble containing the INDIVIDUAL_ATTRIBUTE_STRUCTURE part of a GEDCOM file
+A tidy tibble containing the INDIVIDUAL_ATTRIBUTE_STRUCTURE part of a GEDCOM file.
 }
 \description{
-Constructs the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM specification
+Construct the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM specification
 }

@@ -225,14 +225,14 @@
 #' @param version_number An identifier that represents the version level assigned to the associated product. 
 #' It is defined and changed by the creators of the product. 
 #' @param where_within_source Specific location with in the information referenced. 
-#' @param xref_fam Either a pointer or an unique cross-reference identifier.  
-#' @param xref_indi Either a pointer or an unique cross-reference identifier. 
-#' @param xref_sour Either a pointer or an unique cross-reference identifier. 
-#' @param xref_repo Either a pointer or an unique cross-reference identifier. 
-#' @param xref_obje Either a pointer or an unique cross-reference identifier.
-#' @param xref_note Either a pointer or an unique cross-reference identifier. 
-#' @param xref_subm Either a pointer or an unique cross-reference identifier.
-#' @param xref_subn Either a pointer or an unique cross-reference identifier.
+#' @param xref_fam An xref ID of a family record.  
+#' @param xref_indi An xref ID of an individual record. 
+#' @param xref_sour An xref ID of a source record. 
+#' @param xref_repo An xref ID of a repository record. 
+#' @param xref_obje An xref ID of a multimedia record.
+#' @param xref_note An xref ID of a note record. 
+#' @param xref_subm An xref ID of a submitter record.
+#' @param xref_subn An xref ID of a submission record.
 #' @param notes A list of note_structure() objects.
 #' @param source_citations A list of source_citation() objects.
 #' @param multimedia_links A list of multimedia_link() objects

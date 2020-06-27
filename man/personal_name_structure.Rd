@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{personal_name_structure}
 \alias{personal_name_structure}
-\title{Constructs the PERSONAL_NAME_STRUCTURE from the GEDCOM specification}
+\title{Construct the PERSONAL_NAME_STRUCTURE from the GEDCOM specification}
 \usage{
 personal_name_structure(
   name_personal,
@@ -40,8 +40,8 @@ of the phonetic name variations.}
 of the romanized name variations.}
 }
 \value{
-A tidy tibble containing the PERSONAL_NAME_STRUCTURE part of a GEDCOM file
+A tidy tibble containing the PERSONAL_NAME_STRUCTURE part of a GEDCOM file.
 }
 \description{
-Constructs the PERSONAL_NAME_STRUCTURE from the GEDCOM specification
+Construct the PERSONAL_NAME_STRUCTURE from the GEDCOM specification
 }

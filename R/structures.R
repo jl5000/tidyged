@@ -1,5 +1,5 @@
 
-#' Constructs the ADDRESS_STRUCTURE from the GEDCOM specification
+#' Construct the ADDRESS_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @param all_address_lines The address lines usually contain the addressee’s street and city 
@@ -44,7 +44,7 @@
 #'                              1, "ADR1",    "b",
 #'                              1, "CTRY",   "UK"
 #'              )) 
-#' @return A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file
+#' @return A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file.
 #' @export
 address_structure <- function(all_address_lines,
                               address_city = character(),
@@ -117,7 +117,7 @@ address_structure <- function(all_address_lines,
   
 }
 
-#' Constructs the ASSOCIATION_STRUCTURE from the GEDCOM specification
+#' Construct the ASSOCIATION_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @tests
@@ -138,7 +138,7 @@ address_structure <- function(all_address_lines,
 #'                              1, "RELA",            "Father",
 #'                              1, "NOTE",    "This is a note"
 #'              ))
-#' @return A tidy tibble containing the ASSOCIATION_STRUCTURE part of a GEDCOM file
+#' @return A tidy tibble containing the ASSOCIATION_STRUCTURE part of a GEDCOM file.
 #' @export
 association_structure <- function(xref_indi,
                                   relation_is_descriptor,
@@ -160,7 +160,7 @@ association_structure <- function(xref_indi,
   
 }
 
-#' Constructs the CHANGE_DATE from the GEDCOM specification
+#' Construct the CHANGE_DATE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @tests
@@ -193,7 +193,7 @@ association_structure <- function(xref_indi,
 #'                              1, "NOTE", "Note 1",
 #'                              1, "NOTE", "Note 2"
 #'              ))
-#' @return A tidy tibble containing the CHANGE_DATE part of a GEDCOM file
+#' @return A tidy tibble containing the CHANGE_DATE part of a GEDCOM file.
 #' @export
 change_date <- function(change_date = date_exact(),
                         time_value = character(),
@@ -214,7 +214,7 @@ change_date <- function(change_date = date_exact(),
   
 }
 
-#' Constructs the CHILD_TO_FAMILY_LINK from the GEDCOM specification
+#' Construct the CHILD_TO_FAMILY_LINK from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @tests
@@ -233,7 +233,7 @@ change_date <- function(change_date = date_exact(),
 #'                              1, "PEDI",  "birth",
 #'                              1, "STAT", "proven"
 #'              ))
-#' @return A tidy tibble containing the CHILD_TO_FAMILY_LINK part of a GEDCOM file
+#' @return A tidy tibble containing the CHILD_TO_FAMILY_LINK part of a GEDCOM file.
 #' @export
 child_to_family_link <- function(xref_fam,
                                  pedigree_linkage_type = character(),
@@ -255,7 +255,7 @@ child_to_family_link <- function(xref_fam,
   
 }
 
-#' Constructs the EVENT_DETAIL from the GEDCOM specification
+#' Construct the EVENT_DETAIL from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @param date A date_value() object giving the date of the event.
@@ -288,7 +288,7 @@ child_to_family_link <- function(xref_fam,
 #'                              1, "CONT",       "Road",
 #'                              1, "ADR1",       "Road"
 #'              ))
-#' @return A tidy tibble containing the EVENT_DETAIL part of a GEDCOM file
+#' @return A tidy tibble containing the EVENT_DETAIL part of a GEDCOM file.
 #' @export
 event_detail <- function(event_or_fact_classification = character(),
                          date = date_value(),
@@ -325,7 +325,7 @@ event_detail <- function(event_or_fact_classification = character(),
   
 }
 
-#' Constructs the FAMILY_EVENT_DETAIL from the GEDCOM specification
+#' Construct the FAMILY_EVENT_DETAIL from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @param event_details An event_detail() object giving details of the event.
@@ -351,7 +351,7 @@ event_detail <- function(event_or_fact_classification = character(),
 #'                              0, "WIFE",     "",
 #'                              1,  "AGE",   "40y"
 #'              ))
-#' @return A tidy tibble containing the FAMILY_EVENT_DETAIL part of a GEDCOM file
+#' @return A tidy tibble containing the FAMILY_EVENT_DETAIL part of a GEDCOM file.
 #' @export
 family_event_detail <- function(husband_age_at_event = character(),
                                 wife_age_at_event = character(),
@@ -374,12 +374,12 @@ family_event_detail <- function(husband_age_at_event = character(),
   if (sum(temp$tag == "HAGE") == 0) temp <- dplyr::filter(temp, tag != "HUSB")
   if (sum(temp$tag == "WAGE") == 0) temp <- dplyr::filter(temp, tag != "WIFE")  
   dplyr::mutate(temp,
-                tag = if_else(tag == "HAGE", "AGE", tag),
-                tag = if_else(tag == "WAGE", "AGE", tag))
+                tag = dplyr::if_else(tag == "HAGE", "AGE", tag),
+                tag = dplyr::if_else(tag == "WAGE", "AGE", tag))
   
 }
 
-#' Constructs the FAMILY_EVENT_STRUCTURE from the GEDCOM specification
+#' Construct the FAMILY_EVENT_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @param family_event_details A family_event_detail() object giving details of the event.
@@ -409,7 +409,7 @@ family_event_detail <- function(husband_age_at_event = character(),
 #'                              1, "WIFE",     "",
 #'                              2, "AGE",   "20y"
 #'              ))
-#' @return A tidy tibble containing the FAMILY_EVENT_STRUCTURE part of a GEDCOM file
+#' @return A tidy tibble containing the FAMILY_EVENT_STRUCTURE part of a GEDCOM file.
 #' @export
 family_event_structure <- function(event_type_family,
                                    event_descriptor = character(),
@@ -432,7 +432,7 @@ family_event_structure <- function(event_type_family,
   
 }
 
-#' Constructs the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM specification
+#' Construct the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @param individual_event_details An individual_event_detail() object giving details of the attribute.
@@ -454,7 +454,7 @@ family_event_structure <- function(event_type_family,
 #'                              0, "NATI",     "British",
 #'                              1,  "AGE",           "0y"
 #'              ))
-#' @return A tidy tibble containing the INDIVIDUAL_ATTRIBUTE_STRUCTURE part of a GEDCOM file
+#' @return A tidy tibble containing the INDIVIDUAL_ATTRIBUTE_STRUCTURE part of a GEDCOM file.
 #' @export
 individual_attribute_structure <- function(attribute_type,
                                            attribute_descriptor,
@@ -502,7 +502,7 @@ individual_attribute_structure <- function(attribute_type,
   temp
 }
 
-#' Constructs the INDIVIDUAL_EVENT_DETAIL from the GEDCOM specification
+#' Construct the INDIVIDUAL_EVENT_DETAIL from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @param event_details An event_detail() object giving details of the event.
@@ -513,7 +513,7 @@ individual_attribute_structure <- function(attribute_type,
 #'              tibble::tribble(~level,  ~tag, ~value,
 #'                              0, "AGE",    "5y"
 #'              ))
-#' @return A tidy tibble containing the INDIVIDUAL_EVENT_DETAIL part of a GEDCOM file
+#' @return A tidy tibble containing the INDIVIDUAL_EVENT_DETAIL part of a GEDCOM file.
 #' @export
 individual_event_detail <- function(event_details = event_detail(),
                                     age_at_event = character()) {
@@ -530,7 +530,7 @@ individual_event_detail <- function(event_details = event_detail(),
   
 }
 
-#' Constructs the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM specification
+#' Construct the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @param individual_event_details An individual_event_detail() object giving details of the event.
@@ -561,7 +561,7 @@ individual_event_detail <- function(event_details = event_detail(),
 #'                              1, "FAMC", "@F4@",
 #'                              2, "ADOP", "BOTH"
 #'              ))
-#' @return A tidy tibble containing the INDIVIDUAL_EVENT_STRUCTURE part of a GEDCOM file
+#' @return A tidy tibble containing the INDIVIDUAL_EVENT_STRUCTURE part of a GEDCOM file.
 #' @export
 individual_event_structure <- function(event_type_individual,
                                        individual_event_details = individual_event_detail(),
@@ -592,7 +592,7 @@ individual_event_structure <- function(event_type_individual,
     )
     
   temp %>% 
-    dplyr::mutate(value = if_else(tag %in% c("BIRT", "CHR", "DEAT"), "Y", value))
+    dplyr::mutate(value = dplyr::if_else(tag %in% c("BIRT", "CHR", "DEAT"), "Y", value))
   
 }
 
@@ -608,7 +608,7 @@ lds_spouse_sealing <- function() {
   tibble::tibble()
 }
 
-#' Constructs the MULTIMEDIA_LINK from the GEDCOM specification
+#' Construct the MULTIMEDIA_LINK from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @tests
@@ -629,7 +629,7 @@ lds_spouse_sealing <- function() {
 #'                              2, "FORM",        "jpg",
 #'                              3, "MEDI", "electronic"
 #'              ))
-#' @return A tidy tibble containing the MULTIMEDIA_LINK part of a GEDCOM file
+#' @return A tidy tibble containing the MULTIMEDIA_LINK part of a GEDCOM file.
 #' @export
 multimedia_link <- function(xref_obje = character(),
                             multimedia_file_reference = character(),
@@ -678,7 +678,7 @@ multimedia_link <- function(xref_obje = character(),
   }
 }
 
-#' Constructs the NOTE_STRUCTURE from the GEDCOM specification
+#' Construct the NOTE_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @tests
@@ -712,7 +712,7 @@ multimedia_link <- function(xref_obje = character(),
 #'                              1, "CONC", paste0(rep("a", 248), collapse=""),
 #'                              1, "CONC", paste0(rep("a", 248), collapse="")
 #'              ))
-#' @return A tidy tibble containing the NOTE_STRUCTURE part of a GEDCOM file
+#' @return A tidy tibble containing the NOTE_STRUCTURE part of a GEDCOM file.
 #' @export
 note_structure <- function(xref_note = character(),
                            submitter_text = character()) {
@@ -738,7 +738,7 @@ note_structure <- function(xref_note = character(),
 
 
 
-#' Constructs the PERSONAL_NAME_PIECES from the GEDCOM specification
+#' Construct the PERSONAL_NAME_PIECES from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @tests
@@ -765,7 +765,7 @@ note_structure <- function(xref_note = character(),
 #'                              1, "CONC", paste0(rep("b", 248), collapse=""),
 #'                              1, "CONC", paste0(rep("b", 248), collapse="")
 #'              ))
-#' @return A tidy tibble containing the PERSONAL_NAME_PIECES part of a GEDCOM file
+#' @return A tidy tibble containing the PERSONAL_NAME_PIECES part of a GEDCOM file.
 #' @export
 personal_name_pieces <- function(name_piece_prefix = character(),
                                  name_piece_given = character(), 
@@ -796,7 +796,7 @@ personal_name_pieces <- function(name_piece_prefix = character(),
   
 }
 
-#' Constructs the PERSONAL_NAME_STRUCTURE from the GEDCOM specification
+#' Construct the PERSONAL_NAME_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @param name_pieces A personal_name_pieces() object giving the components of the name.
@@ -862,7 +862,7 @@ personal_name_pieces <- function(name_piece_prefix = character(),
 #'                              2, "GIVN",           "Jo",
 #'                              2, "SURN",       "Bloggs"
 #'              ))
-#' @return A tidy tibble containing the PERSONAL_NAME_STRUCTURE part of a GEDCOM file
+#' @return A tidy tibble containing the PERSONAL_NAME_STRUCTURE part of a GEDCOM file.
 #' @export
 personal_name_structure <- function(name_personal,
                                     name_type = character(),
@@ -925,7 +925,7 @@ personal_name_structure <- function(name_personal,
   
 }
 
-#' Constructs the PLACE_STRUCTURE from the GEDCOM specification
+#' Construct the PLACE_STRUCTURE from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @tests
@@ -956,7 +956,7 @@ personal_name_structure <- function(name_personal,
 #'                              2, "LATI",          "N51.5",
 #'                              2, "LONG",           "E0.00"
 #'              ))
-#' @return A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file
+#' @return A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file.
 #' @export
 place_structure <- function(place_name,
                             place_hierarchy = character(),
@@ -1018,7 +1018,7 @@ place_structure <- function(place_name,
   
 }
 
-#' Constructs the SOURCE_CITATION from the GEDCOM specification
+#' Construct the SOURCE_CITATION from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @tests
@@ -1050,7 +1050,7 @@ place_structure <- function(place_name,
 #'                              1, "EVEN",  "event",
 #'                              2, "ROLE", "a role"
 #'              ))
-#' @return A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file
+#' @return A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file.
 #' @export
 source_citation <- function(xref_sour = character(),
                             source_description = character(),
@@ -1111,7 +1111,7 @@ source_citation <- function(xref_sour = character(),
   
 }
 
-#' Constructs the SOURCE_REPOSITORY_CITATION from the GEDCOM specification
+#' Construct the SOURCE_REPOSITORY_CITATION from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @tests
@@ -1126,7 +1126,7 @@ source_citation <- function(xref_sour = character(),
 #'                              1, "CALN",  "456",
 #'                              2, "MEDI",  "map"
 #'              ))
-#' @return A tidy tibble containing the SOURCE_REPOSITORY_CITATION part of a GEDCOM file
+#' @return A tidy tibble containing the SOURCE_REPOSITORY_CITATION part of a GEDCOM file.
 #' @export
 source_repository_citation <- function(xref_repo,
                                        notes = list(),
@@ -1149,12 +1149,18 @@ source_repository_citation <- function(xref_repo,
 }
 
 
-#' Constructs the SPOUSE_TO_FAMILY_LINK from the GEDCOM specification
+#' Construct the SPOUSE_TO_FAMILY_LINK from the GEDCOM specification
 #'
 #' @inheritParams parameter_definitions
 #' @tests
 #' expect_error(spouse_to_family_link())
-#' @return A tidy tibble containing the SPOUSE_TO_FAMILY_LINK part of a GEDCOM file
+#' 
+#' expect_equal(spouse_to_family_link("@F2@", list(note_structure(submitter_text = "test"))),
+#'              tibble::tribble(~level,   ~tag, ~value,
+#'                              0, "FAMS", "@F2@",
+#'                              1, "NOTE",  "test"
+#'              ))
+#' @return A tidy tibble containing the SPOUSE_TO_FAMILY_LINK part of a GEDCOM file.
 #' @export
 spouse_to_family_link <- function(xref_fam,
                                   notes = list()) {

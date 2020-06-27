@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{source_citation}
 \alias{source_citation}
-\title{Constructs the SOURCE_CITATION from the GEDCOM specification}
+\title{Construct the SOURCE_CITATION from the GEDCOM specification}
 \usage{
 source_citation(
   xref_sour = character(),
@@ -18,7 +18,7 @@ source_citation(
 )
 }
 \arguments{
-\item{xref_sour}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_sour}{An xref ID of a source record.}
 
 \item{source_description}{A free form text block used to describe the source from which information was
 obtained. This text block is used by those systems which cannot use a pointer to a source record.
@@ -56,8 +56,8 @@ eliminate the receiver's need to evaluate the evidence for themselves.
 \item{notes}{A list of note_structure() objects.}
 }
 \value{
-A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file
+A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file.
 }
 \description{
-Constructs the SOURCE_CITATION from the GEDCOM specification
+Construct the SOURCE_CITATION from the GEDCOM specification
 }

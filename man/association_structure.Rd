@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{association_structure}
 \alias{association_structure}
-\title{Constructs the ASSOCIATION_STRUCTURE from the GEDCOM specification}
+\title{Construct the ASSOCIATION_STRUCTURE from the GEDCOM specification}
 \usage{
 association_structure(
   xref_indi,
@@ -12,7 +12,7 @@ association_structure(
 )
 }
 \arguments{
-\item{xref_indi}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_indi}{An xref ID of an individual record.}
 
 \item{relation_is_descriptor}{A word or phrase that states object 1's relation is object 2.}
 
@@ -21,8 +21,8 @@ association_structure(
 \item{notes}{A list of note_structure() objects.}
 }
 \value{
-A tidy tibble containing the ASSOCIATION_STRUCTURE part of a GEDCOM file
+A tidy tibble containing the ASSOCIATION_STRUCTURE part of a GEDCOM file.
 }
 \description{
-Constructs the ASSOCIATION_STRUCTURE from the GEDCOM specification
+Construct the ASSOCIATION_STRUCTURE from the GEDCOM specification
 }

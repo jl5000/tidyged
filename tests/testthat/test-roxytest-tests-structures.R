@@ -484,7 +484,13 @@ test_that("Function source_repository_citation() @ L1131", {
 })
 
 
-test_that("Function spouse_to_family_link() @ L1159", {
+test_that("Function spouse_to_family_link() @ L1165", {
   expect_error(spouse_to_family_link())
+  
+  expect_equal(spouse_to_family_link("@F2@", list(note_structure(submitter_text = "test"))),
+               tibble::tribble(~level,   ~tag, ~value,
+                               0, "FAMS", "@F2@",
+                               1, "NOTE",  "test"
+               ))
 })
 

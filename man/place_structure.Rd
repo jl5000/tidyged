@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{place_structure}
 \alias{place_structure}
-\title{Constructs the PLACE_STRUCTURE from the GEDCOM specification}
+\title{Construct the PLACE_STRUCTURE from the GEDCOM specification}
 \usage{
 place_structure(
   place_name,
@@ -44,8 +44,8 @@ meridian coordinate. For example: 168 degrees, 9 minutes, and 3.4 seconds East w
 \item{notes}{A list of note_structure() objects.}
 }
 \value{
-A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file
+A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file.
 }
 \description{
-Constructs the PLACE_STRUCTURE from the GEDCOM specification
+Construct the PLACE_STRUCTURE from the GEDCOM specification
 }

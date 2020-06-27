@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{change_date}
 \alias{change_date}
-\title{Constructs the CHANGE_DATE from the GEDCOM specification}
+\title{Construct the CHANGE_DATE from the GEDCOM specification}
 \usage{
 change_date(
   change_date = date_exact(),
@@ -18,8 +18,8 @@ change_date(
 \item{notes}{A list of note_structure() objects.}
 }
 \value{
-A tidy tibble containing the CHANGE_DATE part of a GEDCOM file
+A tidy tibble containing the CHANGE_DATE part of a GEDCOM file.
 }
 \description{
-Constructs the CHANGE_DATE from the GEDCOM specification
+Construct the CHANGE_DATE from the GEDCOM specification
 }

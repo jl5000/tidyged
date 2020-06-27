@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{source_repository_citation}
 \alias{source_repository_citation}
-\title{Constructs the SOURCE_REPOSITORY_CITATION from the GEDCOM specification}
+\title{Construct the SOURCE_REPOSITORY_CITATION from the GEDCOM specification}
 \usage{
 source_repository_citation(
   xref_repo,
@@ -12,7 +12,7 @@ source_repository_citation(
 )
 }
 \arguments{
-\item{xref_repo}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_repo}{An xref ID of a repository record.}
 
 \item{notes}{A list of note_structure() objects.}
 
@@ -23,8 +23,8 @@ from the holdings of a repository.}
 that indicates the type of material in which the referenced source is stored.}
 }
 \value{
-A tidy tibble containing the SOURCE_REPOSITORY_CITATION part of a GEDCOM file
+A tidy tibble containing the SOURCE_REPOSITORY_CITATION part of a GEDCOM file.
 }
 \description{
-Constructs the SOURCE_REPOSITORY_CITATION from the GEDCOM specification
+Construct the SOURCE_REPOSITORY_CITATION from the GEDCOM specification
 }

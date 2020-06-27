@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{address_structure}
 \alias{address_structure}
-\title{Constructs the ADDRESS_STRUCTURE from the GEDCOM specification}
+\title{Construct the ADDRESS_STRUCTURE from the GEDCOM specification}
 \usage{
 address_structure(
   all_address_lines,
@@ -39,8 +39,8 @@ sorting or indexing. Used in most cases to facilitate automatic sorting of mail.
 \item{address_web_page}{The world wide web page address.}
 }
 \value{
-A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file
+A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file.
 }
 \description{
-Constructs the ADDRESS_STRUCTURE from the GEDCOM specification
+Construct the ADDRESS_STRUCTURE from the GEDCOM specification
 }

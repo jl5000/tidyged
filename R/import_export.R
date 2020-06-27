@@ -7,8 +7,8 @@ import_gedcom <- function(filepath) {
     tibble::tibble(text = .) %>%
     tidyr::extract(text, into = c("level", "id", "tag", "value"), 
                    regex = "^(.) (@.+@)? ?(\\w{3,5}) ?(.*)$") %>%
-    dplyr::mutate(id = if_else(tag == "HEAD", "HD", id),
-                  id = if_else(tag == "TRLR", "TR", id)) %>%
+    dplyr::mutate(id = dplyr::if_else(tag == "HEAD", "HD", id),
+                  id = dplyr::if_else(tag == "TRLR", "TR", id)) %>%
     tidyr::fill(id) %>% 
     dplyr::mutate(level = as.numeric(level))
 

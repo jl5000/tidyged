@@ -2,7 +2,7 @@
 % Please edit documentation in R/structures.R
 \name{individual_event_structure}
 \alias{individual_event_structure}
-\title{Constructs the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM specification}
+\title{Construct the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM specification}
 \usage{
 individual_event_structure(
   event_type_individual,
@@ -16,14 +16,14 @@ individual_event_structure(
 
 \item{individual_event_details}{An individual_event_detail() object giving details of the event.}
 
-\item{xref_fam}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_fam}{An xref ID of a family record.}
 
 \item{adopted_by_which_parent}{A code which shows which parent in the associated family record adopted this person.
 Use "HUSB" for husband, "WIFE" for wife, or "BOTH" for both.}
 }
 \value{
-A tidy tibble containing the INDIVIDUAL_EVENT_STRUCTURE part of a GEDCOM file
+A tidy tibble containing the INDIVIDUAL_EVENT_STRUCTURE part of a GEDCOM file.
 }
 \description{
-Constructs the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM specification
+Construct the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM specification
 }

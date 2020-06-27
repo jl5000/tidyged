@@ -2,18 +2,18 @@
 % Please edit documentation in R/structures.R
 \name{spouse_to_family_link}
 \alias{spouse_to_family_link}
-\title{Constructs the SPOUSE_TO_FAMILY_LINK from the GEDCOM specification}
+\title{Construct the SPOUSE_TO_FAMILY_LINK from the GEDCOM specification}
 \usage{
 spouse_to_family_link(xref_fam, notes = list())
 }
 \arguments{
-\item{xref_fam}{Either a pointer or an unique cross-reference identifier.}
+\item{xref_fam}{An xref ID of a family record.}
 
 \item{notes}{A list of note_structure() objects.}
 }
 \value{
-A tidy tibble containing the SPOUSE_TO_FAMILY_LINK part of a GEDCOM file
+A tidy tibble containing the SPOUSE_TO_FAMILY_LINK part of a GEDCOM file.
 }
 \description{
-Constructs the SPOUSE_TO_FAMILY_LINK from the GEDCOM specification
+Construct the SPOUSE_TO_FAMILY_LINK from the GEDCOM specification
 }

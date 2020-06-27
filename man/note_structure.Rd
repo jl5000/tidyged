@@ -7,6 +7,8 @@
 note_structure(xref_note = character(), submitter_text = character())
 }
 \arguments{
+\item{xref_note}{Either a pointer or an unique cross-reference identifier.}
+
 \item{submitter_text}{Comments or opinions from the submitter.}
 }
 \value{

@@ -24,11 +24,11 @@ Jurisdictions are separated by commas.}
 lowest to the highest jurisdiction. The jurisdictions are separated by commas, and any jurisdiction's
 name that is missing is still accounted for by a comma.}
 
-\item{place_phonetic_variation}{The phonetic variation of the place name.}
+\item{place_phonetic_variation}{A character vector of phonetic variations of the place name.}
 
 \item{phonetic_type}{Indicates the method used in transforming the text to the phonetic variation.}
 
-\item{place_romanized_variation}{The romanized variation of the place name.}
+\item{place_romanized_variation}{A character vector of romanized variations of the place name.}
 
 \item{romanized_type}{Indicates the method used in transforming the text to a romanized variation.}
 

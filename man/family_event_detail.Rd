@@ -11,6 +11,14 @@ family_event_detail(
 )
 }
 \arguments{
+\item{husband_age_at_event}{A string that indicates the age in years, months, and days that the
+principal was at the time of the associated event. Any labels must come after their
+corresponding number, for example; 4y 8m 10d.}
+
+\item{wife_age_at_event}{A string that indicates the age in years, months, and days that the
+principal was at the time of the associated event. Any labels must come after their
+corresponding number, for example; 4y 8m 10d.}
+
 \item{event_details}{An event_detail() object giving details of the event.}
 }
 \value{

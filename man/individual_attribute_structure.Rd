@@ -6,13 +6,15 @@
 \usage{
 individual_attribute_structure(
   attribute_type,
-  attribute_description,
+  attribute_descriptor,
   individual_event_details = individual_event_detail()
 )
 }
 \arguments{
 \item{attribute_type}{An attribute which may have caused name, addresses, phone numbers,
 family listings to be recorded. Its application is in helping to classify sources used for information.}
+
+\item{attribute_descriptor}{Text describing a particular characteristic or attribute assigned to an individual.}
 
 \item{individual_event_details}{An individual_event_detail() object giving details of the attribute.}
 }

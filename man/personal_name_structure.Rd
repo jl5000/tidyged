@@ -25,14 +25,14 @@ have used when giving it to a recorder.}
 
 \item{name_pieces}{A personal_name_pieces() object giving the components of the name.}
 
-\item{name_phonetic_variation}{The phonetic variation of the name.}
+\item{name_phonetic_variation}{A character vector of phonetic variations of the name.}
 
 \item{phonetic_type}{Indicates the method used in transforming the text to the phonetic variation.}
 
 \item{phonetic_name_pieces}{A list of personal_name_pieces() objects giving the components
 of the phonetic name variations.}
 
-\item{name_romanized_variation}{The romanized variation of the name.}
+\item{name_romanized_variation}{A character vector giving romanized variations of the name.}
 
 \item{romanized_type}{Indicates the method used in transforming the text to a romanized variation.}
 

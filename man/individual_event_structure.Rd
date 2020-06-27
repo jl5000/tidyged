@@ -17,6 +17,9 @@ individual_event_structure(
 \item{individual_event_details}{An individual_event_detail() object giving details of the event.}
 
 \item{xref_fam}{Either a pointer or an unique cross-reference identifier.}
+
+\item{adopted_by_which_parent}{A code which shows which parent in the associated family record adopted this person.
+Use "HUSB" for husband, "WIFE" for wife, or "BOTH" for both.}
 }
 \value{
 A tidy tibble containing the INDIVIDUAL_EVENT_STRUCTURE part of a GEDCOM file

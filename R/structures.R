@@ -457,38 +457,38 @@ family_event_structure <- function(event_type_family,
 #' @return A tidy tibble containing the INDIVIDUAL_ATTRIBUTE_STRUCTURE part of a GEDCOM file
 #' @export
 individual_attribute_structure <- function(attribute_type,
-                                           attribute_description,
+                                           attribute_descriptor,
                                            individual_event_details = individual_event_detail()) {
   
   if (length(attribute_type) == 0) return(tibble::tibble())
-  if (length(attribute_description) == 0) return(tibble::tibble())
+  if (length(attribute_descriptor) == 0) return(tibble::tibble())
   
   validate_attribute_type(attribute_type, 1)
   if (attribute_type %in% c("IDNO", "NCHI", "NMR", "SSN")) 
-    attribute_description <- as.character(attribute_description) 
+    attribute_descriptor <- as.character(attribute_descriptor) 
   
-  if (attribute_type == "CAST") validate_caste_name(attribute_description, 1)
-  if (attribute_type == "DSCR") validate_physical_description(attribute_description, 1)
-  if (attribute_type == "EDUC") validate_scholastic_achievement(attribute_description, 1)
-  if (attribute_type == "IDNO") validate_national_id_number(attribute_description, 1)
-  if (attribute_type == "NATI") validate_national_or_tribal_origin(attribute_description, 1)
-  if (attribute_type == "NCHI") validate_count_of_children(attribute_description, 1)
-  if (attribute_type == "NMR") validate_count_of_marriages(attribute_description, 1)
-  if (attribute_type == "OCCU") validate_occupation(attribute_description, 1)
-  if (attribute_type == "PROP") validate_possessions(attribute_description, 1)
-  if (attribute_type == "RELI") validate_religious_affiliation(attribute_description, 1)
-  if (attribute_type == "RESI") validate_residence_descriptor(attribute_description, 1)
-  if (attribute_type == "SSN") validate_social_security_number(attribute_description, 1)
-  if (attribute_type == "TITL") validate_nobility_type_title(attribute_description, 1)
-  if (attribute_type == "FACT") validate_attribute_descriptor(attribute_description, 1)
+  if (attribute_type == "CAST") validate_caste_name(attribute_descriptor, 1)
+  if (attribute_type == "DSCR") validate_physical_description(attribute_descriptor, 1)
+  if (attribute_type == "EDUC") validate_scholastic_achievement(attribute_descriptor, 1)
+  if (attribute_type == "IDNO") validate_national_id_number(attribute_descriptor, 1)
+  if (attribute_type == "NATI") validate_national_or_tribal_origin(attribute_descriptor, 1)
+  if (attribute_type == "NCHI") validate_count_of_children(attribute_descriptor, 1)
+  if (attribute_type == "NMR") validate_count_of_marriages(attribute_descriptor, 1)
+  if (attribute_type == "OCCU") validate_occupation(attribute_descriptor, 1)
+  if (attribute_type == "PROP") validate_possessions(attribute_descriptor, 1)
+  if (attribute_type == "RELI") validate_religious_affiliation(attribute_descriptor, 1)
+  if (attribute_type == "RESI") validate_residence_descriptor(attribute_descriptor, 1)
+  if (attribute_type == "SSN") validate_social_security_number(attribute_descriptor, 1)
+  if (attribute_type == "TITL") validate_nobility_type_title(attribute_descriptor, 1)
+  if (attribute_type == "FACT") validate_attribute_descriptor(attribute_descriptor, 1)
   
   if (attribute_type == "DSCR") {
     
-    temp <- split_text(start_level = 0, top_tag = "DSCR", text = attribute_description)
+    temp <- split_text(start_level = 0, top_tag = "DSCR", text = attribute_descriptor)
     
   } else {
     
-    temp <- tibble::tibble(level = 0, tag = attribute_type, value = attribute_description)
+    temp <- tibble::tibble(level = 0, tag = attribute_type, value = attribute_descriptor)
     
   }
   

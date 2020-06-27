@@ -23,10 +23,10 @@ Isolated for sorting or indexing.}
 
 \item{address_web_page}{The world wide web page address.}
 
-\item{adoptive_parent}{A code which shows which parent in the associated family record adopted this person.
+\item{adopted_by_which_parent}{A code which shows which parent in the associated family record adopted this person.
 Use "HUSB" for husband, "WIFE" for wife, or "BOTH" for both.}
 
-\item{age_at_event}{A string that indicates the age in years, months, and days that the
+\item{age_at_event, husband_age_at_event, wife_age_at_event}{A string that indicates the age in years, months, and days that the
 principal was at the time of the associated event. Any labels must come after their
 corresponding number, for example; 4y 8m 10d.}
 
@@ -179,7 +179,7 @@ this transmission. For example, the data may have been obtained from a CD-ROM di
 The order of the name parts should be the order that the person would, by custom of their culture,
 have used when giving it to a recorder.}
 
-\item{name_phonetic_variation}{The phonetic variation of the name.}
+\item{name_phonetic_variation}{A character vector of phonetic variations of the name.}
 
 \item{name_piece_given}{Given name or earned name. Different given names are separated by a comma.}
 
@@ -196,7 +196,7 @@ Different name suffix parts are separated by a comma.}
 \item{name_piece_surname_prefix}{Surname prefix or article used in a family name. Different surname
 articles are separated by a comma, for example in the name "de la Cruz", this value would be "de, la".}
 
-\item{name_romanized_variation}{The romanized variation of the name.}
+\item{name_romanized_variation}{A character vector giving romanized variations of the name.}
 
 \item{name_type}{Indicates the name type, for example the name issued or assumed as an immigrant.}
 
@@ -244,9 +244,9 @@ meridian coordinate. For example: 168 degrees, 9 minutes, and 3.4 seconds East w
 \item{place_name}{The jurisdictional name of the place where the event took place.
 Jurisdictions are separated by commas.}
 
-\item{place_phonetic_variation}{The phonetic variation of the place name.}
+\item{place_phonetic_variation}{A character vector of phonetic variations of the place name.}
 
-\item{place_romanized_variation}{The romanized variation of the place name.}
+\item{place_romanized_variation}{A character vector of romanized variations of the place name.}
 
 \item{possessions}{A list of possessions (real estate or other property) belonging to this individual.}
 
@@ -339,6 +339,8 @@ It is defined and changed by the creators of the product.}
 \item{xref_repo}{Either a pointer or an unique cross-reference identifier.}
 
 \item{xref_obje}{Either a pointer or an unique cross-reference identifier.}
+
+\item{xref_note}{Either a pointer or an unique cross-reference identifier.}
 
 \item{xref_subm}{Either a pointer or an unique cross-reference identifier.}
 

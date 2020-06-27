@@ -2,29 +2,29 @@
 
 context("File R/structures.R: @tests")
 
-test_that("Function address_structure() @ L49", {
-  expect_error(address_structure())
-  expect_error(address_structure(letters[1:5]))
-  expect_error(address_structure("address", address_city = 1:2))
-  expect_error(address_structure("address", address_state = 1:2))
-  expect_error(address_structure("address", address_postal_code = 1:2))
-  expect_error(address_structure("address", phone_number = 1:4))
-  expect_error(address_structure("address", address_email = 1:4))
-  expect_error(address_structure("address", address_fax = 1:4))
-  expect_error(address_structure("address", address_web_page = 1:4))
-  expect_error(address_structure(paste0(rep("a", 61), collapse = "")))
-  expect_error(address_structure("address", address_city = paste0(rep("a", 61), collapse = "")))
-  expect_error(address_structure("address", address_state = paste0(rep("a", 61), collapse = "")))
-  expect_error(address_structure("address", address_postal_code = paste0(rep("a", 11), collapse = "")))
-  expect_error(address_structure("address", address_country = paste0(rep("a", 61), collapse = "")))
-  expect_error(address_structure("address", address_web_page = paste0(rep("a", 121), collapse = "")))
+test_that("Function ADDRESS_STRUCTURE() @ L52", {
+  expect_error(ADDRESS_STRUCTURE())
+  expect_error(ADDRESS_STRUCTURE(letters[1:5]))
+  expect_error(ADDRESS_STRUCTURE("address", address_city = 1:2))
+  expect_error(ADDRESS_STRUCTURE("address", address_state = 1:2))
+  expect_error(ADDRESS_STRUCTURE("address", address_postal_code = 1:2))
+  expect_error(ADDRESS_STRUCTURE("address", phone_number = 1:4))
+  expect_error(ADDRESS_STRUCTURE("address", address_email = 1:4))
+  expect_error(ADDRESS_STRUCTURE("address", address_fax = 1:4))
+  expect_error(ADDRESS_STRUCTURE("address", address_web_page = 1:4))
+  expect_error(ADDRESS_STRUCTURE(paste0(rep("a", 61), collapse = "")))
+  expect_error(ADDRESS_STRUCTURE("address", address_city = paste0(rep("a", 61), collapse = "")))
+  expect_error(ADDRESS_STRUCTURE("address", address_state = paste0(rep("a", 61), collapse = "")))
+  expect_error(ADDRESS_STRUCTURE("address", address_postal_code = paste0(rep("a", 11), collapse = "")))
+  expect_error(ADDRESS_STRUCTURE("address", address_country = paste0(rep("a", 61), collapse = "")))
+  expect_error(ADDRESS_STRUCTURE("address", address_web_page = paste0(rep("a", 121), collapse = "")))
   
-  expect_equal(address_structure("Road name"),
+  expect_equal(ADDRESS_STRUCTURE("Road name"),
                tibble::tribble(~level,   ~tag,      ~value,
                                0, "ADDR", "Road name"
                ))
   
-  expect_equal(address_structure(letters[1:4]),
+  expect_equal(ADDRESS_STRUCTURE(letters[1:4]),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "ADDR",    "a",
                                1, "CONT",    "b",
@@ -35,7 +35,7 @@ test_that("Function address_structure() @ L49", {
                                1, "ADR3",    "d"
                ))
   
-  expect_equal(address_structure(letters[1:2], address_country = "UK"),
+  expect_equal(ADDRESS_STRUCTURE(letters[1:2], address_country = "UK"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "ADDR",    "a",
                                1, "CONT",    "b",
@@ -45,19 +45,19 @@ test_that("Function address_structure() @ L49", {
 })
 
 
-test_that("Function association_structure() @ L143", {
-  expect_error(association_structure())
-  expect_error(association_structure("@1@"))
-  expect_error(association_structure(c("@1@", "@2@"), "Godfather"))
+test_that("Function ASSOCIATION_STRUCTURE() @ L149", {
+  expect_error(ASSOCIATION_STRUCTURE())
+  expect_error(ASSOCIATION_STRUCTURE("@1@"))
+  expect_error(ASSOCIATION_STRUCTURE(c("@1@", "@2@"), "Godfather"))
   
-  expect_equal(association_structure("@I1@", "Godfather"),
+  expect_equal(ASSOCIATION_STRUCTURE("@I1@", "Godfather"),
                tibble::tribble(~level,   ~tag,      ~value,
                                0, "ASSO",      "@I1@",
                                1, "RELA", "Godfather"
                ))
   
-  expect_equal(association_structure("@I1@", "Father", 
-                                     notes = list(note_structure(submitter_text = "This is a note"))), 
+  expect_equal(ASSOCIATION_STRUCTURE("@I1@", "Father", 
+                                     notes = list(NOTE_STRUCTURE(submitter_text = "This is a note"))), 
                tibble::tribble(~level,   ~tag,              ~value,
                                0, "ASSO",              "@I1@",
                                1, "RELA",            "Father",
@@ -66,29 +66,29 @@ test_that("Function association_structure() @ L143", {
 })
 
 
-test_that("Function change_date() @ L198", {
-  expect_equal(change_date(),
+test_that("Function CHANGE_DATE() @ L207", {
+  expect_equal(CHANGE_DATE(),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "CHAN", "",
                                1, "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
                ))
                                
-  expect_equal(change_date(date_exact(5, 10, 1990)),
+  expect_equal(CHANGE_DATE(date_exact(5, 10, 1990)),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "CHAN", "",
                                1, "DATE", "5 OCT 1990"
                ))
                                
-  expect_equal(change_date(date_exact(18, 12, 2008), time_value = "11:00:08.563"),
+  expect_equal(CHANGE_DATE(date_exact(18, 12, 2008), time_value = "11:00:08.563"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "CHAN", "",
                                1, "DATE", "18 DEC 2008",
                                2, "TIME", "11:00:08.563"
                ))
                                
-  expect_equal(change_date(date_exact(5, 10, 1990), "10:34:56", 
-                           notes = list(note_structure(submitter_text = "Note 1"),
-                                        note_structure(submitter_text = "Note 2"))),
+  expect_equal(CHANGE_DATE(date_exact(5, 10, 1990), "10:34:56", 
+                           notes = list(NOTE_STRUCTURE(submitter_text = "Note 1"),
+                                        NOTE_STRUCTURE(submitter_text = "Note 2"))),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "CHAN", "",
                                1, "DATE", "5 OCT 1990",
@@ -99,17 +99,17 @@ test_that("Function change_date() @ L198", {
 })
 
 
-test_that("Function child_to_family_link() @ L238", {
-  expect_error(child_to_family_link())
-  expect_error(child_to_family_link("@1@", pedigree_linkage_type = "foste"))
-  expect_error(child_to_family_link("@1@", child_linkage_status = "challenge"))
+test_that("Function CHILD_TO_FAMILY_LINK() @ L250", {
+  expect_error(CHILD_TO_FAMILY_LINK())
+  expect_error(CHILD_TO_FAMILY_LINK("@1@", pedigree_linkage_type = "foste"))
+  expect_error(CHILD_TO_FAMILY_LINK("@1@", child_linkage_status = "challenge"))
   
-  expect_equal(child_to_family_link("@F1@"),
+  expect_equal(CHILD_TO_FAMILY_LINK("@F1@"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "FAMC", "@F1@"
                ))
   
-  expect_equal(child_to_family_link("@F1@", "birth", "proven"),
+  expect_equal(CHILD_TO_FAMILY_LINK("@F1@", "birth", "proven"),
                tibble::tribble(~level,   ~tag,   ~value,
                                0, "FAMC",   "@F1@",
                                1, "PEDI",  "birth",
@@ -118,28 +118,28 @@ test_that("Function child_to_family_link() @ L238", {
 })
 
 
-test_that("Function event_detail() @ L293", {
-  expect_error(event_detail(restriction_notice = "something"))
-  expect_equal(dim(event_detail()), c(0, 3))
+test_that("Function EVENT_DETAIL() @ L308", {
+  expect_error(EVENT_DETAIL(restriction_notice = "something"))
+  expect_equal(dim(EVENT_DETAIL()), c(0, 3))
   
-  expect_equal(event_detail(event_or_fact_classification = "Woodworking"),
+  expect_equal(EVENT_DETAIL(event_or_fact_classification = "Woodworking"),
                tibble::tribble(~level,   ~tag,        ~value,
                                0, "TYPE", "Woodworking"
                ))
   
-  expect_equal(event_detail(place = place_structure("Somewhere")),
+  expect_equal(EVENT_DETAIL(place = PLACE_STRUCTURE("Somewhere")),
                tibble::tribble(~level,   ~tag,      ~value,
                                0, "PLAC", "Somewhere"
                ))
   
-  expect_equal(event_detail(place = place_structure("Somewhere"), 
+  expect_equal(EVENT_DETAIL(place = PLACE_STRUCTURE("Somewhere"), 
                             date = date_value(2008, 4, 9, about = TRUE)),
                tibble::tribble(~level,   ~tag,      ~value,
                                0, "DATE", "ABT 9 APR 2008",
                                0, "PLAC", "Somewhere"
                ))
   
-  expect_equal(event_detail(address = address_structure(c("House name", "Road"))),
+  expect_equal(EVENT_DETAIL(address = ADDRESS_STRUCTURE(c("House name", "Road"))),
                tibble::tribble(~level,   ~tag,       ~value,
                                0, "ADDR", "House name",
                                1, "CONT",       "Road",
@@ -148,22 +148,22 @@ test_that("Function event_detail() @ L293", {
 })
 
 
-test_that("Function family_event_detail() @ L356", {
-  expect_equal(dim(family_event_detail()), c(0, 3))  
+test_that("Function FAMILY_EVENT_DETAIL() @ L374", {
+  expect_equal(dim(FAMILY_EVENT_DETAIL()), c(0, 3))  
   
-  expect_equal(family_event_detail(husband_age_at_event = "42y"),
+  expect_equal(FAMILY_EVENT_DETAIL(husband_age_at_event = "42y"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "HUSB",     "",
                                1,  "AGE",   "42y"
                ))
   
-  expect_equal(family_event_detail(wife_age_at_event = "40y"),
+  expect_equal(FAMILY_EVENT_DETAIL(wife_age_at_event = "40y"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "WIFE",     "",
                                1,  "AGE",   "40y"
                ))
   
-  expect_equal(family_event_detail(husband_age_at_event = "42y", wife_age_at_event = "40y"),
+  expect_equal(FAMILY_EVENT_DETAIL(husband_age_at_event = "42y", wife_age_at_event = "40y"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "HUSB",     "",
                                1,  "AGE",   "42y",
@@ -173,27 +173,27 @@ test_that("Function family_event_detail() @ L356", {
 })
 
 
-test_that("Function family_event_structure() @ L414", {
-  expect_error(family_event_structure())
-  expect_error(family_event_structure("TEST"))
+test_that("Function FAMILY_EVENT_STRUCTURE() @ L435", {
+  expect_error(FAMILY_EVENT_STRUCTURE())
+  expect_error(FAMILY_EVENT_STRUCTURE("TEST"))
   
-  expect_equal(family_event_structure("CENS"),
+  expect_equal(FAMILY_EVENT_STRUCTURE("CENS"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "CENS",     ""
                ))
   
-  expect_equal(family_event_structure("EVEN"), 
+  expect_equal(FAMILY_EVENT_STRUCTURE("EVEN"), 
                tibble::tribble(~level,   ~tag, ~value,
                                0, "EVEN",     ""
                ))
   
-  expect_equal(family_event_structure("EVEN", "Random event"),
+  expect_equal(FAMILY_EVENT_STRUCTURE("EVEN", "Random event"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "EVEN",     "Random event"
                ))
   
-  expect_equal(family_event_structure("MARR", 
-                                      family_event_details = family_event_detail(wife_age_at_event = "20y")),
+  expect_equal(FAMILY_EVENT_STRUCTURE("MARR", 
+                                      family_event_details = FAMILY_EVENT_DETAIL(wife_age_at_event = "20y")),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "MARR",     "Y",
                                1, "WIFE",     "",
@@ -202,20 +202,20 @@ test_that("Function family_event_structure() @ L414", {
 })
 
 
-test_that("Function individual_attribute_structure() @ L459", {
-  expect_error(individual_attribute_structure())
-  expect_error(individual_attribute_structure("TEST"))
-  expect_error(individual_attribute_structure("FACT"))
-  expect_error(individual_attribute_structure(c("FACT", "EDUC"), "This is a fact"))
-  expect_error(individual_attribute_structure("FACT", "This is a fact"))
-  expect_error(individual_attribute_structure("IDNO", 123456))
+test_that("Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L483", {
+  expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE())
+  expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("TEST"))
+  expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("FACT"))
+  expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE(c("FACT", "EDUC"), "This is a fact"))
+  expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("FACT", "This is a fact"))
+  expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("IDNO", 123456))
   
-  expect_equal(individual_attribute_structure("NATI", "British"),
+  expect_equal(INDIVIDUAL_ATTRIBUTE_STRUCTURE("NATI", "British"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "NATI",     "British"
                ))
   
-  expect_equal(individual_attribute_structure("NATI", "British", individual_event_detail(age = "0y")),
+  expect_equal(INDIVIDUAL_ATTRIBUTE_STRUCTURE("NATI", "British", INDIVIDUAL_EVENT_DETAIL(age = "0y")),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "NATI",     "British",
                                1,  "AGE",           "0y"
@@ -223,38 +223,38 @@ test_that("Function individual_attribute_structure() @ L459", {
 })
 
 
-test_that("Function individual_event_detail() @ L518", {
-  expect_equal(dim(individual_event_detail()), c(0, 3))  
+test_that("Function INDIVIDUAL_EVENT_DETAIL() @ L545", {
+  expect_equal(dim(INDIVIDUAL_EVENT_DETAIL()), c(0, 3))  
   
-  expect_equal(individual_event_detail(age = "5y"),
+  expect_equal(INDIVIDUAL_EVENT_DETAIL(age = "5y"),
                tibble::tribble(~level,  ~tag, ~value,
                                0, "AGE",    "5y"
                ))
 })
 
 
-test_that("Function individual_event_structure() @ L566", {
-  expect_error(individual_event_structure())
-  expect_error(individual_event_structure("BLAH"))
-  expect_error(individual_event_structure("ADOP", adopted_by_which_parent = "WHO"))
+test_that("Function INDIVIDUAL_EVENT_STRUCTURE() @ L596", {
+  expect_error(INDIVIDUAL_EVENT_STRUCTURE())
+  expect_error(INDIVIDUAL_EVENT_STRUCTURE("BLAH"))
+  expect_error(INDIVIDUAL_EVENT_STRUCTURE("ADOP", adopted_by_which_parent = "WHO"))
   
-  expect_equal(individual_event_structure("BIRT"),
+  expect_equal(INDIVIDUAL_EVENT_STRUCTURE("BIRT"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "BIRT",    "Y"
                ))
   
-  expect_equal(individual_event_structure("CHRA"),
+  expect_equal(INDIVIDUAL_EVENT_STRUCTURE("CHRA"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "CHRA",     ""
                ))
   
-  expect_equal(individual_event_structure("BIRT", xref_fam = "@F4@"),
+  expect_equal(INDIVIDUAL_EVENT_STRUCTURE("BIRT", xref_fam = "@F4@"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "BIRT",    "Y",
                                1, "FAMC", "@F4@"
                ))
   
-  expect_equal(individual_event_structure("ADOP", xref_fam = "@F4@", adopted_by_which_parent = "BOTH"),
+  expect_equal(INDIVIDUAL_EVENT_STRUCTURE("ADOP", xref_fam = "@F4@", adopted_by_which_parent = "BOTH"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "ADOP",     "",
                                1, "FAMC", "@F4@",
@@ -263,17 +263,17 @@ test_that("Function individual_event_structure() @ L566", {
 })
 
 
-test_that("Function multimedia_link() @ L634", {
-  expect_error(multimedia_link("ref"))
-  expect_error(multimedia_link(multimedia_file_reference = "ref", source_media_type = "carrier pigeon"))
-  expect_error(multimedia_link(multimedia_file_reference = "ref", multimedia_format = "jpeg"))
+test_that("Function MULTIMEDIA_LINK() @ L667", {
+  expect_error(MULTIMEDIA_LINK("ref"))
+  expect_error(MULTIMEDIA_LINK(multimedia_file_reference = "ref", source_media_type = "carrier pigeon"))
+  expect_error(MULTIMEDIA_LINK(multimedia_file_reference = "ref", multimedia_format = "jpeg"))
   
-  expect_equal(multimedia_link("@M1@"),
+  expect_equal(MULTIMEDIA_LINK("@M1@"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "OBJE", "@M1@"
                ))
   
-  expect_equal(multimedia_link(multimedia_file_reference = "ref", multimedia_format = "jpg", 
+  expect_equal(MULTIMEDIA_LINK(multimedia_file_reference = "ref", multimedia_format = "jpg", 
                                source_media_type = "electronic"),
                tibble::tribble(~level,   ~tag,       ~value,
                                0, "OBJE",           "",
@@ -284,31 +284,31 @@ test_that("Function multimedia_link() @ L634", {
 })
 
 
-test_that("Function note_structure() @ L717", {
-  expect_error(note_structure(submitter_text = c("test1", "test2")))
+test_that("Function NOTE_STRUCTURE() @ L753", {
+  expect_error(NOTE_STRUCTURE(submitter_text = c("test1", "test2")))
   
-  expect_equal(note_structure("@T1@"),
+  expect_equal(NOTE_STRUCTURE("@T1@"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "NOTE", "@T1@"
                ))
   
-  expect_equal(note_structure(submitter_text = "test text"),
+  expect_equal(NOTE_STRUCTURE(submitter_text = "test text"),
                tibble::tribble(~level,   ~tag,      ~value,
                                0, "NOTE", "test text"
                ))
   
-  expect_equal(note_structure(submitter_text = paste0(rep("a", 248), collapse="")),
+  expect_equal(NOTE_STRUCTURE(submitter_text = paste0(rep("a", 248), collapse="")),
                tibble::tribble(~level,   ~tag,      ~value,
                                0, "NOTE", paste0(rep("a", 248), collapse="")
                ))
   
-  expect_equal(note_structure(submitter_text = paste0(rep("a", 249), collapse="")),
+  expect_equal(NOTE_STRUCTURE(submitter_text = paste0(rep("a", 249), collapse="")),
                tibble::tribble(~level,   ~tag,      ~value,
                                0, "NOTE", paste0(rep("a", 248), collapse=""),
                                1, "CONC", "a"
                ))
   
-  expect_equal(note_structure(submitter_text = paste0(rep("a", 992), collapse="")),
+  expect_equal(NOTE_STRUCTURE(submitter_text = paste0(rep("a", 992), collapse="")),
                tibble::tribble(~level,   ~tag,      ~value,
                                0, "NOTE", paste0(rep("a", 248), collapse=""),
                                1, "CONC", paste0(rep("a", 248), collapse=""),
@@ -318,18 +318,18 @@ test_that("Function note_structure() @ L717", {
 })
 
 
-test_that("Function personal_name_pieces() @ L770", {
-  expect_equal(dim(personal_name_pieces()), c(0, 3))
+test_that("Function PERSONAL_NAME_PIECES() @ L809", {
+  expect_equal(dim(PERSONAL_NAME_PIECES()), c(0, 3))
   
-  expect_equal(personal_name_pieces(name_piece_prefix = "Mr", name_piece_nickname = "J"),
+  expect_equal(PERSONAL_NAME_PIECES(name_piece_prefix = "Mr", name_piece_nickname = "J"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "NPFX",   "Mr",
                                0, "NICK",    "J"
                ))
   
-  expect_equal(personal_name_pieces(name_piece_prefix = "Mr", name_piece_nickname = "J",
-                                    notes = list(note_structure(submitter_text = paste0(rep("a", 992), collapse="")),
-                                                 note_structure(submitter_text = paste0(rep("b", 992), collapse="")))),
+  expect_equal(PERSONAL_NAME_PIECES(name_piece_prefix = "Mr", name_piece_nickname = "J",
+                                    notes = list(NOTE_STRUCTURE(submitter_text = paste0(rep("a", 992), collapse="")),
+                                                 NOTE_STRUCTURE(submitter_text = paste0(rep("b", 992), collapse="")))),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "NPFX",   "Mr",
                                0, "NICK",    "J",
@@ -345,27 +345,27 @@ test_that("Function personal_name_pieces() @ L770", {
 })
 
 
-test_that("Function personal_name_structure() @ L867", {
-  expect_error(personal_name_structure())
+test_that("Function PERSONAL_NAME_STRUCTURE() @ L909", {
+  expect_error(PERSONAL_NAME_STRUCTURE())
   expect_error(
-    personal_name_structure("Joe Bloggs", 
+    PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
                             name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"))
   )
   expect_error(
-    personal_name_structure("Joe Bloggs", 
+    PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
                             name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
                             phonetic_type = "Can't spell")
   )
   expect_error(
-    personal_name_structure("Joe Bloggs", 
+    PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
                             name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
                             phonetic_type = c("Can't spell", "Can't spell"),
-                            phonetic_name_pieces = list(personal_name_pieces(name_piece_given = "Joe", 
+                            phonetic_name_pieces = list(PERSONAL_NAME_PIECES(name_piece_given = "Joe", 
                                                                              name_piece_surname = "Blogs")))
   )
   
-  expect_equal(personal_name_structure("Joe /Bloggs/", 
-                                       name_pieces = personal_name_pieces(name_piece_prefix = "Mr",
+  expect_equal(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/", 
+                                       name_pieces = PERSONAL_NAME_PIECES(name_piece_prefix = "Mr",
                                                                           name_piece_surname = "Bloggs")),
                tibble::tribble(~level,   ~tag,         ~value,
                                0, "NAME", "Joe /Bloggs/",
@@ -373,7 +373,7 @@ test_that("Function personal_name_structure() @ L867", {
                                1, "SURN",       "Bloggs"
                ))
   
-  expect_equal(personal_name_structure("Joe Bloggs", 
+  expect_equal(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
                                        name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
                                        phonetic_type = c("Can't spell", "Can't spell")),
                tibble::tribble(~level,   ~tag,         ~value,
@@ -384,13 +384,13 @@ test_that("Function personal_name_structure() @ L867", {
                                2, "TYPE",  "Can't spell"
                ))
   
-  expect_equal(personal_name_structure("Joe Bloggs", 
+  expect_equal(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
                                        name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
                                        phonetic_type = c("Can't spell", "Can't spell"),
                                        phonetic_name_pieces = 
-                                         list(personal_name_pieces(name_piece_given = "Joe", 
+                                         list(PERSONAL_NAME_PIECES(name_piece_given = "Joe", 
                                                                    name_piece_surname = "Blogs"),
-                                              personal_name_pieces(name_piece_given = "Jo",
+                                              PERSONAL_NAME_PIECES(name_piece_given = "Jo",
                                                                    name_piece_surname = "Bloggs"))),
                tibble::tribble(~level,   ~tag,         ~value,
                                0, "NAME",   "Joe Bloggs",
@@ -406,20 +406,20 @@ test_that("Function personal_name_structure() @ L867", {
 })
 
 
-test_that("Function place_structure() @ L961", {
-  expect_error(place_structure())
-  expect_error(place_structure("Here", place_latitude = "N51.5", place_longitude = "E0.0"))
+test_that("Function PLACE_STRUCTURE() @ L1006", {
+  expect_error(PLACE_STRUCTURE())
+  expect_error(PLACE_STRUCTURE("Here", place_latitude = "N51.5", place_longitude = "E0.0"))
   expect_error(
-    place_structure("London", 
+    PLACE_STRUCTURE("London", 
                     place_phonetic_variation = c("Lundon", "Lundun"))
   )
   expect_error(
-    place_structure("London", 
+    PLACE_STRUCTURE("London", 
                     place_phonetic_variation = c("Lundon", "Lundun"),
                     phonetic_type = "English accent")
   )
   
-  expect_equal(place_structure("Greenwich", 
+  expect_equal(PLACE_STRUCTURE("Greenwich", 
                                place_phonetic_variation = c("Grenidge", "Grenich"),
                                phonetic_type = c("English accent", "English accent"),
                                place_latitude = "N51.5",
@@ -437,27 +437,27 @@ test_that("Function place_structure() @ L961", {
 })
 
 
-test_that("Function source_citation() @ L1055", {
-  expect_equal(source_citation("@S1@"),
+test_that("Function SOURCE_CITATION() @ L1103", {
+  expect_equal(SOURCE_CITATION("@S1@"),
                tibble::tribble(
                  ~level,   ~tag, ~value,
                  0, "SOUR", "@S1@"
                ))
   
-  expect_equal(source_citation("@S1@", where_within_source = 3, event_type_cited_from = "event"),
+  expect_equal(SOURCE_CITATION("@S1@", where_within_source = 3, event_type_cited_from = "event"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "SOUR",  "@S1@",
                                1, "PAGE",     "3",
                                1, "EVEN", "event"
                ))
   
-  expect_equal(source_citation("@S1@", where_within_source = 3, role_in_event = "a role"),
+  expect_equal(SOURCE_CITATION("@S1@", where_within_source = 3, role_in_event = "a role"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "SOUR",  "@S1@",
                                1, "PAGE",     "3"
                ))
   
-  expect_equal(source_citation("@S1@", where_within_source = 3, 
+  expect_equal(SOURCE_CITATION("@S1@", where_within_source = 3, 
                                event_type_cited_from = "event", 
                                role_in_event = "a role"),
                tibble::tribble(~level,   ~tag, ~value,
@@ -469,11 +469,11 @@ test_that("Function source_citation() @ L1055", {
 })
 
 
-test_that("Function source_repository_citation() @ L1131", {
-  expect_error(source_repository_citation())
-  expect_error(source_repository_citation("@R1@", source_media_type = "carrier pigeon"))
+test_that("Function SOURCE_REPOSITORY_CITATION() @ L1182", {
+  expect_error(SOURCE_REPOSITORY_CITATION())
+  expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_media_type = "carrier pigeon"))
   
-  expect_equal(source_repository_citation("@R1@", source_call_number = c("123", "456"), 
+  expect_equal(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = c("123", "456"), 
                                           source_media_type = "map"),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "REPO", "@R1@",
@@ -484,10 +484,10 @@ test_that("Function source_repository_citation() @ L1131", {
 })
 
 
-test_that("Function spouse_to_family_link() @ L1165", {
-  expect_error(spouse_to_family_link())
+test_that("Function SPOUSE_TO_FAMILY_LINK() @ L1219", {
+  expect_error(SPOUSE_TO_FAMILY_LINK())
   
-  expect_equal(spouse_to_family_link("@F2@", list(note_structure(submitter_text = "test"))),
+  expect_equal(SPOUSE_TO_FAMILY_LINK("@F2@", list(NOTE_STRUCTURE(submitter_text = "test"))),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "FAMS", "@F2@",
                                1, "NOTE",  "test"

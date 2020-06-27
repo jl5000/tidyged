@@ -1,32 +1,35 @@
 
-#' Construct the ADDRESS_STRUCTURE from the GEDCOM specification
+#' Construct the ADDRESS_STRUCTURE tibble
+#' 
+#' This function constructs a tibble representation of the ADDRESS_STRUCTURE from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @param all_address_lines The address lines usually contain the addressee’s street and city 
 #' information so that it forms an address that meets mailing requirements.
 #' @tests
-#' expect_error(address_structure())
-#' expect_error(address_structure(letters[1:5]))
-#' expect_error(address_structure("address", address_city = 1:2))
-#' expect_error(address_structure("address", address_state = 1:2))
-#' expect_error(address_structure("address", address_postal_code = 1:2))
-#' expect_error(address_structure("address", phone_number = 1:4))
-#' expect_error(address_structure("address", address_email = 1:4))
-#' expect_error(address_structure("address", address_fax = 1:4))
-#' expect_error(address_structure("address", address_web_page = 1:4))
-#' expect_error(address_structure(paste0(rep("a", 61), collapse = "")))
-#' expect_error(address_structure("address", address_city = paste0(rep("a", 61), collapse = "")))
-#' expect_error(address_structure("address", address_state = paste0(rep("a", 61), collapse = "")))
-#' expect_error(address_structure("address", address_postal_code = paste0(rep("a", 11), collapse = "")))
-#' expect_error(address_structure("address", address_country = paste0(rep("a", 61), collapse = "")))
-#' expect_error(address_structure("address", address_web_page = paste0(rep("a", 121), collapse = "")))
+#' expect_error(ADDRESS_STRUCTURE())
+#' expect_error(ADDRESS_STRUCTURE(letters[1:5]))
+#' expect_error(ADDRESS_STRUCTURE("address", address_city = 1:2))
+#' expect_error(ADDRESS_STRUCTURE("address", address_state = 1:2))
+#' expect_error(ADDRESS_STRUCTURE("address", address_postal_code = 1:2))
+#' expect_error(ADDRESS_STRUCTURE("address", phone_number = 1:4))
+#' expect_error(ADDRESS_STRUCTURE("address", address_email = 1:4))
+#' expect_error(ADDRESS_STRUCTURE("address", address_fax = 1:4))
+#' expect_error(ADDRESS_STRUCTURE("address", address_web_page = 1:4))
+#' expect_error(ADDRESS_STRUCTURE(paste0(rep("a", 61), collapse = "")))
+#' expect_error(ADDRESS_STRUCTURE("address", address_city = paste0(rep("a", 61), collapse = "")))
+#' expect_error(ADDRESS_STRUCTURE("address", address_state = paste0(rep("a", 61), collapse = "")))
+#' expect_error(ADDRESS_STRUCTURE("address", address_postal_code = paste0(rep("a", 11), collapse = "")))
+#' expect_error(ADDRESS_STRUCTURE("address", address_country = paste0(rep("a", 61), collapse = "")))
+#' expect_error(ADDRESS_STRUCTURE("address", address_web_page = paste0(rep("a", 121), collapse = "")))
 #' 
-#' expect_equal(address_structure("Road name"),
+#' expect_equal(ADDRESS_STRUCTURE("Road name"),
 #'              tibble::tribble(~level,   ~tag,      ~value,
 #'                              0, "ADDR", "Road name"
 #'              ))
 #' 
-#' expect_equal(address_structure(letters[1:4]),
+#' expect_equal(ADDRESS_STRUCTURE(letters[1:4]),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "ADDR",    "a",
 #'                              1, "CONT",    "b",
@@ -37,7 +40,7 @@
 #'                              1, "ADR3",    "d"
 #'              ))
 #' 
-#' expect_equal(address_structure(letters[1:2], address_country = "UK"),
+#' expect_equal(ADDRESS_STRUCTURE(letters[1:2], address_country = "UK"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "ADDR",    "a",
 #'                              1, "CONT",    "b",
@@ -46,7 +49,7 @@
 #'              )) 
 #' @return A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file.
 #' @export
-address_structure <- function(all_address_lines,
+ADDRESS_STRUCTURE <- function(all_address_lines,
                               address_city = character(),
                               address_state = character(),
                               address_postal_code = character(),
@@ -117,22 +120,25 @@ address_structure <- function(all_address_lines,
   
 }
 
-#' Construct the ASSOCIATION_STRUCTURE from the GEDCOM specification
+#' Construct the ASSOCIATION_STRUCTURE tibble
+#' 
+#' This function constructs a tibble representation of the ASSOCIATION_STRUCTURE from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_error(association_structure())
-#' expect_error(association_structure("@1@"))
-#' expect_error(association_structure(c("@1@", "@2@"), "Godfather"))
+#' expect_error(ASSOCIATION_STRUCTURE())
+#' expect_error(ASSOCIATION_STRUCTURE("@1@"))
+#' expect_error(ASSOCIATION_STRUCTURE(c("@1@", "@2@"), "Godfather"))
 #' 
-#' expect_equal(association_structure("@I1@", "Godfather"),
+#' expect_equal(ASSOCIATION_STRUCTURE("@I1@", "Godfather"),
 #'              tibble::tribble(~level,   ~tag,      ~value,
 #'                              0, "ASSO",      "@I1@",
 #'                              1, "RELA", "Godfather"
 #'              ))
 #' 
-#' expect_equal(association_structure("@I1@", "Father", 
-#'                                    notes = list(note_structure(submitter_text = "This is a note"))), 
+#' expect_equal(ASSOCIATION_STRUCTURE("@I1@", "Father", 
+#'                                    notes = list(NOTE_STRUCTURE(submitter_text = "This is a note"))), 
 #'              tibble::tribble(~level,   ~tag,              ~value,
 #'                              0, "ASSO",              "@I1@",
 #'                              1, "RELA",            "Father",
@@ -140,7 +146,7 @@ address_structure <- function(all_address_lines,
 #'              ))
 #' @return A tidy tibble containing the ASSOCIATION_STRUCTURE part of a GEDCOM file.
 #' @export
-association_structure <- function(xref_indi,
+ASSOCIATION_STRUCTURE <- function(xref_indi,
                                   relation_is_descriptor,
                                   source_citations = list(),
                                   notes = list()) {
@@ -160,32 +166,35 @@ association_structure <- function(xref_indi,
   
 }
 
-#' Construct the CHANGE_DATE from the GEDCOM specification
+#' Construct the CHANGE_DATE tibble
 #'
+#' This function constructs a tibble representation of the CHANGE_DATE from the GEDCOM 5.5.1
+#' specification.
+#' 
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_equal(change_date(),
+#' expect_equal(CHANGE_DATE(),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
 #'                              
-#' expect_equal(change_date(date_exact(5, 10, 1990)),
+#' expect_equal(CHANGE_DATE(date_exact(5, 10, 1990)),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", "5 OCT 1990"
 #'              ))
 #'                              
-#' expect_equal(change_date(date_exact(18, 12, 2008), time_value = "11:00:08.563"),
+#' expect_equal(CHANGE_DATE(date_exact(18, 12, 2008), time_value = "11:00:08.563"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", "18 DEC 2008",
 #'                              2, "TIME", "11:00:08.563"
 #'              ))
 #'                              
-#' expect_equal(change_date(date_exact(5, 10, 1990), "10:34:56", 
-#'                          notes = list(note_structure(submitter_text = "Note 1"),
-#'                                       note_structure(submitter_text = "Note 2"))),
+#' expect_equal(CHANGE_DATE(date_exact(5, 10, 1990), "10:34:56", 
+#'                          notes = list(NOTE_STRUCTURE(submitter_text = "Note 1"),
+#'                                       NOTE_STRUCTURE(submitter_text = "Note 2"))),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", "5 OCT 1990",
@@ -195,7 +204,7 @@ association_structure <- function(xref_indi,
 #'              ))
 #' @return A tidy tibble containing the CHANGE_DATE part of a GEDCOM file.
 #' @export
-change_date <- function(change_date = date_exact(),
+CHANGE_DATE <- function(change_date = date_exact(),
                         time_value = character(),
                         notes = list()) {
   
@@ -214,20 +223,23 @@ change_date <- function(change_date = date_exact(),
   
 }
 
-#' Construct the CHILD_TO_FAMILY_LINK from the GEDCOM specification
+#' Construct the CHILD_TO_FAMILY_LINK tibble
+#' 
+#' This function constructs a tibble representation of the CHILD_TO_FAMILY_LINK from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_error(child_to_family_link())
-#' expect_error(child_to_family_link("@1@", pedigree_linkage_type = "foste"))
-#' expect_error(child_to_family_link("@1@", child_linkage_status = "challenge"))
+#' expect_error(CHILD_TO_FAMILY_LINK())
+#' expect_error(CHILD_TO_FAMILY_LINK("@1@", pedigree_linkage_type = "foste"))
+#' expect_error(CHILD_TO_FAMILY_LINK("@1@", child_linkage_status = "challenge"))
 #' 
-#' expect_equal(child_to_family_link("@F1@"),
+#' expect_equal(CHILD_TO_FAMILY_LINK("@F1@"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "FAMC", "@F1@"
 #'              ))
 #' 
-#' expect_equal(child_to_family_link("@F1@", "birth", "proven"),
+#' expect_equal(CHILD_TO_FAMILY_LINK("@F1@", "birth", "proven"),
 #'              tibble::tribble(~level,   ~tag,   ~value,
 #'                              0, "FAMC",   "@F1@",
 #'                              1, "PEDI",  "birth",
@@ -235,7 +247,7 @@ change_date <- function(change_date = date_exact(),
 #'              ))
 #' @return A tidy tibble containing the CHILD_TO_FAMILY_LINK part of a GEDCOM file.
 #' @export
-child_to_family_link <- function(xref_fam,
+CHILD_TO_FAMILY_LINK <- function(xref_fam,
                                  pedigree_linkage_type = character(),
                                  child_linkage_status = character(),
                                  notes = list()) {
@@ -255,34 +267,37 @@ child_to_family_link <- function(xref_fam,
   
 }
 
-#' Construct the EVENT_DETAIL from the GEDCOM specification
+#' Construct the EVENT_DETAIL tibble
+#' 
+#' This function constructs a tibble representation of the EVENT_DETAIL from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @param date A date_value() object giving the date of the event.
-#' @param place A place_structure() object giving the location of the event.
-#' @param address An address_structure() object giving the address of the event.
+#' @param place A PLACE_STRUCTURE() object giving the location of the event.
+#' @param address An ADDRESS_STRUCTURE() object giving the address of the event.
 #' @tests
-#' expect_error(event_detail(restriction_notice = "something"))
-#' expect_equal(dim(event_detail()), c(0, 3))
+#' expect_error(EVENT_DETAIL(restriction_notice = "something"))
+#' expect_equal(dim(EVENT_DETAIL()), c(0, 3))
 #' 
-#' expect_equal(event_detail(event_or_fact_classification = "Woodworking"),
+#' expect_equal(EVENT_DETAIL(event_or_fact_classification = "Woodworking"),
 #'              tibble::tribble(~level,   ~tag,        ~value,
 #'                              0, "TYPE", "Woodworking"
 #'              ))
 #' 
-#' expect_equal(event_detail(place = place_structure("Somewhere")),
+#' expect_equal(EVENT_DETAIL(place = PLACE_STRUCTURE("Somewhere")),
 #'              tibble::tribble(~level,   ~tag,      ~value,
 #'                              0, "PLAC", "Somewhere"
 #'              ))
 #' 
-#' expect_equal(event_detail(place = place_structure("Somewhere"), 
+#' expect_equal(EVENT_DETAIL(place = PLACE_STRUCTURE("Somewhere"), 
 #'                           date = date_value(2008, 4, 9, about = TRUE)),
 #'              tibble::tribble(~level,   ~tag,      ~value,
 #'                              0, "DATE", "ABT 9 APR 2008",
 #'                              0, "PLAC", "Somewhere"
 #'              ))
 #' 
-#' expect_equal(event_detail(address = address_structure(c("House name", "Road"))),
+#' expect_equal(EVENT_DETAIL(address = ADDRESS_STRUCTURE(c("House name", "Road"))),
 #'              tibble::tribble(~level,   ~tag,       ~value,
 #'                              0, "ADDR", "House name",
 #'                              1, "CONT",       "Road",
@@ -290,10 +305,10 @@ child_to_family_link <- function(xref_fam,
 #'              ))
 #' @return A tidy tibble containing the EVENT_DETAIL part of a GEDCOM file.
 #' @export
-event_detail <- function(event_or_fact_classification = character(),
+EVENT_DETAIL <- function(event_or_fact_classification = character(),
                          date = date_value(),
-                         place = place_structure(character()),
-                         address = address_structure(character()),
+                         place = PLACE_STRUCTURE(character()),
+                         address = ADDRESS_STRUCTURE(character()),
                          responsible_agency = character(),
                          religious_affiliation = character(),
                          cause_of_event = character(),
@@ -325,26 +340,29 @@ event_detail <- function(event_or_fact_classification = character(),
   
 }
 
-#' Construct the FAMILY_EVENT_DETAIL from the GEDCOM specification
+#' Construct the FAMILY_EVENT_DETAIL tibble
+#' 
+#' This function constructs a tibble representation of the FAMILY_EVENT_DETAIL from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
-#' @param event_details An event_detail() object giving details of the event.
+#' @param event_details An EVENT_DETAIL() object giving details of the event.
 #' @tests
-#' expect_equal(dim(family_event_detail()), c(0, 3))  
+#' expect_equal(dim(FAMILY_EVENT_DETAIL()), c(0, 3))  
 #' 
-#' expect_equal(family_event_detail(husband_age_at_event = "42y"),
+#' expect_equal(FAMILY_EVENT_DETAIL(husband_age_at_event = "42y"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "HUSB",     "",
 #'                              1,  "AGE",   "42y"
 #'              ))
 #' 
-#' expect_equal(family_event_detail(wife_age_at_event = "40y"),
+#' expect_equal(FAMILY_EVENT_DETAIL(wife_age_at_event = "40y"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "WIFE",     "",
 #'                              1,  "AGE",   "40y"
 #'              ))
 #' 
-#' expect_equal(family_event_detail(husband_age_at_event = "42y", wife_age_at_event = "40y"),
+#' expect_equal(FAMILY_EVENT_DETAIL(husband_age_at_event = "42y", wife_age_at_event = "40y"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "HUSB",     "",
 #'                              1,  "AGE",   "42y",
@@ -353,9 +371,9 @@ event_detail <- function(event_or_fact_classification = character(),
 #'              ))
 #' @return A tidy tibble containing the FAMILY_EVENT_DETAIL part of a GEDCOM file.
 #' @export
-family_event_detail <- function(husband_age_at_event = character(),
+FAMILY_EVENT_DETAIL <- function(husband_age_at_event = character(),
                                 wife_age_at_event = character(),
-                                event_details = event_detail()) {
+                                event_details = EVENT_DETAIL()) {
   
   husband_age_at_event <- as.character(husband_age_at_event)
   wife_age_at_event <- as.character(wife_age_at_event)
@@ -379,31 +397,34 @@ family_event_detail <- function(husband_age_at_event = character(),
   
 }
 
-#' Construct the FAMILY_EVENT_STRUCTURE from the GEDCOM specification
+#' Construct the FAMILY_EVENT_STRUCTURE tibble
+#' 
+#' This function constructs a tibble representation of the FAMILY_EVENT_STRUCTURE from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
-#' @param family_event_details A family_event_detail() object giving details of the event.
+#' @param family_event_details A FAMILY_EVENT_DETAIL() object giving details of the event.
 #' @tests
-#' expect_error(family_event_structure())
-#' expect_error(family_event_structure("TEST"))
+#' expect_error(FAMILY_EVENT_STRUCTURE())
+#' expect_error(FAMILY_EVENT_STRUCTURE("TEST"))
 #' 
-#' expect_equal(family_event_structure("CENS"),
+#' expect_equal(FAMILY_EVENT_STRUCTURE("CENS"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CENS",     ""
 #'              ))
 #' 
-#' expect_equal(family_event_structure("EVEN"), 
+#' expect_equal(FAMILY_EVENT_STRUCTURE("EVEN"), 
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "EVEN",     ""
 #'              ))
 #' 
-#' expect_equal(family_event_structure("EVEN", "Random event"),
+#' expect_equal(FAMILY_EVENT_STRUCTURE("EVEN", "Random event"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "EVEN",     "Random event"
 #'              ))
 #' 
-#' expect_equal(family_event_structure("MARR", 
-#'                                     family_event_details = family_event_detail(wife_age_at_event = "20y")),
+#' expect_equal(FAMILY_EVENT_STRUCTURE("MARR", 
+#'                                     family_event_details = FAMILY_EVENT_DETAIL(wife_age_at_event = "20y")),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "MARR",     "Y",
 #'                              1, "WIFE",     "",
@@ -411,9 +432,9 @@ family_event_detail <- function(husband_age_at_event = character(),
 #'              ))
 #' @return A tidy tibble containing the FAMILY_EVENT_STRUCTURE part of a GEDCOM file.
 #' @export
-family_event_structure <- function(event_type_family,
+FAMILY_EVENT_STRUCTURE <- function(event_type_family,
                                    event_descriptor = character(),
-                                   family_event_details = family_event_detail()) {
+                                   family_event_details = FAMILY_EVENT_DETAIL()) {
   
   if (length(event_type_family) == 0) return(tibble::tibble())
   
@@ -432,33 +453,36 @@ family_event_structure <- function(event_type_family,
   
 }
 
-#' Construct the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM specification
+#' Construct the INDIVIDUAL_ATTRIBUTE_STRUCTURE tibble
+#' 
+#' This function constructs a tibble representation of the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
-#' @param individual_event_details An individual_event_detail() object giving details of the attribute.
+#' @param individual_event_details An INDIVIDUAL_EVENT_DETAIL() object giving details of the attribute.
 #' @tests
-#' expect_error(individual_attribute_structure())
-#' expect_error(individual_attribute_structure("TEST"))
-#' expect_error(individual_attribute_structure("FACT"))
-#' expect_error(individual_attribute_structure(c("FACT", "EDUC"), "This is a fact"))
-#' expect_error(individual_attribute_structure("FACT", "This is a fact"))
-#' expect_error(individual_attribute_structure("IDNO", 123456))
+#' expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE())
+#' expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("TEST"))
+#' expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("FACT"))
+#' expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE(c("FACT", "EDUC"), "This is a fact"))
+#' expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("FACT", "This is a fact"))
+#' expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("IDNO", 123456))
 #' 
-#' expect_equal(individual_attribute_structure("NATI", "British"),
+#' expect_equal(INDIVIDUAL_ATTRIBUTE_STRUCTURE("NATI", "British"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "NATI",     "British"
 #'              ))
 #' 
-#' expect_equal(individual_attribute_structure("NATI", "British", individual_event_detail(age = "0y")),
+#' expect_equal(INDIVIDUAL_ATTRIBUTE_STRUCTURE("NATI", "British", INDIVIDUAL_EVENT_DETAIL(age = "0y")),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "NATI",     "British",
 #'                              1,  "AGE",           "0y"
 #'              ))
 #' @return A tidy tibble containing the INDIVIDUAL_ATTRIBUTE_STRUCTURE part of a GEDCOM file.
 #' @export
-individual_attribute_structure <- function(attribute_type,
+INDIVIDUAL_ATTRIBUTE_STRUCTURE <- function(attribute_type,
                                            attribute_descriptor,
-                                           individual_event_details = individual_event_detail()) {
+                                           individual_event_details = INDIVIDUAL_EVENT_DETAIL()) {
   
   if (length(attribute_type) == 0) return(tibble::tibble())
   if (length(attribute_descriptor) == 0) return(tibble::tibble())
@@ -502,20 +526,23 @@ individual_attribute_structure <- function(attribute_type,
   temp
 }
 
-#' Construct the INDIVIDUAL_EVENT_DETAIL from the GEDCOM specification
+#' Construct the INDIVIDUAL_EVENT_DETAIL tibble
+#' 
+#' This function constructs a tibble representation of the INDIVIDUAL_EVENT_DETAIL from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
-#' @param event_details An event_detail() object giving details of the event.
+#' @param event_details An EVENT_DETAIL() object giving details of the event.
 #' @tests
-#' expect_equal(dim(individual_event_detail()), c(0, 3))  
+#' expect_equal(dim(INDIVIDUAL_EVENT_DETAIL()), c(0, 3))  
 #' 
-#' expect_equal(individual_event_detail(age = "5y"),
+#' expect_equal(INDIVIDUAL_EVENT_DETAIL(age = "5y"),
 #'              tibble::tribble(~level,  ~tag, ~value,
 #'                              0, "AGE",    "5y"
 #'              ))
 #' @return A tidy tibble containing the INDIVIDUAL_EVENT_DETAIL part of a GEDCOM file.
 #' @export
-individual_event_detail <- function(event_details = event_detail(),
+INDIVIDUAL_EVENT_DETAIL <- function(event_details = event_detail(),
                                     age_at_event = character()) {
   
   age_at_event <- as.character(age_at_event)
@@ -530,32 +557,35 @@ individual_event_detail <- function(event_details = event_detail(),
   
 }
 
-#' Construct the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM specification
+#' Construct the INDIVIDUAL_EVENT_STRUCTURE tibble
+#' 
+#' This function constructs a tibble representation of the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
-#' @param individual_event_details An individual_event_detail() object giving details of the event.
+#' @param individual_event_details An INDIVIDUAL_EVENT_DETAIL() object giving details of the event.
 #' @tests
-#' expect_error(individual_event_structure())
-#' expect_error(individual_event_structure("BLAH"))
-#' expect_error(individual_event_structure("ADOP", adopted_by_which_parent = "WHO"))
+#' expect_error(INDIVIDUAL_EVENT_STRUCTURE())
+#' expect_error(INDIVIDUAL_EVENT_STRUCTURE("BLAH"))
+#' expect_error(INDIVIDUAL_EVENT_STRUCTURE("ADOP", adopted_by_which_parent = "WHO"))
 #' 
-#' expect_equal(individual_event_structure("BIRT"),
+#' expect_equal(INDIVIDUAL_EVENT_STRUCTURE("BIRT"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "BIRT",    "Y"
 #'              ))
 #' 
-#' expect_equal(individual_event_structure("CHRA"),
+#' expect_equal(INDIVIDUAL_EVENT_STRUCTURE("CHRA"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHRA",     ""
 #'              ))
 #' 
-#' expect_equal(individual_event_structure("BIRT", xref_fam = "@F4@"),
+#' expect_equal(INDIVIDUAL_EVENT_STRUCTURE("BIRT", xref_fam = "@F4@"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "BIRT",    "Y",
 #'                              1, "FAMC", "@F4@"
 #'              ))
 #' 
-#' expect_equal(individual_event_structure("ADOP", xref_fam = "@F4@", adopted_by_which_parent = "BOTH"),
+#' expect_equal(INDIVIDUAL_EVENT_STRUCTURE("ADOP", xref_fam = "@F4@", adopted_by_which_parent = "BOTH"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "ADOP",     "",
 #'                              1, "FAMC", "@F4@",
@@ -563,8 +593,8 @@ individual_event_detail <- function(event_details = event_detail(),
 #'              ))
 #' @return A tidy tibble containing the INDIVIDUAL_EVENT_STRUCTURE part of a GEDCOM file.
 #' @export
-individual_event_structure <- function(event_type_individual,
-                                       individual_event_details = individual_event_detail(),
+INDIVIDUAL_EVENT_STRUCTURE <- function(event_type_individual,
+                                       individual_event_details = INDIVIDUAL_EVENT_DETAIL(),
                                        xref_fam = character(),
                                        adopted_by_which_parent = character()) {
   
@@ -597,31 +627,34 @@ individual_event_structure <- function(event_type_individual,
 }
 
 
-lds_individual_ordinance <- function() {
+LDS_INDIVIDUAL_ORDINANCE <- function() {
   
   tibble::tibble()
 }
 
 
-lds_spouse_sealing <- function() {
+LDS_SPOUSE_SEALING <- function() {
   
   tibble::tibble()
 }
 
-#' Construct the MULTIMEDIA_LINK from the GEDCOM specification
+#' Construct the MULTIMEDIA_LINK tibble
+#' 
+#' This function constructs a tibble representation of the MULTIMEDIA_LINK from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_error(multimedia_link("ref"))
-#' expect_error(multimedia_link(multimedia_file_reference = "ref", source_media_type = "carrier pigeon"))
-#' expect_error(multimedia_link(multimedia_file_reference = "ref", multimedia_format = "jpeg"))
+#' expect_error(MULTIMEDIA_LINK("ref"))
+#' expect_error(MULTIMEDIA_LINK(multimedia_file_reference = "ref", source_media_type = "carrier pigeon"))
+#' expect_error(MULTIMEDIA_LINK(multimedia_file_reference = "ref", multimedia_format = "jpeg"))
 #' 
-#' expect_equal(multimedia_link("@M1@"),
+#' expect_equal(MULTIMEDIA_LINK("@M1@"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "OBJE", "@M1@"
 #'              ))
 #' 
-#' expect_equal(multimedia_link(multimedia_file_reference = "ref", multimedia_format = "jpg", 
+#' expect_equal(MULTIMEDIA_LINK(multimedia_file_reference = "ref", multimedia_format = "jpg", 
 #'                              source_media_type = "electronic"),
 #'              tibble::tribble(~level,   ~tag,       ~value,
 #'                              0, "OBJE",           "",
@@ -631,7 +664,7 @@ lds_spouse_sealing <- function() {
 #'              ))
 #' @return A tidy tibble containing the MULTIMEDIA_LINK part of a GEDCOM file.
 #' @export
-multimedia_link <- function(xref_obje = character(),
+MULTIMEDIA_LINK <- function(xref_obje = character(),
                             multimedia_file_reference = character(),
                             multimedia_format = character(),
                             source_media_type = character(),
@@ -678,34 +711,37 @@ multimedia_link <- function(xref_obje = character(),
   }
 }
 
-#' Construct the NOTE_STRUCTURE from the GEDCOM specification
+#' Construct the NOTE_STRUCTURE tibble
+#' 
+#' This function constructs a tibble representation of the NOTE_STRUCTURE from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_error(note_structure(submitter_text = c("test1", "test2")))
+#' expect_error(NOTE_STRUCTURE(submitter_text = c("test1", "test2")))
 #' 
-#' expect_equal(note_structure("@T1@"),
+#' expect_equal(NOTE_STRUCTURE("@T1@"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "NOTE", "@T1@"
 #'              ))
 #' 
-#' expect_equal(note_structure(submitter_text = "test text"),
+#' expect_equal(NOTE_STRUCTURE(submitter_text = "test text"),
 #'              tibble::tribble(~level,   ~tag,      ~value,
 #'                              0, "NOTE", "test text"
 #'              ))
 #' 
-#' expect_equal(note_structure(submitter_text = paste0(rep("a", 248), collapse="")),
+#' expect_equal(NOTE_STRUCTURE(submitter_text = paste0(rep("a", 248), collapse="")),
 #'              tibble::tribble(~level,   ~tag,      ~value,
 #'                              0, "NOTE", paste0(rep("a", 248), collapse="")
 #'              ))
 #' 
-#' expect_equal(note_structure(submitter_text = paste0(rep("a", 249), collapse="")),
+#' expect_equal(NOTE_STRUCTURE(submitter_text = paste0(rep("a", 249), collapse="")),
 #'              tibble::tribble(~level,   ~tag,      ~value,
 #'                              0, "NOTE", paste0(rep("a", 248), collapse=""),
 #'                              1, "CONC", "a"
 #'              ))
 #' 
-#' expect_equal(note_structure(submitter_text = paste0(rep("a", 992), collapse="")),
+#' expect_equal(NOTE_STRUCTURE(submitter_text = paste0(rep("a", 992), collapse="")),
 #'              tibble::tribble(~level,   ~tag,      ~value,
 #'                              0, "NOTE", paste0(rep("a", 248), collapse=""),
 #'                              1, "CONC", paste0(rep("a", 248), collapse=""),
@@ -714,7 +750,7 @@ multimedia_link <- function(xref_obje = character(),
 #'              ))
 #' @return A tidy tibble containing the NOTE_STRUCTURE part of a GEDCOM file.
 #' @export
-note_structure <- function(xref_note = character(),
+NOTE_STRUCTURE <- function(xref_note = character(),
                            submitter_text = character()) {
   
   if (length(xref_note) + length(submitter_text) == 0) 
@@ -738,21 +774,24 @@ note_structure <- function(xref_note = character(),
 
 
 
-#' Construct the PERSONAL_NAME_PIECES from the GEDCOM specification
+#' Construct the PERSONAL_NAME_PIECES tibble
+#' 
+#' This function constructs a tibble representation of the PERSONAL_NAME_PIECES from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_equal(dim(personal_name_pieces()), c(0, 3))
+#' expect_equal(dim(PERSONAL_NAME_PIECES()), c(0, 3))
 #' 
-#' expect_equal(personal_name_pieces(name_piece_prefix = "Mr", name_piece_nickname = "J"),
+#' expect_equal(PERSONAL_NAME_PIECES(name_piece_prefix = "Mr", name_piece_nickname = "J"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "NPFX",   "Mr",
 #'                              0, "NICK",    "J"
 #'              ))
 #' 
-#' expect_equal(personal_name_pieces(name_piece_prefix = "Mr", name_piece_nickname = "J",
-#'                                   notes = list(note_structure(submitter_text = paste0(rep("a", 992), collapse="")),
-#'                                                note_structure(submitter_text = paste0(rep("b", 992), collapse="")))),
+#' expect_equal(PERSONAL_NAME_PIECES(name_piece_prefix = "Mr", name_piece_nickname = "J",
+#'                                   notes = list(NOTE_STRUCTURE(submitter_text = paste0(rep("a", 992), collapse="")),
+#'                                                NOTE_STRUCTURE(submitter_text = paste0(rep("b", 992), collapse="")))),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "NPFX",   "Mr",
 #'                              0, "NICK",    "J",
@@ -767,7 +806,7 @@ note_structure <- function(xref_note = character(),
 #'              ))
 #' @return A tidy tibble containing the PERSONAL_NAME_PIECES part of a GEDCOM file.
 #' @export
-personal_name_pieces <- function(name_piece_prefix = character(),
+PERSONAL_NAME_PIECES <- function(name_piece_prefix = character(),
                                  name_piece_given = character(), 
                                  name_piece_nickname = character(), 
                                  name_piece_surname_prefix = character(),
@@ -796,35 +835,38 @@ personal_name_pieces <- function(name_piece_prefix = character(),
   
 }
 
-#' Construct the PERSONAL_NAME_STRUCTURE from the GEDCOM specification
+#' Construct the PERSONAL_NAME_STRUCTURE tibble
+#' 
+#' This function constructs a tibble representation of the PERSONAL_NAME_STRUCTURE from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
-#' @param name_pieces A personal_name_pieces() object giving the components of the name.
-#' @param phonetic_name_pieces A list of personal_name_pieces() objects giving the components 
+#' @param name_pieces A PERSONAL_NAME_PIECES() object giving the components of the name.
+#' @param phonetic_name_pieces A list of PERSONAL_NAME_PIECES() objects giving the components 
 #' of the phonetic name variations.
-#' @param romanized_name_pieces A list of personal_name_pieces() objects giving the components 
+#' @param romanized_name_pieces A list of PERSONAL_NAME_PIECES() objects giving the components 
 #' of the romanized name variations.
 #' @tests
-#' expect_error(personal_name_structure())
+#' expect_error(PERSONAL_NAME_STRUCTURE())
 #' expect_error(
-#'   personal_name_structure("Joe Bloggs", 
+#'   PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
 #'                           name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"))
 #' )
 #' expect_error(
-#'   personal_name_structure("Joe Bloggs", 
+#'   PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
 #'                           name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
 #'                           phonetic_type = "Can't spell")
 #' )
 #' expect_error(
-#'   personal_name_structure("Joe Bloggs", 
+#'   PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
 #'                           name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
 #'                           phonetic_type = c("Can't spell", "Can't spell"),
-#'                           phonetic_name_pieces = list(personal_name_pieces(name_piece_given = "Joe", 
+#'                           phonetic_name_pieces = list(PERSONAL_NAME_PIECES(name_piece_given = "Joe", 
 #'                                                                            name_piece_surname = "Blogs")))
 #' )
 #' 
-#' expect_equal(personal_name_structure("Joe /Bloggs/", 
-#'                                      name_pieces = personal_name_pieces(name_piece_prefix = "Mr",
+#' expect_equal(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/", 
+#'                                      name_pieces = PERSONAL_NAME_PIECES(name_piece_prefix = "Mr",
 #'                                                                         name_piece_surname = "Bloggs")),
 #'              tibble::tribble(~level,   ~tag,         ~value,
 #'                              0, "NAME", "Joe /Bloggs/",
@@ -832,7 +874,7 @@ personal_name_pieces <- function(name_piece_prefix = character(),
 #'                              1, "SURN",       "Bloggs"
 #'              ))
 #' 
-#' expect_equal(personal_name_structure("Joe Bloggs", 
+#' expect_equal(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
 #'                                      name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
 #'                                      phonetic_type = c("Can't spell", "Can't spell")),
 #'              tibble::tribble(~level,   ~tag,         ~value,
@@ -843,13 +885,13 @@ personal_name_pieces <- function(name_piece_prefix = character(),
 #'                              2, "TYPE",  "Can't spell"
 #'              ))
 #' 
-#' expect_equal(personal_name_structure("Joe Bloggs", 
+#' expect_equal(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
 #'                                      name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
 #'                                      phonetic_type = c("Can't spell", "Can't spell"),
 #'                                      phonetic_name_pieces = 
-#'                                        list(personal_name_pieces(name_piece_given = "Joe", 
+#'                                        list(PERSONAL_NAME_PIECES(name_piece_given = "Joe", 
 #'                                                                  name_piece_surname = "Blogs"),
-#'                                             personal_name_pieces(name_piece_given = "Jo",
+#'                                             PERSONAL_NAME_PIECES(name_piece_given = "Jo",
 #'                                                                  name_piece_surname = "Bloggs"))),
 #'              tibble::tribble(~level,   ~tag,         ~value,
 #'                              0, "NAME",   "Joe Bloggs",
@@ -864,9 +906,9 @@ personal_name_pieces <- function(name_piece_prefix = character(),
 #'              ))
 #' @return A tidy tibble containing the PERSONAL_NAME_STRUCTURE part of a GEDCOM file.
 #' @export
-personal_name_structure <- function(name_personal,
+PERSONAL_NAME_STRUCTURE <- function(name_personal,
                                     name_type = character(),
-                                    name_pieces = personal_name_pieces(), 
+                                    name_pieces = PERSONAL_NAME_PIECES(), 
                                     name_phonetic_variation = character(),
                                     phonetic_type = character(),
                                     phonetic_name_pieces = list(),
@@ -925,23 +967,26 @@ personal_name_structure <- function(name_personal,
   
 }
 
-#' Construct the PLACE_STRUCTURE from the GEDCOM specification
+#' Construct the PLACE_STRUCTURE tibble
+#' 
+#' This function constructs a tibble representation of the PLACE_STRUCTURE from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_error(place_structure())
-#' expect_error(place_structure("Here", place_latitude = "N51.5", place_longitude = "E0.0"))
+#' expect_error(PLACE_STRUCTURE())
+#' expect_error(PLACE_STRUCTURE("Here", place_latitude = "N51.5", place_longitude = "E0.0"))
 #' expect_error(
-#'   place_structure("London", 
+#'   PLACE_STRUCTURE("London", 
 #'                   place_phonetic_variation = c("Lundon", "Lundun"))
 #' )
 #' expect_error(
-#'   place_structure("London", 
+#'   PLACE_STRUCTURE("London", 
 #'                   place_phonetic_variation = c("Lundon", "Lundun"),
 #'                   phonetic_type = "English accent")
 #' )
 #' 
-#' expect_equal(place_structure("Greenwich", 
+#' expect_equal(PLACE_STRUCTURE("Greenwich", 
 #'                              place_phonetic_variation = c("Grenidge", "Grenich"),
 #'                              phonetic_type = c("English accent", "English accent"),
 #'                              place_latitude = "N51.5",
@@ -958,7 +1003,7 @@ personal_name_structure <- function(name_personal,
 #'              ))
 #' @return A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file.
 #' @export
-place_structure <- function(place_name,
+PLACE_STRUCTURE <- function(place_name,
                             place_hierarchy = character(),
                             place_phonetic_variation = character(),
                             phonetic_type = character(),
@@ -1018,30 +1063,33 @@ place_structure <- function(place_name,
   
 }
 
-#' Construct the SOURCE_CITATION from the GEDCOM specification
+#' Construct the SOURCE_CITATION tibble
+#' 
+#' This function constructs a tibble representation of the SOURCE_CITATION from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_equal(source_citation("@S1@"),
+#' expect_equal(SOURCE_CITATION("@S1@"),
 #'              tibble::tribble(
 #'                ~level,   ~tag, ~value,
 #'                0, "SOUR", "@S1@"
 #'              ))
 #' 
-#' expect_equal(source_citation("@S1@", where_within_source = 3, event_type_cited_from = "event"),
+#' expect_equal(SOURCE_CITATION("@S1@", where_within_source = 3, event_type_cited_from = "event"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "SOUR",  "@S1@",
 #'                              1, "PAGE",     "3",
 #'                              1, "EVEN", "event"
 #'              ))
 #' 
-#' expect_equal(source_citation("@S1@", where_within_source = 3, role_in_event = "a role"),
+#' expect_equal(SOURCE_CITATION("@S1@", where_within_source = 3, role_in_event = "a role"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "SOUR",  "@S1@",
 #'                              1, "PAGE",     "3"
 #'              ))
 #' 
-#' expect_equal(source_citation("@S1@", where_within_source = 3, 
+#' expect_equal(SOURCE_CITATION("@S1@", where_within_source = 3, 
 #'                              event_type_cited_from = "event", 
 #'                              role_in_event = "a role"),
 #'              tibble::tribble(~level,   ~tag, ~value,
@@ -1052,7 +1100,7 @@ place_structure <- function(place_name,
 #'              ))
 #' @return A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file.
 #' @export
-source_citation <- function(xref_sour = character(),
+SOURCE_CITATION <- function(xref_sour = character(),
                             source_description = character(),
                             where_within_source = character(),
                             event_type_cited_from = character(),
@@ -1111,14 +1159,17 @@ source_citation <- function(xref_sour = character(),
   
 }
 
-#' Construct the SOURCE_REPOSITORY_CITATION from the GEDCOM specification
+#' Construct the SOURCE_REPOSITORY_CITATION tibble
+#' 
+#' This function constructs a tibble representation of the SOURCE_REPOSITORY_CITATION from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_error(source_repository_citation())
-#' expect_error(source_repository_citation("@R1@", source_media_type = "carrier pigeon"))
+#' expect_error(SOURCE_REPOSITORY_CITATION())
+#' expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_media_type = "carrier pigeon"))
 #' 
-#' expect_equal(source_repository_citation("@R1@", source_call_number = c("123", "456"), 
+#' expect_equal(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = c("123", "456"), 
 #'                                         source_media_type = "map"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "REPO", "@R1@",
@@ -1128,7 +1179,7 @@ source_citation <- function(xref_sour = character(),
 #'              ))
 #' @return A tidy tibble containing the SOURCE_REPOSITORY_CITATION part of a GEDCOM file.
 #' @export
-source_repository_citation <- function(xref_repo,
+SOURCE_REPOSITORY_CITATION <- function(xref_repo,
                                        notes = list(),
                                        source_call_number = character(),
                                        source_media_type = character()) {
@@ -1149,20 +1200,23 @@ source_repository_citation <- function(xref_repo,
 }
 
 
-#' Construct the SPOUSE_TO_FAMILY_LINK from the GEDCOM specification
+#' Construct the SPOUSE_TO_FAMILY_LINK tibble
+#' 
+#' This function constructs a tibble representation of the SPOUSE_TO_FAMILY_LINK from the GEDCOM 5.5.1
+#' specification.
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_error(spouse_to_family_link())
+#' expect_error(SPOUSE_TO_FAMILY_LINK())
 #' 
-#' expect_equal(spouse_to_family_link("@F2@", list(note_structure(submitter_text = "test"))),
+#' expect_equal(SPOUSE_TO_FAMILY_LINK("@F2@", list(NOTE_STRUCTURE(submitter_text = "test"))),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "FAMS", "@F2@",
 #'                              1, "NOTE",  "test"
 #'              ))
 #' @return A tidy tibble containing the SPOUSE_TO_FAMILY_LINK part of a GEDCOM file.
 #' @export
-spouse_to_family_link <- function(xref_fam,
+SPOUSE_TO_FAMILY_LINK <- function(xref_fam,
                                   notes = list()) {
   
   if (length(xref_fam) == 0) return(tibble())

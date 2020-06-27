@@ -31,9 +31,9 @@ articles are separated by a comma, for example in the name "de la Cruz", this va
 \item{name_piece_suffix}{Non-indexing name piece that appears after the given name and surname parts.
 Different name suffix parts are separated by a comma.}
 
-\item{notes}{A list of note_structure() objects.}
+\item{notes}{A list of NOTE_STRUCTURE() objects.}
 
-\item{source_citations}{A list of source_citation() objects.}
+\item{source_citations}{A list of SOURCE_CITATION() objects.}
 }
 \value{
 A tidy tibble containing the PERSONAL_NAME_PIECES part of a GEDCOM file.

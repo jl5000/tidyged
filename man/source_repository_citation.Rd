@@ -14,7 +14,7 @@ SOURCE_REPOSITORY_CITATION(
 \arguments{
 \item{xref_repo}{An xref ID of a repository record.}
 
-\item{notes}{A list of note_structure() objects.}
+\item{notes}{A list of NOTE_STRUCTURE() objects.}
 
 \item{source_call_number}{An identification or reference description used to file and retrieve items
 from the holdings of a repository.}

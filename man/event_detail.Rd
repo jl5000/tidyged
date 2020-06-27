@@ -43,11 +43,11 @@ might be listed on a death certificate.}
 \item{restriction_notice}{The restriction notice is defined for Ancestral File usage. Ancestral File
 download GEDCOM files may contain this data.}
 
-\item{notes}{A list of note_structure() objects.}
+\item{notes}{A list of NOTE_STRUCTURE() objects.}
 
-\item{source_citations}{A list of source_citation() objects.}
+\item{source_citations}{A list of SOURCE_CITATION() objects.}
 
-\item{multimedia_links}{A list of multimedia_link() objects}
+\item{multimedia_links}{A list of MULTIMEDIA_LINK() objects}
 }
 \value{
 A tidy tibble containing the EVENT_DETAIL part of a GEDCOM file.

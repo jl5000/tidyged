@@ -41,7 +41,7 @@ would be formatted as N18.150944.}
 The longitude coordinate is Degrees and fraction of degrees east or west of the zero or base
 meridian coordinate. For example: 168 degrees, 9 minutes, and 3.4 seconds East would be formatted as E168.150944.}
 
-\item{notes}{A list of note_structure() objects.}
+\item{notes}{A list of NOTE_STRUCTURE() objects.}
 }
 \value{
 A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file.

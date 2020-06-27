@@ -175,7 +175,7 @@
 #' @param place_phonetic_variation A character vector of phonetic variations of the place name.
 #' @param place_romanized_variation A character vector of romanized variations of the place name. 
 #' @param possessions A list of possessions (real estate or other property) belonging to this individual.
-#' @param publication_date The date this source was published or created.
+#' @param publication_date_source_data A date_exact() object giving the date this source was published or created.
 #' @param receiving_system_name The name of the system expected to process the GEDCOM-compatible transmission.
 #' @param relation_is_descriptor A word or phrase that states object 1's relation is object 2. 
 #' @param religious_affiliation A name of the religion with which this person, event, or record was affiliated.
@@ -218,11 +218,13 @@
 #' @param text_from_source A verbatim copy of any description contained within the source. 
 #' This indicates notes or text that are actually contained in the source document, not the submitter's 
 #' opinion about the source.  
-#' @param time_value The time of a specific event. 
-#' @param transmission_date The date that this transmission was created. 
+#' @param time_value,transmission_time The time of a specific event. 
+#' @param transmission_date A date_exact() object giving the date that this transmission was created. 
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify this record. 
 #' @param user_reference_type A user-defined definition of the user_reference_number.
-#' @param version_number An identifier that represents the version level assigned to the associated product. 
+#' @param system_version_number An identifier that represents the version level assigned to the system. 
+#' It is defined and changed by the creators of the product.
+#' @param character_set_version_number An identifier that represents the version level assigned to the character set. 
 #' It is defined and changed by the creators of the product. 
 #' @param where_within_source Specific location with in the information referenced. 
 #' @param xref_fam An xref ID of a family record.  
@@ -233,8 +235,10 @@
 #' @param xref_note An xref ID of a note record. 
 #' @param xref_subm An xref ID of a submitter record.
 #' @param xref_subn An xref ID of a submission record.
-#' @param notes A list of note_structure() objects.
-#' @param source_citations A list of source_citation() objects.
-#' @param multimedia_links A list of multimedia_link() objects
+#' @param date_changed A CHANGE_DATE() object giving the time this record was last modified. If not provided,
+#' the current date is used.
+#' @param notes A list of NOTE_STRUCTURE() objects.
+#' @param source_citations A list of SOURCE_CITATION() objects.
+#' @param multimedia_links A list of MULTIMEDIA_LINK() objects
 parameter_definitions <- function() {return(0)}
 

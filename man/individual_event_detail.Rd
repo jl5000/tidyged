@@ -5,7 +5,7 @@
 \title{Construct the INDIVIDUAL_EVENT_DETAIL tibble}
 \usage{
 INDIVIDUAL_EVENT_DETAIL(
-  event_details = event_detail(),
+  event_details = EVENT_DETAIL(),
   age_at_event = character()
 )
 }

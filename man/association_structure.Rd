@@ -16,9 +16,9 @@ ASSOCIATION_STRUCTURE(
 
 \item{relation_is_descriptor}{A word or phrase that states object 1's relation is object 2.}
 
-\item{source_citations}{A list of source_citation() objects.}
+\item{source_citations}{A list of SOURCE_CITATION() objects.}
 
-\item{notes}{A list of note_structure() objects.}
+\item{notes}{A list of NOTE_STRUCTURE() objects.}
 }
 \value{
 A tidy tibble containing the ASSOCIATION_STRUCTURE part of a GEDCOM file.

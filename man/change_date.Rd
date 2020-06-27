@@ -15,7 +15,7 @@ CHANGE_DATE(
 
 \item{time_value}{The time of a specific event.}
 
-\item{notes}{A list of note_structure() objects.}
+\item{notes}{A list of NOTE_STRUCTURE() objects.}
 }
 \value{
 A tidy tibble containing the CHANGE_DATE part of a GEDCOM file.

@@ -103,10 +103,6 @@ validate_certainty_assessment <- function(input, max_dim) {
   validate_input(input, choices)
   validate_input_size(input, max_dim, 1, 1)
 }
-validate_change_date <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 10, 14)
-  validate_input_pattern(input, date_exact_pattern())  
-}
 validate_character_set <- function(input, max_dim) {
   choices <- c("ANSEL", "UTF-8", "UNICODE", "ASCII")
   validate_input_choice(input, choices)
@@ -121,7 +117,7 @@ validate_copyright_gedcom_file <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
 validate_copyright_source_data <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 90)
+  validate_input_size(input, max_dim)
 }
 validate_count_of_children <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 3)
@@ -133,9 +129,9 @@ validate_date <- function(input, max_dim) {
   validate_input_size(input, max_dim, 4, 35)
   validate_input_pattern(inputs, date_pattern())
 }
-validate_date_approximated <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 4, 35)
-  validate_input_pattern(input, date_approximated_pattern())
+validate_date_exact <- function(input, max_dim) {
+  validate_input_size(input, max_dim, 10, 11)
+  validate_input_pattern(input, date_exact_pattern())
 }
 validate_date_value <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 35)
@@ -144,10 +140,6 @@ validate_date_value <- function(input, max_dim) {
 }
 validate_descriptive_title <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
-}
-validate_entry_recording_date <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 90)
-  validate_input_pattern(input, date_value_pattern())
 }
 validate_event_attribute_type <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 15)
@@ -184,7 +176,7 @@ validate_file_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
 validate_gedcom_content_description <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 248)
+  validate_input_size(input, max_dim)
 }
 validate_generations_of_ancestors <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 4)
@@ -324,10 +316,6 @@ validate_place_text <- function(input, max_dim) {
 validate_possessions <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
 }
-validate_publication_date <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 10, 11)
-  validate_input_pattern(input, "\\d{1,2} \\w{3} \\d{4}")
-}
 validate_receiving_system_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 20)
 }
@@ -422,10 +410,6 @@ validate_time_value <- function(input, max_dim) {
   validate_input_pattern(input, paste0("^\\d\\d:\\d\\d:\\d\\d.\\d{1,3}$|",
                                        "^\\d\\d:\\d\\d:\\d\\d$|",
                                        "^\\d\\d:\\d\\d$"))
-}
-validate_transmission_date <- function(input, max_dim) {
-  validate_date_exact(input, max_dim)
-  validate_input_pattern(input, "\\d{1,2} \\w{3} \\d{4}")
 }
 validate_user_reference_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 20)

@@ -51,9 +51,9 @@ eliminate the receiver's need to evaluate the evidence for themselves.
 2 = Secondary evidence, data officially recorded sometime after event
 3 = Direct and primary evidence used, or by dominance of the evidence}
 
-\item{multimedia_links}{A list of multimedia_link() objects}
+\item{multimedia_links}{A list of MULTIMEDIA_LINK() objects}
 
-\item{notes}{A list of note_structure() objects.}
+\item{notes}{A list of NOTE_STRUCTURE() objects.}
 }
 \value{
 A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file.

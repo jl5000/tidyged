@@ -250,7 +250,7 @@ Jurisdictions are separated by commas.}
 
 \item{possessions}{A list of possessions (real estate or other property) belonging to this individual.}
 
-\item{publication_date}{The date this source was published or created.}
+\item{publication_date_source_data}{A date_exact() object giving the date this source was published or created.}
 
 \item{receiving_system_name}{The name of the system expected to process the GEDCOM-compatible transmission.}
 
@@ -317,15 +317,18 @@ This number is used in subsequent submissions or inquiries by the submitter for 
 This indicates notes or text that are actually contained in the source document, not the submitter's
 opinion about the source.}
 
-\item{time_value}{The time of a specific event.}
+\item{time_value, transmission_time}{The time of a specific event.}
 
-\item{transmission_date}{The date that this transmission was created.}
+\item{transmission_date}{A date_exact() object giving the date that this transmission was created.}
 
 \item{user_reference_number}{A user-defined number or text that the submitter uses to identify this record.}
 
 \item{user_reference_type}{A user-defined definition of the user_reference_number.}
 
-\item{version_number}{An identifier that represents the version level assigned to the associated product.
+\item{system_version_number}{An identifier that represents the version level assigned to the system.
+It is defined and changed by the creators of the product.}
+
+\item{character_set_version_number}{An identifier that represents the version level assigned to the character set.
 It is defined and changed by the creators of the product.}
 
 \item{where_within_source}{Specific location with in the information referenced.}
@@ -346,11 +349,14 @@ It is defined and changed by the creators of the product.}
 
 \item{xref_subn}{An xref ID of a submission record.}
 
-\item{notes}{A list of note_structure() objects.}
+\item{date_changed}{A CHANGE_DATE() object giving the time this record was last modified. If not provided,
+the current date is used.}
 
-\item{source_citations}{A list of source_citation() objects.}
+\item{notes}{A list of NOTE_STRUCTURE() objects.}
 
-\item{multimedia_links}{A list of multimedia_link() objects}
+\item{source_citations}{A list of SOURCE_CITATION() objects.}
+
+\item{multimedia_links}{A list of MULTIMEDIA_LINK() objects}
 }
 \description{
 

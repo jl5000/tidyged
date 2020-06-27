@@ -211,7 +211,7 @@ CHANGE_DATE <- function(change_date = date_exact(),
   if (length(change_date) == 0) 
     change_date <- toupper(format(Sys.Date(), "%d %b %Y"))
   
-  validate_change_date(change_date, 1)
+  validate_date_exact(change_date, 1)
   validate_time_value(time_value, 1)
   
   dplyr::bind_rows(
@@ -542,7 +542,7 @@ INDIVIDUAL_ATTRIBUTE_STRUCTURE <- function(attribute_type,
 #'              ))
 #' @return A tidy tibble containing the INDIVIDUAL_EVENT_DETAIL part of a GEDCOM file.
 #' @export
-INDIVIDUAL_EVENT_DETAIL <- function(event_details = event_detail(),
+INDIVIDUAL_EVENT_DETAIL <- function(event_details = EVENT_DETAIL(),
                                     age_at_event = character()) {
   
   age_at_event <- as.character(age_at_event)
@@ -1124,7 +1124,7 @@ SOURCE_CITATION <- function(xref_sour = character(),
     validate_where_within_source(where_within_source, 1)
     validate_event_type_cited_from(event_type_cited_from, 1)
     validate_role_in_event(role_in_event, 1)
-    validate_entry_recording_date(entry_recording_date, 1)
+    validate_date_value(entry_recording_date, 1)
     
     temp <- dplyr::bind_rows(
       tibble::tibble(level = 0, tag = "SOUR", value = xref_sour),

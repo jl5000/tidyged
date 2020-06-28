@@ -66,7 +66,7 @@ test_that("Function ASSOCIATION_STRUCTURE() @ L149", {
 })
 
 
-test_that("Function CHANGE_DATE() @ L207", {
+test_that("Function CHANGE_DATE() @ L208", {
   expect_equal(CHANGE_DATE(),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "CHAN", "",
@@ -99,7 +99,7 @@ test_that("Function CHANGE_DATE() @ L207", {
 })
 
 
-test_that("Function CHILD_TO_FAMILY_LINK() @ L250", {
+test_that("Function CHILD_TO_FAMILY_LINK() @ L251", {
   expect_error(CHILD_TO_FAMILY_LINK())
   expect_error(CHILD_TO_FAMILY_LINK("@1@", pedigree_linkage_type = "foste"))
   expect_error(CHILD_TO_FAMILY_LINK("@1@", child_linkage_status = "challenge"))
@@ -118,7 +118,7 @@ test_that("Function CHILD_TO_FAMILY_LINK() @ L250", {
 })
 
 
-test_that("Function EVENT_DETAIL() @ L308", {
+test_that("Function EVENT_DETAIL() @ L309", {
   expect_error(EVENT_DETAIL(restriction_notice = "something"))
   expect_equal(dim(EVENT_DETAIL()), c(0, 3))
   
@@ -148,7 +148,7 @@ test_that("Function EVENT_DETAIL() @ L308", {
 })
 
 
-test_that("Function FAMILY_EVENT_DETAIL() @ L374", {
+test_that("Function FAMILY_EVENT_DETAIL() @ L375", {
   expect_equal(dim(FAMILY_EVENT_DETAIL()), c(0, 3))  
   
   expect_equal(FAMILY_EVENT_DETAIL(husband_age_at_event = "42y"),
@@ -173,7 +173,7 @@ test_that("Function FAMILY_EVENT_DETAIL() @ L374", {
 })
 
 
-test_that("Function FAMILY_EVENT_STRUCTURE() @ L435", {
+test_that("Function FAMILY_EVENT_STRUCTURE() @ L436", {
   expect_error(FAMILY_EVENT_STRUCTURE())
   expect_error(FAMILY_EVENT_STRUCTURE("TEST"))
   
@@ -202,7 +202,7 @@ test_that("Function FAMILY_EVENT_STRUCTURE() @ L435", {
 })
 
 
-test_that("Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L483", {
+test_that("Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L484", {
   expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE())
   expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("TEST"))
   expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("FACT"))
@@ -223,7 +223,7 @@ test_that("Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L483", {
 })
 
 
-test_that("Function INDIVIDUAL_EVENT_DETAIL() @ L545", {
+test_that("Function INDIVIDUAL_EVENT_DETAIL() @ L546", {
   expect_equal(dim(INDIVIDUAL_EVENT_DETAIL()), c(0, 3))  
   
   expect_equal(INDIVIDUAL_EVENT_DETAIL(age = "5y"),
@@ -233,7 +233,7 @@ test_that("Function INDIVIDUAL_EVENT_DETAIL() @ L545", {
 })
 
 
-test_that("Function INDIVIDUAL_EVENT_STRUCTURE() @ L596", {
+test_that("Function INDIVIDUAL_EVENT_STRUCTURE() @ L597", {
   expect_error(INDIVIDUAL_EVENT_STRUCTURE())
   expect_error(INDIVIDUAL_EVENT_STRUCTURE("BLAH"))
   expect_error(INDIVIDUAL_EVENT_STRUCTURE("ADOP", adopted_by_which_parent = "WHO"))
@@ -263,7 +263,7 @@ test_that("Function INDIVIDUAL_EVENT_STRUCTURE() @ L596", {
 })
 
 
-test_that("Function MULTIMEDIA_LINK() @ L667", {
+test_that("Function MULTIMEDIA_LINK() @ L668", {
   expect_error(MULTIMEDIA_LINK("ref"))
   expect_error(MULTIMEDIA_LINK(multimedia_file_reference = "ref", source_media_type = "carrier pigeon"))
   expect_error(MULTIMEDIA_LINK(multimedia_file_reference = "ref", multimedia_format = "jpeg"))
@@ -284,7 +284,7 @@ test_that("Function MULTIMEDIA_LINK() @ L667", {
 })
 
 
-test_that("Function NOTE_STRUCTURE() @ L753", {
+test_that("Function NOTE_STRUCTURE() @ L756", {
   expect_error(NOTE_STRUCTURE(submitter_text = c("test1", "test2")))
   
   expect_equal(NOTE_STRUCTURE("@T1@"),
@@ -318,7 +318,7 @@ test_that("Function NOTE_STRUCTURE() @ L753", {
 })
 
 
-test_that("Function PERSONAL_NAME_PIECES() @ L809", {
+test_that("Function PERSONAL_NAME_PIECES() @ L812", {
   expect_equal(dim(PERSONAL_NAME_PIECES()), c(0, 3))
   
   expect_equal(PERSONAL_NAME_PIECES(name_piece_prefix = "Mr", name_piece_nickname = "J"),
@@ -345,7 +345,7 @@ test_that("Function PERSONAL_NAME_PIECES() @ L809", {
 })
 
 
-test_that("Function PERSONAL_NAME_STRUCTURE() @ L909", {
+test_that("Function PERSONAL_NAME_STRUCTURE() @ L912", {
   expect_error(PERSONAL_NAME_STRUCTURE())
   expect_error(
     PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
@@ -406,7 +406,7 @@ test_that("Function PERSONAL_NAME_STRUCTURE() @ L909", {
 })
 
 
-test_that("Function PLACE_STRUCTURE() @ L1006", {
+test_that("Function PLACE_STRUCTURE() @ L1009", {
   expect_error(PLACE_STRUCTURE())
   expect_error(PLACE_STRUCTURE("Here", place_latitude = "N51.5", place_longitude = "E0.0"))
   expect_error(
@@ -437,7 +437,7 @@ test_that("Function PLACE_STRUCTURE() @ L1006", {
 })
 
 
-test_that("Function SOURCE_CITATION() @ L1103", {
+test_that("Function SOURCE_CITATION() @ L1106", {
   expect_equal(SOURCE_CITATION("@S1@"),
                tibble::tribble(
                  ~level,   ~tag, ~value,
@@ -469,7 +469,7 @@ test_that("Function SOURCE_CITATION() @ L1103", {
 })
 
 
-test_that("Function SOURCE_REPOSITORY_CITATION() @ L1182", {
+test_that("Function SOURCE_REPOSITORY_CITATION() @ L1185", {
   expect_error(SOURCE_REPOSITORY_CITATION())
   expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_media_type = "carrier pigeon"))
   
@@ -484,7 +484,7 @@ test_that("Function SOURCE_REPOSITORY_CITATION() @ L1182", {
 })
 
 
-test_that("Function SPOUSE_TO_FAMILY_LINK() @ L1219", {
+test_that("Function SPOUSE_TO_FAMILY_LINK() @ L1222", {
   expect_error(SPOUSE_TO_FAMILY_LINK())
   
   expect_equal(SPOUSE_TO_FAMILY_LINK("@F2@", list(NOTE_STRUCTURE(submitter_text = "test"))),

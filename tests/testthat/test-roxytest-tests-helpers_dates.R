@@ -105,12 +105,14 @@ test_that("Function date_value_pattern() @ L201", {
 })
 
 
-test_that("Function date_exact() @ L221", {
+test_that("Function date_exact() @ L223", {
+  expect_equal(date_exact(12), character())
+  expect_equal(date_exact(12, 8), character())
   expect_equal(date_exact(12, 8, 2005), "12 AUG 2005")
 })
 
 
-test_that("Function date_value() @ L266", {
+test_that("Function date_value() @ L268", {
   expect_equal(date_value(2005), "2005")
   expect_equal(date_value(2005, 1), "JAN 2005")
   expect_equal(date_value(2005, 1, 14), "14 JAN 2005")

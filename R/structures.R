@@ -172,6 +172,7 @@ ASSOCIATION_STRUCTURE <- function(xref_indi,
 #' specification.
 #' 
 #' @inheritParams parameter_definitions
+#' @param change_date A date_exact() object giving the date that this data was changed.
 #' @tests
 #' expect_equal(CHANGE_DATE(),
 #'              tibble::tribble(~level,   ~tag, ~value,
@@ -700,9 +701,11 @@ MULTIMEDIA_LINK <- function(xref_obje = character(),
       
       temp <- dplyr::bind_rows(temp,
                         tibble::tibble(level = 1, tag = "FILE", value = multimedia_file_reference[i]),
-                        tibble::tibble(level = 2, tag = "FORM", value = multimedia_format[i]),
-                        tibble::tibble(level = 3, tag = "MEDI", value = source_media_type[i])
-      )
+                        tibble::tibble(level = 2, tag = "FORM", value = multimedia_format[i]))
+      
+      if (length(source_media_type) > 0)
+        temp <- dplyr::bind_rows(temp,
+                                 tibble::tibble(level = 3, tag = "MEDI", value = source_media_type[i]))
     }
     
     dplyr::bind_rows(temp,

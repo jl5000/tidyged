@@ -68,12 +68,68 @@ test_that("Function HEADER_SECTION() @ L87", {
 })
 
 
-test_that("Function FAMILY_RECORD() @ L188", {
-  
+test_that("Function FAMILY_RECORD() @ L194", {
+  expect_error(FAMILY_RECORD("@F1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
+  expect_equal(FAMILY_RECORD("@F1@"),
+               tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+                               0, "@F1@", "FAM",                      "",
+                               1, "@F1@", "CHAN",                     "",
+                               2, "@F1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+               ))
 })
 
 
-test_that("Function FOOTER_SECTION() @ L556", {
+test_that("Function INDIVIDUAL_RECORD() @ L296", {
+  expect_error(INDIVIDUAL_RECORD("@I1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
+  expect_equal(INDIVIDUAL_RECORD("@I1@"),
+               tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+                               0, "@I1@", "INDI",                      "",
+                               1, "@I1@", "CHAN",                      "",
+                               2, "@I1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+               ))
+})
+
+
+test_that("Function MULTIMEDIA_RECORD() @ L400", {
+  expect_error(MULTIMEDIA_RECORD("@M1@", "file_ref", "jpg",
+                                 user_reference_number = 123:125, user_reference_type = letters[1:2]))
+  expect_equal(MULTIMEDIA_RECORD("@M1@", "file_ref", "jpg"),
+               tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+                               0, "@M1@", "OBJE",                      "",
+                               1, "@M1@", "FILE",              "file_ref",
+                               2, "@M1@", "FORM",                   "jpg",
+                               1, "@M1@", "CHAN",                      "",
+                               2, "@M1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+               ))
+})
+
+
+test_that("Function NOTE_RECORD() @ L489", {
+  expect_error(NOTE_RECORD("@N1@", "This is a note",
+                                 user_reference_number = 123:125, user_reference_type = letters[1:2]))
+  expect_equal(NOTE_RECORD("@N1@", "This is a note"),
+               tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+                               0, "@N1@", "NOTE",        "This is a note",
+                               1, "@N1@", "CHAN",                      "",
+                               2, "@N1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+               ))
+})
+
+
+test_that("Function REPOSITORY_RECORD() @ L550", {
+  expect_error(REPOSITORY_RECORD("@R1@", "Repo name",
+                                 user_reference_number = 123:125, user_reference_type = letters[1:2]))
+  expect_equal(REPOSITORY_RECORD("@R1@", "Repo name"),
+               tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+                               0, "@R1@", "REPO",                      "",
+                               1, "@R1@", "NAME",             "Repo name",
+                               1, "@R1@", "CHAN",                      "",
+                               2, "@R1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+               ))
+})
+
+
+test_that("Function FOOTER_SECTION() @ L714", {
   expect_equal(FOOTER_SECTION(),
                tibble::tribble(~level,  ~id,   ~tag, ~value,
                                0, "TR", "TRLR",     ""

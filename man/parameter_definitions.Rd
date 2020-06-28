@@ -62,8 +62,6 @@ eliminate the receiver's need to evaluate the evidence for themselves.
 2 = Secondary evidence, data officially recorded sometime after event
 3 = Direct and primary evidence used, or by dominance of the evidence}
 
-\item{change_date}{A date_exact() object giving the date that this data was changed.}
-
 \item{character_set}{A code value that represents the character set to be used to
 interpret this data. Currently, the preferred character set is ANSEL, which
 includes ASCII as a subset. UNICODE is not widely supported by most operating systems;

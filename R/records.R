@@ -182,7 +182,13 @@ HEADER_SECTION <- function(xref_subm,
 #' @param xrefs_subm A vector of xref IDs of submitters of this record.
 #' @param lds_spouse_sealings Not used.
 #' @tests
-#' 
+#' expect_error(FAMILY_RECORD("@F1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
+#' expect_equal(FAMILY_RECORD("@F1@"),
+#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'                              0, "@F1@", "FAM",                      "",
+#'                              1, "@F1@", "CHAN",                     "",
+#'                              2, "@F1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+#'              ))
 #' @return A tidy tibble containing a FAMILY_RECORD part of a GEDCOM file.
 #' @export
 FAMILY_RECORD <- function(xref_fam,
@@ -202,9 +208,12 @@ FAMILY_RECORD <- function(xref_fam,
                           source_citations = list(),
                           multimedia_links = list()){
   
-  children_count <- as.character(children_count)
+  children_count <- as.character(count_of_children)
   user_reference_number <- as.character(user_reference_number)
-  #TODO: checks for user ref number/type
+  
+  if (length(user_reference_type) > 0 & length(user_reference_type) != length(user_reference_number))
+    stop("The number of user reference types must be the same as the number of user reference numbers")
+  
   validate_xref(xref_fam, 1)
   validate_restriction_notice(restriction_notice, 1)
   validate_xref(xref_husb, 1)
@@ -217,8 +226,8 @@ FAMILY_RECORD <- function(xref_fam,
   validate_automated_record_id(automated_record_id, 1)
   
   
-  dplyr::bind_rows(
-    tibble::tibble(level = 0, id = xref_fam, tag = "FAM"),
+  temp <- dplyr::bind_rows(
+    tibble::tibble(level = 0, id = xref_fam, tag = "FAM", value = ""),
     tibble::tibble(level = 1, tag = "RESN", value = restriction_notice),
     events %>% dplyr::bind_rows() %>% add_levels(1),
     tibble::tibble(level = 1, tag = "HUSB", value = xref_husb),
@@ -226,35 +235,79 @@ FAMILY_RECORD <- function(xref_fam,
     tibble::tibble(level = 1, tag = "CHIL", value = xrefs_chil),
     tibble::tibble(level = 1, tag = "NCHI", value = count_of_children),
     tibble::tibble(level = 1, tag = "SUBM", value = xrefs_subm),
-    lds_spouse_sealings %>% dplyr::bind_rows() %>% add_levels(1),
-    tibble::tibble(level = 1, tag = "REFN", value = user_reference_number),
-    tibble::tibble(level = 2, tag = "TYPE", value = user_reference_type),
-    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
-    date_changed %>% add_levels(1),
-    notes %>% dplyr::bind_rows() %>% add_levels(1),
-    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
-    multimedia_links %>% dplyr::bind_rows() %>% add_levels(1)
+    lds_spouse_sealings %>% dplyr::bind_rows() %>% add_levels(1)
+  )
+  
+  for (i in seq_along(user_reference_number)) {
+    temp <- dplyr::bind_rows(temp,
+                             tibble::tibble(level = 1, tag = "REFN", value = user_reference_number[i]))
+    
+    if (length(user_reference_type) > 0 )
+      temp <- dplyr::bind_rows(temp,
+                               tibble::tibble(level = 2, tag = "TYPE", value = user_reference_type[i])) 
+  }
+  
+  dplyr::bind_rows(temp,
+                   tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
+                   date_changed %>% add_levels(1),
+                   notes %>% dplyr::bind_rows() %>% add_levels(1),
+                   source_citations %>% dplyr::bind_rows() %>% add_levels(1),
+                   multimedia_links %>% dplyr::bind_rows() %>% add_levels(1)
   ) %>% 
     finalise()
   
-  
 }
 
-INDIVIDUAL_RECORD <- function(individual_ref,
+
+#' Construct the INDIVIDUAL_RECORD tibble
+#' 
+#' This function constructs a tibble representation of the INDIVIDUAL_RECORD from the GEDCOM 5.5.1
+#' specification.
+#'
+#' @inheritParams parameter_definitions
+#' @param names A list of PERSONAL_NAME_STRUCTURE() objects giving the names associated with this individual.
+#' @param events A list of INDIVIDUAL_EVENT_STRUCTURE() objects giving the events associated with
+#' this individual.
+#' @param attributes A list of INDIVIDUAL_ATTRIBUTE_STRUCTURE() objects giving the attributes associated 
+#' with this individual.
+#' @param ordinance Not used.
+#' @param child_to_family_links A list of CHILD_TO_FAMILY_LINK() objects giving the details of families
+#' this individual is a child of.
+#' @param spouse_to_family_links A list of SPOUSE_TO_FAMILY_LINK() objects giving the details of families
+#' this individual is a spouse of.
+#' @param xrefs_subm A vector of xref IDs of submitters of this record.
+#' @param associations A list of ASSOCIATION_STRUCTURE() objects giving the details of individuals this
+#' individual is associated with.
+#' @param xrefs_alia A vector of xref IDs of individual aliases of this individual.
+#' @param xrefs_subm_interested_in_ancestors A vector of xref IDs of submitters with an interest in
+#' ancestors of this individual.
+#' @param xrefs_subm_interested_in_descendents A vector of xref IDs of submitters with an interest in
+#' ancestors of this individual.
+#' @tests
+#' expect_error(INDIVIDUAL_RECORD("@I1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
+#' expect_equal(INDIVIDUAL_RECORD("@I1@"),
+#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'                              0, "@I1@", "INDI",                      "",
+#'                              1, "@I1@", "CHAN",                      "",
+#'                              2, "@I1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+#'              ))
+#' @return A tidy tibble containing an INDIVIDUAL_RECORD part of a GEDCOM file.
+#' @export
+INDIVIDUAL_RECORD <- function(xref_indi,
                               restriction_notice = character(),
                               names = list(),
-                              sex = character(),
+                              sex_value = character(),
                               events = list(),
                               attributes = list(),
                               ordinance = list(),
                               child_to_family_links = list(),
                               spouse_to_family_links = list(),
-                              submitter_refs = character(),
+                              xrefs_subm = character(),
                               associations = list(),
-                              alias_refs = character(),
-                              submitters_interested_in_ancestors = character(),
-                              submitters_interested_in_descendents = character(),
-                              record_file_number = character(),
+                              xrefs_alia = character(),
+                              xrefs_subm_interested_in_ancestors = character(),
+                              xrefs_subm_interested_in_descendents = character(),
+                              permanent_record_file_number = character(),
                               ancestral_file_number = character(),
                               user_reference_number = character(),
                               user_reference_type = character(),
@@ -264,102 +317,151 @@ INDIVIDUAL_RECORD <- function(individual_ref,
                               source_citations = list(),
                               multimedia_links = list()) {
   
-  record_file_number <- as.character(record_file_number)
+  permanent_record_file_number <- as.character(permanent_record_file_number)
   ancestral_file_number <- as.character(ancestral_file_number)
   user_reference_number <- as.character(user_reference_number)
   
-  validate_input_size(individual_ref, 1, 1, 18)
-  validate_input_size(restriction_notice, 1)
-  validate_input_size(sex, 1)
-  validate_input_size(submitter_refs, 1000, 1, 18)
-  validate_input_size(individual_ref, 1, 1, 18)
-  validate_input_size(alias_refs, 1000, 1, 18)
-  validate_input_size(submitters_interested_in_ancestors, 1000, 1, 18)
-  validate_input_size(submitters_interested_in_descendents, 1000, 1, 18)
-  validate_input_size(record_file_number, 1, 1, 90)
-  validate_input_size(ancestral_file_number, 1, 1, 12)
-  validate_input_size(user_reference_number, 1000, 1, 20) # QUERY
-  validate_input_size(user_reference_type, 1, 1, 40)
-  validate_input_size(automated_record_id, 1, 1, 12)
-  validate_input_size(last_modified, 1, 10, 11)
-    
-  check_restriction_notice(restriction_notice)
-  check_sex(sex)
+  if (length(user_reference_type) > 0 & length(user_reference_type) != length(user_reference_number))
+    stop("The number of user reference types must be the same as the number of user reference numbers")
   
-  dplyr::bind_rows(
-    tibble::tibble(level = 0, id = ref_to_xref(individual_ref, "I"), tag = "INDI"),
+  validate_xref(xref_indi, 1)
+  validate_restriction_notice(restriction_notice, 1)
+  validate_sex_value(sex_value, 1)
+  validate_xref(xrefs_subm, 1000)
+  validate_xref(xrefs_alia, 1000)
+  validate_xref(xrefs_subm_interested_in_ancestors, 1000)
+  validate_xref(xrefs_subm_interested_in_descendents, 1000)
+  validate_permanent_record_file_number(permanent_record_file_number, 1)
+  validate_ancestral_file_number(ancestral_file_number, 1)
+  validate_user_reference_number(user_reference_number, 1000)
+  validate_user_reference_type(user_reference_type, 1000)
+  validate_automated_record_id(automated_record_id, 1)
+  
+  
+  temp <- dplyr::bind_rows(
+    tibble::tibble(level = 0, id = xref_indi, tag = "INDI", value = ""),
     tibble::tibble(level = 1, tag = "RESN", value = restriction_notice),
     names %>% dplyr::bind_rows() %>% add_levels(1),
-    tibble::tibble(level = 1, tag = "SEX", value = sex),
+    tibble::tibble(level = 1, tag = "SEX", value = sex_value),
     events %>% dplyr::bind_rows() %>% add_levels(1),
     attributes %>% dplyr::bind_rows() %>% add_levels(1),
     ordinance %>% dplyr::bind_rows() %>% add_levels(1),
     child_to_family_links %>% dplyr::bind_rows() %>% add_levels(1),
     spouse_to_family_links %>% dplyr::bind_rows() %>% add_levels(1),
-    tibble::tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_refs, "U")),
+    tibble::tibble(level = 1, tag = "SUBM", value = xrefs_subm),
     associations %>% dplyr::bind_rows() %>%  add_levels(1),
-    tibble::tibble(level = 1, tag = "ALIA", value = ref_to_xref(alias_refs, "I")),
-    tibble::tibble(level = 1, tag = "ANCI", value = ref_to_xref(submitters_interested_in_ancestors, "U")),
-    tibble::tibble(level = 1, tag = "DESI", value = ref_to_xref(submitters_interested_in_descendents, "U")),
-    tibble::tibble(level = 1, tag = "RFN", value = record_file_number),
-    tibble::tibble(level = 1, tag = "AFN", value = ancestral_file_number),
-    tibble::tibble(level = 1, tag = "REFN", value = user_reference_number),
-    tibble::tibble(level = 2, tag = "TYPE", value = user_reference_type),
-    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
-    last_modified %>% add_levels(1),
-    notes %>% dplyr::bind_rows() %>% add_levels(1),
-    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
-    multimedia_links %>% dplyr::bind_rows() %>% add_levels(1)
+    tibble::tibble(level = 1, tag = "ALIA", value = xrefs_alia),
+    tibble::tibble(level = 1, tag = "ANCI", value = xrefs_subm_interested_in_ancestors),
+    tibble::tibble(level = 1, tag = "DESI", value = xrefs_subm_interested_in_descendents),
+    tibble::tibble(level = 1, tag = "RFN", value = permanent_record_file_number),
+    tibble::tibble(level = 1, tag = "AFN", value = ancestral_file_number)
+  )
+  
+  for (i in seq_along(user_reference_number)) {
+    temp <- dplyr::bind_rows(temp,
+                             tibble::tibble(level = 1, tag = "REFN", value = user_reference_number[i]))
+    
+    if (length(user_reference_type) > 0 )
+      temp <- dplyr::bind_rows(temp,
+                               tibble::tibble(level = 2, tag = "TYPE", value = user_reference_type[i])) 
+  }
+  
+  dplyr::bind_rows(temp,
+                   tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
+                   date_changed %>% add_levels(1),
+                   notes %>% dplyr::bind_rows() %>% add_levels(1),
+                   source_citations %>% dplyr::bind_rows() %>% add_levels(1),
+                   multimedia_links %>% dplyr::bind_rows() %>% add_levels(1)
   ) %>% 
     finalise()
   
 }
 
 
-
-MULTIMEDIA_RECORD <- function(object_ref,
-                              file_reference,
-                              media_format,
-                              media_type = character(),
-                              title = character(),
-                              user_ref_number = character(),
-                              user_ref_type = character(),
+#' Construct the MULTIMEDIA_RECORD tibble
+#' 
+#' This function constructs a tibble representation of the MULTIMEDIA_RECORD from the GEDCOM 5.5.1
+#' specification.
+#'
+#' @inheritParams parameter_definitions
+#' @tests
+#' expect_error(MULTIMEDIA_RECORD("@M1@", "file_ref", "jpg",
+#'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
+#' expect_equal(MULTIMEDIA_RECORD("@M1@", "file_ref", "jpg"),
+#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'                              0, "@M1@", "OBJE",                      "",
+#'                              1, "@M1@", "FILE",              "file_ref",
+#'                              2, "@M1@", "FORM",                   "jpg",
+#'                              1, "@M1@", "CHAN",                      "",
+#'                              2, "@M1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+#'              ))
+#' @return A tidy tibble containing a MULTIMEDIA_RECORD part of a GEDCOM file.
+#' @export
+MULTIMEDIA_RECORD <- function(xref_obje,
+                              multimedia_file_reference,
+                              multimedia_format,
+                              source_media_type = character(),
+                              descriptive_title = character(),
+                              user_reference_number = character(),
+                              user_reference_type = character(),
                               automated_record_id = character(),
                               notes = list(),
                               source_citations = list(),
                               date_changed = CHANGE_DATE()){
   
-  file_reference <- as.character(file_reference)
-  user_ref_number <- as.character(user_ref_number)
+  multimedia_file_reference <- as.character(multimedia_file_reference)
+  user_reference_number <- as.character(user_reference_number)
   
-  if (length(file_reference) != length(media_format))
+  if (length(multimedia_file_reference) != length(multimedia_format))
     stop("Each file reference requires a media format")
   
-  validate_input_size(object_ref, 1, 1, 18)
-  validate_input_size(file_reference, 1000, 1, 30)
-  validate_input_size(media_format, 1)
-  validate_input_size(media_type, 1)
-  validate_input_size(title, 1, 1, 248)
-  validate_input_size(user_ref_number, 1000, 1, 20)
-  validate_input_size(user_ref_type, 1000, 1, 40)
-  validate_input_size(automated_record_id, 1, 1, 12)
-  validate_input_size(last_modified, 1, 10, 11)
+  if (length(source_media_type) > 0 & length(source_media_type) != length(multimedia_file_reference))
+    stop("The number of media types must be the same as the number of file references")
   
-  check_media_format(media_format)
-  check_media_type(media_type)
+  if (length(descriptive_title) > 0 & length(descriptive_title) != length(multimedia_file_reference))
+    stop("The number of desciptive titles must be the same as the number of file references")
   
-  dplyr::bind_rows(
-    tibble::tibble(level = 0, id = ref_to_xref(object_ref, "M"), tag = "OBJE"),
-    tibble::tibble(level = 1, tag = "FILE", value = file_reference),
-    tibble::tibble(level = 2, tag = "FORM", value = media_format),
-    tibble::tibble(level = 3, tag = "TYPE", value = media_type),
-    tibble::tibble(level = 2, tag = "TITL", value = title),
-    tibble::tibble(level = 1, tag = "REFN", value = user_ref_number),
-    tibble::tibble(level = 2, tag = "TYPE", value = user_ref_type),
-    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
-    notes %>% dplyr::bind_rows() %>% add_levels(1),
-    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
-    last_modified %>% add_levels(1)
+  if (length(user_reference_type) > 0 & length(user_reference_type) != length(user_reference_number))
+    stop("The number of user reference types must be the same as the number of user reference numbers")
+  
+  validate_xref(xref_obje, 1)
+  validate_multimedia_file_reference(multimedia_file_reference, 1000)
+  validate_multimedia_format(multimedia_format, 1000)
+  validate_source_media_type(source_media_type, 1000)
+  validate_descriptive_title(descriptive_title, 1000)
+  validate_user_reference_number(user_reference_number, 1000)
+  validate_user_reference_type(user_reference_type, 1000)
+  validate_automated_record_id(automated_record_id, 1)
+  
+  temp <- tibble::tibble(level = 0, id = xref_obje, tag = "OBJE", value = "") 
+    
+  for (i in seq_along(multimedia_file_reference)) {
+    temp <- dplyr::bind_rows(temp,
+                             tibble::tibble(level = 1, tag = "FILE", value = multimedia_file_reference[i]),
+                             tibble::tibble(level = 2, tag = "FORM", value = multimedia_format[i]))
+    
+    if (length(source_media_type) > 0 )
+      temp <- dplyr::bind_rows(temp,
+                               tibble::tibble(level = 3, tag = "TYPE", value = source_media_type[i]))
+    if (length(descriptive_title) > 0 )
+      temp <- dplyr::bind_rows(temp,
+                               tibble::tibble(level = 2, tag = "TITL", value = descriptive_title[i]))
+  }
+    
+  for (i in seq_along(user_reference_number)) {
+    temp <- dplyr::bind_rows(temp,
+                             tibble::tibble(level = 1, tag = "REFN", value = user_reference_number[i]))
+    
+    if (length(user_reference_type) > 0 )
+      temp <- dplyr::bind_rows(temp,
+                               tibble::tibble(level = 2, tag = "TYPE", value = user_reference_type[i])) 
+  }
+    
+  dplyr::bind_rows(temp,
+                   tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
+                   notes %>% dplyr::bind_rows() %>% add_levels(1),
+                   source_citations %>% dplyr::bind_rows() %>% add_levels(1),
+                   date_changed %>% add_levels(1)
   ) %>% 
     finalise()
   
@@ -367,82 +469,139 @@ MULTIMEDIA_RECORD <- function(object_ref,
 }
 
 
-
-NOTE_RECORD <- function(note_ref,
+#' Construct the NOTE_RECORD tibble
+#' 
+#' This function constructs a tibble representation of the NOTE_RECORD from the GEDCOM 5.5.1
+#' specification.
+#'
+#' @inheritParams parameter_definitions
+#' @tests
+#' expect_error(NOTE_RECORD("@N1@", "This is a note",
+#'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
+#' expect_equal(NOTE_RECORD("@N1@", "This is a note"),
+#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'                              0, "@N1@", "NOTE",        "This is a note",
+#'                              1, "@N1@", "CHAN",                      "",
+#'                              2, "@N1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+#'              ))
+#' @return A tidy tibble containing a NOTE_RECORD part of a GEDCOM file.
+#' @export
+NOTE_RECORD <- function(xref_note,
                         submitter_text,
-                        user_ref_number = character(),
-                        user_ref_type = character(),
+                        user_reference_number = character(),
+                        user_reference_type = character(),
                         automated_record_id = character(),
                         source_citations = list(),
                         date_changed = CHANGE_DATE()){
   
-  user_ref_number <- as.character(user_ref_number)
+  user_reference_number <- as.character(user_reference_number)
   
-  validate_input_size(note_ref, 1, 1, 18)
-  validate_input_size(submitter_text, 1)
-  validate_input_size(user_ref_number, 1000, 1, 20)
-  validate_input_size(user_ref_type, 1, 1, 40)
-  validate_input_size(automated_record_id, 1, 1, 12)
-  validate_input_size(last_modified, 1, 10, 11)
+  if (length(user_reference_type) > 0 & length(user_reference_type) != length(user_reference_number))
+    stop("The number of user reference types must be the same as the number of user reference numbers")
   
-  dplyr::bind_rows(
-    split_text(start_level = 0, top_tag = "NOTE", text = submitter_text),
-    tibble::tibble(level = 1, tag = "REFN", value = user_ref_number),
-    tibble::tibble(level = 2, tag = "TYPE", value = user_ref_type),
-    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
-    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
-    last_modified %>% add_levels(1)
+  validate_xref(xref_note, 1)
+  validate_submitter_text(submitter_text, 1)
+  validate_user_reference_number(user_reference_number, 1000)
+  validate_user_reference_type(user_reference_type, 1000)
+  validate_automated_record_id(automated_record_id, 1)
+  
+  temp <- split_text(start_level = 0, top_tag = "NOTE", text = submitter_text)
+  
+  for (i in seq_along(user_reference_number)) {
+    temp <- dplyr::bind_rows(temp,
+                             tibble::tibble(level = 1, tag = "REFN", value = user_reference_number[i]))
+    
+    if (length(user_reference_type) > 0 )
+      temp <- dplyr::bind_rows(temp,
+                               tibble::tibble(level = 2, tag = "TYPE", value = user_reference_type[i])) 
+  }
+  
+  dplyr::bind_rows(temp,
+                   tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
+                   source_citations %>% dplyr::bind_rows() %>% add_levels(1),
+                   date_changed %>% add_levels(1)
   ) %>% 
-    dplyr::mutate(id = if_else(tag == "NOTE", ref_to_xref(note_ref, "T"), NA_character_)) %>% 
+    dplyr::mutate(id = dplyr::if_else(tag == "NOTE", xref_note, NA_character_),
+                  .after = level) %>% 
     finalise()
+  
   
 }
 
 
-
-REPOSITORY_RECORD <- function(repo_ref,
-                              repo_name,
-                              repo_address = address_structure(character()),
-                              repo_notes = list(),
-                              user_ref_number = character(),
-                              user_ref_type = character(),
+#' Construct the REPOSITORY_RECORD tibble
+#' 
+#' This function constructs a tibble representation of the REPOSITORY_RECORD from the GEDCOM 5.5.1
+#' specification.
+#'
+#' @inheritParams parameter_definitions
+#' @param address An ADDRESS_STRUCTURE() object giving details of the repository address.
+#' @tests
+#' expect_error(REPOSITORY_RECORD("@R1@", "Repo name",
+#'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
+#' expect_equal(REPOSITORY_RECORD("@R1@", "Repo name"),
+#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'                              0, "@R1@", "REPO",                      "",
+#'                              1, "@R1@", "NAME",             "Repo name",
+#'                              1, "@R1@", "CHAN",                      "",
+#'                              2, "@R1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+#'              ))
+#' @return A tidy tibble containing a REPOSITORY_RECORD part of a GEDCOM file.
+#' @export
+REPOSITORY_RECORD <- function(xref_repo,
+                              name_of_repository,
+                              address = ADDRESS_STRUCTURE(character()),
+                              notes = list(),
+                              user_reference_number = character(),
+                              user_reference_type = character(),
                               automated_record_id = character(),
                               date_changed = CHANGE_DATE()){
 
-  user_ref_number <- as.character(user_ref_number)
+  user_reference_number <- as.character(user_reference_number)
   
-  validate_input_size(repo_ref, 1, 1, 18)
-  validate_input_size(repo_name, 1, 1, 90)
-  validate_input_size(user_ref_number, 1000, 1, 20)
-  validate_input_size(user_ref_type, 1, 1, 40)
-  validate_input_size(automated_record_id, 1, 1, 12)
-  validate_input_size(last_modified, 1, 10, 11)
+  if (length(user_reference_type) > 0 & length(user_reference_type) != length(user_reference_number))
+    stop("The number of user reference types must be the same as the number of user reference numbers")
   
-  dplyr::bind_rows(
-    tibble::tibble(level = 0, id = ref_to_xref(repo_ref, "R"), tag = "REPO"),
-    tibble::tibble(level = 1, tag = "NAME", value = repo_name),
-    repo_address %>% add_levels(1),
-    repo_notes %>% dplyr::bind_rows() %>% add_levels(1),
-    tibble::tibble(level = 1, tag = "REFN", value = user_ref_number),
-    tibble::tibble(level = 2, tag = "TYPE", value = user_ref_type),
-    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
-    last_modified %>% add_levels(1)
+  validate_xref(xref_repo, 1)
+  validate_name_of_repository(name_of_repository, 1)
+  validate_user_reference_number(user_reference_number, 1000)
+  validate_user_reference_type(user_reference_type, 1000)
+  validate_automated_record_id(automated_record_id, 1)
+  
+  temp <- dplyr::bind_rows(
+    tibble::tibble(level = 0, id = xref_repo, tag = "REPO", value = ""),
+    tibble::tibble(level = 1, tag = "NAME", value = name_of_repository),
+    address %>% add_levels(1),
+    notes %>% dplyr::bind_rows() %>% add_levels(1)
   ) %>% 
     finalise()
   
+  for (i in seq_along(user_reference_number)) {
+    temp <- dplyr::bind_rows(temp,
+                             tibble::tibble(level = 1, tag = "REFN", value = user_reference_number[i]))
     
+    if (length(user_reference_type) > 0 )
+      temp <- dplyr::bind_rows(temp,
+                               tibble::tibble(level = 2, tag = "TYPE", value = user_reference_type[i])) 
+  }
+    
+  dplyr::bind_rows(temp,
+                   tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
+                   date_changed %>% add_levels(1)
+  ) %>% 
+    finalise()
 }
 
 
 
-SOURCE_RECORD <- function(source_ref,
+SOURCE_RECORD <- function(xref_sour,
                           events_recorded = character(),
-                          date_period = character(),
+                          date_period = date_period(),
                           source_jurisdiction_place = character(),
                           responsible_agency = character(),
                           data_notes = list(),
                           source_originator = character(),
-                          source_title = character(),
+                          source_descriptive_title = character(),
                           source_filed_by = character(),
                           source_publ_facts = character(),
                           source_text = character(),
@@ -460,7 +619,7 @@ SOURCE_RECORD <- function(source_ref,
   
   
   dplyr::bind_rows(
-    tibble::tibble(level = 0, id = ref_to_xref(source_ref, "S"), tag = "SOUR"),
+    tibble::tibble(level = 0, id = ref_to_xref(source_ref, "S"), tag = "SOUR", value = ""),
     tibble::tibble(level = 1, tag = "DATA", value = ""),
     tibble::tibble(level = 2, tag = "EVEN", value = events_recorded),
     tibble::tibble(level = 3, tag = "DATE", value = date_period),
@@ -476,7 +635,7 @@ SOURCE_RECORD <- function(source_ref,
     tibble::tibble(level = 1, tag = "REFN", value = user_ref_number),
     tibble::tibble(level = 2, tag = "TYPE", value = user_ref_type),
     tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
-    last_modified %>% add_levels(1),
+    date_changed %>% add_levels(1),
     notes %>% dplyr::bind_rows() %>% add_levels(1),
     multimedia_links %>% dplyr::bind_rows() %>% add_levels(1)
   ) %>% 
@@ -502,7 +661,7 @@ SUBMISSION_RECORD <- function(submission_ref,
   check_ordinance_flag(ordinance_flag)
   
   dplyr::bind_rows(
-    tibble::tibble(level = 0, id = ref_to_xref(submission_ref, "SN"), tag = "SUBN"),
+    tibble::tibble(level = 0, id = ref_to_xref(submission_ref, "SN"), tag = "SUBN", value = ""),
     tibble::tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_ref, "U")),
     tibble::tibble(level = 1, tag = "FAMF", value = name_of_family_file),
     tibble::tibble(level = 1, tag = "TEMP", value = temple_code),
@@ -511,7 +670,7 @@ SUBMISSION_RECORD <- function(submission_ref,
     tibble::tibble(level = 1, tag = "ORDI", value = ordinance_flag),
     tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
     notes %>% dplyr::bind_rows() %>% add_levels(1),
-    last_modified %>% add_levels(1)
+    date_changed %>% add_levels(1)
   ) %>% 
     finalise()
   
@@ -532,7 +691,7 @@ SUBMITTER_RECORD <- function(submitter_ref,
   submitter_registered_rfn <- as.character(submitter_registered_rfn)
   
   dplyr::bind_rows(
-    tibble::tibble(level = 0, id = ref_to_xref(submitter_ref, "U"), tag = "SUBM"),
+    tibble::tibble(level = 0, id = ref_to_xref(submitter_ref, "U"), tag = "SUBM", value = ""),
     tibble::tibble(level = 1, tag = "NAME", value = submitter_name),
     submitter_address %>% add_levels(1),
     multimedia_links %>% dplyr::bind_rows() %>% add_levels(1),
@@ -540,7 +699,7 @@ SUBMITTER_RECORD <- function(submitter_ref,
     tibble::tibble(level = 1, tag = "RFN", value = submitter_registered_rfn),
     tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
     notes %>% dplyr::bind_rows() %>% add_levels(1),
-    last_modified %>% add_levels(1)
+    date_changed %>% add_levels(1)
   ) %>% 
     finalise()
   

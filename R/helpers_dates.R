@@ -215,6 +215,8 @@ date_value_pattern <- function() {
 #' @param month The month of the year.
 #' @param year The year.
 #' @tests
+#' expect_equal(date_exact(12), character())
+#' expect_equal(date_exact(12, 8), character())
 #' expect_equal(date_exact(12, 8, 2005), "12 AUG 2005")
 #' @return A DATE_EXACT string
 #' @export

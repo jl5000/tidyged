@@ -133,6 +133,10 @@ validate_date_exact <- function(input, max_dim) {
   validate_input_size(input, max_dim, 10, 11)
   validate_input_pattern(input, date_exact_pattern())
 }
+validate_date_period_covered <- function(input, max_dim) {
+  validate_input_size(input, max_dim, 7, 35)
+  validate_input_pattern(input, date_period_pattern())
+}
 validate_date_value <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 35)
   validate_input_pattern(input, date_value_pattern())
@@ -181,7 +185,7 @@ validate_gedcom_content_description <- function(input, max_dim) {
 validate_generations_of_ancestors <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 4)
 }
-validate_generations_of_descendents <- function(input, max_dim) {
+validate_generations_of_descendants <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 4)
 }
 validate_language_of_text <- function(input, max_dim) {
@@ -369,7 +373,7 @@ validate_source_description <- function(input, max_dim) {
   validate_input_size(input, max_dim)
 }
 validate_source_descriptive_title <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 248)
+  validate_input_size(input, max_dim)
 }
 validate_source_filed_by_entry <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 60)
@@ -385,7 +389,7 @@ validate_source_media_type <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 15)
 }
 validate_source_originator <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 248)
+  validate_input_size(input, max_dim)
 }
 validate_source_publication_facts <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
@@ -403,7 +407,7 @@ validate_temple_code <- function(input, max_dim) {
   validate_input_size(input, max_dim, 4, 5)
 }
 validate_text_from_source <- function(input, max_dim) {
-  validate_text(input, max_dim)
+  validate_input_size(input, max_dim)
 }
 validate_time_value <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 12)

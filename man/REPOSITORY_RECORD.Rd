@@ -20,6 +20,8 @@ REPOSITORY_RECORD(
 
 \item{name_of_repository}{The official name of the archive in which the stated source material is stored.}
 
+\item{address}{An ADDRESS_STRUCTURE() object giving details of the repository address.}
+
 \item{notes}{A list of NOTE_STRUCTURE() objects.}
 
 \item{user_reference_number}{A user-defined number or text that the submitter uses to identify this record.}

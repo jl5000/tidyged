@@ -593,81 +593,153 @@ REPOSITORY_RECORD <- function(xref_repo,
 }
 
 
-
+#' Construct the SOURCE_RECORD tibble
+#' 
+#' This function constructs a tibble representation of the SOURCE_RECORD from the GEDCOM 5.5.1
+#' specification.
+#'
+#' @inheritParams parameter_definitions
+#' @param date_period_covered A date_period() object associated with the period covered by the course. 
+#' @param data_notes A list of NOTE_STRUCTURE() objects associated with the data in this source.
+#' @tests
+#' expect_error(SOURCE_RECORD("@S1@",
+#'                            user_reference_number = 123:125, user_reference_type = letters[1:2]))
+#' expect_equal(SOURCE_RECORD("@S1@"),
+#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'                              0, "@S1@", "SOUR",                      "",
+#'                              1, "@S1@", "CHAN",                      "",
+#'                              2, "@S1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+#'              ))
+#' @return A tidy tibble containing a SOURCE_RECORD part of a GEDCOM file.
+#' @export
 SOURCE_RECORD <- function(xref_sour,
                           events_recorded = character(),
-                          date_period = date_period(),
+                          date_period_covered = date_period(),
                           source_jurisdiction_place = character(),
                           responsible_agency = character(),
                           data_notes = list(),
                           source_originator = character(),
                           source_descriptive_title = character(),
-                          source_filed_by = character(),
-                          source_publ_facts = character(),
-                          source_text = character(),
-                          source_repo_citations = list(),
-                          user_ref_number = character(),
-                          user_ref_type = character(),
+                          source_filed_by_entry = character(),
+                          source_publication_facts = character(),
+                          text_from_source = character(),
+                          source_repository_citations = list(),
+                          user_reference_number = character(),
+                          user_reference_type = character(),
                           automated_record_id = character(),
                           date_changed = CHANGE_DATE(),
                           notes = list(),
                           multimedia_links = list()){
   
-  user_ref_number <- as.character(user_ref_number)
+  user_reference_number <- as.character(user_reference_number)
   
-  validate_input_size()
+  if (length(user_reference_type) > 0 & length(user_reference_type) != length(user_reference_number))
+    stop("The number of user reference types must be the same as the number of user reference numbers")
   
+  validate_xref(xref_sour, 1)
+  validate_events_recorded(events_recorded, 1000)
+  validate_date_period_covered(date_period_covered, 1)
+  validate_source_jurisdiction_place(source_jurisdiction_place, 1)
+  validate_responsible_agency(responsible_agency, 1)
+  validate_source_originator(source_originator, 1)
+  validate_source_descriptive_title(source_descriptive_title, 1)
+  validate_source_filed_by_entry(source_filed_by_entry, 1)
+  validate_source_publication_facts(source_publication_facts, 1)
+  validate_text_from_source(text_from_source, 1)
+  validate_user_reference_number(user_reference_number, 1000)
+  validate_user_reference_type(user_reference_type, 1000)
+  validate_automated_record_id(automated_record_id, 1)
   
-  dplyr::bind_rows(
-    tibble::tibble(level = 0, id = ref_to_xref(source_ref, "S"), tag = "SOUR", value = ""),
+  temp <- dplyr::bind_rows(
+    tibble::tibble(level = 0, id = xref_sour, tag = "SOUR", value = ""),
     tibble::tibble(level = 1, tag = "DATA", value = ""),
     tibble::tibble(level = 2, tag = "EVEN", value = events_recorded),
-    tibble::tibble(level = 3, tag = "DATE", value = date_period),
+    tibble::tibble(level = 3, tag = "DATE", value = date_period_covered),
     tibble::tibble(level = 3, tag = "PLAC", value = source_jurisdiction_place),
     tibble::tibble(level = 2, tag = "AGNC", value = responsible_agency),
     data_notes %>% dplyr::bind_rows() %>% add_levels(2),
     split_text(start_level = 1, top_tag = "AUTH", text = source_originator),
-    split_text(start_level = 1, top_tag = "TITL", text = source_title),
-    tibble::tibble(level = 1, tag = "ABBR", value = source_filed_by),
-    split_text(start_level = 1, top_tag = "PUBL", text = source_publ_facts),
-    split_text(start_level = 1, top_tag = "TEXT", text = source_text),
-    source_repo_citations %>% dplyr::bind_rows() %>% add_levels(1),
-    tibble::tibble(level = 1, tag = "REFN", value = user_ref_number),
-    tibble::tibble(level = 2, tag = "TYPE", value = user_ref_type),
-    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
-    date_changed %>% add_levels(1),
-    notes %>% dplyr::bind_rows() %>% add_levels(1),
-    multimedia_links %>% dplyr::bind_rows() %>% add_levels(1)
-  ) %>% 
-    finalise()
+    split_text(start_level = 1, top_tag = "TITL", text = source_descriptive_title),
+    tibble::tibble(level = 1, tag = "ABBR", value = source_filed_by_entry),
+    split_text(start_level = 1, top_tag = "PUBL", text = source_publication_facts),
+    split_text(start_level = 1, top_tag = "TEXT", text = text_from_source),
+    source_repository_citations %>% dplyr::bind_rows() %>% add_levels(1)
+    )
+  
+  
+  for (i in seq_along(user_reference_number)) {
+    temp <- dplyr::bind_rows(temp,
+                             tibble::tibble(level = 1, tag = "REFN", value = user_reference_number[i]))
+    
+    if (length(user_reference_type) > 0 )
+      temp <- dplyr::bind_rows(temp,
+                               tibble::tibble(level = 2, tag = "TYPE", value = user_reference_type[i])) 
+  }
+  
+  temp <- dplyr::bind_rows(temp,
+                           tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
+                           date_changed %>% add_levels(1),
+                           notes %>% dplyr::bind_rows() %>% add_levels(1),
+                           multimedia_links %>% dplyr::bind_rows() %>% add_levels(1)
+  )
+  
+  if (length(date_period_covered) + length(source_jurisdiction_place) == 0)
+    temp <- dplyr::filter(temp, tag != "EVEN")
+  
+  if (length(events_recorded) + length(responsible_agency) + length(data_notes) == 0)
+    temp <- dplyr::filter(temp, tag != "DATA")
+  
+  finalise(temp)
   
 }
 
 
-# Max = 1
-SUBMISSION_RECORD <- function(submission_ref,
-                              submitter_ref = character(),
+#' Construct the SUBMISSION_RECORD tibble
+#' 
+#' This function constructs a tibble representation of the SUBMISSION_RECORD from the GEDCOM 5.5.1
+#' specification.
+#'
+#' @inheritParams parameter_definitions
+#' @tests
+#' expect_equal(SUBMISSION_RECORD("@S1@"),
+#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'                              0, "@S1@", "SUBN",                      "",
+#'                              1, "@S1@", "CHAN",                      "",
+#'                              2, "@S1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+#'              ))
+#' @return A tidy tibble containing a SUBMISSION_RECORD part of a GEDCOM file.
+#' @export
+SUBMISSION_RECORD <- function(xref_subn,
+                              xref_subm = character(),
                               name_of_family_file = character(),
                               temple_code = character(),
-                              num_anc_generations = character(),
-                              num_des_generations = character(),
-                              ordinance_flag = character(),
+                              generations_of_ancestors = character(),
+                              generations_of_descendants = character(),
+                              ordinance_process_flag = character(),
                               automated_record_id = character(),
                               notes = list(),
                               date_changed = CHANGE_DATE()){
  
-  num_anc_generations <- as.character(num_anc_generations)
-  num_des_generations <- as.character(num_des_generations)
-  check_ordinance_flag(ordinance_flag)
+  generations_of_ancestors <- as.character(generations_of_ancestors)
+  generations_of_descendants <- as.character(generations_of_descendants)
+  
+  validate_xref(xref_subn, 1)
+  validate_xref(xref_subm, 1)
+  validate_name_of_family_file(name_of_family_file, 1)
+  validate_temple_code(temple_code, 1)
+  validate_generations_of_ancestors(generations_of_ancestors, 1)
+  validate_generations_of_descendants(generations_of_descendants, 1)
+  validate_ordinance_process_flag(ordinance_process_flag, 1)
+  validate_automated_record_id(automated_record_id, 1)
   
   dplyr::bind_rows(
-    tibble::tibble(level = 0, id = ref_to_xref(submission_ref, "SN"), tag = "SUBN", value = ""),
-    tibble::tibble(level = 1, tag = "SUBM", value = ref_to_xref(submitter_ref, "U")),
+    tibble::tibble(level = 0, id = xref_subn, tag = "SUBN", value = ""),
+    tibble::tibble(level = 1, tag = "SUBM", value = xref_subm),
     tibble::tibble(level = 1, tag = "FAMF", value = name_of_family_file),
     tibble::tibble(level = 1, tag = "TEMP", value = temple_code),
-    tibble::tibble(level = 1, tag = "ANCE", value = num_anc_generations),
-    tibble::tibble(level = 1, tag = "DESC", value = num_des_generations),
-    tibble::tibble(level = 1, tag = "ORDI", value = ordinance_flag),
+    tibble::tibble(level = 1, tag = "ANCE", value = generations_of_ancestors),
+    tibble::tibble(level = 1, tag = "DESC", value = generations_of_descendants),
+    tibble::tibble(level = 1, tag = "ORDI", value = ordinance_process_flag),
     tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
     notes %>% dplyr::bind_rows() %>% add_levels(1),
     date_changed %>% add_levels(1)
@@ -678,9 +750,26 @@ SUBMISSION_RECORD <- function(submission_ref,
 }
 
 
-SUBMITTER_RECORD <- function(submitter_ref,
-                             submitter_name = character(),
-                             submitter_address = address_structure(character()),
+#' Construct the SUBMITTER_RECORD tibble
+#' 
+#' This function constructs a tibble representation of the SUBMITTER_RECORD from the GEDCOM 5.5.1
+#' specification.
+#'
+#' @inheritParams parameter_definitions
+#' @param address An ADDRESS_STRUCTURE() object giving address details of the submitter.
+#' @tests
+#' expect_equal(SUBMITTER_RECORD("@S1@", "Joe Bloggs"),
+#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'                              0, "@S1@", "SUBM",                      "",
+#'                              1, "@S1@", "NAME",            "Joe Bloggs",
+#'                              1, "@S1@", "CHAN",                      "",
+#'                              2, "@S1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+#'              ))
+#' @return A tidy tibble containing a SUBMITTER_RECORD part of a GEDCOM file.
+#' @export
+SUBMITTER_RECORD <- function(xref_subm,
+                             submitter_name,
+                             address = ADDRESS_STRUCTURE(character()),
                              multimedia_links = list(),
                              language_preference = character(),
                              submitter_registered_rfn = character(),
@@ -690,10 +779,16 @@ SUBMITTER_RECORD <- function(submitter_ref,
   
   submitter_registered_rfn <- as.character(submitter_registered_rfn)
   
+  validate_xref(xref_subm, 1)
+  validate_submitter_name(submitter_name, 1)
+  validate_language_preference(language_preference, 3)
+  validate_submitter_registered_rfn(submitter_registered_rfn, 1)
+  validate_automated_record_id(automated_record_id, 1)
+  
   dplyr::bind_rows(
-    tibble::tibble(level = 0, id = ref_to_xref(submitter_ref, "U"), tag = "SUBM", value = ""),
+    tibble::tibble(level = 0, id = xref_subm, tag = "SUBM", value = ""),
     tibble::tibble(level = 1, tag = "NAME", value = submitter_name),
-    submitter_address %>% add_levels(1),
+    address %>% add_levels(1),
     multimedia_links %>% dplyr::bind_rows() %>% add_levels(1),
     tibble::tibble(level = 1, tag = "LANG", value = language_preference),
     tibble::tibble(level = 1, tag = "RFN", value = submitter_registered_rfn),
@@ -706,12 +801,18 @@ SUBMITTER_RECORD <- function(submitter_ref,
   
 }
 
-
+#' Construct the FOOTER_SECTION tibble
+#' 
+#' This function constructs a tibble representation of the FOOTER_SECTION from the GEDCOM 5.5.1
+#' specification.
+#'
 #' @tests
 #' expect_equal(FOOTER_SECTION(),
 #'              tibble::tribble(~level,  ~id,   ~tag, ~value,
 #'                              0, "TR", "TRLR",     ""
 #'              ))
+#' @return A tidy tibble containing a FOOTER_SECTION part of a GEDCOM file.
+#' @export
 FOOTER_SECTION <- function(){
   tibble::tibble(level = 0, id = "TR", tag = "TRLR", value = "") %>% 
     finalise()

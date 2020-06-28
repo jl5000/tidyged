@@ -93,7 +93,8 @@
 #' @param event_type_individual A code used to indicate the type of individual event. 
 #' @param events_recorded An enumeration of the different kinds of events that were recorded in a 
 #' particular source. Each enumeration is separated by a comma. Such as a parish register of births, 
-#' deaths, and marriages would be BIRT, DEAT, MARR. 
+#' deaths, and marriages would be BIRT, DEAT, MARR. These can be enumerated over more than one
+#' vector element. 
 #' @param file_name The name of the GEDCOM transmission file. If the file name includes a file 
 #' extension it must be shown in the form (filename.ext).
 #' @param gedcom_content_description A note that a user enters to describe the contents of the 
@@ -214,6 +215,7 @@
 #' @param submitter_registered_rfn A registered number of a submitter of Ancestral File data. 
 #' This number is used in subsequent submissions or inquiries by the submitter for identification purposes.
 #' @param submitter_text Comments or opinions from the submitter. 
+#' @param temple_code An abbreviation of the temple in which LDS temple ordinances were performed.
 #' @param text_from_source A verbatim copy of any description contained within the source. 
 #' This indicates notes or text that are actually contained in the source document, not the submitter's 
 #' opinion about the source.  
@@ -238,6 +240,7 @@
 #' the current date is used.
 #' @param notes A list of NOTE_STRUCTURE() objects.
 #' @param source_citations A list of SOURCE_CITATION() objects.
+#' @param source_repository_citations A list of SOURCE_REPOSITORY_CITATION() objects.
 #' @param multimedia_links A list of MULTIMEDIA_LINK() objects
 parameter_definitions <- function() {return(0)}
 

@@ -125,7 +125,8 @@ the certainty associated with the source used in asserting the cited fact.}
 
 \item{events_recorded}{An enumeration of the different kinds of events that were recorded in a
 particular source. Each enumeration is separated by a comma. Such as a parish register of births,
-deaths, and marriages would be BIRT, DEAT, MARR.}
+deaths, and marriages would be BIRT, DEAT, MARR. These can be enumerated over more than one
+vector element.}
 
 \item{file_name}{The name of the GEDCOM transmission file. If the file name includes a file
 extension it must be shown in the form (filename.ext).}
@@ -311,6 +312,8 @@ This number is used in subsequent submissions or inquiries by the submitter for 
 
 \item{submitter_text}{Comments or opinions from the submitter.}
 
+\item{temple_code}{An abbreviation of the temple in which LDS temple ordinances were performed.}
+
 \item{text_from_source}{A verbatim copy of any description contained within the source.
 This indicates notes or text that are actually contained in the source document, not the submitter's
 opinion about the source.}
@@ -353,6 +356,8 @@ the current date is used.}
 \item{notes}{A list of NOTE_STRUCTURE() objects.}
 
 \item{source_citations}{A list of SOURCE_CITATION() objects.}
+
+\item{source_repository_citations}{A list of SOURCE_REPOSITORY_CITATION() objects.}
 
 \item{multimedia_links}{A list of MULTIMEDIA_LINK() objects}
 }

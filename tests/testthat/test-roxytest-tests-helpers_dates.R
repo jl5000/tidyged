@@ -128,3 +128,14 @@ test_that("Function date_value() @ L268", {
   expect_equal(date_value(2005, 1, about = TRUE), "ABT JAN 2005")
 })
 
+
+test_that("Function date_period() @ L342", {
+  expect_equal(date_period(2005), "FROM 2005")
+  expect_equal(date_period(2005, 1), "FROM JAN 2005")
+  expect_equal(date_period(2005, 1, 14), "FROM 14 JAN 2005")
+  expect_equal(date_period(2005, to = TRUE), "TO 2005")
+  expect_equal(date_period(2010, 6, to = TRUE), "TO JUN 2010")
+  expect_equal(date_period(2005, 10, 14, 2008, 9), "FROM 14 OCT 2005 TO SEP 2008")
+  expect_equal(date_period(1900, 6, 30, 1901), "FROM 30 JUN 1900 TO 1901")
+})
+

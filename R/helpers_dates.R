@@ -319,3 +319,54 @@ date_value <- function(start_year = numeric(),
   stringr::str_trim(val)
 }
 
+
+#' Construct a DATE_PERIOD string
+#'
+#' @param start_year The start year of the period. This value is required.
+#' @param start_month The start month of the period.
+#' @param start_day The start day of the period.
+#' @param end_year The end year of the period
+#' @param end_month The end month of the period.
+#' @param end_day The end day of the period.
+#' @param to Whether the date given by start_year/month/day should be considered the end of a period.
+#' @tests
+#' expect_equal(date_period(2005), "FROM 2005")
+#' expect_equal(date_period(2005, 1), "FROM JAN 2005")
+#' expect_equal(date_period(2005, 1, 14), "FROM 14 JAN 2005")
+#' expect_equal(date_period(2005, to = TRUE), "TO 2005")
+#' expect_equal(date_period(2010, 6, to = TRUE), "TO JUN 2010")
+#' expect_equal(date_period(2005, 10, 14, 2008, 9), "FROM 14 OCT 2005 TO SEP 2008")
+#' expect_equal(date_period(1900, 6, 30, 1901), "FROM 30 JUN 1900 TO 1901")
+#' @return A DATE_PERIOD string
+#' @export
+date_period <- function(start_year = numeric(),
+                        start_month = numeric(),
+                        start_day = numeric(),
+                        end_year = numeric(),
+                        end_month = numeric(),
+                        end_day = numeric(),
+                        to = FALSE) {
+  
+  if (length(start_year) == 0) return(character())
+  
+  if (!to) { 
+    val <- "FROM"
+  } else {
+    val <- "TO"
+  }
+  
+  if (length(start_day) == 1) val <- paste(val, start_day)
+  if (length(start_month) == 1) val <- paste(val, toupper(month.abb[start_month]))
+  val <- paste(val, start_year)
+  
+  if (length(end_year) == 1) {
+    val <- paste(val, "TO")
+    
+    if (length(end_day) == 1) val <- paste(val, end_day)
+    if (length(end_month) == 1) val <- paste(val, toupper(month.abb[end_month]))
+    val <- paste(val, end_year)
+  }
+  
+  stringr::str_trim(val)
+  
+}

@@ -19,3 +19,6 @@ Imports:
     tidyr,
     stringr,
     purrr
+Suggests: 
+    testthat,
+    roxytest

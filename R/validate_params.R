@@ -26,6 +26,53 @@ validate_input_choice <- function(input, choices) {
          paste(choices, collapse = ", "))
 }
 
+
+#' @tests
+#' expect_error(validate_date(2005, day1 = 15))
+#' expect_error(validate_date(2005, 10, 15, month2 = 4))
+#' expect_error(validate_date(2005, 10, 15, day2 = 15))
+#' expect_error(validate_date(2005, 10, 15, 2015, day2 = 15))
+#' expect_error(validate_date(2005, 13))
+#' expect_error(validate_date(2005, 10, 32))
+#' expect_error(validate_date(2005, -1, 6))
+#' expect_error(validate_date(2005, 6, 15, 2005, 0, 20))
+#' expect_error(validate_date(2005, 5, 18, 2006, 2, 29))
+#' expect_error(validate_date(2005, 3, year2 = 2005, month2 = 2))
+#' expect_error(validate_date(2005, year2 = 2004))
+validate_date <- function(year1,
+                          month1 = numeric(),
+                          day1 = numeric(),
+                          year2 = numeric(),
+                          month2 = numeric(),
+                          day2 = numeric()) {
+  
+  if (length(year1) < length(month1) | length(year2) < length(month2))
+    stop("Month is defined without a year")
+  
+  if (length(month1) < length(day1) | length(month2) < length(day2))
+    stop("Day is defined without a month")
+  
+  # Set first date to earliest possible time
+  if (length(month1) == 0) month1 <- 1
+  if (length(day1) == 0) day1 <- 1
+  
+  #Let lubridate do the heavy lifting
+  date1 <- lubridate::make_date(year1, month1, day1)
+  if (is.na(date1)) stop("First date is invalid")
+  
+  # If second date isn't given, make one anyway
+  if (length(year2) == 0) year2 <- 4000
+  if (length(month2) == 0) month2 <- 12
+  if (length(day2) == 0) day2 <- lubridate::days_in_month(month2)
+  if (lubridate::leap_year(year2) & month2 == 2) day2 <- day2 + 1
+  
+  date2 <- lubridate::make_date(year2, month2, day2)
+  if (is.na(date2)) stop("Second date is invalid")
+  
+  if (date1 > date2) stop("First date is after second date")
+}
+
+
 validate_address_city <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 60)
 }
@@ -100,7 +147,7 @@ validate_cause_of_event <- function(input, max_dim) {
 }
 validate_certainty_assessment <- function(input, max_dim) {
   choices <- as.character(0:3)
-  validate_input(input, choices)
+  validate_input_choice(input, choices)
   validate_input_size(input, max_dim, 1, 1)
 }
 validate_character_set <- function(input, max_dim) {
@@ -124,10 +171,6 @@ validate_count_of_children <- function(input, max_dim) {
 }
 validate_count_of_marriages <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 3)
-}
-validate_date <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 4, 35)
-  validate_input_pattern(inputs, date_pattern())
 }
 validate_date_exact <- function(input, max_dim) {
   validate_input_size(input, max_dim, 10, 11)

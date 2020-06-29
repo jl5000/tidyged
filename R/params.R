@@ -1,11 +1,6 @@
 
 
-#' Title
-#'
-#' @description 
-#' 
-#' @details
-#'
+
 #' @param address_city The name of the city/town used in the address. Isolated for sorting or indexing.
 #' @param address_country The name of the country that pertains to the associated address. Isolated by some systems for 
 #' sorting or indexing. Used in most cases to facilitate automatic sorting of mail.

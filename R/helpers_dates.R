@@ -34,7 +34,6 @@ year_pattern <- function() {
 #' expect_equal(grepl(date_exact_pattern(), "5 JUL 2005 "), FALSE)
 #' expect_equal(grepl(date_exact_pattern(), " 5 JUL 2005"), FALSE)
 #' @return A regex string
-#' @export
 date_exact_pattern <- function() {
   paste(day_pattern(), month_pattern(), year_pattern()) %>% anchor_it()
 }
@@ -58,7 +57,6 @@ date_exact_pattern <- function() {
 #' expect_equal(grepl(date_pattern(), "5 JUL 2005 "), FALSE)
 #' expect_equal(grepl(date_pattern(), " 5 JUL 2005"), FALSE)
 #' @return Either a single regex string or a vector of them
-#' @export
 date_pattern <- function(flatten = TRUE) {
   combos <- c(paste(day_pattern(), month_pattern(), year_pattern()),
               paste(month_pattern(), year_pattern()),
@@ -89,7 +87,6 @@ date_pattern <- function(flatten = TRUE) {
 #' expect_equal(grepl(date_period_pattern(), "FROM 5 JUL 2005 "), FALSE)
 #' expect_equal(grepl(date_period_pattern(), " TO 5 JUL 2005"), FALSE)
 #' @return Either a single regex string or a vector of them
-#' @export
 date_period_pattern <- function(flatten = TRUE) {
   combos <- c(paste("FROM", date_pattern(FALSE)),
               paste("TO", date_pattern(FALSE)),
@@ -121,7 +118,6 @@ date_period_pattern <- function(flatten = TRUE) {
 #' expect_equal(grepl(date_range_pattern(), "BEF 5 JUL 2005 "), FALSE)
 #' expect_equal(grepl(date_range_pattern(), " AFT 5 JUL 2005"), FALSE)
 #' @return Either a single regex string or a vector of them
-#' @export
 date_range_pattern <- function(flatten = TRUE) {
   combos <- c(paste("BEF", date_pattern(FALSE)),
               paste("AFT", date_pattern(FALSE)),
@@ -153,7 +149,6 @@ date_range_pattern <- function(flatten = TRUE) {
 #' expect_equal(grepl(date_approximated_pattern(), "CAL 5 JUL 2005 "), FALSE)
 #' expect_equal(grepl(date_approximated_pattern(), " CAL 5 JUL 2005"), FALSE)
 #' @return Either a single regex string or a vector of them
-#' @export
 date_approximated_pattern <- function(flatten = TRUE) {
   combos <- c(paste("ABT", date_pattern(FALSE)),
               paste("CAL", date_pattern(FALSE)),
@@ -167,10 +162,6 @@ date_approximated_pattern <- function(flatten = TRUE) {
 
 #' Construct the regex pattern for DATE_VALUE values
 #'
-#' @param flatten A logical value which determines whether a single regex string should be
-#' returned (flatten = TRUE) or if a vector of them should be returned (flatten = FALSE).
-#' The vector output is used if the regexes need to be combined with other regexes. If they
-#' do not, then they are anchored with ^ and $ and separated with | (OR).
 #' @tests
 #' expect_equal(grepl(date_value_pattern(), "14 JAN 2005"), TRUE)
 #' expect_equal(grepl(date_value_pattern(), "MAR 1901"), TRUE)
@@ -197,7 +188,6 @@ date_approximated_pattern <- function(flatten = TRUE) {
 #' expect_equal(grepl(date_value_pattern(), "14TH JAN 1901/58"), FALSE)
 #' expect_equal(grepl(date_value_pattern(), "ABT 5  JUL 2005"), FALSE)
 #' @return Either a single regex string or a vector of them
-#' @export
 date_value_pattern <- function() {
   #date_phrase not implemented
   c(date_pattern(FALSE),
@@ -225,6 +215,8 @@ date_exact <- function(day = numeric(),
                        year = numeric()) {
   
   if (length(day) + length(month) + length(year) < 3) return(character())
+  
+  validate_date(year, month, day)
   
   paste(day, toupper(month.abb[month]), year)
   
@@ -281,6 +273,8 @@ date_value <- function(start_year = numeric(),
                        est = FALSE) {
   
   if (length(start_year) == 0) return(character())
+  
+  validate_date(start_year, start_month, start_day, end_year, end_month, end_day)
   
   val <- ""
   if (from) val <- "FROM"
@@ -348,6 +342,8 @@ date_period <- function(start_year = numeric(),
                         to = FALSE) {
   
   if (length(start_year) == 0) return(character())
+  
+  validate_date(start_year, start_month, start_day, end_year, end_month, end_day)
   
   if (!to) { 
     val <- "FROM"

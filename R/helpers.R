@@ -2,6 +2,11 @@
 
 `%nin%` <- Negate(`%in%`)
 
+set_class_to_tidygedcom <- function(gedcom) {
+  class(gedcom) <- c("tidygedcom", "tbl_df", "tbl", "data.frame")
+  gedcom
+}
+
 add_levels <- function(df, start_level) {
   
   if (nrow(df) == 0) return(df)
@@ -39,7 +44,6 @@ ref_to_xref <- function(ref, type) {
 #' @param start_level The level of the first line. Defaults to 0.
 #' @tests
 #' @return A tidy tibble containing the GEDCOM representation of the character vector.
-#' @export
 split_text <- function(text, top_tag, char_limit = 248, start_level = 0) {
    
   purrr::map_dfr(text, function(txt) {

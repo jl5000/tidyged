@@ -1,12 +1,13 @@
 
-purrr::walk(list.files("R", full.names = TRUE, pattern = "[.]R$"), source)
+devtools::load_all()
 devtools::document()
-testthat::test_dir("tests/testthat")
+devtools::test()
+devtools::check()
 
-test = import_gedcom("Franklins.ged")
-royals = import_gedcom("royal92.ged")
+test = import_gedcom("../tgdata/Franklins.ged")
+royals = import_gedcom("../tgdata/royal92.ged")
 
-export_gedcom(test, "test.ged")
+export_gedcom(test, "../tgdata/test.ged")
 
 
   

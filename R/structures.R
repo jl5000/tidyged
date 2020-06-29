@@ -1187,7 +1187,7 @@ SOURCE_REPOSITORY_CITATION <- function(xref_repo,
                                        source_call_number = character(),
                                        source_media_type = character()) {
   
-  if (length(xref_repo) == 0) return(tibble())
+  if (length(xref_repo) == 0) return(tibble::tibble())
   
   validate_xref(xref_repo, 1)
   validate_source_call_number(source_call_number, 1000)
@@ -1222,7 +1222,7 @@ SOURCE_REPOSITORY_CITATION <- function(xref_repo,
 SPOUSE_TO_FAMILY_LINK <- function(xref_fam,
                                   notes = list()) {
   
-  if (length(xref_fam) == 0) return(tibble())
+  if (length(xref_fam) == 0) return(tibble::tibble())
   
   validate_xref(xref_fam, 1)
   

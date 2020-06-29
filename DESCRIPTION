@@ -18,7 +18,9 @@ Imports:
     readr,
     tidyr,
     stringr,
-    purrr
+    purrr,
+    lubridate,
+    tibble
 Suggests: 
     testthat,
     roxytest

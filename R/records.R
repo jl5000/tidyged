@@ -573,8 +573,7 @@ REPOSITORY_RECORD <- function(xref_repo,
     tibble::tibble(level = 1, tag = "NAME", value = name_of_repository),
     address %>% add_levels(1),
     notes %>% dplyr::bind_rows() %>% add_levels(1)
-  ) %>% 
-    finalise()
+  )
   
   for (i in seq_along(user_reference_number)) {
     temp <- dplyr::bind_rows(temp,

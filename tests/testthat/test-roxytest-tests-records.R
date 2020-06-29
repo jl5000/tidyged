@@ -129,7 +129,7 @@ test_that("Function REPOSITORY_RECORD() @ L551", {
 })
 
 
-test_that("Function SOURCE_RECORD() @ L615", {
+test_that("Function SOURCE_RECORD() @ L614", {
   expect_error(SOURCE_RECORD("@S1@",
                              user_reference_number = 123:125, user_reference_type = letters[1:2]))
   expect_equal(SOURCE_RECORD("@S1@"),
@@ -141,7 +141,7 @@ test_that("Function SOURCE_RECORD() @ L615", {
 })
 
 
-test_that("Function SUBMISSION_RECORD() @ L712", {
+test_that("Function SUBMISSION_RECORD() @ L711", {
   expect_equal(SUBMISSION_RECORD("@S1@"),
                tibble::tribble(~level,  ~id,   ~tag,                  ~value,
                                0, "@S1@", "SUBN",                      "",
@@ -151,7 +151,7 @@ test_that("Function SUBMISSION_RECORD() @ L712", {
 })
 
 
-test_that("Function SUBMITTER_RECORD() @ L770", {
+test_that("Function SUBMITTER_RECORD() @ L769", {
   expect_equal(SUBMITTER_RECORD("@S1@", "Joe Bloggs"),
                tibble::tribble(~level,  ~id,   ~tag,                  ~value,
                                0, "@S1@", "SUBM",                      "",
@@ -162,7 +162,7 @@ test_that("Function SUBMITTER_RECORD() @ L770", {
 })
 
 
-test_that("Function FOOTER_SECTION() @ L816", {
+test_that("Function FOOTER_SECTION() @ L815", {
   expect_equal(FOOTER_SECTION(),
                tibble::tribble(~level,  ~id,   ~tag, ~value,
                                0, "TR", "TRLR",     ""

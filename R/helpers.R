@@ -7,6 +7,14 @@ set_class_to_tidygedcom <- function(gedcom) {
   gedcom
 }
 
+summary_line <- function(gedcom, tag_label, tag_level, prefix) {
+  
+  tag_level <- as.character(tag_level)
+  ifelse(dplyr::filter(gedcom, tag == tag_label, level == tag_level) %>% nrow() == 1, 
+         paste(prefix, dplyr::filter(gedcom, tag == tag_label, level == tag_level) %>% dplyr::pull(value), "\n"), "")
+  
+}
+
 add_levels <- function(df, start_level) {
   
   if (nrow(df) == 0) return(df)

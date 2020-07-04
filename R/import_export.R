@@ -2,7 +2,7 @@
 
 import_gedcom <- function(filepath) {
   
-  readr::read_lines(filepath) %>% 
+  ged <- readr::read_lines(filepath) %>% 
     stringr::str_trim() %>% 
     tibble::tibble(value = .) %>%
     tidyr::extract(value, into = c("level", "id", "tag", "value"), 
@@ -13,6 +13,8 @@ import_gedcom <- function(filepath) {
     dplyr::mutate(level = as.numeric(level)) %>% 
     set_class_to_tidygedcom()
 
+  validate_gedcom(ged)
+  ged
   
 }
 

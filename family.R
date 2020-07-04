@@ -5,7 +5,7 @@ devtools::test()
 devtools::check()
 
 test = import_gedcom("../tgdata/Franklins.ged")
-royals = import_gedcom("../tgdata/royal92.ged")
+test = import_gedcom("../tgdata/royal92.ged")
 
 export_gedcom(test, "../tgdata/test.ged")
 

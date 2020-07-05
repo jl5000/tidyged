@@ -1,5 +1,9 @@
 
 
+current_date <- function() { 
+  toupper(format(Sys.Date(), "%d %b %Y")) 
+}
+
 group_it <- function(reg) {
   paste0("(?:", reg, ")")
 }

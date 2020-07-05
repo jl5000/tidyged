@@ -1,30 +1,33 @@
 
 gedcom <- function(submitter_name,
-                   gedcom_description = character()) {
-  
-  dplyr::bind_rows(
-    HEADER_SECTION(submitter_ref,
-                   approved_system_id = "tidygedcom",
-                   submission_ref = character(),
-                   system_version_number = character(),
-                   name_of_product = character(),
-                   name_of_business = character(),
-                   business_address = ADDRESS_STRUCTURE(character()),
+                   gedcom_description = character(),
+                   gedcom_copyright = character(),
                    source_data_name = character(),
-                   source_data_publication_date = character(),
+                   source_data_date = date_exact(),
                    source_data_copyright = character(),
                    receiving_system = character(),
-                   transmission_date = character(),
-                   transmission_time = character(),
-                   file_name = character(),
-                   gedcom_copyright = character(),
-                   character_set = "UTF-8",
-                   character_set_version_number = character(),
-                   language = "English",
-                   place = character(),
-                   gedcom_description = character()),
-    FOOTER_SECTION()
-  )
+                   language = character(),
+                   char_set = "UTF-8",
+                   char_set_version = character()) {
+  
+  submitter_name <- Sys.info()["user"]
+  
+  HEADER_SECTION(xref_subm = submitter_name,
+                 approved_system_id = "tidygedcom",
+                 character_set = char_set,
+                 xref_subn = character(),
+                 system_version_number = packageVersion("tidygedcom"),
+                 name_of_source_data = source_data_name,
+                 publication_date_source_data = source_data_date,
+                 copyright_source_data = source_data_copyright,
+                 receiving_system_name = receiving_system,
+                 transmission_date = toupper(format(Sys.Date(), "%d %b %Y")),
+                 copyright_gedcom_file = gedcom_copyright,
+                 character_set_version_number = char_set_version,
+                 language_of_text = language,
+                 gedcom_content_description = gedcom_description) %>% 
+    dplyr::bind_rows(FOOTER_SECTION())
+  
   
 }
 

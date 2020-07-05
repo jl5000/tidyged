@@ -22,6 +22,7 @@ import_gedcom <- function(filepath) {
 
 export_gedcom <- function(gedcom_df, filepath) {
   
+  #TODO: Change FILE in header
   gedcom_df %>%
     dplyr::mutate(id = dplyr::if_else(dplyr::lag(id) == id, "", id)) %>% 
     tidyr::replace_na(list(id = "")) %>% 

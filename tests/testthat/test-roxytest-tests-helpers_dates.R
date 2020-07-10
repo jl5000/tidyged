@@ -2,7 +2,7 @@
 
 context("File R/helpers_dates.R: @tests")
 
-test_that("Function date_exact_pattern() @ L37", {
+test_that("Function date_exact_pattern() @ L41", {
   expect_equal(grepl(date_exact_pattern(), "14 JAN 2005"), TRUE)
   expect_equal(grepl(date_exact_pattern(), "14 JAM 2005"), FALSE)
   expect_equal(grepl(date_exact_pattern(), "JAN 2005"), FALSE)
@@ -17,7 +17,7 @@ test_that("Function date_exact_pattern() @ L37", {
 })
 
 
-test_that("Function date_pattern() @ L60", {
+test_that("Function date_pattern() @ L64", {
   expect_equal(grepl(date_pattern(), "14 JAN 2005"), TRUE)
   expect_equal(grepl(date_pattern(), "14 JAM 2005"), FALSE)
   expect_equal(grepl(date_pattern(), "JAN 2005"), TRUE)
@@ -32,7 +32,7 @@ test_that("Function date_pattern() @ L60", {
 })
 
 
-test_that("Function date_period_pattern() @ L90", {
+test_that("Function date_period_pattern() @ L94", {
   expect_equal(grepl(date_period_pattern(), "FROM 14 JAN 2005"), TRUE)
   expect_equal(grepl(date_period_pattern(), "TO 14 JAM 2005"), FALSE)
   expect_equal(grepl(date_period_pattern(), "FROM JAN 2005"), TRUE)
@@ -47,7 +47,7 @@ test_that("Function date_period_pattern() @ L90", {
 })
 
 
-test_that("Function date_range_pattern() @ L121", {
+test_that("Function date_range_pattern() @ L125", {
   expect_equal(grepl(date_range_pattern(), "BEF 14 JAN 2005"), TRUE)
   expect_equal(grepl(date_range_pattern(), "AFT 14 JAM 2005"), FALSE)
   expect_equal(grepl(date_range_pattern(), "BEF JAN 2005"), TRUE)
@@ -62,7 +62,7 @@ test_that("Function date_range_pattern() @ L121", {
 })
 
 
-test_that("Function date_approximated_pattern() @ L152", {
+test_that("Function date_approximated_pattern() @ L156", {
   expect_equal(grepl(date_approximated_pattern(), "ABT 14 JAN 2005"), TRUE)
   expect_equal(grepl(date_approximated_pattern(), "CAL 14 JAM 2005"), FALSE)
   expect_equal(grepl(date_approximated_pattern(), "EST JAN 2005"), TRUE)
@@ -77,7 +77,7 @@ test_that("Function date_approximated_pattern() @ L152", {
 })
 
 
-test_that("Function date_value_pattern() @ L191", {
+test_that("Function date_value_pattern() @ L195", {
   expect_equal(grepl(date_value_pattern(), "14 JAN 2005"), TRUE)
   expect_equal(grepl(date_value_pattern(), "MAR 1901"), TRUE)
   expect_equal(grepl(date_value_pattern(), "2010"), TRUE)
@@ -105,14 +105,14 @@ test_that("Function date_value_pattern() @ L191", {
 })
 
 
-test_that("Function date_exact() @ L213", {
+test_that("Function date_exact() @ L217", {
   expect_equal(date_exact(12), character())
   expect_equal(date_exact(12, 8), character())
   expect_equal(date_exact(12, 8, 2005), "12 AUG 2005")
 })
 
 
-test_that("Function date_value() @ L260", {
+test_that("Function date_value() @ L264", {
   expect_equal(date_value(2005), "2005")
   expect_equal(date_value(2005, 1), "JAN 2005")
   expect_equal(date_value(2005, 1, 14), "14 JAN 2005")
@@ -129,7 +129,7 @@ test_that("Function date_value() @ L260", {
 })
 
 
-test_that("Function date_period() @ L336", {
+test_that("Function date_period() @ L340", {
   expect_equal(date_period(2005), "FROM 2005")
   expect_equal(date_period(2005, 1), "FROM JAN 2005")
   expect_equal(date_period(2005, 1, 14), "FROM 14 JAN 2005")

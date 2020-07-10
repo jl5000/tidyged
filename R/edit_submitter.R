@@ -35,7 +35,7 @@ remove_submitter <- function(gedcom) {
 }
 
 #' @export
-subm <- function(name = Sys.info()["user"],
+subm <- function(name = unname(Sys.info()["user"]),
                  address = ADDRESS_STRUCTURE(character()),
                  multimedia_links = list(),
                  language_preference = character(),

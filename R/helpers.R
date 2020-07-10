@@ -7,15 +7,41 @@ set_class_to_tidygedcom <- function(gedcom) {
   gedcom
 }
 
-summary_line <- function(gedcom, tag_label, tag_level, prefix) {
+
+
+gedcom_value <- function(gedcom, section, tag, level) {
   
-  tag_level <- as.character(tag_level)
+  level <- as.character(level)
   
-  ifelse(dplyr::filter(gedcom, tag == tag_label, level == tag_level) %>% nrow() == 1, 
-         paste(prefix, dplyr::filter(gedcom, tag == tag_label, level == tag_level) %>% dplyr::pull(value)), 
-         paste(prefix, "<None given>"))
+  gedcom_filtered <- dplyr::filter(gedcom, id %in% section)
+  if(nrow(gedcom_filtered) == 0) stop("Section not found")
   
+  for(i in 1:nrow(gedcom_filtered)) {
+    if(gedcom_filtered$tag[i] == tag & gedcom_filtered$level[i] == level) break
+    if(i == nrow(gedcom_filtered)) return("<None given>")
+  }
+  
+  if(i == nrow(gedcom_filtered)) return(gedcom_filtered$value[i])
+  
+  for(j in (i+1):nrow(gedcom_filtered)) {
+    if(gedcom_filtered$tag[j] %nin% c("CONT", "CONC") | 
+       gedcom_filtered$level[j] != as.character(as.integer(level) + 1)) {
+      j <- j - 1
+      break
+    }
+  }
+  
+  if(i == j) return(gedcom_filtered$value[i])
+  
+  text <- gedcom_filtered$value[i]
+  for(row in (i+1):j) {
+    if(gedcom_filtered$tag[row] == "CONT") text <- paste0(text, "\n", gedcom_filtered$value[row])
+    if(gedcom_filtered$tag[row] == "CONC") text <- paste0(text, gedcom_filtered$value[row])
+  }
+  
+  cat(text)
 }
+
 
 add_levels <- function(df, start_level) {
   
@@ -41,6 +67,7 @@ ref_to_xref <- function(ref, type) {
   paste0("@", toupper(type), ref, "@")
   
 }
+
 
 
 #' Split a vector of free text into separate rows of a GEDCOM file

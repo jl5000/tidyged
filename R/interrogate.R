@@ -12,26 +12,20 @@ num_sour <- function(gedcom) {unique_record_count(gedcom, "SOUR")}
 
 summary.tidygedcom <- function(gedcom) {
   eol <- "\n"
-  header <- dplyr::filter(gedcom, id == "HD")
+  subm_name <- gedcom_value(gedcom, "HD", "SUBM", 1)
   
-  #SOUR, VERS, NAME, CORP
-  #CHAR
-  #SUBM
-  #LANG
-  #NOTE
-  #COPR
   paste("GEDCOM file summary:", eol, eol,
-        summary_line(header, "SUBM", 1, "Submitter:"), eol,
-        summary_line(header, "NOTE", 1, "Description:"), eol,
-        summary_line(header, "LANG", 1, "Language:"), eol,
-        summary_line(header, "CHAR", 1, "Character Set:"), eol,
+        "Submitter:", gedcom_value(gedcom, subm_name, "NAME", 1), eol, 
+        "Description:", gedcom_value(gedcom, "HD", "NOTE", 1), eol,
+        "Language:", gedcom_value(gedcom, "HD", "LANG", 1), eol,
+        "Character Set:", gedcom_value(gedcom, "HD", "CHAR", 1), eol,
         
-        summary_line(header, "COPR", 1, "Copyright:"), eol,
+        "Copyright:", gedcom_value(gedcom, "HD", "COPR", 1), eol,
         
-        summary_line(header, "SOUR", 1, "Source system:"), eol,
-        summary_line(header, "VERS", 2, "Source system version:"), eol,
-        summary_line(header, "NAME", 2, "Product Name:"), eol,
-        summary_line(header, "CORP", 2, "Product Source:"), eol
+        "Source system:", gedcom_value(gedcom, "HD", "SOUR", 1), eol,
+        "Source system version:", gedcom_value(gedcom, "HD", "VERS", 2), eol,
+        "Product Name:", gedcom_value(gedcom, "HD", "NAME", 2), eol,
+        "Product Source:", gedcom_value(gedcom, "HD", "CORP", 2), eol
   ) %>% cat()
 }
 

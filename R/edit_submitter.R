@@ -9,10 +9,9 @@ add_submitter <- function(gedcom,
                           automated_record_id = character(),
                           notes = list()) {
   
-  ref <- num_subm(gedcom) + 1
   
   gedcom %>% 
-    tibble::add_row(SUBMITTER_RECORD(xref_subm = ref_to_xref(ref, "U"),
+    tibble::add_row(SUBMITTER_RECORD(xref_subm = assign_xref(xref_prefix_subm(), gedcom = .),
                                      name,
                                      address,
                                      multimedia_links,
@@ -44,7 +43,7 @@ subm <- function(name = unname(Sys.info()["user"]),
                  notes = list()) {
   
   #Shortcut used in gedcom function
-  SUBMITTER_RECORD(ref_to_xref(1, "U"),
+  SUBMITTER_RECORD(assign_xref(xref_prefix_subm(), 1),
                    name,
                    address,
                    multimedia_links,

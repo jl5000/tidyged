@@ -10,6 +10,7 @@ num_note <- function(gedcom) {unique_record_count(gedcom, "NOTE")}
 num_repo <- function(gedcom) {unique_record_count(gedcom, "REPO")}
 num_sour <- function(gedcom) {unique_record_count(gedcom, "SOUR")}
 
+
 summary.tidygedcom <- function(gedcom) {
   eol <- "\n"
   subm_name <- gedcom_value(gedcom, "HD", "SUBM", 1)
@@ -44,3 +45,27 @@ str.tidygedcom <- function(gedcom) {
   ) %>% cat()
 }
 
+individuals <- function(gedcom) {
+  #Tibble with xref, name, sex, DOB, place of birth, mother, father, num_siblings, num_marriages, num_chil, died, place of death
+  ind_xrefs <- unique(dplyr::filter(gedcom, tag == "INDI")$id)
+  ind_names <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  ind_sex <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "SEX", level = 1)
+  famc_xrefs <- "???"
+  
+  tibble::tibble(xref = ind_xrefs,
+                 name = ind_names,
+                 sex = ind_sex,
+                 date_of_birth = 1,
+                 place_of_birth = 1,
+                 mother = 1, #child_to_family_link
+                 father = 1, #child_to_family_link
+                 num_siblings = 1, #child_to_family_link
+                 num_spouses = 1, #spouse_to_family_link
+                 num_children = 1, #spouse_to_family_link
+                 date_of_death = 1,
+                 place_of_death = 1)
+}
+
+families <- function(gedcom) {
+  
+}

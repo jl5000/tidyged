@@ -1,7 +1,54 @@
 
 
 
-add_individual <- function(gedcom) {
+add_individual <- function(gedcom,
+                           names = list(),
+                           sex = character(),
+                           child_to_family_links = list(),
+                           spouse_to_family_links = list(),
+                           restriction_notice = character(),
+                           events = list(),
+                           attributes = list(),
+                           xrefs_subm = character(),
+                           associations = list(),
+                           xrefs_alia = character(),
+                           xrefs_subm_interested_in_ancestors = character(),
+                           xrefs_subm_interested_in_descendents = character(),
+                           permanent_record_file_number = character(),
+                           ancestral_file_number = character(),
+                           user_reference_number = character(),
+                           user_reference_type = character(),
+                           automated_record_id = character(),
+                           notes = list(),
+                           source_citations = list(),
+                           multimedia_links = list()) {
+  
+  #add individual record
+  #add links to families (child + spouse)
+  
+  ind_record <- INDIVIDUAL_RECORD(xref_indi = assign_xref(xref_prefix_indi(), gedcom = gedcom),
+                                  restriction_notice = character(),
+                                  names = list(),
+                                  sex_value = sex,
+                                  events = list(),
+                                  attributes = list(),
+                                  ordinance = list(),
+                                  child_to_family_links = list(),
+                                  spouse_to_family_links = list(),
+                                  xrefs_subm = character(),
+                                  associations = list(),
+                                  xrefs_alia = character(),
+                                  xrefs_subm_interested_in_ancestors = character(),
+                                  xrefs_subm_interested_in_descendents = character(),
+                                  permanent_record_file_number = character(),
+                                  ancestral_file_number = character(),
+                                  user_reference_number = character(),
+                                  user_reference_type = character(),
+                                  automated_record_id = character(),
+                                  date_changed = CHANGE_DATE(),
+                                  notes = list(),
+                                  source_citations = list(),
+                                  multimedia_links = list())
   
   
 }

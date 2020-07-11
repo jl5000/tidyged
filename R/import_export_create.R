@@ -47,7 +47,7 @@ gedcom <- function(submitter_details = subm(),
                    char_set_version = character()) {
   
   
-  HEADER_SECTION(xref_subm = ref_to_xref(1, "U"),
+  HEADER_SECTION(xref_subm = assign_xref(xref_prefix_subm(), 1),
                  approved_system_id = "tidygedcom",
                  character_set = char_set,
                  system_version_number = packageVersion("tidygedcom"),

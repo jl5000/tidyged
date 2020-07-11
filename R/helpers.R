@@ -2,6 +2,16 @@
 
 `%nin%` <- Negate(`%in%`)
 
+xref_prefix_indi <- function() {"I"}
+xref_prefix_fam <- function() {"F"}
+xref_prefix_subm <- function() {"U"}
+xref_prefix_subn <- function() {"G"}
+xref_prefix_repo <- function() {"R"}
+xref_prefix_obje <- function() {"O"}
+xref_prefix_note <- function() {"N"}
+xref_prefix_sour <- function() {"S"}
+
+
 set_class_to_tidygedcom <- function(gedcom) {
   class(gedcom) <- c("tidygedcom", "tbl_df", "tbl", "data.frame")
   gedcom
@@ -61,12 +71,31 @@ finalise <- function(df, global_start_level = 0) {
 }
 
 
-ref_to_xref <- function(ref, type) {
+assign_xref <- function(type, ref = 0, gedcom = tibble::tibble()) {
   
-  if (length(ref) == 0) return(character())
-  paste0("@", toupper(type), ref, "@")
+  if (ref == 0) {
+    gedcom_filt <- gedcom %>% 
+      dplyr::filter(stringr::str_detect(id, paste0("@", type, "\\d+@"))) 
+    
+    if(nrow(gedcom_filt) == 0) {
+      ref <- 1
+    } else {
+      ref <- gedcom_filt %>%
+        dplyr::pull(id) %>% 
+        unique() %>% 
+        stringr::str_remove_all("@") %>% 
+        stringr::str_remove_all("[A-Z]") %>% 
+        as.numeric() %>% 
+        max() + 1
+      
+    }
+    
+  }
+  paste0("@", type, ref, "@")
   
 }
+
+
 
 
 

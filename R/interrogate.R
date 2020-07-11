@@ -15,17 +15,17 @@ summary.tidygedcom <- function(gedcom) {
   subm_name <- gedcom_value(gedcom, "HD", "SUBM", 1)
   
   paste("GEDCOM file summary:", eol, eol,
-        "Submitter:", gedcom_value(gedcom, subm_name, "NAME", 1), eol, 
-        "Description:", gedcom_value(gedcom, "HD", "NOTE", 1), eol,
-        "Language:", gedcom_value(gedcom, "HD", "LANG", 1), eol,
-        "Character Set:", gedcom_value(gedcom, "HD", "CHAR", 1), eol,
+        "Submitter:", "\t", "\t", gedcom_value(gedcom, subm_name, "NAME", 1), eol, 
+        "Description:", "\t", "\t", gedcom_value(gedcom, "HD", "NOTE", 1), eol,
+        "Language:", "\t", "\t", gedcom_value(gedcom, "HD", "LANG", 1), eol,
+        "Character Set:", "\t", gedcom_value(gedcom, "HD", "CHAR", 1), eol, eol,
         
-        "Copyright:", gedcom_value(gedcom, "HD", "COPR", 1), eol,
+        "Copyright:", "\t", "\t", gedcom_value(gedcom, "HD", "COPR", 1), eol, eol,
         
-        "Source system:", gedcom_value(gedcom, "HD", "SOUR", 1), eol,
-        "Source system version:", gedcom_value(gedcom, "HD", "VERS", 2), eol,
-        "Product Name:", gedcom_value(gedcom, "HD", "NAME", 2), eol,
-        "Product Source:", gedcom_value(gedcom, "HD", "CORP", 2), eol
+        "Source system:", "\t", gedcom_value(gedcom, "HD", "SOUR", 1), eol,
+        "Source system version: ", gedcom_value(gedcom, "HD", "VERS", 2), eol,
+        "Product Name:", "\t", "\t", gedcom_value(gedcom, "HD", "NAME", 2), eol,
+        "Product Source:", "\t", gedcom_value(gedcom, "HD", "CORP", 2), eol
   ) %>% cat()
 }
 
@@ -43,3 +43,4 @@ str.tidygedcom <- function(gedcom) {
         "Repositories:\t\t", num_repo(gedcom), eol 
   ) %>% cat()
 }
+

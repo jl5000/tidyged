@@ -107,3 +107,35 @@ families <- function(gedcom) {
                                         num_children))
   
 }
+
+multimedia <- function(gedcom) {
+  
+  obje_xrefs <- unique(dplyr::filter(gedcom, tag == "OBJE")$id)
+  file_refs <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FILE", level = 1)
+  file_titles <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "TITL", level = 2)
+  file_forms <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FORM", level = 2)
+  file_sour <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "TYPE", level = 3)
+  
+  tibble::tibble(xref = obje_xrefs,
+                 file_ref = file_refs,
+                 file_title = file_titles,
+                 file_format = file_forms,
+                 source_media = file_sour)
+  
+}
+
+sources <- function(gedcom) {
+  
+  
+}
+
+repositories <- function(gedcom) {
+  
+  
+}
+
+
+notes <- function(gedcom) {
+  
+  
+}

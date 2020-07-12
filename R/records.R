@@ -83,7 +83,6 @@
 #'                              1, "HD", "NOTE", "This is a gedcom file"
 #'              ))
 #' @return A tidy tibble containing the HEADER part of a GEDCOM file.
-#' @export
 HEADER_SECTION <- function(xref_subm,
                            approved_system_id,
                            character_set,
@@ -190,7 +189,6 @@ HEADER_SECTION <- function(xref_subm,
 #'                              2, "@F1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
 #' @return A tidy tibble containing a FAMILY_RECORD part of a GEDCOM file.
-#' @export
 FAMILY_RECORD <- function(xref_fam,
                           restriction_notice = character(),
                           events = list(),
@@ -292,7 +290,6 @@ FAMILY_RECORD <- function(xref_fam,
 #'                              2, "@I1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
 #' @return A tidy tibble containing an INDIVIDUAL_RECORD part of a GEDCOM file.
-#' @export
 INDIVIDUAL_RECORD <- function(xref_indi,
                               restriction_notice = character(),
                               names = list(),
@@ -396,7 +393,6 @@ INDIVIDUAL_RECORD <- function(xref_indi,
 #'                              2, "@M1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
 #' @return A tidy tibble containing a MULTIMEDIA_RECORD part of a GEDCOM file.
-#' @export
 MULTIMEDIA_RECORD <- function(xref_obje,
                               multimedia_file_reference,
                               multimedia_format,
@@ -485,7 +481,6 @@ MULTIMEDIA_RECORD <- function(xref_obje,
 #'                              2, "@N1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
 #' @return A tidy tibble containing a NOTE_RECORD part of a GEDCOM file.
-#' @export
 NOTE_RECORD <- function(xref_note,
                         submitter_text,
                         user_reference_number = character(),
@@ -547,7 +542,6 @@ NOTE_RECORD <- function(xref_note,
 #'                              2, "@R1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
 #' @return A tidy tibble containing a REPOSITORY_RECORD part of a GEDCOM file.
-#' @export
 REPOSITORY_RECORD <- function(xref_repo,
                               name_of_repository,
                               address = ADDRESS_STRUCTURE(character()),
@@ -610,7 +604,6 @@ REPOSITORY_RECORD <- function(xref_repo,
 #'                              2, "@S1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
 #' @return A tidy tibble containing a SOURCE_RECORD part of a GEDCOM file.
-#' @export
 SOURCE_RECORD <- function(xref_sour,
                           events_recorded = character(),
                           date_period_covered = date_period(),
@@ -707,7 +700,6 @@ SOURCE_RECORD <- function(xref_sour,
 #'                              2, "@S1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
 #' @return A tidy tibble containing a SUBMISSION_RECORD part of a GEDCOM file.
-#' @export
 SUBMISSION_RECORD <- function(xref_subn,
                               xref_subm = character(),
                               name_of_family_file = character(),
@@ -765,7 +757,6 @@ SUBMISSION_RECORD <- function(xref_subn,
 #'                              2, "@S1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
 #' @return A tidy tibble containing a SUBMITTER_RECORD part of a GEDCOM file.
-#' @export
 SUBMITTER_RECORD <- function(xref_subm,
                              submitter_name,
                              address = ADDRESS_STRUCTURE(character()),
@@ -811,7 +802,6 @@ SUBMITTER_RECORD <- function(xref_subm,
 #'                              0, "TR", "TRLR",     ""
 #'              ))
 #' @return A tidy tibble containing a FOOTER_SECTION part of a GEDCOM file.
-#' @export
 FOOTER_SECTION <- function(){
   tibble::tibble(level = 0, id = "TR", tag = "TRLR", value = "") %>% 
     finalise()

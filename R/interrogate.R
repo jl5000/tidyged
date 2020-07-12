@@ -45,7 +45,7 @@ str.tidygedcom <- function(gedcom) {
   ) %>% cat()
 }
 
-individuals <- function(gedcom, remove_slashes = TRUE) {
+individuals <- function(gedcom) {
   
   ind_xrefs <- unique(dplyr::filter(gedcom, tag == "INDI")$id)
   ind_names <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
@@ -80,11 +80,30 @@ individuals <- function(gedcom, remove_slashes = TRUE) {
                                         as.character(as.integer(num_siblings) - 1)),
                   num_siblings = ifelse(mother_xref == "" | father_xref == "",
                                         "", num_siblings)) %>% 
-    dplyr::select(-full) %>% 
     dplyr::mutate(num_children = stringr::str_count(paste(moth_xref,collapse = "|"), xref) +
-                    stringr::str_count(paste(fath_xref,collapse = "|"), xref))
+                    stringr::str_count(paste(fath_xref,collapse = "|"), xref)) %>% 
+    dplyr::select(-full, -mother_xref, -father_xref)
 }
 
 families <- function(gedcom) {
+  
+  fam_xrefs <- unique(dplyr::filter(gedcom, tag == "FAM")$id)
+  husb_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1)
+  wife_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1)
+  husb_names <- purrr::map_chr(husb_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  wife_names <- purrr::map_chr(wife_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  marr_dates <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "MARR")
+  marr_places <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "MARR")
+  num_chil <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "NCHI", level = 1)
+  
+  tibble::tibble(xref = fam_xrefs,
+                 husband = stringr::str_remove_all(husb_names, "/"),
+                 wife = stringr::str_remove_all(wife_names, "/"),
+                 marriage_date = marr_dates,
+                 marriage_place = marr_places,
+                 num_children = num_chil) %>% 
+    dplyr::mutate(num_children = ifelse(num_children == "",
+                                        purrr::map_chr(xref, ~sum(dplyr::filter(gedcom, id == .x)$tag == "CHIL")),
+                                        num_children))
   
 }

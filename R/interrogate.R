@@ -45,25 +45,44 @@ str.tidygedcom <- function(gedcom) {
   ) %>% cat()
 }
 
-individuals <- function(gedcom) {
-  #Tibble with xref, name, sex, DOB, place of birth, mother, father, num_siblings, num_marriages, num_chil, died, place of death
+individuals <- function(gedcom, remove_slashes = TRUE) {
+  
   ind_xrefs <- unique(dplyr::filter(gedcom, tag == "INDI")$id)
   ind_names <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
   ind_sex <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "SEX", level = 1)
-  famc_xrefs <- "???"
-  
+  ind_dobs <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
+  ind_pobs <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "BIRT")
+  ind_dods <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "DEAT")
+  ind_pods <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "DEAT")
+  ind_famc <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "FAMC", level = 1)
+  #ind_fams <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "FAMS", level = 1)
+  moth_xref <- purrr::map_chr(ind_famc, gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1) 
+  ind_moth <- purrr::map_chr(moth_xref, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  fath_xref <- purrr::map_chr(ind_famc, gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1) 
+  ind_fath <- purrr::map_chr(fath_xref, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  ind_sibl <- purrr::map_chr(ind_famc, gedcom_value, gedcom = gedcom, tag = "NCHI", level = 1)
+
   tibble::tibble(xref = ind_xrefs,
-                 name = ind_names,
+                 name = stringr::str_remove_all(ind_names, "/"),
                  sex = ind_sex,
-                 date_of_birth = 1,
-                 place_of_birth = 1,
-                 mother = 1, #child_to_family_link
-                 father = 1, #child_to_family_link
-                 num_siblings = 1, #child_to_family_link
-                 num_spouses = 1, #spouse_to_family_link
-                 num_children = 1, #spouse_to_family_link
-                 date_of_death = 1,
-                 place_of_death = 1)
+                 date_of_birth = ind_dobs,
+                 place_of_birth = ind_pobs,
+                 date_of_death = ind_dods,
+                 place_of_death = ind_pods,
+                 mother_xref = moth_xref,
+                 mother = stringr::str_remove_all(ind_moth, "/"),
+                 father_xref = fath_xref,
+                 father = stringr::str_remove_all(ind_fath, "/"),
+                 num_siblings = ind_sibl) %>% 
+    dplyr::add_count(mother_xref, father_xref, name = "full") %>%
+    dplyr::mutate(num_siblings = ifelse(num_siblings == "", 
+                                        as.character(full - 1),
+                                        as.character(as.integer(num_siblings) - 1)),
+                  num_siblings = ifelse(mother_xref == "" | father_xref == "",
+                                        "", num_siblings)) %>% 
+    dplyr::select(-full) %>% 
+    dplyr::mutate(num_children = stringr::str_count(paste(moth_xref,collapse = "|"), xref) +
+                    stringr::str_count(paste(fath_xref,collapse = "|"), xref))
 }
 
 families <- function(gedcom) {

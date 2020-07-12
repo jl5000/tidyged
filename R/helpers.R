@@ -19,23 +19,33 @@ set_class_to_tidygedcom <- function(gedcom) {
 
 
 
-gedcom_value <- function(gedcom, section, tag, level) {
-  
-  level <- as.character(level)
+gedcom_value <- function(gedcom, section, tag, level, after_tag = NULL) {
   
   gedcom_filtered <- dplyr::filter(gedcom, id %in% section)
-  if(nrow(gedcom_filtered) == 0) stop("Section not found")
+  if(nrow(gedcom_filtered) == 0) return("")
   
+  active <- is.null(after_tag)
   for(i in 1:nrow(gedcom_filtered)) {
-    if(gedcom_filtered$tag[i] == tag & gedcom_filtered$level[i] == level) break
-    if(i == nrow(gedcom_filtered)) return("<None given>")
+    if(is.null(after_tag)) {
+      active <- TRUE
+    } else if(gedcom_filtered$tag[i] == after_tag && gedcom_filtered$level[i] < level) {
+      active <- TRUE
+    } else if(active && gedcom_filtered$level[i] > level){
+      active <- FALSE
+    }
+    
+    if(active) {
+      if(gedcom_filtered$tag[i] == tag & gedcom_filtered$level[i] == level) break  
+    }
+    
+    if(i == nrow(gedcom_filtered)) return("")
   }
   
   if(i == nrow(gedcom_filtered)) return(gedcom_filtered$value[i])
   
   for(j in (i+1):nrow(gedcom_filtered)) {
     if(gedcom_filtered$tag[j] %nin% c("CONT", "CONC") | 
-       gedcom_filtered$level[j] != as.character(as.integer(level) + 1)) {
+       gedcom_filtered$level[j] != level + 1) {
       j <- j - 1
       break
     }

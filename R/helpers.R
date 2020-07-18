@@ -18,7 +18,6 @@ set_class_to_tidygedcom <- function(gedcom) {
 }
 
 
-
 gedcom_value <- function(gedcom, section, tag, level, after_tag = NULL) {
   
   gedcom_filtered <- dplyr::filter(gedcom, id %in% section)
@@ -148,15 +147,3 @@ split_text <- function(text, top_tag, char_limit = 248, start_level = 0) {
   
 }
 
-multimedia_link <- function() {
-  
-}
-
-
-note_structure <- function() {
-  
-}
-
-source_citation <- function() {
-  
-}

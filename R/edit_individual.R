@@ -54,6 +54,34 @@ add_individual <- function(gedcom,
 }
 
 
+add_individual_event <- function(gedcom) {
+  
+  
+  
+}
+
+
+add_individual_attribute <- function(gedcom) {
+  
+  
+}
+
+add_individual_association <- function(gedcom) {
+  
+  
+}
+
+
+add_individual_family_link_as_spouse <- function(gedcom) {
+  
+  
+}
+
+add_individual_family_link_as_child <- function(gedcom) {
+  
+  
+}
+
 remove_individual <- function(gedcom) {
   
   

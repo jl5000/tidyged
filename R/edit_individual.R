@@ -26,6 +26,8 @@ add_individual <- function(gedcom,
   #add individual record
   #add links to families (child + spouse)
   
+  xref <- assign_xref(xref_prefix_indi(), gedcom = gedcom)
+  
   ind_record <- INDIVIDUAL_RECORD(xref_indi = assign_xref(xref_prefix_indi(), gedcom = gedcom),
                                   restriction_notice = character(),
                                   names = list(),
@@ -48,7 +50,8 @@ add_individual <- function(gedcom,
                                   date_changed = CHANGE_DATE(),
                                   notes = list(),
                                   source_citations = list(),
-                                  multimedia_links = list())
+                                  multimedia_links = list()) %>% 
+    set_active_record(xref)
   
   
 }

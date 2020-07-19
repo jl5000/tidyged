@@ -9,9 +9,10 @@ add_submitter <- function(gedcom,
                           automated_record_id = character(),
                           notes = list()) {
   
+  xref <- assign_xref(xref_prefix_subm(), gedcom = gedcom)
   
   gedcom %>% 
-    tibble::add_row(SUBMITTER_RECORD(xref_subm = assign_xref(xref_prefix_subm(), gedcom = .),
+    tibble::add_row(SUBMITTER_RECORD(xref_subm = xref,
                                      name,
                                      address,
                                      multimedia_links,

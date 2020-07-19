@@ -10,8 +10,9 @@ add_family <- function(gedcom,
                        user_ref_type = character(),
                        automated_record_id = character()) {
   
+  xref <- assign_xref(xref_prefix_fam(), gedcom = gedcom)
   
-  FAMILY_RECORD(xref_fam = assign_xref(xref_prefix_fam(), gedcom = gedcom),
+  FAMILY_RECORD(xref_fam = xref,
                 restriction_notice = restriction_notice,
                 xref_husb = character(),
                 xref_wife = character(),
@@ -25,7 +26,8 @@ add_family <- function(gedcom,
                 date_changed = CHANGE_DATE(),
                 notes = list(),
                 source_citations = list(),
-                multimedia_links = list())
+                multimedia_links = list()) %>% 
+    set_active_record(xref)
   
   
 }

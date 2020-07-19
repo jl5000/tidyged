@@ -21,15 +21,17 @@ set_class_to_tidygedcom <- function(gedcom) {
 #' Extract a particular value from a tidygedcom object
 #'
 #' @param gedcom A tidygedcom object
-#' @param record_xref 
-#' @param tag 
-#' @param level 
-#' @param after_tag 
+#' @param record_xref The xref of the record in which the value may exist
+#' @param tag The tag associated with the value
+#' @param level The level number of the value
+#' @param after_tag Whether the tag should be subordinate to this parent tag 
 #'
-#' @return
+#' @return The particular value fitting the criteria of the input arguments. If not value is found,
+#' an empty string is returned. The function will automatically combine values split over CONT and CONC tags.
 #' @export
 #'
 #' @examples
+#' gedcom_value(gedcom, "@I1@", "NAME", 1)
 gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   
   gedcom_filtered <- dplyr::filter(gedcom, record %in% record_xref)
@@ -92,6 +94,16 @@ finalise <- function(df, global_start_level = 0) {
 }
 
 
+#' Create a new xref for a record
+#' 
+#' This function is used to assign xrefs to new records that are created.
+#'
+#' @param type The type of record, given by one of the xref_prefix_*() functions
+#' @param ref An explicit reference string (xref without the "@") if one is to be chosen manually
+#' @param gedcom A tidygedcm object
+#'
+#' @return An xref to use for a new record
+#' @export
 assign_xref <- function(type, ref = 0, gedcom = tibble::tibble()) {
   
   if (ref == 0) {

@@ -47,11 +47,15 @@ add_individual_names <- function(gedcom,
                                  romanized_type = character(),
                                  romanized_name_pieces = list()) {
   
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. An individual record must be activated to add names to it")
   
 }
 
 add_individual_event <- function(gedcom) {
   
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. An individual record must be activated to add events to it")
   
   
 }
@@ -59,27 +63,38 @@ add_individual_event <- function(gedcom) {
 
 add_individual_attribute <- function(gedcom) {
   
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. An individual record must be activated to add attributes to it")
   
 }
 
 add_individual_association <- function(gedcom) {
   
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. An individual record must be activated to add associations to it")
   
 }
 
 
 add_individual_family_link_as_spouse <- function(gedcom) {
   
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. An individual record must be activated to add links to it")
+  
   
 }
 
 add_individual_family_link_as_child <- function(gedcom) {
   
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. An individual record must be activated to add links to it")
   
 }
 
 remove_individual <- function(gedcom) {
   
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. An individual record must be activated to remove it")
   
   
   

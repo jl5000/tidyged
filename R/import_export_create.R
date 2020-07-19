@@ -13,6 +13,9 @@
 #' import_gedcom("C:/my_family.ged")
 import_gedcom <- function(filepath) {
   
+  if(stringr::str_sub(filepath, -4, -1) != ".ged")
+    warning("GEDCOM files usually have a .ged extension. Continuing anyway.")
+  
   ged <- readr::read_lines(filepath) %>% 
     stringr::str_trim() %>% 
     tibble::tibble(value = .) %>%

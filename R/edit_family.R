@@ -51,14 +51,16 @@ add_family_event <- function(gedcom,
 
 remove_family <- function(gedcom) {
   
-  
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. A family record must be activated to remove it")
   
 }
 
 
 update_family <- function(gedcom) {
   
-  
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. A family record must be activated to update it")
   
   
 }

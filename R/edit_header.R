@@ -1,9 +1,10 @@
 
 
 
-update_header <- function(gedcom) {
+update_header <- function(gedcom,
+                          file_name = character()) {
   
-  tibble::add_row(gedcom                 )
+  gedcom
   
 }
 

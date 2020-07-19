@@ -27,10 +27,16 @@ add_submitter <- function(gedcom,
 #' @export
 update_submitter <- function(gedcom) {
   
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. A submitter record must be activated to update it")
+  
 }
 
 #' @export
 remove_submitter <- function(gedcom) {
+  
+  if(is.null(attr(gedcom, "active_record")))
+    stop("No record is activated. A submitter record must be activated to remove it")
   
 }
 

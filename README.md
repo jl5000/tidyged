@@ -27,7 +27,9 @@ A sister package named `tgvis` will allow visualisation of `tidygedcom` objects.
 # Current status
 
 * The GEDCOM 5.5.1 specification has been implemented within the params.R, structures.R, records.R, and validate_params.R files. This is the bulk of the internal data structures required;
-* Current work is on the creation, interrogation, and editing of tidygedcom objects;
+* Some initial functions to summarise tidygedcom objects have been completed;
+* Functions to import, export and create tidygedcom objects have been completed;
+* Current work is on the modification of tidygedcom objects;
 * It is still undecided how extensive any validation checks should be, given the number of GEDCOM validators available.
 * Work on `tgvis` will begin once an initial version of `tidygedcom` is complete.
 

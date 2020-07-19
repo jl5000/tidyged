@@ -132,8 +132,15 @@ multimedia <- function(gedcom) {
 
 sources <- function(gedcom) {
   
+  sour_xrefs <- unique(dplyr::filter(gedcom, tag == "SOUR", level == 0)$record)
+  origs <- purrr::map_chr(sour_xrefs, gedcom_value, gedcom = gedcom, tag = "AUTH", level = 1)
+  titles <- purrr::map_chr(sour_xrefs, gedcom_value, gedcom = gedcom, tag = "TITL", level = 1)
+  date_chan <- purrr::map_chr(sour_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
   
-  
+  tibble::tibble(xref = sour_xrefs,
+                 originator = origs,
+                 title = titles,
+                 last_modified = date_chan)
   
 }
 

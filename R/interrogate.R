@@ -47,7 +47,7 @@ str.tidygedcom <- function(gedcom) {
 
 individuals <- function(gedcom) {
   
-  ind_xrefs <- unique(dplyr::filter(gedcom, tag == "INDI")$record)
+  ind_xrefs <- unique(dplyr::filter(gedcom, tag == "INDI", level == 0)$record)
   ind_names <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
   ind_sex <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "SEX", level = 1)
   ind_dobs <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
@@ -61,7 +61,8 @@ individuals <- function(gedcom) {
   fath_xref <- purrr::map_chr(ind_famc, gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1) 
   ind_fath <- purrr::map_chr(fath_xref, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
   ind_sibl <- purrr::map_chr(ind_famc, gedcom_value, gedcom = gedcom, tag = "NCHI", level = 1)
-
+  date_chan <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
+  
   tibble::tibble(xref = ind_xrefs,
                  name = stringr::str_remove_all(ind_names, "/"),
                  sex = ind_sex,
@@ -81,13 +82,14 @@ individuals <- function(gedcom) {
                   num_siblings = ifelse(mother_xref == "" | father_xref == "",
                                         "", num_siblings)) %>% 
     dplyr::mutate(num_children = stringr::str_count(paste(moth_xref,collapse = "|"), xref) +
-                    stringr::str_count(paste(fath_xref,collapse = "|"), xref)) %>% 
+                    stringr::str_count(paste(fath_xref,collapse = "|"), xref),
+                  last_modified = date_chan) %>% 
     dplyr::select(-full, -mother_xref, -father_xref)
 }
 
 families <- function(gedcom) {
   
-  fam_xrefs <- unique(dplyr::filter(gedcom, tag == "FAM")$record)
+  fam_xrefs <- unique(dplyr::filter(gedcom, tag == "FAM", level == 0)$record)
   husb_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1)
   wife_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1)
   husb_names <- purrr::map_chr(husb_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
@@ -95,6 +97,7 @@ families <- function(gedcom) {
   marr_dates <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "MARR")
   marr_places <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "MARR")
   num_chil <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "NCHI", level = 1)
+  date_chan <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
   
   tibble::tibble(xref = fam_xrefs,
                  husband = stringr::str_remove_all(husb_names, "/"),
@@ -104,38 +107,66 @@ families <- function(gedcom) {
                  num_children = num_chil) %>% 
     dplyr::mutate(num_children = ifelse(num_children == "",
                                         purrr::map_chr(xref, ~sum(dplyr::filter(gedcom, record == .x)$tag == "CHIL")),
-                                        num_children))
+                                        num_children),
+                  last_modified = date_chan)
   
 }
 
 multimedia <- function(gedcom) {
   
-  obje_xrefs <- unique(dplyr::filter(gedcom, tag == "OBJE")$record)
+  obje_xrefs <- unique(dplyr::filter(gedcom, tag == "OBJE", level == 0)$record)
   file_refs <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FILE", level = 1)
   file_titles <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "TITL", level = 2)
   file_forms <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FORM", level = 2)
   file_sour <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "TYPE", level = 3)
+  date_chan <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
   
   tibble::tibble(xref = obje_xrefs,
                  file_ref = file_refs,
                  file_title = file_titles,
                  file_format = file_forms,
-                 source_media = file_sour)
+                 source_media = file_sour,
+                 last_modified = date_chan)
   
 }
 
 sources <- function(gedcom) {
   
   
+  
+  
 }
 
 repositories <- function(gedcom) {
   
+  repo_xrefs <- unique(dplyr::filter(gedcom, tag == "REPO", level == 0)$record)
+  repo_names <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  repo_cits <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "CITY", level = 2)
+  repo_stae <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "STAE", level = 2)
+  repo_coun <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "CTRY", level = 2)
+  date_chan <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
+  
+  tibble::tibble(xref = repo_xrefs,
+                 name = repo_names,
+                 city = repo_cits,
+                 state = repo_stae,
+                 country = repo_coun,
+                 last_modified = date_chan)
   
 }
 
 
 notes <- function(gedcom) {
+  
+  note_xrefs <- unique(dplyr::filter(gedcom, tag == "NOTE", level == 0)$record)
+  ref_nos <- purrr::map_chr(note_xrefs, gedcom_value, gedcom = gedcom, tag = "REFN", level = 1)
+  note_txts <- purrr::map_chr(note_xrefs, gedcom_value, gedcom = gedcom, tag = "NOTE", level = 0)
+  date_chan <- purrr::map_chr(note_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
+  
+  tibble::tibble(xref = note_xrefs,
+                 ref = ref_nos,
+                 text = note_txts,
+                 last_modified = date_chan)
   
   
 }

@@ -1,5 +1,16 @@
 
 
+#' Import a GEDCOM file
+#'
+#' Imports a *.ged file and creates a tidygedcom object.
+#'
+#' @param filepath The full filepath of the GEDCOM file
+#'
+#' @return A tidygedcom object
+#' @export
+#'
+#' @examples
+#' import_gedcom("C:/my_family.ged")
 import_gedcom <- function(filepath) {
   
   ged <- readr::read_lines(filepath) %>% 
@@ -20,9 +31,19 @@ import_gedcom <- function(filepath) {
 
 
 
-export_gedcom <- function(gedcom_df, filepath) {
+#' Save a tidygedcom object to disk as a GEDCOM file
+#'
+#' @param gedcom_df A tidygedcom object
+#' @param filepath The full filepath to write to
+#'
+#' @return The tidygedcom object
+#' @export
+export_gedcom <- function(gedcom, filepath) {
   
-  gedcom_df %>%
+  if(stringr::str_sub(filepath, -4, -1) != ".ged")
+    warning("Output is not being saved as a GEDCOM file (*.ged)")
+  
+  gedcom %>%
     update_header(file_name = basename(filepath)) %>% 
     dplyr::mutate(id = dplyr::if_else(dplyr::lag(id) == id, "", id)) %>% 
     tidyr::replace_na(list(id = "")) %>% 
@@ -30,10 +51,33 @@ export_gedcom <- function(gedcom_df, filepath) {
     dplyr::mutate(value = stringr::str_replace_all(value, "  ", " ")) %>%
     utils::write.table(filepath, na = "", col.names = FALSE, quote = FALSE, row.names = FALSE)
   
+  gedcom
+  
 }
 
 
 
+#' Create a base tidygedcom object
+#' 
+#' This function creates a minimal tidygedcom object with header and footer sections and a single submitter record.
+#'  
+#' @param submitter_details Details of the submitter of the file (you?) using the subm() function. If no submitter
+#' name is provided, the username is used.
+#' @param gedcom_description A note to describe the contents of the file in terms of "ancestors or descendants of" 
+#' so that the person receiving the data knows what genealogical information the transmission contains.
+#' @param gedcom_copyright A copyright statement needed to protect the copyrights of the submitter of this GEDCOM file.
+#' @param source_data_name The name of the electronic data source that was used to obtain the data in this transmission. 
+#' @param source_data_date The date this source was created or published. Ensure you create this date with the 
+#' date_exact() function.
+#' @param source_data_copyright A copyright statement required by the owner of data from which this information was 
+#' obtained.  
+#' @param receiving_system The name of the system expected to process the GEDCOM-compatible transmission. 
+#' @param language The human language in which the data in the transmission is normally read or written.
+#' @param char_set A code value that represents the character set to be used to interpret this data. One of 
+#' "ANSEL", "UTF-8", "UNICODE", "ASCII". Defaults to "UTF-8".
+#' @param char_set_version The version number of the character set used.
+#'
+#' @return A minimal tidygedcom object 
 #' @export
 gedcom <- function(submitter_details = subm(),
                    gedcom_description = character(),

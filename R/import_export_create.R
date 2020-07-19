@@ -16,11 +16,11 @@ import_gedcom <- function(filepath) {
   ged <- readr::read_lines(filepath) %>% 
     stringr::str_trim() %>% 
     tibble::tibble(value = .) %>%
-    tidyr::extract(value, into = c("level", "id", "tag", "value"), 
+    tidyr::extract(value, into = c("level", "record", "tag", "value"), 
                    regex = "^(.) (@.+@)? ?(\\w{3,5}) ?(.*)$") %>%
-    dplyr::mutate(id = dplyr::if_else(tag == "HEAD", "HD", id),
-                  id = dplyr::if_else(tag == "TRLR", "TR", id)) %>%
-    tidyr::fill(id) %>% 
+    dplyr::mutate(record = dplyr::if_else(tag == "HEAD", "HD", record),
+                  record = dplyr::if_else(tag == "TRLR", "TR", record)) %>%
+    tidyr::fill(record) %>% 
     dplyr::mutate(level = as.numeric(level)) %>% 
     set_class_to_tidygedcom()
 
@@ -45,9 +45,9 @@ export_gedcom <- function(gedcom, filepath) {
   
   gedcom %>%
     update_header(file_name = basename(filepath)) %>% 
-    dplyr::mutate(id = dplyr::if_else(dplyr::lag(id) == id, "", id)) %>% 
-    tidyr::replace_na(list(id = "")) %>% 
-    dplyr::transmute(value = paste(level, id, tag, value)) %>% 
+    dplyr::mutate(record = dplyr::if_else(dplyr::lag(record) == record, "", record)) %>% 
+    tidyr::replace_na(list(record = "")) %>% 
+    dplyr::transmute(value = paste(level, record, tag, value)) %>% 
     dplyr::mutate(value = stringr::str_replace_all(value, "  ", " ")) %>%
     utils::write.table(filepath, na = "", col.names = FALSE, quote = FALSE, row.names = FALSE)
   

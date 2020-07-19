@@ -47,7 +47,7 @@ str.tidygedcom <- function(gedcom) {
 
 individuals <- function(gedcom) {
   
-  ind_xrefs <- unique(dplyr::filter(gedcom, tag == "INDI")$id)
+  ind_xrefs <- unique(dplyr::filter(gedcom, tag == "INDI")$record)
   ind_names <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
   ind_sex <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "SEX", level = 1)
   ind_dobs <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
@@ -87,7 +87,7 @@ individuals <- function(gedcom) {
 
 families <- function(gedcom) {
   
-  fam_xrefs <- unique(dplyr::filter(gedcom, tag == "FAM")$id)
+  fam_xrefs <- unique(dplyr::filter(gedcom, tag == "FAM")$record)
   husb_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1)
   wife_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1)
   husb_names <- purrr::map_chr(husb_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
@@ -103,14 +103,14 @@ families <- function(gedcom) {
                  marriage_place = marr_places,
                  num_children = num_chil) %>% 
     dplyr::mutate(num_children = ifelse(num_children == "",
-                                        purrr::map_chr(xref, ~sum(dplyr::filter(gedcom, id == .x)$tag == "CHIL")),
+                                        purrr::map_chr(xref, ~sum(dplyr::filter(gedcom, record == .x)$tag == "CHIL")),
                                         num_children))
   
 }
 
 multimedia <- function(gedcom) {
   
-  obje_xrefs <- unique(dplyr::filter(gedcom, tag == "OBJE")$id)
+  obje_xrefs <- unique(dplyr::filter(gedcom, tag == "OBJE")$record)
   file_refs <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FILE", level = 1)
   file_titles <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "TITL", level = 2)
   file_forms <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FORM", level = 2)

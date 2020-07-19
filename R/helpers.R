@@ -18,9 +18,21 @@ set_class_to_tidygedcom <- function(gedcom) {
 }
 
 
-gedcom_value <- function(gedcom, section, tag, level, after_tag = NULL) {
+#' Extract a particular value from a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object
+#' @param record_xref 
+#' @param tag 
+#' @param level 
+#' @param after_tag 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   
-  gedcom_filtered <- dplyr::filter(gedcom, id %in% section)
+  gedcom_filtered <- dplyr::filter(gedcom, record %in% record_xref)
   if(nrow(gedcom_filtered) == 0) return("")
   
   active <- is.null(after_tag)
@@ -75,7 +87,7 @@ finalise <- function(df, global_start_level = 0) {
   
   df %>% 
     dplyr::mutate(level = global_start_level + level) %>%
-    tidyr::fill(id)
+    tidyr::fill(record)
   
 }
 
@@ -84,13 +96,13 @@ assign_xref <- function(type, ref = 0, gedcom = tibble::tibble()) {
   
   if (ref == 0) {
     gedcom_filt <- gedcom %>% 
-      dplyr::filter(stringr::str_detect(id, paste0("@", type, "\\d+@"))) 
+      dplyr::filter(stringr::str_detect(record, paste0("@", type, "\\d+@"))) 
     
     if(nrow(gedcom_filt) == 0) {
       ref <- 1
     } else {
       ref <- gedcom_filt %>%
-        dplyr::pull(id) %>% 
+        dplyr::pull(record) %>% 
         unique() %>% 
         stringr::str_remove_all("@") %>% 
         stringr::str_remove_all("[A-Z]") %>% 

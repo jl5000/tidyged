@@ -29,7 +29,7 @@
 #'                             xref_subn = "@2@", system_version_number = "1.0", name_of_product = "R",
 #'                             copyright_gedcom_file = "Do not copy", language = "English",
 #'                             gedcom_content_description = "This is a gedcom file"),
-#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "HD", "HEAD",                      "",
 #'                              1, "HD", "SOUR",                "system",
 #'                              2, "HD", "VERS",                   "1.0",
@@ -53,7 +53,7 @@
 #'                             transmission_date = date_exact(15, 10, 2020), file_name = "test.ged",
 #'                             copyright_gedcom_file = "Do not copy", language = "English", place_hierarchy = "here",
 #'                             gedcom_content_description = "This is a gedcom file"),
-#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "HD", "HEAD",                      "",
 #'                              1, "HD", "SOUR",                "system",
 #'                              2, "HD", "VERS",                   "1.0",
@@ -129,7 +129,7 @@ HEADER_SECTION <- function(xref_subm,
   validate_gedcom_content_description(gedcom_content_description, 1)
   
   temp <- dplyr::bind_rows(
-    tibble::tibble(level = 0, id = "HD", tag = "HEAD", value = ""),
+    tibble::tibble(level = 0, record = "HD", tag = "HEAD", value = ""),
     tibble::tibble(level = 1, tag = "SOUR", value = approved_system_id),
     tibble::tibble(level = 2, tag = "VERS", value = system_version_number),
     tibble::tibble(level = 2, tag = "NAME", value = name_of_product),
@@ -183,7 +183,7 @@ HEADER_SECTION <- function(xref_subm,
 #' @tests
 #' expect_error(FAMILY_RECORD("@F1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
 #' expect_equal(FAMILY_RECORD("@F1@"),
-#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@F1@", "FAM",                      "",
 #'                              1, "@F1@", "CHAN",                     "",
 #'                              2, "@F1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
@@ -225,7 +225,7 @@ FAMILY_RECORD <- function(xref_fam,
   
   
   temp <- dplyr::bind_rows(
-    tibble::tibble(level = 0, id = xref_fam, tag = "FAM", value = ""),
+    tibble::tibble(level = 0, record = xref_fam, tag = "FAM", value = ""),
     tibble::tibble(level = 1, tag = "RESN", value = restriction_notice),
     events %>% dplyr::bind_rows() %>% add_levels(1),
     tibble::tibble(level = 1, tag = "HUSB", value = xref_husb),
@@ -284,7 +284,7 @@ FAMILY_RECORD <- function(xref_fam,
 #' @tests
 #' expect_error(INDIVIDUAL_RECORD("@I1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
 #' expect_equal(INDIVIDUAL_RECORD("@I1@"),
-#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@I1@", "INDI",                      "",
 #'                              1, "@I1@", "CHAN",                      "",
 #'                              2, "@I1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
@@ -336,7 +336,7 @@ INDIVIDUAL_RECORD <- function(xref_indi,
   
   
   temp <- dplyr::bind_rows(
-    tibble::tibble(level = 0, id = xref_indi, tag = "INDI", value = ""),
+    tibble::tibble(level = 0, record = xref_indi, tag = "INDI", value = ""),
     tibble::tibble(level = 1, tag = "RESN", value = restriction_notice),
     names %>% dplyr::bind_rows() %>% add_levels(1),
     tibble::tibble(level = 1, tag = "SEX", value = sex_value),
@@ -385,7 +385,7 @@ INDIVIDUAL_RECORD <- function(xref_indi,
 #' expect_error(MULTIMEDIA_RECORD("@M1@", "file_ref", "jpg",
 #'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
 #' expect_equal(MULTIMEDIA_RECORD("@M1@", "file_ref", "jpg"),
-#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@M1@", "OBJE",                      "",
 #'                              1, "@M1@", "FILE",              "file_ref",
 #'                              2, "@M1@", "FORM",                   "jpg",
@@ -429,7 +429,7 @@ MULTIMEDIA_RECORD <- function(xref_obje,
   validate_user_reference_type(user_reference_type, 1000)
   validate_automated_record_id(automated_record_id, 1)
   
-  temp <- tibble::tibble(level = 0, id = xref_obje, tag = "OBJE", value = "") 
+  temp <- tibble::tibble(level = 0, record = xref_obje, tag = "OBJE", value = "") 
     
   for (i in seq_along(multimedia_file_reference)) {
     temp <- dplyr::bind_rows(temp,
@@ -475,7 +475,7 @@ MULTIMEDIA_RECORD <- function(xref_obje,
 #' expect_error(NOTE_RECORD("@N1@", "This is a note",
 #'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
 #' expect_equal(NOTE_RECORD("@N1@", "This is a note"),
-#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@N1@", "NOTE",        "This is a note",
 #'                              1, "@N1@", "CHAN",                      "",
 #'                              2, "@N1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
@@ -516,7 +516,7 @@ NOTE_RECORD <- function(xref_note,
                    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
                    date_changed %>% add_levels(1)
   ) %>% 
-    dplyr::mutate(id = dplyr::if_else(tag == "NOTE", xref_note, NA_character_),
+    dplyr::mutate(record = dplyr::if_else(tag == "NOTE", xref_note, NA_character_),
                   .after = level) %>% 
     finalise()
   
@@ -535,7 +535,7 @@ NOTE_RECORD <- function(xref_note,
 #' expect_error(REPOSITORY_RECORD("@R1@", "Repo name",
 #'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
 #' expect_equal(REPOSITORY_RECORD("@R1@", "Repo name"),
-#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@R1@", "REPO",                      "",
 #'                              1, "@R1@", "NAME",             "Repo name",
 #'                              1, "@R1@", "CHAN",                      "",
@@ -563,7 +563,7 @@ REPOSITORY_RECORD <- function(xref_repo,
   validate_automated_record_id(automated_record_id, 1)
   
   temp <- dplyr::bind_rows(
-    tibble::tibble(level = 0, id = xref_repo, tag = "REPO", value = ""),
+    tibble::tibble(level = 0, record = xref_repo, tag = "REPO", value = ""),
     tibble::tibble(level = 1, tag = "NAME", value = name_of_repository),
     address %>% add_levels(1),
     notes %>% dplyr::bind_rows() %>% add_levels(1)
@@ -598,7 +598,7 @@ REPOSITORY_RECORD <- function(xref_repo,
 #' expect_error(SOURCE_RECORD("@S1@",
 #'                            user_reference_number = 123:125, user_reference_type = letters[1:2]))
 #' expect_equal(SOURCE_RECORD("@S1@"),
-#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@S1@", "SOUR",                      "",
 #'                              1, "@S1@", "CHAN",                      "",
 #'                              2, "@S1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
@@ -643,7 +643,7 @@ SOURCE_RECORD <- function(xref_sour,
   validate_automated_record_id(automated_record_id, 1)
   
   temp <- dplyr::bind_rows(
-    tibble::tibble(level = 0, id = xref_sour, tag = "SOUR", value = ""),
+    tibble::tibble(level = 0, record = xref_sour, tag = "SOUR", value = ""),
     tibble::tibble(level = 1, tag = "DATA", value = ""),
     tibble::tibble(level = 2, tag = "EVEN", value = events_recorded),
     tibble::tibble(level = 3, tag = "DATE", value = date_period_covered),
@@ -694,7 +694,7 @@ SOURCE_RECORD <- function(xref_sour,
 #' @inheritParams parameter_definitions
 #' @tests
 #' expect_equal(SUBMISSION_RECORD("@S1@"),
-#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@S1@", "SUBN",                      "",
 #'                              1, "@S1@", "CHAN",                      "",
 #'                              2, "@S1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
@@ -724,7 +724,7 @@ SUBMISSION_RECORD <- function(xref_subn,
   validate_automated_record_id(automated_record_id, 1)
   
   dplyr::bind_rows(
-    tibble::tibble(level = 0, id = xref_subn, tag = "SUBN", value = ""),
+    tibble::tibble(level = 0, record = xref_subn, tag = "SUBN", value = ""),
     tibble::tibble(level = 1, tag = "SUBM", value = xref_subm),
     tibble::tibble(level = 1, tag = "FAMF", value = name_of_family_file),
     tibble::tibble(level = 1, tag = "TEMP", value = temple_code),
@@ -750,7 +750,7 @@ SUBMISSION_RECORD <- function(xref_subn,
 #' @param address An ADDRESS_STRUCTURE() object giving address details of the submitter.
 #' @tests
 #' expect_equal(SUBMITTER_RECORD("@S1@", "Joe Bloggs"),
-#'              tibble::tribble(~level,  ~id,   ~tag,                  ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@S1@", "SUBM",                      "",
 #'                              1, "@S1@", "NAME",            "Joe Bloggs",
 #'                              1, "@S1@", "CHAN",                      "",
@@ -776,7 +776,7 @@ SUBMITTER_RECORD <- function(xref_subm,
   validate_automated_record_id(automated_record_id, 1)
   
   dplyr::bind_rows(
-    tibble::tibble(level = 0, id = xref_subm, tag = "SUBM", value = ""),
+    tibble::tibble(level = 0, record = xref_subm, tag = "SUBM", value = ""),
     tibble::tibble(level = 1, tag = "NAME", value = submitter_name),
     address %>% add_levels(1),
     multimedia_links %>% dplyr::bind_rows() %>% add_levels(1),
@@ -798,11 +798,11 @@ SUBMITTER_RECORD <- function(xref_subm,
 #'
 #' @tests
 #' expect_equal(FOOTER_SECTION(),
-#'              tibble::tribble(~level,  ~id,   ~tag, ~value,
+#'              tibble::tribble(~level,  ~record,   ~tag, ~value,
 #'                              0, "TR", "TRLR",     ""
 #'              ))
 #' @return A tidy tibble containing a FOOTER_SECTION part of a GEDCOM file.
 FOOTER_SECTION <- function(){
-  tibble::tibble(level = 0, id = "TR", tag = "TRLR", value = "") %>% 
+  tibble::tibble(level = 0, record = "TR", tag = "TRLR", value = "") %>% 
     finalise()
 }

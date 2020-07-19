@@ -33,23 +33,23 @@ find_xref <- function(gedcom, record_ids, tags, search_string, allow_broken = FA
   if(allow_broken) search_string <- stringr::str_replace_all(search_string, " ", ".*")
   
   possibilities <- gedcom %>% 
-    dplyr::filter(id %in% record_ids) %>% 
+    dplyr::filter(record %in% record_ids) %>% 
     dplyr::filter(tag %in% tags) %>% 
     dplyr::filter(stringr::str_detect(value, search_string))
   
-  if(length(unique(possibilities$id)) == 0) {
+  if(length(unique(possibilities$record)) == 0) {
     
     stop("Record activation failed - no records found. Try supplying the xref explicitly.")
     
-  } else if(length(unique(possibilities$id)) > 1) {
+  } else if(length(unique(possibilities$record)) > 1) {
     
     stop("Record activation failed - more than one record found: ",
          paste(unique(possibilities$value), collapse = ", "),
          ". \nTry being more specific or supplying the xref explicitly.")
     
-  } else if(length(unique(possibilities$id)) == 1) {
+  } else if(length(unique(possibilities$record)) == 1) {
     
-    xref <- unique(possibilities$id)
+    xref <- unique(possibilities$record)
   }
   
 }
@@ -74,7 +74,7 @@ activate_individual_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    individuals <- dplyr::filter(gedcom, level == 0 & tag == "INDI")$id
+    individuals <- dplyr::filter(gedcom, level == 0 & tag == "INDI")$record
     
     xref <- find_xref(gedcom, 
                       individuals, 
@@ -124,7 +124,7 @@ activate_submitter_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    submitters <- dplyr::filter(gedcom, level == 0 & tag == "SUBM")$id
+    submitters <- dplyr::filter(gedcom, level == 0 & tag == "SUBM")$record
     
     xref <- find_xref(gedcom, 
                       submitters, 
@@ -156,7 +156,7 @@ activate_multimedia_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    objects <- dplyr::filter(gedcom, level == 0 & tag == "OBJE")$id
+    objects <- dplyr::filter(gedcom, level == 0 & tag == "OBJE")$record
     
     xref <- find_xref(gedcom, 
                       objects, 
@@ -188,7 +188,7 @@ activate_note_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    notes <- dplyr::filter(gedcom, level == 0 & tag == "NOTE")$id
+    notes <- dplyr::filter(gedcom, level == 0 & tag == "NOTE")$record
     
     xref <- find_xref(gedcom, 
                       notes, 
@@ -220,7 +220,7 @@ activate_source_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    sources <- dplyr::filter(gedcom, level == 0 & tag == "SOUR")$id
+    sources <- dplyr::filter(gedcom, level == 0 & tag == "SOUR")$record
     
     xref <- find_xref(gedcom, 
                       sources, 
@@ -252,7 +252,7 @@ activate_repository_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    repositories <- dplyr::filter(gedcom, level == 0 & tag == "REPO")$id
+    repositories <- dplyr::filter(gedcom, level == 0 & tag == "REPO")$record
     
     xref <- find_xref(gedcom, 
                       repositories, 

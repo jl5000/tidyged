@@ -36,7 +36,7 @@ null_active_record <- function(gedcom) {
 
 
 
-#' Find an xref of a record given a particular value.
+#' Find an xref of a record given a particular regex pattern.
 #'
 #' This is a helper function to identify the xref of a record given a piece of information such
 #' as a name or reference number.
@@ -44,19 +44,15 @@ null_active_record <- function(gedcom) {
 #' @param gedcom A tidygedcom object
 #' @param record_ids A list of potential xrefs to consider
 #' @param tags The tags to look at when comparing values
-#' @param search_string The identifying information to search for
-#' @param allow_broken Whether to allow the search_string to be matched piece-wise or exactly. 
-#' For example, if TRUE, "Joe Bloggs" will match "Joe Ian Bloggs".
+#' @param search_pattern A regex pattern to search for
 #'
 #' @return A single xref for the given record
-find_xref <- function(gedcom, record_ids, tags, search_string, allow_broken = FALSE) {
-  
-  if(allow_broken) search_string <- stringr::str_replace_all(search_string, " ", ".*")
+find_xref <- function(gedcom, record_ids, tags, search_pattern) {
   
   possibilities <- gedcom %>% 
     dplyr::filter(record %in% record_ids) %>% 
     dplyr::filter(tag %in% tags) %>% 
-    dplyr::filter(stringr::str_detect(value, search_string))
+    dplyr::filter(stringr::str_detect(value, search_pattern))
   
   if(length(unique(possibilities$record)) == 0) {
     
@@ -95,13 +91,10 @@ activate_individual_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    individuals <- dplyr::filter(gedcom, level == 0 & tag == "INDI")$record
-    
     xref <- find_xref(gedcom, 
-                      individuals, 
+                      individual_xrefs(gedcom), 
                       c("NAME", "ROMN", "FONE"), 
-                      individual_name,
-                      allow_broken = TRUE)
+                      individual_name)
   }
   
   set_active_record(gedcom, xref)
@@ -145,13 +138,10 @@ activate_submitter_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    submitters <- dplyr::filter(gedcom, level == 0 & tag == "SUBM")$record
-    
     xref <- find_xref(gedcom, 
-                      submitters, 
+                      submitter_xrefs(gedcom), 
                       "NAME", 
-                      submitter_name,
-                      allow_broken = TRUE)
+                      submitter_name)
   }
   
   set_active_record(gedcom, xref)
@@ -177,13 +167,10 @@ activate_multimedia_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    objects <- dplyr::filter(gedcom, level == 0 & tag == "OBJE")$record
-    
     xref <- find_xref(gedcom, 
-                      objects, 
+                      multimedia_xrefs(gedcom), 
                       "FILE", 
-                      file_reference,
-                      allow_broken = FALSE)
+                      file_reference)
   }
   
   set_active_record(gedcom, xref)
@@ -209,13 +196,10 @@ activate_note_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    notes <- dplyr::filter(gedcom, level == 0 & tag == "NOTE")$record
-    
     xref <- find_xref(gedcom, 
-                      notes, 
+                      note_xrefs(gedcom), 
                       c("NOTE", "CONT", "CONC"), 
-                      note_excerpt,
-                      allow_broken = FALSE)
+                      note_excerpt)
   }
   
   set_active_record(gedcom, xref)
@@ -241,13 +225,10 @@ activate_source_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    sources <- dplyr::filter(gedcom, level == 0 & tag == "SOUR")$record
-    
     xref <- find_xref(gedcom, 
-                      sources, 
+                      source_xrefs(gedcom), 
                       "TITL", 
-                      source_title,
-                      allow_broken = FALSE)
+                      source_title)
   }
   
   set_active_record(gedcom, xref)
@@ -273,13 +254,10 @@ activate_repository_record <- function(gedcom,
   
   if(length(xref) == 0) {
     
-    repositories <- dplyr::filter(gedcom, level == 0 & tag == "REPO")$record
-    
     xref <- find_xref(gedcom, 
-                      repositories, 
+                      repository_xrefs(gedcom), 
                       "NAME", 
-                      repository_name,
-                      allow_broken = FALSE) 
+                      repository_name) 
   }
   
   set_active_record(gedcom, xref)

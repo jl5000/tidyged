@@ -6,27 +6,25 @@ add_family <- function(gedcom,
                        number_of_children = character(),
                        submitter = character(),
                        restriction_notice = character(),
-                       user_ref_number = character(),
-                       user_ref_type = character(),
+                       user_reference_number = character(),
+                       user_reference_type = character(),
                        automated_record_id = character()) {
   
   xref <- assign_xref(xref_prefix_fam(), gedcom = gedcom)
   
-  FAMILY_RECORD(xref_fam = xref,
-                restriction_notice = restriction_notice,
-                xref_husb = character(),
-                xref_wife = character(),
-                xrefs_chil = character(),
-                count_of_children = character(),
-                xrefs_subm = character(),
-                lds_spouse_sealings = list(),
-                user_reference_number = character(),
-                user_reference_type = character(),
-                automated_record_id = character(),
-                date_changed = CHANGE_DATE(),
-                notes = list(),
-                source_citations = list(),
-                multimedia_links = list()) %>% 
+  fam_record <- FAMILY_RECORD(xref_fam = xref,
+                              restriction_notice = restriction_notice,
+                              xref_husb = character(),#TODO lookup
+                              xref_wife = character(),
+                              xrefs_chil = character(),
+                              count_of_children = number_of_children,
+                              xrefs_subm = character(),
+                              user_reference_number = user_reference_number,
+                              user_reference_type = user_reference_type,
+                              automated_record_id = automated_record_id) 
+  
+  gedcom %>% 
+    tibble::add_row(fam_record, .before = nrow(.)) %>% 
     set_active_record(xref)
   
   

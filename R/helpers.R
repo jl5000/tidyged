@@ -54,6 +54,15 @@ is_source <- function(gedcom, xref) {
   dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_sour()
 }
 
+individual_xrefs <- function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_indi())$record }
+family_xrefs <-     function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_fam())$record }
+submitter_xrefs <-  function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_subm())$record }
+submission_xrefs <- function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_subn())$record }
+source_xrefs <-     function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_sour())$record }
+repository_xrefs <- function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_repo())$record }
+note_xrefs <-       function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_note())$record }
+multimedia_xrefs <- function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_obje())$record }
+
 set_class_to_tidygedcom <- function(gedcom) {
   class(gedcom) <- c("tidygedcom", "tbl_df", "tbl", "data.frame")
   gedcom

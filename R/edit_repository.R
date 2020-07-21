@@ -7,14 +7,15 @@ add_repository <- function(gedcom) {
 
 update_repository <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A repository record must be activated to update it")
+  check_active_record_valid(gedcom, record_string_repo(), is_repository)
   
 }
 
 remove_repository <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A repository record must be activated to remove it")
+  check_active_record_valid(gedcom, record_string_repo(), is_repository)
   
+  
+  
+  null_active_record(gedcom)
 }

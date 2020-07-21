@@ -11,6 +11,48 @@ xref_prefix_obje <- function() {"O"}
 xref_prefix_note <- function() {"N"}
 xref_prefix_sour <- function() {"S"}
 
+record_tag_indi <- function() {"INDI"}
+record_tag_fam <- function() {"FAM"}
+record_tag_subm <- function() {"SUBM"}
+record_tag_subn <- function() {"SUBN"}
+record_tag_repo <- function() {"REPO"}
+record_tag_obje <- function() {"OBJE"}
+record_tag_note <- function() {"NOTE"}
+record_tag_sour <- function() {"SOUR"}
+
+record_string_indi <- function() {"individual"}
+record_string_fam <- function() {"family"}
+record_string_subm <- function() {"submitter"}
+record_string_subn <- function() {"submission"}
+record_string_repo <- function() {"repository"}
+record_string_obje <- function() {"multimedia"}
+record_string_note <- function() {"note"}
+record_string_sour <- function() {"source"}
+
+is_individual <- function(gedcom, xref) {
+  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_indi()
+}
+is_family <- function(gedcom, xref) {
+  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_fam()
+}
+is_submitter <- function(gedcom, xref) {
+  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_subm()
+}
+is_submission <- function(gedcom, xref) {
+  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_subn()
+}
+is_repository <- function(gedcom, xref) {
+  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_repo()
+}
+is_multimedia <- function(gedcom, xref) {
+  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_obje()
+}
+is_note <- function(gedcom, xref) {
+  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_note()
+}
+is_source <- function(gedcom, xref) {
+  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_sour()
+}
 
 set_class_to_tidygedcom <- function(gedcom) {
   class(gedcom) <- c("tidygedcom", "tbl_df", "tbl", "data.frame")

@@ -45,22 +45,24 @@ add_family_event <- function(gedcom,
                              event_place = PLACE_STRUCTURE(character()),
                              event_address = ADDRESS_STRUCTURE(character())) {
   
+  check_active_record_valid(gedcom, record_string_fam(), is_family)
   
   
 }
 
 remove_family <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A family record must be activated to remove it")
+  check_active_record_valid(gedcom, record_string_fam(), is_family)
   
+  
+  
+  null_active_record(gedcom)  
 }
 
 
 update_family <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A family record must be activated to update it")
+  check_active_record_valid(gedcom, record_string_fam(), is_family)
   
   
 }

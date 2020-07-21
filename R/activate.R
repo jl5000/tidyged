@@ -12,6 +12,27 @@ set_active_record <- function(gedcom, xref) {
   attr(gedcom, "active_record") <- xref
   gedcom
 }
+get_active_record <- function(gedcom) {
+  attr(gedcom, "active_record")
+}
+
+check_active_record_valid <- function(gedcom, record_type, record_type_fn) {
+  
+  xref <- get_active_record(gedcom)
+  
+  if(is.null(xref))
+    stop("No record is activated. A ", record_type, " record must be activated to update or remove it")
+  
+  if(!record_type_fn(gedcom, xref))
+    stop("The active record is not a ", record_type, " record")
+  
+}
+
+null_active_record <- function(gedcom) {
+  attr(gedcom, "active_record") <- NULL
+  gedcom
+}
+
 
 
 

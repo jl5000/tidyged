@@ -3,41 +3,44 @@
 add_submitter <- function(gedcom,
                           name,
                           address = ADDRESS_STRUCTURE(character()),
-                          multimedia_links = list(),
                           language_preference = character(),
                           submitter_registered_rfn = character(),
-                          automated_record_id = character(),
-                          notes = list()) {
+                          automated_record_id = character()) {
   
   xref <- assign_xref(xref_prefix_subm(), gedcom = gedcom)
   
+  subm_record <- SUBMITTER_RECORD(xref_subm = xref,
+                                  name,
+                                  address,
+                                  language_preference,
+                                  submitter_registered_rfn,
+                                  automated_record_id)
+  
   gedcom %>% 
-    tibble::add_row(SUBMITTER_RECORD(xref_subm = xref,
-                                     name,
-                                     address,
-                                     multimedia_links,
-                                     language_preference,
-                                     submitter_registered_rfn,
-                                     automated_record_id,
-                                     notes),
-                    .before(nrow(.)))
+    tibble::add_row(subm_record, .before(nrow(.))) %>% 
+    set_active_record(xref)
   
 }
 
 #' @export
 update_submitter <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A submitter record must be activated to update it")
+  check_active_record_valid(gedcom, record_string_subm(), is_submitter)
+  
+  
+  
+  
   
 }
 
 #' @export
 remove_submitter <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A submitter record must be activated to remove it")
+  check_active_record_valid(gedcom, record_string_subm(), is_submitter)
   
+  
+  
+  null_active_record(gedcom)
 }
 
 #' @export

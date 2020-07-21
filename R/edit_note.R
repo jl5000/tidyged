@@ -7,14 +7,15 @@ add_note <- function(gedcom) {
 
 update_note <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A note record must be activated to update it")
+  check_active_record_valid(gedcom, record_string_note(), is_note)
   
 }
 
 remove_note <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A note record must be activated to remove it")
+  check_active_record_valid(gedcom, record_string_note(), is_note)
   
+  
+  
+  null_active_record(gedcom)
 }

@@ -47,62 +47,61 @@ add_individual_names <- function(gedcom,
                                  romanized_type = character(),
                                  romanized_name_pieces = list()) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. An individual record must be activated to add names to it")
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
+  
   
 }
 
 add_individual_event <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. An individual record must be activated to add events to it")
-  
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
 }
 
 
 add_individual_attribute <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. An individual record must be activated to add attributes to it")
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
   
 }
 
 add_individual_association <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. An individual record must be activated to add associations to it")
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
+  
   
 }
 
 
 add_individual_family_link_as_spouse <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. An individual record must be activated to add links to it")
-  
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
 }
 
 add_individual_family_link_as_child <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. An individual record must be activated to add links to it")
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
   
 }
 
 remove_individual <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. An individual record must be activated to remove it")
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
   
   
+  null_active_record(gedcom)
 }
 
 
 update_individual <- function(gedcom) {
   
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
   
   

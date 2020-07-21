@@ -7,14 +7,17 @@ add_source <- function(gedcom) {
 
 update_source <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A source record must be activated to update it")
+  check_active_record_valid(gedcom, record_string_sour(), is_source)
   
 }
 
 remove_source <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A source record must be activated to remove it")
+  check_active_record_valid(gedcom, record_string_sour(), is_source)
   
+  
+  
+  
+  
+  null_active_record(gedcom)
 }

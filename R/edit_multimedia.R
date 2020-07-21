@@ -7,16 +7,18 @@ add_multimedia <- function(gedcom) {
 
 update_multimedia <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A multimedia record must be activated to update it")
+  check_active_record_valid(gedcom, record_string_obje(), is_multimedia)
   
   
 }
 
 remove_multimedia <- function(gedcom) {
   
-  if(is.null(attr(gedcom, "active_record")))
-    stop("No record is activated. A multimedia record must be activated to remove it")
+  check_active_record_valid(gedcom, record_string_obje(), is_multimedia)
   
   
+  
+  
+  
+  null_active_record(gedcom)
 }

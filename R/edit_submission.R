@@ -15,4 +15,7 @@ update_submission <- function(gedcom) {
 
 remove_submission <- function(gedcom) {
   
+  
+  
+  null_active_record(gedcom)
 }

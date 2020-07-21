@@ -103,6 +103,7 @@ update_individual <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
-  
+
+    
   
 }

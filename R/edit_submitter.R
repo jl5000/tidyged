@@ -17,7 +17,7 @@ add_submitter <- function(gedcom,
                                   automated_record_id)
   
   gedcom %>% 
-    tibble::add_row(subm_record, .before(nrow(.))) %>% 
+    tibble::add_row(subm_record, .before = nrow(.)) %>% 
     set_active_record(xref)
   
 }

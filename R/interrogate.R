@@ -1,14 +1,14 @@
 
 unique_record_count <- function(gedcom, tag) {sum(gedcom$level == 0 & gedcom$tag == tag)}
 
-num_indi <- function(gedcom) {unique_record_count(gedcom, "INDI")}
-num_fam <- function(gedcom) {unique_record_count(gedcom, "FAM")}
-num_subm <- function(gedcom) {unique_record_count(gedcom, "SUBM")}
-num_subn <- function(gedcom) {unique_record_count(gedcom, "SUBN")}
-num_media <- function(gedcom) {unique_record_count(gedcom, "OBJE")}
-num_note <- function(gedcom) {unique_record_count(gedcom, "NOTE")}
-num_repo <- function(gedcom) {unique_record_count(gedcom, "REPO")}
-num_sour <- function(gedcom) {unique_record_count(gedcom, "SOUR")}
+num_indi <- function(gedcom) {unique_record_count(gedcom, record_tag_indi())}
+num_fam <- function(gedcom) {unique_record_count(gedcom, record_tag_fam())}
+num_subm <- function(gedcom) {unique_record_count(gedcom, record_tag_subm())}
+num_subn <- function(gedcom) {unique_record_count(gedcom, record_tag_subn())}
+num_media <- function(gedcom) {unique_record_count(gedcom, record_tag_obje())}
+num_note <- function(gedcom) {unique_record_count(gedcom, record_tag_note())}
+num_repo <- function(gedcom) {unique_record_count(gedcom, record_tag_repo())}
+num_sour <- function(gedcom) {unique_record_count(gedcom, record_tag_sour())}
 
 
 summary.tidygedcom <- function(gedcom) {

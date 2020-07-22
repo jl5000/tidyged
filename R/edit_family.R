@@ -66,13 +66,27 @@ add_family_event <- function(gedcom,
   
 }
 
-remove_family <- function(gedcom) {
+remove_family <- function(gedcom, remove_individuals = FALSE) {
   
   check_active_record_valid(gedcom, record_string_fam(), is_family)
   
+  ind_xrefs <- unique(dplyr::filter(gedcom, record == get_active_record(gedcom),
+                                    tag %in% c("HUSB", "WIFE", "CHIL"))$value)
   
+  temp <- dplyr::filter(gedcom, record != get_active_record(gedcom))
   
-  null_active_record(gedcom)  
+  if(remove_individuals) {
+    
+    for(i in seq_along(ind_xrefs)) {
+      
+      temp <- activate_individual_record(temp, xref = ind_xrefs[i]) %>% 
+        remove_individual()
+      
+    }
+    message("Records for individuals in the family have also been removed.")
+  }
+  
+  null_active_record(temp)  
 }
 
 

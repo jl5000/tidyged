@@ -19,7 +19,9 @@ gedcom(subm("The Submitter")) %>%
   add_family(husband = "@I1@", wife = "@I2@", children = c("@I3@", "@I4@"), submitters = "Submitter") %>%
   add_note("THis is a note") %>% 
   add_source(short_title = "Abbrev", title = "Full title") %>% 
-  add_submitter("Submitter 2") %>% View()
+  add_submitter("Submitter 2") %>%
+  activate_family_record(xref="@F1@") %>% 
+  remove_family(remove_individuals = TRUE) %>% View()
 
 
 full_ged <- gedcom(subm("Submitter name", 

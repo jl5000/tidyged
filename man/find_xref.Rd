@@ -2,21 +2,18 @@
 % Please edit documentation in R/activate.R
 \name{find_xref}
 \alias{find_xref}
-\title{Find an xref of a record given a particular value.}
+\title{Find an xref of a record given a particular regex pattern.}
 \usage{
-find_xref(gedcom, record_ids, tags, search_string, allow_broken = FALSE)
+find_xref(gedcom, record_xrefs, tags, search_pattern)
 }
 \arguments{
 \item{gedcom}{A tidygedcom object}
 
-\item{record_ids}{A list of potential xrefs to consider}
+\item{record_xrefs}{A list of potential xrefs to consider}
 
 \item{tags}{The tags to look at when comparing values}
 
-\item{search_string}{The identifying information to search for}
-
-\item{allow_broken}{Whether to allow the search_string to be matched piece-wise or exactly.
-For example, if TRUE, "Joe Bloggs" will match "Joe Ian Bloggs".}
+\item{search_pattern}{A regex pattern to search for}
 }
 \value{
 A single xref for the given record
@@ -24,4 +21,7 @@ A single xref for the given record
 \description{
 This is a helper function to identify the xref of a record given a piece of information such
 as a name or reference number.
+}
+\details{
+Sometimes an xref may be provided directly, in which case it's returned straight back.
 }

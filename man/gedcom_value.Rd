@@ -9,17 +9,21 @@ gedcom_value(gedcom, record_xref, tag, level, after_tag = NULL)
 \arguments{
 \item{gedcom}{A tidygedcom object}
 
-\item{record_xref}{}
+\item{record_xref}{The xref of the record in which the value may exist}
 
-\item{tag}{}
+\item{tag}{The tag associated with the value}
 
-\item{level}{}
+\item{level}{The level number of the value}
 
-\item{after_tag}{}
+\item{after_tag}{Whether the tag should be subordinate to this parent tag}
 }
 \value{
-
+The particular value fitting the criteria of the input arguments. If not value is found,
+an empty string is returned. The function will automatically combine values split over CONT and CONC tags.
 }
 \description{
 Extract a particular value from a tidygedcom object
+}
+\examples{
+gedcom_value(gedcom, "@I1@", "NAME", 1)
 }

@@ -2,40 +2,31 @@
 
 `%nin%` <- Negate(`%in%`)
 
-
-is_individual <- function(gedcom, xref) {
-  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_indi()
-}
-is_family <- function(gedcom, xref) {
-  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_fam()
-}
-is_submitter <- function(gedcom, xref) {
-  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_subm()
-}
-is_submission <- function(gedcom, xref) {
-  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_subn()
-}
-is_repository <- function(gedcom, xref) {
-  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_repo()
-}
-is_multimedia <- function(gedcom, xref) {
-  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_obje()
-}
-is_note <- function(gedcom, xref) {
-  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_note()
-}
-is_source <- function(gedcom, xref) {
-  dplyr::filter(gedcom, record == xref)$tag[1] == record_tag_sour()
+is_record_type <- function(gedcom, xref, tag) {
+  dplyr::filter(gedcom, record == xref)$tag[1] == tag
 }
 
-individual_xrefs <- function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_indi())$record }
-family_xrefs <-     function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_fam())$record }
-submitter_xrefs <-  function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_subm())$record }
-submission_xrefs <- function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_subn())$record }
-source_xrefs <-     function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_sour())$record }
-repository_xrefs <- function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_repo())$record }
-note_xrefs <-       function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_note())$record }
-multimedia_xrefs <- function(gedcom) { dplyr::filter(gedcom, level == 0 & tag == record_tag_obje())$record }
+is_individual <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_indi()) }
+is_family <- function(gedcom, xref)     { is_record_type(gedcom, xref, record_tag_fam())  }
+is_submitter <- function(gedcom, xref)  { is_record_type(gedcom, xref, record_tag_subm()) }
+is_submission <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_subn()) }
+is_repository <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_repo()) }
+is_multimedia <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_obje()) }
+is_note <- function(gedcom, xref)       { is_record_type(gedcom, xref, record_tag_note()) }
+is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, record_tag_sour()) }
+
+xrefs_record_type <- function(gedcom, record_tag) {
+  dplyr::filter(gedcom, level == 0 & tag == record_tag)$record
+}
+
+xrefs_individuals <-  function(gedcom) {  xrefs_record_type(gedcom, record_tag_indi()) }
+xrefs_families <-     function(gedcom) {  xrefs_record_type(gedcom, record_tag_fam())  }
+xrefs_submitters <-   function(gedcom) {  xrefs_record_type(gedcom, record_tag_subm()) }
+xrefs_submission <-   function(gedcom) {  xrefs_record_type(gedcom, record_tag_subn()) }
+xrefs_sources <-      function(gedcom) {  xrefs_record_type(gedcom, record_tag_sour()) }
+xrefs_repositories <- function(gedcom) {  xrefs_record_type(gedcom, record_tag_repo()) }
+xrefs_notes <-        function(gedcom) {  xrefs_record_type(gedcom, record_tag_note()) }
+xrefs_multimedia <-   function(gedcom) {  xrefs_record_type(gedcom, record_tag_obje()) }
 
 set_class_to_tidygedcom <- function(gedcom) {
   class(gedcom) <- c("tidygedcom", "tbl_df", "tbl", "data.frame")
@@ -53,7 +44,6 @@ set_class_to_tidygedcom <- function(gedcom) {
 #'
 #' @return The particular value fitting the criteria of the input arguments. If not value is found,
 #' an empty string is returned. The function will automatically combine values split over CONT and CONC tags.
-#' @export
 #'
 #' @examples
 #' gedcom_value(gedcom, "@I1@", "NAME", 1)
@@ -100,7 +90,7 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   cat(text)
 }
 
-
+#' @keywords internal
 add_levels <- function(df, start_level) {
   
   if (nrow(df) == 0) return(df)
@@ -110,6 +100,7 @@ add_levels <- function(df, start_level) {
   
 }
 
+#' @keywords internal
 finalise <- function(df, global_start_level = 0) {
   
   df %>% 

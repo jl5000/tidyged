@@ -45,9 +45,9 @@ str.tidygedcom <- function(gedcom) {
   ) %>% cat()
 }
 
-individuals <- function(gedcom) {
+df_individuals <- function(gedcom) {
   
-  ind_xrefs <- unique(dplyr::filter(gedcom, tag == "INDI", level == 0)$record)
+  ind_xrefs <- xrefs_individuals(gedcom)
   ind_names <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
   ind_sex <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "SEX", level = 1)
   ind_dobs <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
@@ -87,9 +87,9 @@ individuals <- function(gedcom) {
     dplyr::select(-full, -mother_xref, -father_xref)
 }
 
-families <- function(gedcom) {
+df_families <- function(gedcom) {
   
-  fam_xrefs <- unique(dplyr::filter(gedcom, tag == "FAM", level == 0)$record)
+  fam_xrefs <- xrefs_families(gedcom)
   husb_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1)
   wife_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1)
   husb_names <- purrr::map_chr(husb_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
@@ -112,9 +112,9 @@ families <- function(gedcom) {
   
 }
 
-multimedia <- function(gedcom) {
+df_multimedia <- function(gedcom) {
   
-  obje_xrefs <- unique(dplyr::filter(gedcom, tag == "OBJE", level == 0)$record)
+  obje_xrefs <- xrefs_multimedia(gedcom)
   file_refs <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FILE", level = 1)
   file_titles <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "TITL", level = 2)
   file_forms <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FORM", level = 2)
@@ -130,9 +130,9 @@ multimedia <- function(gedcom) {
   
 }
 
-sources <- function(gedcom) {
+df_sources <- function(gedcom) {
   
-  sour_xrefs <- unique(dplyr::filter(gedcom, tag == "SOUR", level == 0)$record)
+  sour_xrefs <- xrefs_sources(gedcom)
   origs <- purrr::map_chr(sour_xrefs, gedcom_value, gedcom = gedcom, tag = "AUTH", level = 1)
   titles <- purrr::map_chr(sour_xrefs, gedcom_value, gedcom = gedcom, tag = "TITL", level = 1)
   date_chan <- purrr::map_chr(sour_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
@@ -144,9 +144,9 @@ sources <- function(gedcom) {
   
 }
 
-repositories <- function(gedcom) {
+df_repositories <- function(gedcom) {
   
-  repo_xrefs <- unique(dplyr::filter(gedcom, tag == "REPO", level == 0)$record)
+  repo_xrefs <- xrefs_repositories(gedcom)
   repo_names <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
   repo_cits <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "CITY", level = 2)
   repo_stae <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "STAE", level = 2)
@@ -163,9 +163,9 @@ repositories <- function(gedcom) {
 }
 
 
-notes <- function(gedcom) {
+df_notes <- function(gedcom) {
   
-  note_xrefs <- unique(dplyr::filter(gedcom, tag == "NOTE", level == 0)$record)
+  note_xrefs <- xrefs_notes(gedcom)
   ref_nos <- purrr::map_chr(note_xrefs, gedcom_value, gedcom = gedcom, tag = "REFN", level = 1)
   note_txts <- purrr::map_chr(note_xrefs, gedcom_value, gedcom = gedcom, tag = "NOTE", level = 0)
   date_chan <- purrr::map_chr(note_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")

@@ -22,7 +22,7 @@ add_repository <- function(gedcom,
     
   if(length(address_lines) == 0) {
     
-    address <- character()
+    address <- tibble::tibble()
     
   } else {
     

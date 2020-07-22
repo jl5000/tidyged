@@ -4,10 +4,10 @@
 add_individual <- function(gedcom,
                            sex = character(),
                            restriction_notice = character(),
-                           subm_names = character(),
-                           alias_names = character(),
-                           subm_names_interested_in_ancestors = character(),
-                           subm_names_interested_in_descendents = character(),
+                           submitters = character(),
+                           aliases = character(),
+                           submitters_interested_in_ancestors = character(),
+                           submitters_interested_in_descendents = character(),
                            permanent_record_file_number = character(),
                            ancestral_file_number = character(),
                            user_reference_number = character(),
@@ -16,27 +16,20 @@ add_individual <- function(gedcom,
   
   xref <- assign_xref(xref_prefix_indi(), gedcom = gedcom)
   
-  xrefs_subm <- purrr::map_chr(subm_names, find_xref, 
-                               gedcom = gedcom,
-                               record_ids = submitter_xrefs(gedcom), 
-                               tags = "NAME")
+  xrefs_subm <- purrr::map_chr(submitters, find_xref, 
+                               gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
   
-  xrefs_alia <- purrr::map_chr(alias_names, find_xref, 
-                               gedcom = gedcom,
-                               record_ids = individual_xrefs(gedcom), 
+  xrefs_alia <- purrr::map_chr(aliases, find_xref, 
+                               gedcom = gedcom, record_xrefs = xrefs_individuals(gedcom), 
                                tags = c("NAME", "ROMN", "FONE"))
   
   xrefs_subm_interested_in_ancestors <- 
-    purrr::map_chr(subm_names_interested_in_ancestors, find_xref, 
-                   gedcom = gedcom,
-                   record_ids = submitter_xrefs(gedcom), 
-                   tags = "NAME")
+    purrr::map_chr(submitters_interested_in_ancestors, find_xref, 
+                   gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
   
   xrefs_subm_interested_in_descendents <- 
-    purrr::map_chr(subm_names_interested_in_descendents, find_xref, 
-                   gedcom = gedcom,
-                   record_ids = submitter_xrefs(gedcom), 
-                   tags = "NAME")
+    purrr::map_chr(submitters_interested_in_descendents, find_xref, 
+                   gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
   
   ind_record <- INDIVIDUAL_RECORD(xref_indi = xref,
                                   restriction_notice = restriction_notice,
@@ -96,16 +89,18 @@ add_individual_association <- function(gedcom) {
 }
 
 
-add_individual_family_link_as_spouse <- function(gedcom) {
+add_individual_family_link_as_spouse <- function(gedcom, family_xref) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
-  
+  message("spouse", family_xref)
+  gedcom
 }
 
-add_individual_family_link_as_child <- function(gedcom) {
+add_individual_family_link_as_child <- function(gedcom, family_xref) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
-  
+  message("child", family_xref)
+  gedcom
   
 }
 

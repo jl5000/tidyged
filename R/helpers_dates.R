@@ -4,9 +4,12 @@ current_date <- function() {
   toupper(format(Sys.Date(), "%d %b %Y")) 
 }
 
+#' @keywords internal
 group_it <- function(reg) {
   paste0("(?:", reg, ")")
 }
+
+#' @keywords internal
 anchor_it <- function(reg) {
   paste0("^", reg, "$")
 }

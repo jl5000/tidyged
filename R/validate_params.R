@@ -472,7 +472,7 @@ validate_where_within_source <- function(input, max_dim) {
 }
 validate_xref <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 22)
-  validate_input_pattern(input, "@.{1,20}@")
+  validate_input_pattern(input, "^@.{1,20}@$")
 }
 validate_year <- function(input, max_dim) {
   validate_input_size(input, max_dim, 3, 4)

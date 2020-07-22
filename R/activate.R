@@ -9,6 +9,7 @@
 #'
 #' @return The same tidygedcom object with an "active_record" attribute set to the xref of the record
 set_active_record <- function(gedcom, xref) {
+  if(length(xref) == 0) return(gedcom)
   attr(gedcom, "active_record") <- xref
   gedcom
 }
@@ -40,27 +41,32 @@ null_active_record <- function(gedcom) {
 #'
 #' This is a helper function to identify the xref of a record given a piece of information such
 #' as a name or reference number.
+#' 
+#' Sometimes an xref may be provided directly, in which case it's returned straight back.
 #'
 #' @param gedcom A tidygedcom object
-#' @param record_ids A list of potential xrefs to consider
+#' @param record_xrefs A list of potential xrefs to consider
 #' @param tags The tags to look at when comparing values
 #' @param search_pattern A regex pattern to search for
 #'
 #' @return A single xref for the given record
-find_xref <- function(gedcom, record_ids, tags, search_pattern) {
+find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
+  
+  if(length(search_pattern) == 0) return(character())
+  if(grepl("^@.{1,20}@$", search_pattern)) return(search_pattern)
   
   possibilities <- gedcom %>% 
-    dplyr::filter(record %in% record_ids) %>% 
+    dplyr::filter(record %in% record_xrefs) %>% 
     dplyr::filter(tag %in% tags) %>% 
     dplyr::filter(stringr::str_detect(value, search_pattern))
   
   if(length(unique(possibilities$record)) == 0) {
     
-    stop("Record activation failed - no records found. Try supplying the xref explicitly.")
+    stop("No records found for the given regex", " (", search_pattern, "). Try supplying the xref explicitly.")
     
   } else if(length(unique(possibilities$record)) > 1) {
     
-    stop("Record activation failed - more than one record found: ",
+    stop("More than one record found for the given regex: ",
          paste(unique(possibilities$value), collapse = ", "),
          ". \nTry being more specific or supplying the xref explicitly.")
     
@@ -92,7 +98,7 @@ activate_individual_record <- function(gedcom,
   if(length(xref) == 0) {
     
     xref <- find_xref(gedcom, 
-                      individual_xrefs(gedcom), 
+                      xrefs_individuals(gedcom), 
                       c("NAME", "ROMN", "FONE"), 
                       individual_name)
   }
@@ -139,7 +145,7 @@ activate_submitter_record <- function(gedcom,
   if(length(xref) == 0) {
     
     xref <- find_xref(gedcom, 
-                      submitter_xrefs(gedcom), 
+                      xrefs_submitters(gedcom), 
                       "NAME", 
                       submitter_name)
   }
@@ -168,7 +174,7 @@ activate_multimedia_record <- function(gedcom,
   if(length(xref) == 0) {
     
     xref <- find_xref(gedcom, 
-                      multimedia_xrefs(gedcom), 
+                      xrefs_multimedia(gedcom), 
                       "FILE", 
                       file_reference)
   }
@@ -197,7 +203,7 @@ activate_note_record <- function(gedcom,
   if(length(xref) == 0) {
     
     xref <- find_xref(gedcom, 
-                      note_xrefs(gedcom), 
+                      xrefs_notes(gedcom), 
                       c("NOTE", "CONT", "CONC"), 
                       note_excerpt)
   }
@@ -226,7 +232,7 @@ activate_source_record <- function(gedcom,
   if(length(xref) == 0) {
     
     xref <- find_xref(gedcom, 
-                      source_xrefs(gedcom), 
+                      xrefs_sources(gedcom), 
                       "TITL", 
                       source_title)
   }
@@ -255,7 +261,7 @@ activate_repository_record <- function(gedcom,
   if(length(xref) == 0) {
     
     xref <- find_xref(gedcom, 
-                      repository_xrefs(gedcom), 
+                      xrefs_repositories(gedcom), 
                       "NAME", 
                       repository_name) 
   }

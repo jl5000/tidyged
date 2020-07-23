@@ -35,9 +35,7 @@ remove_multimedia <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_obje(), is_multimedia)
   
-  
-  
-  
-  
-  null_active_record(gedcom)
+  gedcom %>% 
+    dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 
+    null_active_record()
 }

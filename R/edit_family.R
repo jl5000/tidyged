@@ -69,7 +69,7 @@ add_family_event <- function(gedcom,
 remove_family <- function(gedcom, remove_individuals = FALSE) {
   
   check_active_record_valid(gedcom, record_string_fam(), is_family)
-  
+  #TODO: Remove subordinate ADOP tags
   ind_xrefs <- unique(dplyr::filter(gedcom, record == get_active_record(gedcom),
                                     tag %in% c("HUSB", "WIFE", "CHIL"))$value)
   
@@ -83,7 +83,8 @@ remove_family <- function(gedcom, remove_individuals = FALSE) {
         remove_individual()
       
     }
-    message("Records for individuals in the family have also been removed.")
+    message("Records for individuals in the family have also been removed.\n",
+            "This has also removed associations with these individuals, but not any aliases.")
   }
   
   null_active_record(temp)  

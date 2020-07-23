@@ -12,6 +12,7 @@ export_gedcom(test, "../tgdata/test.ged")
 
 
 gedcom(subm("The Submitter")) %>% 
+  add_submission() %>% 
   add_individual(sex = "M") %>% 
   add_individual(sex = "F") %>% 
   add_individual(sex = "F") %>% 
@@ -19,39 +20,7 @@ gedcom(subm("The Submitter")) %>%
   add_family(husband = "@I1@", wife = "@I2@", children = c("@I3@", "@I4@"), submitters = "Submitter") %>%
   add_note("THis is a note") %>% 
   add_source(short_title = "Abbrev", title = "Full title") %>% 
+  add_repository("Repository name", city = "London") %>% 
   add_submitter("Submitter 2") %>%
-  activate_family_record(xref="@F1@") %>% 
-  remove_family(remove_individuals = TRUE) %>% View()
+  add_multimedia("Ref: XYZ", format = "jpg") %>% View()
 
-
-full_ged <- gedcom(subm("Submitter name", 
-                        address = ADDRESS_STRUCTURE(c("House", "Street", "City"),
-                                                    address_city = "City",
-                                                    address_state = "County",
-                                                    address_postal_code = "ABC 123",
-                                                    address_country = "UK",
-                                                    phone_number = "0123456789",
-                                                    address_email = "email@domain.com",
-                                                    address_fax = "987456",
-                                                    address_web_page = "www.website.com"),
-                        language_preference = "English",
-                        automated_record_id = "Auto ID",
-                        submitter_registered_rfn = "1547892",
-                        multimedia_links = list(MULTIMEDIA_LINK())),
-                   gedcom_description = paste0("This is a", paste(rep(" very", 100), collapse=""), " long description"),
-                   source_data_name = "Data source",
-                   source_data_copyright = paste0("This is a", paste(rep(" very", 100), collapse=""), " long copyright"),
-                   gedcom_copyright = "Gedcom copyright",
-                   source_data_date = date_exact(),
-                   receiving_system = "Receiving system",
-                   language = "English",
-                   char_set = "UTF-8",
-                   char_set_version = "v1.0")
-
-
-  
-  
-  
-  
-  
- 

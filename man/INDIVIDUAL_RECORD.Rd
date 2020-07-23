@@ -18,7 +18,7 @@ INDIVIDUAL_RECORD(
   associations = list(),
   xrefs_alia = character(),
   xrefs_subm_interested_in_ancestors = character(),
-  xrefs_subm_interested_in_descendents = character(),
+  xrefs_subm_interested_in_descendants = character(),
   permanent_record_file_number = character(),
   ancestral_file_number = character(),
   user_reference_number = character(),
@@ -64,8 +64,8 @@ individual is associated with.}
 \item{xrefs_subm_interested_in_ancestors}{A vector of xref IDs of submitters with an interest in
 ancestors of this individual.}
 
-\item{xrefs_subm_interested_in_descendents}{A vector of xref IDs of submitters with an interest in
-ancestors of this individual.}
+\item{xrefs_subm_interested_in_descendants}{A vector of xref IDs of submitters with an interest in
+descendants of this individual.}
 
 \item{permanent_record_file_number}{The record number that uniquely identifies this record within a
 registered network resource.}

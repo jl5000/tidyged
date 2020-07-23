@@ -28,7 +28,7 @@ remove_note <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_note(), is_note)
   
-  
-  
-  null_active_record(gedcom)
+  gedcom %>% 
+    dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 
+    null_active_record()
 }

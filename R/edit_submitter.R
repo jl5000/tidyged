@@ -67,9 +67,12 @@ remove_submitter <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_subm(), is_submitter)
   
+  if(dplyr::filter(gedcom, record == "HD", tag == "SUBM")$value == get_active_record(gedcom))
+    stop("Submitter is GEDCOM file submitter - cannot remove")
   
-  
-  null_active_record(gedcom)
+  gedcom %>% 
+    dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 
+    null_active_record()
 }
 
 #' @export

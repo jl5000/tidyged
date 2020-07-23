@@ -279,8 +279,8 @@ FAMILY_RECORD <- function(xref_fam,
 #' @param xrefs_alia A vector of xref IDs of individual aliases of this individual.
 #' @param xrefs_subm_interested_in_ancestors A vector of xref IDs of submitters with an interest in
 #' ancestors of this individual.
-#' @param xrefs_subm_interested_in_descendents A vector of xref IDs of submitters with an interest in
-#' ancestors of this individual.
+#' @param xrefs_subm_interested_in_descendants A vector of xref IDs of submitters with an interest in
+#' descendants of this individual.
 #' @tests
 #' expect_error(INDIVIDUAL_RECORD("@I1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
 #' expect_equal(INDIVIDUAL_RECORD("@I1@"),
@@ -303,7 +303,7 @@ INDIVIDUAL_RECORD <- function(xref_indi,
                               associations = list(),
                               xrefs_alia = character(),
                               xrefs_subm_interested_in_ancestors = character(),
-                              xrefs_subm_interested_in_descendents = character(),
+                              xrefs_subm_interested_in_descendants = character(),
                               permanent_record_file_number = character(),
                               ancestral_file_number = character(),
                               user_reference_number = character(),
@@ -327,7 +327,7 @@ INDIVIDUAL_RECORD <- function(xref_indi,
   validate_xref(xrefs_subm, 1000)
   validate_xref(xrefs_alia, 1000)
   validate_xref(xrefs_subm_interested_in_ancestors, 1000)
-  validate_xref(xrefs_subm_interested_in_descendents, 1000)
+  validate_xref(xrefs_subm_interested_in_descendants, 1000)
   validate_permanent_record_file_number(permanent_record_file_number, 1)
   validate_ancestral_file_number(ancestral_file_number, 1)
   validate_user_reference_number(user_reference_number, 1000)
@@ -349,7 +349,7 @@ INDIVIDUAL_RECORD <- function(xref_indi,
     associations %>% dplyr::bind_rows() %>%  add_levels(1),
     tibble::tibble(level = 1, tag = "ALIA", value = xrefs_alia),
     tibble::tibble(level = 1, tag = "ANCI", value = xrefs_subm_interested_in_ancestors),
-    tibble::tibble(level = 1, tag = "DESI", value = xrefs_subm_interested_in_descendents),
+    tibble::tibble(level = 1, tag = "DESI", value = xrefs_subm_interested_in_descendants),
     tibble::tibble(level = 1, tag = "RFN", value = permanent_record_file_number),
     tibble::tibble(level = 1, tag = "AFN", value = ancestral_file_number)
   )

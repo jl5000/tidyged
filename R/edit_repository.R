@@ -58,8 +58,8 @@ update_repository <- function(gedcom) {
 remove_repository <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_repo(), is_repository)
-  
-  
-  
-  null_active_record(gedcom)
+  #TODO: Remove source_repository_citation 
+  gedcom %>% 
+    dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 
+    null_active_record()
 }

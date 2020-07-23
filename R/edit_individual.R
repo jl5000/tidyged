@@ -7,7 +7,7 @@ add_individual <- function(gedcom,
                            submitters = character(),
                            aliases = character(),
                            submitters_interested_in_ancestors = character(),
-                           submitters_interested_in_descendents = character(),
+                           submitters_interested_in_descendants = character(),
                            permanent_record_file_number = character(),
                            ancestral_file_number = character(),
                            user_reference_number = character(),
@@ -27,8 +27,8 @@ add_individual <- function(gedcom,
     purrr::map_chr(submitters_interested_in_ancestors, find_xref, 
                    gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
   
-  xrefs_subm_interested_in_descendents <- 
-    purrr::map_chr(submitters_interested_in_descendents, find_xref, 
+  xrefs_subm_interested_in_descendants <- 
+    purrr::map_chr(submitters_interested_in_descendants, find_xref, 
                    gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
   
   ind_record <- INDIVIDUAL_RECORD(xref_indi = xref,
@@ -37,7 +37,7 @@ add_individual <- function(gedcom,
                                   xrefs_subm = xrefs_subm,
                                   xrefs_alia = xrefs_alia,
                                   xrefs_subm_interested_in_ancestors = xrefs_subm_interested_in_ancestors,
-                                  xrefs_subm_interested_in_descendents = xrefs_subm_interested_in_descendents,
+                                  xrefs_subm_interested_in_descendants = xrefs_subm_interested_in_descendants,
                                   permanent_record_file_number = permanent_record_file_number,
                                   ancestral_file_number = ancestral_file_number,
                                   user_reference_number = user_reference_number,
@@ -104,10 +104,10 @@ add_individual_family_link_as_child <- function(gedcom, family_xref) {
   
 }
 
-remove_individual <- function(gedcom) {
+remove_individual <- function(gedcom, remove_aliases = FALSE, remove_associatons = TRUE) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
-  
+  #TODO: Need to remove associations and aliases
   gedcom %>% 
     dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 
     null_active_record()

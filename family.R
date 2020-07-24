@@ -11,7 +11,7 @@ test = import_gedcom("../tgdata/royal92.ged")
 export_gedcom(test, "../tgdata/test.ged")
 
 
-gedcom(subm("The Submitter")) %>% 
+gedcom(subm("The Submitter")) %>%
   add_submission() %>% 
   add_individual(sex = "M") %>% 
   add_individual(sex = "F") %>% 

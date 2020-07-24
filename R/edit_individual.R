@@ -50,37 +50,109 @@ add_individual <- function(gedcom,
 }
 
 add_individual_names <- function(gedcom,
-                                 name_personal,
-                                 name_type = character(),
-                                 name_pieces = PERSONAL_NAME_PIECES(), 
-                                 name_phonetic_variation = character(),
+                                 name,
+                                 type = character(),
+                                 prefix = character(),
+                                 given = character(),
+                                 nickname = character(),
+                                 surname_prefix = character(),
+                                 surname = character(),
+                                 suffix = character()) {
+  
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
+  
+  
+}
+
+add_individual_names_var <- function(gedcom,
+                                     parent_name,
+                                     variation_name,
+                                     type,
+                                     phonetic_variation = TRUE,
+                                     prefix = character(),
+                                     given = character(),
+                                     nickname = character(),
+                                     surname_prefix = character(),
+                                     surname = character(),
+                                     suffix = character()) {
+  
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
+  
+  
+}
+
+add_individual_event <- function(gedcom,
+                                 event_type,
+                                 age_at_event = character(),
+                                 event_or_fact_classification = character(),
+                                 date = date_value(),
+                                 place_name = character(),
+                                 place_hierarchy = character(),
+                                 place_phonetic_variation = character(),
                                  phonetic_type = character(),
-                                 phonetic_name_pieces = list(),
-                                 name_romanized_variation = character(),
+                                 place_romanized_variation = character(),
                                  romanized_type = character(),
-                                 romanized_name_pieces = list()) {
+                                 place_latitude = character(),
+                                 place_longitude = character(),
+                                 all_address_lines = character(),
+                                 address_city = character(),
+                                 address_state = character(),
+                                 address_postal_code = character(),
+                                 address_country = character(),
+                                 phone_number = character(),
+                                 address_email = character(),
+                                 address_fax = character(),
+                                 address_web_page = character(),
+                                 responsible_agency = character(),
+                                 religious_affiliation = character(),
+                                 cause_of_event = character(),
+                                 restriction_notice = character(),
+                                 family_xref = character(),
+                                 adopting_parent = character()) {
+  
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
+}
+
+
+add_individual_attribute <- function(gedcom,
+                                     attribute_type,
+                                     attribute_descriptor,
+                                     age_at_event = character(),
+                                     event_or_fact_classification = character(),
+                                     date = date_value(),
+                                     place_name = character(),
+                                     place_hierarchy = character(),
+                                     place_phonetic_variation = character(),
+                                     phonetic_type = character(),
+                                     place_romanized_variation = character(),
+                                     romanized_type = character(),
+                                     place_latitude = character(),
+                                     place_longitude = character(),
+                                     all_address_lines = character(),
+                                     address_city = character(),
+                                     address_state = character(),
+                                     address_postal_code = character(),
+                                     address_country = character(),
+                                     phone_number = character(),
+                                     address_email = character(),
+                                     address_fax = character(),
+                                     address_web_page = character(),
+                                     responsible_agency = character(),
+                                     religious_affiliation = character(),
+                                     cause_of_event = character(),
+                                     restriction_notice = character()) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
   
-  
 }
 
-add_individual_event <- function(gedcom) {
-  
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
-  
-}
-
-
-add_individual_attribute <- function(gedcom) {
-  
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
-  
-  
-}
-
-add_individual_association <- function(gedcom) {
+add_individual_association <- function(gedcom,
+                                       associated_with,
+                                       association) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
@@ -92,14 +164,17 @@ add_individual_association <- function(gedcom) {
 add_individual_family_link_as_spouse <- function(gedcom, family_xref) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
-  message("spouse", family_xref)
+  
+  
   gedcom
 }
 
 add_individual_family_link_as_child <- function(gedcom, family_xref) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
-  message("child", family_xref)
+  
+  
+  
   gedcom
   
 }

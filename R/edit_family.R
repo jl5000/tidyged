@@ -3,6 +3,8 @@ add_family <- function(gedcom,
                        husband = character(),
                        wife = character(),
                        children = character(),
+                       child_linkage_type = character(),
+                       child_linkage_status = character(),
                        number_of_children = character(),
                        submitters = character(),
                        restriction_notice = character(),
@@ -42,7 +44,7 @@ add_family <- function(gedcom,
     
     temp <- temp %>% 
       set_active_record(xrefs_chil[i]) %>% 
-      add_individual_family_link_as_child(xref)    
+      add_individual_family_link_as_child(xref, child_linkage_type[i], child_linkage_status[i])    
   }
   
   set_active_record(temp, xref)

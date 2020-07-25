@@ -92,7 +92,50 @@ add_individual_names_var <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
+  if(phonetic_variation) {
+    
+    name_phonetic_var <- variation_name
+    phonetic_type <- type
+    phon_name_pieces <- PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
+                                             name_piece_given = given, 
+                                             name_piece_nickname = nickname, 
+                                             name_piece_surname_prefix = surname_prefix,
+                                             name_piece_surname = surname,
+                                             name_piece_suffix = suffix)
+    name_romanized_var <- character()
+    romanized_type <- character()
+    rom_name_pieces <- list()
+    
+  } else {
+    
+    name_romanized_var <- variation_name
+    romanized_type <- type
+    rom_name_pieces <- PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
+                                            name_piece_given = given, 
+                                            name_piece_nickname = nickname, 
+                                            name_piece_surname_prefix = surname_prefix,
+                                            name_piece_surname = surname,
+                                            name_piece_suffix = suffix)
+    name_phonetic_var <- character()
+    phonetic_type <- character()
+    phon_name_pieces <- list()
+    
+  }
   
+  name_str <- PERSONAL_NAME_STRUCTURE(name_personal = "what?",
+                                      name_type = character(),
+                                      name_pieces = PERSONAL_NAME_PIECES(), 
+                                      name_phonetic_variation = name_phonetic_var,
+                                      phonetic_type = phonetic_type,
+                                      phonetic_name_pieces = phon_name_pieces,
+                                      name_romanized_variation = name_romanized_var,
+                                      romanized_type = romanized_type,
+                                      romanized_name_pieces = rom_name_pieces)
+  
+  next_row = 5 #TODO: Function to find insertion point using primary_name
+  
+  gedcom %>%
+    tibble::add_row(name_str, .before = next_row)
   
 }
 
@@ -187,17 +230,29 @@ add_individual_family_link_as_spouse <- function(gedcom, family_xref) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
+  link <- SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref)
   
-  gedcom
+  next_row = 5
+  
+  gedcom %>%
+    tibble::add_row(link, .before = next_row)
 }
 
-add_individual_family_link_as_child <- function(gedcom, family_xref) {
+add_individual_family_link_as_child <- function(gedcom, 
+                                                family_xref,
+                                                linkage_type = character(),
+                                                linkage_status = character()) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
+  link <- CHILD_TO_FAMILY_LINK(xref_fam = family_xref,
+                               pedigree_linkage_type = linkage_type,
+                               child_linkage_status = linkage_status)
   
+  next_row = 5
   
-  gedcom
+  gedcom %>%
+    tibble::add_row(link, .before = next_row)
   
 }
 

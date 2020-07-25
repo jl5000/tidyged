@@ -1,12 +1,12 @@
 Package: tidygedcom
-Title: Use GEDCOM Files With Tidy Dataframes
+Title: Handle GEDCOM Files Using Tidyverse Principles
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Jamie",
            family = "Lendrum",
            role = c("aut", "cre"),
            email = "jalendrum@gmail.com")
-Description: Import/export, validate, interrogate, visualise, and edit family tree GEDCOM files using tidy dataframes.
+Description: Import/export, create, summarise, and edit family tree GEDCOM files using tidy dataframes.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

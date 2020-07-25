@@ -1,0 +1,90 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# tidygedcom
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Import, create, summarise, and edit family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version unlikely to be complete before October 2020.
+
+## Installation
+
+You can install development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("jl5000/tidygedcom")
+```
+## 
+
+## Example
+
+The intent is to allow the user to import GEDCOM files or create them from scratch using a `ggplot2` type interface; starting with a base GEDCOM object (with only a header and trailer section) and adding records as you would add layers to a ggplot object (but instead using the pipe operator, %>%).
+
+A simple example is below:
+
+```{r example}
+library(tidygedcom)
+
+tg <- gedcom(subm("Jamie Lendrum")) %>%
+  add_individual(sex = "M") %>% 
+  add_individual(sex = "F") %>% 
+  add_individual(sex = "F") %>% 
+  add_individual(sex = "F") %>% 
+  add_family(husband = "@I1@", wife = "@I2@", children = c("@I3@", "@I4@"), submitters = "Jamie") %>%
+  add_note("This is a note") %>% 
+  add_source(short_title = "ABC", title = "Some book title") %>% 
+  add_repository("Britsh Library", city = "London") %>% 
+  add_submitter("Joe Bloggs") %>%
+  add_multimedia(file_reference = "XYZ", format = "jpg")
+
+tg
+```
+
+
+Just like a ggplot object requires aesthetics, a GEDCOM file requires details of a submitter. If no submitter details are given, the username is used.
+
+Within the package, GEDCOM files are represented as tidy tibbles (a sub-class of tibble known as `tidygedcom` objects) allowing easy manipulation and exploitation of existing `tidyverse` infrastructure.
+
+Functionality will also exist to allow the removal and modification of existing records, as well as summaries:
+
+```{r}
+num_indi(tg)
+num_fam(tg)
+
+str(tg)
+summary(tg)
+
+df_individuals(tg)
+df_families(tg)
+```
+
+Editing of existing records is made possible through 'activation' (much like the `tidygraph` package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of `activate_*_record()` functions.
+
+A sister package named `tgvis` will allow visualisation of `tidygedcom` objects.
+
+## Current status
+
+* The GEDCOM 5.5.1 specification has been implemented within the params.R, structures.R, records.R, and validate_params.R files. This is the bulk of the internal data structures required;
+* Some initial functions to summarise tidygedcom objects have been completed;
+* Functions to import, export and create tidygedcom objects have been completed;
+* Current work is on the modification of tidygedcom objects;
+* It is still undecided how extensive any validation checks should be, given the number of GEDCOM validators available.
+* Work on `tgvis` will begin once an initial version of `tidygedcom` is complete.
+
+## References
+
+* [The GEDCOM Standard - Release 5.5.1](https://edge.fscdn.org/assets/img/documents/ged551-5bac5e57fe88dd37df0e153d9c515335.pdf)

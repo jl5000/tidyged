@@ -61,12 +61,25 @@ add_individual_names <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
+  name_pieces <- PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
+                                      name_piece_given = given, 
+                                      name_piece_nickname = nickname, 
+                                      name_piece_surname_prefix = surname_prefix,
+                                      name_piece_surname = surname,
+                                      name_piece_suffix = suffix)
   
+  name_str <- PERSONAL_NAME_STRUCTURE(name_personal = name,
+                                       name_type = type,
+                                       name_pieces = name_pieces)
   
+  next_row = 5 #TODO: Function to find insertion point
+  
+  gedcom %>%
+    tibble::add_row(name_str, .before = next_row)
 }
 
 add_individual_names_var <- function(gedcom,
-                                     parent_name,
+                                     primary_name,
                                      variation_name,
                                      type,
                                      phonetic_variation = TRUE,
@@ -148,6 +161,7 @@ add_individual_attribute <- function(gedcom,
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
   
+  
 }
 
 add_individual_association <- function(gedcom,
@@ -156,7 +170,15 @@ add_individual_association <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
+  indi_xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), associated_with)
   
+  asso_str <- ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
+                                    relation_is_descriptor = association)
+  
+  next_row = 5 #TODO: Function to find insertion point
+  
+  gedcom %>%
+    tibble::add_row(asso_str, .before = next_row)
   
 }
 

@@ -23,9 +23,8 @@ add_family <- function(gedcom,
   xrefs_subm <- purrr::map_chr(submitters, find_xref, 
                                gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
   
-  fam_notes <- purrr::map(family_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
-                                                 NOTE_STRUCTURE(xref_note = .x),
-                                                 NOTE_STRUCTURE(submitter_text = .x)))
+  fam_notes <- purrr::map(family_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   fam_record <- FAMILY_RECORD(xref_fam = xref,
                               restriction_notice = restriction_notice,

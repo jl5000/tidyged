@@ -17,13 +17,11 @@ add_source <- function(gedcom,
   
   xref <- assign_xref(xref_prefix_sour(), gedcom = gedcom)
   
-  dat_notes <- purrr::map(data_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
-                                               NOTE_STRUCTURE(xref_note = .x),
-                                               NOTE_STRUCTURE(submitter_text = .x)))
+  dat_notes <- purrr::map(data_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
-  sour_notes <- purrr::map(source_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
-                                                  NOTE_STRUCTURE(xref_note = .x),
-                                                  NOTE_STRUCTURE(submitter_text = .x)))
+  sour_notes <- purrr::map(source_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   sour_record <- SOURCE_RECORD(xref_sour = xref,
                                events_recorded = events_recorded,

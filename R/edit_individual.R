@@ -160,9 +160,9 @@ add_individual_names_var <- function(gedcom,
 
 add_individual_event <- function(gedcom,
                                  event_type,
+                                 event_classification = character(),
+                                 event_date = date_value(),
                                  age_at_event = character(),
-                                 event_or_fact_classification = character(),
-                                 date = date_value(),
                                  event_notes = character(),
                                  place_name = character(),
                                  place_hierarchy = character(),
@@ -173,15 +173,15 @@ add_individual_event <- function(gedcom,
                                  place_latitude = character(),
                                  place_longitude = character(),
                                  place_notes = character(),
-                                 all_address_lines = character(),
-                                 address_city = character(),
-                                 address_state = character(),
-                                 address_postal_code = character(),
-                                 address_country = character(),
+                                 address_first_line = character(),
+                                 city = character(),
+                                 state = character(),
+                                 postal_code = character(),
+                                 country = character(),
                                  phone_number = character(),
-                                 address_email = character(),
-                                 address_fax = character(),
-                                 address_web_page = character(),
+                                 email = character(),
+                                 fax = character(),
+                                 web_page = character(),
                                  responsible_agency = character(),
                                  religious_affiliation = character(),
                                  cause_of_event = character(),
@@ -191,15 +191,85 @@ add_individual_event <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
+  address_lines <- c(address_first_line, city, state, postal_code, country)
+  
+  if(length(address_lines) > 4) address_lines <- address_lines[1:4]
+  
+  if(length(address_lines) == 0) {
+    
+    event_address <- ADDRESS_STRUCTURE(character())
+    
+  } else {
+    
+    event_address <- ADDRESS_STRUCTURE(all_address_lines = address_lines,
+                                       address_city = city,
+                                       address_state = state,
+                                       address_postal_code = postal_code,
+                                       address_country = country,
+                                       phone_number = phone_number,
+                                       address_email = email,
+                                       address_fax = fax,
+                                       address_web_page = web_page)
+  }
+  
+  
+  plac_notes <- purrr::map(place_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  
+  if(length(place_name) == 0) {
+    
+    event_place <- PLACE_STRUCTURE(character())
+    
+  } else {
+    
+    event_place <- PLACE_STRUCTURE(place_name = place_name,
+                                   place_hierarchy = place_hierarchy,
+                                   place_phonetic_variation = place_phonetic_variation,
+                                   phonetic_type = phonetic_type,
+                                   place_romanized_variation = place_romanized_variation,
+                                   romanized_type = romanized_type,
+                                   place_latitude = place_latitude,
+                                   place_longitude = place_longitude,
+                                   notes = plac_notes)
+  }
+  
+  even_notes <- purrr::map(event_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  
+  details1 <- EVENT_DETAIL(event_or_fact_classification = event_classification,
+                          date = event_date,
+                          place = event_place,
+                          address = event_address,
+                          responsible_agency = responsible_agency,
+                          religious_affiliation = religious_affiliation,
+                          cause_of_event = cause_of_event,
+                          restriction_notice = restriction_notice,
+                          notes = even_notes)
+  
+  details2 <- INDIVIDUAL_EVENT_DETAIL(event_details = details1,
+                                      age_at_event = age_at_event)
+    
+  event_str <- INDIVIDUAL_EVENT_STRUCTURE(event_type_individual = event_type,
+                                         individual_event_details = details2,
+                                         xref_fam = family_xref,
+                                         adopted_by_which_parent = adopting_parent) %>% add_levels(1)
+  
+  
+  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  
+  gedcom %>%
+    tibble::add_row(event_str, .before = next_row) %>% 
+    finalise()
+  
 }
 
 
 add_individual_attribute <- function(gedcom,
                                      attribute_type,
                                      attribute_descriptor,
+                                     fact_classification = character(),
+                                     event_date = date_value(),
                                      age_at_event = character(),
-                                     event_or_fact_classification = character(),
-                                     date = date_value(),
                                      event_notes = character(),
                                      place_name = character(),
                                      place_hierarchy = character(),
@@ -210,15 +280,15 @@ add_individual_attribute <- function(gedcom,
                                      place_latitude = character(),
                                      place_longitude = character(),
                                      place_notes = character(),
-                                     all_address_lines = character(),
-                                     address_city = character(),
-                                     address_state = character(),
-                                     address_postal_code = character(),
-                                     address_country = character(),
+                                     address_first_line = character(),
+                                     city = character(),
+                                     state = character(),
+                                     postal_code = character(),
+                                     country = character(),
                                      phone_number = character(),
-                                     address_email = character(),
-                                     address_fax = character(),
-                                     address_web_page = character(),
+                                     email = character(),
+                                     fax = character(),
+                                     web_page = character(),
                                      responsible_agency = character(),
                                      religious_affiliation = character(),
                                      cause_of_event = character(),
@@ -226,6 +296,74 @@ add_individual_attribute <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
+  address_lines <- c(address_first_line, city, state, postal_code, country)
+  
+  if(length(address_lines) > 4) address_lines <- address_lines[1:4]
+  
+  if(length(address_lines) == 0) {
+    
+    event_address <- ADDRESS_STRUCTURE(character())
+    
+  } else {
+    
+    event_address <- ADDRESS_STRUCTURE(all_address_lines = address_lines,
+                                       address_city = city,
+                                       address_state = state,
+                                       address_postal_code = postal_code,
+                                       address_country = country,
+                                       phone_number = phone_number,
+                                       address_email = email,
+                                       address_fax = fax,
+                                       address_web_page = web_page)
+  }
+  
+  
+  plac_notes <- purrr::map(place_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  
+  if(length(place_name) == 0) {
+    
+    event_place <- PLACE_STRUCTURE(character())
+    
+  } else {
+    
+    event_place <- PLACE_STRUCTURE(place_name = place_name,
+                                   place_hierarchy = place_hierarchy,
+                                   place_phonetic_variation = place_phonetic_variation,
+                                   phonetic_type = phonetic_type,
+                                   place_romanized_variation = place_romanized_variation,
+                                   romanized_type = romanized_type,
+                                   place_latitude = place_latitude,
+                                   place_longitude = place_longitude,
+                                   notes = plac_notes)
+  }
+  
+  even_notes <- purrr::map(event_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  
+  details1 <- EVENT_DETAIL(event_or_fact_classification = fact_classification,
+                           date = event_date,
+                           place = event_place,
+                           address = event_address,
+                           responsible_agency = responsible_agency,
+                           religious_affiliation = religious_affiliation,
+                           cause_of_event = cause_of_event,
+                           restriction_notice = restriction_notice,
+                           notes = even_notes)
+  
+  details2 <- INDIVIDUAL_EVENT_DETAIL(event_details = details1,
+                                      age_at_event = age_at_event)
+  
+  attribute_str <- INDIVIDUAL_ATTRIBUTE_STRUCTURE(attribute_type = attribute_type,
+                                                  attribute_descriptor = attribute_descriptor,
+                                                  individual_event_details = details2) %>% add_levels(1)
+  
+  
+  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  
+  gedcom %>%
+    tibble::add_row(attribute_str, .before = next_row) %>% 
+    finalise()
   
   
 }
@@ -239,9 +377,8 @@ add_individual_association <- function(gedcom,
   
   indi_xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), associated_with)
   
-  asso_notes <- purrr::map(association_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
-                                                       NOTE_STRUCTURE(xref_note = .x),
-                                                       NOTE_STRUCTURE(submitter_text = .x)))
+  asso_notes <- purrr::map(association_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   asso_str <- ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
                                     relation_is_descriptor = association,
@@ -262,9 +399,8 @@ add_individual_family_link_as_spouse <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
-  link_notes <- purrr::map(linkage_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
-                                                   NOTE_STRUCTURE(xref_note = .x),
-                                                   NOTE_STRUCTURE(submitter_text = .x)))
+  link_notes <- purrr::map(linkage_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   link <- SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% add_levels(1)
   
@@ -283,9 +419,8 @@ add_individual_family_link_as_child <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
-  link_notes <- purrr::map(linkage_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
-                                                   NOTE_STRUCTURE(xref_note = .x),
-                                                   NOTE_STRUCTURE(submitter_text = .x)))
+  link_notes <- purrr::map(linkage_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   link <- CHILD_TO_FAMILY_LINK(xref_fam = family_xref,
                                pedigree_linkage_type = linkage_type,

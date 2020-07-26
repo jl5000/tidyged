@@ -40,15 +40,19 @@ A simple example is below:
 library(tidygedcom)
 
 tg <- gedcom(subm("Jamie Lendrum")) %>%
-  add_individual(sex = "M") %>% 
+  add_individual(sex = "M") %>%
+  add_individual_names("Anakin Skywalker") %>% 
+  add_individual(sex = "F") %>%
+  add_individual_names("Padme Amidala") %>% 
   add_individual(sex = "F") %>% 
-  add_individual(sex = "F") %>% 
-  add_individual(sex = "F") %>% 
-  add_family(husband = "@I1@", wife = "@I2@", children = c("@I3@", "@I4@"), submitters = "Jamie") %>%
-  add_note("This is a note") %>% 
-  add_source(short_title = "ABC", title = "Some book title") %>% 
-  add_repository("Britsh Library", city = "London") %>% 
-  add_submitter("Joe Bloggs") %>%
+  add_individual_names("Leia Organa") %>% 
+  add_individual(sex = "M") %>%
+  add_individual_names("Luke Skywalker") %>% 
+  add_family(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia"), submitters = "Jamie") %>%
+  add_note("Based on Star Wars") %>% 
+  add_source(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
+  add_repository("The Skywalker Saga") %>% 
+  add_submitter("George Lucas") %>%
   add_multimedia(file_reference = "XYZ", format = "jpg")
 
 tg

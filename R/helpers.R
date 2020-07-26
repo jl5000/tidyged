@@ -187,3 +187,20 @@ split_text <- function(text, top_tag, char_limit = 248, start_level = 0) {
   
 }
 
+
+find_insertion_point <- function(gedcom,
+                                 xref,
+                                 parent_level,
+                                 parent_tag) {
+  
+  active <- FALSE
+  for(i in 1:nrow(gedcom)) {
+    
+    if(active && gedcom$level[i] <= parent_level) break
+    
+    if(gedcom$record[i] == xref && gedcom$level[i] == parent_level && gedcom$tag[i] == parent_tag) 
+      active <- TRUE
+    
+  }
+  i
+}

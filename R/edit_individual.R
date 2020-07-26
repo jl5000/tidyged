@@ -12,7 +12,8 @@ add_individual <- function(gedcom,
                            ancestral_file_number = character(),
                            user_reference_number = character(),
                            user_reference_type = character(),
-                           automated_record_id = character()) {
+                           automated_record_id = character(),
+                           individual_notes = character()) {
   
   xref <- assign_xref(xref_prefix_indi(), gedcom = gedcom)
   
@@ -31,6 +32,10 @@ add_individual <- function(gedcom,
     purrr::map_chr(submitters_interested_in_descendants, find_xref, 
                    gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
   
+  indi_notes <- purrr::map(individual_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                      NOTE_STRUCTURE(xref_note = .x),
+                                                      NOTE_STRUCTURE(submitter_text = .x)))
+  
   ind_record <- INDIVIDUAL_RECORD(xref_indi = xref,
                                   restriction_notice = restriction_notice,
                                   sex_value = sex,
@@ -42,7 +47,8 @@ add_individual <- function(gedcom,
                                   ancestral_file_number = ancestral_file_number,
                                   user_reference_number = user_reference_number,
                                   user_reference_type = user_reference_type,
-                                  automated_record_id = automated_record_id) 
+                                  automated_record_id = automated_record_id,
+                                  notes = indi_notes) 
   
   gedcom %>%
     tibble::add_row(ind_record, .before = nrow(.)) %>% 
@@ -57,25 +63,32 @@ add_individual_names <- function(gedcom,
                                  nickname = character(),
                                  surname_prefix = character(),
                                  surname = character(),
-                                 suffix = character()) {
+                                 suffix = character(),
+                                 name_notes = character()) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
+  nam_notes <- purrr::map(name_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                               NOTE_STRUCTURE(xref_note = .x),
+                                               NOTE_STRUCTURE(submitter_text = .x)))
   
   name_pieces <- PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                       name_piece_given = given, 
                                       name_piece_nickname = nickname, 
                                       name_piece_surname_prefix = surname_prefix,
                                       name_piece_surname = surname,
-                                      name_piece_suffix = suffix)
+                                      name_piece_suffix = suffix,
+                                      notes = nam_notes)
   
   name_str <- PERSONAL_NAME_STRUCTURE(name_personal = name,
                                        name_type = type,
-                                       name_pieces = name_pieces)
+                                       name_pieces = name_pieces) %>% add_levels(1)
   
-  next_row = 5 #TODO: Function to find insertion point
+  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
-    tibble::add_row(name_str, .before = next_row)
+    tibble::add_row(name_str, .before = next_row) %>% 
+    finalise()
 }
 
 add_individual_names_var <- function(gedcom,
@@ -88,9 +101,14 @@ add_individual_names_var <- function(gedcom,
                                      nickname = character(),
                                      surname_prefix = character(),
                                      surname = character(),
-                                     suffix = character()) {
+                                     suffix = character(),
+                                     variation_notes = character()) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
+  name_notes <- purrr::map(variation_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                     NOTE_STRUCTURE(xref_note = .x),
+                                                     NOTE_STRUCTURE(submitter_text = .x)))
   
   if(phonetic_variation) {
     
@@ -101,7 +119,8 @@ add_individual_names_var <- function(gedcom,
                                              name_piece_nickname = nickname, 
                                              name_piece_surname_prefix = surname_prefix,
                                              name_piece_surname = surname,
-                                             name_piece_suffix = suffix)
+                                             name_piece_suffix = suffix,
+                                             notes = name_notes)
     name_romanized_var <- character()
     romanized_type <- character()
     rom_name_pieces <- list()
@@ -115,13 +134,15 @@ add_individual_names_var <- function(gedcom,
                                             name_piece_nickname = nickname, 
                                             name_piece_surname_prefix = surname_prefix,
                                             name_piece_surname = surname,
-                                            name_piece_suffix = suffix)
+                                            name_piece_suffix = suffix,
+                                            notes = name_notes)
     name_phonetic_var <- character()
     phonetic_type <- character()
     phon_name_pieces <- list()
     
   }
   
+  #TODO: Filter out parent name
   name_str <- PERSONAL_NAME_STRUCTURE(name_personal = "what?",
                                       name_type = character(),
                                       name_pieces = PERSONAL_NAME_PIECES(), 
@@ -130,12 +151,14 @@ add_individual_names_var <- function(gedcom,
                                       phonetic_name_pieces = phon_name_pieces,
                                       name_romanized_variation = name_romanized_var,
                                       romanized_type = romanized_type,
-                                      romanized_name_pieces = rom_name_pieces)
+                                      romanized_name_pieces = rom_name_pieces) %>% add_levels(1)
   
-  next_row = 5 #TODO: Function to find insertion point using primary_name
+  #TODO: THis isn't right
+  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
-    tibble::add_row(name_str, .before = next_row)
+    tibble::add_row(name_str, .before = next_row) %>% 
+    finalise()
   
 }
 
@@ -144,6 +167,7 @@ add_individual_event <- function(gedcom,
                                  age_at_event = character(),
                                  event_or_fact_classification = character(),
                                  date = date_value(),
+                                 event_notes = character(),
                                  place_name = character(),
                                  place_hierarchy = character(),
                                  place_phonetic_variation = character(),
@@ -152,6 +176,7 @@ add_individual_event <- function(gedcom,
                                  romanized_type = character(),
                                  place_latitude = character(),
                                  place_longitude = character(),
+                                 place_notes = character(),
                                  all_address_lines = character(),
                                  address_city = character(),
                                  address_state = character(),
@@ -179,6 +204,7 @@ add_individual_attribute <- function(gedcom,
                                      age_at_event = character(),
                                      event_or_fact_classification = character(),
                                      date = date_value(),
+                                     event_notes = character(),
                                      place_name = character(),
                                      place_hierarchy = character(),
                                      place_phonetic_variation = character(),
@@ -187,6 +213,7 @@ add_individual_attribute <- function(gedcom,
                                      romanized_type = character(),
                                      place_latitude = character(),
                                      place_longitude = character(),
+                                     place_notes = character(),
                                      all_address_lines = character(),
                                      address_city = character(),
                                      address_state = character(),
@@ -209,51 +236,71 @@ add_individual_attribute <- function(gedcom,
 
 add_individual_association <- function(gedcom,
                                        associated_with,
-                                       association) {
+                                       association,
+                                       association_notes = character()) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
   indi_xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), associated_with)
   
-  asso_str <- ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
-                                    relation_is_descriptor = association)
+  asso_notes <- purrr::map(association_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                       NOTE_STRUCTURE(xref_note = .x),
+                                                       NOTE_STRUCTURE(submitter_text = .x)))
   
-  next_row = 5 #TODO: Function to find insertion point
+  asso_str <- ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
+                                    relation_is_descriptor = association,
+                                    notes = asso_notes) %>% add_levels(1)
+  
+  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
-    tibble::add_row(asso_str, .before = next_row)
+    tibble::add_row(asso_str, .before = next_row) %>% 
+    finalise()
   
 }
 
 
-add_individual_family_link_as_spouse <- function(gedcom, family_xref) {
+add_individual_family_link_as_spouse <- function(gedcom, 
+                                                 family_xref,
+                                                 linkage_notes = character()) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
-  link <- SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref)
+  link_notes <- purrr::map(linkage_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                   NOTE_STRUCTURE(xref_note = .x),
+                                                   NOTE_STRUCTURE(submitter_text = .x)))
   
-  next_row = 5
+  link <- SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% add_levels(1)
+  
+  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
-    tibble::add_row(link, .before = next_row)
+    tibble::add_row(link, .before = next_row) %>% 
+    finalise()
 }
 
 add_individual_family_link_as_child <- function(gedcom, 
                                                 family_xref,
                                                 linkage_type = character(),
-                                                linkage_status = character()) {
+                                                linkage_status = character(),
+                                                linkage_notes = character()) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
+  link_notes <- purrr::map(linkage_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                   NOTE_STRUCTURE(xref_note = .x),
+                                                   NOTE_STRUCTURE(submitter_text = .x)))
+  
   link <- CHILD_TO_FAMILY_LINK(xref_fam = family_xref,
                                pedigree_linkage_type = linkage_type,
-                               child_linkage_status = linkage_status)
+                               child_linkage_status = linkage_status,
+                               notes = link_notes) %>% add_levels(1)
   
-  next_row = 5
+  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
-    tibble::add_row(link, .before = next_row)
-  
+    tibble::add_row(link, .before = next_row) %>% 
+    finalise()
 }
 
 remove_individual <- function(gedcom, remove_aliases = FALSE, remove_associatons = TRUE) {

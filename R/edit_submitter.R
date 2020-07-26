@@ -13,7 +13,8 @@ add_submitter <- function(gedcom,
                           web_page = character(),
                           language_preference = character(),
                           submitter_registered_rfn = character(),
-                          automated_record_id = character()) {
+                          automated_record_id = character(),
+                          submitter_notes = character()) {
   
   xref <- assign_xref(xref_prefix_subm(), gedcom = gedcom)
   
@@ -38,12 +39,17 @@ add_submitter <- function(gedcom,
                                  address_web_page = web_page)
   }
   
+  subm_notes <- purrr::map(submitter_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                     NOTE_STRUCTURE(xref_note = .x),
+                                                     NOTE_STRUCTURE(submitter_text = .x)))
+  
   subm_record <- SUBMITTER_RECORD(xref_subm = xref,
                                   submitter_name = name,
                                   address = address,
                                   language_preference = language_preference,
                                   submitter_registered_rfn = submitter_registered_rfn,
-                                  automated_record_id = automated_record_id)
+                                  automated_record_id = automated_record_id,
+                                  notes = subm_notes)
   
   gedcom %>% 
     tibble::add_row(subm_record, .before = nrow(.)) %>% 
@@ -88,7 +94,8 @@ subm <- function(name = unname(Sys.info()["user"]),
                  web_page = character(),
                  language_preference = character(),
                  submitter_registered_rfn = character(),
-                 automated_record_id = character()) {
+                 automated_record_id = character(),
+                 submitter_notes = character()) {
   
   address_lines <- c(address_first_line, city, state, postal_code, country)
   
@@ -111,12 +118,16 @@ subm <- function(name = unname(Sys.info()["user"]),
                                  address_web_page = web_page)
   }
   
-  #Shortcut used in gedcom function
+  subm_notes <- purrr::map(submitter_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                     NOTE_STRUCTURE(xref_note = .x),
+                                                     NOTE_STRUCTURE(submitter_text = .x)))
+  
   SUBMITTER_RECORD(xref_subm = assign_xref(xref_prefix_subm(), 1),
                    submitter_name = name,
                    address = address,
                    language_preference = language_preference,
                    submitter_registered_rfn = submitter_registered_rfn,
-                   automated_record_id = automated_record_id)
+                   automated_record_id = automated_record_id,
+                   notes = subm_notes)
   
 }

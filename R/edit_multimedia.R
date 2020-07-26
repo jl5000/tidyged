@@ -6,9 +6,14 @@ add_multimedia <- function(gedcom,
                            title = character(),
                            user_reference_number = character(),
                            user_reference_type = character(),
-                           automated_record_id = character()) {
+                           automated_record_id = character(),
+                           multimedia_notes = character()) {
   
   xref <- assign_xref(xref_prefix_obje(), gedcom = gedcom)
+  
+  media_notes <- purrr::map(multimedia_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                       NOTE_STRUCTURE(xref_note = .x),
+                                                       NOTE_STRUCTURE(submitter_text = .x)))
   
   media_record <- MULTIMEDIA_RECORD(xref_obje = xref,
                                     multimedia_file_reference = file_reference,
@@ -17,7 +22,8 @@ add_multimedia <- function(gedcom,
                                     descriptive_title = title,
                                     user_reference_number = user_reference_number,
                                     user_reference_type = user_reference_type,
-                                    automated_record_id = automated_record_id)
+                                    automated_record_id = automated_record_id,
+                                    notes = media_notes)
   
   gedcom %>% 
     tibble::add_row(media_record, .before = nrow(.)) %>% 

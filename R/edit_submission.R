@@ -5,7 +5,8 @@ add_submission <- function(gedcom,
                            generations_of_ancestors = character(),
                            generations_of_descendants = character(),
                            ordinance_process_flag = character(),
-                           automated_record_id = character()) {
+                           automated_record_id = character(),
+                           submission_notes = character()) {
   
   if(num_subn(gedcom) > 0) {
     warning("Submission not added because one already exists")
@@ -16,6 +17,10 @@ add_submission <- function(gedcom,
   
   xref_subm <- dplyr::filter(gedcom, record == "HD", tag == "SUBM")$value
   
+  subn_notes <- purrr::map(submission_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                      NOTE_STRUCTURE(xref_note = .x),
+                                                      NOTE_STRUCTURE(submitter_text = .x)))
+  
   subn_record <- SUBMISSION_RECORD(xref_subn = xref,
                                    xref_subm = xref_subm,
                                    name_of_family_file = name_of_family_file,
@@ -23,7 +28,8 @@ add_submission <- function(gedcom,
                                    generations_of_ancestors = generations_of_ancestors,
                                    generations_of_descendants = generations_of_descendants,
                                    ordinance_process_flag = ordinance_process_flag,
-                                   automated_record_id = automated_record_id)
+                                   automated_record_id = automated_record_id,
+                                   notes = subn_notes)
   
   gedcom %>% 
     tibble::add_row(subn_record, .before = nrow(.)) %>% 

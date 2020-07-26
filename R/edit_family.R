@@ -3,14 +3,15 @@ add_family <- function(gedcom,
                        husband = character(),
                        wife = character(),
                        children = character(),
-                       child_linkage_type = character(),
-                       child_linkage_status = character(),
+                       child_linkage_types = character(),
+                       child_linkage_statuses = character(),
                        number_of_children = character(),
                        submitters = character(),
                        restriction_notice = character(),
                        user_reference_number = character(),
                        user_reference_type = character(),
-                       automated_record_id = character()) {
+                       automated_record_id = character(),
+                       family_notes = character()) {
   
   xref <- assign_xref(xref_prefix_fam(), gedcom = gedcom)
   
@@ -22,6 +23,10 @@ add_family <- function(gedcom,
   xrefs_subm <- purrr::map_chr(submitters, find_xref, 
                                gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
   
+  fam_notes <- purrr::map(family_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                 NOTE_STRUCTURE(xref_note = .x),
+                                                 NOTE_STRUCTURE(submitter_text = .x)))
+  
   fam_record <- FAMILY_RECORD(xref_fam = xref,
                               restriction_notice = restriction_notice,
                               xref_husb = xref_husb,
@@ -31,7 +36,8 @@ add_family <- function(gedcom,
                               xrefs_subm = xrefs_subm,
                               user_reference_number = user_reference_number,
                               user_reference_type = user_reference_type,
-                              automated_record_id = automated_record_id) 
+                              automated_record_id = automated_record_id,
+                              notes = fam_notes) 
   
   temp <- gedcom %>%
     tibble::add_row(fam_record, .before = nrow(.)) %>%
@@ -41,10 +47,10 @@ add_family <- function(gedcom,
     add_individual_family_link_as_spouse(xref)
   
   for(i in seq_along(xrefs_chil)) {
-    
+    #TODO: Linkage status/type
     temp <- temp %>% 
       set_active_record(xrefs_chil[i]) %>% 
-      add_individual_family_link_as_child(xref, child_linkage_type[i], child_linkage_status[i])    
+      add_individual_family_link_as_child(xref)    
   }
   
   set_active_record(temp, xref)

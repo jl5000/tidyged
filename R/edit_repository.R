@@ -12,7 +12,8 @@ add_repository <- function(gedcom,
                            web_page = character(),
                            user_reference_number = character(),
                            user_reference_type = character(),
-                           automated_record_id = character()) {
+                           automated_record_id = character(),
+                           repository_notes = character()) {
   
   xref <- assign_xref(xref_prefix_repo(), gedcom = gedcom)
   
@@ -37,12 +38,17 @@ add_repository <- function(gedcom,
                                  address_web_page = web_page)
   }
   
+  repo_notes <- purrr::map(repository_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
+                                                      NOTE_STRUCTURE(xref_note = .x),
+                                                      NOTE_STRUCTURE(submitter_text = .x)))
+  
   repo_record <- REPOSITORY_RECORD(xref_repo = xref,
                                    name_of_repository = name,
                                    address = address,
                                    user_reference_number = user_reference_number,
                                    user_reference_type = user_reference_type,
-                                   automated_record_id = automated_record_id)
+                                   automated_record_id = automated_record_id,
+                                   notes = repo_notes)
   
   gedcom %>% 
     tibble::add_row(repo_record, .before = nrow(.)) %>% 

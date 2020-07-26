@@ -32,9 +32,8 @@ add_individual <- function(gedcom,
     purrr::map_chr(submitters_interested_in_descendants, find_xref, 
                    gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
   
-  indi_notes <- purrr::map(individual_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
-                                                      NOTE_STRUCTURE(xref_note = .x),
-                                                      NOTE_STRUCTURE(submitter_text = .x)))
+  indi_notes <- purrr::map(individual_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   ind_record <- INDIVIDUAL_RECORD(xref_indi = xref,
                                   restriction_notice = restriction_notice,
@@ -68,9 +67,8 @@ add_individual_names <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
-  nam_notes <- purrr::map(name_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
-                                               NOTE_STRUCTURE(xref_note = .x),
-                                               NOTE_STRUCTURE(submitter_text = .x)))
+  nam_notes <- purrr::map(name_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   name_pieces <- PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                       name_piece_given = given, 
@@ -106,21 +104,20 @@ add_individual_names_var <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
-  name_notes <- purrr::map(variation_notes, ~ ifelse(grepl("^@.{1,20}@$", .x),
-                                                     NOTE_STRUCTURE(xref_note = .x),
-                                                     NOTE_STRUCTURE(submitter_text = .x)))
+  name_notes <- purrr::map(variation_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   if(phonetic_variation) {
     
     name_phonetic_var <- variation_name
     phonetic_type <- type
-    phon_name_pieces <- PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
+    phon_name_pieces <- list(PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                              name_piece_given = given, 
                                              name_piece_nickname = nickname, 
                                              name_piece_surname_prefix = surname_prefix,
                                              name_piece_surname = surname,
                                              name_piece_suffix = suffix,
-                                             notes = name_notes)
+                                             notes = name_notes))
     name_romanized_var <- character()
     romanized_type <- character()
     rom_name_pieces <- list()
@@ -129,20 +126,19 @@ add_individual_names_var <- function(gedcom,
     
     name_romanized_var <- variation_name
     romanized_type <- type
-    rom_name_pieces <- PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
+    rom_name_pieces <- list(PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                             name_piece_given = given, 
                                             name_piece_nickname = nickname, 
                                             name_piece_surname_prefix = surname_prefix,
                                             name_piece_surname = surname,
                                             name_piece_suffix = suffix,
-                                            notes = name_notes)
+                                            notes = name_notes))
     name_phonetic_var <- character()
     phonetic_type <- character()
     phon_name_pieces <- list()
     
   }
   
-  #TODO: Filter out parent name
   name_str <- PERSONAL_NAME_STRUCTURE(name_personal = "what?",
                                       name_type = character(),
                                       name_pieces = PERSONAL_NAME_PIECES(), 
@@ -151,15 +147,15 @@ add_individual_names_var <- function(gedcom,
                                       phonetic_name_pieces = phon_name_pieces,
                                       name_romanized_variation = name_romanized_var,
                                       romanized_type = romanized_type,
-                                      romanized_name_pieces = rom_name_pieces) %>% add_levels(1)
+                                      romanized_name_pieces = rom_name_pieces) %>% 
+    dplyr::filter(tag != "NAME") %>%
+    add_levels(1)
   
-  #TODO: THis isn't right
-  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 1, "NAME", primary_name)
   
   gedcom %>%
     tibble::add_row(name_str, .before = next_row) %>% 
     finalise()
-  
 }
 
 add_individual_event <- function(gedcom,

@@ -297,7 +297,7 @@ validate_name_text <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
 validate_name_type <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 5, 30)
+  validate_input_size(input, max_dim, 3, 30)
 }
 validate_national_id_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 30)
@@ -328,7 +328,7 @@ validate_phone_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 25)
 }
 validate_phonetic_type <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 5, 30)
+  validate_input_size(input, max_dim, 3, 30)
 }
 validate_physical_description <- function(input, max_dim) {
   # character limits not checked as it is split over several lines if too long
@@ -396,7 +396,7 @@ validate_role_in_event <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 15)
 }
 validate_romanized_type <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 5, 30)
+  validate_input_size(input, max_dim, 3, 30)
 }
 validate_scholastic_achievement <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)

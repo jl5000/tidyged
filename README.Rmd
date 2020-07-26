@@ -40,9 +40,11 @@ A simple example is below:
 library(tidygedcom)
 
 tg <- gedcom(subm("Jamie Lendrum")) %>%
-  add_individual(sex = "M") %>%
-  add_individual_names("Anakin Skywalker") %>% 
-  add_individual(sex = "F") %>%
+  add_individual(sex = "M", individual_notes = "The central character in the Star Wars Skywalker Saga") %>%
+  add_individual_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>% 
+  add_individual_names_var(primary_name = "Anakin Skywalker", variation_name = "Darth Vader", type = "aka",
+                           prefix = "Darth", variation_notes = "Title bestowed by Emperor Palpatine") %>% 
+  add_individual(sex = "F", individual_notes = "Queen of Naboo") %>%
   add_individual_names("Padme Amidala") %>% 
   add_individual(sex = "F") %>% 
   add_individual_names("Leia Organa") %>% 

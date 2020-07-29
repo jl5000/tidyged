@@ -49,6 +49,7 @@ export_gedcom <- function(gedcom, filepath) {
   gedcom %>%
     update_header(file_name = basename(filepath)) %>% 
     dplyr::mutate(record = dplyr::if_else(dplyr::lag(record) == record, "", record)) %>% 
+    dplyr::mutate(record = dplyr::if_else(record == "TR", "", record)) %>% 
     tidyr::replace_na(list(record = "")) %>% 
     dplyr::transmute(value = paste(level, record, tag, value)) %>% 
     dplyr::mutate(value = stringr::str_replace_all(value, "  ", " ")) %>%

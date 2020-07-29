@@ -82,7 +82,7 @@ add_individual_names <- function(gedcom,
                                        name_type = type,
                                        name_pieces = name_pieces) %>% add_levels(1)
   
-  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
     tibble::add_row(name_str, .before = next_row) %>% 
@@ -151,7 +151,7 @@ add_individual_names_var <- function(gedcom,
     dplyr::filter(tag != "NAME") %>%
     add_levels(1)
   
-  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 1, "NAME", primary_name)
+  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 1, "NAME", primary_name)
   
   gedcom %>%
     tibble::add_row(name_str, .before = next_row) %>% 
@@ -255,7 +255,7 @@ add_individual_event <- function(gedcom,
                                          adopted_by_which_parent = adopting_parent) %>% add_levels(1)
   
   
-  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
     tibble::add_row(event_str, .before = next_row) %>% 
@@ -359,7 +359,7 @@ add_individual_attribute <- function(gedcom,
                                                   individual_event_details = details2) %>% add_levels(1)
   
   
-  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
     tibble::add_row(attribute_str, .before = next_row) %>% 
@@ -384,7 +384,7 @@ add_individual_association <- function(gedcom,
                                     relation_is_descriptor = association,
                                     notes = asso_notes) %>% add_levels(1)
   
-  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
     tibble::add_row(asso_str, .before = next_row) %>% 
@@ -404,7 +404,7 @@ add_individual_family_link_as_spouse <- function(gedcom,
   
   link <- SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% add_levels(1)
   
-  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
     tibble::add_row(link, .before = next_row) %>% 
@@ -427,14 +427,14 @@ add_individual_family_link_as_child <- function(gedcom,
                                child_linkage_status = linkage_status,
                                notes = link_notes) %>% add_levels(1)
   
-  next_row = find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
   gedcom %>%
     tibble::add_row(link, .before = next_row) %>% 
     finalise()
 }
 
-remove_individual <- function(gedcom, remove_aliases = FALSE, remove_associatons = TRUE) {
+remove_individual <- function(gedcom, remove_aliases = FALSE, remove_associations = TRUE) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   #TODO: Need to remove associations and aliases
@@ -444,11 +444,3 @@ remove_individual <- function(gedcom, remove_aliases = FALSE, remove_associatons
 }
 
 
-update_individual <- function(gedcom) {
-  
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
-  
-
-    
-  
-}

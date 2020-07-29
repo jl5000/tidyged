@@ -42,8 +42,6 @@ library(tidygedcom)
 tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_individual(sex = "M", individual_notes = "The central character in the Star Wars Skywalker Saga") %>%
   add_individual_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>% 
-  add_individual_names_var(primary_name = "Anakin Skywalker", variation_name = "Darth Vader", type = "aka",
-                           prefix = "Darth", variation_notes = "Title bestowed by Emperor Palpatine") %>% 
   add_individual_event(event_type = "DEAT", age_at_event = "45y", event_notes = "Killed by son Luke",
                        place_name = "Second Death Star", place_notes = "Orbiting Endor System") %>% 
   add_individual_attribute(attribute_type = "RELI", attribute_descriptor = "Jedi") %>% 
@@ -55,6 +53,10 @@ tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_individual(sex = "M") %>%
   add_individual_names("Luke Skywalker") %>% 
   add_family(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia"), submitters = "Jamie") %>%
+  add_individual(sex = "M") %>% 
+  add_individual_names("Obi-Wan Kenobi") %>% 
+  activate_individual_record("Anakin") %>% 
+  add_individual_association("Obi-Wan", association = "Master") %>% 
   add_note("Based on Star Wars") %>% 
   add_source(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
   add_repository("The Skywalker Saga") %>% 

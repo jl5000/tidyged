@@ -45,11 +45,15 @@ add_family <- function(gedcom,
     set_active_record(xref_wife) %>% 
     add_individual_family_link_as_spouse(xref)
   
+  message("Family link also added to the Individual record for husband")
+  message("Family link also added to the Individual record for wife")
+  
   for(i in seq_along(xrefs_chil)) {
     #TODO: Linkage status/type
     temp <- temp %>% 
       set_active_record(xrefs_chil[i]) %>% 
-      add_individual_family_link_as_child(xref)    
+      add_individual_family_link_as_child(xref) 
+    message("Family link also added to the Individual record for child ", i)
   }
   
   set_active_record(temp, xref)
@@ -98,9 +102,3 @@ remove_family <- function(gedcom, remove_individuals = FALSE) {
 }
 
 
-update_family <- function(gedcom) {
-  
-  check_active_record_valid(gedcom, record_string_fam(), is_family)
-  
-  
-}

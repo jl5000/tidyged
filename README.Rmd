@@ -93,7 +93,7 @@ A sister package named `tgvis` will allow visualisation of `tidygedcom` objects.
 * Some initial functions to summarise tidygedcom objects have been completed;
 * Functions to import, export and create tidygedcom objects have been completed;
 * Current work is on the modification of tidygedcom objects;
-* It is still undecided how extensive any validation checks should be, given the number of GEDCOM validators available.
+* It is still undecided how extensive any validation checks should be, given the number of GEDCOM validators available ([such as this one](http://ged-inline.elasticbeanstalk.com/validate)).
 * Work on `tgvis` will begin once an initial version of `tidygedcom` is complete.
 
 ## References

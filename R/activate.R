@@ -81,7 +81,7 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
 #' Activate an Individual record
 #' 
 #' This allows a mechanism to easily edit particular records. Either the individual name can be provided
-#' (can be a partial name) or the xref can be provided explicitly. Providing the name instead of the
+#' (can be a regex pattern) or the xref can be provided explicitly. Providing the name instead of the
 #' xref can make your code more readable, provided that the name returns a unique record! 
 #'
 #' @param gedcom A tidygedcom object 

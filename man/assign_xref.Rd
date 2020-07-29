@@ -11,7 +11,7 @@ assign_xref(type, ref = 0, gedcom = tibble::tibble())
 
 \item{ref}{An explicit reference string (xref without the "@") if one is to be chosen manually}
 
-\item{gedcom}{A tidygedcm object}
+\item{gedcom}{A tidygedcom object}
 }
 \value{
 An xref to use for a new record

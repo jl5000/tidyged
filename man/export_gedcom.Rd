@@ -12,7 +12,7 @@ export_gedcom(gedcom, filepath)
 \item{gedcom_df}{A tidygedcom object}
 }
 \value{
-The tidygedcom object
+Nothing
 }
 \description{
 Save a tidygedcom object to disk as a GEDCOM file

@@ -39,7 +39,7 @@ import_gedcom <- function(filepath) {
 #' @param gedcom_df A tidygedcom object
 #' @param filepath The full filepath to write to
 #'
-#' @return The tidygedcom object
+#' @return Nothing
 #' @export
 export_gedcom <- function(gedcom, filepath) {
   
@@ -54,8 +54,6 @@ export_gedcom <- function(gedcom, filepath) {
     dplyr::transmute(value = paste(level, record, tag, value)) %>% 
     dplyr::mutate(value = stringr::str_replace_all(value, "  ", " ")) %>%
     utils::write.table(filepath, na = "", col.names = FALSE, quote = FALSE, row.names = FALSE)
-  
-  gedcom
   
 }
 
@@ -111,7 +109,6 @@ gedcom <- function(submitter_details = subm(),
     dplyr::bind_rows(submitter_details, 
                      FOOTER_SECTION()) %>%
     set_class_to_tidygedcom()
-  
   
 }
 

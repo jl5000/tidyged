@@ -116,7 +116,7 @@ finalise <- function(df, global_start_level = 0) {
 #'
 #' @param type The type of record, given by one of the xref_prefix_*() functions
 #' @param ref An explicit reference string (xref without the "@") if one is to be chosen manually
-#' @param gedcom A tidygedcm object
+#' @param gedcom A tidygedcom object
 #'
 #' @return An xref to use for a new record
 #' @export

@@ -7,7 +7,7 @@
 # Inputs which are not structures or lists are placed straight into tibbles
 # Inputs which are lists of dataframes are first binded by row, and then levels pushed down
 # Inputs which are structures have their levels pushed down
-# Inputs which are long text strings are split up intow several rows using split_text
+# Inputs which are long text strings are split up into several rows using split_text
 # Finally, if certain subordinate tags are not used, the parent tags are removed
 # For records, an additional finalising step is performed which fills missing ids
 

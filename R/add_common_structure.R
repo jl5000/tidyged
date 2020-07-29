@@ -1,6 +1,6 @@
 
 
-add_record_note <- function(gedcom) {
+add_note_to_record <- function(gedcom) {
   
   xref <- get_active_record(gedcom)
   
@@ -10,11 +10,20 @@ add_record_note <- function(gedcom) {
   if(is_note(gedcom, xref))
     stop("Notes cannot be added to the active record")
     
+  #record
+  #source DATA
+  #indi association
+  #indi links
+  #event_detail
+  #name_pieces
+  #place_structure
+  #source_citation
+  #source_repository_citation
     
 }
 
 
-add_record_multimedia_link <- function(gedcom) {
+add_multimedia_link_to_record <- function(gedcom) {
   
   xref <- get_active_record(gedcom)
   
@@ -31,7 +40,7 @@ add_record_multimedia_link <- function(gedcom) {
 }
 
 # not for repo/source/subn/subm record
-add_record_source_citation <- function(gedcom) {
+add_source_citation_to_record <- function(gedcom) {
   
   xref <- get_active_record(gedcom)
   

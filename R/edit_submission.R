@@ -35,9 +35,6 @@ add_submission <- function(gedcom,
     set_active_record(xref)
 }
 
-update_submission <- function(gedcom) {
-  
-}
 
 remove_submission <- function(gedcom) {
   

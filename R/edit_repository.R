@@ -54,11 +54,6 @@ add_repository <- function(gedcom,
     set_active_record(xref)
 }
 
-update_repository <- function(gedcom) {
-  
-  check_active_record_valid(gedcom, record_string_repo(), is_repository)
-  
-}
 
 remove_repository <- function(gedcom) {
   

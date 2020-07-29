@@ -18,11 +18,6 @@ add_note <- function(gedcom,
     set_active_record(xref)
 }
 
-update_note <- function(gedcom) {
-  
-  check_active_record_valid(gedcom, record_string_note(), is_note)
-  
-}
 
 remove_note <- function(gedcom) {
   

@@ -56,16 +56,6 @@ add_submitter <- function(gedcom,
   
 }
 
-#' @export
-update_submitter <- function(gedcom) {
-  
-  check_active_record_valid(gedcom, record_string_subm(), is_submitter)
-  
-  
-  
-  
-  
-}
 
 #' @export
 remove_submitter <- function(gedcom) {

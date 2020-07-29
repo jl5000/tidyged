@@ -29,12 +29,6 @@ add_multimedia <- function(gedcom,
     set_active_record(xref)
 }
 
-update_multimedia <- function(gedcom) {
-  
-  check_active_record_valid(gedcom, record_string_obje(), is_multimedia)
-  
-  
-}
 
 remove_multimedia <- function(gedcom) {
   

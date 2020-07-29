@@ -45,16 +45,32 @@ add_source <- function(gedcom,
 }
 
 
-add_source_repository_citation <- function(gedcom) {
-  
-  
-}
-
-update_source <- function(gedcom) {
+add_source_repository_citation <- function(gedcom,
+                                           repository,
+                                           call_number = character(),
+                                           media_type = character(),
+                                           citation_notes = character()) {
   
   check_active_record_valid(gedcom, record_string_sour(), is_source)
   
+  repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
+  
+  cit_notes <- purrr::map(citation_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  
+  citation <- SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,
+                                         notes = cit_notes,
+                                         source_call_number = call_number,
+                                         source_media_type = media_type) %>% add_levels(1)
+  
+  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "SOUR")
+  
+  gedcom %>%
+    tibble::add_row(citation, .before = next_row) %>% 
+    finalise()
+  
 }
+
 
 remove_source <- function(gedcom) {
   

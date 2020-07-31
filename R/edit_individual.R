@@ -1,9 +1,53 @@
 
 
 
+#' Add an Individual record to a tidygedcom object
+#'
+#' @details This function will automatically assign a unique xref for this record. Most users
+#' will only need to use the sex, submitters, and individual_notes parameters (and of course gedcom).
+#' 
+#' If you need to add further information about this individual (e.g. names), use the 
+#' add_individual_* functions.
+#' 
+#' The function will automatically split the individual_notes onto separate lines if the 
+#' character limit in the Gedcom standard is exceeded.
+#'
+#' @param gedcom A tidygedcom object.
+#' @param sex The sex of the individual. Either "M" (male), "F" (female), or "U" (undetermined).
+#' @param submitters A character vector of submitters of this record. A submitter can either be
+#' referenced by an xref or by a regular expression to match to a submitter name.
+#' @param aliases A character vector of other Individual records that are aliases of this
+#' individual. An individual can either be referenced by an xref or by a regular expression 
+#' to match to an individual name.
+#' @param submitters_interested_in_ancestors A character vector of submitters interested in 
+#' ancestors of this individual. A submitter can either be referenced by an xref or by a 
+#' regular expression to match to a submitter name.
+#' @param submitters_interested_in_descendants A character vector of submitters interested in 
+#' descendants of this individual. A submitter can either be referenced by an xref or by a 
+#' regular expression to match to a submitter name.
+#' @param permanent_record_file_number The record number that uniquely identifies this record 
+#' within a registered network resource. See the Gedcom 5.5.1 Standard for more details.
+#' @param ancestral_file_number A unique permanent record number of an individual record 
+#' contained in the Family History Department's Ancestral File.
+#' @param user_reference_number A user-defined number or text that the submitter uses to identify 
+#' this record. See the Gedcom 5.5.1 Standard for more details.
+#' @param user_reference_type A user-defined definition of the user_reference_number.
+#' @param automated_record_id A unique record identification number assigned to the record by 
+#' the source system. 
+#' @param restriction_notice Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more 
+#' details.
+#' @param individual_notes A character vector of notes accompanying this Individual record.
+#'
+#' @return An updated tidygedcom object including the Individual record.
+#' 
+#' @seealso [add_individual_names()], [add_individual_names_var()], 
+#' [add_individual_event()], [add_individual_attribute()], 
+#' [add_individual_association()], [add_individual_family_link_as_spouse()],
+#' [add_individual_family_link_as_child()]
+#' 
+#' @export
 add_individual <- function(gedcom,
                            sex = character(),
-                           restriction_notice = character(),
                            submitters = character(),
                            aliases = character(),
                            submitters_interested_in_ancestors = character(),
@@ -13,6 +57,7 @@ add_individual <- function(gedcom,
                            user_reference_number = character(),
                            user_reference_type = character(),
                            automated_record_id = character(),
+                           restriction_notice = character(),
                            individual_notes = character()) {
   
   xref <- assign_xref(xref_prefix_indi(), gedcom = gedcom)

@@ -1,4 +1,50 @@
 
+
+#' Add a Family record to a tidygedcom object
+#'
+#' @details This function will automatically assign a unique xref for this record. Most users
+#' will only need to use the husband, wife, children, and family_notes parameters (and of course gedcom).
+#' 
+#' If you need to add further information about this family (e.g. events), use the 
+#' add_family_event function.
+#' 
+#' The function will automatically split the family_notes onto separate lines if the 
+#' character limit in the Gedcom standard is exceeded. It will also automatically add links
+#' to this family to the respective Individual records of the wife, husband, and children.
+#'
+#' @param gedcom A tidygedcom object.
+#' @param husband A character string identifying the husband of this family. This can either 
+#' be an xref or a regular expression to match to an individual name.
+#' @param wife A character string identifying the wife of this family. This can either 
+#' be an xref or a regular expression to match to an individual name.
+#' @param children A character vector of other Individual records that are children of this
+#' family. Children can either be referenced by an xref or by a regular expression 
+#' to match to an individual name.
+#' @param child_linkage_types Codes used to indicate the child to family relationships. If defined,
+#' this must be a character vector the same size as children. Values must be one of:
+#' adopted, birth, foster, sealing.
+#' @param child_linkage_statuses Codes that allow passing on the users opinion of the 
+#' status of a child to family link. If defined, this must be a character vector the same 
+#' size as children. Values must be one of: challenged, disproven, proven.
+#' @param number_of_children The reported number of children known to belong to this family, 
+#' regardless of whether the associated children are represented here.
+#' @param submitters A character vector of submitters of this record. A submitter can either be
+#' referenced by an xref or by a regular expression to match to a submitter name.
+#' @param user_reference_number A user-defined number or text that the submitter uses to identify 
+#' this record. See the Gedcom 5.5.1 Standard for more details.
+#' @param user_reference_type A user-defined definition of the user_reference_number.
+#' @param automated_record_id A unique record identification number assigned to the record by 
+#' the source system. 
+#' @param restriction_notice Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more 
+#' details.
+#' @param family_notes A character vector of notes accompanying this Family record. These could be
+#' xrefs to existing Note records.
+#'
+#' @return An updated tidygedcom object including the Family record.
+#' 
+#' @seealso [add_family_event()]
+#' 
+#' @export
 add_family <- function(gedcom,
                        husband = character(),
                        wife = character(),
@@ -7,10 +53,10 @@ add_family <- function(gedcom,
                        child_linkage_statuses = character(),
                        number_of_children = character(),
                        submitters = character(),
-                       restriction_notice = character(),
                        user_reference_number = character(),
                        user_reference_type = character(),
                        automated_record_id = character(),
+                       restriction_notice = character(),
                        family_notes = character()) {
   
   xref <- assign_xref(xref_prefix_fam(), gedcom = gedcom)

@@ -60,21 +60,25 @@ details.}
 \item{individual_notes}{A character vector of notes accompanying this Individual record.}
 }
 \value{
-An updated tidygedcom object including the Individual record.
+An updated tidygedcom object including the Individual record. These could be
+xrefs to existing Note records.
 }
 \description{
 Add an Individual record to a tidygedcom object
 }
 \details{
 This function will automatically assign a unique xref for this record. Most users
-will only need to use the sex, submitters, and individual_notes parameters.
+will only need to use the sex, submitters, and individual_notes parameters (and of course gedcom).
 
 If you need to add further information about this individual (e.g. names), use the
 add_individual_* functions.
+
+The function will automatically split the individual_notes onto separate lines if the
+character limit in the Gedcom standard is exceeded.
 }
 \seealso{
 \code{\link[=add_individual_names]{add_individual_names()}}, \code{\link[=add_individual_names_var]{add_individual_names_var()}},
 \code{\link[=add_individual_event]{add_individual_event()}}, \code{\link[=add_individual_attribute]{add_individual_attribute()}},
 \code{\link[=add_individual_association]{add_individual_association()}}, \code{\link[=add_individual_family_link_as_spouse]{add_individual_family_link_as_spouse()}},
-\code{\link[=import_gedcom]{import_gedcom()}}
+\code{\link[=add_individual_family_link_as_child]{add_individual_family_link_as_child()}}
 }

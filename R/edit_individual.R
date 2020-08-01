@@ -38,7 +38,8 @@
 #' details.
 #' @param individual_notes A character vector of notes accompanying this Individual record.
 #'
-#' @return An updated tidygedcom object including the Individual record.
+#' @return An updated tidygedcom object including the Individual record. These could be
+#' xrefs to existing Note records.
 #' 
 #' @seealso [add_individual_names()], [add_individual_names_var()], 
 #' [add_individual_event()], [add_individual_attribute()], 

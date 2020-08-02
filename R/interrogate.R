@@ -1,16 +1,55 @@
 
 unique_record_count <- function(gedcom, tag) {sum(gedcom$level == 0 & gedcom$tag == tag)}
 
+
+#' Get the number of records in a tidygedcom object
+#'
+#' These functions return the number of records of a particular type in a tidygedcom object.
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return The number of records of the relevant type.
+#' @export
 num_indi <- function(gedcom) {unique_record_count(gedcom, record_tag_indi())}
+
+#' @export
+#' @rdname num_indi
 num_fam <- function(gedcom) {unique_record_count(gedcom, record_tag_fam())}
+
+#' @export
+#' @rdname num_indi
 num_subm <- function(gedcom) {unique_record_count(gedcom, record_tag_subm())}
+
+#' @export
+#' @rdname num_indi
 num_subn <- function(gedcom) {unique_record_count(gedcom, record_tag_subn())}
+
+#' @export
+#' @rdname num_indi
 num_media <- function(gedcom) {unique_record_count(gedcom, record_tag_obje())}
+
+#' @export
+#' @rdname num_indi
 num_note <- function(gedcom) {unique_record_count(gedcom, record_tag_note())}
+
+#' @export
+#' @rdname num_indi
 num_repo <- function(gedcom) {unique_record_count(gedcom, record_tag_repo())}
+
+#' @export
+#' @rdname num_indi
 num_sour <- function(gedcom) {unique_record_count(gedcom, record_tag_sour())}
 
 
+#' Get a summary of a tidygedcom object
+#'
+#' This function shows key information from the header of a tidygedcom object, including submitter
+#' and description.
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return A printed summary of the GEDCOM file.
+#' @export
 summary.tidygedcom <- function(gedcom) {
   eol <- "\n"
   subm_name <- gedcom_value(gedcom, "HD", "SUBM", 1)
@@ -30,6 +69,14 @@ summary.tidygedcom <- function(gedcom) {
   ) %>% cat()
 }
 
+#' Get the structure of a tidygedcom object
+#'
+#' This function gives a breakdown of record counts in the GEDCOM file.
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return A printed summary of the GEDCOM file structure.
+#' @export
 str.tidygedcom <- function(gedcom) {
   eol <- "\n"
   gedc_row <- which(gedcom$tag == "GEDC")
@@ -45,6 +92,15 @@ str.tidygedcom <- function(gedcom) {
   ) %>% cat()
 }
 
+#' Summarise records in a GEDCOM file
+#'
+#' These functions gives a summary of key information of individuals/families/notes etc. 
+#' in the GEDCOM file.
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return A tibble summarising records where every row is a record.
+#' @export
 df_individuals <- function(gedcom) {
   
   ind_xrefs <- xrefs_individuals(gedcom)
@@ -87,6 +143,9 @@ df_individuals <- function(gedcom) {
     dplyr::select(-full, -mother_xref, -father_xref)
 }
 
+
+#' @rdname df_individuals
+#' @export
 df_families <- function(gedcom) {
   
   fam_xrefs <- xrefs_families(gedcom)
@@ -112,6 +171,8 @@ df_families <- function(gedcom) {
   
 }
 
+#' @rdname df_individuals
+#' @export
 df_multimedia <- function(gedcom) {
   
   obje_xrefs <- xrefs_multimedia(gedcom)
@@ -130,6 +191,8 @@ df_multimedia <- function(gedcom) {
   
 }
 
+#' @rdname df_individuals
+#' @export
 df_sources <- function(gedcom) {
   
   sour_xrefs <- xrefs_sources(gedcom)
@@ -144,6 +207,8 @@ df_sources <- function(gedcom) {
   
 }
 
+#' @rdname df_individuals
+#' @export
 df_repositories <- function(gedcom) {
   
   repo_xrefs <- xrefs_repositories(gedcom)
@@ -162,7 +227,8 @@ df_repositories <- function(gedcom) {
   
 }
 
-
+#' @rdname df_individuals
+#' @export
 df_notes <- function(gedcom) {
   
   note_xrefs <- xrefs_notes(gedcom)

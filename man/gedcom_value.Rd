@@ -24,6 +24,3 @@ an empty string is returned. The function will automatically combine values spli
 \description{
 Extract a particular value from a tidygedcom object
 }
-\examples{
-gedcom_value(gedcom, "@I1@", "NAME", 1)
-}

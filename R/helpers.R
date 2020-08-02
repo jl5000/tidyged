@@ -6,13 +6,41 @@ is_record_type <- function(gedcom, xref, tag) {
   dplyr::filter(gedcom, record == xref)$tag[1] == tag
 }
 
+#' Check whether a given record is a particular type
+#'
+#' @param gedcom A tidygedcom object.
+#' @param xref The xref of the record.
+#'
+#' @return A logical indicating whether the record is of a particular type.
+#' @export
 is_individual <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_indi()) }
+
+#' @export
+#' @rdname is_individual
 is_family <- function(gedcom, xref)     { is_record_type(gedcom, xref, record_tag_fam())  }
+
+#' @export
+#' @rdname is_individual
 is_submitter <- function(gedcom, xref)  { is_record_type(gedcom, xref, record_tag_subm()) }
+
+#' @export
+#' @rdname is_individual
 is_submission <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_subn()) }
+
+#' @export
+#' @rdname is_individual
 is_repository <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_repo()) }
+
+#' @export
+#' @rdname is_individual
 is_multimedia <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_obje()) }
+
+#' @export
+#' @rdname is_individual
 is_note <- function(gedcom, xref)       { is_record_type(gedcom, xref, record_tag_note()) }
+
+#' @export
+#' @rdname is_individual
 is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, record_tag_sour()) }
 
 xrefs_record_type <- function(gedcom, record_tag) {
@@ -44,9 +72,6 @@ set_class_to_tidygedcom <- function(gedcom) {
 #'
 #' @return The particular value fitting the criteria of the input arguments. If not value is found,
 #' an empty string is returned. The function will automatically combine values split over CONT and CONC tags.
-#'
-#' @examples
-#' gedcom_value(gedcom, "@I1@", "NAME", 1)
 gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   
   gedcom_filtered <- dplyr::filter(gedcom, record %in% record_xref)
@@ -90,7 +115,7 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   cat(text)
 }
 
-#' @keywords internal
+
 add_levels <- function(df, start_level) {
   
   if (nrow(df) == 0) return(df)
@@ -100,7 +125,7 @@ add_levels <- function(df, start_level) {
   
 }
 
-#' @keywords internal
+
 finalise <- function(df, global_start_level = 0) {
   
   df %>% 
@@ -119,7 +144,6 @@ finalise <- function(df, global_start_level = 0) {
 #' @param gedcom A tidygedcom object
 #'
 #' @return An xref to use for a new record
-#' @export
 assign_xref <- function(type, ref = 0, gedcom = tibble::tibble()) {
   
   if (ref == 0) {

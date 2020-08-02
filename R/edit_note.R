@@ -1,4 +1,22 @@
 
+#' Add a Note record to a tidygedcom object
+#'
+#' @details This function will automatically assign a unique xref for this record. Most users
+#' will only need to use the text parameter (and of course gedcom).
+#' 
+#' The function will automatically split the text onto separate lines if the 
+#' character limit in the Gedcom standard is exceeded.
+#'
+#' @param gedcom A tidygedcom object.
+#' @param text A character string containing the text of the note.
+#' @param user_reference_number A user-defined number or text that the submitter uses to identify 
+#' this record. See the Gedcom 5.5.1 Standard for more details.
+#' @param user_reference_type A user-defined definition of the user_reference_number.
+#' @param automated_record_id A unique record identification number assigned to the record by 
+#' the source system.  
+#'
+#' @return An updated tidygedcom object including the Note record.
+#' @export
 add_note <- function(gedcom,
                      text,
                      user_reference_number = character(),

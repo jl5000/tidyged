@@ -57,11 +57,11 @@ the source system.}
 \item{restriction_notice}{Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more
 details.}
 
-\item{individual_notes}{A character vector of notes accompanying this Individual record.}
+\item{individual_notes}{A character vector of notes accompanying this Individual record.
+These could be xrefs to existing Note records.}
 }
 \value{
-An updated tidygedcom object including the Individual record. These could be
-xrefs to existing Note records.
+An updated tidygedcom object including the Individual record.
 }
 \description{
 Add an Individual record to a tidygedcom object

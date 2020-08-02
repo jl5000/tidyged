@@ -37,9 +37,9 @@
 #' @param restriction_notice Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more 
 #' details.
 #' @param individual_notes A character vector of notes accompanying this Individual record.
+#' These could be xrefs to existing Note records.
 #'
-#' @return An updated tidygedcom object including the Individual record. These could be
-#' xrefs to existing Note records.
+#' @return An updated tidygedcom object including the Individual record.
 #' 
 #' @seealso [add_individual_names()], [add_individual_names_var()], 
 #' [add_individual_event()], [add_individual_attribute()], 

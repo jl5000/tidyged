@@ -1,4 +1,37 @@
 
+
+#' Add a Repository record to a tidygedcom object
+#'
+#' @details This function will automatically assign a unique xref for this record. Most users
+#' will only need to use the sex, submitters, and individual_notes parameters (and of course gedcom).
+#' 
+#' If you need to add further information about this individual (e.g. names), use the 
+#' add_individual_* functions.
+#' 
+#' The function will automatically split the individual_notes onto separate lines if the 
+#' character limit in the Gedcom standard is exceeded.
+#'
+#' @param gedcom A tidygedcom object.
+#' @param name The name of the repository.
+#' @param address_first_line The first line of the repository address.
+#' @param city The city of the repository.
+#' @param state The state/county of the repository.
+#' @param postal_code The postal code of the repository.
+#' @param country The country of the repository.
+#' @param phone_number A character vector containing up to three phone numbers of the repository.
+#' @param email A character vector containing up to three email addresses of the repository.
+#' @param fax A character vector containing up to three fax numbers of the repository.
+#' @param web_page A character vector containing up to three web pages of the repository.
+#' @param user_reference_number A user-defined number or text that the submitter uses to identify 
+#' this record. See the Gedcom 5.5.1 Standard for more details.
+#' @param user_reference_type A user-defined definition of the user_reference_number.
+#' @param automated_record_id A unique record identification number assigned to the record by 
+#' the source system. 
+#' @param repository_notes A character vector of notes accompanying this Repository record.
+#' These could be xrefs to existing Note records.
+#'
+#' @return An updated tidygedcom object including the Repository record.
+#' @export
 add_repository <- function(gedcom,
                            name,
                            address_first_line = character(),

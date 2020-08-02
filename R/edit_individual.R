@@ -100,6 +100,34 @@ add_individual <- function(gedcom,
     set_active_record(xref)
 }
 
+
+#' Add a personal name (and components) to an Individual record
+#' 
+#' This function can be applied to an Individual record several times to record
+#' personal names.
+#'
+#' @param gedcom A tidygedcom object.
+#' @param name The full name of the individual. The order of the name parts should 
+#' be the order that the person would, by custom of their culture, have used when
+#' giving it to a recorder. The surname, if known, should be enclosed between two 
+#' forward slash (/) characters. 
+#' @param type The name type, e.g. "birth", "aka", "maiden".
+#' @param prefix The name prefix, e.g. Cmdr.
+#' @param given The given name or earned name. Different given names are separated 
+#' by a comma.
+#' @param nickname A descriptive or familiar name used in connection with one's 
+#' proper name.
+#' @param surname_prefix Surname prefix or article used in a family name. 
+#' Different surname articles are separated by a comma, for example in the name 
+#' "de la Cruz", this value would be "de, la".
+#' @param surname Surname or family name. Different surnames are separated by a comma.
+#' @param suffix Non-indexing name piece that appears after the given name and surname 
+#' parts, e.g. Jr. Different name suffix parts are separated by a comma.
+#' @param name_notes A character vector of notes accompanying this name.
+#' These could be xrefs to existing Note records.
+#'
+#' @return An updated tidygedcom object with an expanded Individual record including
+#' these names.
 #' @export
 add_individual_names <- function(gedcom,
                                  name,
@@ -136,6 +164,31 @@ add_individual_names <- function(gedcom,
     finalise()
 }
 
+#' Add a variation of a personal name to an Individual record
+#' 
+#' @param gedcom A tidygedcom object.
+#' @param primary_name The name for which this is a variation. This is treated as a
+#' regex pattern to match to existing names. 
+#' @param variation_name The full name variation.
+#' @param type Indicates the method used in transforming the text to the variation.
+#' @param phonetic_variation Whether the name variation is a phonetic variation
+#' (TRUE, default) or a romanized variation (FALSE).
+#' @param prefix The name prefix, e.g. Cmdr.
+#' @param given The given name or earned name. Different given names are separated 
+#' by a comma.
+#' @param nickname A descriptive or familiar name used in connection with one's 
+#' proper name.
+#' @param surname_prefix Surname prefix or article used in a family name. 
+#' Different surname articles are separated by a comma, for example in the name 
+#' "de la Cruz", this value would be "de, la".
+#' @param surname Surname or family name. Different surnames are separated by a comma.
+#' @param suffix Non-indexing name piece that appears after the given name and surname 
+#' parts, e.g. Jr. Different name suffix parts are separated by a comma.
+#' @param variation_notes A character vector of notes accompanying this name variation.
+#' These could be xrefs to existing Note records.
+#'
+#' @return An updated tidygedcom object with an expanded Individual record including
+#' these name variants.
 #' @export
 add_individual_names_var <- function(gedcom,
                                      primary_name,
@@ -187,7 +240,7 @@ add_individual_names_var <- function(gedcom,
     
   }
   
-  name_str <- PERSONAL_NAME_STRUCTURE(name_personal = "what?",
+  name_str <- PERSONAL_NAME_STRUCTURE(name_personal = "line filtered out below",
                                       name_type = character(),
                                       name_pieces = PERSONAL_NAME_PIECES(), 
                                       name_phonetic_variation = name_phonetic_var,

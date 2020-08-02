@@ -100,6 +100,7 @@ add_individual <- function(gedcom,
     set_active_record(xref)
 }
 
+#' @export
 add_individual_names <- function(gedcom,
                                  name,
                                  type = character(),
@@ -135,6 +136,7 @@ add_individual_names <- function(gedcom,
     finalise()
 }
 
+#' @export
 add_individual_names_var <- function(gedcom,
                                      primary_name,
                                      variation_name,
@@ -204,6 +206,7 @@ add_individual_names_var <- function(gedcom,
     finalise()
 }
 
+#' @export
 add_individual_event <- function(gedcom,
                                  event_type,
                                  event_classification = character(),
@@ -309,7 +312,7 @@ add_individual_event <- function(gedcom,
   
 }
 
-
+#' @export
 add_individual_attribute <- function(gedcom,
                                      attribute_type,
                                      attribute_descriptor,
@@ -414,6 +417,7 @@ add_individual_attribute <- function(gedcom,
   
 }
 
+#' @export
 add_individual_association <- function(gedcom,
                                        associated_with,
                                        association,
@@ -438,7 +442,7 @@ add_individual_association <- function(gedcom,
   
 }
 
-
+#' @export
 add_individual_family_link_as_spouse <- function(gedcom, 
                                                  family_xref,
                                                  linkage_notes = character()) {
@@ -457,6 +461,7 @@ add_individual_family_link_as_spouse <- function(gedcom,
     finalise()
 }
 
+#' @export
 add_individual_family_link_as_child <- function(gedcom, 
                                                 family_xref,
                                                 linkage_type = character(),

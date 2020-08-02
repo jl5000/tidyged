@@ -480,6 +480,17 @@ add_individual_family_link_as_child <- function(gedcom,
     finalise()
 }
 
+#' Remove an Individual record from a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object.
+#' @param remove_aliases Whether to also remove the individual records given as aliases of
+#' this individual. Defaults to FALSE.
+#' @param remove_associations Whether to also remove associations with this individual in 
+#' other individual records. Defaults to TRUE.
+#'
+#' @return An updated tidygedcom object excluding the active Individual record.
+#' 
+#' @export
 remove_individual <- function(gedcom, remove_aliases = FALSE, remove_associations = TRUE) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)

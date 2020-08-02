@@ -117,7 +117,12 @@ add_source_repository_citation <- function(gedcom,
   
 }
 
-
+#' Remove a Source record from a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return An updated tidygedcom object excluding the active Source record.
+#' @export
 remove_source <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_sour(), is_source)

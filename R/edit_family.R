@@ -123,6 +123,15 @@ add_family_event <- function(gedcom,
   
 }
 
+#' Remove a Family record from a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object.
+#' @param remove_individuals Whether to also remove the individual records for all individuals
+#' in the family.
+#'
+#' @return An updated tidygedcom object excluding the active Family record (and potentially the 
+#' individuals within it).
+#' @export
 remove_family <- function(gedcom, remove_individuals = FALSE) {
   
   check_active_record_valid(gedcom, record_string_fam(), is_family)

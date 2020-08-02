@@ -87,7 +87,12 @@ add_repository <- function(gedcom,
     set_active_record(xref)
 }
 
-
+#' Remove a Repository record from a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return An updated tidygedcom object excluding the active Repository record.
+#' @export
 remove_repository <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_repo(), is_repository)

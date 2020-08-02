@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-Import, create, summarise, and edit family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version unlikely to be complete before October 2020.
+Import, create, and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version unlikely to be complete before October 2020.
 
 ## Installation
 
@@ -70,7 +70,7 @@ Just like a ggplot object requires aesthetics, a GEDCOM file requires details of
 
 Within the package, GEDCOM files are represented as tidy tibbles (a sub-class of tibble known as `tidygedcom` objects) allowing easy manipulation and exploitation of existing `tidyverse` infrastructure.
 
-Functionality will also exist to allow the removal and (limited) modification of existing records, as well as summaries:
+A number of functions are available to provide summaries of `tidygedcom` objects:
 
 ```{r}
 num_indi(tg)
@@ -83,18 +83,21 @@ df_individuals(tg)
 df_families(tg)
 ```
 
-Editing of existing records is made possible through 'activation' (much like the `tidygraph` package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of `activate_*_record()` functions.
+This package allows limited editing of `tidygedcom` objects (adding/removing records, as well as the addition of some record substructures). Editing of existing records is made possible through 'activation' (much like the `tidygraph` package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of `activate_*_record()` functions.
 
-A sister package named `tgvis` will allow visualisation of `tidygedcom` objects.
+Two sister packages are planned:
+
+* `tgvis` will allow visualisation of `tidygedcom` objects;
+* `tgedit` will provide a shiny app to edit `tidygedcom` objects.
 
 ## Current status
 
-* The GEDCOM 5.5.1 specification has been implemented within the params.R, structures.R, records.R, and validate_params.R files. This is the bulk of the internal data structures required;
-* Some initial functions to summarise tidygedcom objects have been completed;
-* Functions to import, export and create tidygedcom objects have been completed;
+* The GEDCOM 5.5.1 specification has been implemented. This is the bulk of the internal data structures required (params.R, structures.R, records.R, and validate_params.R);
+* Some initial functions to summarise tidygedcom objects have been completed (interrogate.R);
+* Functions to import, export and create tidygedcom objects have been completed (import_export_create.R);
 * Current work is on the modification of tidygedcom objects;
-* It is still undecided how extensive any validation checks should be, given the number of GEDCOM validators available ([such as this one](http://ged-inline.elasticbeanstalk.com/validate)).
-* Work on `tgvis` will begin once an initial version of `tidygedcom` is complete.
+* Some simple validation checks have been written (validate_gedcom.R), but there won't be an extensive functionality for this given the number of GEDCOM validators available ([such as this one](http://ged-inline.elasticbeanstalk.com/validate)).
+* Work on `tgvis` and `tgedit` will begin once an initial version of `tidygedcom` is complete.
 
 ## References
 

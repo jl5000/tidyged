@@ -61,7 +61,12 @@ add_submission <- function(gedcom,
     set_active_record(xref)
 }
 
-
+#' Remove a Submission record from a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return An updated tidygedcom object excluding the Submission record.
+#' @export
 remove_submission <- function(gedcom) {
   
   xref <- dplyr::filter(gedcom, tag == record_tag_subn())$record

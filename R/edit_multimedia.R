@@ -61,7 +61,12 @@ add_multimedia <- function(gedcom,
     set_active_record(xref)
 }
 
-
+#' Remove a Multimedia record from a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return An updated tidygedcom object excluding the active Multimedia record.
+#' @export
 remove_multimedia <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_obje(), is_multimedia)

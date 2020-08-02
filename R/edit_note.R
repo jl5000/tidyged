@@ -36,7 +36,12 @@ add_note <- function(gedcom,
     set_active_record(xref)
 }
 
-
+#' Remove a Note record from a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return An updated tidygedcom object excluding the active Note record.
+#' @export
 remove_note <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_note(), is_note)

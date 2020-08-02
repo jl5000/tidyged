@@ -87,6 +87,11 @@ add_submitter <- function(gedcom,
 }
 
 
+#' Remove a Submitter record from a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return An updated tidygedcom object excluding the active Submitter record.
 #' @export
 remove_submitter <- function(gedcom) {
   

@@ -601,6 +601,52 @@ add_individual_attribute <- function(gedcom,
   
 }
 
+
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_caste <- purrr::partial(add_individual_attribute, attribute_type = "CAST")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_phys_descr <- purrr::partial(add_individual_attribute, attribute_type = "DSCR")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_education <- purrr::partial(add_individual_attribute, attribute_type = "EDUC")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_national_id <- purrr::partial(add_individual_attribute, attribute_type = "IDNO")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_nationality <- purrr::partial(add_individual_attribute, attribute_type = "NATI")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_num_children <- purrr::partial(add_individual_attribute, attribute_type = "NCHI")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_num_marriages <- purrr::partial(add_individual_attribute, attribute_type = "NMR")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_occupation <- purrr::partial(add_individual_attribute, attribute_type = "OCCU")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_possessions <- purrr::partial(add_individual_attribute, attribute_type = "PROP")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_religion <- purrr::partial(add_individual_attribute, attribute_type = "RELI")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_residence <- purrr::partial(add_individual_attribute, attribute_type = "RESI")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_social_sec_num <- purrr::partial(add_individual_attribute, attribute_type = "SSN")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_nobility_title <- purrr::partial(add_individual_attribute, attribute_type = "TITL")
+#' @export
+#' @rdname add_individual_attribute
+add_individual_attribute_other <- purrr::partial(add_individual_attribute, attribute_type = "FACT")
+
+
+
 #' @export
 add_individual_association <- function(gedcom,
                                        associated_with,

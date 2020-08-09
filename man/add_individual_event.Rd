@@ -3,116 +3,15 @@
 \name{add_individual_event}
 \alias{add_individual_event}
 \alias{add_individual_event_birth}
-\alias{add_individual_event_christening}
-\alias{add_individual_event_death}
-\alias{add_individual_event_burial}
-\alias{add_individual_event_cremation}
-\alias{add_individual_event_adoption}
-\alias{add_individual_event_baptism}
-\alias{add_individual_event_bar_mitzvah}
-\alias{add_individual_event_bas_mitzvah}
-\alias{add_individual_event_blessing}
-\alias{add_individual_event_adult_christening}
-\alias{add_individual_event_confirmation}
-\alias{add_individual_event_first_communion}
-\alias{add_individual_event_ordination}
-\alias{add_individual_event_naturalization}
-\alias{add_individual_event_emigration}
-\alias{add_individual_event_immigration}
-\alias{add_individual_event_census}
-\alias{add_individual_event_probate}
-\alias{add_individual_event_will}
-\alias{add_individual_event_graduation}
-\alias{add_individual_event_retirement}
-\alias{add_individual_event_other}
 \title{Add an event associated with an individual}
 \usage{
-add_individual_event(
-  gedcom,
-  event_type,
-  event_classification = character(),
-  event_date = date_value(),
-  age_at_event = character(),
-  event_notes = character(),
-  place_name = character(),
-  place_hierarchy = character(),
-  place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
-  place_latitude = character(),
-  place_longitude = character(),
-  place_notes = character(),
-  address_first_line = character(),
-  city = character(),
-  state = character(),
-  postal_code = character(),
-  country = character(),
-  phone_number = character(),
-  email = character(),
-  fax = character(),
-  web_page = character(),
-  responsible_agency = character(),
-  religious_affiliation = character(),
-  cause_of_event = character(),
-  restriction_notice = character(),
-  family_xref = character(),
-  adopting_parent = character()
-)
-
 add_individual_event_birth(...)
-
-add_individual_event_christening(...)
-
-add_individual_event_death(...)
-
-add_individual_event_burial(...)
-
-add_individual_event_cremation(...)
-
-add_individual_event_adoption(...)
-
-add_individual_event_baptism(...)
-
-add_individual_event_bar_mitzvah(...)
-
-add_individual_event_bas_mitzvah(...)
-
-add_individual_event_blessing(...)
-
-add_individual_event_adult_christening(...)
-
-add_individual_event_confirmation(...)
-
-add_individual_event_first_communion(...)
-
-add_individual_event_ordination(...)
-
-add_individual_event_naturalization(...)
-
-add_individual_event_emigration(...)
-
-add_individual_event_immigration(...)
-
-add_individual_event_census(...)
-
-add_individual_event_probate(...)
-
-add_individual_event_will(...)
-
-add_individual_event_graduation(...)
-
-add_individual_event_retirement(...)
-
-add_individual_event_other(...)
 }
 \arguments{
 \item{gedcom}{A tidygedcom object.}
 
-\item{event_type}{A code signifying the type of event.}
-
-\item{event_classification}{A descriptive word or phrase used to further classify the
-event type. This should be used whenever the EVEN event_type is used (but can also be used
+\item{event_classification}{A descriptive word or phrase used to further classify this
+event. This should be used whenever the 'other' event is used (but can also be used
 with others).}
 
 \item{event_date}{A date_value() object giving the date of the event.}
@@ -128,7 +27,9 @@ These could be xrefs to existing Note records.}
 \item{place_name}{The jurisdictional name of the place where the event took place.
 Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."}
 
-\item{place_hierarchy}{}
+\item{place_hierarchy}{This shows the jurisdictional entities that are named in a sequence
+from the lowest to the highest jurisdiction. The jurisdictions are separated by commas,
+and any jurisdiction's name that is missing is still accounted for by a comma.}
 
 \item{place_phonetic_variation}{A character vector of phonetic variations of the place name.}
 

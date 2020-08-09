@@ -237,5 +237,6 @@
 #' @param source_citations A list of SOURCE_CITATION() objects.
 #' @param source_repository_citations A list of SOURCE_REPOSITORY_CITATION() objects.
 #' @param multimedia_links A list of MULTIMEDIA_LINK() objects
-parameter_definitions <- function() {return(0)}
+#' @name parameter_definitions
+NULL
 

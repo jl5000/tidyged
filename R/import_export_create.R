@@ -10,7 +10,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' import_gedcom("C:/my_family.ged")
+#' }
 import_gedcom <- function(filepath) {
   
   if(stringr::str_sub(filepath, -4, -1) != ".ged")
@@ -36,8 +38,8 @@ import_gedcom <- function(filepath) {
 
 #' Save a tidygedcom object to disk as a GEDCOM file
 #'
-#' @param gedcom_df A tidygedcom object
-#' @param filepath The full filepath to write to
+#' @param gedcom A tidygedcom object.
+#' @param filepath The full filepath to write to.
 #'
 #' @return Nothing
 #' @export
@@ -47,7 +49,16 @@ export_gedcom <- function(gedcom, filepath) {
     warning("Output is not being saved as a GEDCOM file (*.ged)")
   
   gedcom %>%
-    update_header(file_name = basename(filepath)) %>% 
+    #update_header(file_name = basename(filepath)) %>% 
+    purrr::when(
+      nrow(dplyr::filter(., record == "HD", tag == "FILE")) == 0 ~
+                     tibble::add_row(., tibble::tibble(level = 1, record = "HD", 
+                                                       tag = "FILE", value = basename(filepath)),
+                                     .before = find_insertion_point(., "HD", 0, "HEAD")),
+      nrow(dplyr::filter(., record == "HD", tag == "FILE")) == 1 ~
+        dplyr::mutate(., value = dplyr::if_else(record == "HD" & tag == "FILE", basename(filepath), value)),
+      ~ .
+    ) %>% 
     dplyr::mutate(record = dplyr::if_else(dplyr::lag(record) == record, "", record)) %>% 
     dplyr::mutate(record = dplyr::if_else(record == "TR", "", record)) %>% 
     tidyr::replace_na(list(record = "")) %>% 
@@ -96,7 +107,7 @@ gedcom <- function(submitter_details = subm(),
   HEADER_SECTION(xref_subm = assign_xref(xref_prefix_subm(), 1),
                  approved_system_id = "tidygedcom",
                  character_set = char_set,
-                 system_version_number = packageVersion("tidygedcom"),
+                 system_version_number = utils::packageVersion("tidygedcom"),
                  name_of_source_data = source_data_name,
                  publication_date_source_data = source_data_date,
                  copyright_source_data = source_data_copyright,

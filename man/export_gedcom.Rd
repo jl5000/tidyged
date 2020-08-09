@@ -7,9 +7,9 @@
 export_gedcom(gedcom, filepath)
 }
 \arguments{
-\item{filepath}{The full filepath to write to}
+\item{gedcom}{A tidygedcom object.}
 
-\item{gedcom_df}{A tidygedcom object}
+\item{filepath}{The full filepath to write to.}
 }
 \value{
 Nothing

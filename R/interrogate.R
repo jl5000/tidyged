@@ -46,26 +46,27 @@ num_sour <- function(gedcom) {unique_record_count(gedcom, record_tag_sour())}
 #' This function shows key information from the header of a tidygedcom object, including submitter
 #' and description.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param object A tidygedcom object.
+#' @param ... Not used.
 #'
 #' @return A printed summary of the GEDCOM file.
 #' @export
-summary.tidygedcom <- function(gedcom) {
+summary.tidygedcom <- function(object, ...) {
   eol <- "\n"
-  subm_name <- gedcom_value(gedcom, "HD", "SUBM", 1)
+  subm_name <- gedcom_value(object, "HD", "SUBM", 1)
   
   paste("GEDCOM file summary:", eol, eol,
-        "Submitter:", "\t", "\t", gedcom_value(gedcom, subm_name, "NAME", 1), eol, 
-        "Description:", "\t", "\t", gedcom_value(gedcom, "HD", "NOTE", 1), eol,
-        "Language:", "\t", "\t", gedcom_value(gedcom, "HD", "LANG", 1), eol,
-        "Character Set:", "\t", gedcom_value(gedcom, "HD", "CHAR", 1), eol, eol,
+        "Submitter:", "\t", "\t", gedcom_value(object, subm_name, "NAME", 1), eol, 
+        "Description:", "\t", "\t", gedcom_value(object, "HD", "NOTE", 1), eol,
+        "Language:", "\t", "\t", gedcom_value(object, "HD", "LANG", 1), eol,
+        "Character Set:", "\t", gedcom_value(object, "HD", "CHAR", 1), eol, eol,
         
-        "Copyright:", "\t", "\t", gedcom_value(gedcom, "HD", "COPR", 1), eol, eol,
+        "Copyright:", "\t", "\t", gedcom_value(object, "HD", "COPR", 1), eol, eol,
         
-        "Source system:", "\t", gedcom_value(gedcom, "HD", "SOUR", 1), eol,
-        "Source system version: ", gedcom_value(gedcom, "HD", "VERS", 2), eol,
-        "Product Name:", "\t", "\t", gedcom_value(gedcom, "HD", "NAME", 2), eol,
-        "Product Source:", "\t", gedcom_value(gedcom, "HD", "CORP", 2), eol
+        "Source system:", "\t", gedcom_value(object, "HD", "SOUR", 1), eol,
+        "Source system version: ", gedcom_value(object, "HD", "VERS", 2), eol,
+        "Product Name:", "\t", "\t", gedcom_value(object, "HD", "NAME", 2), eol,
+        "Product Source:", "\t", gedcom_value(object, "HD", "CORP", 2), eol
   ) %>% cat()
 }
 
@@ -73,22 +74,23 @@ summary.tidygedcom <- function(gedcom) {
 #'
 #' This function gives a breakdown of record counts in the GEDCOM file.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param object A tidygedcom object.
+#' @param ... Not used.
 #'
 #' @return A printed summary of the GEDCOM file structure.
 #' @export
-str.tidygedcom <- function(gedcom) {
+str.tidygedcom <- function(object, ...) {
   eol <- "\n"
-  gedc_row <- which(gedcom$tag == "GEDC")
-  paste0("GEDCOM version ", gedcom$value[gedc_row + 1], " (", gedcom$value[gedc_row + 2], ")", eol, eol,
-        "Individuals:\t\t", num_indi(gedcom), eol,
-        "Families:\t\t", num_fam(gedcom), eol,
-        "Submitters:\t\t", num_subm(gedcom), eol,
-        "Submissions:\t\t", num_subn(gedcom), eol,
-        "Multimedia objects:\t", num_media(gedcom), eol, 
-        "Notes:\t\t\t", num_note(gedcom), eol,
-        "Sources:\t\t", num_sour(gedcom), eol,
-        "Repositories:\t\t", num_repo(gedcom), eol 
+  gedc_row <- which(object$tag == "GEDC")
+  paste0("GEDCOM version ", object$value[gedc_row + 1], " (", object$value[gedc_row + 2], ")", eol, eol,
+        "Individuals:\t\t", num_indi(object), eol,
+        "Families:\t\t", num_fam(object), eol,
+        "Submitters:\t\t", num_subm(object), eol,
+        "Submissions:\t\t", num_subn(object), eol,
+        "Multimedia objects:\t", num_media(object), eol, 
+        "Notes:\t\t\t", num_note(object), eol,
+        "Sources:\t\t", num_sour(object), eol,
+        "Repositories:\t\t", num_repo(object), eol 
   ) %>% cat()
 }
 

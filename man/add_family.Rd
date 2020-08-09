@@ -78,6 +78,3 @@ The function will automatically split the family_notes onto separate lines if th
 character limit in the Gedcom standard is exceeded. It will also automatically add links
 to this family to the respective Individual records of the wife, husband, and children.
 }
-\seealso{
-\code{\link[=add_family_event]{add_family_event()}}
-}

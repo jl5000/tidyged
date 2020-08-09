@@ -4,10 +4,12 @@
 \alias{summary.tidygedcom}
 \title{Get a summary of a tidygedcom object}
 \usage{
-\method{summary}{tidygedcom}(gedcom)
+\method{summary}{tidygedcom}(object, ...)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{object}{A tidygedcom object.}
+
+\item{...}{Not used.}
 }
 \value{
 A printed summary of the GEDCOM file.

@@ -4,10 +4,12 @@
 \alias{str.tidygedcom}
 \title{Get the structure of a tidygedcom object}
 \usage{
-\method{str}{tidygedcom}(gedcom)
+\method{str}{tidygedcom}(object, ...)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{object}{A tidygedcom object.}
+
+\item{...}{Not used.}
 }
 \value{
 A printed summary of the GEDCOM file structure.

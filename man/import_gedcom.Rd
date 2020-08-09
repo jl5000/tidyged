@@ -16,5 +16,7 @@ A tidygedcom object
 Imports a *.ged file and creates a tidygedcom object.
 }
 \examples{
+\dontrun{
 import_gedcom("C:/my_family.ged")
+}
 }

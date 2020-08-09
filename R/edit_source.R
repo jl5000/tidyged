@@ -41,9 +41,6 @@
 #' These could be xrefs to existing Note records.
 #'
 #' @return An updated tidygedcom object including the Source record.
-#' 
-#' @seealso [add_source_repository_citation()]
-#' 
 #' @export
 add_source <- function(gedcom,
                        events_recorded = character(),

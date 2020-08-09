@@ -76,9 +76,3 @@ add_individual_* functions.
 The function will automatically split the individual_notes onto separate lines if the
 character limit in the Gedcom standard is exceeded.
 }
-\seealso{
-\code{\link[=add_individual_names]{add_individual_names()}}, \code{\link[=add_individual_names_var]{add_individual_names_var()}},
-\code{\link[=add_individual_event]{add_individual_event()}}, \code{\link[=add_individual_attribute]{add_individual_attribute()}},
-\code{\link[=add_individual_association]{add_individual_association()}}, \code{\link[=add_individual_family_link_as_spouse]{add_individual_family_link_as_spouse()}},
-\code{\link[=add_individual_family_link_as_child]{add_individual_family_link_as_child()}}
-}

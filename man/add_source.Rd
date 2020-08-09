@@ -82,6 +82,3 @@ The function will automatically split the originator, title, publication_detail,
 data_notes and source_notes onto separate lines if the character limit in the Gedcom
 standard is exceeded.
 }
-\seealso{
-\code{\link[=add_source_repository_citation]{add_source_repository_citation()}}
-}

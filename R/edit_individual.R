@@ -96,6 +96,16 @@ add_individual <- function(gedcom,
 
 
 #' Remove an Individual record from a tidygedcom object
+#' 
+#' This function removes an active Individual record from the tidygedcom object.
+#' At a minimum it will also remove references to this individual in Family records.
+#' If remove_associations is TRUE (default) it will remove associations with this
+#' individual in other Individual records.
+#' If remove_aliases is TRUE it will remove other Individual records giving aliases of this
+#' individual.
+#' 
+#' Given a sufficiently complex and joined up GEDCOM file, this can cause a cascade of dependent
+#' individual references and records being removed.
 #'
 #' @param gedcom A tidygedcom object.
 #' @param remove_aliases Whether to also remove the individual records given as aliases of
@@ -109,9 +119,30 @@ add_individual <- function(gedcom,
 remove_individual <- function(gedcom, remove_aliases = FALSE, remove_associations = TRUE) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
-  #TODO: Need to remove associations and aliases
+  active_record <- get_active_record(gedcom)
+  
+  if(remove_aliases) {
+    aliases <- dplyr::filter(gedcom, record == active_record, tag == "ALIA")$value
+    
+    for(i in seq_along(aliases)) {
+      message("Alias record ", 
+              get_individual_name(gedcom, aliases[i]), 
+              " for ", get_individual_name(gedcom, active_record),
+              " also removed")
+      
+      gedcom <- activate_individual_record(gedcom, xref = aliases[i]) %>% 
+        remove_individual()
+    }
+  }
+  
+  if(remove_associations) {
+    gedcom <- remove_section(gedcom, 1, "ASSO", active_record)
+    message("Associations with ", get_individual_name(gedcom, active_record),
+            " also removed")
+  }
+  
   gedcom %>% 
-    dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 
+    dplyr::filter(record != active_record, value != active_record) %>% 
     null_active_record()
 }
 

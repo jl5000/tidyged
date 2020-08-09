@@ -83,7 +83,7 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
       active <- TRUE
     } else if(gedcom_filtered$tag[i] == after_tag && gedcom_filtered$level[i] < level) {
       active <- TRUE
-    } else if(active && gedcom_filtered$level[i] > level){
+    } else if(active && gedcom_filtered$level[i] < level){
       active <- FALSE
     }
     
@@ -114,6 +114,9 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   
   cat(text)
 }
+
+get_individual_name <- function(gedcom, xref) { gedcom_value(gedcom, xref, "NAME", 1, "INDI") }
+
 
 
 add_levels <- function(df, start_level) {
@@ -231,4 +234,42 @@ find_insertion_point <- function(gedcom,
       
   }
   i
+}
+
+
+remove_section <- function(gedcom,
+                           containing_level,
+                           containing_tag,
+                           containing_value,
+                           xrefs = character()) {
+  
+  rows_to_remove <- c()
+  
+  active <- FALSE
+  for(i in 1:nrow(gedcom)) {
+    
+    if(active) {
+      if(gedcom$level[i] <= containing_level) {
+        active <- FALSE
+      } else {
+        rows_to_remove <- c(rows_to_remove, i)
+      }
+      
+    }
+    
+    if(gedcom$level[i] == containing_level && gedcom$tag[i] == containing_tag) {
+      if(length(xrefs) == 0 || gedcom$record[i] %in% xrefs) {
+       if(gedcom$value[i] == containing_value) {
+         active <- TRUE
+         rows_to_remove <- c(rows_to_remove, i) 
+       } 
+      }
+    }
+  }
+  
+  if(is.null(rows_to_remove)) {
+    gedcom
+  } else {
+    dplyr::slice(gedcom, -rows_to_remove)
+  }
 }

@@ -128,7 +128,8 @@ remove_individual <- function(gedcom, remove_aliases = FALSE, remove_association
       message("Alias record ", 
               get_individual_name(gedcom, aliases[i]), 
               " for ", get_individual_name(gedcom, active_record),
-              " also removed")
+              " also removed.\n",
+              "Alias records for this alias will not be deleted")
       
       gedcom <- activate_individual_record(gedcom, xref = aliases[i]) %>% 
         remove_individual()

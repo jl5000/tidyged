@@ -157,3 +157,44 @@ add_individual_names_var <- function(gedcom,
     tibble::add_row(name_str, .before = next_row) %>% 
     finalise()
 }
+
+
+#' Remove a personal name (and components) from an Individual record
+#'
+#' @param gedcom A tidygedcom object.
+#' @param name The personal name to remove.
+#'
+#' @return An updated tidygedcom object with an Individual record excluding
+#' this personal name (and components).
+#' @export
+remove_individual_name <- function(gedcom,
+                                    name) {
+  
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
+  remove_section(gedcom, 1, "NAME", name,
+                 xrefs = get_active_record(gedcom))
+  
+}
+
+
+#' Remove a variation of a personal name from an Individual record
+#'
+#' @param gedcom A tidygedcom object.
+#' @param variation_name The personal name variation to remove.
+#' @param phonetic_variation Whether the name variation is a phonetic variation
+#' (TRUE, default) or a romanized variation (FALSE).
+#'
+#' @return An updated tidygedcom object with an Individual record excluding
+#' this personal name variation (and components).
+#' @export
+remove_individual_name_var <- function(gedcom,
+                                       variation_name,
+                                       phonetic_variation = TRUE) {
+  
+  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  
+  remove_section(gedcom, 2, if_else(phonetic_variation, "FONE", "ROMN"), 
+                 variation_name, xrefs = get_active_record(gedcom))
+  
+}

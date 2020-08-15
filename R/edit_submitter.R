@@ -105,6 +105,37 @@ remove_submitter <- function(gedcom) {
     null_active_record()
 }
 
+
+#' Define a Submitter record for a new tidygedcom object
+#'
+#' @details 
+#' This function is supposed to be used in the gedcom() function to define a
+#' new tidygedcom object.
+#' 
+#' This submitter record identifies the individual or organization that contributed 
+#' information contained in the GEDCOM transmission.
+#' 
+#' The function will automatically split the submitter_notes onto separate lines if the 
+#' character limit in the Gedcom standard is exceeded.
+#'
+#' @param name The name of the submitter.
+#' @param address_first_line The first line of the submitter address.
+#' @param city The city of the submitter.
+#' @param state The state/county of the submitter.
+#' @param postal_code The postal code of the submitter.
+#' @param country The country of the submitter.
+#' @param phone_number A character vector containing up to three phone numbers of the submitter.
+#' @param email A character vector containing up to three email addresses of the submitter.
+#' @param fax A character vector containing up to three fax numbers of the submitter.
+#' @param web_page A character vector containing up to three web pages of the submitter.
+#' @param language_preference The language in which the submitter prefers to communicate. 
+#' @param submitter_registered_rfn See the Gedcom 5.5.1 Standard for more details.
+#' @param automated_record_id A unique record identification number assigned to the record by 
+#' the source system. 
+#' @param submitter_notes A character vector of notes accompanying this Submitter record.
+#' These could be xrefs to existing Note records.
+#'
+#' @return A Submitter record to be incorporated into a new tidygedcom object.
 #' @export
 subm <- function(name = unname(Sys.info()["user"]),
                  address_first_line = character(),

@@ -123,8 +123,10 @@ add_source_repository_citation <- function(gedcom,
 remove_source <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_sour(), is_source)
-  #TODO: Remove source_citation
+  
   gedcom %>% 
+    remove_section(1, "SOUR", get_active_record(.)) %>% 
+    remove_section(2, "SOUR", get_active_record(.)) %>%
     dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 
     null_active_record()
 }

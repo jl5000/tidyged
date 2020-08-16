@@ -87,8 +87,8 @@ This package allows limited editing of `tidygedcom` objects (adding/removing rec
 
 Two sister packages are planned:
 
-* `tgvis` will allow visualisation of `tidygedcom` objects;
-* `tgedit` will provide a shiny app to edit `tidygedcom` objects.
+* `shinygedcom` will provide a shiny app to edit `tidygedcom` objects;
+* `visgedcom` will allow visualisation of `tidygedcom` objects.
 
 ## Current status
 
@@ -97,7 +97,7 @@ Two sister packages are planned:
 * Functions to import, export and create tidygedcom objects have been completed (import_export_create.R);
 * Current work is on the modification of tidygedcom objects;
 * Some simple validation checks have been written (validate_gedcom.R), but there won't be an extensive functionality for this given the number of GEDCOM validators available ([such as this one](http://ged-inline.elasticbeanstalk.com/validate)).
-* Work on `tgvis` and `tgedit` will begin once an initial version of `tidygedcom` is complete.
+* Work on `shinygedcom` and `visgedcom` will begin once an initial version of `tidygedcom` is complete.
 
 ## References
 

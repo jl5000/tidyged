@@ -96,8 +96,9 @@ add_repository <- function(gedcom,
 remove_repository <- function(gedcom) {
   
   check_active_record_valid(gedcom, record_string_repo(), is_repository)
-  #TODO: Remove source_repository_citation 
+  
   gedcom %>% 
+    remove_section(1, "REPO", get_active_record(.)) %>% 
     dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 
     null_active_record()
 }

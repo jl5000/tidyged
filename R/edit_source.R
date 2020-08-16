@@ -134,6 +134,17 @@ add_source_repository_citation <- function(gedcom,
   
 }
 
+remove_source_repository_citation <- function(gedcom,
+                                              repository) {
+  
+  check_active_record_valid(gedcom, record_string_sour(), is_source)
+  
+  repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
+  
+  remove_section(gedcom, 1, "REPO", repo_xref, xrefs = get_active_record(gedcom))
+  
+}
+
 #' Remove a Source record from a tidygedcom object
 #'
 #' @param gedcom A tidygedcom object.

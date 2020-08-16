@@ -88,6 +88,26 @@ add_source <- function(gedcom,
 }
 
 
+#' Add a source repository citation to a source record
+#'
+#' This structure is used within a source record to point to a name and 
+#' address record of the holder of the source document.
+#' 
+#' @param gedcom A tidygedcom object.
+#' @param repository A character string identifying the repository. This can either 
+#' be an xref or a regular expression to match to a repository name.
+#' @param call_number An identification or reference description used to file 
+#' and retrieve items from the holdings of a repository.
+#' @param media_type A code that indicates the type of material in which the referenced 
+#' source is stored. Must be one of: audio, book, card, electronic, fiche, film, magazine,
+#' manuscript, map, newspaper, photo, tombstone, video. If this is defined, it must be a character
+#' vector the same size as file_reference and format.
+#' @param citation_notes A character vector of notes associated with this Source citation.
+#' These could be xrefs to existing Note records.
+#'
+#' @return An updated tidygedcom object with an expanded Source record including
+#' this repository citation.
+#' @export
 add_source_repository_citation <- function(gedcom,
                                            repository,
                                            call_number = character(),

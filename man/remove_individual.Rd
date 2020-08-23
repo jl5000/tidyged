@@ -19,5 +19,15 @@ other individual records. Defaults to TRUE.}
 An updated tidygedcom object excluding the active Individual record.
 }
 \description{
-Remove an Individual record from a tidygedcom object
+This function removes an active Individual record from the tidygedcom object.
+}
+\details{
+At a minimum it will also remove references to this individual in Family records.
+If remove_associations is TRUE (default) it will remove associations with this
+individual in other Individual records.
+If remove_aliases is TRUE it will remove other Individual records giving aliases of this
+individual.
+
+Given a sufficiently complex and joined up GEDCOM file, this can cause a cascade of dependent
+individual references and records being removed.
 }

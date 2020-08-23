@@ -17,5 +17,10 @@ An updated tidygedcom object excluding the active Family record (and potentially
 individuals within it).
 }
 \description{
-Remove a Family record from a tidygedcom object
+This function removes a record containing details of a family.
+}
+\details{
+This function will also automatically remove references to this record in other
+individual records. If remove_individuals is set to TRUE, it will also remove
+all records for individuals in this family (including associations, but not aliases).
 }

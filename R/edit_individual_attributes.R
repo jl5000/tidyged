@@ -1,5 +1,5 @@
 
-#' @export
+
 add_individual_attribute <- function(gedcom,
                                      attribute_type,
                                      attribute_descriptor,

@@ -1,7 +1,7 @@
 
 add_individual_event <- function(gedcom,
                                  event_type,
-                                 event_classification = character(),
+                                 event_subtype = character(),
                                  event_date = date_value(),
                                  age_at_event = character(),
                                  event_notes = character(),
@@ -77,7 +77,7 @@ add_individual_event <- function(gedcom,
   even_notes <- purrr::map(event_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
-  details1 <- EVENT_DETAIL(event_or_fact_classification = event_classification,
+  details1 <- EVENT_DETAIL(event_or_fact_classification = event_subtype,
                            date = event_date,
                            place = event_place,
                            address = event_address,
@@ -106,7 +106,6 @@ add_individual_event <- function(gedcom,
 
 #' Add an event associated with an individual
 #'
-#' @name add_individual_event
 #' @param gedcom A tidygedcom object.
 #' @param event_classification A descriptive word or phrase used to further classify this 
 #' event. This should be used whenever the 'other' event is used (but can also be used
@@ -168,7 +167,6 @@ add_individual_event <- function(gedcom,
 #' @export
 add_individual_event_birth <- purrr::partial(add_individual_event, event_type = "BIRT")
 #' @export
-#' @name add_individual_event
 #' @rdname add_individual_event_birth
 add_individual_event_christening <- purrr::partial(add_individual_event, event_type = "CHR")
 #' @export

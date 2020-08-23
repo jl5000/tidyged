@@ -64,7 +64,7 @@ These could be xrefs to existing Note records.}
 An updated tidygedcom object including the Individual record.
 }
 \description{
-Add an Individual record to a tidygedcom object
+This function adds a new record for an individual.
 }
 \details{
 This function will automatically assign a unique xref for this record. Most users

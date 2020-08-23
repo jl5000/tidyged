@@ -3,7 +3,9 @@
 
 #' Add an Individual record to a tidygedcom object
 #'
-#' @details This function will automatically assign a unique xref for this record. Most users
+#' This function adds a new record for an individual.
+#'
+#' This function will automatically assign a unique xref for this record. Most users
 #' will only need to use the sex, submitters, and individual_notes parameters (and of course gedcom).
 #' 
 #' If you need to add further information about this individual (e.g. names), use the 
@@ -98,6 +100,7 @@ add_individual <- function(gedcom,
 #' Remove an Individual record from a tidygedcom object
 #' 
 #' This function removes an active Individual record from the tidygedcom object.
+#' 
 #' At a minimum it will also remove references to this individual in Family records.
 #' If remove_associations is TRUE (default) it will remove associations with this
 #' individual in other Individual records.
@@ -124,14 +127,14 @@ remove_individual <- function(gedcom, remove_aliases = FALSE, remove_association
   if(remove_aliases) {
     aliases <- dplyr::filter(gedcom, record == active_record, tag == "ALIA")$value
     
-    for(i in seq_along(aliases)) {
+    for(alias in aliases) {
       message("Alias record ", 
-              get_individual_name(gedcom, aliases[i]), 
+              get_individual_name(gedcom, alias), 
               " for ", get_individual_name(gedcom, active_record),
               " also removed.\n",
               "Alias records for this alias will not be deleted")
       
-      gedcom <- activate_individual_record(gedcom, xref = aliases[i]) %>% 
+      gedcom <- activate_individual_record(gedcom, xref = alias) %>% 
         remove_individual()
     }
   }

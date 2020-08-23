@@ -243,6 +243,8 @@ remove_section <- function(gedcom,
                            containing_value,
                            xrefs = character()) {
   
+  no_xrefs_defined <- length(xrefs) == 0
+  
   rows_to_remove <- c()
   
   active <- FALSE
@@ -257,13 +259,14 @@ remove_section <- function(gedcom,
       
     }
     
-    if(gedcom$level[i] == containing_level && gedcom$tag[i] == containing_tag) {
-      if(length(xrefs) == 0 || gedcom$record[i] %in% xrefs) {
-       if(gedcom$value[i] == containing_value) {
-         active <- TRUE
-         rows_to_remove <- c(rows_to_remove, i) 
-       } 
-      }
+    if(no_xrefs_defined || gedcom$record[i] %in% xrefs) {
+      if(gedcom$level[i] == containing_level & gedcom$tag[i] == containing_tag &
+         gedcom$value[i] == containing_value) {
+        
+        active <- TRUE
+        rows_to_remove <- c(rows_to_remove, i) 
+      } 
+      
     }
   }
   

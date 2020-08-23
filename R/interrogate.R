@@ -1,4 +1,5 @@
 
+
 unique_record_count <- function(gedcom, tag) {sum(gedcom$level == 0 & gedcom$tag == tag)}
 
 
@@ -10,35 +11,35 @@ unique_record_count <- function(gedcom, tag) {sum(gedcom$level == 0 & gedcom$tag
 #'
 #' @return The number of records of the relevant type.
 #' @export
-num_indi <- function(gedcom) {unique_record_count(gedcom, record_tag_indi())}
+num_indi <- function(gedcom) { unique_record_count(gedcom, record_tag_indi()) }
 
 #' @export
 #' @rdname num_indi
-num_fam <- function(gedcom) {unique_record_count(gedcom, record_tag_fam())}
+num_fam <- function(gedcom) { unique_record_count(gedcom, record_tag_fam()) }
 
 #' @export
 #' @rdname num_indi
-num_subm <- function(gedcom) {unique_record_count(gedcom, record_tag_subm())}
+num_subm <- function(gedcom) { unique_record_count(gedcom, record_tag_subm()) }
 
 #' @export
 #' @rdname num_indi
-num_subn <- function(gedcom) {unique_record_count(gedcom, record_tag_subn())}
+num_subn <- function(gedcom) { unique_record_count(gedcom, record_tag_subn()) }
 
 #' @export
 #' @rdname num_indi
-num_media <- function(gedcom) {unique_record_count(gedcom, record_tag_obje())}
+num_media <- function(gedcom) { unique_record_count(gedcom, record_tag_obje()) }
 
 #' @export
 #' @rdname num_indi
-num_note <- function(gedcom) {unique_record_count(gedcom, record_tag_note())}
+num_note <- function(gedcom) { unique_record_count(gedcom, record_tag_note()) }
 
 #' @export
 #' @rdname num_indi
-num_repo <- function(gedcom) {unique_record_count(gedcom, record_tag_repo())}
+num_repo <- function(gedcom) { unique_record_count(gedcom, record_tag_repo()) }
 
 #' @export
 #' @rdname num_indi
-num_sour <- function(gedcom) {unique_record_count(gedcom, record_tag_sour())}
+num_sour <- function(gedcom) { unique_record_count(gedcom, record_tag_sour()) }
 
 
 #' Get a summary of a tidygedcom object
@@ -96,7 +97,7 @@ str.tidygedcom <- function(object, ...) {
 
 #' Summarise records in a GEDCOM file
 #'
-#' These functions gives a summary of key information of individuals/families/notes etc. 
+#' These functions give a summary of key information of individuals/families/notes etc. 
 #' in the GEDCOM file.
 #'
 #' @param gedcom A tidygedcom object.

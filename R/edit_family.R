@@ -2,15 +2,20 @@
 
 #' Add a Family record to a tidygedcom object
 #'
-#' @details This function will automatically assign a unique xref for this record. Most users
+#' This function adds a record containing details of a family.
+#' 
+#' This function will automatically assign a unique xref for this record. Most users
 #' will only need to use the husband, wife, children, and family_notes parameters (and of course gedcom).
 #' 
 #' If you need to add further information about this family (e.g. events), use the 
-#' add_family_event function.
+#' add_family_event_*() functions.
 #' 
 #' The function will automatically split the family_notes onto separate lines if the 
 #' character limit in the Gedcom standard is exceeded. It will also automatically add links
 #' to this family to the respective Individual records of the wife, husband, and children.
+#' 
+#' This function will also automatically add appropriate references to this record in the
+#' respective individual records of the husband/wife/children.
 #'
 #' @param gedcom A tidygedcom object.
 #' @param husband A character string identifying the husband of this family. This can either 
@@ -92,11 +97,12 @@ add_family <- function(gedcom,
   message("Family link also added to the Individual record for husband")
   message("Family link also added to the Individual record for wife")
   
-  for(i in seq_along(xrefs_chil)) {
+  for(xref_chil in xrefs_chil) {
     #TODO: Linkage status/type
     temp <- temp %>% 
-      set_active_record(xrefs_chil[i]) %>% 
+      set_active_record(xref_chil) %>% 
       add_individual_family_link_as_child(xref) 
+    
     message("Family link also added to the Individual record for child ", i)
   }
   
@@ -108,6 +114,12 @@ add_family <- function(gedcom,
 
 
 #' Remove a Family record from a tidygedcom object
+#' 
+#' This function removes a record containing details of a family.
+#' 
+#' This function will also automatically remove references to this record in other 
+#' individual records. If remove_individuals is set to TRUE, it will also remove
+#' all records for individuals in this family (including associations, but not aliases).
 #'
 #' @param gedcom A tidygedcom object.
 #' @param remove_individuals Whether to also remove the individual records for all individuals
@@ -119,22 +131,24 @@ add_family <- function(gedcom,
 remove_family <- function(gedcom, remove_individuals = FALSE) {
   
   check_active_record_valid(gedcom, record_string_fam(), is_family)
-  #TODO: Remove subordinate ADOP tags
-  ind_xrefs <- unique(dplyr::filter(gedcom, record == get_active_record(gedcom),
+  active_record <- get_active_record(gedcom)
+  
+  ind_xrefs <- unique(dplyr::filter(gedcom, record == active_record,
                                     tag %in% c("HUSB", "WIFE", "CHIL"))$value)
   
-  temp <- dplyr::filter(gedcom, record != get_active_record(gedcom))
+  temp <- remove_section(gedcom, 1, "FAMC", active_record) %>% 
+    remove_section(2, "FAMC", active_record) %>% 
+    remove_section(1, "FAMS", active_record) %>% 
+    remove_section(2, "FAMS", active_record)
   
   if(remove_individuals) {
     
-    for(i in seq_along(ind_xrefs)) {
+    for(xref in ind_xrefs) {
       
-      temp <- activate_individual_record(temp, xref = ind_xrefs[i]) %>% 
+      temp <- activate_individual_record(temp, xref = xref) %>% 
         remove_individual()
       
     }
-    message("Records for individuals in the family have also been removed.\n",
-            "This has also removed associations with these individuals, but not any aliases.")
   }
   
   null_active_record(temp)  

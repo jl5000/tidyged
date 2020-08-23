@@ -6,21 +6,120 @@ add_family_event <- function(gedcom,
                              event_descriptor = character(),
                              husband_age_at_event = character(),
                              wife_age_at_event = character(),
+                             event_notes = character(),
                              event_date = date_value(),
                              event_cause = character(),
-                             event_place = PLACE_STRUCTURE(character()),
-                             event_address = ADDRESS_STRUCTURE(character())) {
+                             place_name = character(),
+                             place_hierarchy = character(),
+                             place_phonetic_variation = character(),
+                             phonetic_type = character(),
+                             place_romanized_variation = character(),
+                             romanized_type = character(),
+                             place_latitude = character(),
+                             place_longitude = character(),
+                             place_notes = character(),
+                             address_first_line = character(),
+                             city = character(),
+                             state = character(),
+                             postal_code = character(),
+                             country = character(),
+                             phone_number = character(),
+                             email = character(),
+                             fax = character(),
+                             web_page = character(),
+                             responsible_agency = character(),
+                             religious_affiliation = character(),
+                             cause_of_event = character(),
+                             restriction_notice = character()) {
   
   check_active_record_valid(gedcom, record_string_fam(), is_family)
   
   
 }
 
+#' Add a family event to a family record
+#' 
+#' @param gedcom 
+#' @param family_xref 
+#' @param event_subtype 
+#' @param event_descriptor 
+#' @param husband_age_at_event 
+#' @param wife_age_at_event 
+#' @param event_date 
+#' @param event_cause 
+#' @param event_place 
+#' @param event_address 
+#'
 #' @export
-#' @rdname add_family_event
-add_family_event_annulment <- purrr::partial(add_family_event, event_type = "ANUL")
+add_family_annulment <- function(gedcom,
+                                 family_xref = character(),
+                                 annulment_type = character(),
+                                 husband_age_at_event = character(),
+                                 wife_age_at_event = character(),
+                                 event_notes = character(),
+                                 event_date = date_value(),
+                                 event_cause = character(),
+                                 place_name = character(),
+                                 place_hierarchy = character(),
+                                 place_phonetic_variation = character(),
+                                 phonetic_type = character(),
+                                 place_romanized_variation = character(),
+                                 romanized_type = character(),
+                                 place_latitude = character(),
+                                 place_longitude = character(),
+                                 place_notes = character(),
+                                 address_first_line = character(),
+                                 city = character(),
+                                 state = character(),
+                                 postal_code = character(),
+                                 country = character(),
+                                 phone_number = character(),
+                                 email = character(),
+                                 fax = character(),
+                                 web_page = character(),
+                                 responsible_agency = character(),
+                                 religious_affiliation = character(),
+                                 cause_of_event = character(),
+                                 restriction_notice = character()) {
+  
+  add_family_event(gedcom = gedcom,
+                   family_xref = family_xref,
+                   event_type = "ANUL",
+                   event_subtype = annulment_type,
+                   event_descriptor = character(),
+                   husband_age_at_event = husband_age_at_event,
+                   wife_age_at_event = wife_age_at_event,
+                   event_notes = event_notes,
+                   event_date = event_date,
+                   event_cause = event_cause,
+                   place_name = place_name,
+                   place_hierarchy = place_hierarchy,
+                   place_phonetic_variation = place_phonetic_variation,
+                   phonetic_type = phonetic_type,
+                   place_romanized_variation = place_romanized_variation,
+                   romanized_type = romanized_type,
+                   place_latitude = place_latitude,
+                   place_longitude = place_longitude,
+                   place_notes = place_notes,
+                   address_first_line = address_first_line,
+                   city = city,
+                   state = state,
+                   postal_code = postal_code,
+                   country = country,
+                   phone_number = phone_number,
+                   email = email,
+                   fax = fax,
+                   web_page = web_page,
+                   responsible_agency = responsible_agency,
+                   religious_affiliation = religious_affiliation,
+                   cause_of_event = cause_of_event,
+                   restriction_notice = restriction_notice)
+  
+}
+
+
 #' @export
-#' @rdname add_family_event
+#' @rdname add_family_event_annulment
 add_family_event_census <- purrr::partial(add_family_event, event_type = "CENS")
 #' @export
 #' @rdname add_family_event

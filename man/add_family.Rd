@@ -65,16 +65,19 @@ xrefs to existing Note records.}
 An updated tidygedcom object including the Family record.
 }
 \description{
-Add a Family record to a tidygedcom object
+This function adds a record containing details of a family.
 }
 \details{
 This function will automatically assign a unique xref for this record. Most users
 will only need to use the husband, wife, children, and family_notes parameters (and of course gedcom).
 
 If you need to add further information about this family (e.g. events), use the
-add_family_event function.
+add_family_event_*() functions.
 
 The function will automatically split the family_notes onto separate lines if the
 character limit in the Gedcom standard is exceeded. It will also automatically add links
 to this family to the respective Individual records of the wife, husband, and children.
+
+This function will also automatically add appropriate references to this record in the
+respective individual records of the husband/wife/children.
 }

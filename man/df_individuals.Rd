@@ -28,6 +28,6 @@ df_notes(gedcom)
 A tibble summarising records where every row is a record.
 }
 \description{
-These functions gives a summary of key information of individuals/families/notes etc.
+These functions give a summary of key information of individuals/families/notes etc.
 in the GEDCOM file.
 }

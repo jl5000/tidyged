@@ -1,5 +1,38 @@
 
 
+#' Title
+#'
+#' @param gedcom 
+#' @param attribute_type 
+#' @param attribute_descriptor 
+#' @param fact_classification 
+#' @param event_date 
+#' @param age_at_event 
+#' @param event_notes 
+#' @param place_name 
+#' @param place_hierarchy 
+#' @param place_phonetic_variation 
+#' @param phonetic_type 
+#' @param place_romanized_variation 
+#' @param romanized_type 
+#' @param place_latitude 
+#' @param place_longitude 
+#' @param place_notes 
+#' @param address_first_line 
+#' @param city 
+#' @param state 
+#' @param postal_code 
+#' @param country 
+#' @param phone_number 
+#' @param email 
+#' @param fax 
+#' @param web_page 
+#' @param responsible_agency 
+#' @param religious_affiliation 
+#' @param cause_of_event 
+#' @param restriction_notice 
+#'
+#' @return
 add_individual_attribute <- function(gedcom,
                                      attribute_type,
                                      attribute_descriptor,
@@ -108,43 +141,71 @@ add_individual_attribute <- function(gedcom,
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_caste <- purrr::partial(add_individual_attribute, attribute_type = "CAST")
+rlang::fn_fmls(add_individual_attribute_caste) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "CAST")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_phys_descr <- purrr::partial(add_individual_attribute, attribute_type = "DSCR")
+rlang::fn_fmls(add_individual_attribute_phys_descr) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "DSCR")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_education <- purrr::partial(add_individual_attribute, attribute_type = "EDUC")
+rlang::fn_fmls(add_individual_attribute_education) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "EDUC")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_national_id <- purrr::partial(add_individual_attribute, attribute_type = "IDNO")
+rlang::fn_fmls(add_individual_attribute_national_id) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "IDNO")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_nationality <- purrr::partial(add_individual_attribute, attribute_type = "NATI")
+rlang::fn_fmls(add_individual_attribute_nationality) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "NATI")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_num_children <- purrr::partial(add_individual_attribute, attribute_type = "NCHI")
+rlang::fn_fmls(add_individual_attribute_num_children) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "NCHI")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_num_marriages <- purrr::partial(add_individual_attribute, attribute_type = "NMR")
+rlang::fn_fmls(add_individual_attribute_num_marriages) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "NMR")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_occupation <- purrr::partial(add_individual_attribute, attribute_type = "OCCU")
+rlang::fn_fmls(add_individual_attribute_occupation) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "OCCU")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_possessions <- purrr::partial(add_individual_attribute, attribute_type = "PROP")
+rlang::fn_fmls(add_individual_attribute_possessions) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "PROP")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_religion <- purrr::partial(add_individual_attribute, attribute_type = "RELI")
+rlang::fn_fmls(add_individual_attribute_religion) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "RELI")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_residence <- purrr::partial(add_individual_attribute, attribute_type = "RESI")
+rlang::fn_fmls(add_individual_attribute_residence) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "RESI")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_social_sec_num <- purrr::partial(add_individual_attribute, attribute_type = "SSN")
+rlang::fn_fmls(add_individual_attribute_social_sec_num) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "SSN")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_nobility_title <- purrr::partial(add_individual_attribute, attribute_type = "TITL")
+rlang::fn_fmls(add_individual_attribute_nobility_title) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "TITL")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_other <- purrr::partial(add_individual_attribute, attribute_type = "FACT")
+rlang::fn_fmls(add_individual_attribute_other) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
+                                                                     attribute_type = "FACT")
 

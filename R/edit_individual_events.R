@@ -1,7 +1,68 @@
 
+#' Add an event associated with an individual
+#'
+#' @param gedcom A tidygedcom object.
+#' @param event_type
+#' @param event_classification A descriptive word or phrase used to further classify this 
+#' event. This should be used whenever the 'other' event is used (but can also be used
+#' with others).
+#' @param event_date A date_value() object giving the date of the event.
+#' @param age_at_event A character string that indicates the age in years, months, and days 
+#' that the individual was at the time of the event. Any combination of these is permitted. 
+#' Any labels must come after their corresponding number, for example; "4y 8m 10d".
+#' The string can also be "CHILD", "INFANT", or "STILLBORN".
+#' @param event_notes A character vector of notes accompanying the event.
+#' These could be xrefs to existing Note records.
+#' @param place_name The jurisdictional name of the place where the event took place. 
+#' Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."
+#' @param place_hierarchy This shows the jurisdictional entities that are named in a sequence 
+#' from the lowest to the highest jurisdiction. The jurisdictions are separated by commas, 
+#' and any jurisdiction's name that is missing is still accounted for by a comma.
+#' @param place_phonetic_variation A character vector of phonetic variations of the place name.
+#' @param phonetic_type A character vector giving the method used in transforming the text to 
+#' the corresponding phonetic variation. If this argument is used, it must be the same size
+#' as the place_phonetic_variation argument.
+#' @param place_romanized_variation A character vector of romanized variations of the place name. 
+#' @param romanized_type A character vector giving the method used in transforming the text to 
+#' the corresponding romanized variation. If this argument is used, it must be the same size
+#' as the place_romanized_variation argument.
+#' @param place_latitude The value specifying the latitudinal coordinate of the event place. 
+#' The latitude coordinate is the direction North or South from the equator in degrees and 
+#' fraction of degrees carried out to give the desired accuracy. 
+#' For example: 18 degrees, 9 minutes, and 3.4 seconds North would be formatted as "N18.150944"
+#' @param place_longitude The value specifying the longitudinal coordinate of the event place. 
+#' The longitude coordinate is Degrees and fraction of degrees east or west of the zero or 
+#' base meridian coordinate. For example:
+#' 168 degrees, 9 minutes, and 3.4 seconds East would be formatted as "E168.150944". 
+#' @param place_notes A character vector of notes accompanying the event place.
+#' These could be xrefs to existing Note records.
+#' @param address_first_line The first line of the event address.
+#' @param city The city of the event address.
+#' @param state The state/county of the event address.
+#' @param postal_code The postal code of the event address.
+#' @param country The country of the event address.
+#' @param phone_number A character vector containing up to three phone numbers of the event address.
+#' @param email A character vector containing up to three email addresses of the event address.
+#' @param fax A character vector containing up to three fax numbers of the event address.
+#' @param web_page A character vector containing up to three web pages of the event address.
+#' @param responsible_agency The organisation, institution, corporation, person, or other 
+#' entity that has responsibility for the event data.
+#' @param religious_affiliation A name of the religion with which this event was affiliated.
+#' @param cause_of_event Used in special cases to record the reasons which precipitated an event. 
+#' Normally this will be used for a death event to show cause of death, such as might be listed 
+#' on a death certificate.
+#' @param restriction_notice Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more 
+#' details.
+#' @param family_xref The xref of the family associated of which this individual is a child.
+#' Only used for birth, christening, or adoption events.
+#' @param adopting_parent A code which shows which parent in the associated family adopted this 
+#' individual. Either "HUSB", "WIFE", or "BOTH".
+#'
+#' @return An updated tidygedcom object with an expanded Individual record including
+#' this event.
 add_individual_event <- function(gedcom,
                                  event_type,
-                                 event_subtype = character(),
+                                 event_classification = character(),
                                  event_date = date_value(),
                                  age_at_event = character(),
                                  event_notes = character(),
@@ -77,7 +138,7 @@ add_individual_event <- function(gedcom,
   even_notes <- purrr::map(event_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
-  details1 <- EVENT_DETAIL(event_or_fact_classification = event_subtype,
+  details1 <- EVENT_DETAIL(event_or_fact_classification = event_classification,
                            date = event_date,
                            place = event_place,
                            address = event_address,
@@ -104,132 +165,120 @@ add_individual_event <- function(gedcom,
   
 }
 
-#' Add an event associated with an individual
-#'
-#' @param gedcom A tidygedcom object.
-#' @param event_classification A descriptive word or phrase used to further classify this 
-#' event. This should be used whenever the 'other' event is used (but can also be used
-#' with others).
-#' @param event_date A date_value() object giving the date of the event.
-#' @param age_at_event A character string that indicates the age in years, months, and days 
-#' that the individual was at the time of the event. Any combination of these is permitted. 
-#' Any labels must come after their corresponding number, for example; "4y 8m 10d".
-#' The string can also be "CHILD", "INFANT", or "STILLBORN".
-#' @param event_notes A character vector of notes accompanying the event.
-#' These could be xrefs to existing Note records.
-#' @param place_name The jurisdictional name of the place where the event took place. 
-#' Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."
-#' @param place_hierarchy This shows the jurisdictional entities that are named in a sequence 
-#' from the lowest to the highest jurisdiction. The jurisdictions are separated by commas, 
-#' and any jurisdiction's name that is missing is still accounted for by a comma.
-#' @param place_phonetic_variation A character vector of phonetic variations of the place name.
-#' @param phonetic_type A character vector giving the method used in transforming the text to 
-#' the corresponding phonetic variation. If this argument is used, it must be the same size
-#' as the place_phonetic_variation argument.
-#' @param place_romanized_variation A character vector of romanized variations of the place name. 
-#' @param romanized_type A character vector giving the method used in transforming the text to 
-#' the corresponding romanized variation. If this argument is used, it must be the same size
-#' as the place_romanized_variation argument.
-#' @param place_latitude The value specifying the latitudinal coordinate of the event place. 
-#' The latitude coordinate is the direction North or South from the equator in degrees and 
-#' fraction of degrees carried out to give the desired accuracy. 
-#' For example: 18 degrees, 9 minutes, and 3.4 seconds North would be formatted as "N18.150944"
-#' @param place_longitude The value specifying the longitudinal coordinate of the event place. 
-#' The longitude coordinate is Degrees and fraction of degrees east or west of the zero or 
-#' base meridian coordinate. For example:
-#' 168 degrees, 9 minutes, and 3.4 seconds East would be formatted as "E168.150944". 
-#' @param place_notes A character vector of notes accompanying the event place.
-#' These could be xrefs to existing Note records.
-#' @param address_first_line The first line of the event address.
-#' @param city The city of the event address.
-#' @param state The state/county of the event address.
-#' @param postal_code The postal code of the event address.
-#' @param country The country of the event address.
-#' @param phone_number A character vector containing up to three phone numbers of the event address.
-#' @param email A character vector containing up to three email addresses of the event address.
-#' @param fax A character vector containing up to three fax numbers of the event address.
-#' @param web_page A character vector containing up to three web pages of the event address.
-#' @param responsible_agency The organisation, institution, corporation, person, or other 
-#' entity that has responsibility for the event data.
-#' @param religious_affiliation A name of the religion with which this event was affiliated.
-#' @param cause_of_event Used in special cases to record the reasons which precipitated an event. 
-#' Normally this will be used for a death event to show cause of death, such as might be listed 
-#' on a death certificate.
-#' @param restriction_notice Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more 
-#' details.
-#' @param family_xref The xref of the family associated of which this individual is a child.
-#' Only used for birth, christening, or adoption events.
-#' @param adopting_parent A code which shows which parent in the associated family adopted this 
-#' individual. Either "HUSB", "WIFE", or "BOTH".
-#'
-#' @return An updated tidygedcom object with an expanded Individual record including
-#' this event.
+
 #' @export
+#' @rdname add_individual_event
 add_individual_event_birth <- purrr::partial(add_individual_event, event_type = "BIRT")
+rlang::fn_fmls(add_individual_event_birth) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                  event_type = "BIRT")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_christening <- purrr::partial(add_individual_event, event_type = "CHR")
+rlang::fn_fmls(add_individual_event_christening) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "CHR")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_death <- purrr::partial(add_individual_event, event_type = "DEAT")
+rlang::fn_fmls(add_individual_event_death) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "DEAT")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_burial <- purrr::partial(add_individual_event, event_type = "BURI")
+rlang::fn_fmls(add_individual_event_burial) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "BURI")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_cremation <- purrr::partial(add_individual_event, event_type = "CREM")
+rlang::fn_fmls(add_individual_event_cremation) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "CREM")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_adoption <- purrr::partial(add_individual_event, event_type = "ADOP")
+rlang::fn_fmls(add_individual_event_adoption) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "ADOP")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_baptism <- purrr::partial(add_individual_event, event_type = "BAPM")
+rlang::fn_fmls(add_individual_event_baptism) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "BAPM")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_bar_mitzvah <- purrr::partial(add_individual_event, event_type = "BARM")
+rlang::fn_fmls(add_individual_event_bar_mitzvah) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "BARM")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_bas_mitzvah <- purrr::partial(add_individual_event, event_type = "BASM")
+rlang::fn_fmls(add_individual_event_bas_mitzvah) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "BASM")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_blessing <- purrr::partial(add_individual_event, event_type = "BLES")
+rlang::fn_fmls(add_individual_event_blessing) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "BLES")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_adult_christening <- purrr::partial(add_individual_event, event_type = "CHRA")
+rlang::fn_fmls(add_individual_event_adult_christening) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "CHRA")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_confirmation <- purrr::partial(add_individual_event, event_type = "CONF")
+rlang::fn_fmls(add_individual_event_confirmation) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "CONF")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_first_communion <- purrr::partial(add_individual_event, event_type = "FCOM")
+rlang::fn_fmls(add_individual_event_first_communion) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "FCOM")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_ordination <- purrr::partial(add_individual_event, event_type = "ORDN")
+rlang::fn_fmls(add_individual_event_ordination) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "ORDN")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_naturalization <- purrr::partial(add_individual_event, event_type = "NATU")
+rlang::fn_fmls(add_individual_event_naturalization) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "NATU")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_emigration <- purrr::partial(add_individual_event, event_type = "EMIG")
+rlang::fn_fmls(add_individual_event_emigration) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "EMIG")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_immigration <- purrr::partial(add_individual_event, event_type = "IMMI")
+rlang::fn_fmls(add_individual_event_immigration) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "IMMI")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_census <- purrr::partial(add_individual_event, event_type = "CENS")
+rlang::fn_fmls(add_individual_event_census) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "CENS")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_probate <- purrr::partial(add_individual_event, event_type = "PROB")
+rlang::fn_fmls(add_individual_event_probate) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "PROB")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_will <- purrr::partial(add_individual_event, event_type = "WILL")
+rlang::fn_fmls(add_individual_event_will) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "WILL")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_graduation <- purrr::partial(add_individual_event, event_type = "GRAD")
+rlang::fn_fmls(add_individual_event_graduation) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "GRAD")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_retirement <- purrr::partial(add_individual_event, event_type = "RETI")
+rlang::fn_fmls(add_individual_event_retirement) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "RETI")
 #' @export
-#' @rdname add_individual_event_birth
+#' @rdname add_individual_event
 add_individual_event_other <- purrr::partial(add_individual_event, event_type = "EVEN")
+rlang::fn_fmls(add_individual_event_other) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
+                                                                 event_type = "EVEN")
 

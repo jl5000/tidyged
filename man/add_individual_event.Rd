@@ -32,6 +32,7 @@ add_individual_event(
   event_type,
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -54,7 +55,6 @@ add_individual_event(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -65,6 +65,7 @@ add_individual_event_birth(
   event_type = "BIRT",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -87,7 +88,6 @@ add_individual_event_birth(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -98,6 +98,7 @@ add_individual_event_christening(
   event_type = "CHR",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -120,7 +121,6 @@ add_individual_event_christening(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -131,6 +131,7 @@ add_individual_event_death(
   event_type = "DEAT",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -153,7 +154,6 @@ add_individual_event_death(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -164,6 +164,7 @@ add_individual_event_burial(
   event_type = "BURI",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -186,7 +187,6 @@ add_individual_event_burial(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -197,6 +197,7 @@ add_individual_event_cremation(
   event_type = "CREM",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -219,7 +220,6 @@ add_individual_event_cremation(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -230,6 +230,7 @@ add_individual_event_adoption(
   event_type = "ADOP",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -252,7 +253,6 @@ add_individual_event_adoption(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -263,6 +263,7 @@ add_individual_event_baptism(
   event_type = "BAPM",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -285,7 +286,6 @@ add_individual_event_baptism(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -296,6 +296,7 @@ add_individual_event_bar_mitzvah(
   event_type = "BARM",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -318,7 +319,6 @@ add_individual_event_bar_mitzvah(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -329,6 +329,7 @@ add_individual_event_bas_mitzvah(
   event_type = "BASM",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -351,7 +352,6 @@ add_individual_event_bas_mitzvah(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -362,6 +362,7 @@ add_individual_event_blessing(
   event_type = "BLES",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -384,7 +385,6 @@ add_individual_event_blessing(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -395,6 +395,7 @@ add_individual_event_adult_christening(
   event_type = "CHRA",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -417,7 +418,6 @@ add_individual_event_adult_christening(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -428,6 +428,7 @@ add_individual_event_confirmation(
   event_type = "CONF",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -450,7 +451,6 @@ add_individual_event_confirmation(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -461,6 +461,7 @@ add_individual_event_first_communion(
   event_type = "FCOM",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -483,7 +484,6 @@ add_individual_event_first_communion(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -494,6 +494,7 @@ add_individual_event_ordination(
   event_type = "ORDN",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -516,7 +517,6 @@ add_individual_event_ordination(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -527,6 +527,7 @@ add_individual_event_naturalization(
   event_type = "NATU",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -549,7 +550,6 @@ add_individual_event_naturalization(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -560,6 +560,7 @@ add_individual_event_emigration(
   event_type = "EMIG",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -582,7 +583,6 @@ add_individual_event_emigration(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -593,6 +593,7 @@ add_individual_event_immigration(
   event_type = "IMMI",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -615,7 +616,6 @@ add_individual_event_immigration(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -626,6 +626,7 @@ add_individual_event_census(
   event_type = "CENS",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -648,7 +649,6 @@ add_individual_event_census(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -659,6 +659,7 @@ add_individual_event_probate(
   event_type = "PROB",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -681,7 +682,6 @@ add_individual_event_probate(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -692,6 +692,7 @@ add_individual_event_will(
   event_type = "WILL",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -714,7 +715,6 @@ add_individual_event_will(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -725,6 +725,7 @@ add_individual_event_graduation(
   event_type = "GRAD",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -747,7 +748,6 @@ add_individual_event_graduation(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -758,6 +758,7 @@ add_individual_event_retirement(
   event_type = "RETI",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -780,7 +781,6 @@ add_individual_event_retirement(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -791,6 +791,7 @@ add_individual_event_other(
   event_type = "EVEN",
   event_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -813,7 +814,6 @@ add_individual_event_other(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
@@ -822,11 +822,18 @@ add_individual_event_other(
 \arguments{
 \item{gedcom}{A tidygedcom object.}
 
+\item{event_type}{The type of event. This should be automatically populated with the appropriate
+event function.}
+
 \item{event_classification}{A descriptive word or phrase used to further classify this
 event. This should be used whenever the 'other' event is used (but can also be used
 with others).}
 
 \item{event_date}{A date_value() object giving the date of the event.}
+
+\item{event_cause}{Used in special cases to record the reasons which precipitated an event.
+Normally this will be used for a death event to show cause of death, such as might be listed
+on a death certificate.}
 
 \item{age_at_event}{A character string that indicates the age in years, months, and days
 that the individual was at the time of the event. Any combination of these is permitted.
@@ -890,10 +897,6 @@ These could be xrefs to existing Note records.}
 entity that has responsibility for the event data.}
 
 \item{religious_affiliation}{A name of the religion with which this event was affiliated.}
-
-\item{cause_of_event}{Used in special cases to record the reasons which precipitated an event.
-Normally this will be used for a death event to show cause of death, such as might be listed
-on a death certificate.}
 
 \item{restriction_notice}{Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more
 details.}

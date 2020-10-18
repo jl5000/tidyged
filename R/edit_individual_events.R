@@ -2,17 +2,23 @@
 #' Add an event associated with an individual
 #'
 #' @param gedcom A tidygedcom object.
-#' @param event_type
-#' @param event_classification A descriptive word or phrase used to further classify this 
-#' event. This should be used whenever the 'other' event is used (but can also be used
-#' with others).
-#' @param event_date A date_value() object giving the date of the event.
+#' 
+#' @param event_type The type of event. This should be automatically populated with the appropriate
+#' event function.
+#' @param family_xref The xref of the family associated of which this individual is a child.
+#' Only used for birth, christening, or adoption events.
+#' @param adopting_parent A code which shows which parent in the associated family adopted this 
+#' individual. Either "HUSB", "WIFE", or "BOTH".
+#' 
 #' @param age_at_event A character string that indicates the age in years, months, and days 
 #' that the individual was at the time of the event. Any combination of these is permitted. 
 #' Any labels must come after their corresponding number, for example; "4y 8m 10d".
 #' The string can also be "CHILD", "INFANT", or "STILLBORN".
-#' @param event_notes A character vector of notes accompanying the event.
-#' These could be xrefs to existing Note records.
+#' 
+#' @param event_classification A descriptive word or phrase used to further classify this 
+#' event. This should be used whenever the 'other' event is used (but can also be used
+#' with others).
+#' @param event_date A date_value() object giving the date of the event.
 #' @param place_name The jurisdictional name of the place where the event took place. 
 #' Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."
 #' @param place_hierarchy This shows the jurisdictional entities that are named in a sequence 
@@ -48,15 +54,13 @@
 #' @param responsible_agency The organisation, institution, corporation, person, or other 
 #' entity that has responsibility for the event data.
 #' @param religious_affiliation A name of the religion with which this event was affiliated.
-#' @param cause_of_event Used in special cases to record the reasons which precipitated an event. 
+#' @param event_cause Used in special cases to record the reasons which precipitated an event. 
 #' Normally this will be used for a death event to show cause of death, such as might be listed 
 #' on a death certificate.
 #' @param restriction_notice Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more 
 #' details.
-#' @param family_xref The xref of the family associated of which this individual is a child.
-#' Only used for birth, christening, or adoption events.
-#' @param adopting_parent A code which shows which parent in the associated family adopted this 
-#' individual. Either "HUSB", "WIFE", or "BOTH".
+#' @param event_notes A character vector of notes accompanying the event.
+#' These could be xrefs to existing Note records.
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this event.
@@ -64,6 +68,7 @@ add_individual_event <- function(gedcom,
                                  event_type,
                                  event_classification = character(),
                                  event_date = date_value(),
+                                 event_cause = character(),
                                  age_at_event = character(),
                                  event_notes = character(),
                                  place_name = character(),
@@ -86,7 +91,6 @@ add_individual_event <- function(gedcom,
                                  web_page = character(),
                                  responsible_agency = character(),
                                  religious_affiliation = character(),
-                                 cause_of_event = character(),
                                  restriction_notice = character(),
                                  family_xref = character(),
                                  adopting_parent = character()) {
@@ -144,7 +148,7 @@ add_individual_event <- function(gedcom,
                            address = event_address,
                            responsible_agency = responsible_agency,
                            religious_affiliation = religious_affiliation,
-                           cause_of_event = cause_of_event,
+                           cause_of_event = event_cause,
                            restriction_notice = restriction_notice,
                            notes = even_notes)
   

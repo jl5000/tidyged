@@ -1,43 +1,24 @@
 
 
-#' Title
+#' Add an attribute associated with an individual
 #'
-#' @param gedcom 
-#' @param attribute_type 
-#' @param attribute_descriptor 
-#' @param fact_classification 
-#' @param event_date 
-#' @param age_at_event 
-#' @param event_notes 
-#' @param place_name 
-#' @param place_hierarchy 
-#' @param place_phonetic_variation 
-#' @param phonetic_type 
-#' @param place_romanized_variation 
-#' @param romanized_type 
-#' @param place_latitude 
-#' @param place_longitude 
-#' @param place_notes 
-#' @param address_first_line 
-#' @param city 
-#' @param state 
-#' @param postal_code 
-#' @param country 
-#' @param phone_number 
-#' @param email 
-#' @param fax 
-#' @param web_page 
-#' @param responsible_agency 
-#' @param religious_affiliation 
-#' @param cause_of_event 
-#' @param restriction_notice 
+#' @inheritParams add_individual_event
+#' 
+#' @param attribute_type The type of attribute. This should be automatically populated with the appropriate
+#' attribute function.
+#' @param attribute_descriptor The value of this attribute.
+#' @param fact_classification A descriptive word or phrase used to further classify this 
+#' attribute. This should be used whenever the 'other' attribute is used (but can also be used
+#' with others).
 #'
-#' @return
+#' @return An updated tidygedcom object with an expanded Individual record including
+#' this attribute.
 add_individual_attribute <- function(gedcom,
                                      attribute_type,
                                      attribute_descriptor,
                                      fact_classification = character(),
                                      event_date = date_value(),
+                                     event_cause = character(),
                                      age_at_event = character(),
                                      event_notes = character(),
                                      place_name = character(),
@@ -60,7 +41,6 @@ add_individual_attribute <- function(gedcom,
                                      web_page = character(),
                                      responsible_agency = character(),
                                      religious_affiliation = character(),
-                                     cause_of_event = character(),
                                      restriction_notice = character()) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
@@ -116,7 +96,7 @@ add_individual_attribute <- function(gedcom,
                            address = event_address,
                            responsible_agency = responsible_agency,
                            religious_affiliation = religious_affiliation,
-                           cause_of_event = cause_of_event,
+                           cause_of_event = event_cause,
                            restriction_notice = restriction_notice,
                            notes = even_notes)
   

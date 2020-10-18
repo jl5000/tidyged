@@ -16,7 +16,7 @@
 \alias{add_individual_attribute_social_sec_num}
 \alias{add_individual_attribute_nobility_title}
 \alias{add_individual_attribute_other}
-\title{Title}
+\title{Add an attribute associated with an individual}
 \usage{
 add_individual_attribute(
   gedcom,
@@ -24,6 +24,7 @@ add_individual_attribute(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -46,7 +47,6 @@ add_individual_attribute(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -56,6 +56,7 @@ add_individual_attribute_caste(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -78,7 +79,6 @@ add_individual_attribute_caste(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -88,6 +88,7 @@ add_individual_attribute_phys_descr(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -110,7 +111,6 @@ add_individual_attribute_phys_descr(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -120,6 +120,7 @@ add_individual_attribute_education(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -142,7 +143,6 @@ add_individual_attribute_education(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -152,6 +152,7 @@ add_individual_attribute_national_id(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -174,7 +175,6 @@ add_individual_attribute_national_id(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -184,6 +184,7 @@ add_individual_attribute_nationality(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -206,7 +207,6 @@ add_individual_attribute_nationality(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -216,6 +216,7 @@ add_individual_attribute_num_children(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -238,7 +239,6 @@ add_individual_attribute_num_children(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -248,6 +248,7 @@ add_individual_attribute_num_marriages(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -270,7 +271,6 @@ add_individual_attribute_num_marriages(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -280,6 +280,7 @@ add_individual_attribute_occupation(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -302,7 +303,6 @@ add_individual_attribute_occupation(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -312,6 +312,7 @@ add_individual_attribute_possessions(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -334,7 +335,6 @@ add_individual_attribute_possessions(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -344,6 +344,7 @@ add_individual_attribute_religion(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -366,7 +367,6 @@ add_individual_attribute_religion(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -376,6 +376,7 @@ add_individual_attribute_residence(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -398,7 +399,6 @@ add_individual_attribute_residence(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -408,6 +408,7 @@ add_individual_attribute_social_sec_num(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -430,7 +431,6 @@ add_individual_attribute_social_sec_num(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -440,6 +440,7 @@ add_individual_attribute_nobility_title(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -462,7 +463,6 @@ add_individual_attribute_nobility_title(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
@@ -472,6 +472,7 @@ add_individual_attribute_other(
   attribute_descriptor,
   fact_classification = character(),
   event_date = date_value(),
+  event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
@@ -494,72 +495,97 @@ add_individual_attribute_other(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 }
 \arguments{
-\item{gedcom}{}
+\item{gedcom}{A tidygedcom object.}
 
-\item{attribute_type}{}
+\item{attribute_type}{The type of attribute. This should be automatically populated with the appropriate
+attribute function.}
 
-\item{attribute_descriptor}{}
+\item{attribute_descriptor}{The value of this attribute.}
 
-\item{fact_classification}{}
+\item{fact_classification}{A descriptive word or phrase used to further classify this
+attribute. This should be used whenever the 'other' attribute is used (but can also be used
+with others).}
 
-\item{event_date}{}
+\item{event_date}{A date_value() object giving the date of the event.}
 
-\item{age_at_event}{}
+\item{event_cause}{Used in special cases to record the reasons which precipitated an event.
+Normally this will be used for a death event to show cause of death, such as might be listed
+on a death certificate.}
 
-\item{event_notes}{}
+\item{age_at_event}{A character string that indicates the age in years, months, and days
+that the individual was at the time of the event. Any combination of these is permitted.
+Any labels must come after their corresponding number, for example; "4y 8m 10d".
+The string can also be "CHILD", "INFANT", or "STILLBORN".}
 
-\item{place_name}{}
+\item{event_notes}{A character vector of notes accompanying the event.
+These could be xrefs to existing Note records.}
 
-\item{place_hierarchy}{}
+\item{place_name}{The jurisdictional name of the place where the event took place.
+Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."}
 
-\item{place_phonetic_variation}{}
+\item{place_hierarchy}{This shows the jurisdictional entities that are named in a sequence
+from the lowest to the highest jurisdiction. The jurisdictions are separated by commas,
+and any jurisdiction's name that is missing is still accounted for by a comma.}
 
-\item{phonetic_type}{}
+\item{place_phonetic_variation}{A character vector of phonetic variations of the place name.}
 
-\item{place_romanized_variation}{}
+\item{phonetic_type}{A character vector giving the method used in transforming the text to
+the corresponding phonetic variation. If this argument is used, it must be the same size
+as the place_phonetic_variation argument.}
 
-\item{romanized_type}{}
+\item{place_romanized_variation}{A character vector of romanized variations of the place name.}
 
-\item{place_latitude}{}
+\item{romanized_type}{A character vector giving the method used in transforming the text to
+the corresponding romanized variation. If this argument is used, it must be the same size
+as the place_romanized_variation argument.}
 
-\item{place_longitude}{}
+\item{place_latitude}{The value specifying the latitudinal coordinate of the event place.
+The latitude coordinate is the direction North or South from the equator in degrees and
+fraction of degrees carried out to give the desired accuracy.
+For example: 18 degrees, 9 minutes, and 3.4 seconds North would be formatted as "N18.150944"}
 
-\item{place_notes}{}
+\item{place_longitude}{The value specifying the longitudinal coordinate of the event place.
+The longitude coordinate is Degrees and fraction of degrees east or west of the zero or
+base meridian coordinate. For example:
+168 degrees, 9 minutes, and 3.4 seconds East would be formatted as "E168.150944".}
 
-\item{address_first_line}{}
+\item{place_notes}{A character vector of notes accompanying the event place.
+These could be xrefs to existing Note records.}
 
-\item{city}{}
+\item{address_first_line}{The first line of the event address.}
 
-\item{state}{}
+\item{city}{The city of the event address.}
 
-\item{postal_code}{}
+\item{state}{The state/county of the event address.}
 
-\item{country}{}
+\item{postal_code}{The postal code of the event address.}
 
-\item{phone_number}{}
+\item{country}{The country of the event address.}
 
-\item{email}{}
+\item{phone_number}{A character vector containing up to three phone numbers of the event address.}
 
-\item{fax}{}
+\item{email}{A character vector containing up to three email addresses of the event address.}
 
-\item{web_page}{}
+\item{fax}{A character vector containing up to three fax numbers of the event address.}
 
-\item{responsible_agency}{}
+\item{web_page}{A character vector containing up to three web pages of the event address.}
 
-\item{religious_affiliation}{}
+\item{responsible_agency}{The organisation, institution, corporation, person, or other
+entity that has responsibility for the event data.}
 
-\item{cause_of_event}{}
+\item{religious_affiliation}{A name of the religion with which this event was affiliated.}
 
-\item{restriction_notice}{}
+\item{restriction_notice}{Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more
+details.}
 }
 \value{
-
+An updated tidygedcom object with an expanded Individual record including
+this attribute.
 }
 \description{
-Title
+Add an attribute associated with an individual
 }

@@ -18,10 +18,9 @@
 \usage{
 add_family_event(
   gedcom,
-  family_xref = character(),
   event_type = character(),
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -47,16 +46,14 @@ add_family_event(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_annulment(
   gedcom,
-  family_xref = character(),
   event_type = "ANUL",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -82,16 +79,14 @@ add_family_event_annulment(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_census(
   gedcom,
-  family_xref = character(),
   event_type = "CENS",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -117,16 +112,14 @@ add_family_event_census(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_divorce(
   gedcom,
-  family_xref = character(),
   event_type = "DIV",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -152,16 +145,14 @@ add_family_event_divorce(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_divorce_filed(
   gedcom,
-  family_xref = character(),
   event_type = "DIVF",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -187,16 +178,14 @@ add_family_event_divorce_filed(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_engagement(
   gedcom,
-  family_xref = character(),
   event_type = "ENGA",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -222,16 +211,14 @@ add_family_event_engagement(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_marriage_banns(
   gedcom,
-  family_xref = character(),
   event_type = "MARB",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -257,16 +244,14 @@ add_family_event_marriage_banns(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_marriage_contract(
   gedcom,
-  family_xref = character(),
   event_type = "MARC",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -292,16 +277,14 @@ add_family_event_marriage_contract(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_marriage(
   gedcom,
-  family_xref = character(),
   event_type = "MARR",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -327,16 +310,14 @@ add_family_event_marriage(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_marriage_license(
   gedcom,
-  family_xref = character(),
   event_type = "MARL",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -362,16 +343,14 @@ add_family_event_marriage_license(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_marriage_settlement(
   gedcom,
-  family_xref = character(),
   event_type = "MARS",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -397,16 +376,14 @@ add_family_event_marriage_settlement(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_residence(
   gedcom,
-  family_xref = character(),
   event_type = "RESI",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -432,16 +409,14 @@ add_family_event_residence(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 
 add_family_event_other(
   gedcom,
-  family_xref = character(),
   event_type = "EVEN",
-  event_subtype = character(),
   event_descriptor = character(),
+  event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
   event_notes = character(),
@@ -467,77 +442,99 @@ add_family_event_other(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  cause_of_event = character(),
   restriction_notice = character()
 )
 }
 \arguments{
-\item{gedcom}{}
+\item{gedcom}{A tidygedcom object.}
 
-\item{family_xref}{}
+\item{event_type}{The type of event. This should be automatically populated with the appropriate
+event function.}
 
-\item{event_type}{}
+\item{event_descriptor}{A short description of the event.}
 
-\item{event_subtype}{}
+\item{event_classification}{A descriptive word or phrase used to further classify this
+event. This should be used whenever the 'other' event is used (but can also be used
+with others).}
 
-\item{event_descriptor}{}
+\item{husband_age_at_event}{A character string that indicates the age in years, months, and days
+that the husband was at the time of the event. Any combination of these is permitted.
+Any labels must come after their corresponding number, for example; "4y 8m 10d".}
 
-\item{husband_age_at_event}{}
+\item{wife_age_at_event}{A character string that indicates the age in years, months, and days
+that the wife was at the time of the event. Any combination of these is permitted.
+Any labels must come after their corresponding number, for example; "4y 8m 10d".}
 
-\item{wife_age_at_event}{}
+\item{event_notes}{A character vector of notes accompanying the event.
+These could be xrefs to existing Note records.}
 
-\item{event_notes}{}
+\item{event_date}{A date_value() object giving the date of the event.}
 
-\item{event_date}{}
+\item{event_cause}{Used in special cases to record the reasons which precipitated an event.
+Normally this will be used for a death event to show cause of death, such as might be listed
+on a death certificate.}
 
-\item{event_cause}{}
+\item{place_name}{The jurisdictional name of the place where the event took place.
+Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."}
 
-\item{place_name}{}
+\item{place_hierarchy}{This shows the jurisdictional entities that are named in a sequence
+from the lowest to the highest jurisdiction. The jurisdictions are separated by commas,
+and any jurisdiction's name that is missing is still accounted for by a comma.}
 
-\item{place_hierarchy}{}
+\item{place_phonetic_variation}{A character vector of phonetic variations of the place name.}
 
-\item{place_phonetic_variation}{}
+\item{phonetic_type}{A character vector giving the method used in transforming the text to
+the corresponding phonetic variation. If this argument is used, it must be the same size
+as the place_phonetic_variation argument.}
 
-\item{phonetic_type}{}
+\item{place_romanized_variation}{A character vector of romanized variations of the place name.}
 
-\item{place_romanized_variation}{}
+\item{romanized_type}{A character vector giving the method used in transforming the text to
+the corresponding romanized variation. If this argument is used, it must be the same size
+as the place_romanized_variation argument.}
 
-\item{romanized_type}{}
+\item{place_latitude}{The value specifying the latitudinal coordinate of the event place.
+The latitude coordinate is the direction North or South from the equator in degrees and
+fraction of degrees carried out to give the desired accuracy.
+For example: 18 degrees, 9 minutes, and 3.4 seconds North would be formatted as "N18.150944"}
 
-\item{place_latitude}{}
+\item{place_longitude}{The value specifying the longitudinal coordinate of the event place.
+The longitude coordinate is Degrees and fraction of degrees east or west of the zero or
+base meridian coordinate. For example:
+168 degrees, 9 minutes, and 3.4 seconds East would be formatted as "E168.150944".}
 
-\item{place_longitude}{}
+\item{place_notes}{A character vector of notes accompanying the event place.
+These could be xrefs to existing Note records.}
 
-\item{place_notes}{}
+\item{address_first_line}{The first line of the event address.}
 
-\item{address_first_line}{}
+\item{city}{The city of the event address.}
 
-\item{city}{}
+\item{state}{The state/county of the event address.}
 
-\item{state}{}
+\item{postal_code}{The postal code of the event address.}
 
-\item{postal_code}{}
+\item{country}{The country of the event address.}
 
-\item{country}{}
+\item{phone_number}{A character vector containing up to three phone numbers of the event address.}
 
-\item{phone_number}{}
+\item{email}{A character vector containing up to three email addresses of the event address.}
 
-\item{email}{}
+\item{fax}{A character vector containing up to three fax numbers of the event address.}
 
-\item{fax}{}
+\item{web_page}{A character vector containing up to three web pages of the event address.}
 
-\item{web_page}{}
+\item{responsible_agency}{The organisation, institution, corporation, person, or other
+entity that has responsibility for the event data.}
 
-\item{responsible_agency}{}
+\item{religious_affiliation}{A name of the religion with which this event was affiliated.}
 
-\item{religious_affiliation}{}
-
-\item{cause_of_event}{}
-
-\item{restriction_notice}{}
+\item{restriction_notice}{Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more
+details.}
 }
 \value{
-
+An updated tidygedcom object with an expanded Family record including
+this event.
 }
 \description{
 Add a family event to a family record

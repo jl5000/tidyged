@@ -2,45 +2,22 @@
 
 #' Add a family event to a family record
 #'
-#' @param gedcom 
-#' @param family_xref 
-#' @param event_type 
-#' @param event_subtype 
-#' @param event_descriptor 
-#' @param husband_age_at_event 
-#' @param wife_age_at_event 
-#' @param event_notes 
-#' @param event_date 
-#' @param event_cause 
-#' @param place_name 
-#' @param place_hierarchy 
-#' @param place_phonetic_variation 
-#' @param phonetic_type 
-#' @param place_romanized_variation 
-#' @param romanized_type 
-#' @param place_latitude 
-#' @param place_longitude 
-#' @param place_notes 
-#' @param address_first_line 
-#' @param city 
-#' @param state 
-#' @param postal_code 
-#' @param country 
-#' @param phone_number 
-#' @param email 
-#' @param fax 
-#' @param web_page 
-#' @param responsible_agency 
-#' @param religious_affiliation 
-#' @param cause_of_event 
-#' @param restriction_notice 
-#'
-#' @return
+#' @inheritParams add_individual_event
+#' @param event_descriptor A short description of the event.
+#' 
+#' @param husband_age_at_event A character string that indicates the age in years, months, and days 
+#' that the husband was at the time of the event. Any combination of these is permitted. 
+#' Any labels must come after their corresponding number, for example; "4y 8m 10d".
+#' @param wife_age_at_event A character string that indicates the age in years, months, and days 
+#' that the wife was at the time of the event. Any combination of these is permitted. 
+#' Any labels must come after their corresponding number, for example; "4y 8m 10d".
+#' 
+#' @return An updated tidygedcom object with an expanded Family record including
+#' this event.
 add_family_event <- function(gedcom,
-                             family_xref = character(),
                              event_type = character(),
-                             event_subtype = character(),
                              event_descriptor = character(),
+                             event_classification = character(),
                              husband_age_at_event = character(),
                              wife_age_at_event = character(),
                              event_notes = character(),
@@ -66,7 +43,6 @@ add_family_event <- function(gedcom,
                              web_page = character(),
                              responsible_agency = character(),
                              religious_affiliation = character(),
-                             cause_of_event = character(),
                              restriction_notice = character()) {
   
   check_active_record_valid(gedcom, record_string_fam(), is_family)

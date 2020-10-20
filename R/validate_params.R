@@ -183,7 +183,6 @@ validate_date_period_covered <- function(input, max_dim) {
 validate_date_value <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 35)
   validate_input_pattern(input, date_value_pattern())
-  #TODO: ensure year 1 is before year 2 etc.
 }
 validate_descriptive_title <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)

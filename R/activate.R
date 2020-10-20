@@ -9,9 +9,8 @@
 #'
 #' @return The same tidygedcom object with an "active_record" attribute set to the xref of the record
 set_active_record <- function(gedcom, xref) {
-  if(length(xref) == 0) return(gedcom)
-  attr(gedcom, "active_record") <- xref
-  gedcom
+  if(length(xref) > 0) attr(gedcom, "active_record") <- xref 
+  return(gedcom)
 }
 get_active_record <- function(gedcom) {
   attr(gedcom, "active_record")
@@ -31,7 +30,7 @@ check_active_record_valid <- function(gedcom, record_type, record_type_fn) {
 
 null_active_record <- function(gedcom) {
   attr(gedcom, "active_record") <- NULL
-  gedcom
+  return(gedcom)
 }
 
 

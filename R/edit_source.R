@@ -60,10 +60,10 @@ add_source <- function(gedcom,
   
   xref <- assign_xref(xref_prefix_sour(), gedcom = gedcom)
   
-  dat_notes <- purrr::map(data_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  dat_notes <- purrr::map(data_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
-  sour_notes <- purrr::map(source_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  sour_notes <- purrr::map(source_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   sour_record <- SOURCE_RECORD(xref_sour = xref,
@@ -118,7 +118,7 @@ add_source_repository_citation <- function(gedcom,
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
-  cit_notes <- purrr::map(citation_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  cit_notes <- purrr::map(citation_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   citation <- SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,

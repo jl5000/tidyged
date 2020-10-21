@@ -74,7 +74,7 @@ add_individual <- function(gedcom,
     purrr::map_chr(submitters_interested_in_descendants, find_xref, 
                    gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
   
-  indi_notes <- purrr::map(individual_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  indi_notes <- purrr::map(individual_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   ind_record <- INDIVIDUAL_RECORD(xref_indi = xref,

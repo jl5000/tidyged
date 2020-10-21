@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-Import, create, and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version unlikely to be complete before October 2020.
+Import, create, and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version unlikely to be complete before December 2020.
 
 ## Installation
 
@@ -95,10 +95,10 @@ Two sister packages are planned:
 * The GEDCOM 5.5.1 specification has been implemented. This is the bulk of the internal data structures required (params.R, structures.R, records.R, and validate_params.R);
 * Some initial functions to summarise tidygedcom objects have been completed (interrogate.R);
 * Functions to import, export and create tidygedcom objects have been completed (import_export_create.R);
-* Current work is on the modification of tidygedcom objects;
+* Current work is on updating code for GEDCOM 5.5.5 and the modification of tidygedcom objects;
 * Some simple validation checks have been written (validate_gedcom.R), but there won't be an extensive functionality for this given the number of GEDCOM validators available ([such as this one](http://ged-inline.elasticbeanstalk.com/validate)).
 * Work on `shinygedcom` and `visgedcom` will begin once an initial version of `tidygedcom` is complete.
 
 ## References
 
-* [The GEDCOM Standard - Release 5.5.1](https://edge.fscdn.org/assets/img/documents/ged551-5bac5e57fe88dd37df0e153d9c515335.pdf)
+* [The GEDCOM 5.5.5 Specification](https://www.gedcom.org/gedcom.html)

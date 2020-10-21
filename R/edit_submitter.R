@@ -69,7 +69,7 @@ add_submitter <- function(gedcom,
                                  address_web_page = web_page)
   }
   
-  subm_notes <- purrr::map(submitter_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  subm_notes <- purrr::map(submitter_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   subm_record <- SUBMITTER_RECORD(xref_subm = xref,
@@ -173,7 +173,7 @@ subm <- function(name = unname(Sys.info()["user"]),
                                  address_web_page = web_page)
   }
   
-  subm_notes <- purrr::map(submitter_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  subm_notes <- purrr::map(submitter_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   SUBMITTER_RECORD(xref_subm = assign_xref(xref_prefix_subm(), 1),

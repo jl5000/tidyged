@@ -119,7 +119,7 @@ add_individual_event <- function(gedcom,
   }
   
   
-  plac_notes <- purrr::map(place_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  plac_notes <- purrr::map(place_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   if(length(place_name) == 0) {
@@ -139,7 +139,7 @@ add_individual_event <- function(gedcom,
                                    notes = plac_notes)
   }
   
-  even_notes <- purrr::map(event_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  even_notes <- purrr::map(event_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   details1 <- EVENT_DETAIL(event_or_fact_classification = event_classification,

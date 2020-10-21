@@ -43,7 +43,7 @@ add_submission <- function(gedcom,
   
   xref_subm <- dplyr::filter(gedcom, record == "HD", tag == "SUBM")$value
   
-  subn_notes <- purrr::map(submission_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  subn_notes <- purrr::map(submission_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   subn_record <- SUBMISSION_RECORD(xref_subn = xref,

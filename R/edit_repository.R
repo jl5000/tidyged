@@ -71,7 +71,7 @@ add_repository <- function(gedcom,
                                  address_web_page = web_page)
   }
   
-  repo_notes <- purrr::map(repository_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  repo_notes <- purrr::map(repository_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   repo_record <- REPOSITORY_RECORD(xref_repo = xref,

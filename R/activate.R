@@ -52,7 +52,7 @@ null_active_record <- function(gedcom) {
 find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
   
   if(length(search_pattern) == 0) return(character())
-  if(grepl("^@.{1,20}@$", search_pattern)) return(search_pattern)
+  if(grepl(xref_pattern, search_pattern)) return(search_pattern)
   
   possibilities <- gedcom %>% 
     dplyr::filter(record %in% record_xrefs) %>% 

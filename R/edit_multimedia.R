@@ -43,7 +43,7 @@ add_multimedia <- function(gedcom,
   
   xref <- assign_xref(xref_prefix_obje(), gedcom = gedcom)
   
-  media_notes <- purrr::map(multimedia_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  media_notes <- purrr::map(multimedia_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   media_record <- MULTIMEDIA_RECORD(xref_obje = xref,

@@ -15,7 +15,7 @@
 #' }
 import_gedcom <- function(filepath) {
   
-  if(stringr::str_sub(filepath, -4, -1) != ".ged")
+  if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")
     warning("GEDCOM files usually have a .ged extension. Continuing anyway.")
   
   ged <- readr::read_lines(filepath) %>% 
@@ -45,7 +45,7 @@ import_gedcom <- function(filepath) {
 #' @export
 export_gedcom <- function(gedcom, filepath) {
   
-  if(stringr::str_sub(filepath, -4, -1) != ".ged")
+  if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")
     warning("Output is not being saved as a GEDCOM file (*.ged)")
   
   gedcom %>%

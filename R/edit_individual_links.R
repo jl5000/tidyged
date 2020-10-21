@@ -9,7 +9,7 @@ add_individual_association <- function(gedcom,
   
   indi_xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), associated_with)
   
-  asso_notes <- purrr::map(association_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  asso_notes <- purrr::map(association_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   asso_str <- ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
@@ -31,7 +31,7 @@ add_individual_family_link_as_spouse <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
-  link_notes <- purrr::map(linkage_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  link_notes <- purrr::map(linkage_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   link <- SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% add_levels(1)
@@ -52,7 +52,7 @@ add_individual_family_link_as_child <- function(gedcom,
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
-  link_notes <- purrr::map(linkage_notes, ~ if(grepl("^@.{1,20}@$", .x)) {
+  link_notes <- purrr::map(linkage_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   link <- CHILD_TO_FAMILY_LINK(xref_fam = family_xref,

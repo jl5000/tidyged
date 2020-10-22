@@ -1,12 +1,12 @@
 
 #' Construct the ADDRESS_STRUCTURE tibble
 #' 
-#' This function constructs a tibble representation of the ADDRESS_STRUCTURE from the GEDCOM 5.5.1
+#' This function constructs a tibble representation of the ADDRESS_STRUCTURE from the GEDCOM 5.5.5
 #' specification.
 #'
 #' @inheritParams parameter_definitions
-#' @param all_address_lines The address lines usually contain the addressee’s street and city 
-#' information so that it forms an address that meets mailing requirements.
+#' @param local_address_lines These address lines contain the address lines before the town/city.
+#' This can be a vector with up to 3 elements.
 #' @tests
 #' expect_error(ADDRESS_STRUCTURE())
 #' expect_error(ADDRESS_STRUCTURE(letters[1:5]))
@@ -48,7 +48,7 @@
 #'                              1, "CTRY",   "UK"
 #'              )) 
 #' @return A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file.
-ADDRESS_STRUCTURE <- function(all_address_lines,
+ADDRESS_STRUCTURE <- function(local_address_lines = character(),
                               address_city = character(),
                               address_state = character(),
                               address_postal_code = character(),
@@ -58,13 +58,11 @@ ADDRESS_STRUCTURE <- function(all_address_lines,
                               address_fax = character(),
                               address_web_page = character()) {
   
-  if (length(all_address_lines) == 0) return(tibble::tibble())
-  
   address_postal_code <- as.character(address_postal_code)
   phone_number <- as.character(phone_number)
   address_fax <- as.character(address_fax)
   
-  validate_address_lines(all_address_lines, 4)
+  validate_address_lines(local_address_lines, 3)
   validate_address_city(address_city, 1)
   validate_address_state(address_state, 1)
   validate_address_postal_code(address_postal_code, 1)
@@ -74,38 +72,18 @@ ADDRESS_STRUCTURE <- function(all_address_lines,
   validate_address_fax(address_fax, 3)
   validate_address_web_page(address_web_page, 3)
   
-  address_lines_all <- tibble::tibble()
+  address_lines <- tibble::tibble(level = 0, tag = "ADDR", value = "")
   
-  # First populate the ADDR and CONT lines (mandatory)
-  for (i in seq_along(all_address_lines)) {
-      
-    if (i == 1) {
-      address_lines_all <- dplyr::bind_rows(
-        address_lines_all,
-        tibble::tibble(level = 0, tag = "ADDR", value = all_address_lines[i])
-      )
-    } else {
-      address_lines_all <- dplyr::bind_rows(
-        address_lines_all,
-        tibble::tibble(level = 1, tag = "CONT", value = all_address_lines[i])
-      )
-    }
-      
+  for (i in seq_along(local_address_lines)) {
+    
+    address_lines <- dplyr::bind_rows(
+      address_lines,
+      tibble::tibble(level = 1, tag = paste0("ADR", i), value = local_address_lines[i])
+    )
   }
   
-  # Now populate ADR1/2/3 lines
-  if (length(all_address_lines) > 1) {
-    for (i in 2:length(all_address_lines)) {
-      
-      address_lines_all <- dplyr::bind_rows(
-        address_lines_all,
-        tibble::tibble(level = 1, tag = paste0("ADR", i-1), value = all_address_lines[i])
-      )
-    }
-  }
-  
-  dplyr::bind_rows(
-    address_lines_all,
+  temp <- dplyr::bind_rows(
+    address_lines,
     tibble::tibble(level = 1, tag = "CITY", value = address_city),
     tibble::tibble(level = 1, tag = "STAE", value = address_state),
     tibble::tibble(level = 1, tag = "POST", value = address_postal_code),
@@ -116,6 +94,11 @@ ADDRESS_STRUCTURE <- function(all_address_lines,
     tibble::tibble(level = 0, tag = "WWW", value = address_web_page)
   )
   
+  if(nrow(temp) <= 1) {
+    return(tibble::tibble())
+  } else {
+    return(temp)
+  }
   
 }
 

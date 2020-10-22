@@ -95,7 +95,7 @@ validate_address_state <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 60)
 }
 validate_address_web_page <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 5, 120)
+  validate_input_size(input, max_dim, 4, 2047)
 }
 validate_address_country <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 60)

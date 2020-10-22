@@ -48,19 +48,19 @@
 #' @return An updated tidygedcom object including the Family record.
 #' 
 #' @export
-add_family <- function(gedcom,
-                       husband = character(),
-                       wife = character(),
-                       children = character(),
-                       child_linkage_types = character(),
-                       child_linkage_statuses = character(),
-                       number_of_children = character(),
-                       submitters = character(),
-                       user_reference_number = character(),
-                       user_reference_type = character(),
-                       automated_record_id = character(),
-                       restriction_notice = character(),
-                       family_notes = character()) {
+add_family_group <- function(gedcom,
+                             husband = character(),
+                             wife = character(),
+                             children = character(),
+                             child_linkage_types = character(),
+                             child_linkage_statuses = character(),
+                             number_of_children = character(),
+                             submitters = character(),
+                             user_reference_number = character(),
+                             user_reference_type = character(),
+                             automated_record_id = character(),
+                             restriction_notice = character(),
+                             family_notes = character()) {
   
   xref <- assign_xref(xref_prefix_fam(), gedcom = gedcom)
   

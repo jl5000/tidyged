@@ -26,7 +26,8 @@ import_gedcom <- function(filepath) {
     dplyr::mutate(record = dplyr::if_else(tag == "HEAD", "HD", record),
                   record = dplyr::if_else(tag == "TRLR", "TR", record)) %>%
     tidyr::fill(record) %>% 
-    dplyr::mutate(level = as.numeric(level)) %>% 
+    dplyr::mutate(level = as.numeric(level),
+                  value = stringr::str_replace_all(value, "@@", "@")) %>% 
     set_class_to_tidygedcom()
 
   validate_gedcom(ged)
@@ -59,6 +60,7 @@ export_gedcom <- function(gedcom, filepath) {
         dplyr::mutate(., value = dplyr::if_else(record == "HD" & tag == "FILE", basename(filepath), value)),
       ~ .
     ) %>% 
+    dplyr::mutate(value = str_replace_all(value, "@", "@@")) %>% 
     dplyr::mutate(record = dplyr::if_else(dplyr::lag(record) == record, "", record)) %>% 
     dplyr::mutate(record = dplyr::if_else(record == "TR", "", record)) %>% 
     tidyr::replace_na(list(record = "")) %>% 

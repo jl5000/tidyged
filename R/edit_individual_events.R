@@ -57,8 +57,6 @@
 #' @param event_cause Used in special cases to record the reasons which precipitated an event. 
 #' Normally this will be used for a death event to show cause of death, such as might be listed 
 #' on a death certificate.
-#' @param restriction_notice Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more 
-#' details.
 #' @param event_notes A character vector of notes accompanying the event.
 #' These could be xrefs to existing Note records.
 #'
@@ -91,7 +89,6 @@ add_individual_event <- function(gedcom,
                                  web_page = character(),
                                  responsible_agency = character(),
                                  religious_affiliation = character(),
-                                 restriction_notice = character(),
                                  family_xref = character(),
                                  adopting_parent = character()) {
   
@@ -149,7 +146,6 @@ add_individual_event <- function(gedcom,
                            responsible_agency = responsible_agency,
                            religious_affiliation = religious_affiliation,
                            cause_of_event = event_cause,
-                           restriction_notice = restriction_notice,
                            notes = even_notes)
   
   details2 <- INDIVIDUAL_EVENT_DETAIL(event_details = details1,

@@ -36,8 +36,6 @@
 #' @param user_reference_type A user-defined definition of the user_reference_number.
 #' @param automated_record_id A unique record identification number assigned to the record by 
 #' the source system. 
-#' @param restriction_notice Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more 
-#' details.
 #' @param individual_notes A character vector of notes accompanying this Individual record.
 #' These could be xrefs to existing Note records.
 #'
@@ -54,7 +52,6 @@ add_individual <- function(gedcom,
                            user_reference_number = character(),
                            user_reference_type = character(),
                            automated_record_id = character(),
-                           restriction_notice = character(),
                            individual_notes = character()) {
   
   xref <- assign_xref(xref_prefix_indi(), gedcom = gedcom)
@@ -78,7 +75,6 @@ add_individual <- function(gedcom,
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   ind_record <- INDIVIDUAL_RECORD(xref_indi = xref,
-                                  restriction_notice = restriction_notice,
                                   sex_value = sex,
                                   xrefs_subm = xrefs_subm,
                                   xrefs_alia = xrefs_alia,

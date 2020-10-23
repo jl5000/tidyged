@@ -47,7 +47,6 @@ add_individual_family_link_as_spouse <- function(gedcom,
 add_individual_family_link_as_child <- function(gedcom, 
                                                 family_xref,
                                                 linkage_type = character(),
-                                                linkage_status = character(),
                                                 linkage_notes = character()) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
@@ -57,7 +56,6 @@ add_individual_family_link_as_child <- function(gedcom,
   
   link <- CHILD_TO_FAMILY_LINK(xref_fam = family_xref,
                                pedigree_linkage_type = linkage_type,
-                               child_linkage_status = linkage_status,
                                notes = link_notes) %>% add_levels(1)
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")

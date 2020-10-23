@@ -40,8 +40,7 @@ add_individual_attribute <- function(gedcom,
                                      fax = character(),
                                      web_page = character(),
                                      responsible_agency = character(),
-                                     religious_affiliation = character(),
-                                     restriction_notice = character()) {
+                                     religious_affiliation = character()) {
   
   check_active_record_valid(gedcom, record_string_indi(), is_individual)
   
@@ -97,7 +96,6 @@ add_individual_attribute <- function(gedcom,
                            responsible_agency = responsible_agency,
                            religious_affiliation = religious_affiliation,
                            cause_of_event = event_cause,
-                           restriction_notice = restriction_notice,
                            notes = even_notes)
   
   details2 <- INDIVIDUAL_EVENT_DETAIL(event_details = details1,

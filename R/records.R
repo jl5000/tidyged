@@ -190,7 +190,6 @@ HEADER_SECTION <- function(xref_subm,
 #'              ))
 #' @return A tidy tibble containing a FAMILY_RECORD part of a GEDCOM file.
 FAMILY_RECORD <- function(xref_fam,
-                          restriction_notice = character(),
                           events = list(),
                           xref_husb = character(),
                           xref_wife = character(),
@@ -213,7 +212,6 @@ FAMILY_RECORD <- function(xref_fam,
     stop("The number of user reference types must be the same as the number of user reference numbers")
   
   validate_xref(xref_fam, 1)
-  validate_restriction_notice(restriction_notice, 1)
   validate_xref(xref_husb, 1)
   validate_xref(xref_wife, 1)
   validate_xref(xrefs_chil, 100)
@@ -226,7 +224,6 @@ FAMILY_RECORD <- function(xref_fam,
   
   temp <- dplyr::bind_rows(
     tibble::tibble(level = 0, record = xref_fam, tag = "FAM", value = ""),
-    tibble::tibble(level = 1, tag = "RESN", value = restriction_notice),
     events %>% dplyr::bind_rows() %>% add_levels(1),
     tibble::tibble(level = 1, tag = "HUSB", value = xref_husb),
     tibble::tibble(level = 1, tag = "WIFE", value = xref_wife),
@@ -291,7 +288,6 @@ FAMILY_RECORD <- function(xref_fam,
 #'              ))
 #' @return A tidy tibble containing an INDIVIDUAL_RECORD part of a GEDCOM file.
 INDIVIDUAL_RECORD <- function(xref_indi,
-                              restriction_notice = character(),
                               names = list(),
                               sex_value = character(),
                               events = list(),
@@ -322,7 +318,6 @@ INDIVIDUAL_RECORD <- function(xref_indi,
     stop("The number of user reference types must be the same as the number of user reference numbers")
   
   validate_xref(xref_indi, 1)
-  validate_restriction_notice(restriction_notice, 1)
   validate_sex_value(sex_value, 1)
   validate_xref(xrefs_subm, 1000)
   validate_xref(xrefs_alia, 1000)
@@ -337,7 +332,6 @@ INDIVIDUAL_RECORD <- function(xref_indi,
   
   temp <- dplyr::bind_rows(
     tibble::tibble(level = 0, record = xref_indi, tag = "INDI", value = ""),
-    tibble::tibble(level = 1, tag = "RESN", value = restriction_notice),
     names %>% dplyr::bind_rows() %>% add_levels(1),
     tibble::tibble(level = 1, tag = "SEX", value = sex_value),
     events %>% dplyr::bind_rows() %>% add_levels(1),

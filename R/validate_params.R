@@ -145,11 +145,6 @@ validate_character_set <- function(input, max_dim) {
   validate_input_choice(input, choices)
   validate_input_size(input, max_dim, 5, 7)
 }
-validate_child_linkage_status <- function(input, max_dim) {
-  choices <- c("challenged", "disproven", "proven")
-  validate_input_choice(input, choices)
-  validate_input_size(input, max_dim, 1, 15)
-}
 validate_copyright_gedcom_file <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
@@ -306,7 +301,7 @@ validate_ordinance_process_flag <- function(input, max_dim) {
   validate_input_size(input, max_dim, 2, 3)
 }
 validate_pedigree_linkage_type <- function(input, max_dim) {
-  choices <- c("adopted", "birth", "foster", "sealing")
+  choices <- c("adopted", "birth", "foster")
   validate_input_choice(input, choices)
   validate_input_size(input, max_dim, 5, 7)
 }
@@ -442,10 +437,9 @@ validate_text_from_source <- function(input, max_dim) {
   validate_input_size(input, max_dim)
 }
 validate_time_value <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 12)
-  validate_input_pattern(input, paste0("^\\d\\d:\\d\\d:\\d\\d.\\d{1,3}$|",
-                                       "^\\d\\d:\\d\\d:\\d\\d$|",
-                                       "^\\d\\d:\\d\\d$"))
+  validate_input_size(input, max_dim, 7, 12)
+  validate_input_pattern(input, paste0("^\\d{1,2}:\\d\\d:\\d\\d$|",
+                                       "^\\d{1,2}:\\d\\d:\\d\\d.\\d\\d$"))
 }
 validate_user_reference_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 20)

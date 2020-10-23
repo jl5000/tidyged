@@ -28,9 +28,6 @@
 #' @param child_linkage_types Codes used to indicate the child to family relationships. If defined,
 #' this must be a character vector the same size as children. Values must be one of:
 #' adopted, birth, foster, sealing.
-#' @param child_linkage_statuses Codes that allow passing on the users opinion of the 
-#' status of a child to family link. If defined, this must be a character vector the same 
-#' size as children. Values must be one of: challenged, disproven, proven.
 #' @param number_of_children The reported number of children known to belong to this family, 
 #' regardless of whether the associated children are represented here.
 #' @param submitters A character vector of submitters of this record. A submitter can either be
@@ -40,8 +37,6 @@
 #' @param user_reference_type A user-defined definition of the user_reference_number.
 #' @param automated_record_id A unique record identification number assigned to the record by 
 #' the source system. 
-#' @param restriction_notice Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more 
-#' details.
 #' @param family_notes A character vector of notes accompanying this Family record. These could be
 #' xrefs to existing Note records.
 #'
@@ -53,13 +48,11 @@ add_family_group <- function(gedcom,
                              wife = character(),
                              children = character(),
                              child_linkage_types = character(),
-                             child_linkage_statuses = character(),
                              number_of_children = character(),
                              submitters = character(),
                              user_reference_number = character(),
                              user_reference_type = character(),
                              automated_record_id = character(),
-                             restriction_notice = character(),
                              family_notes = character()) {
   
   xref <- assign_xref(xref_prefix_fam(), gedcom = gedcom)
@@ -76,7 +69,6 @@ add_family_group <- function(gedcom,
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
   
   fam_record <- FAMILY_RECORD(xref_fam = xref,
-                              restriction_notice = restriction_notice,
                               xref_husb = xref_husb,
                               xref_wife = xref_wife,
                               xrefs_chil = xrefs_chil,
@@ -98,7 +90,7 @@ add_family_group <- function(gedcom,
   message("Family link also added to the Individual record for wife")
   
   for(xref_chil in xrefs_chil) {
-    #TODO: Linkage status/type
+    #TODO: Linkage type
     temp <- temp %>% 
       set_active_record(xref_chil) %>% 
       add_individual_family_link_as_child(xref) 

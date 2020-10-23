@@ -8,8 +8,7 @@
 #' @param local_address_lines These address lines contain the address lines before the town/city.
 #' This can be a vector with up to 3 elements.
 #' @tests
-#' expect_error(ADDRESS_STRUCTURE())
-#' expect_error(ADDRESS_STRUCTURE(letters[1:5]))
+#' expect_error(ADDRESS_STRUCTURE(letters[1:4]))
 #' expect_error(ADDRESS_STRUCTURE("address", address_city = 1:2))
 #' expect_error(ADDRESS_STRUCTURE("address", address_state = 1:2))
 #' expect_error(ADDRESS_STRUCTURE("address", address_postal_code = 1:2))
@@ -23,28 +22,26 @@
 #' expect_error(ADDRESS_STRUCTURE("address", address_postal_code = paste0(rep("a", 11), collapse = "")))
 #' expect_error(ADDRESS_STRUCTURE("address", address_country = paste0(rep("a", 61), collapse = "")))
 #' expect_error(ADDRESS_STRUCTURE("address", address_web_page = paste0(rep("a", 121), collapse = "")))
-#' 
+#' expect_equal(ADDRESS_STRUCTURE(), tibble::tibble())
 #' expect_equal(ADDRESS_STRUCTURE("Road name"),
 #'              tibble::tribble(~level,   ~tag,      ~value,
-#'                              0, "ADDR", "Road name"
+#'                              0, "ADDR", "",
+#'                              1, "ADR1", "Road name"
 #'              ))
 #' 
-#' expect_equal(ADDRESS_STRUCTURE(letters[1:4]),
+#' expect_equal(ADDRESS_STRUCTURE(letters[1:3]),
 #'              tibble::tribble(~level,   ~tag, ~value,
-#'                              0, "ADDR",    "a",
-#'                              1, "CONT",    "b",
-#'                              1, "CONT",    "c",
-#'                              1, "CONT",    "d",
-#'                              1, "ADR1",    "b",
-#'                              1, "ADR2",    "c",
-#'                              1, "ADR3",    "d"
+#'                              0, "ADDR",    "",
+#'                              1, "ADR1",    "a",
+#'                              1, "ADR2",    "b",
+#'                              1, "ADR3",    "c"
 #'              ))
 #' 
 #' expect_equal(ADDRESS_STRUCTURE(letters[1:2], address_country = "UK"),
 #'              tibble::tribble(~level,   ~tag, ~value,
-#'                              0, "ADDR",    "a",
-#'                              1, "CONT",    "b",
-#'                              1, "ADR1",    "b",
+#'                              0, "ADDR",    "",
+#'                              1, "ADR1",    "a",
+#'                              1, "ADR2",    "b",
 #'                              1, "CTRY",   "UK"
 #'              )) 
 #' @return A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file.
@@ -167,11 +164,11 @@ ASSOCIATION_STRUCTURE <- function(xref_indi,
 #'                              1, "DATE", "5 OCT 1990"
 #'              ))
 #'                              
-#' expect_equal(CHANGE_DATE(date_exact(18, 12, 2008), time_value = "11:00:08.563"),
+#' expect_equal(CHANGE_DATE(date_exact(18, 12, 2008), time_value = "11:00:08.56"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "CHAN", "",
 #'                              1, "DATE", "18 DEC 2008",
-#'                              2, "TIME", "11:00:08.563"
+#'                              2, "TIME", "11:00:08.56"
 #'              ))
 #'                              
 #' expect_equal(CHANGE_DATE(date_exact(5, 10, 1990), "10:34:56", 
@@ -213,35 +210,30 @@ CHANGE_DATE <- function(change_date = date_exact(),
 #' @tests
 #' expect_error(CHILD_TO_FAMILY_LINK())
 #' expect_error(CHILD_TO_FAMILY_LINK("@1@", pedigree_linkage_type = "foste"))
-#' expect_error(CHILD_TO_FAMILY_LINK("@1@", child_linkage_status = "challenge"))
 #' 
 #' expect_equal(CHILD_TO_FAMILY_LINK("@F1@"),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "FAMC", "@F1@"
 #'              ))
 #' 
-#' expect_equal(CHILD_TO_FAMILY_LINK("@F1@", "birth", "proven"),
+#' expect_equal(CHILD_TO_FAMILY_LINK("@F1@", "birth"),
 #'              tibble::tribble(~level,   ~tag,   ~value,
 #'                              0, "FAMC",   "@F1@",
-#'                              1, "PEDI",  "birth",
-#'                              1, "STAT", "proven"
+#'                              1, "PEDI",  "birth"
 #'              ))
 #' @return A tidy tibble containing the CHILD_TO_FAMILY_LINK part of a GEDCOM file.
 CHILD_TO_FAMILY_LINK <- function(xref_fam,
                                  pedigree_linkage_type = character(),
-                                 child_linkage_status = character(),
                                  notes = list()) {
   
   if (length(xref_fam) == 0) return(tibble::tibble())
   
   validate_xref(xref_fam, 1)
   validate_pedigree_linkage_type(pedigree_linkage_type, 1)
-  validate_child_linkage_status(child_linkage_status, 1)
   
   dplyr::bind_rows(
     tibble::tibble(level = 0, tag = "FAMC", value = xref_fam),
     tibble::tibble(level = 1, tag = "PEDI", value = pedigree_linkage_type),
-    tibble::tibble(level = 1, tag = "STAT", value = child_linkage_status),
     notes %>% dplyr::bind_rows() %>% add_levels(1)
   )
   
@@ -257,7 +249,6 @@ CHILD_TO_FAMILY_LINK <- function(xref_fam,
 #' @param place A PLACE_STRUCTURE() object giving the location of the event.
 #' @param address An ADDRESS_STRUCTURE() object giving the address of the event.
 #' @tests
-#' expect_error(EVENT_DETAIL(restriction_notice = "something"))
 #' expect_equal(dim(EVENT_DETAIL()), c(0, 3))
 #' 
 #' expect_equal(EVENT_DETAIL(event_or_fact_classification = "Woodworking"),
@@ -287,11 +278,10 @@ CHILD_TO_FAMILY_LINK <- function(xref_fam,
 EVENT_DETAIL <- function(event_or_fact_classification = character(),
                          date = date_value(),
                          place = PLACE_STRUCTURE(character()),
-                         address = ADDRESS_STRUCTURE(character()),
+                         address = ADDRESS_STRUCTURE(),
                          responsible_agency = character(),
                          religious_affiliation = character(),
                          cause_of_event = character(),
-                         restriction_notice = character(),
                          notes = list(),
                          source_citations = list(),
                          multimedia_links = list()) {
@@ -301,7 +291,6 @@ EVENT_DETAIL <- function(event_or_fact_classification = character(),
   validate_responsible_agency(responsible_agency, 1)
   validate_religious_affiliation(religious_affiliation, 1)
   validate_cause_of_event(cause_of_event, 1)
-  validate_restriction_notice(restriction_notice, 1)
   
   dplyr::bind_rows(
     tibble::tibble(level = 0, tag = "TYPE", value = event_or_fact_classification),
@@ -311,7 +300,6 @@ EVENT_DETAIL <- function(event_or_fact_classification = character(),
     tibble::tibble(level = 0, tag = "AGNC", value = responsible_agency),
     tibble::tibble(level = 0, tag = "RELI", value = religious_affiliation),
     tibble::tibble(level = 0, tag = "CAUS", value = cause_of_event),
-    tibble::tibble(level = 0, tag = "RESN", value = restriction_notice),
     notes %>% dplyr::bind_rows() %>% add_levels(0),
     source_citations %>% dplyr::bind_rows() %>% add_levels(0),
     multimedia_links %>% dplyr::bind_rows() %>% add_levels(0)

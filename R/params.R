@@ -45,14 +45,6 @@
 #' therefore, GEDCOM produced using the UNICODE character set will be limited in its 
 #' interchangeability for a while but should eventually provide the international flexibility 
 #' that is desired. Allowed values: "ANSEL", "UTF-8", "UNICODE", "ASCII"
-#' @param child_linkage_status A status code that allows passing on the users opinion of the 
-#' status of a child to family link.
-#' "challenged": Linking this child to this family is suspect, but the linkage has been 
-#' neither proven nor disproven.
-#' "disproven": There has been a claim by some that this child belongs to this family, but 
-#' the linkage has been disproven.
-#' "proven" = There has been a claim by some that this child does not belongs to this family, 
-#' but the linkage has been proven.
 #' @param copyright_gedcom_file A copyright statement needed to protect the copyrights of the 
 #' submitter of this GEDCOM file.
 #' @param copyright_source_data A copyright statement required by the owner of data from 
@@ -178,8 +170,6 @@
 #' responsibility for the associated context. For example, an employer of a person of an associated occupation, 
 #' or a church that administered rites or events, or an organization responsible for creating and/or archiving 
 #' records.
-#' @param restriction_notice The restriction notice is defined for Ancestral File usage. Ancestral File 
-#' download GEDCOM files may contain this data.
 #' @param role_descriptor A word or phrase that identifies a person's role in an event being described. 
 #' This should be the same word or phrase, and in the same language, that the recorder used to define 
 #' the role in the actual record. 

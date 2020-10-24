@@ -199,7 +199,6 @@
 #' @param submitter_name The name of the submitter formatted for display and address generation. 
 #' @param submitter_registered_rfn A registered number of a submitter of Ancestral File data. 
 #' This number is used in subsequent submissions or inquiries by the submitter for identification purposes.
-#' @param submitter_text Comments or opinions from the submitter. 
 #' @param temple_code An abbreviation of the temple in which LDS temple ordinances were performed.
 #' @param text_from_source A verbatim copy of any description contained within the source. 
 #' This indicates notes or text that are actually contained in the source document, not the submitter's 
@@ -208,6 +207,7 @@
 #' @param transmission_date A date_exact() object giving the date that this transmission was created. 
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify this record. 
 #' @param user_reference_type A user-defined definition of the user_reference_number.
+#' @param user_text Comments or opinions from the submitter. 
 #' @param system_version_number An identifier that represents the version level assigned to the system. 
 #' It is defined and changed by the creators of the product.
 #' @param character_set_version_number An identifier that represents the version level assigned to the character set. 

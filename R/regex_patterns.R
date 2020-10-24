@@ -31,11 +31,11 @@ xref_pattern <- function() {
 }
 
 latitude_pattern <- function() {
-  "^[NS]\\d{1,2}\\.\\d{1,6}$"
+  "^[NS]\\d{1,2}(\\.\\d{1,6})?$"
 }
 
 longitude_pattern <- function() {
-  "^[EW]\\d{1,3}\\.\\d{2,6}$"
+  "^[EW]\\d{1,3}(\\.\\d{2,6})?$"
 }
 
 age_at_event_pattern <- function() {

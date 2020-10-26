@@ -15,7 +15,8 @@
 #' character limit in the Gedcom standard is exceeded.
 #'
 #' @param gedcom A tidygedcom object.
-#' @param sex The sex of the individual. Either "M" (male), "F" (female), or "U" (undetermined).
+#' @param sex The sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
+#' "X" (intersex), or "N" (not recorded).
 #' @param submitters A character vector of submitters of this record. A submitter can either be
 #' referenced by an xref or by a regular expression to match to a submitter name.
 #' @param aliases A character vector of other Individual records that are aliases of this
@@ -42,7 +43,7 @@
 #' @return An updated tidygedcom object including the Individual record.
 #' @export
 add_individual <- function(gedcom,
-                           sex = character(),
+                           sex = "U",
                            submitters = character(),
                            aliases = character(),
                            submitters_interested_in_ancestors = character(),

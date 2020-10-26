@@ -101,6 +101,7 @@ validate_address_country <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 60)
 }
 validate_adopted_by_which_parent <- function(input, max_dim) {
+  validate_input_size(input, max_dim)
   choices <- c("HUSB", "WIFE", "BOTH")
   validate_input_choice(input, choices)
 }
@@ -108,16 +109,11 @@ validate_age_at_event <- function(input, max_dim) {
   validate_input_size(input, max_dim, 2, 13)
   validate_input_pattern(input, age_at_event_pattern)
 }
-validate_ancestral_file_number <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 12)
-}
-validate_approved_system_id <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 20)
-}
 validate_attribute_descriptor <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
 validate_attribute_type <- function(input, max_dim) {
+  validate_input_size(input, max_dim)
   choices <- c("CAST", "DSCR", "EDUC", "IDNO",
                "NATI", "NCHI", "NMR", "OCCU",
                "PROP", "RELI", "RESI",
@@ -127,6 +123,11 @@ validate_attribute_type <- function(input, max_dim) {
 validate_automated_record_id <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 12)
 }
+validate_before_common_era <- function(input, max_dim) {
+  validate_input_size(input, max_dim)
+  choices <- c("BCE", "BC", "B.C.")
+  validate_input_choice(input, choices)
+}
 validate_caste_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
@@ -134,9 +135,9 @@ validate_cause_of_event <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
 validate_certainty_assessment <- function(input, max_dim) {
+  validate_input_size(input, max_dim)
   choices <- as.character(0:3)
   validate_input_choice(input, choices)
-  validate_input_size(input, max_dim, 1, 1)
 }
 validate_character_set <- function(input, max_dim) {
   choices <- c("UTF-8", "UNICODE")
@@ -144,10 +145,10 @@ validate_character_set <- function(input, max_dim) {
   validate_input_size(input, max_dim, 5, 7)
 }
 validate_copyright_gedcom_file <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 90)
+  validate_input_size(input, max_dim, 1, 248)
 }
 validate_copyright_source_data <- function(input, max_dim) {
-  validate_input_size(input, max_dim)
+  validate_input_size(input, max_dim, 1, 248)
 }
 validate_count_of_children <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 3)
@@ -180,12 +181,14 @@ validate_event_type_cited_from <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 15)
 }
 validate_event_type_family <- function(input, max_dim) {
+  validate_input_size(input, max_dim)
   choices <- c("ANUL", "CENS", "DIV", "DIVF",
                "ENGA", "MARB", "MARC", "MARR",
                "MARL", "MARS", "RESI", "EVEN")
   validate_input_choice(input, choices)
 }
 validate_event_type_individual <- function(input, max_dim) {
+  validate_input_size(input, max_dim)
   choices <- c("BIRT", "CHR", "DEAT", "BURI", "CREM",
                "ADOP", "BAPM", "BARM", "BASM",
                "CHRA", "CONF", "FCOM", "NATU",
@@ -196,39 +199,32 @@ validate_event_type_individual <- function(input, max_dim) {
 validate_events_recorded <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
-validate_file_name <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 90)
-}
 validate_gedcom_content_description <- function(input, max_dim) {
-  validate_input_size(input, max_dim)
+  validate_input_size(input, max_dim, 1, 248)
 }
-validate_generations_of_ancestors <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 4)
-}
-validate_generations_of_descendants <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 4)
+validate_gedcom_file_name <- function(input, max_dim) {
+  validate_input_size(input, max_dim, 5, 248)
 }
 validate_id_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 30)
 }
+validate_language_id <- function(input, max_dim) {
+  validate_input_size(input, max_dim, 1, 90)
+}
 validate_language_of_text <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 15)
 }
-validate_language_preference <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 90)
-}
 validate_multimedia_file_reference <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 30)
+  validate_input_size(input, max_dim, 1, 259)
 }
 validate_multimedia_format <- function(input, max_dim) {
-  choices <- c( "bmp", "gif", "jpg", "ole", "pcx", "tif", "wav")
+  validate_input_size(input, max_dim)
+  choices <- c("AAC", "AVI", "BMP", "ePub", "FLAC", "GIF", "JPEG", "JPG", "MKV",
+               "mobi", "MP3", "PCX", "PDF", "PNG", "TIFF", "TIF", "WAV")
   validate_input_choice(input, choices)
 }
 validate_name_of_business <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
-}
-validate_name_of_family_file <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 120)
 }
 validate_name_of_product <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
@@ -247,9 +243,6 @@ validate_name_phonetic_variation <- function(input, max_dim) {
 }
 validate_name_piece <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
-}
-validate_phone_number <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 25)
 }
 validate_name_piece_given <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
@@ -290,35 +283,23 @@ validate_number_of_relationhips <- function(input, max_dim) {
 validate_occupation <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
 }
-validate_ordinance_process_flag <- function(input, max_dim) {
-  choices <- c("yes", "no")
-  validate_input_choice(input, choices)
-}
 validate_pedigree_linkage_type <- function(input, max_dim) {
+  validate_input_size(input, max_dim)
   choices <- c("adopted", "birth", "foster")
   validate_input_choice(input, choices)
-}
-validate_permanent_record_file_number <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 90)
 }
 validate_phone_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 25)
 }
 validate_phonetisation_method <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 3, 30)
+  validate_input_size(input, max_dim, 5, 30)
 }
 validate_physical_description <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 4095)
 }
-validate_place_hierarchy <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 120)
-}
 validate_place_latitude <- function(input, max_dim) {
   validate_input_size(input, max_dim, 2, 10)
   validate_input_pattern(input, latitude_pattern)
-}
-validate_place_living_ordinance <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 120)
 }
 validate_place_longitude <- function(input, max_dim) {
   validate_input_size(input, max_dim, 2, 11)
@@ -330,7 +311,7 @@ validate_place_name <- function(input, max_dim) {
 validate_place_phonetic_variation <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
-validate_place_romanized_variation <- function(input, max_dim) {
+validate_place_romanised_variation <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
 validate_place_text <- function(input, max_dim) {
@@ -338,6 +319,10 @@ validate_place_text <- function(input, max_dim) {
 }
 validate_possessions <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
+}
+validate_product_version_number <- function(input, max_dim) {
+  validate_input_size(input, max_dim, 3, 15)
+  validate_input_pattern(input, "^\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3}(\\.\\d{1,3})?)?$")
 }
 validate_receiving_system_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 20)
@@ -357,35 +342,28 @@ validate_religious_affiliation <- function(input, max_dim) {
 validate_responsible_agency <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
-validate_restriction_notice <- function(input, max_dim) {
-  choices <- c("confidential", "locked", "privacy")
-  validate_input_choice(input, choices)
-}
 validate_role_descriptor <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 25)
 }
 validate_role_in_event <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 15)
+  validate_input_size(input, max_dim, 3, 27)
 }
 validate_romanisation_method <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 3, 30)
+  validate_input_size(input, max_dim, 5, 30)
 }
 validate_scholastic_achievement <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
 }
 validate_sex_value <- function(input, max_dim) {
-  choices <- c("M", "F", "U")
+  validate_input_size(input, max_dim)
+  choices <- c("M", "F", "U", "X", "N")
   validate_input_choice(input, choices)
-  validate_input_size(input, max_dim, 1, 248)
 }
 validate_source_call_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
-validate_source_description <- function(input, max_dim) {
-  validate_input_size(input, max_dim)
-}
 validate_source_descriptive_title <- function(input, max_dim) {
-  validate_input_size(input, max_dim)
+  validate_input_size(input, max_dim, 1, 4095)
 }
 validate_source_filed_by_entry <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 60)
@@ -394,16 +372,17 @@ validate_source_jurisdiction_place <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
 validate_source_media_type <- function(input, max_dim) {
+  validate_input_size(input, max_dim)
   choices <- c("audio", "book", "card", "electronic", "fiche", 
                "film", "magazine", "manuscript", "map", 
                "newspaper", "photo", "tombstone", "video")
   validate_input_choice(input, choices)
 }
 validate_source_originator <- function(input, max_dim) {
-  validate_input_size(input, max_dim)
+  validate_input_size(input, max_dim, 1, 255)
 }
 validate_source_publication_facts <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 248)
+  validate_input_size(input, max_dim, 1, 4095)
 }
 validate_submitter_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 60)
@@ -411,11 +390,11 @@ validate_submitter_name <- function(input, max_dim) {
 validate_submitter_registered_rfn <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 30)
 }
-validate_temple_code <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 4, 5)
+validate_system_id <- function(input, max_dim) {
+  validate_input_size(input, max_dim, 1, 20)
 }
 validate_text_from_source <- function(input, max_dim) {
-  validate_input_size(input, max_dim)
+  validate_input_size(input, max_dim, 1, 32767)
 }
 validate_time_value <- function(input, max_dim) {
   validate_input_size(input, max_dim, 7, 12)
@@ -429,16 +408,13 @@ validate_user_reference_type <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 40)
 }
 validate_user_text <- function(input, max_dim) {
-  validate_input_size(input, max_dim)
-}
-validate_version_number <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 15)
+  validate_input_size(input, max_dim, 1, 32767)
 }
 validate_where_within_source <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
 }
 validate_xref <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 22)
+  validate_input_size(input, max_dim)
   validate_input_pattern(input, xref_pattern)
 }
 validate_year <- function(input, max_dim) {

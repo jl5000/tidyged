@@ -892,7 +892,6 @@ PERSONAL_NAME_STRUCTURE <- function(name_personal,
 #'              ))
 #' @return A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file.
 PLACE_STRUCTURE <- function(place_name,
-                            place_hierarchy = character(),
                             place_phonetic_variation = character(),
                             phonetisation_method = character(),
                             place_romanised_variation = character(),
@@ -904,7 +903,6 @@ PLACE_STRUCTURE <- function(place_name,
   if (length(place_name) == 0) return(tibble::tibble())
   
   validate_place_name(place_name, 1)
-  validate_place_hierarchy(place_hierarchy, 1)
   validate_place_phonetic_variation(place_phonetic_variation, 1000)
   validate_phonetisation_method(phonetisation_method, 1000)
   validate_place_romanised_variation(place_romanised_variation, 1000)
@@ -917,10 +915,7 @@ PLACE_STRUCTURE <- function(place_name,
   if (length(place_romanised_variation) != length(romanisation_method))
     stop("Each romanised variation requires a romanised type")
   
-  temp <- dplyr::bind_rows(
-    tibble::tibble(level = 0, tag = "PLAC", value = place_name),
-    tibble::tibble(level = 1, tag = "FORM", value = place_hierarchy)
-    )
+  temp <- tibble::tibble(level = 0, tag = "PLAC", value = place_name)
   
   for (i in seq_along(place_phonetic_variation)) {
     temp <- dplyr::bind_rows(
@@ -987,8 +982,7 @@ PLACE_STRUCTURE <- function(place_name,
 #'                              2, "ROLE", "a role"
 #'              ))
 #' @return A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file.
-SOURCE_CITATION <- function(xref_sour = character(),
-                            source_description = character(),
+SOURCE_CITATION <- function(xref_sour,
                             where_within_source = character(),
                             event_type_cited_from = character(),
                             role_in_event = character(),
@@ -998,52 +992,36 @@ SOURCE_CITATION <- function(xref_sour = character(),
                             multimedia_links = list(),
                             notes = list()) {
   
-  if (length(xref_sour) + length(source_description) == 0) 
-    return(tibble::tibble())
+  if (length(xref_sour) == 0) return(tibble::tibble())
   
   where_within_source <- as.character(where_within_source)
   certainty_assessment <- as.character(certainty_assessment)
   
   validate_xref(xref_sour, 1)
+  validate_where_within_source(where_within_source, 1)
+  validate_event_type_cited_from(event_type_cited_from, 1)
+  validate_role_in_event(role_in_event, 1)
+  validate_date_value(entry_recording_date, 1)
   
-  if (length(xref_sour) == 1) {
-    
-    validate_where_within_source(where_within_source, 1)
-    validate_event_type_cited_from(event_type_cited_from, 1)
-    validate_role_in_event(role_in_event, 1)
-    validate_date_value(entry_recording_date, 1)
-    
-    temp <- dplyr::bind_rows(
-      tibble::tibble(level = 0, tag = "SOUR", value = xref_sour),
-      tibble::tibble(level = 1, tag = "PAGE", value = where_within_source),
-      tibble::tibble(level = 1, tag = "EVEN", value = event_type_cited_from),
-      tibble::tibble(level = 2, tag = "ROLE", value = role_in_event),
-      tibble::tibble(level = 1, tag = "DATA", value = ""),
-      tibble::tibble(level = 1, tag = "DATE", value = entry_recording_date),
-      split_text(start_level = 2, top_tag = "TEXT", text = text_from_source),
-      multimedia_links %>% dplyr::bind_rows() %>% add_levels(1),
-      notes %>% dplyr::bind_rows() %>% add_levels(1),
-      tibble::tibble(level = 1, tag = "QUAY", value = certainty_assessment)
-    ) 
-    
-    if (sum(temp$tag == "EVEN") == 0) temp <- dplyr::filter(temp, tag != "ROLE")
-    if (sum(temp$tag == "DATE") == 0 & sum(temp$tag == "TEXT") == 0) 
-      temp <- dplyr::filter(temp, tag != "DATA")
-    
-    temp
-    
-  } else {
-    
-    dplyr::bind_rows(
-      split_text(start_level = 0, top_tag = "SOUR", text = source_description),
-      split_text(start_level = 1, top_tag = "TEXT", text = text_from_source),
-      multimedia_links %>% dplyr::bind_rows() %>% add_levels(1),
-      notes %>% dplyr::bind_rows() %>% add_levels(1),
-      tibble::tibble(level = 1, tag = "QUAY", value = certainty_assessment)
-    )
-    
-  }
+  temp <- dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "SOUR", value = xref_sour),
+    tibble::tibble(level = 1, tag = "PAGE", value = where_within_source),
+    tibble::tibble(level = 1, tag = "EVEN", value = event_type_cited_from),
+    tibble::tibble(level = 2, tag = "ROLE", value = role_in_event),
+    tibble::tibble(level = 1, tag = "DATA", value = ""),
+    tibble::tibble(level = 1, tag = "DATE", value = entry_recording_date),
+    split_text(start_level = 2, top_tag = "TEXT", text = text_from_source),
+    multimedia_links %>% dplyr::bind_rows() %>% add_levels(1),
+    notes %>% dplyr::bind_rows() %>% add_levels(1),
+    tibble::tibble(level = 1, tag = "QUAY", value = certainty_assessment)
+  ) 
   
+  if (sum(temp$tag == "EVEN") == 0) temp <- dplyr::filter(temp, tag != "ROLE")
+  if (sum(temp$tag == "DATE") == 0 & sum(temp$tag == "TEXT") == 0) 
+    temp <- dplyr::filter(temp, tag != "DATA")
+  
+  temp
+    
 }
 
 #' Construct the SOURCE_REPOSITORY_CITATION tibble
@@ -1054,33 +1032,26 @@ SOURCE_CITATION <- function(xref_sour = character(),
 #' @inheritParams parameter_definitions
 #' @tests
 #' expect_error(SOURCE_REPOSITORY_CITATION())
-#' expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_media_type = "carrier pigeon"))
+#' expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = c("123", "456"))
 #' 
-#' expect_equal(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = c("123", "456"), 
-#'                                         source_media_type = "map"),
+#' expect_equal(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = 123),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "REPO", "@R1@",
-#'                              1, "CALN",  "123",
-#'                              1, "CALN",  "456",
-#'                              2, "MEDI",  "map"
+#'                              1, "CALN",  "123"
 #'              ))
 #' @return A tidy tibble containing the SOURCE_REPOSITORY_CITATION part of a GEDCOM file.
 SOURCE_REPOSITORY_CITATION <- function(xref_repo,
-                                       notes = list(),
-                                       source_call_number = character(),
-                                       source_media_type = character()) {
+                                       source_call_number = character()) {
   
   if (length(xref_repo) == 0) return(tibble::tibble())
   
+  source_call_number = as.character(source_call_number)
   validate_xref(xref_repo, 1)
-  validate_source_call_number(source_call_number, 1000)
-  validate_source_media_type(source_media_type, 1)
+  validate_source_call_number(source_call_number, 1)
   
   dplyr::bind_rows(
     tibble::tibble(level = 0, tag = "REPO", value = xref_repo),
-    notes %>% dplyr::bind_rows() %>% add_levels(1),
-    tibble::tibble(level = 1, tag = "CALN", value = source_call_number),
-    tibble::tibble(level = 2, tag = "MEDI", value = source_media_type)
+    tibble::tibble(level = 1, tag = "CALN", value = source_call_number)
     )
     
 }

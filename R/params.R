@@ -147,9 +147,6 @@
 #' @param phonetic_type Indicates the method used in transforming the text to the phonetic variation.
 #' @param physical_description An unstructured list of the attributes that describe the physical 
 #' characteristics of a person, place, or object. Commas separate each attribute.
-#' @param place_hierarchy This shows the jurisdictional entities that are named in a sequence from the 
-#' lowest to the highest jurisdiction. The jurisdictions are separated by commas, and any jurisdiction's 
-#' name that is missing is still accounted for by a comma. 
 #' @param place_latitude The value specifying the latitudinal coordinate of the place name. 
 #' The latitude coordinate is the direction North or South from the equator in degrees and fraction of 
 #' degrees carried out to give the desired accuracy. For example: 18 degrees, 9 minutes, and 3.4 seconds North 
@@ -180,10 +177,6 @@
 #' @param social_security_number A number assigned to a person in the United States for identification purposes. 
 #' @param source_call_number An identification or reference description used to file and retrieve items 
 #' from the holdings of a repository. 
-#' @param source_description A free form text block used to describe the source from which information was 
-#' obtained. This text block is used by those systems which cannot use a pointer to a source record. 
-#' It must contain a descriptive title, who created the work, where and when it was created, and where 
-#' the source data stored.
 #' @param source_descriptive_title The title of the work, record, or item and, when appropriate, 
 #' the title of the larger work or series of which it is a part.
 #' @param source_filed_by_entry This entry is to provide a short title used for sorting, filing, 

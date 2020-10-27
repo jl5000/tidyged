@@ -6,7 +6,6 @@
 \usage{
 FAMILY_RECORD(
   xref_fam,
-  restriction_notice = character(),
   events = list(),
   xref_husb = character(),
   xref_wife = character(),
@@ -25,9 +24,6 @@ FAMILY_RECORD(
 }
 \arguments{
 \item{xref_fam}{An xref ID of a family record.}
-
-\item{restriction_notice}{The restriction notice is defined for Ancestral File usage. Ancestral File
-download GEDCOM files may contain this data.}
 
 \item{events}{A list of FAMILY_EVENT_STRUCTURE() objects giving events associated with this family.}
 

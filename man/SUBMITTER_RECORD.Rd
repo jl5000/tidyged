@@ -7,7 +7,7 @@
 SUBMITTER_RECORD(
   xref_subm,
   submitter_name,
-  address = ADDRESS_STRUCTURE(character()),
+  address = ADDRESS_STRUCTURE(),
   multimedia_links = list(),
   language_preference = character(),
   submitter_registered_rfn = character(),

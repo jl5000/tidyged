@@ -6,7 +6,7 @@
 \usage{
 add_individual(
   gedcom,
-  sex = character(),
+  sex = "U",
   submitters = character(),
   aliases = character(),
   submitters_interested_in_ancestors = character(),
@@ -16,14 +16,14 @@ add_individual(
   user_reference_number = character(),
   user_reference_type = character(),
   automated_record_id = character(),
-  restriction_notice = character(),
   individual_notes = character()
 )
 }
 \arguments{
 \item{gedcom}{A tidygedcom object.}
 
-\item{sex}{The sex of the individual. Either "M" (male), "F" (female), or "U" (undetermined).}
+\item{sex}{The sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
+"X" (intersex), or "N" (not recorded).}
 
 \item{submitters}{A character vector of submitters of this record. A submitter can either be
 referenced by an xref or by a regular expression to match to a submitter name.}
@@ -53,9 +53,6 @@ this record. See the Gedcom 5.5.1 Standard for more details.}
 
 \item{automated_record_id}{A unique record identification number assigned to the record by
 the source system.}
-
-\item{restriction_notice}{Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more
-details.}
 
 \item{individual_notes}{A character vector of notes accompanying this Individual record.
 These could be xrefs to existing Note records.}

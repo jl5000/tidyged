@@ -17,8 +17,6 @@ NOTE_RECORD(
 \arguments{
 \item{xref_note}{An xref ID of a note record.}
 
-\item{submitter_text}{Comments or opinions from the submitter.}
-
 \item{user_reference_number}{A user-defined number or text that the submitter uses to identify this record.}
 
 \item{user_reference_type}{A user-defined definition of the user_reference_number.}

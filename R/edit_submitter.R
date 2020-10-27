@@ -138,7 +138,7 @@ remove_submitter <- function(gedcom) {
 #' @return A Submitter record to be incorporated into a new tidygedcom object.
 #' @export
 subm <- function(name = unname(Sys.info()["user"]),
-                 address_first_line = character(),
+                 local_address_lines = character(),
                  city = character(),
                  state = character(),
                  postal_code = character(),
@@ -147,40 +147,27 @@ subm <- function(name = unname(Sys.info()["user"]),
                  email = character(),
                  fax = character(),
                  web_page = character(),
-                 language_preference = character(),
-                 submitter_registered_rfn = character(),
                  automated_record_id = character(),
                  submitter_notes = character()) {
   
-  address_lines <- c(address_first_line, city, state, postal_code, country)
+  if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
-  if(length(address_lines) > 4) address_lines <- address_lines[1:4]
-  
-  if(length(address_lines) == 0) {
-    
-    address <- ADDRESS_STRUCTURE(character())
-    
-  } else {
-    
-    address <- ADDRESS_STRUCTURE(all_address_lines = address_lines,
-                                 address_city = city,
-                                 address_state = state,
-                                 address_postal_code = postal_code,
-                                 address_country = country,
-                                 phone_number = phone_number,
-                                 address_email = email,
-                                 address_fax = fax,
-                                 address_web_page = web_page)
-  }
+  address <- ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+                               address_city = city,
+                               address_state = state,
+                               address_postal_code = postal_code,
+                               address_country = country,
+                               phone_number = phone_number,
+                               address_email = email,
+                               address_fax = fax,
+                               address_web_page = web_page)
   
   subm_notes <- purrr::map(submitter_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
   SUBMITTER_RECORD(xref_subm = assign_xref(xref_prefix_subm(), 1),
                    submitter_name = name,
                    address = address,
-                   language_preference = language_preference,
-                   submitter_registered_rfn = submitter_registered_rfn,
                    automated_record_id = automated_record_id,
                    notes = subm_notes)
   

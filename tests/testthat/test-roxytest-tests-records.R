@@ -2,73 +2,7 @@
 
 context("File R/records.R: @tests")
 
-test_that("Function HEADER_SECTION() @ L86", {
-  expect_error(HEADER_SECTION())
-  expect_error(HEADER_SECTION("@1@"))
-  expect_error(HEADER_SECTION("@1@", approved_system_id = "system"))
-  expect_error(HEADER_SECTION("@1@", approved_system_id = "system", character_set = "red"))
-  
-  expect_equal(HEADER_SECTION("@1@", approved_system_id = "system", character_set = "UTF-8",
-                              xref_subn = "@2@", system_version_number = "1.0", name_of_product = "R",
-                              copyright_gedcom_file = "Do not copy", language = "English",
-                              gedcom_content_description = "This is a gedcom file"),
-               tibble::tribble(~level,  ~record,   ~tag,                  ~value,
-                               0, "HD", "HEAD",                      "",
-                               1, "HD", "SOUR",                "system",
-                               2, "HD", "VERS",                   "1.0",
-                               2, "HD", "NAME",                     "R",
-                               1, "HD", "SUBM",                   "@1@",
-                               1, "HD", "SUBN",                   "@2@",
-                               1, "HD", "COPR",           "Do not copy",
-                               1, "HD", "GEDC",                      "",
-                               2, "HD", "VERS",                 "5.5.1",
-                               2, "HD", "FORM",        "Lineage-Linked",
-                               1, "HD", "CHAR",                 "UTF-8",
-                               1, "HD", "LANG",               "English",
-                               1, "HD", "NOTE", "This is a gedcom file"
-               ))
-  
-  expect_equal(HEADER_SECTION("@1@", approved_system_id = "system", character_set = "UTF-8",
-                              xref_subn = "@2@", system_version_number = "1.0", name_of_product = "R",
-                              name_of_business = "RStudio", business_address = ADDRESS_STRUCTURE(c("Street", "City", "State")),
-                              name_of_source_data = "Source text", publication_date_source_data = date_exact(5, 9, 2005),
-                              copyright_source_data = "Source is protected", receiving_system_name = "Windows",
-                              transmission_date = date_exact(15, 10, 2020), file_name = "test.ged",
-                              copyright_gedcom_file = "Do not copy", language = "English", place_hierarchy = "here",
-                              gedcom_content_description = "This is a gedcom file"),
-               tibble::tribble(~level,  ~record,   ~tag,                  ~value,
-                               0, "HD", "HEAD",                      "",
-                               1, "HD", "SOUR",                "system",
-                               2, "HD", "VERS",                   "1.0",
-                               2, "HD", "NAME",                     "R",
-                               2, "HD", "CORP",               "RStudio",
-                               3, "HD", "ADDR",                "Street",
-                               4, "HD", "CONT",                  "City",
-                               4, "HD", "CONT",                 "State",
-                               4, "HD", "ADR1",                  "City",
-                               4, "HD", "ADR2",                 "State",
-                               2, "HD", "DATA",           "Source text",
-                               3, "HD", "DATE",            "5 SEP 2005",
-                               3, "HD", "COPR",   "Source is protected",
-                               1, "HD", "DEST",               "Windows",
-                               1, "HD", "DATE",           "15 OCT 2020",
-                               1, "HD", "SUBM",                   "@1@",
-                               1, "HD", "SUBN",                   "@2@",
-                               1, "HD", "FILE",              "test.ged",
-                               1, "HD", "COPR",           "Do not copy",
-                               1, "HD", "GEDC",                      "",
-                               2, "HD", "VERS",                 "5.5.1",
-                               2, "HD", "FORM",        "Lineage-Linked",
-                               1, "HD", "CHAR",                 "UTF-8",
-                               1, "HD", "LANG",               "English",
-                               1, "HD", "PLAC",                      "",
-                               2, "HD", "FORM",                  "here",
-                               1, "HD", "NOTE", "This is a gedcom file"
-               ))
-})
-
-
-test_that("Function FAMILY_RECORD() @ L192", {
+test_that("Function FAMILY_RECORD() @ L62", {
   expect_error(FAMILY_RECORD("@F1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
   expect_equal(FAMILY_RECORD("@F1@"),
                tibble::tribble(~level,  ~record,   ~tag,                  ~value,
@@ -79,7 +13,7 @@ test_that("Function FAMILY_RECORD() @ L192", {
 })
 
 
-test_that("Function INDIVIDUAL_RECORD() @ L293", {
+test_that("Function INDIVIDUAL_RECORD() @ L160", {
   expect_error(INDIVIDUAL_RECORD("@I1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
   expect_equal(INDIVIDUAL_RECORD("@I1@"),
                tibble::tribble(~level,  ~record,   ~tag,                  ~value,
@@ -90,7 +24,7 @@ test_that("Function INDIVIDUAL_RECORD() @ L293", {
 })
 
 
-test_that("Function MULTIMEDIA_RECORD() @ L396", {
+test_that("Function MULTIMEDIA_RECORD() @ L260", {
   expect_error(MULTIMEDIA_RECORD("@M1@", "file_ref", "jpg",
                                  user_reference_number = 123:125, user_reference_type = letters[1:2]))
   expect_equal(MULTIMEDIA_RECORD("@M1@", "file_ref", "jpg"),
@@ -104,7 +38,7 @@ test_that("Function MULTIMEDIA_RECORD() @ L396", {
 })
 
 
-test_that("Function NOTE_RECORD() @ L484", {
+test_that("Function NOTE_RECORD() @ L348", {
   expect_error(NOTE_RECORD("@N1@", "This is a note",
                                  user_reference_number = 123:125, user_reference_type = letters[1:2]))
   expect_equal(NOTE_RECORD("@N1@", "This is a note"),
@@ -116,7 +50,7 @@ test_that("Function NOTE_RECORD() @ L484", {
 })
 
 
-test_that("Function REPOSITORY_RECORD() @ L545", {
+test_that("Function REPOSITORY_RECORD() @ L409", {
   expect_error(REPOSITORY_RECORD("@R1@", "Repo name",
                                  user_reference_number = 123:125, user_reference_type = letters[1:2]))
   expect_equal(REPOSITORY_RECORD("@R1@", "Repo name"),
@@ -129,7 +63,7 @@ test_that("Function REPOSITORY_RECORD() @ L545", {
 })
 
 
-test_that("Function SOURCE_RECORD() @ L607", {
+test_that("Function SOURCE_RECORD() @ L471", {
   expect_error(SOURCE_RECORD("@S1@",
                              user_reference_number = 123:125, user_reference_type = letters[1:2]))
   expect_equal(SOURCE_RECORD("@S1@"),
@@ -141,7 +75,7 @@ test_that("Function SOURCE_RECORD() @ L607", {
 })
 
 
-test_that("Function SUBMISSION_RECORD() @ L703", {
+test_that("Function SUBMISSION_RECORD() @ L567", {
   expect_equal(SUBMISSION_RECORD("@S1@"),
                tibble::tribble(~level,  ~record,   ~tag,                  ~value,
                                0, "@S1@", "SUBN",                      "",
@@ -151,7 +85,7 @@ test_that("Function SUBMISSION_RECORD() @ L703", {
 })
 
 
-test_that("Function SUBMITTER_RECORD() @ L760", {
+test_that("Function SUBMITTER_RECORD() @ L624", {
   expect_equal(SUBMITTER_RECORD("@S1@", "Joe Bloggs"),
                tibble::tribble(~level,  ~record,   ~tag,                  ~value,
                                0, "@S1@", "SUBM",                      "",
@@ -162,7 +96,7 @@ test_that("Function SUBMITTER_RECORD() @ L760", {
 })
 
 
-test_that("Function FOOTER_SECTION() @ L805", {
+test_that("Function FOOTER_SECTION() @ L669", {
   expect_equal(FOOTER_SECTION(),
                tibble::tribble(~level,  ~record,   ~tag, ~value,
                                0, "TR", "TRLR",     ""

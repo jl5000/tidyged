@@ -17,9 +17,6 @@
 #' corresponding number, for example; 4y 8m 10d.
 #' @param ancestral_file_number A unique permanent record number of an individual record 
 #' contained in the Family History Department's Ancestral File.
-#' @param approved_system_id A system identification name which was obtained through the GEDCOM 
-#' registration process. This name must be unique from any other product. Spaces within the name 
-#' must be substituted with an underscore.
 #' @param attribute_descriptor Text describing a particular characteristic or attribute assigned to an individual. 
 #' @param attribute_type An attribute which may have caused name, addresses, phone numbers, 
 #' family listings to be recorded. Its application is in helping to classify sources used for information.
@@ -39,7 +36,7 @@
 #' 1 = Questionable reliability of evidence 
 #' 2 = Secondary evidence, data officially recorded sometime after event
 #' 3 = Direct and primary evidence used, or by dominance of the evidence
-#' @param character_set A code value that represents the character set to be used to 
+#' @param character_encoding A code value that represents the character set to be used to 
 #' interpret this data. Currently, the preferred character set is ANSEL, which 
 #' includes ASCII as a subset. UNICODE is not widely supported by most operating systems; 
 #' therefore, GEDCOM produced using the UNICODE character set will be limited in its 
@@ -82,11 +79,12 @@
 #' particular source. Each enumeration is separated by a comma. Such as a parish register of births, 
 #' deaths, and marriages would be BIRT, DEAT, MARR. These can be enumerated over more than one
 #' vector element. 
-#' @param file_name The name of the GEDCOM transmission file. If the file name includes a file 
-#' extension it must be shown in the form (filename.ext).
+#' @param file_creation_date A date_exact() object giving the date that this transmission was created. 
 #' @param gedcom_content_description A note that a user enters to describe the contents of the 
 #' lineage-linked file in terms of "ancestors or descendants of" so that the person receiving 
 #' the data knows what genealogical information the transmission contains. 
+#' @param gedcom_file_name The name of the GEDCOM transmission file. If the file name includes a file 
+#' extension it must be shown in the form (filename.ext).
 #' @param gedcom_form The GEDCOM form used to construct this transmission. There maybe other 
 #' forms used such as CommSoft's "EVENT_LINEAGE_LINKED" but these specifications define only 
 #' the LINEAGE-LINKED Form. Systems will use this value to specify GEDCOM compatible with these specifications. 
@@ -159,6 +157,8 @@
 #' @param place_phonetic_variation A character vector of phonetic variations of the place name.
 #' @param place_romanized_variation A character vector of romanized variations of the place name. 
 #' @param possessions A list of possessions (real estate or other property) belonging to this individual.
+#' @param product_version_number An identifier that represents the version level assigned to the system. 
+#' It is defined and changed by the creators of the product.
 #' @param publication_date_source_data A date_exact() object giving the date this source was published or created.
 #' @param receiving_system_name The name of the system expected to process the GEDCOM-compatible transmission.
 #' @param relation_is_descriptor A word or phrase that states object 1's relation is object 2. 
@@ -192,17 +192,17 @@
 #' @param submitter_name The name of the submitter formatted for display and address generation. 
 #' @param submitter_registered_rfn A registered number of a submitter of Ancestral File data. 
 #' This number is used in subsequent submissions or inquiries by the submitter for identification purposes.
+#' @param system_id A system identification name which was obtained through the GEDCOM 
+#' registration process. This name must be unique from any other product. Spaces within the name 
+#' must be substituted with an underscore.
 #' @param temple_code An abbreviation of the temple in which LDS temple ordinances were performed.
 #' @param text_from_source A verbatim copy of any description contained within the source. 
 #' This indicates notes or text that are actually contained in the source document, not the submitter's 
 #' opinion about the source.  
-#' @param time_value,transmission_time The time of a specific event. 
-#' @param transmission_date A date_exact() object giving the date that this transmission was created. 
+#' @param time_value,file_creation_time The time of a specific event. 
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify this record. 
 #' @param user_reference_type A user-defined definition of the user_reference_number.
 #' @param user_text Comments or opinions from the submitter. 
-#' @param system_version_number An identifier that represents the version level assigned to the system. 
-#' It is defined and changed by the creators of the product.
 #' @param character_set_version_number An identifier that represents the version level assigned to the character set. 
 #' It is defined and changed by the creators of the product. 
 #' @param where_within_source Specific location with in the information referenced. 

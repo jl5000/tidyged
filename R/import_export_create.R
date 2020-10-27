@@ -88,9 +88,6 @@ export_gedcom <- function(gedcom, filepath) {
 #' obtained.  
 #' @param receiving_system The name of the system expected to process the GEDCOM-compatible transmission. 
 #' @param language The human language in which the data in the transmission is normally read or written.
-#' @param char_set A code value that represents the character set to be used to interpret this data. One of 
-#' "ANSEL", "UTF-8", "UNICODE", "ASCII". Defaults to "UTF-8".
-#' @param char_set_version The version number of the character set used.
 #'
 #' @return A minimal tidygedcom object 
 #' @export
@@ -101,24 +98,19 @@ gedcom <- function(submitter_details = subm(),
                    source_data_date = date_exact(),
                    source_data_copyright = character(),
                    receiving_system = character(),
-                   language = character(),
-                   char_set = "UTF-8",
-                   char_set_version = character()) {
+                   language = character()) {
   
   
-  HEADER_SECTION(xref_subm = assign_xref(xref_prefix_subm(), 1),
-                 approved_system_id = "tidygedcom",
-                 character_set = char_set,
-                 system_version_number = utils::packageVersion("tidygedcom"),
-                 name_of_source_data = source_data_name,
-                 publication_date_source_data = source_data_date,
-                 copyright_source_data = source_data_copyright,
-                 receiving_system_name = receiving_system,
-                 transmission_date = current_date(),
-                 copyright_gedcom_file = gedcom_copyright,
-                 character_set_version_number = char_set_version,
-                 language_of_text = language,
-                 gedcom_content_description = gedcom_description) %>% 
+  GEDCOM_HEADER(header_extension = 
+    LINEAGE_LINKED_HEADER_EXTENSION(name_of_source_data = source_data_name,
+                                    publication_date_source_data = source_data_date,
+                                    copyright_source_data = source_data_copyright,
+                                    receiving_system_name = receiving_system,
+                                    file_creation_date = current_date(),
+                                    language_of_text = language,
+                                    xref_subm = assign_xref(xref_prefix_subm(), 1),
+                                    copyright_gedcom_file = gedcom_copyright,
+                                    gedcom_content_description = gedcom_description)) %>% 
     dplyr::bind_rows(submitter_details, 
                      FOOTER_SECTION()) %>%
     set_class_to_tidygedcom()

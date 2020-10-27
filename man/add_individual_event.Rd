@@ -55,7 +55,6 @@ add_individual_event(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -88,7 +87,6 @@ add_individual_event_birth(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -121,7 +119,6 @@ add_individual_event_christening(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -154,7 +151,6 @@ add_individual_event_death(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -187,7 +183,6 @@ add_individual_event_burial(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -220,7 +215,6 @@ add_individual_event_cremation(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -253,7 +247,6 @@ add_individual_event_adoption(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -286,7 +279,6 @@ add_individual_event_baptism(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -319,7 +311,6 @@ add_individual_event_bar_mitzvah(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -352,7 +343,6 @@ add_individual_event_bas_mitzvah(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -385,7 +375,6 @@ add_individual_event_blessing(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -418,7 +407,6 @@ add_individual_event_adult_christening(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -451,7 +439,6 @@ add_individual_event_confirmation(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -484,7 +471,6 @@ add_individual_event_first_communion(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -517,7 +503,6 @@ add_individual_event_ordination(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -550,7 +535,6 @@ add_individual_event_naturalization(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -583,7 +567,6 @@ add_individual_event_emigration(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -616,7 +599,6 @@ add_individual_event_immigration(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -649,7 +631,6 @@ add_individual_event_census(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -682,7 +663,6 @@ add_individual_event_probate(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -715,7 +695,6 @@ add_individual_event_will(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -748,7 +727,6 @@ add_individual_event_graduation(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -781,7 +759,6 @@ add_individual_event_retirement(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -814,7 +791,6 @@ add_individual_event_other(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  restriction_notice = character(),
   family_xref = character(),
   adopting_parent = character()
 )
@@ -897,9 +873,6 @@ These could be xrefs to existing Note records.}
 entity that has responsibility for the event data.}
 
 \item{religious_affiliation}{A name of the religion with which this event was affiliated.}
-
-\item{restriction_notice}{Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more
-details.}
 
 \item{family_xref}{The xref of the family associated of which this individual is a child.
 Only used for birth, christening, or adoption events.}

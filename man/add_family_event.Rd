@@ -45,8 +45,7 @@ add_family_event(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_annulment(
@@ -78,8 +77,7 @@ add_family_event_annulment(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_census(
@@ -111,8 +109,7 @@ add_family_event_census(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_divorce(
@@ -144,8 +141,7 @@ add_family_event_divorce(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_divorce_filed(
@@ -177,8 +173,7 @@ add_family_event_divorce_filed(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_engagement(
@@ -210,8 +205,7 @@ add_family_event_engagement(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_marriage_banns(
@@ -243,8 +237,7 @@ add_family_event_marriage_banns(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_marriage_contract(
@@ -276,8 +269,7 @@ add_family_event_marriage_contract(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_marriage(
@@ -309,8 +301,7 @@ add_family_event_marriage(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_marriage_license(
@@ -342,8 +333,7 @@ add_family_event_marriage_license(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_marriage_settlement(
@@ -375,8 +365,7 @@ add_family_event_marriage_settlement(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_residence(
@@ -408,8 +397,7 @@ add_family_event_residence(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_family_event_other(
@@ -441,8 +429,7 @@ add_family_event_other(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 }
 \arguments{
@@ -528,9 +515,6 @@ These could be xrefs to existing Note records.}
 entity that has responsibility for the event data.}
 
 \item{religious_affiliation}{A name of the religion with which this event was affiliated.}
-
-\item{restriction_notice}{Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more
-details.}
 }
 \value{
 An updated tidygedcom object with an expanded Family record including

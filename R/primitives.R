@@ -139,10 +139,10 @@ validate_certainty_assessment <- function(input, max_dim) {
   choices <- as.character(0:3)
   validate_input_choice(input, choices)
 }
-validate_character_set <- function(input, max_dim) {
+validate_character_encoding <- function(input, max_dim) {
+  validate_input_size(input, max_dim, 5, 7)
   choices <- c("UTF-8", "UNICODE")
   validate_input_choice(input, choices)
-  validate_input_size(input, max_dim, 5, 7)
 }
 validate_copyright_gedcom_file <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
@@ -205,6 +205,15 @@ validate_gedcom_content_description <- function(input, max_dim) {
 validate_gedcom_file_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 5, 248)
 }
+validate_gedcom_form <- function(input, max_dim) {
+  validate_input_size(input, max_dim)
+  validate_input_pattern(input, "LINEAGE-LINKED")
+}
+validate_gedcom_version_number <- function(input, max_dim) {
+  validate_input_size(input, max_dim)
+  validate_input_pattern(input, "^\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?$")
+}
+
 validate_id_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 30)
 }
@@ -299,11 +308,11 @@ validate_physical_description <- function(input, max_dim) {
 }
 validate_place_latitude <- function(input, max_dim) {
   validate_input_size(input, max_dim, 2, 10)
-  validate_input_pattern(input, latitude_pattern)
+  validate_input_pattern(input, latitude_pattern())
 }
 validate_place_longitude <- function(input, max_dim) {
   validate_input_size(input, max_dim, 2, 11)
-  validate_input_pattern(input, longitude_pattern)
+  validate_input_pattern(input, longitude_pattern())
 }
 validate_place_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
@@ -415,7 +424,7 @@ validate_where_within_source <- function(input, max_dim) {
 }
 validate_xref <- function(input, max_dim) {
   validate_input_size(input, max_dim)
-  validate_input_pattern(input, xref_pattern)
+  validate_input_pattern(input, xref_pattern())
 }
 validate_year <- function(input, max_dim) {
   validate_input_size(input, max_dim, 3, 4)

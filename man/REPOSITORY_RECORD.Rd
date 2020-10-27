@@ -7,7 +7,7 @@
 REPOSITORY_RECORD(
   xref_repo,
   name_of_repository,
-  address = ADDRESS_STRUCTURE(character()),
+  address = ADDRESS_STRUCTURE(),
   notes = list(),
   user_reference_number = character(),
   user_reference_type = character(),

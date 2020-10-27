@@ -6,7 +6,6 @@
 \usage{
 INDIVIDUAL_RECORD(
   xref_indi,
-  restriction_notice = character(),
   names = list(),
   sex_value = character(),
   events = list(),
@@ -32,9 +31,6 @@ INDIVIDUAL_RECORD(
 }
 \arguments{
 \item{xref_indi}{An xref ID of an individual record.}
-
-\item{restriction_notice}{The restriction notice is defined for Ancestral File usage. Ancestral File
-download GEDCOM files may contain this data.}
 
 \item{names}{A list of PERSONAL_NAME_STRUCTURE() objects giving the names associated with this individual.}
 

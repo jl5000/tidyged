@@ -12,9 +12,7 @@ gedcom(
   source_data_date = date_exact(),
   source_data_copyright = character(),
   receiving_system = character(),
-  language = character(),
-  char_set = "UTF-8",
-  char_set_version = character()
+  language = character()
 )
 }
 \arguments{
@@ -37,11 +35,6 @@ obtained.}
 \item{receiving_system}{The name of the system expected to process the GEDCOM-compatible transmission.}
 
 \item{language}{The human language in which the data in the transmission is normally read or written.}
-
-\item{char_set}{A code value that represents the character set to be used to interpret this data. One of
-"ANSEL", "UTF-8", "UNICODE", "ASCII". Defaults to "UTF-8".}
-
-\item{char_set_version}{The version number of the character set used.}
 }
 \value{
 A minimal tidygedcom object

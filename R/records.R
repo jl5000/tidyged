@@ -12,160 +12,31 @@
 # For records, an additional finalising step is performed which fills missing ids
 
 
-#' Construct the HEADER_SECTION tibble
-#' 
-#' This function constructs a tibble representation of the HEADER_SECTION from the GEDCOM 5.5.1
-#' specification.
-#'
-#' @inheritParams parameter_definitions
-#' @param business_address An ADDRESS_STRUCTURE() object giving the address of the business.
-#' @tests
-#' expect_error(HEADER_SECTION())
-#' expect_error(HEADER_SECTION("@1@"))
-#' expect_error(HEADER_SECTION("@1@", approved_system_id = "system"))
-#' expect_error(HEADER_SECTION("@1@", approved_system_id = "system", character_set = "red"))
-#' 
-#' expect_equal(HEADER_SECTION("@1@", approved_system_id = "system", character_set = "UTF-8",
-#'                             xref_subn = "@2@", system_version_number = "1.0", name_of_product = "R",
-#'                             copyright_gedcom_file = "Do not copy", language = "English",
-#'                             gedcom_content_description = "This is a gedcom file"),
-#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
-#'                              0, "HD", "HEAD",                      "",
-#'                              1, "HD", "SOUR",                "system",
-#'                              2, "HD", "VERS",                   "1.0",
-#'                              2, "HD", "NAME",                     "R",
-#'                              1, "HD", "SUBM",                   "@1@",
-#'                              1, "HD", "SUBN",                   "@2@",
-#'                              1, "HD", "COPR",           "Do not copy",
-#'                              1, "HD", "GEDC",                      "",
-#'                              2, "HD", "VERS",                 "5.5.1",
-#'                              2, "HD", "FORM",        "Lineage-Linked",
-#'                              1, "HD", "CHAR",                 "UTF-8",
-#'                              1, "HD", "LANG",               "English",
-#'                              1, "HD", "NOTE", "This is a gedcom file"
-#'              ))
-#' 
-#' expect_equal(HEADER_SECTION("@1@", approved_system_id = "system", character_set = "UTF-8",
-#'                             xref_subn = "@2@", system_version_number = "1.0", name_of_product = "R",
-#'                             name_of_business = "RStudio", business_address = ADDRESS_STRUCTURE(c("Street", "City", "State")),
-#'                             name_of_source_data = "Source text", publication_date_source_data = date_exact(5, 9, 2005),
-#'                             copyright_source_data = "Source is protected", receiving_system_name = "Windows",
-#'                             transmission_date = date_exact(15, 10, 2020), file_name = "test.ged",
-#'                             copyright_gedcom_file = "Do not copy", language = "English", place_hierarchy = "here",
-#'                             gedcom_content_description = "This is a gedcom file"),
-#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
-#'                              0, "HD", "HEAD",                      "",
-#'                              1, "HD", "SOUR",                "system",
-#'                              2, "HD", "VERS",                   "1.0",
-#'                              2, "HD", "NAME",                     "R",
-#'                              2, "HD", "CORP",               "RStudio",
-#'                              3, "HD", "ADDR",                "Street",
-#'                              4, "HD", "CONT",                  "City",
-#'                              4, "HD", "CONT",                 "State",
-#'                              4, "HD", "ADR1",                  "City",
-#'                              4, "HD", "ADR2",                 "State",
-#'                              2, "HD", "DATA",           "Source text",
-#'                              3, "HD", "DATE",            "5 SEP 2005",
-#'                              3, "HD", "COPR",   "Source is protected",
-#'                              1, "HD", "DEST",               "Windows",
-#'                              1, "HD", "DATE",           "15 OCT 2020",
-#'                              1, "HD", "SUBM",                   "@1@",
-#'                              1, "HD", "SUBN",                   "@2@",
-#'                              1, "HD", "FILE",              "test.ged",
-#'                              1, "HD", "COPR",           "Do not copy",
-#'                              1, "HD", "GEDC",                      "",
-#'                              2, "HD", "VERS",                 "5.5.1",
-#'                              2, "HD", "FORM",        "Lineage-Linked",
-#'                              1, "HD", "CHAR",                 "UTF-8",
-#'                              1, "HD", "LANG",               "English",
-#'                              1, "HD", "PLAC",                      "",
-#'                              2, "HD", "FORM",                  "here",
-#'                              1, "HD", "NOTE", "This is a gedcom file"
-#'              ))
-#' @return A tidy tibble containing the HEADER part of a GEDCOM file.
-HEADER_SECTION <- function(xref_subm,
-                           approved_system_id,
-                           character_set,
-                           xref_subn = character(),
-                           system_version_number = character(),
-                           name_of_product = character(),
-                           name_of_business = character(),
-                           business_address = ADDRESS_STRUCTURE(character()),
-                           name_of_source_data = character(),
-                           publication_date_source_data = date_exact(),
-                           copyright_source_data = character(),
-                           receiving_system_name = character(),
-                           transmission_date = date_exact(),
-                           transmission_time = character(),
-                           file_name = character(),
-                           copyright_gedcom_file = character(),
-                           character_set_version_number = character(),
-                           language_of_text = character(),
-                           place_hierarchy = character(),
-                           gedcom_content_description = character()) {
+GEDCOM_HEADER <- function(character_encoding = "UTF-8",
+                          gedcom_version_number = "5.5.5",
+                          gedcom_form = "LINEAGE-LINKED",
+                          header_extension = LINEAGE_LINKED_HEADER_EXTENSION()) {
   
-  system_version_number <- as.character(system_version_number)
-  character_set_version_number <- as.character(character_set_version_number)
+  gedcom_version_number <- as.character(gedcom_version_number)
   
-  validate_xref(xref_subm, 1)
-  validate_approved_system_id(approved_system_id, 1)
-  approved_system_id <- stringr::str_replace_all(approved_system_id, " ", "_")
-  validate_character_set(character_set, 1)
-  validate_xref(xref_subn, 1)
-  validate_version_number(system_version_number, 1)
-  validate_name_of_product(name_of_product, 1)
-  validate_name_of_business(name_of_business, 1)
-  validate_name_of_source_data(name_of_source_data, 1)
-  validate_date_exact(publication_date_source_data, 1)
-  validate_copyright_source_data(copyright_source_data, 1)
-  validate_receiving_system_name(receiving_system_name, 1)
-  validate_date_exact(transmission_date, 1)
-  validate_time_value(transmission_time, 1)
-  validate_file_name(file_name, 1)
-  validate_copyright_gedcom_file(copyright_gedcom_file, 1)
-  validate_version_number(character_set_version_number, 1)
-  validate_language_of_text(language_of_text, 1)
-  validate_place_hierarchy(place_hierarchy, 1)
-  validate_gedcom_content_description(gedcom_content_description, 1)
+  validate_character_encoding(character_encoding, 1)
+  validate_gedcom_version_number(gedcom_version_number, 1)
+  validate_gedcom_form(gedcom_form, 1)
   
-  temp <- dplyr::bind_rows(
+  dplyr::bind_rows(
     tibble::tibble(level = 0, record = "HD", tag = "HEAD", value = ""),
-    tibble::tibble(level = 1, tag = "SOUR", value = approved_system_id),
-    tibble::tibble(level = 2, tag = "VERS", value = system_version_number),
-    tibble::tibble(level = 2, tag = "NAME", value = name_of_product),
-    tibble::tibble(level = 2, tag = "CORP", value = name_of_business),
-    business_address %>% add_levels(3),
-    tibble::tibble(level = 2, tag = "DATA", value = name_of_source_data),
-    tibble::tibble(level = 3, tag = "DATE", value = publication_date_source_data),
-    split_text(start_level = 3, top_tag = "COPR", text = copyright_source_data, char_limit = 90),
-    tibble::tibble(level = 1, tag = "DEST", value = receiving_system_name),
-    tibble::tibble(level = 1, tag = "DATE", value = transmission_date),
-    tibble::tibble(level = 2, tag = "TIME", value = transmission_time),
-    tibble::tibble(level = 1, tag = "SUBM", value = xref_subm),
-    tibble::tibble(level = 1, tag = "SUBN", value = xref_subn),
-    tibble::tibble(level = 1, tag = "FILE", value = file_name),
-    tibble::tibble(level = 1, tag = "COPR", value = copyright_gedcom_file),
     tibble::tibble(level = 1, tag = "GEDC", value = ""),
-    tibble::tibble(level = 2, tag = "VERS", value = "5.5.1"),
-    tibble::tibble(level = 2, tag = "FORM", value = "Lineage-Linked"),
-    tibble::tibble(level = 1, tag = "CHAR", value = character_set),
-    tibble::tibble(level = 2, tag = "VERS", value = character_set_version_number),
-    tibble::tibble(level = 1, tag = "LANG", value = language_of_text),
-    tibble::tibble(level = 1, tag = "PLAC", value = ""),
-    tibble::tibble(level = 2, tag = "FORM", value = place_hierarchy),
-    split_text(start_level = 1, top_tag = "NOTE", text = gedcom_content_description)
+    tibble::tibble(level = 2, tag = "VERS", value = gedcom_version_number),
+    tibble::tibble(level = 2, tag = "FORM", value = gedcom_form),
+    tibble::tibble(level = 3, tag = "VERS", value = gedcom_version_number),
+    tibble::tibble(level = 1, tag = "CHAR", value = character_encoding),
+    header_extension %>% dplyr::bind_rows() %>% add_levels(1),
   ) %>% 
     finalise()
   
-  # There should only be one FORM (Lineage linked) if no place_hierarchy defined
-  if (sum(temp$tag == "FORM") == 1) {
-    dplyr::filter(temp, tag != "PLAC")
-  } else {
-    temp
-  }
-  
-  
 }
+
+
 
 
 #' Construct the FAMILY_RECORD tibble
@@ -538,7 +409,7 @@ NOTE_RECORD <- function(xref_note,
 #' @return A tidy tibble containing a REPOSITORY_RECORD part of a GEDCOM file.
 REPOSITORY_RECORD <- function(xref_repo,
                               name_of_repository,
-                              address = ADDRESS_STRUCTURE(character()),
+                              address = ADDRESS_STRUCTURE(),
                               notes = list(),
                               user_reference_number = character(),
                               user_reference_type = character(),
@@ -680,64 +551,11 @@ SOURCE_RECORD <- function(xref_sour,
 }
 
 
-#' Construct the SUBMISSION_RECORD tibble
-#' 
-#' This function constructs a tibble representation of the SUBMISSION_RECORD from the GEDCOM 5.5.1
-#' specification.
-#'
-#' @inheritParams parameter_definitions
-#' @tests
-#' expect_equal(SUBMISSION_RECORD("@S1@"),
-#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
-#'                              0, "@S1@", "SUBN",                      "",
-#'                              1, "@S1@", "CHAN",                      "",
-#'                              2, "@S1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
-#'              ))
-#' @return A tidy tibble containing a SUBMISSION_RECORD part of a GEDCOM file.
-SUBMISSION_RECORD <- function(xref_subn,
-                              xref_subm = character(),
-                              name_of_family_file = character(),
-                              temple_code = character(),
-                              generations_of_ancestors = character(),
-                              generations_of_descendants = character(),
-                              ordinance_process_flag = character(),
-                              automated_record_id = character(),
-                              notes = list(),
-                              date_changed = CHANGE_DATE()){
- 
-  generations_of_ancestors <- as.character(generations_of_ancestors)
-  generations_of_descendants <- as.character(generations_of_descendants)
-  
-  validate_xref(xref_subn, 1)
-  validate_xref(xref_subm, 1)
-  validate_name_of_family_file(name_of_family_file, 1)
-  validate_temple_code(temple_code, 1)
-  validate_generations_of_ancestors(generations_of_ancestors, 1)
-  validate_generations_of_descendants(generations_of_descendants, 1)
-  validate_ordinance_process_flag(ordinance_process_flag, 1)
-  validate_automated_record_id(automated_record_id, 1)
-  
-  dplyr::bind_rows(
-    tibble::tibble(level = 0, record = xref_subn, tag = "SUBN", value = ""),
-    tibble::tibble(level = 1, tag = "SUBM", value = xref_subm),
-    tibble::tibble(level = 1, tag = "FAMF", value = name_of_family_file),
-    tibble::tibble(level = 1, tag = "TEMP", value = temple_code),
-    tibble::tibble(level = 1, tag = "ANCE", value = generations_of_ancestors),
-    tibble::tibble(level = 1, tag = "DESC", value = generations_of_descendants),
-    tibble::tibble(level = 1, tag = "ORDI", value = ordinance_process_flag),
-    tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
-    notes %>% dplyr::bind_rows() %>% add_levels(1),
-    date_changed %>% add_levels(1)
-  ) %>% 
-    finalise()
-  
-   
-}
 
 
 #' Construct the SUBMITTER_RECORD tibble
 #' 
-#' This function constructs a tibble representation of the SUBMITTER_RECORD from the GEDCOM 5.5.1
+#' This function constructs a tibble representation of the SUBMITTER_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
 #' @inheritParams parameter_definitions
@@ -753,20 +571,14 @@ SUBMISSION_RECORD <- function(xref_subn,
 #' @return A tidy tibble containing a SUBMITTER_RECORD part of a GEDCOM file.
 SUBMITTER_RECORD <- function(xref_subm,
                              submitter_name,
-                             address = ADDRESS_STRUCTURE(character()),
+                             address = ADDRESS_STRUCTURE(),
                              multimedia_links = list(),
-                             language_preference = character(),
-                             submitter_registered_rfn = character(),
                              automated_record_id = character(),
                              notes = list(),
                              date_changed = CHANGE_DATE()){
   
-  submitter_registered_rfn <- as.character(submitter_registered_rfn)
-  
   validate_xref(xref_subm, 1)
   validate_submitter_name(submitter_name, 1)
-  validate_language_preference(language_preference, 3)
-  validate_submitter_registered_rfn(submitter_registered_rfn, 1)
   validate_automated_record_id(automated_record_id, 1)
   
   dplyr::bind_rows(
@@ -774,8 +586,6 @@ SUBMITTER_RECORD <- function(xref_subm,
     tibble::tibble(level = 1, tag = "NAME", value = submitter_name),
     address %>% add_levels(1),
     multimedia_links %>% dplyr::bind_rows() %>% add_levels(1),
-    tibble::tibble(level = 1, tag = "LANG", value = language_preference),
-    tibble::tibble(level = 1, tag = "RFN", value = submitter_registered_rfn),
     tibble::tibble(level = 1, tag = "RIN", value = automated_record_id),
     notes %>% dplyr::bind_rows() %>% add_levels(1),
     date_changed %>% add_levels(1)

@@ -1,4 +1,70 @@
 
+#' Construct the LINEAGE_LINKED_HEADER_EXTENSION tibble
+#' 
+#' This function constructs a tibble representation of the LINEAGE_LINKED_HEADER_EXTENSION 
+#' from the GEDCOM 5.5.5 specification.
+#'
+#' @inheritParams parameter_definitions
+#' @param business_address An ADDRESS_STRUCTURE() object giving the address of the business.
+#'
+#' @return A tidy tibble containing the HEADER part of a GEDCOM file.
+LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
+                                            product_version_number = utils::packageVersion("tidygedcom"),
+                                            name_of_product = character(),
+                                            name_of_business = character(),
+                                            business_address = ADDRESS_STRUCTURE(),
+                                            name_of_source_data = character(),
+                                            publication_date_source_data = date_exact(),
+                                            copyright_source_data = character(),
+                                            receiving_system_name = character(),
+                                            file_creation_date = date_exact(),
+                                            file_creation_time = character(),
+                                            language_of_text = character(),
+                                            xref_subm = character(),
+                                            gedcom_file_name = character(),
+                                            copyright_gedcom_file = character(),
+                                            gedcom_content_description = character()) {
+  
+  product_version_number <- as.character(product_version_number)
+  
+  validate_system_id(system_id, 1)
+  validate_product_version_number(product_version_number, 1)
+  validate_name_of_product(name_of_product, 1)
+  validate_name_of_business(name_of_business, 1)
+  validate_name_of_source_data(name_of_source_data, 1)
+  validate_date_exact(publication_date_source_data, 1)
+  validate_copyright_source_data(copyright_source_data, 1)
+  validate_receiving_system_name(receiving_system_name, 1)
+  validate_date_exact(file_creation_date, 1)
+  validate_time_value(file_creation_time, 1)
+  validate_language_of_text(language_of_text, 1)
+  validate_xref(xref_subm, 1)
+  validate_gedcom_file_name(gedcom_file_name, 1)
+  validate_copyright_gedcom_file(copyright_gedcom_file, 1)
+  validate_gedcom_content_description(gedcom_content_description, 1)
+  
+  dplyr::bind_rows(
+    tibble::tibble(level = 0, tag = "DEST", value = receiving_system_name),
+    tibble::tibble(level = 0, tag = "SOUR", value = system_id),
+    tibble::tibble(level = 1, tag = "VERS", value = product_version_number),
+    tibble::tibble(level = 1, tag = "NAME", value = name_of_product),
+    tibble::tibble(level = 1, tag = "CORP", value = name_of_business),
+    business_address %>% add_levels(2),
+    tibble::tibble(level = 1, tag = "DATA", value = name_of_source_data),
+    tibble::tibble(level = 2, tag = "DATE", value = publication_date_source_data),
+    tibble::tibble(level = 2, tag = "COPR", value = copyright_source_data),
+    tibble::tibble(level = 0, tag = "DATE", value = file_creation_date),
+    tibble::tibble(level = 1, tag = "TIME", value = file_creation_time),
+    tibble::tibble(level = 0, tag = "LANG", value = language_of_text),
+    tibble::tibble(level = 0, tag = "SUBM", value = xref_subm),
+    tibble::tibble(level = 0, tag = "FILE", value = gedcom_file_name),
+    tibble::tibble(level = 0, tag = "COPR", value = copyright_gedcom_file),
+    tibble::tibble(level = 0, tag = "NOTE", value = gedcom_content_description)
+  ) 
+  
+}
+
+
 #' Construct the ADDRESS_STRUCTURE tibble
 #' 
 #' This function constructs a tibble representation of the ADDRESS_STRUCTURE from the GEDCOM 5.5.5
@@ -657,7 +723,7 @@ NOTE_STRUCTURE <- function(xref_note = character(),
   
     validate_user_text(user_text, 1)
     
-    split_text(start_level = 0, top_tag = "NOTE", text = user_text)  
+    tibble::tibble(level = 0, tag = "NOTE", value = user_text)  
   }
   
 }

@@ -46,8 +46,7 @@ add_individual_attribute(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_caste(
@@ -78,8 +77,7 @@ add_individual_attribute_caste(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_phys_descr(
@@ -110,8 +108,7 @@ add_individual_attribute_phys_descr(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_education(
@@ -142,8 +139,7 @@ add_individual_attribute_education(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_national_id(
@@ -174,8 +170,7 @@ add_individual_attribute_national_id(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_nationality(
@@ -206,8 +201,7 @@ add_individual_attribute_nationality(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_num_children(
@@ -238,8 +232,7 @@ add_individual_attribute_num_children(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_num_marriages(
@@ -270,8 +263,7 @@ add_individual_attribute_num_marriages(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_occupation(
@@ -302,8 +294,7 @@ add_individual_attribute_occupation(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_possessions(
@@ -334,8 +325,7 @@ add_individual_attribute_possessions(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_religion(
@@ -366,8 +356,7 @@ add_individual_attribute_religion(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_residence(
@@ -398,8 +387,7 @@ add_individual_attribute_residence(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_social_sec_num(
@@ -430,8 +418,7 @@ add_individual_attribute_social_sec_num(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_nobility_title(
@@ -462,8 +449,7 @@ add_individual_attribute_nobility_title(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 
 add_individual_attribute_other(
@@ -494,8 +480,7 @@ add_individual_attribute_other(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character(),
-  restriction_notice = character()
+  religious_affiliation = character()
 )
 }
 \arguments{
@@ -578,9 +563,6 @@ These could be xrefs to existing Note records.}
 entity that has responsibility for the event data.}
 
 \item{religious_affiliation}{A name of the religion with which this event was affiliated.}
-
-\item{restriction_notice}{Only for Ancestral File usage. See the Gedcom 5.5.1 Standard for more
-details.}
 }
 \value{
 An updated tidygedcom object with an expanded Individual record including

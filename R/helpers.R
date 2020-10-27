@@ -13,48 +13,43 @@ is_record_type <- function(gedcom, xref, tag) {
 #'
 #' @return A logical indicating whether the record is of a particular type.
 #' @export
-is_individual <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_indi()) }
+is_individual <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_indi) }
 
 #' @export
 #' @rdname is_individual
-is_family <- function(gedcom, xref)     { is_record_type(gedcom, xref, record_tag_fam())  }
+is_family <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_fam) }
 
 #' @export
 #' @rdname is_individual
-is_submitter <- function(gedcom, xref)  { is_record_type(gedcom, xref, record_tag_subm()) }
+is_submitter <- function(gedcom, xref)  { is_record_type(gedcom, xref, .pkgenv$record_tag_subm) }
 
 #' @export
 #' @rdname is_individual
-is_submission <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_subn()) }
+is_repository <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_repo) }
 
 #' @export
 #' @rdname is_individual
-is_repository <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_repo()) }
+is_multimedia <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_obje) }
 
 #' @export
 #' @rdname is_individual
-is_multimedia <- function(gedcom, xref) { is_record_type(gedcom, xref, record_tag_obje()) }
+is_note <- function(gedcom, xref)       { is_record_type(gedcom, xref, .pkgenv$record_tag_note) }
 
 #' @export
 #' @rdname is_individual
-is_note <- function(gedcom, xref)       { is_record_type(gedcom, xref, record_tag_note()) }
-
-#' @export
-#' @rdname is_individual
-is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, record_tag_sour()) }
+is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_sour) }
 
 xrefs_record_type <- function(gedcom, record_tag) {
   dplyr::filter(gedcom, level == 0 & tag == record_tag)$record
 }
 
-xrefs_individuals <-  function(gedcom) {  xrefs_record_type(gedcom, record_tag_indi()) }
-xrefs_families <-     function(gedcom) {  xrefs_record_type(gedcom, record_tag_fam())  }
-xrefs_submitters <-   function(gedcom) {  xrefs_record_type(gedcom, record_tag_subm()) }
-xrefs_submission <-   function(gedcom) {  xrefs_record_type(gedcom, record_tag_subn()) }
-xrefs_sources <-      function(gedcom) {  xrefs_record_type(gedcom, record_tag_sour()) }
-xrefs_repositories <- function(gedcom) {  xrefs_record_type(gedcom, record_tag_repo()) }
-xrefs_notes <-        function(gedcom) {  xrefs_record_type(gedcom, record_tag_note()) }
-xrefs_multimedia <-   function(gedcom) {  xrefs_record_type(gedcom, record_tag_obje()) }
+xrefs_individuals <-  function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_indi) }
+xrefs_families <-     function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_fam)  }
+xrefs_submitters <-   function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_subm) }
+xrefs_sources <-      function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_sour) }
+xrefs_repositories <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_repo) }
+xrefs_notes <-        function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_note) }
+xrefs_multimedia <-   function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_obje) }
 
 set_class_to_tidygedcom <- function(gedcom) {
   class(gedcom) <- c("tidygedcom", "tbl_df", "tbl", "data.frame")

@@ -58,7 +58,7 @@ add_source <- function(gedcom,
                        data_notes = character(),
                        source_notes = character()) {
   
-  xref <- assign_xref(xref_prefix_sour(), gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
   
   dat_notes <- purrr::map(data_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
@@ -114,7 +114,7 @@ add_source_repository_citation <- function(gedcom,
                                            media_type = character(),
                                            citation_notes = character()) {
   
-  check_active_record_valid(gedcom, record_string_sour(), is_source)
+  check_active_record_valid(gedcom, .pkgenv$record_string_sour, is_source)
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
@@ -137,7 +137,7 @@ add_source_repository_citation <- function(gedcom,
 remove_source_repository_citation <- function(gedcom,
                                               repository) {
   
-  check_active_record_valid(gedcom, record_string_sour(), is_source)
+  check_active_record_valid(gedcom, .pkgenv$record_string_sour, is_source)
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
@@ -153,7 +153,7 @@ remove_source_repository_citation <- function(gedcom,
 #' @export
 remove_source <- function(gedcom) {
   
-  check_active_record_valid(gedcom, record_string_sour(), is_source)
+  check_active_record_valid(gedcom, .pkgenv$record_string_sour, is_source)
   
   gedcom %>% 
     remove_section(1, "SOUR", get_active_record(.)) %>% 

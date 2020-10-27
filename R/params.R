@@ -79,22 +79,22 @@
 #' particular source. Each enumeration is separated by a comma. Such as a parish register of births, 
 #' deaths, and marriages would be BIRT, DEAT, MARR. These can be enumerated over more than one
 #' vector element. 
-#' @param file_creation_date A date_exact() object giving the date that this transmission was created. 
+#' @param file_creation_date A date_exact() object giving the date that this file was created. 
 #' @param gedcom_content_description A note that a user enters to describe the contents of the 
 #' lineage-linked file in terms of "ancestors or descendants of" so that the person receiving 
-#' the data knows what genealogical information the transmission contains. 
-#' @param gedcom_file_name The name of the GEDCOM transmission file. If the file name includes a file 
+#' the data knows what genealogical information the file contains. 
+#' @param gedcom_file_name The name of the GEDCOM file. If the file name includes a file 
 #' extension it must be shown in the form (filename.ext).
-#' @param gedcom_form The GEDCOM form used to construct this transmission. There maybe other 
+#' @param gedcom_form The GEDCOM form used to construct this file. There maybe other 
 #' forms used such as CommSoft's "EVENT_LINEAGE_LINKED" but these specifications define only 
 #' the LINEAGE-LINKED Form. Systems will use this value to specify GEDCOM compatible with these specifications. 
-#' @param generations_of_ancestors The number of generations of ancestors included in this transmission. 
+#' @param generations_of_ancestors The number of generations of ancestors included in this file. 
 #' This value is usually provided when FamilySearch programs build a GEDCOM file for a patron requesting 
 #' a download of ancestors.
-#' @param generations_of_descendants The number of generations of descendants included in this transmission. 
+#' @param generations_of_descendants The number of generations of descendants included in this file. 
 #' This value is usually provided when FamilySearch programs build a GEDCOM file for a patron requesting 
 #' a download of descendants. 
-#' @param language_of_text The human language in which the data in the transmission is normally read or 
+#' @param language_of_text The human language in which the data in the file is normally read or 
 #' written. It is used primarily by programs to select language-specific sorting sequences and phonetic 
 #' name matching algorithms.
 #' @param language_preference The language in which a person prefers to communicate. Multiple language 
@@ -107,10 +107,10 @@
 #' Any linked files should contain the data required, in the indicated format, to process the file data. 
 #' @param name_of_business Name of the business, corporation, or person that produced or commissioned the product.
 #' @param name_of_family_file Name under which family names for ordinances are stored in the temple's family file.
-#' @param name_of_product The name of the software product that produced this transmission.
+#' @param name_of_product The name of the software product that produced this file.
 #' @param name_of_repository The official name of the archive in which the stated source material is stored.
 #' @param name_of_source_data The name of the electronic data source that was used to obtain the data in 
-#' this transmission. For example, the data may have been obtained from a CD-ROM disc that was named 
+#' this file. For example, the data may have been obtained from a CD-ROM disc that was named 
 #' "U.S. 1880 CENSUS CD-ROM vol. 13."
 #' @param name_personal The surname of an individual, if known, is enclosed between two slash (/) characters. 
 #' The order of the name parts should be the order that the person would, by custom of their culture, 
@@ -160,7 +160,7 @@
 #' @param product_version_number An identifier that represents the version level assigned to the system. 
 #' It is defined and changed by the creators of the product.
 #' @param publication_date_source_data A date_exact() object giving the date this source was published or created.
-#' @param receiving_system_name The name of the system expected to process the GEDCOM-compatible transmission.
+#' @param receiving_system_name The name of the system expected to process the GEDCOM-compatible file.
 #' @param relation_is_descriptor A word or phrase that states object 1's relation is object 2. 
 #' @param religious_affiliation A name of the religion with which this person, event, or record was affiliated.
 #' @param responsible_agency The organization, institution, corporation, person, or other entity that has 

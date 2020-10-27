@@ -41,7 +41,7 @@ add_multimedia <- function(gedcom,
                            automated_record_id = character(),
                            multimedia_notes = character()) {
   
-  xref <- assign_xref(xref_prefix_obje(), gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_obje, gedcom = gedcom)
   
   media_notes <- purrr::map(multimedia_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
@@ -69,7 +69,7 @@ add_multimedia <- function(gedcom,
 #' @export
 remove_multimedia <- function(gedcom) {
   
-  check_active_record_valid(gedcom, record_string_obje(), is_multimedia)
+  check_active_record_valid(gedcom, .pkgenv$record_string_obje, is_multimedia)
   
   gedcom %>% 
     dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 

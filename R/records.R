@@ -49,8 +49,6 @@ GEDCOM_HEADER <- function(character_encoding = "UTF-8",
 #' @param xref_husb An xref ID of the husband.
 #' @param xref_wife An xref ID of the wife.
 #' @param xrefs_chil A vector of xref IDs of children in this family.
-#' @param xrefs_subm A vector of xref IDs of submitters of this record.
-#' @param lds_spouse_sealings Not used.
 #' @tests
 #' expect_error(FAMILY_RECORD("@F1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
 #' expect_equal(FAMILY_RECORD("@F1@"),
@@ -60,21 +58,19 @@ GEDCOM_HEADER <- function(character_encoding = "UTF-8",
 #'                              2, "@F1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
 #' @return A tidy tibble containing a FAMILY_RECORD part of a GEDCOM file.
-FAMILY_RECORD <- function(xref_fam,
-                          events = list(),
-                          xref_husb = character(),
-                          xref_wife = character(),
-                          xrefs_chil = character(),
-                          count_of_children = character(),
-                          xrefs_subm = character(),
-                          lds_spouse_sealings = list(),
-                          user_reference_number = character(),
-                          user_reference_type = character(),
-                          automated_record_id = character(),
-                          date_changed = CHANGE_DATE(),
-                          notes = list(),
-                          source_citations = list(),
-                          multimedia_links = list()){
+FAMILY_GROUP_RECORD <- function(xref_fam,
+                                events = list(),
+                                xref_husb = character(),
+                                xref_wife = character(),
+                                xrefs_chil = character(),
+                                count_of_children = character(),
+                                user_reference_number = character(),
+                                user_reference_type = character(),
+                                automated_record_id = character(),
+                                date_changed = CHANGE_DATE(),
+                                notes = list(),
+                                source_citations = list(),
+                                multimedia_links = list()){
   
   children_count <- as.character(count_of_children)
   user_reference_number <- as.character(user_reference_number)
@@ -87,7 +83,6 @@ FAMILY_RECORD <- function(xref_fam,
   validate_xref(xref_wife, 1)
   validate_xref(xrefs_chil, 100)
   validate_count_of_children(count_of_children, 1)
-  validate_xref(xrefs_subm, 1000)
   validate_user_reference_number(user_reference_number, 1000)
   validate_user_reference_type(user_reference_type, 1000)
   validate_automated_record_id(automated_record_id, 1)
@@ -99,9 +94,7 @@ FAMILY_RECORD <- function(xref_fam,
     tibble::tibble(level = 1, tag = "HUSB", value = xref_husb),
     tibble::tibble(level = 1, tag = "WIFE", value = xref_wife),
     tibble::tibble(level = 1, tag = "CHIL", value = xrefs_chil),
-    tibble::tibble(level = 1, tag = "NCHI", value = count_of_children),
-    tibble::tibble(level = 1, tag = "SUBM", value = xrefs_subm),
-    lds_spouse_sealings %>% dplyr::bind_rows() %>% add_levels(1)
+    tibble::tibble(level = 1, tag = "NCHI", value = count_of_children)
   )
   
   for (i in seq_along(user_reference_number)) {
@@ -136,19 +129,12 @@ FAMILY_RECORD <- function(xref_fam,
 #' this individual.
 #' @param attributes A list of INDIVIDUAL_ATTRIBUTE_STRUCTURE() objects giving the attributes associated 
 #' with this individual.
-#' @param ordinance Not used.
 #' @param child_to_family_links A list of CHILD_TO_FAMILY_LINK() objects giving the details of families
 #' this individual is a child of.
 #' @param spouse_to_family_links A list of SPOUSE_TO_FAMILY_LINK() objects giving the details of families
 #' this individual is a spouse of.
-#' @param xrefs_subm A vector of xref IDs of submitters of this record.
 #' @param associations A list of ASSOCIATION_STRUCTURE() objects giving the details of individuals this
 #' individual is associated with.
-#' @param xrefs_alia A vector of xref IDs of individual aliases of this individual.
-#' @param xrefs_subm_interested_in_ancestors A vector of xref IDs of submitters with an interest in
-#' ancestors of this individual.
-#' @param xrefs_subm_interested_in_descendants A vector of xref IDs of submitters with an interest in
-#' descendants of this individual.
 #' @tests
 #' expect_error(INDIVIDUAL_RECORD("@I1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
 #' expect_equal(INDIVIDUAL_RECORD("@I1@"),
@@ -163,16 +149,9 @@ INDIVIDUAL_RECORD <- function(xref_indi,
                               sex_value = character(),
                               events = list(),
                               attributes = list(),
-                              ordinance = list(),
                               child_to_family_links = list(),
                               spouse_to_family_links = list(),
-                              xrefs_subm = character(),
                               associations = list(),
-                              xrefs_alia = character(),
-                              xrefs_subm_interested_in_ancestors = character(),
-                              xrefs_subm_interested_in_descendants = character(),
-                              permanent_record_file_number = character(),
-                              ancestral_file_number = character(),
                               user_reference_number = character(),
                               user_reference_type = character(),
                               automated_record_id = character(),
@@ -181,8 +160,6 @@ INDIVIDUAL_RECORD <- function(xref_indi,
                               source_citations = list(),
                               multimedia_links = list()) {
   
-  permanent_record_file_number <- as.character(permanent_record_file_number)
-  ancestral_file_number <- as.character(ancestral_file_number)
   user_reference_number <- as.character(user_reference_number)
   
   if (length(user_reference_type) > 0 & length(user_reference_type) != length(user_reference_number))
@@ -190,12 +167,6 @@ INDIVIDUAL_RECORD <- function(xref_indi,
   
   validate_xref(xref_indi, 1)
   validate_sex_value(sex_value, 1)
-  validate_xref(xrefs_subm, 1000)
-  validate_xref(xrefs_alia, 1000)
-  validate_xref(xrefs_subm_interested_in_ancestors, 1000)
-  validate_xref(xrefs_subm_interested_in_descendants, 1000)
-  validate_permanent_record_file_number(permanent_record_file_number, 1)
-  validate_ancestral_file_number(ancestral_file_number, 1)
   validate_user_reference_number(user_reference_number, 1000)
   validate_user_reference_type(user_reference_type, 1000)
   validate_automated_record_id(automated_record_id, 1)
@@ -207,16 +178,9 @@ INDIVIDUAL_RECORD <- function(xref_indi,
     tibble::tibble(level = 1, tag = "SEX", value = sex_value),
     events %>% dplyr::bind_rows() %>% add_levels(1),
     attributes %>% dplyr::bind_rows() %>% add_levels(1),
-    ordinance %>% dplyr::bind_rows() %>% add_levels(1),
     child_to_family_links %>% dplyr::bind_rows() %>% add_levels(1),
     spouse_to_family_links %>% dplyr::bind_rows() %>% add_levels(1),
-    tibble::tibble(level = 1, tag = "SUBM", value = xrefs_subm),
-    associations %>% dplyr::bind_rows() %>%  add_levels(1),
-    tibble::tibble(level = 1, tag = "ALIA", value = xrefs_alia),
-    tibble::tibble(level = 1, tag = "ANCI", value = xrefs_subm_interested_in_ancestors),
-    tibble::tibble(level = 1, tag = "DESI", value = xrefs_subm_interested_in_descendants),
-    tibble::tibble(level = 1, tag = "RFN", value = permanent_record_file_number),
-    tibble::tibble(level = 1, tag = "AFN", value = ancestral_file_number)
+    associations %>% dplyr::bind_rows() %>%  add_levels(1)
   )
   
   for (i in seq_along(user_reference_number)) {
@@ -347,7 +311,7 @@ MULTIMEDIA_RECORD <- function(xref_obje,
 #'              ))
 #' @return A tidy tibble containing a NOTE_RECORD part of a GEDCOM file.
 NOTE_RECORD <- function(xref_note,
-                        submitter_text,
+                        user_text,
                         user_reference_number = character(),
                         user_reference_type = character(),
                         automated_record_id = character(),
@@ -360,12 +324,12 @@ NOTE_RECORD <- function(xref_note,
     stop("The number of user reference types must be the same as the number of user reference numbers")
   
   validate_xref(xref_note, 1)
-  validate_submitter_text(submitter_text, 1)
+  validate_user_text(user_text, 1)
   validate_user_reference_number(user_reference_number, 1000)
   validate_user_reference_type(user_reference_type, 1000)
   validate_automated_record_id(automated_record_id, 1)
   
-  temp <- split_text(start_level = 0, top_tag = "NOTE", text = submitter_text)
+  temp <- tibble::tibble(level = 0, record = xref_note, tag = "NOTE", value = user_text)
   
   for (i in seq_along(user_reference_number)) {
     temp <- dplyr::bind_rows(temp,
@@ -381,8 +345,6 @@ NOTE_RECORD <- function(xref_note,
                    source_citations %>% dplyr::bind_rows() %>% add_levels(1),
                    date_changed %>% add_levels(1)
   ) %>% 
-    dplyr::mutate(record = dplyr::if_else(tag == "NOTE", xref_note, NA_character_),
-                  .after = level) %>% 
     finalise()
   
   

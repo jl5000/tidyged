@@ -92,7 +92,7 @@ add_individual_event <- function(gedcom,
                                  family_xref = character(),
                                  adopting_parent = character()) {
   
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
   address_lines <- c(address_first_line, city, state, postal_code, country)
   

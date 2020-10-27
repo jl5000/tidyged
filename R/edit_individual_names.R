@@ -39,7 +39,7 @@ add_individual_names <- function(gedcom,
                                  suffix = character(),
                                  name_notes = character()) {
   
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
   nam_notes <- purrr::map(name_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
@@ -102,7 +102,7 @@ add_individual_names_var <- function(gedcom,
                                      suffix = character(),
                                      variation_notes = character()) {
   
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
   name_notes <- purrr::map(variation_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
@@ -170,7 +170,7 @@ add_individual_names_var <- function(gedcom,
 remove_individual_name <- function(gedcom,
                                     name) {
   
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
   remove_section(gedcom, 1, "NAME", name,
                  xrefs = get_active_record(gedcom))
@@ -192,7 +192,7 @@ remove_individual_name_var <- function(gedcom,
                                        variation_name,
                                        phonetic_variation = TRUE) {
   
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
   remove_section(gedcom, 2, if_else(phonetic_variation, "FONE", "ROMN"), 
                  variation_name, xrefs = get_active_record(gedcom))

@@ -23,7 +23,7 @@ add_note <- function(gedcom,
                      user_reference_type = character(),
                      automated_record_id = character()) {
   
-  xref <- assign_xref(xref_prefix_note(), gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_note, gedcom = gedcom)
   
   note_record <- NOTE_RECORD(xref_note = xref,
                              submitter_text = text,
@@ -44,7 +44,7 @@ add_note <- function(gedcom,
 #' @export
 remove_note <- function(gedcom) {
   
-  check_active_record_valid(gedcom, record_string_note(), is_note)
+  check_active_record_valid(gedcom, .pkgenv$record_string_note, is_note)
   
   gedcom %>% 
     dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 

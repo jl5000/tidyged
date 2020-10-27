@@ -53,17 +53,18 @@ add_family_group <- function(gedcom,
                              user_reference_number = character(),
                              user_reference_type = character(),
                              automated_record_id = character(),
-                             family_notes = character()) {
+                             family_notes = character(),
+                             multimedia_links = character()) {
   
-  xref <- assign_xref(xref_prefix_fam(), gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_fam, gedcom = gedcom)
   
   xref_husb <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), husband)
   xref_wife <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), wife)
   xrefs_chil <- purrr::map_chr(children, find_xref,
                                gedcom = gedcom, record_xrefs = xrefs_individuals(gedcom), 
                                tags = c("NAME", "ROMN", "FONE"))
-  xrefs_subm <- purrr::map_chr(submitters, find_xref, 
-                               gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
+  media_links <- purrr::map_chr(multimedia_links, find_xref, 
+                               gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE")
   
   fam_notes <- purrr::map(family_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
@@ -122,7 +123,7 @@ add_family_group <- function(gedcom,
 #' @export
 remove_family <- function(gedcom, remove_individuals = FALSE) {
   
-  check_active_record_valid(gedcom, record_string_fam(), is_family)
+  check_active_record_valid(gedcom, .pkgenv$record_string_fam, is_family)
   active_record <- get_active_record(gedcom)
   
   ind_xrefs <- unique(dplyr::filter(gedcom, record == active_record,

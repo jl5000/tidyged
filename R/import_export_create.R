@@ -14,17 +14,21 @@
 #' import_gedcom("C:/my_family.ged")
 #' }
 import_gedcom <- function(filepath) {
+  # TODO: Byte Order Mark, reject leading whitespace 
+  
+  gedcom_encoding <- read_gedcom_encoding(filepath)
   
   if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")
-    warning("GEDCOM files usually have a .ged extension. Continuing anyway.")
+    stop("GEDCOM file should have a .ged extension")
   
-  ged <- readr::read_lines(filepath) %>% 
-    stringr::str_trim() %>% 
+  ged <- readr::read_lines(filepath, locale = readr::locale(encoding = gedcom_encoding)) %>% 
+    stringr::str_trim(side = "left") %>% 
     tibble::tibble(value = .) %>%
     tidyr::extract(value, into = c("level", "record", "tag", "value"), 
-                   regex = "^(.) (@.+@)? ?(\\w{3,5}) ?(.*)$") %>%
+                   regex = "^(\\d) (@.+@)? ?(\\w{3,5}) ?(.*)$") %>%
     dplyr::mutate(record = dplyr::if_else(tag == "HEAD", "HD", record),
-                  record = dplyr::if_else(tag == "TRLR", "TR", record)) %>%
+                  record = dplyr::if_else(tag == "TRLR", "TR", record),
+                  record = dplyr::na_if(record, "")) %>%
     tidyr::fill(record) %>% 
     dplyr::mutate(level = as.numeric(level),
                   value = stringr::str_replace_all(value, "@@", "@")) %>% 
@@ -36,6 +40,19 @@ import_gedcom <- function(filepath) {
 }
 
 
+read_gedcom_encoding <- function(filepath) {
+  
+  if(all.equal(as.character(readBin(filepath, 'raw', 3)), .pkgenv$BOM_UTF8)) {
+    return("UTF-8")  
+  } else if(all.equal(as.character(readBin(filepath, 'raw', 2)), .pkgenv$BOM_UTF16_BE)) {
+    return("UTF-16BE")
+  } else if(all.equal(as.character(readBin(filepath, 'raw', 2)), .pkgenv$BOM_UTF16_LE)) {
+    return("UTF-16LE")
+  } else {
+    stop("Invalid file encoding. Only UTF-8 and UTF-16 are supported")
+  }
+  
+}
 
 #' Save a tidygedcom object to disk as a GEDCOM file
 #'
@@ -45,6 +62,7 @@ import_gedcom <- function(filepath) {
 #' @return Nothing
 #' @export
 export_gedcom <- function(gedcom, filepath) {
+  # TODO: CONC/CONT lines
   
   if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")
     warning("Output is not being saved as a GEDCOM file (*.ged)")
@@ -79,15 +97,15 @@ export_gedcom <- function(gedcom, filepath) {
 #' @param submitter_details Details of the submitter of the file (you?) using the subm() function. If no submitter
 #' name is provided, the username is used.
 #' @param gedcom_description A note to describe the contents of the file in terms of "ancestors or descendants of" 
-#' so that the person receiving the data knows what genealogical information the transmission contains.
+#' so that the person receiving the data knows what genealogical information the file contains.
 #' @param gedcom_copyright A copyright statement needed to protect the copyrights of the submitter of this GEDCOM file.
-#' @param source_data_name The name of the electronic data source that was used to obtain the data in this transmission. 
+#' @param source_data_name The name of the electronic data source that was used to obtain the data in this file. 
 #' @param source_data_date The date this source was created or published. Ensure you create this date with the 
 #' date_exact() function.
 #' @param source_data_copyright A copyright statement required by the owner of data from which this information was 
 #' obtained.  
-#' @param receiving_system The name of the system expected to process the GEDCOM-compatible transmission. 
-#' @param language The human language in which the data in the transmission is normally read or written.
+#' @param receiving_system The name of the system expected to process the GEDCOM-compatible file. 
+#' @param language The human language in which the data in the file is normally read or written.
 #'
 #' @return A minimal tidygedcom object 
 #' @export
@@ -108,7 +126,7 @@ gedcom <- function(submitter_details = subm(),
                                     receiving_system_name = receiving_system,
                                     file_creation_date = current_date(),
                                     language_of_text = language,
-                                    xref_subm = assign_xref(xref_prefix_subm(), 1),
+                                    xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
                                     copyright_gedcom_file = gedcom_copyright,
                                     gedcom_content_description = gedcom_description)) %>% 
     dplyr::bind_rows(submitter_details, 

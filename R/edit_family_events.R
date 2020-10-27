@@ -44,7 +44,7 @@ add_family_event <- function(gedcom,
                              responsible_agency = character(),
                              religious_affiliation = character()) {
   
-  check_active_record_valid(gedcom, record_string_fam(), is_family)
+  check_active_record_valid(gedcom, .pkgenv$record_string_fam, is_family)
   
 }
 

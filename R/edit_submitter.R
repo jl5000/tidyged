@@ -3,7 +3,7 @@
 #' Add a Submitter record to a tidygedcom object
 #'
 #' @details The submitter record identifies an individual or organization that contributed 
-#' information contained in the GEDCOM transmission.
+#' information contained in the GEDCOM file.
 #' 
 #' This function will automatically assign a unique xref for this record.
 #' 
@@ -46,7 +46,7 @@ add_submitter <- function(gedcom,
                           automated_record_id = character(),
                           submitter_notes = character()) {
   
-  xref <- assign_xref(xref_prefix_subm(), gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_subm, gedcom = gedcom)
   
   address_lines <- c(address_first_line, city, state, postal_code, country)
   
@@ -95,7 +95,7 @@ add_submitter <- function(gedcom,
 #' @export
 remove_submitter <- function(gedcom) {
   
-  check_active_record_valid(gedcom, record_string_subm(), is_submitter)
+  check_active_record_valid(gedcom, .pkgenv$record_string_subm, is_submitter)
   
   if(dplyr::filter(gedcom, record == "HD", tag == "SUBM")$value == get_active_record(gedcom))
     stop("Submitter is GEDCOM file submitter - cannot remove")
@@ -113,7 +113,7 @@ remove_submitter <- function(gedcom) {
 #' new tidygedcom object.
 #' 
 #' This submitter record identifies the individual or organization that contributed 
-#' information contained in the GEDCOM transmission.
+#' information contained in the GEDCOM file.
 #' 
 #' The function will automatically split the submitter_notes onto separate lines if the 
 #' character limit in the Gedcom standard is exceeded.
@@ -165,7 +165,7 @@ subm <- function(name = unname(Sys.info()["user"]),
   subm_notes <- purrr::map(submitter_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
-  SUBMITTER_RECORD(xref_subm = assign_xref(xref_prefix_subm(), 1),
+  SUBMITTER_RECORD(xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
                    submitter_name = name,
                    address = address,
                    automated_record_id = automated_record_id,

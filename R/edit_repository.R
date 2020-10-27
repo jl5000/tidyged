@@ -48,7 +48,7 @@ add_repository <- function(gedcom,
                            automated_record_id = character(),
                            repository_notes = character()) {
   
-  xref <- assign_xref(xref_prefix_repo(), gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_repo, gedcom = gedcom)
   
   address_lines <- c(address_first_line, city, state, postal_code, country)
   
@@ -95,7 +95,7 @@ add_repository <- function(gedcom,
 #' @export
 remove_repository <- function(gedcom) {
   
-  check_active_record_valid(gedcom, record_string_repo(), is_repository)
+  check_active_record_valid(gedcom, .pkgenv$record_string_repo, is_repository)
   
   gedcom %>% 
     remove_section(1, "REPO", get_active_record(.)) %>% 

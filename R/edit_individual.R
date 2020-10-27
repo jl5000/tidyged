@@ -55,7 +55,7 @@ add_individual <- function(gedcom,
                            automated_record_id = character(),
                            individual_notes = character()) {
   
-  xref <- assign_xref(xref_prefix_indi(), gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
   
   xrefs_subm <- purrr::map_chr(submitters, find_xref, 
                                gedcom = gedcom, record_xrefs = xrefs_submitters(gedcom), tags = "NAME")
@@ -118,7 +118,7 @@ add_individual <- function(gedcom,
 #' @export
 remove_individual <- function(gedcom, remove_aliases = FALSE, remove_associations = TRUE) {
   
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   active_record <- get_active_record(gedcom)
   
   if(remove_aliases) {

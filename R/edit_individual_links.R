@@ -5,7 +5,7 @@ add_individual_association <- function(gedcom,
                                        association,
                                        association_notes = character()) {
   
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
   indi_xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), associated_with)
   
@@ -29,7 +29,7 @@ add_individual_family_link_as_spouse <- function(gedcom,
                                                  family_xref,
                                                  linkage_notes = character()) {
   
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
   link_notes <- purrr::map(linkage_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
@@ -49,7 +49,7 @@ add_individual_family_link_as_child <- function(gedcom,
                                                 linkage_type = character(),
                                                 linkage_notes = character()) {
   
-  check_active_record_valid(gedcom, record_string_indi(), is_individual)
+  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
   link_notes <- purrr::map(linkage_notes, ~ if(grepl(xref_pattern, .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )

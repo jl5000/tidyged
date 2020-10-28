@@ -6,6 +6,8 @@ if(getRversion() >= "2.15.1")
 
 .pkgenv <- new.env(parent=emptyenv())
 
+.pkgenv$gedcom_phys_value_limit <- 248
+
 .pkgenv$xref_prefix_indi <- "I"
 .pkgenv$xref_prefix_fam <- "F"
 .pkgenv$xref_prefix_subm <- "U"

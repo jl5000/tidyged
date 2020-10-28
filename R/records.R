@@ -7,7 +7,6 @@
 # Inputs which are not structures or lists are placed straight into tibbles
 # Inputs which are lists of dataframes are first binded by row, and then levels pushed down
 # Inputs which are structures have their levels pushed down
-# Inputs which are long text strings are split up into several rows using split_text
 # Finally, if certain subordinate tags are not used, the parent tags are removed
 # For records, an additional finalising step is performed which fills missing ids
 
@@ -477,11 +476,11 @@ SOURCE_RECORD <- function(xref_sour,
     tibble::tibble(level = 3, tag = "PLAC", value = source_jurisdiction_place),
     tibble::tibble(level = 2, tag = "AGNC", value = responsible_agency),
     data_notes %>% dplyr::bind_rows() %>% add_levels(2),
-    split_text(start_level = 1, top_tag = "AUTH", text = source_originator),
-    split_text(start_level = 1, top_tag = "TITL", text = source_descriptive_title),
+    tibble::tibble(level = 1, tag = "AUTH", value = source_originator),
+    tibble::tibble(level = 1, tag = "TITL", value = source_descriptive_title),
     tibble::tibble(level = 1, tag = "ABBR", value = source_filed_by_entry),
-    split_text(start_level = 1, top_tag = "PUBL", text = source_publication_facts),
-    split_text(start_level = 1, top_tag = "TEXT", text = text_from_source),
+    tibble::tibble(level = 1, tag = "PUBL", value = source_publication_facts),
+    tibble::tibble(level = 1, tag = "TEXT", value = text_from_source),
     source_repository_citations %>% dplyr::bind_rows() %>% add_levels(1)
     )
   

@@ -62,8 +62,7 @@ read_gedcom_encoding <- function(filepath) {
 #' @return Nothing
 #' @export
 export_gedcom <- function(gedcom, filepath) {
-  # TODO: CONC/CONT lines
-  
+
   if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")
     warning("Output is not being saved as a GEDCOM file (*.ged)")
   
@@ -79,6 +78,7 @@ export_gedcom <- function(gedcom, filepath) {
       ~ .
     ) %>% 
     dplyr::mutate(value = str_replace_all(value, "@", "@@")) %>% 
+    split_gedcom_values(char_limit = .pkgenv$gedcom_phys_value_limit) %>% 
     dplyr::mutate(record = dplyr::if_else(dplyr::lag(record) == record, "", record)) %>% 
     dplyr::mutate(record = dplyr::if_else(record == "TR", "", record)) %>% 
     tidyr::replace_na(list(record = "")) %>% 
@@ -88,6 +88,41 @@ export_gedcom <- function(gedcom, filepath) {
   
 }
 
+#' Convert the GEDCOM form to GEDCOM grammar
+#' 
+#' This function introduces CONC/CONT lines for line values that exceed the given number of characters.
+#' This function only uses the CONC(atenation) tag for splitting values, and does
+#' not use the CONT(inuation) tag. This is because it is easier to implement.
+#'
+#' @param gedcom A tidygedcom object.
+#' @param char_limit
+#' @tests
+#' @return A tidygedcom object potentially expanded with CONC/CONT rows.
+split_gedcom_values <- function(gedcom, char_limit) {
+  
+  unique_delim <- "<>delimiter<>"
+  
+  gedcom %>% 
+    dplyr::mutate(split = record != "HD" & nchar(value) > char_limit, #mark rows to split
+                  row = dplyr::row_number()) %>% # mark unique rows
+    dplyr::mutate(value = gsub(paste0("(.{", char_limit, "})"), #add delimiters where
+                        paste0("\\1", unique_delim), #the splits should occur
+                        value)) %>% 
+    dplyr::mutate(value = gsub(paste0(unique_delim, "$"), "", value)) %>% #remove last delimiter
+    tidyr::separate_rows(value, sep = unique_delim) %>% 
+    dplyr::mutate(tag = dplyr::if_else(split & dplyr::lag(split) & row == dplyr::lag(row), "CONC", tag)) %>% # use CONC tags
+    dplyr::mutate(level = dplyr::if_else(split & dplyr::lag(split) & row == dplyr::lag(row), level + 1, level)) %>% # increase levels
+    dplyr::select(-split, -row) #remove temporary columns
+  
+  
+}
+
+
+
+combine_gedcom_lines <- function(gedcom) {
+  
+  
+}
 
 
 #' Create a base tidygedcom object

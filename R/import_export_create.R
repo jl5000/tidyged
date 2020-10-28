@@ -101,9 +101,11 @@ export_gedcom <- function(gedcom, filepath) {
 split_gedcom_values <- function(gedcom, char_limit) {
   
   unique_delim <- "<>delimiter<>"
+  header <- dplyr::filter(gedcom, record == "HD")
   
   gedcom %>% 
-    dplyr::mutate(split = record != "HD" & nchar(value) > char_limit, #mark rows to split
+    dplyr::filter(record != "HD") %>% 
+    dplyr::mutate(split = nchar(value) > char_limit, #mark rows to split
                   row = dplyr::row_number()) %>% # mark unique rows
     dplyr::mutate(value = gsub(paste0("(.{", char_limit, "})"), #add delimiters where
                         paste0("\\1", unique_delim), #the splits should occur
@@ -112,7 +114,8 @@ split_gedcom_values <- function(gedcom, char_limit) {
     tidyr::separate_rows(value, sep = unique_delim) %>% 
     dplyr::mutate(tag = dplyr::if_else(split & dplyr::lag(split) & row == dplyr::lag(row), "CONC", tag)) %>% # use CONC tags
     dplyr::mutate(level = dplyr::if_else(split & dplyr::lag(split) & row == dplyr::lag(row), level + 1, level)) %>% # increase levels
-    dplyr::select(-split, -row) #remove temporary columns
+    dplyr::select(-split, -row) %>%  #remove temporary columns
+    dplyr::bind_rows(header, .)
   
   
 }

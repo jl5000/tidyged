@@ -29,8 +29,8 @@ data may be obtained.}
 GEDCOM context. This allows processors to determine whether they can process the data object.
 Any linked files should contain the data required, in the indicated format, to process the file data.}
 
-\item{source_media_type}{A code, selected from one of the media classifications choices above,
-that indicates the type of material in which the referenced source is stored.}
+\item{source_media_type}{A media classification code that indicates the type of material in which
+the referenced source is stored.}
 
 \item{descriptive_title}{The title of a work, record, item, or object.}
 

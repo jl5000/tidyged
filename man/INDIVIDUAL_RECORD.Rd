@@ -10,16 +10,9 @@ INDIVIDUAL_RECORD(
   sex_value = character(),
   events = list(),
   attributes = list(),
-  ordinance = list(),
   child_to_family_links = list(),
   spouse_to_family_links = list(),
-  xrefs_subm = character(),
   associations = list(),
-  xrefs_alia = character(),
-  xrefs_subm_interested_in_ancestors = character(),
-  xrefs_subm_interested_in_descendants = character(),
-  permanent_record_file_number = character(),
-  ancestral_file_number = character(),
   user_reference_number = character(),
   user_reference_type = character(),
   automated_record_id = character(),
@@ -42,32 +35,14 @@ this individual.}
 \item{attributes}{A list of INDIVIDUAL_ATTRIBUTE_STRUCTURE() objects giving the attributes associated
 with this individual.}
 
-\item{ordinance}{Not used.}
-
 \item{child_to_family_links}{A list of CHILD_TO_FAMILY_LINK() objects giving the details of families
 this individual is a child of.}
 
 \item{spouse_to_family_links}{A list of SPOUSE_TO_FAMILY_LINK() objects giving the details of families
 this individual is a spouse of.}
 
-\item{xrefs_subm}{A vector of xref IDs of submitters of this record.}
-
 \item{associations}{A list of ASSOCIATION_STRUCTURE() objects giving the details of individuals this
 individual is associated with.}
-
-\item{xrefs_alia}{A vector of xref IDs of individual aliases of this individual.}
-
-\item{xrefs_subm_interested_in_ancestors}{A vector of xref IDs of submitters with an interest in
-ancestors of this individual.}
-
-\item{xrefs_subm_interested_in_descendants}{A vector of xref IDs of submitters with an interest in
-descendants of this individual.}
-
-\item{permanent_record_file_number}{The record number that uniquely identifies this record within a
-registered network resource.}
-
-\item{ancestral_file_number}{A unique permanent record number of an individual record
-contained in the Family History Department's Ancestral File.}
 
 \item{user_reference_number}{A user-defined number or text that the submitter uses to identify this record.}
 

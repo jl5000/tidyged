@@ -4,7 +4,6 @@
 \alias{is_individual}
 \alias{is_family}
 \alias{is_submitter}
-\alias{is_submission}
 \alias{is_repository}
 \alias{is_multimedia}
 \alias{is_note}
@@ -16,8 +15,6 @@ is_individual(gedcom, xref)
 is_family(gedcom, xref)
 
 is_submitter(gedcom, xref)
-
-is_submission(gedcom, xref)
 
 is_repository(gedcom, xref)
 

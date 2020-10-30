@@ -7,7 +7,7 @@
 SPOUSE_TO_FAMILY_LINK(xref_fam, notes = list())
 }
 \arguments{
-\item{xref_fam}{An xref ID of a family record.}
+\item{xref_fam}{An xref ID of a family group record.}
 
 \item{notes}{A list of NOTE_STRUCTURE() objects.}
 }

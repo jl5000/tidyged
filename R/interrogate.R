@@ -83,7 +83,6 @@ str.tidygedcom <- function(object, ...) {
         "Individuals:\t\t", num_indi(object), eol,
         "Families:\t\t", num_fam(object), eol,
         "Submitters:\t\t", num_subm(object), eol,
-        "Submissions:\t\t", num_subn(object), eol,
         "Multimedia objects:\t", num_media(object), eol, 
         "Notes:\t\t\t", num_note(object), eol,
         "Sources:\t\t", num_sour(object), eol,

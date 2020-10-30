@@ -6,7 +6,7 @@
 \usage{
 NOTE_RECORD(
   xref_note,
-  submitter_text,
+  user_text,
   user_reference_number = character(),
   user_reference_type = character(),
   automated_record_id = character(),
@@ -16,6 +16,8 @@ NOTE_RECORD(
 }
 \arguments{
 \item{xref_note}{An xref ID of a note record.}
+
+\item{user_text}{Free-form user text. Comments, opinions.}
 
 \item{user_reference_number}{A user-defined number or text that the submitter uses to identify this record.}
 

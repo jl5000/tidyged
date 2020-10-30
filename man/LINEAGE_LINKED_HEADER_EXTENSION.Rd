@@ -2,13 +2,13 @@
 % Please edit documentation in R/subrecords.R
 \name{LINEAGE_LINKED_HEADER_EXTENSION}
 \alias{LINEAGE_LINKED_HEADER_EXTENSION}
-\title{Construct the HEADER_SECTION tibble}
+\title{Construct the LINEAGE_LINKED_HEADER_EXTENSION tibble}
 \usage{
 LINEAGE_LINKED_HEADER_EXTENSION(
   system_id = "tidygedcom",
   product_version_number = utils::packageVersion("tidygedcom"),
-  name_of_product = character(),
-  name_of_business = character(),
+  name_of_product = "tidygedcom",
+  name_of_business = "Jamie Lendrum",
   business_address = ADDRESS_STRUCTURE(),
   name_of_source_data = character(),
   publication_date_source_data = date_exact(),
@@ -24,56 +24,53 @@ LINEAGE_LINKED_HEADER_EXTENSION(
 )
 }
 \arguments{
-\item{system_id}{A system identification name which was obtained through the GEDCOM
-registration process. This name must be unique from any other product. Spaces within the name
-must be substituted with an underscore.}
+\item{system_id}{A system identification name. This name must be unique for each system (product),
+different from any other system. The name may include spaces, and is not restricted to ASCII characters.}
 
-\item{product_version_number}{An identifier that represents the version level assigned to the system.
+\item{product_version_number}{The version of the product that created the GEDCOM file.
 It is defined and changed by the creators of the product.}
 
-\item{name_of_product}{The name of the software product that produced this transmission.}
+\item{name_of_product}{The name of the software product that produced this file.}
 
 \item{name_of_business}{Name of the business, corporation, or person that produced or commissioned the product.}
 
 \item{business_address}{An ADDRESS_STRUCTURE() object giving the address of the business.}
 
 \item{name_of_source_data}{The name of the electronic data source that was used to obtain the data in
-this transmission. For example, the data may have been obtained from a CD-ROM disc that was named
+this file. For example, the data may have been obtained from a CD-ROM disc that was named
 "U.S. 1880 CENSUS CD-ROM vol. 13."}
 
 \item{publication_date_source_data}{A date_exact() object giving the date this source was published or created.}
 
 \item{copyright_source_data}{A copyright statement required by the owner of data from
-which this information was downloaded. For example, when a GEDCOM down-load is requested
-from the Ancestral File, this would be the copyright statement to indicate that the data
-came from a copyrighted source.}
+which this information was downloaded.}
 
-\item{receiving_system_name}{The name of the system expected to process the GEDCOM-compatible transmission.}
+\item{receiving_system_name}{The name of the system expected to process the GEDCOM file.}
 
-\item{file_creation_date}{A date_exact() object giving the date that this transmission was created.}
+\item{file_creation_date}{A date_exact() object giving the date that this file was created.}
 
 \item{file_creation_time}{The time of a specific event.}
 
-\item{language_of_text}{The human language in which the data in the transmission is normally read or
+\item{language_of_text}{The human language in which the data in the file is normally read or
 written. It is used primarily by programs to select language-specific sorting sequences and phonetic
 name matching algorithms.}
 
 \item{xref_subm}{An xref ID of a submitter record.}
 
-\item{gedcom_file_name}{The name of the GEDCOM transmission file. If the file name includes a file
-extension it must be shown in the form (filename.ext).}
+\item{gedcom_file_name}{The name of the GEDCOM file. A GEDCOM file name should use the format
+basename.ext, and use the file extension .GED (or .ged).}
 
 \item{copyright_gedcom_file}{A copyright statement needed to protect the copyrights of the
 submitter of this GEDCOM file.}
 
 \item{gedcom_content_description}{A note that a user enters to describe the contents of the
 lineage-linked file in terms of "ancestors or descendants of" so that the person receiving
-the data knows what genealogical information the transmission contains.}
+the data knows what genealogical information the file contains.}
 }
 \value{
 A tidy tibble containing the HEADER part of a GEDCOM file.
 }
 \description{
-This function constructs a tibble representation of the HEADER_SECTION from the GEDCOM 5.5.1
-specification.
+This function constructs a tibble representation of the LINEAGE_LINKED_HEADER_EXTENSION
+from the GEDCOM 5.5.5 specification.
 }

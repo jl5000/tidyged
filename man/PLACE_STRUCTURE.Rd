@@ -21,6 +21,12 @@ Jurisdictions are separated by commas.}
 
 \item{place_phonetic_variation}{A character vector of phonetic variations of the place name.}
 
+\item{phonetisation_method}{Indicates the method used in transforming the text to the phonetic variation.}
+
+\item{place_romanised_variation}{A character vector of romanised variations of the place name.}
+
+\item{romanisation_method}{Indicates the method used in transforming the text to a romanised variation.}
+
 \item{place_latitude}{The value specifying the latitudinal coordinate of the place name.
 The latitude coordinate is the direction North or South from the equator in degrees and fraction of
 degrees carried out to give the desired accuracy. For example: 18 degrees, 9 minutes, and 3.4 seconds North

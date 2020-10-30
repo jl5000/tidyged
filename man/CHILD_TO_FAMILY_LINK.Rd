@@ -11,7 +11,7 @@ CHILD_TO_FAMILY_LINK(
 )
 }
 \arguments{
-\item{xref_fam}{An xref ID of a family record.}
+\item{xref_fam}{An xref ID of a family group record.}
 
 \item{pedigree_linkage_type}{A code used to indicate the child to family relationship for pedigree navigation
 purposes.}

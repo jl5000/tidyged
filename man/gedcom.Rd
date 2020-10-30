@@ -20,11 +20,11 @@ gedcom(
 name is provided, the username is used.}
 
 \item{gedcom_description}{A note to describe the contents of the file in terms of "ancestors or descendants of"
-so that the person receiving the data knows what genealogical information the transmission contains.}
+so that the person receiving the data knows what genealogical information the file contains.}
 
 \item{gedcom_copyright}{A copyright statement needed to protect the copyrights of the submitter of this GEDCOM file.}
 
-\item{source_data_name}{The name of the electronic data source that was used to obtain the data in this transmission.}
+\item{source_data_name}{The name of the electronic data source that was used to obtain the data in this file.}
 
 \item{source_data_date}{The date this source was created or published. Ensure you create this date with the
 date_exact() function.}
@@ -32,9 +32,9 @@ date_exact() function.}
 \item{source_data_copyright}{A copyright statement required by the owner of data from which this information was
 obtained.}
 
-\item{receiving_system}{The name of the system expected to process the GEDCOM-compatible transmission.}
+\item{receiving_system}{The name of the system expected to process the GEDCOM-compatible file.}
 
-\item{language}{The human language in which the data in the transmission is normally read or written.}
+\item{language}{The human language in which the data in the file is normally read or written.}
 }
 \value{
 A minimal tidygedcom object

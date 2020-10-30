@@ -9,7 +9,7 @@ NOTE_STRUCTURE(xref_note = character(), user_text = character())
 \arguments{
 \item{xref_note}{An xref ID of a note record.}
 
-\item{user_text}{Comments or opinions from the submitter.}
+\item{user_text}{Free-form user text. Comments, opinions.}
 }
 \value{
 A tidy tibble containing the NOTE_STRUCTURE part of a GEDCOM file.

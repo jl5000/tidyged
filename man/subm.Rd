@@ -6,7 +6,7 @@
 \usage{
 subm(
   name = unname(Sys.info()["user"]),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -15,16 +15,12 @@ subm(
   email = character(),
   fax = character(),
   web_page = character(),
-  language_preference = character(),
-  submitter_registered_rfn = character(),
   automated_record_id = character(),
   submitter_notes = character()
 )
 }
 \arguments{
 \item{name}{The name of the submitter.}
-
-\item{address_first_line}{The first line of the submitter address.}
 
 \item{city}{The city of the submitter.}
 
@@ -42,15 +38,17 @@ subm(
 
 \item{web_page}{A character vector containing up to three web pages of the submitter.}
 
-\item{language_preference}{The language in which the submitter prefers to communicate.}
-
-\item{submitter_registered_rfn}{See the Gedcom 5.5.1 Standard for more details.}
-
 \item{automated_record_id}{A unique record identification number assigned to the record by
 the source system.}
 
 \item{submitter_notes}{A character vector of notes accompanying this Submitter record.
 These could be xrefs to existing Note records.}
+
+\item{address_first_line}{The first line of the submitter address.}
+
+\item{language_preference}{The language in which the submitter prefers to communicate.}
+
+\item{submitter_registered_rfn}{See the Gedcom 5.5.1 Standard for more details.}
 }
 \value{
 A Submitter record to be incorporated into a new tidygedcom object.
@@ -63,7 +61,7 @@ This function is supposed to be used in the gedcom() function to define a
 new tidygedcom object.
 
 This submitter record identifies the individual or organization that contributed
-information contained in the GEDCOM transmission.
+information contained in the GEDCOM file.
 
 The function will automatically split the submitter_notes onto separate lines if the
 character limit in the Gedcom standard is exceeded.

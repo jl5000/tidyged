@@ -2,73 +2,7 @@
 
 context("File R/subrecords.R: @tests")
 
-test_that("Function LINEAGE_LINKED_HEADER_EXTENSION() @ L73", {
-  expect_error(HEADER_SECTION())
-  expect_error(HEADER_SECTION("@1@"))
-  expect_error(HEADER_SECTION("@1@", approved_system_id = "system"))
-  expect_error(HEADER_SECTION("@1@", approved_system_id = "system", character_set = "red"))
-  
-  expect_equal(HEADER_SECTION("@1@", approved_system_id = "system", character_set = "UTF-8",
-                              xref_subn = "@2@", system_version_number = "1.0", name_of_product = "R",
-                              copyright_gedcom_file = "Do not copy", language = "English",
-                              gedcom_content_description = "This is a gedcom file"),
-               tibble::tribble(~level,  ~record,   ~tag,                  ~value,
-                               0, "HD", "HEAD",                      "",
-                               1, "HD", "SOUR",                "system",
-                               2, "HD", "VERS",                   "1.0",
-                               2, "HD", "NAME",                     "R",
-                               1, "HD", "SUBM",                   "@1@",
-                               1, "HD", "SUBN",                   "@2@",
-                               1, "HD", "COPR",           "Do not copy",
-                               1, "HD", "GEDC",                      "",
-                               2, "HD", "VERS",                 "5.5.1",
-                               2, "HD", "FORM",        "Lineage-Linked",
-                               1, "HD", "CHAR",                 "UTF-8",
-                               1, "HD", "LANG",               "English",
-                               1, "HD", "NOTE", "This is a gedcom file"
-               ))
-  
-  expect_equal(HEADER_SECTION("@1@", approved_system_id = "system", character_set = "UTF-8",
-                              xref_subn = "@2@", system_version_number = "1.0", name_of_product = "R",
-                              name_of_business = "RStudio", business_address = ADDRESS_STRUCTURE(c("Street", "City", "State")),
-                              name_of_source_data = "Source text", publication_date_source_data = date_exact(5, 9, 2005),
-                              copyright_source_data = "Source is protected", receiving_system_name = "Windows",
-                              transmission_date = date_exact(15, 10, 2020), file_name = "test.ged",
-                              copyright_gedcom_file = "Do not copy", language = "English", place_hierarchy = "here",
-                              gedcom_content_description = "This is a gedcom file"),
-               tibble::tribble(~level,  ~record,   ~tag,                  ~value,
-                               0, "HD", "HEAD",                      "",
-                               1, "HD", "SOUR",                "system",
-                               2, "HD", "VERS",                   "1.0",
-                               2, "HD", "NAME",                     "R",
-                               2, "HD", "CORP",               "RStudio",
-                               3, "HD", "ADDR",                "Street",
-                               4, "HD", "CONT",                  "City",
-                               4, "HD", "CONT",                 "State",
-                               4, "HD", "ADR1",                  "City",
-                               4, "HD", "ADR2",                 "State",
-                               2, "HD", "DATA",           "Source text",
-                               3, "HD", "DATE",            "5 SEP 2005",
-                               3, "HD", "COPR",   "Source is protected",
-                               1, "HD", "DEST",               "Windows",
-                               1, "HD", "DATE",           "15 OCT 2020",
-                               1, "HD", "SUBM",                   "@1@",
-                               1, "HD", "SUBN",                   "@2@",
-                               1, "HD", "FILE",              "test.ged",
-                               1, "HD", "COPR",           "Do not copy",
-                               1, "HD", "GEDC",                      "",
-                               2, "HD", "VERS",                 "5.5.1",
-                               2, "HD", "FORM",        "Lineage-Linked",
-                               1, "HD", "CHAR",                 "UTF-8",
-                               1, "HD", "LANG",               "English",
-                               1, "HD", "PLAC",                      "",
-                               2, "HD", "FORM",                  "here",
-                               1, "HD", "NOTE", "This is a gedcom file"
-               ))
-})
-
-
-test_that("Function ADDRESS_STRUCTURE() @ L176", {
+test_that("Function ADDRESS_STRUCTURE() @ L114", {
   expect_error(ADDRESS_STRUCTURE(letters[1:4]))
   expect_error(ADDRESS_STRUCTURE("address", address_city = 1:2))
   expect_error(ADDRESS_STRUCTURE("address", address_state = 1:2))
@@ -108,7 +42,7 @@ test_that("Function ADDRESS_STRUCTURE() @ L176", {
 })
 
 
-test_that("Function ASSOCIATION_STRUCTURE() @ L255", {
+test_that("Function ASSOCIATION_STRUCTURE() @ L193", {
   expect_error(ASSOCIATION_STRUCTURE())
   expect_error(ASSOCIATION_STRUCTURE("@1@"))
   expect_error(ASSOCIATION_STRUCTURE(c("@1@", "@2@"), "Godfather"))
@@ -129,7 +63,7 @@ test_that("Function ASSOCIATION_STRUCTURE() @ L255", {
 })
 
 
-test_that("Function CHANGE_DATE() @ L313", {
+test_that("Function CHANGE_DATE() @ L251", {
   expect_equal(CHANGE_DATE(),
                tibble::tribble(~level,   ~tag, ~value,
                                0, "CHAN", "",
@@ -162,7 +96,7 @@ test_that("Function CHANGE_DATE() @ L313", {
 })
 
 
-test_that("Function CHILD_TO_FAMILY_LINK() @ L353", {
+test_that("Function CHILD_TO_FAMILY_LINK() @ L291", {
   expect_error(CHILD_TO_FAMILY_LINK())
   expect_error(CHILD_TO_FAMILY_LINK("@1@", pedigree_linkage_type = "foste"))
   
@@ -179,7 +113,7 @@ test_that("Function CHILD_TO_FAMILY_LINK() @ L353", {
 })
 
 
-test_that("Function EVENT_DETAIL() @ L406", {
+test_that("Function EVENT_DETAIL() @ L344", {
   expect_equal(dim(EVENT_DETAIL()), c(0, 3))
   
   expect_equal(EVENT_DETAIL(event_or_fact_classification = "Woodworking"),
@@ -208,7 +142,7 @@ test_that("Function EVENT_DETAIL() @ L406", {
 })
 
 
-test_that("Function FAMILY_EVENT_DETAIL() @ L468", {
+test_that("Function FAMILY_EVENT_DETAIL() @ L406", {
   expect_equal(dim(FAMILY_EVENT_DETAIL()), c(0, 3))  
   
   expect_equal(FAMILY_EVENT_DETAIL(husband_age_at_event = "42y"),
@@ -233,7 +167,7 @@ test_that("Function FAMILY_EVENT_DETAIL() @ L468", {
 })
 
 
-test_that("Function FAMILY_EVENT_STRUCTURE() @ L528", {
+test_that("Function FAMILY_EVENT_STRUCTURE() @ L466", {
   expect_error(FAMILY_EVENT_STRUCTURE())
   expect_error(FAMILY_EVENT_STRUCTURE("TEST"))
   
@@ -262,7 +196,7 @@ test_that("Function FAMILY_EVENT_STRUCTURE() @ L528", {
 })
 
 
-test_that("Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L574", {
+test_that("Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L512", {
   expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE())
   expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("TEST"))
   expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("FACT"))
@@ -283,7 +217,7 @@ test_that("Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L574", {
 })
 
 
-test_that("Function INDIVIDUAL_EVENT_DETAIL() @ L631", {
+test_that("Function INDIVIDUAL_EVENT_DETAIL() @ L569", {
   expect_equal(dim(INDIVIDUAL_EVENT_DETAIL()), c(0, 3))  
   
   expect_equal(INDIVIDUAL_EVENT_DETAIL(age = "5y"),
@@ -293,7 +227,7 @@ test_that("Function INDIVIDUAL_EVENT_DETAIL() @ L631", {
 })
 
 
-test_that("Function INDIVIDUAL_EVENT_STRUCTURE() @ L681", {
+test_that("Function INDIVIDUAL_EVENT_STRUCTURE() @ L619", {
   expect_error(INDIVIDUAL_EVENT_STRUCTURE())
   expect_error(INDIVIDUAL_EVENT_STRUCTURE("BLAH"))
   expect_error(INDIVIDUAL_EVENT_STRUCTURE("ADOP", adopted_by_which_parent = "WHO"))
@@ -323,12 +257,12 @@ test_that("Function INDIVIDUAL_EVENT_STRUCTURE() @ L681", {
 })
 
 
-test_that("Function MULTIMEDIA_LINK() @ L724", {
+test_that("Function MULTIMEDIA_LINK() @ L662", {
   expect_error(MULTIMEDIA_LINK("ref"))
 })
 
 
-test_that("Function NOTE_STRUCTURE() @ L772", {
+test_that("Function NOTE_STRUCTURE() @ L710", {
   expect_error(NOTE_STRUCTURE(user_text = c("test1", "test2")))
   
   expect_equal(NOTE_STRUCTURE("@T1@"),
@@ -362,7 +296,7 @@ test_that("Function NOTE_STRUCTURE() @ L772", {
 })
 
 
-test_that("Function PERSONAL_NAME_PIECES() @ L827", {
+test_that("Function PERSONAL_NAME_PIECES() @ L765", {
   expect_equal(dim(PERSONAL_NAME_PIECES()), c(0, 3))
   
   expect_equal(PERSONAL_NAME_PIECES(name_piece_prefix = "Mr", name_piece_nickname = "J"),
@@ -389,7 +323,7 @@ test_that("Function PERSONAL_NAME_PIECES() @ L827", {
 })
 
 
-test_that("Function PERSONAL_NAME_STRUCTURE() @ L926", {
+test_that("Function PERSONAL_NAME_STRUCTURE() @ L864", {
   expect_error(PERSONAL_NAME_STRUCTURE())
   expect_error(
     PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
@@ -450,7 +384,7 @@ test_that("Function PERSONAL_NAME_STRUCTURE() @ L926", {
 })
 
 
-test_that("Function PLACE_STRUCTURE() @ L1022", {
+test_that("Function PLACE_STRUCTURE() @ L960", {
   expect_error(PLACE_STRUCTURE())
   expect_error(PLACE_STRUCTURE("Here", place_latitude = "N51.5", place_longitude = "E0.0"))
   expect_error(
@@ -481,7 +415,7 @@ test_that("Function PLACE_STRUCTURE() @ L1022", {
 })
 
 
-test_that("Function SOURCE_CITATION() @ L1113", {
+test_that("Function SOURCE_CITATION() @ L1051", {
   expect_equal(SOURCE_CITATION("@S1@"),
                tibble::tribble(
                  ~level,   ~tag, ~value,
@@ -513,7 +447,7 @@ test_that("Function SOURCE_CITATION() @ L1113", {
 })
 
 
-test_that("Function SOURCE_REPOSITORY_CITATION() @ L1171", {
+test_that("Function SOURCE_REPOSITORY_CITATION() @ L1109", {
   expect_error(SOURCE_REPOSITORY_CITATION())
   expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = c("123", "456"))
   
@@ -525,7 +459,7 @@ test_that("Function SOURCE_REPOSITORY_CITATION() @ L1171", {
 })
 
 
-test_that("Function SPOUSE_TO_FAMILY_LINK() @ L1203", {
+test_that("Function SPOUSE_TO_FAMILY_LINK() @ L1141", {
   expect_error(SPOUSE_TO_FAMILY_LINK())
   
   expect_equal(SPOUSE_TO_FAMILY_LINK("@F2@", list(NOTE_STRUCTURE(submitter_text = "test"))),

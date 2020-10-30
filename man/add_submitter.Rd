@@ -63,7 +63,7 @@ Add a Submitter record to a tidygedcom object
 }
 \details{
 The submitter record identifies an individual or organization that contributed
-information contained in the GEDCOM transmission.
+information contained in the GEDCOM file.
 
 This function will automatically assign a unique xref for this record.
 

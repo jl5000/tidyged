@@ -22,7 +22,8 @@ This can be a vector with up to 3 elements.}
 
 \item{address_city}{The name of the city/town used in the address. Isolated for sorting or indexing.}
 
-\item{address_state}{The name of the US state/UK county used in the address. Isolated for sorting or indexing.}
+\item{address_state}{The name of the province, state or similar country subdivision used in the address.
+Isolated for sorting or indexing.}
 
 \item{address_postal_code}{The ZIP or postal code used by the various localities in handling of mail.
 Isolated for sorting or indexing.}

@@ -30,8 +30,7 @@ SOURCE_RECORD(
 
 \item{events_recorded}{An enumeration of the different kinds of events that were recorded in a
 particular source. Each enumeration is separated by a comma. Such as a parish register of births,
-deaths, and marriages would be BIRT, DEAT, MARR. These can be enumerated over more than one
-vector element.}
+deaths, and marriages would be BIRT, DEAT, MARR.}
 
 \item{date_period_covered}{A date_period() object associated with the period covered by the course.}
 

@@ -4,7 +4,6 @@
 \alias{num_indi}
 \alias{num_fam}
 \alias{num_subm}
-\alias{num_subn}
 \alias{num_media}
 \alias{num_note}
 \alias{num_repo}
@@ -16,8 +15,6 @@ num_indi(gedcom)
 num_fam(gedcom)
 
 num_subm(gedcom)
-
-num_subn(gedcom)
 
 num_media(gedcom)
 

@@ -9,8 +9,6 @@ SUBMITTER_RECORD(
   submitter_name,
   address = ADDRESS_STRUCTURE(),
   multimedia_links = list(),
-  language_preference = character(),
-  submitter_registered_rfn = character(),
   automated_record_id = character(),
   notes = list(),
   date_changed = CHANGE_DATE()
@@ -25,12 +23,6 @@ SUBMITTER_RECORD(
 
 \item{multimedia_links}{A list of MULTIMEDIA_LINK() objects}
 
-\item{language_preference}{The language in which a person prefers to communicate. Multiple language
-preference is shown by using multiple occurrences in order of priority.}
-
-\item{submitter_registered_rfn}{A registered number of a submitter of Ancestral File data.
-This number is used in subsequent submissions or inquiries by the submitter for identification purposes.}
-
 \item{automated_record_id}{A unique record identification number assigned to the record by
 the source system. This number is intended to serve as a more sure means of identification
 of a record for reconciling differences in data between two interfacing systems.}
@@ -44,6 +36,6 @@ the current date is used.}
 A tidy tibble containing a SUBMITTER_RECORD part of a GEDCOM file.
 }
 \description{
-This function constructs a tibble representation of the SUBMITTER_RECORD from the GEDCOM 5.5.1
+This function constructs a tibble representation of the SUBMITTER_RECORD from the GEDCOM 5.5.5
 specification.
 }

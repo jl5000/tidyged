@@ -16,9 +16,9 @@ INDIVIDUAL_EVENT_STRUCTURE(
 
 \item{individual_event_details}{An INDIVIDUAL_EVENT_DETAIL() object giving details of the event.}
 
-\item{xref_fam}{An xref ID of a family record.}
+\item{xref_fam}{An xref ID of a family group record.}
 
-\item{adopted_by_which_parent}{A code which shows which parent in the associated family record adopted this person.
+\item{adopted_by_which_parent}{A code which shows which parent in the associated family group record adopted this person.
 Use "HUSB" for husband, "WIFE" for wife, or "BOTH" for both.}
 }
 \value{

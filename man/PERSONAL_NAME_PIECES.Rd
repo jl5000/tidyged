@@ -23,8 +23,9 @@ Different name prefix parts are separated by a comma.}
 
 \item{name_piece_nickname}{A descriptive or familiar name used in connection with one's proper name.}
 
-\item{name_piece_surname_prefix}{Surname prefix or article used in a family name. Different surname
-articles are separated by a comma, for example in the name "de la Cruz", this value would be "de, la".}
+\item{name_piece_surname_prefix}{Surname prefix or article used in a family name. A surname prefix that
+consists of multiple parts is written as is, and not modified in any way. Thus, the surname prefix for the
+surname “de la Cruz” is “de la”.}
 
 \item{name_piece_surname}{Surname or family name. Different surnames are separated by a comma.}
 

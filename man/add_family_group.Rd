@@ -15,7 +15,8 @@ add_family_group(
   user_reference_number = character(),
   user_reference_type = character(),
   automated_record_id = character(),
-  family_notes = character()
+  family_notes = character(),
+  multimedia_links = character()
 )
 }
 \arguments{

@@ -32,6 +32,7 @@ import_gedcom <- function(filepath) {
     tidyr::fill(record) %>% 
     dplyr::mutate(level = as.numeric(level),
                   value = stringr::str_replace_all(value, "@@", "@")) %>% 
+    combine_gedcom_values() %>% 
     set_class_to_tidygedcom()
 
   validate_gedcom(ged)
@@ -51,6 +52,35 @@ read_gedcom_encoding <- function(filepath) {
   } else {
     stop("Invalid file encoding. Only UTF-8 and UTF-16 are supported")
   }
+  
+}
+
+
+
+#' Convert the GEDCOM grammar to the GEDCOM form
+#' 
+#' This function applies concatenation indicated by CONC/CONT lines. 
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return
+#' @export
+#'
+#' @examples
+combine_gedcom_values <- function(gedcom) {
+  
+  gedcom %>% 
+    dplyr::mutate(row = dplyr::row_number()) %>% 
+    dplyr::mutate(tag = dplyr::if_else(tag == "CONC", NA_character_, tag),
+                  row = dplyr::if_else(tag == "CONC", NA_integer_, row)) %>%
+    tidyr::fill(tag, row, .direction = "down") %>%
+    dplyr::group_by(record, tag, row) %>% 
+    dplyr::summarise(level = min(level),
+                     value = paste(value, collapse = ""),
+                     .groups = "drop") %>%
+    dplyr::ungroup() %>% 
+    dplyr::arrange(row) %>%
+    dplyr::select(level, record, tag, value)
   
 }
 
@@ -104,7 +134,7 @@ split_gedcom_values <- function(gedcom, char_limit) {
   header <- dplyr::filter(gedcom, record == "HD")
   
   gedcom %>% 
-    dplyr::filter(record != "HD") %>% 
+    dplyr::filter(record != "HD") %>% #header shouldn't contain CONT/CONC lines
     dplyr::mutate(split = nchar(value) > char_limit, #mark rows to split
                   row = dplyr::row_number()) %>% # mark unique rows
     dplyr::mutate(value = gsub(paste0("(.{", char_limit, "})"), #add delimiters where
@@ -122,10 +152,6 @@ split_gedcom_values <- function(gedcom, char_limit) {
 
 
 
-combine_gedcom_lines <- function(gedcom) {
-  
-  
-}
 
 
 #' Create a base tidygedcom object

@@ -4,13 +4,7 @@
 \alias{add_source_repository_citation}
 \title{Add a source repository citation to a source record}
 \usage{
-add_source_repository_citation(
-  gedcom,
-  repository,
-  call_number = character(),
-  media_type = character(),
-  citation_notes = character()
-)
+add_source_repository_citation(gedcom, repository, call_number = character())
 }
 \arguments{
 \item{gedcom}{A tidygedcom object.}
@@ -20,14 +14,6 @@ be an xref or a regular expression to match to a repository name.}
 
 \item{call_number}{An identification or reference description used to file
 and retrieve items from the holdings of a repository.}
-
-\item{media_type}{A code that indicates the type of material in which the referenced
-source is stored. Must be one of: audio, book, card, electronic, fiche, film, magazine,
-manuscript, map, newspaper, photo, tombstone, video. If this is defined, it must be a character
-vector the same size as file_reference and format.}
-
-\item{citation_notes}{A character vector of notes associated with this Source citation.
-These could be xrefs to existing Note records.}
 }
 \value{
 An updated tidygedcom object with an expanded Source record including

@@ -54,7 +54,4 @@ Add a Multimedia record to a tidygedcom object
 This function will automatically assign a unique xref for this record. Most users
 will only need to use the file_reference, format, source_media, title, and
 multimedia_notes parameters (and of course gedcom).
-
-The function will automatically split the multimedia_notes onto separate lines if the
-character limit in the Gedcom standard is exceeded.
 }

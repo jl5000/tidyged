@@ -262,7 +262,7 @@ test_that("Function MULTIMEDIA_LINK() @ L662", {
 })
 
 
-test_that("Function NOTE_STRUCTURE() @ L710", {
+test_that("Function NOTE_STRUCTURE() @ L692", {
   expect_error(NOTE_STRUCTURE(user_text = c("test1", "test2")))
   
   expect_equal(NOTE_STRUCTURE("@T1@"),
@@ -274,29 +274,10 @@ test_that("Function NOTE_STRUCTURE() @ L710", {
                tibble::tribble(~level,   ~tag,      ~value,
                                0, "NOTE", "test text"
                ))
-  
-  expect_equal(NOTE_STRUCTURE(user_text = paste0(rep("a", 248), collapse="")),
-               tibble::tribble(~level,   ~tag,      ~value,
-                               0, "NOTE", paste0(rep("a", 248), collapse="")
-               ))
-  
-  expect_equal(NOTE_STRUCTURE(user_text = paste0(rep("a", 249), collapse="")),
-               tibble::tribble(~level,   ~tag,      ~value,
-                               0, "NOTE", paste0(rep("a", 248), collapse=""),
-                               1, "CONC", "a"
-               ))
-  
-  expect_equal(NOTE_STRUCTURE(user_text = paste0(rep("a", 992), collapse="")),
-               tibble::tribble(~level,   ~tag,      ~value,
-                               0, "NOTE", paste0(rep("a", 248), collapse=""),
-                               1, "CONC", paste0(rep("a", 248), collapse=""),
-                               1, "CONC", paste0(rep("a", 248), collapse=""),
-                               1, "CONC", paste0(rep("a", 248), collapse="")
-               ))
 })
 
 
-test_that("Function PERSONAL_NAME_PIECES() @ L765", {
+test_that("Function PERSONAL_NAME_PIECES() @ L747", {
   expect_equal(dim(PERSONAL_NAME_PIECES()), c(0, 3))
   
   expect_equal(PERSONAL_NAME_PIECES(name_piece_prefix = "Mr", name_piece_nickname = "J"),
@@ -323,7 +304,7 @@ test_that("Function PERSONAL_NAME_PIECES() @ L765", {
 })
 
 
-test_that("Function PERSONAL_NAME_STRUCTURE() @ L864", {
+test_that("Function PERSONAL_NAME_STRUCTURE() @ L846", {
   expect_error(PERSONAL_NAME_STRUCTURE())
   expect_error(
     PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
@@ -384,7 +365,7 @@ test_that("Function PERSONAL_NAME_STRUCTURE() @ L864", {
 })
 
 
-test_that("Function PLACE_STRUCTURE() @ L960", {
+test_that("Function PLACE_STRUCTURE() @ L942", {
   expect_error(PLACE_STRUCTURE())
   expect_error(PLACE_STRUCTURE("Here", place_latitude = "N51.5", place_longitude = "E0.0"))
   expect_error(
@@ -415,7 +396,7 @@ test_that("Function PLACE_STRUCTURE() @ L960", {
 })
 
 
-test_that("Function SOURCE_CITATION() @ L1051", {
+test_that("Function SOURCE_CITATION() @ L1033", {
   expect_equal(SOURCE_CITATION("@S1@"),
                tibble::tribble(
                  ~level,   ~tag, ~value,
@@ -447,7 +428,7 @@ test_that("Function SOURCE_CITATION() @ L1051", {
 })
 
 
-test_that("Function SOURCE_REPOSITORY_CITATION() @ L1109", {
+test_that("Function SOURCE_REPOSITORY_CITATION() @ L1091", {
   expect_error(SOURCE_REPOSITORY_CITATION())
   expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = c("123", "456"))
   
@@ -459,7 +440,7 @@ test_that("Function SOURCE_REPOSITORY_CITATION() @ L1109", {
 })
 
 
-test_that("Function SPOUSE_TO_FAMILY_LINK() @ L1141", {
+test_that("Function SPOUSE_TO_FAMILY_LINK() @ L1123", {
   expect_error(SPOUSE_TO_FAMILY_LINK())
   
   expect_equal(SPOUSE_TO_FAMILY_LINK("@F2@", list(NOTE_STRUCTURE(submitter_text = "test"))),

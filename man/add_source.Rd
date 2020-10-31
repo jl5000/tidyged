@@ -19,7 +19,8 @@ add_source(
   user_reference_type = character(),
   automated_record_id = character(),
   data_notes = character(),
-  source_notes = character()
+  source_notes = character(),
+  multimedia_links = character()
 )
 }
 \arguments{

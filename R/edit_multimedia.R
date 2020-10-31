@@ -7,9 +7,6 @@
 #' will only need to use the file_reference, format, source_media, title, and 
 #' multimedia_notes parameters (and of course gedcom).
 #' 
-#' The function will automatically split the multimedia_notes onto separate lines if the 
-#' character limit in the Gedcom standard is exceeded. 
-#' 
 #' @param gedcom A tidygedcom object.
 #' @param file_reference A character vector of references for the files, typically a filepath or URL.
 #' @param format A character vector indicating the format of each multimedia file. 
@@ -43,8 +40,8 @@ add_multimedia <- function(gedcom,
   
   xref <- assign_xref(.pkgenv$xref_prefix_obje, gedcom = gedcom)
   
-  media_notes <- purrr::map(multimedia_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  media_notes <- purrr::map(multimedia_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
   media_record <- MULTIMEDIA_RECORD(xref_obje = xref,
                                     multimedia_file_reference = file_reference,

@@ -7,7 +7,7 @@
 add_repository(
   gedcom,
   name,
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -27,7 +27,7 @@ add_repository(
 
 \item{name}{The name of the repository.}
 
-\item{address_first_line}{The first line of the repository address.}
+\item{local_address_lines}{The first lines of the repository address.}
 
 \item{city}{The city of the repository.}
 
@@ -68,7 +68,4 @@ will only need to use the sex, submitters, and individual_notes parameters (and 
 
 If you need to add further information about this individual (e.g. names), use the
 add_individual_* functions.
-
-The function will automatically split the individual_notes onto separate lines if the
-character limit in the Gedcom standard is exceeded.
 }

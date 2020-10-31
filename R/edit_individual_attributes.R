@@ -66,8 +66,8 @@ add_individual_attribute <- function(gedcom,
   }
   
   
-  plac_notes <- purrr::map(place_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  plac_notes <- purrr::map(place_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
   if(length(place_name) == 0) {
     
@@ -86,8 +86,8 @@ add_individual_attribute <- function(gedcom,
                                    notes = plac_notes)
   }
   
-  even_notes <- purrr::map(event_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  even_notes <- purrr::map(event_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
   details1 <- EVENT_DETAIL(event_or_fact_classification = fact_classification,
                            date = event_date,

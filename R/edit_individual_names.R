@@ -41,8 +41,8 @@ add_individual_names <- function(gedcom,
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
-  nam_notes <- purrr::map(name_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  nam_notes <- purrr::map(name_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
   name_pieces <- PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                       name_piece_given = given, 
@@ -104,8 +104,8 @@ add_individual_names_var <- function(gedcom,
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
-  name_notes <- purrr::map(variation_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  name_notes <- purrr::map(variation_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
   if(phonetic_variation) {
     

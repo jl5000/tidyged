@@ -4,9 +4,6 @@
 #' @details This function will automatically assign a unique xref for this record. Most users
 #' will only need to use the text parameter (and of course gedcom).
 #' 
-#' The function will automatically split the text onto separate lines if the 
-#' character limit in the Gedcom standard is exceeded.
-#'
 #' @param gedcom A tidygedcom object.
 #' @param text A character string containing the text of the note.
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify 
@@ -26,7 +23,7 @@ add_note <- function(gedcom,
   xref <- assign_xref(.pkgenv$xref_prefix_note, gedcom = gedcom)
   
   note_record <- NOTE_RECORD(xref_note = xref,
-                             submitter_text = text,
+                             user_text = text,
                              user_reference_number = user_reference_number,
                              user_reference_type = user_reference_type,
                              automated_record_id = automated_record_id)

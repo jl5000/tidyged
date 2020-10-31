@@ -4,13 +4,10 @@
 \alias{remove_individual}
 \title{Remove an Individual record from a tidygedcom object}
 \usage{
-remove_individual(gedcom, remove_aliases = FALSE, remove_associations = TRUE)
+remove_individual(gedcom, remove_associations = TRUE)
 }
 \arguments{
 \item{gedcom}{A tidygedcom object.}
-
-\item{remove_aliases}{Whether to also remove the individual records given as aliases of
-this individual. Defaults to FALSE.}
 
 \item{remove_associations}{Whether to also remove associations with this individual in
 other individual records. Defaults to TRUE.}
@@ -25,9 +22,4 @@ This function removes an active Individual record from the tidygedcom object.
 At a minimum it will also remove references to this individual in Family records.
 If remove_associations is TRUE (default) it will remove associations with this
 individual in other Individual records.
-If remove_aliases is TRUE it will remove other Individual records giving aliases of this
-individual.
-
-Given a sufficiently complex and joined up GEDCOM file, this can cause a cascade of dependent
-individual references and records being removed.
 }

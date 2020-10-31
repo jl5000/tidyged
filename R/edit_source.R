@@ -56,15 +56,20 @@ add_source <- function(gedcom,
                        user_reference_type = character(),
                        automated_record_id = character(),
                        data_notes = character(),
-                       source_notes = character()) {
+                       source_notes = character(),
+                       multimedia_links = character()) {
   
   xref <- assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
   
-  dat_notes <- purrr::map(data_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  dat_notes <- purrr::map(data_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
-  sour_notes <- purrr::map(source_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  sour_notes <- purrr::map(source_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+  
+  media_links <- purrr::map_chr(multimedia_links, find_xref, 
+                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+    purrr::map(MULTIMEDIA_LINK)
   
   sour_record <- SOURCE_RECORD(xref_sour = xref,
                                events_recorded = events_recorded,
@@ -80,7 +85,8 @@ add_source <- function(gedcom,
                                user_reference_number = user_reference_number,
                                user_reference_type = user_reference_type,
                                automated_record_id = automated_record_id,
-                               notes = sour_notes)
+                               notes = sour_notes,
+                               multimedia_links = media_links)
     
     gedcom %>% 
       tibble::add_row(sour_record, .before = nrow(.)) %>% 
@@ -98,33 +104,20 @@ add_source <- function(gedcom,
 #' be an xref or a regular expression to match to a repository name.
 #' @param call_number An identification or reference description used to file 
 #' and retrieve items from the holdings of a repository.
-#' @param media_type A code that indicates the type of material in which the referenced 
-#' source is stored. Must be one of: audio, book, card, electronic, fiche, film, magazine,
-#' manuscript, map, newspaper, photo, tombstone, video. If this is defined, it must be a character
-#' vector the same size as file_reference and format.
-#' @param citation_notes A character vector of notes associated with this Source citation.
-#' These could be xrefs to existing Note records.
 #'
 #' @return An updated tidygedcom object with an expanded Source record including
 #' this repository citation.
 #' @export
 add_source_repository_citation <- function(gedcom,
                                            repository,
-                                           call_number = character(),
-                                           media_type = character(),
-                                           citation_notes = character()) {
+                                           call_number = character()) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_sour, is_source)
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
-  cit_notes <- purrr::map(citation_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
-  
   citation <- SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,
-                                         notes = cit_notes,
-                                         source_call_number = call_number,
-                                         source_media_type = media_type) %>% add_levels(1)
+                                         source_call_number = call_number) %>% add_levels(1)
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "SOUR")
   

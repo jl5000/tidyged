@@ -51,7 +51,7 @@ tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_individual_names("Leia Organa") %>% 
   add_individual(sex = "M") %>%
   add_individual_names("Luke Skywalker") %>% 
-  add_family(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia"), submitters = "Jamie") %>%
+  add_family(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
   add_individual(sex = "M") %>% 
   add_individual_names("Obi-Wan Kenobi") %>% 
   activate_individual_record("Anakin") %>% 
@@ -59,7 +59,6 @@ tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_note("Based on Star Wars") %>% 
   add_source(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
   add_repository("The Skywalker Saga") %>% 
-  add_submitter("George Lucas") %>%
   add_multimedia(file_reference = "XYZ", format = "jpg")
 
 tg

@@ -2,7 +2,7 @@
 % Please edit documentation in R/edit_family_group.R
 \name{add_family_group}
 \alias{add_family_group}
-\title{Add a Family record to a tidygedcom object}
+\title{Add a Family Group record to a tidygedcom object}
 \usage{
 add_family_group(
   gedcom,
@@ -11,7 +11,6 @@ add_family_group(
   children = character(),
   child_linkage_types = character(),
   number_of_children = character(),
-  submitters = character(),
   user_reference_number = character(),
   user_reference_type = character(),
   automated_record_id = character(),
@@ -39,9 +38,6 @@ adopted, birth, foster, sealing.}
 \item{number_of_children}{The reported number of children known to belong to this family,
 regardless of whether the associated children are represented here.}
 
-\item{submitters}{A character vector of submitters of this record. A submitter can either be
-referenced by an xref or by a regular expression to match to a submitter name.}
-
 \item{user_reference_number}{A user-defined number or text that the submitter uses to identify
 this record. See the Gedcom 5.5.1 Standard for more details.}
 
@@ -52,12 +48,15 @@ the source system.}
 
 \item{family_notes}{A character vector of notes accompanying this Family record. These could be
 xrefs to existing Note records.}
+
+\item{multimedia_links}{A character vector of multimedia file references accompanying this
+Family group record. These could be xrefs to existing Multimedia records.}
 }
 \value{
-An updated tidygedcom object including the Family record.
+An updated tidygedcom object including the Family group record.
 }
 \description{
-This function adds a record containing details of a family.
+This function adds a record containing details of a family group.
 }
 \details{
 This function will automatically assign a unique xref for this record. Most users
@@ -66,10 +65,6 @@ will only need to use the husband, wife, children, and family_notes parameters (
 If you need to add further information about this family (e.g. events), use the
 add_family_event_*() functions.
 
-The function will automatically split the family_notes onto separate lines if the
-character limit in the Gedcom standard is exceeded. It will also automatically add links
-to this family to the respective Individual records of the wife, husband, and children.
-
-This function will also automatically add appropriate references to this record in the
-respective individual records of the husband/wife/children.
+The function will automatically add links to this family to the respective Individual
+records of the wife, husband, and children.
 }

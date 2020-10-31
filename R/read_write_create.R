@@ -11,10 +11,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' import_gedcom("C:/my_family.ged")
+#' read_gedcom("C:/my_family.ged")
 #' }
-import_gedcom <- function(filepath) {
-  # TODO: Byte Order Mark, reject leading whitespace 
+read_gedcom <- function(filepath) {
+  # TODO: Reject leading whitespace 
   
   gedcom_encoding <- read_gedcom_encoding(filepath)
   
@@ -41,6 +41,14 @@ import_gedcom <- function(filepath) {
 }
 
 
+#' Read the Byte Order Mark of the GEDCOM file
+#' 
+#' This function reads the Byte Order Mark of a GEDCOM file in order to determine its encoding.
+#' It only checks for UTF-8 or UTF-16 - if neither of these are found it throws an error.
+#'
+#' @param filepath 
+#'
+#' @return A character string indicating the encoding of the file.
 read_gedcom_encoding <- function(filepath) {
   
   if(all.equal(as.character(readBin(filepath, 'raw', 3)), .pkgenv$BOM_UTF8)) {
@@ -59,14 +67,13 @@ read_gedcom_encoding <- function(filepath) {
 
 #' Convert the GEDCOM grammar to the GEDCOM form
 #' 
-#' This function applies concatenation indicated by CONC/CONT lines. 
+#' This function applies concatenation indicated by CONC/CONT lines.
+#' 
+#' The function works by collapsing CONC/CONT lines using group-by/summarise.   
 #'
 #' @param gedcom A tidygedcom object.
 #'
-#' @return
-#' @export
-#'
-#' @examples
+#' @return A tidygedcom object in the GEDCOM form.
 combine_gedcom_values <- function(gedcom) {
   
   gedcom %>% 
@@ -91,22 +98,13 @@ combine_gedcom_values <- function(gedcom) {
 #'
 #' @return Nothing
 #' @export
-export_gedcom <- function(gedcom, filepath) {
+write_gedcom <- function(gedcom, filepath) {
 
   if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")
     warning("Output is not being saved as a GEDCOM file (*.ged)")
   
   gedcom %>%
-    #update_header(file_name = basename(filepath)) %>% 
-    purrr::when(
-      nrow(dplyr::filter(., record == "HD", tag == "FILE")) == 0 ~
-                     tibble::add_row(., tibble::tibble(level = 1, record = "HD", 
-                                                       tag = "FILE", value = basename(filepath)),
-                                     .before = find_insertion_point(., "HD", 0, "HEAD")),
-      nrow(dplyr::filter(., record == "HD", tag == "FILE")) == 1 ~
-        dplyr::mutate(., value = dplyr::if_else(record == "HD" & tag == "FILE", basename(filepath), value)),
-      ~ .
-    ) %>% 
+    update_header_with_filename(filename = basename(filepath)) %>% 
     dplyr::mutate(value = str_replace_all(value, "@", "@@")) %>% 
     split_gedcom_values(char_limit = .pkgenv$gedcom_phys_value_limit) %>% 
     dplyr::mutate(record = dplyr::if_else(dplyr::lag(record) == record, "", record)) %>% 
@@ -114,9 +112,34 @@ export_gedcom <- function(gedcom, filepath) {
     tidyr::replace_na(list(record = "")) %>% 
     dplyr::transmute(value = paste(level, record, tag, value)) %>% 
     dplyr::mutate(value = stringr::str_replace_all(value, "  ", " ")) %>%
-    utils::write.table(filepath, na = "", col.names = FALSE, quote = FALSE, row.names = FALSE)
+    utils::write.table(filepath, na = "", col.names = FALSE, quote = FALSE, row.names = FALSE,
+                       fileEncoding = "UTF-8")
   
 }
+
+
+#' Update GEDCOM header with filename
+#'
+#' @param gedcom A tidygedcom object.
+#' @param filename The name of the file (with extension).
+#'
+#' @return An updated tidygedcom object with the updated filename.
+update_header_with_filename <- function(gedcom, filename) {
+  
+  if(nrow(dplyr::filter(gedcom, record == "HD", tag == "FILE")) == 0) {
+    
+    tibble::add_row(gedcom, 
+                    tibble::tibble(level = 1, record = "HD", tag = "FILE", value = filename),
+                    .before = find_insertion_point(gedcom, "HD", 0, "HEAD"))
+    
+  } else if(nrow(dplyr::filter(gedcom, record == "HD", tag == "FILE")) == 1) {
+    
+    dplyr::mutate(gedcom, 
+                  value = dplyr::if_else(record == "HD" & tag == "FILE", filename, value))
+  }
+  
+}
+
 
 #' Convert the GEDCOM form to GEDCOM grammar
 #' 
@@ -125,9 +148,9 @@ export_gedcom <- function(gedcom, filepath) {
 #' not use the CONT(inuation) tag. This is because it is easier to implement.
 #'
 #' @param gedcom A tidygedcom object.
-#' @param char_limit
+#' @param char_limit Maximum string length of values.
 #' @tests
-#' @return A tidygedcom object potentially expanded with CONC/CONT rows.
+#' @return A tidygedcom object in the GEDCOM grammar ready to export.
 split_gedcom_values <- function(gedcom, char_limit) {
   
   unique_delim <- "<>delimiter<>"
@@ -200,3 +223,72 @@ gedcom <- function(submitter_details = subm(),
 }
 
 
+
+#' Define a Submitter record for a new tidygedcom object
+#'
+#' @details 
+#' This function is supposed to be used in the gedcom() function to define a
+#' new tidygedcom object.
+#' 
+#' This submitter record identifies the individual or organization that contributed 
+#' information contained in the GEDCOM file.
+#' 
+#' @param name The name of the submitter.
+#' @param local_address_lines The first lines of the submitter address.
+#' @param city The city of the submitter.
+#' @param state The state/county of the submitter.
+#' @param postal_code The postal code of the submitter.
+#' @param country The country of the submitter.
+#' @param phone_number A character vector containing up to three phone numbers of the submitter.
+#' @param email A character vector containing up to three email addresses of the submitter.
+#' @param fax A character vector containing up to three fax numbers of the submitter.
+#' @param web_page A character vector containing up to three web pages of the submitter.
+#' @param automated_record_id A unique record identification number assigned to the record by 
+#' the source system. 
+#' @param submitter_notes A character vector of notes accompanying this Submitter record.
+#' These could be xrefs to existing Note records.
+#' @param multimedia_links
+#'
+#' @return A Submitter record to be incorporated into a new tidygedcom object.
+#' @export
+subm <- function(name = unname(Sys.info()["user"]),
+                 local_address_lines = character(),
+                 city = character(),
+                 state = character(),
+                 postal_code = character(),
+                 country = character(),
+                 phone_number = character(),
+                 email = character(),
+                 fax = character(),
+                 web_page = character(),
+                 automated_record_id = character(),
+                 submitter_notes = character(),
+                 multimedia_links = character()) {
+  
+  if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
+  
+  address <- ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+                               address_city = city,
+                               address_state = state,
+                               address_postal_code = postal_code,
+                               address_country = country,
+                               phone_number = phone_number,
+                               address_email = email,
+                               address_fax = fax,
+                               address_web_page = web_page)
+  
+  subm_notes <- purrr::map(submitter_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+  
+  media_links <- purrr::map_chr(multimedia_links, find_xref, 
+                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+    purrr::map(MULTIMEDIA_LINK)
+  
+  SUBMITTER_RECORD(xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
+                   submitter_name = name,
+                   address = address,
+                   automated_record_id = automated_record_id,
+                   notes = subm_notes,
+                   multimedia_links = media_links)
+  
+}

@@ -1,8 +1,8 @@
 
 
-#' Add a Family record to a tidygedcom object
+#' Add a Family Group record to a tidygedcom object
 #'
-#' This function adds a record containing details of a family.
+#' This function adds a record containing details of a family group.
 #' 
 #' This function will automatically assign a unique xref for this record. Most users
 #' will only need to use the husband, wife, children, and family_notes parameters (and of course gedcom).
@@ -10,13 +10,9 @@
 #' If you need to add further information about this family (e.g. events), use the 
 #' add_family_event_*() functions.
 #' 
-#' The function will automatically split the family_notes onto separate lines if the 
-#' character limit in the Gedcom standard is exceeded. It will also automatically add links
-#' to this family to the respective Individual records of the wife, husband, and children.
+#' The function will automatically add links to this family to the respective Individual 
+#' records of the wife, husband, and children.
 #' 
-#' This function will also automatically add appropriate references to this record in the
-#' respective individual records of the husband/wife/children.
-#'
 #' @param gedcom A tidygedcom object.
 #' @param husband A character string identifying the husband of this family. This can either 
 #' be an xref or a regular expression to match to an individual name.
@@ -30,8 +26,6 @@
 #' adopted, birth, foster, sealing.
 #' @param number_of_children The reported number of children known to belong to this family, 
 #' regardless of whether the associated children are represented here.
-#' @param submitters A character vector of submitters of this record. A submitter can either be
-#' referenced by an xref or by a regular expression to match to a submitter name.
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify 
 #' this record. See the Gedcom 5.5.1 Standard for more details.
 #' @param user_reference_type A user-defined definition of the user_reference_number.
@@ -39,8 +33,10 @@
 #' the source system. 
 #' @param family_notes A character vector of notes accompanying this Family record. These could be
 #' xrefs to existing Note records.
+#' @param multimedia_links A character vector of multimedia file references accompanying this 
+#' Family group record. These could be xrefs to existing Multimedia records.
 #'
-#' @return An updated tidygedcom object including the Family record.
+#' @return An updated tidygedcom object including the Family group record.
 #' 
 #' @export
 add_family_group <- function(gedcom,
@@ -49,7 +45,6 @@ add_family_group <- function(gedcom,
                              children = character(),
                              child_linkage_types = character(),
                              number_of_children = character(),
-                             submitters = character(),
                              user_reference_number = character(),
                              user_reference_type = character(),
                              automated_record_id = character(),
@@ -63,22 +58,24 @@ add_family_group <- function(gedcom,
   xrefs_chil <- purrr::map_chr(children, find_xref,
                                gedcom = gedcom, record_xrefs = xrefs_individuals(gedcom), 
                                tags = c("NAME", "ROMN", "FONE"))
+  
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                               gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE")
+                               gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+    purrr::map(MULTIMEDIA_LINK)
   
-  fam_notes <- purrr::map(family_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  fam_notes <- purrr::map(family_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
-  fam_record <- FAMILY_RECORD(xref_fam = xref,
-                              xref_husb = xref_husb,
-                              xref_wife = xref_wife,
-                              xrefs_chil = xrefs_chil,
-                              count_of_children = number_of_children,
-                              xrefs_subm = xrefs_subm,
-                              user_reference_number = user_reference_number,
-                              user_reference_type = user_reference_type,
-                              automated_record_id = automated_record_id,
-                              notes = fam_notes) 
+  fam_record <- FAMILY_GROUP_RECORD(xref_fam = xref,
+                                    xref_husb = xref_husb,
+                                    xref_wife = xref_wife,
+                                    xrefs_chil = xrefs_chil,
+                                    count_of_children = number_of_children,
+                                    user_reference_number = user_reference_number,
+                                    user_reference_type = user_reference_type,
+                                    automated_record_id = automated_record_id,
+                                    notes = fam_notes,
+                                    multimedia_links = media_links) 
   
   temp <- gedcom %>%
     tibble::add_row(fam_record, .before = nrow(.)) %>%
@@ -106,22 +103,22 @@ add_family_group <- function(gedcom,
 
 
 
-#' Remove a Family record from a tidygedcom object
+#' Remove a Family group record from a tidygedcom object
 #' 
-#' This function removes a record containing details of a family.
+#' This function removes a record containing details of a family group.
 #' 
 #' This function will also automatically remove references to this record in other 
 #' individual records. If remove_individuals is set to TRUE, it will also remove
-#' all records for individuals in this family (including associations, but not aliases).
+#' all records for individuals in this family (including associations).
 #'
 #' @param gedcom A tidygedcom object.
 #' @param remove_individuals Whether to also remove the individual records for all individuals
 #' in the family.
 #'
-#' @return An updated tidygedcom object excluding the active Family record (and potentially the 
+#' @return An updated tidygedcom object excluding the active Family group record (and potentially the 
 #' individuals within it).
 #' @export
-remove_family <- function(gedcom, remove_individuals = FALSE) {
+remove_family_group <- function(gedcom, remove_individuals = FALSE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_fam, is_family)
   active_record <- get_active_record(gedcom)

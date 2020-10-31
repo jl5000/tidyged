@@ -5,8 +5,8 @@ devtools::document()
 devtools::test()
 devtools::check()
 
-test = import_gedcom("../tgdata/Franklins.ged")
-test = import_gedcom("../tgdata/royal92.ged")
-test = import_gedcom("../tgdata/555SAMPLE.GED")
-export_gedcom(test, "../tgdata/test.ged")
+test = read_gedcom("../tgdata/Franklins.ged")
+test = read_gedcom("../tgdata/royal92.ged")
+test = read_gedcom("../tgdata/555SAMPLE.GED")
+write_gedcom(test, "../tgdata/test.ged")
 

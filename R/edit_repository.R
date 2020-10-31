@@ -8,12 +8,9 @@
 #' If you need to add further information about this individual (e.g. names), use the 
 #' add_individual_* functions.
 #' 
-#' The function will automatically split the individual_notes onto separate lines if the 
-#' character limit in the Gedcom standard is exceeded.
-#'
 #' @param gedcom A tidygedcom object.
 #' @param name The name of the repository.
-#' @param address_first_line The first line of the repository address.
+#' @param local_address_lines The first lines of the repository address.
 #' @param city The city of the repository.
 #' @param state The state/county of the repository.
 #' @param postal_code The postal code of the repository.
@@ -34,7 +31,7 @@
 #' @export
 add_repository <- function(gedcom,
                            name,
-                           address_first_line = character(),
+                           local_address_lines = character(),
                            city = character(),
                            state = character(),
                            postal_code = character(),
@@ -50,29 +47,20 @@ add_repository <- function(gedcom,
   
   xref <- assign_xref(.pkgenv$xref_prefix_repo, gedcom = gedcom)
   
-  address_lines <- c(address_first_line, city, state, postal_code, country)
+  if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
-  if(length(address_lines) > 4) address_lines <- address_lines[1:4]
-    
-  if(length(address_lines) == 0) {
-    
-    address <- tibble::tibble()
-    
-  } else {
-    
-    address <- ADDRESS_STRUCTURE(all_address_lines = address_lines,
-                                 address_city = city,
-                                 address_state = state,
-                                 address_postal_code = postal_code,
-                                 address_country = country,
-                                 phone_number = phone_number,
-                                 address_email = email,
-                                 address_fax = fax,
-                                 address_web_page = web_page)
-  }
+  address <- ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+                               address_city = city,
+                               address_state = state,
+                               address_postal_code = postal_code,
+                               address_country = country,
+                               phone_number = phone_number,
+                               address_email = email,
+                               address_fax = fax,
+                               address_web_page = web_page)
   
-  repo_notes <- purrr::map(repository_notes, ~ if(grepl(xref_pattern, .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(submitter_text = .x) }  )
+  repo_notes <- purrr::map(repository_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
   repo_record <- REPOSITORY_RECORD(xref_repo = xref,
                                    name_of_repository = name,

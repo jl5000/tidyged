@@ -688,24 +688,6 @@ MULTIMEDIA_LINK <- function(xref_obje) {
 #'                              0, "NOTE", "test text"
 #'              ))
 #' 
-#' expect_equal(NOTE_STRUCTURE(user_text = paste0(rep("a", 248), collapse="")),
-#'              tibble::tribble(~level,   ~tag,      ~value,
-#'                              0, "NOTE", paste0(rep("a", 248), collapse="")
-#'              ))
-#' 
-#' expect_equal(NOTE_STRUCTURE(user_text = paste0(rep("a", 249), collapse="")),
-#'              tibble::tribble(~level,   ~tag,      ~value,
-#'                              0, "NOTE", paste0(rep("a", 248), collapse=""),
-#'                              1, "CONC", "a"
-#'              ))
-#' 
-#' expect_equal(NOTE_STRUCTURE(user_text = paste0(rep("a", 992), collapse="")),
-#'              tibble::tribble(~level,   ~tag,      ~value,
-#'                              0, "NOTE", paste0(rep("a", 248), collapse=""),
-#'                              1, "CONC", paste0(rep("a", 248), collapse=""),
-#'                              1, "CONC", paste0(rep("a", 248), collapse=""),
-#'                              1, "CONC", paste0(rep("a", 248), collapse="")
-#'              ))
 #' @return A tidy tibble containing the NOTE_STRUCTURE part of a GEDCOM file.
 NOTE_STRUCTURE <- function(xref_note = character(),
                            user_text = character()) {

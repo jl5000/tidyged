@@ -7,6 +7,8 @@
 #' @inheritParams parameter_definitions
 #' @param business_address An ADDRESS_STRUCTURE() object giving the address of the business.
 #'
+#' @tests
+#' expect_snapshot_value(LINEAGE_LINKED_HEADER_EXTENSION())
 #' @return A tidy tibble containing the HEADER part of a GEDCOM file.
 LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
                                             product_version_number = utils::packageVersion("tidygedcom"),

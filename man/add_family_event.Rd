@@ -14,7 +14,7 @@
 \alias{add_family_event_marriage_settlement}
 \alias{add_family_event_residence}
 \alias{add_family_event_other}
-\title{Add a family event to a family record}
+\title{Add a family event to a family group record}
 \usage{
 add_family_event(
   gedcom,
@@ -27,15 +27,14 @@ add_family_event(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -45,13 +44,14 @@ add_family_event(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_annulment(
   gedcom,
   event_type = "ANUL",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -59,15 +59,14 @@ add_family_event_annulment(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -77,13 +76,14 @@ add_family_event_annulment(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_census(
   gedcom,
   event_type = "CENS",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -91,15 +91,14 @@ add_family_event_census(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -109,13 +108,14 @@ add_family_event_census(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_divorce(
   gedcom,
   event_type = "DIV",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -123,15 +123,14 @@ add_family_event_divorce(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -141,13 +140,14 @@ add_family_event_divorce(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_divorce_filed(
   gedcom,
   event_type = "DIVF",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -155,15 +155,14 @@ add_family_event_divorce_filed(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -173,13 +172,14 @@ add_family_event_divorce_filed(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_engagement(
   gedcom,
   event_type = "ENGA",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -187,15 +187,14 @@ add_family_event_engagement(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -205,13 +204,14 @@ add_family_event_engagement(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_marriage_banns(
   gedcom,
   event_type = "MARB",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -219,15 +219,14 @@ add_family_event_marriage_banns(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -237,13 +236,14 @@ add_family_event_marriage_banns(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_marriage_contract(
   gedcom,
   event_type = "MARC",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -251,15 +251,14 @@ add_family_event_marriage_contract(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -269,13 +268,14 @@ add_family_event_marriage_contract(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_marriage(
   gedcom,
   event_type = "MARR",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -283,15 +283,14 @@ add_family_event_marriage(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -301,13 +300,14 @@ add_family_event_marriage(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_marriage_license(
   gedcom,
   event_type = "MARL",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -315,15 +315,14 @@ add_family_event_marriage_license(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -333,13 +332,14 @@ add_family_event_marriage_license(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_marriage_settlement(
   gedcom,
   event_type = "MARS",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -347,15 +347,14 @@ add_family_event_marriage_settlement(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -365,13 +364,14 @@ add_family_event_marriage_settlement(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_residence(
   gedcom,
   event_type = "RESI",
-  event_descriptor = character(),
+  event_descriptor = "",
   event_classification = character(),
   husband_age_at_event = character(),
   wife_age_at_event = character(),
@@ -379,15 +379,14 @@ add_family_event_residence(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -397,7 +396,8 @@ add_family_event_residence(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_family_event_other(
@@ -411,15 +411,14 @@ add_family_event_other(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -429,7 +428,8 @@ add_family_event_other(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 }
 \arguments{
@@ -464,19 +464,15 @@ on a death certificate.}
 \item{place_name}{The jurisdictional name of the place where the event took place.
 Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."}
 
-\item{place_hierarchy}{This shows the jurisdictional entities that are named in a sequence
-from the lowest to the highest jurisdiction. The jurisdictions are separated by commas,
-and any jurisdiction's name that is missing is still accounted for by a comma.}
-
 \item{place_phonetic_variation}{A character vector of phonetic variations of the place name.}
 
-\item{phonetic_type}{A character vector giving the method used in transforming the text to
+\item{phonetisation_method}{A character vector giving the method used in transforming the text to
 the corresponding phonetic variation. If this argument is used, it must be the same size
 as the place_phonetic_variation argument.}
 
-\item{place_romanized_variation}{A character vector of romanized variations of the place name.}
+\item{place_romanised_variation}{A character vector of romanized variations of the place name.}
 
-\item{romanized_type}{A character vector giving the method used in transforming the text to
+\item{romanisation_method}{A character vector giving the method used in transforming the text to
 the corresponding romanized variation. If this argument is used, it must be the same size
 as the place_romanized_variation argument.}
 
@@ -493,7 +489,7 @@ base meridian coordinate. For example:
 \item{place_notes}{A character vector of notes accompanying the event place.
 These could be xrefs to existing Note records.}
 
-\item{address_first_line}{The first line of the event address.}
+\item{local_address_lines}{The first line of the event address.}
 
 \item{city}{The city of the event address.}
 
@@ -517,9 +513,9 @@ entity that has responsibility for the event data.}
 \item{religious_affiliation}{A name of the religion with which this event was affiliated.}
 }
 \value{
-An updated tidygedcom object with an expanded Family record including
+An updated tidygedcom object with an expanded Family group record including
 this event.
 }
 \description{
-Add a family event to a family record
+Add a family event to a family group record
 }

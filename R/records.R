@@ -38,7 +38,7 @@ GEDCOM_HEADER <- function(character_encoding = "UTF-8",
 
 
 
-#' Construct the FAMILY_RECORD tibble
+#' Construct the FAMILY_GROUP_RECORD tibble
 #' 
 #' This function constructs a tibble representation of the FAMILY_RECORD from the GEDCOM 5.5.1
 #' specification.
@@ -49,8 +49,8 @@ GEDCOM_HEADER <- function(character_encoding = "UTF-8",
 #' @param xref_wife An xref ID of the wife.
 #' @param xrefs_chil A vector of xref IDs of children in this family.
 #' @tests
-#' expect_error(FAMILY_RECORD("@F1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
-#' expect_equal(FAMILY_RECORD("@F1@"),
+#' expect_error(FAMILY_GROUP_RECORD("@F1@", user_reference_number = 123:125, user_reference_type = letters[1:2]))
+#' expect_equal(FAMILY_GROUP_RECORD("@F1@"),
 #'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@F1@", "FAM",                      "",
 #'                              1, "@F1@", "CHAN",                     "",
@@ -210,13 +210,13 @@ INDIVIDUAL_RECORD <- function(xref_indi,
 #'
 #' @inheritParams parameter_definitions
 #' @tests
-#' expect_error(MULTIMEDIA_RECORD("@M1@", "file_ref", "jpg",
+#' expect_error(MULTIMEDIA_RECORD("@M1@", "file_ref", "JPG",
 #'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
-#' expect_equal(MULTIMEDIA_RECORD("@M1@", "file_ref", "jpg"),
+#' expect_equal(MULTIMEDIA_RECORD("@M1@", "file_ref", "JPG"),
 #'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@M1@", "OBJE",                      "",
 #'                              1, "@M1@", "FILE",              "file_ref",
-#'                              2, "@M1@", "FORM",                   "jpg",
+#'                              2, "@M1@", "FORM",                   "JPG",
 #'                              1, "@M1@", "CHAN",                      "",
 #'                              2, "@M1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))

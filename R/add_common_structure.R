@@ -23,21 +23,6 @@ add_note_to_record <- function(gedcom) {
 }
 
 
-add_multimedia_link_to_record <- function(gedcom) {
-  
-  xref <- get_active_record(gedcom)
-  
-  if(is.null(xref))
-    stop("No record is activated. A record must be activated to add a multimedia link to it")
-  
-  if(is_multimedia(gedcom, xref) |
-     is_note(gedcom, xref) |
-     is_repository(gedcom, xref) |
-     is_submission(gedcom, xref))
-    stop("Multimedia links cannot be added to the active record")
-  
-  
-}
 
 # not for repo/source/subn/subm record
 add_source_citation_to_record <- function(gedcom) {

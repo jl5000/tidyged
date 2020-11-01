@@ -21,15 +21,12 @@
 #' @param event_date A date_value() object giving the date of the event.
 #' @param place_name The jurisdictional name of the place where the event took place. 
 #' Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."
-#' @param place_hierarchy This shows the jurisdictional entities that are named in a sequence 
-#' from the lowest to the highest jurisdiction. The jurisdictions are separated by commas, 
-#' and any jurisdiction's name that is missing is still accounted for by a comma.
 #' @param place_phonetic_variation A character vector of phonetic variations of the place name.
-#' @param phonetic_type A character vector giving the method used in transforming the text to 
+#' @param phonetisation_method A character vector giving the method used in transforming the text to 
 #' the corresponding phonetic variation. If this argument is used, it must be the same size
 #' as the place_phonetic_variation argument.
-#' @param place_romanized_variation A character vector of romanized variations of the place name. 
-#' @param romanized_type A character vector giving the method used in transforming the text to 
+#' @param place_romanised_variation A character vector of romanized variations of the place name. 
+#' @param romanisation_method A character vector giving the method used in transforming the text to 
 #' the corresponding romanized variation. If this argument is used, it must be the same size
 #' as the place_romanized_variation argument.
 #' @param place_latitude The value specifying the latitudinal coordinate of the event place. 
@@ -42,7 +39,7 @@
 #' 168 degrees, 9 minutes, and 3.4 seconds East would be formatted as "E168.150944". 
 #' @param place_notes A character vector of notes accompanying the event place.
 #' These could be xrefs to existing Note records.
-#' @param address_first_line The first line of the event address.
+#' @param local_address_lines The first line of the event address.
 #' @param city The city of the event address.
 #' @param state The state/county of the event address.
 #' @param postal_code The postal code of the event address.
@@ -64,21 +61,21 @@
 #' this event.
 add_individual_event <- function(gedcom,
                                  event_type,
+                                 event_descriptor = character(),
                                  event_classification = character(),
                                  event_date = date_value(),
                                  event_cause = character(),
                                  age_at_event = character(),
                                  event_notes = character(),
                                  place_name = character(),
-                                 place_hierarchy = character(),
                                  place_phonetic_variation = character(),
-                                 phonetic_type = character(),
-                                 place_romanized_variation = character(),
-                                 romanized_type = character(),
+                                 phonetisation_method = character(),
+                                 place_romanised_variation = character(),
+                                 romanisation_method = character(),
                                  place_latitude = character(),
                                  place_longitude = character(),
                                  place_notes = character(),
-                                 address_first_line = character(),
+                                 local_address_lines = character(),
                                  city = character(),
                                  state = character(),
                                  postal_code = character(),
@@ -90,31 +87,22 @@ add_individual_event <- function(gedcom,
                                  responsible_agency = character(),
                                  religious_affiliation = character(),
                                  family_xref = character(),
-                                 adopting_parent = character()) {
+                                 adopting_parent = character(),
+                                 multimedia_links = character()) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
-  address_lines <- c(address_first_line, city, state, postal_code, country)
+  if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
-  if(length(address_lines) > 4) address_lines <- address_lines[1:4]
-  
-  if(length(address_lines) == 0) {
-    
-    event_address <- ADDRESS_STRUCTURE(character())
-    
-  } else {
-    
-    event_address <- ADDRESS_STRUCTURE(all_address_lines = address_lines,
-                                       address_city = city,
-                                       address_state = state,
-                                       address_postal_code = postal_code,
-                                       address_country = country,
-                                       phone_number = phone_number,
-                                       address_email = email,
-                                       address_fax = fax,
-                                       address_web_page = web_page)
-  }
-  
+  event_address <- ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+                                     address_city = city,
+                                     address_state = state,
+                                     address_postal_code = postal_code,
+                                     address_country = country,
+                                     phone_number = phone_number,
+                                     address_email = email,
+                                     address_fax = fax,
+                                     address_web_page = web_page)
   
   plac_notes <- purrr::map(place_notes, ~ if(grepl(xref_pattern(), .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
@@ -126,11 +114,10 @@ add_individual_event <- function(gedcom,
   } else {
     
     event_place <- PLACE_STRUCTURE(place_name = place_name,
-                                   place_hierarchy = place_hierarchy,
                                    place_phonetic_variation = place_phonetic_variation,
-                                   phonetic_type = phonetic_type,
-                                   place_romanized_variation = place_romanized_variation,
-                                   romanized_type = romanized_type,
+                                   phonetisation_method = phonetisation_method,
+                                   place_romanised_variation = place_romanised_variation,
+                                   romanisation_method = romanisation_method,
                                    place_latitude = place_latitude,
                                    place_longitude = place_longitude,
                                    notes = plac_notes)
@@ -139,6 +126,10 @@ add_individual_event <- function(gedcom,
   even_notes <- purrr::map(event_notes, ~ if(grepl(xref_pattern(), .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
+  media_links <- purrr::map_chr(multimedia_links, find_xref, 
+                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+    purrr::map(MULTIMEDIA_LINK)
+  
   details1 <- EVENT_DETAIL(event_or_fact_classification = event_classification,
                            date = event_date,
                            place = event_place,
@@ -146,7 +137,8 @@ add_individual_event <- function(gedcom,
                            responsible_agency = responsible_agency,
                            religious_affiliation = religious_affiliation,
                            cause_of_event = event_cause,
-                           notes = even_notes)
+                           notes = even_notes,
+                           multimedia_links = media_links)
   
   details2 <- INDIVIDUAL_EVENT_DETAIL(event_details = details1,
                                       age_at_event = age_at_event)
@@ -168,114 +160,104 @@ add_individual_event <- function(gedcom,
 
 #' @export
 #' @rdname add_individual_event
-add_individual_event_birth <- purrr::partial(add_individual_event, event_type = "BIRT")
+add_individual_event_birth <- purrr::partial(add_individual_event, event_type = "BIRT", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_birth) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                  event_type = "BIRT")
+                                                                  event_type = "BIRT", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_christening <- purrr::partial(add_individual_event, event_type = "CHR")
+add_individual_event_christening <- purrr::partial(add_individual_event, event_type = "CHR", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_christening) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "CHR")
+                                                                 event_type = "CHR", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_death <- purrr::partial(add_individual_event, event_type = "DEAT")
+add_individual_event_death <- purrr::partial(add_individual_event, event_type = "DEAT", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_death) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "DEAT")
+                                                                 event_type = "DEAT", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_burial <- purrr::partial(add_individual_event, event_type = "BURI")
+add_individual_event_burial <- purrr::partial(add_individual_event, event_type = "BURI", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_burial) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "BURI")
+                                                                 event_type = "BURI", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_cremation <- purrr::partial(add_individual_event, event_type = "CREM")
+add_individual_event_cremation <- purrr::partial(add_individual_event, event_type = "CREM", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_cremation) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "CREM")
-#' @export
+                                                                 event_type = "CREM", event_descriptor = "")
+    #' @export
 #' @rdname add_individual_event
-add_individual_event_adoption <- purrr::partial(add_individual_event, event_type = "ADOP")
+add_individual_event_adoption <- purrr::partial(add_individual_event, event_type = "ADOP", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_adoption) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "ADOP")
+                                                                 event_type = "ADOP", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_baptism <- purrr::partial(add_individual_event, event_type = "BAPM")
+add_individual_event_baptism <- purrr::partial(add_individual_event, event_type = "BAPM", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_baptism) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "BAPM")
+                                                                 event_type = "BAPM", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_bar_mitzvah <- purrr::partial(add_individual_event, event_type = "BARM")
+add_individual_event_bar_mitzvah <- purrr::partial(add_individual_event, event_type = "BARM", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_bar_mitzvah) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "BARM")
+                                                                 event_type = "BARM", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_bas_mitzvah <- purrr::partial(add_individual_event, event_type = "BASM")
+add_individual_event_bas_mitzvah <- purrr::partial(add_individual_event, event_type = "BASM", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_bas_mitzvah) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "BASM")
+                                                                 event_type = "BASM", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_blessing <- purrr::partial(add_individual_event, event_type = "BLES")
-rlang::fn_fmls(add_individual_event_blessing) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "BLES")
-#' @export
-#' @rdname add_individual_event
-add_individual_event_adult_christening <- purrr::partial(add_individual_event, event_type = "CHRA")
+add_individual_event_adult_christening <- purrr::partial(add_individual_event, event_type = "CHRA", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_adult_christening) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "CHRA")
+                                                                 event_type = "CHRA", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_confirmation <- purrr::partial(add_individual_event, event_type = "CONF")
+add_individual_event_confirmation <- purrr::partial(add_individual_event, event_type = "CONF", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_confirmation) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "CONF")
+                                                                 event_type = "CONF", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_first_communion <- purrr::partial(add_individual_event, event_type = "FCOM")
+add_individual_event_first_communion <- purrr::partial(add_individual_event, event_type = "FCOM", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_first_communion) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "FCOM")
+                                                                 event_type = "FCOM", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_ordination <- purrr::partial(add_individual_event, event_type = "ORDN")
-rlang::fn_fmls(add_individual_event_ordination) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "ORDN")
-#' @export
-#' @rdname add_individual_event
-add_individual_event_naturalization <- purrr::partial(add_individual_event, event_type = "NATU")
+add_individual_event_naturalization <- purrr::partial(add_individual_event, event_type = "NATU", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_naturalization) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "NATU")
+                                                                 event_type = "NATU", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_emigration <- purrr::partial(add_individual_event, event_type = "EMIG")
+add_individual_event_emigration <- purrr::partial(add_individual_event, event_type = "EMIG", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_emigration) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "EMIG")
+                                                                 event_type = "EMIG", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_immigration <- purrr::partial(add_individual_event, event_type = "IMMI")
+add_individual_event_immigration <- purrr::partial(add_individual_event, event_type = "IMMI", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_immigration) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "IMMI")
+                                                                 event_type = "IMMI", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_census <- purrr::partial(add_individual_event, event_type = "CENS")
+add_individual_event_census <- purrr::partial(add_individual_event, event_type = "CENS", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_census) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "CENS")
+                                                                 event_type = "CENS", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_probate <- purrr::partial(add_individual_event, event_type = "PROB")
+add_individual_event_probate <- purrr::partial(add_individual_event, event_type = "PROB", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_probate) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "PROB")
+                                                                 event_type = "PROB", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_will <- purrr::partial(add_individual_event, event_type = "WILL")
+add_individual_event_will <- purrr::partial(add_individual_event, event_type = "WILL", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_will) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "WILL")
+                                                                 event_type = "WILL", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_graduation <- purrr::partial(add_individual_event, event_type = "GRAD")
+add_individual_event_graduation <- purrr::partial(add_individual_event, event_type = "GRAD", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_graduation) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "GRAD")
+                                                                 event_type = "GRAD", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
-add_individual_event_retirement <- purrr::partial(add_individual_event, event_type = "RETI")
+add_individual_event_retirement <- purrr::partial(add_individual_event, event_type = "RETI", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_retirement) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "RETI")
+                                                                 event_type = "RETI", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_other <- purrr::partial(add_individual_event, event_type = "EVEN")

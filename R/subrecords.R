@@ -9,12 +9,33 @@
 #'
 #' @tests
 #' expect_snapshot_value(LINEAGE_LINKED_HEADER_EXTENSION())
+#' expect_snapshot_value(LINEAGE_LINKED_HEADER_EXTENSION(
+#'                business_address = ADDRESS_STRUCTURE("Road name",
+#'                                                     "City",
+#'                                                     "State",
+#'                                                     "ABC",
+#'                                                     "UK",
+#'                                                     123445567,
+#'                                                     "email@domain.com",
+#'                                                     4587375238427,
+#'                                                     "www.url.com"),
+#'                name_of_source_data = "source data name",
+#'                publication_date_source_data = date_exact(25,5,2009),
+#'                copyright_source_data = "source copyright",
+#'                receiving_system_name = "destination system",
+#'                file_creation_date = date_exact(3,4,2008),
+#'                file_creation_time = "10:56:05",
+#'                language_of_text = "English",
+#'                xref_subm = "@U1@",
+#'                gedcom_file_name = "file.ged",
+#'                copyright_gedcom_file = "gedcom copyright",
+#'                gedcom_content_description = "gedcom_description"))
 #' @return A tidy tibble containing the HEADER part of a GEDCOM file.
 LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
                                             product_version_number = utils::packageVersion("tidygedcom"),
                                             name_of_product = "tidygedcom",
                                             name_of_business = "Jamie Lendrum",
-                                            business_address = ADDRESS_STRUCTURE(),
+                                            business_address = ADDRESS_STRUCTURE(address_email = "jalendrum@gmail.com"),
                                             name_of_source_data = character(),
                                             publication_date_source_data = date_exact(),
                                             copyright_source_data = character(),
@@ -89,29 +110,11 @@ LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
 #' expect_error(ADDRESS_STRUCTURE("address", address_state = paste0(rep("a", 61), collapse = "")))
 #' expect_error(ADDRESS_STRUCTURE("address", address_postal_code = paste0(rep("a", 11), collapse = "")))
 #' expect_error(ADDRESS_STRUCTURE("address", address_country = paste0(rep("a", 61), collapse = "")))
-#' expect_error(ADDRESS_STRUCTURE("address", address_web_page = paste0(rep("a", 121), collapse = "")))
+#' expect_error(ADDRESS_STRUCTURE("address", address_web_page = paste0(rep("a", 2048), collapse = "")))
 #' expect_equal(ADDRESS_STRUCTURE(), tibble::tibble())
-#' expect_equal(ADDRESS_STRUCTURE("Road name"),
-#'              tibble::tribble(~level,   ~tag,      ~value,
-#'                              0, "ADDR", "",
-#'                              1, "ADR1", "Road name"
-#'              ))
-#' 
-#' expect_equal(ADDRESS_STRUCTURE(letters[1:3]),
-#'              tibble::tribble(~level,   ~tag, ~value,
-#'                              0, "ADDR",    "",
-#'                              1, "ADR1",    "a",
-#'                              1, "ADR2",    "b",
-#'                              1, "ADR3",    "c"
-#'              ))
-#' 
-#' expect_equal(ADDRESS_STRUCTURE(letters[1:2], address_country = "UK"),
-#'              tibble::tribble(~level,   ~tag, ~value,
-#'                              0, "ADDR",    "",
-#'                              1, "ADR1",    "a",
-#'                              1, "ADR2",    "b",
-#'                              1, "CTRY",   "UK"
-#'              )) 
+#' expect_snapshot_value(ADDRESS_STRUCTURE("Road name"))
+#' expect_snapshot_value(ADDRESS_STRUCTURE(letters[1:3]))
+#' expect_snapshot_value(ADDRESS_STRUCTURE(letters[1:2], address_country = "UK")) 
 #' @return A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file.
 ADDRESS_STRUCTURE <- function(local_address_lines = character(),
                               address_city = character(),
@@ -505,7 +508,7 @@ FAMILY_EVENT_STRUCTURE <- function(event_type_family,
 #'                              0, "NATI",     "British"
 #'              ))
 #' 
-#' expect_equal(INDIVIDUAL_ATTRIBUTE_STRUCTURE("NATI", "British", INDIVIDUAL_EVENT_DETAIL(age = "0y")),
+#' expect_equal(INDIVIDUAL_ATTRIBUTE_STRUCTURE("NATI", "British", INDIVIDUAL_EVENT_DETAIL(age_at_event = "0y")),
 #'              tibble::tribble(~level,   ~tag, ~value,
 #'                              0, "NATI",     "British",
 #'                              1,  "AGE",           "0y"
@@ -619,6 +622,7 @@ INDIVIDUAL_EVENT_DETAIL <- function(event_details = EVENT_DETAIL(),
 #'              ))
 #' @return A tidy tibble containing the INDIVIDUAL_EVENT_STRUCTURE part of a GEDCOM file.
 INDIVIDUAL_EVENT_STRUCTURE <- function(event_type_individual,
+                                       event_descriptor = "",
                                        individual_event_details = INDIVIDUAL_EVENT_DETAIL(),
                                        xref_fam = character(),
                                        adopted_by_which_parent = character()) {
@@ -630,7 +634,7 @@ INDIVIDUAL_EVENT_STRUCTURE <- function(event_type_individual,
   validate_adopted_by_which_parent(adopted_by_which_parent, 1)
   
   temp <- dplyr::bind_rows(
-    tibble::tibble(level = 0, tag = event_type_individual, value = ""),
+    tibble::tibble(level = 0, tag = event_type_individual, value = event_descriptor),
     individual_event_details %>% add_levels(1)
   )
     
@@ -1082,7 +1086,7 @@ SOURCE_CITATION <- function(xref_sour,
 #' @inheritParams parameter_definitions
 #' @tests
 #' expect_error(SOURCE_REPOSITORY_CITATION())
-#' expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = c("123", "456"))
+#' expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = c("123", "456")))
 #' 
 #' expect_equal(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = 123),
 #'              tibble::tribble(~level,   ~tag, ~value,

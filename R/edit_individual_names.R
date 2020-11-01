@@ -118,14 +118,14 @@ add_individual_names_var <- function(gedcom,
                                                   name_piece_surname = surname,
                                                   name_piece_suffix = suffix,
                                                   notes = name_notes))
-    name_romanized_var <- character()
-    romanized_type <- character()
+    name_romanised_var <- character()
+    romanisation_method <- character()
     rom_name_pieces <- list()
     
   } else {
     
-    name_romanized_var <- variation_name
-    romanized_type <- type
+    name_romanised_var <- variation_name
+    romanisation <- type
     rom_name_pieces <- list(PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                                  name_piece_given = given, 
                                                  name_piece_nickname = nickname, 
@@ -134,7 +134,7 @@ add_individual_names_var <- function(gedcom,
                                                  name_piece_suffix = suffix,
                                                  notes = name_notes))
     name_phonetic_var <- character()
-    phonetic_type <- character()
+    phonetisation_method <- character()
     phon_name_pieces <- list()
     
   }
@@ -143,11 +143,11 @@ add_individual_names_var <- function(gedcom,
                                       name_type = character(),
                                       name_pieces = PERSONAL_NAME_PIECES(), 
                                       name_phonetic_variation = name_phonetic_var,
-                                      phonetic_type = phonetic_type,
+                                      phonetisation_method = phonetisation_method,
                                       phonetic_name_pieces = phon_name_pieces,
-                                      name_romanized_variation = name_romanized_var,
-                                      romanized_type = romanized_type,
-                                      romanized_name_pieces = rom_name_pieces) %>% 
+                                      name_romanised_variation = name_romanised_var,
+                                      romanisation_method = romanisation_method,
+                                      romanised_name_pieces = rom_name_pieces) %>% 
     dplyr::filter(tag != "NAME") %>%
     add_levels(1)
   

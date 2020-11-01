@@ -19,18 +19,18 @@ add_individual_attribute <- function(gedcom,
                                      fact_classification = character(),
                                      event_date = date_value(),
                                      event_cause = character(),
+                                     user_reference_type = character(),
                                      age_at_event = character(),
                                      event_notes = character(),
                                      place_name = character(),
-                                     place_hierarchy = character(),
                                      place_phonetic_variation = character(),
-                                     phonetic_type = character(),
-                                     place_romanized_variation = character(),
-                                     romanized_type = character(),
+                                     phonetisation_method = character(),
+                                     place_romanised_variation = character(),
+                                     romanisation_method = character(),
                                      place_latitude = character(),
                                      place_longitude = character(),
                                      place_notes = character(),
-                                     address_first_line = character(),
+                                     local_address_lines = character(),
                                      city = character(),
                                      state = character(),
                                      postal_code = character(),
@@ -40,34 +40,30 @@ add_individual_attribute <- function(gedcom,
                                      fax = character(),
                                      web_page = character(),
                                      responsible_agency = character(),
-                                     religious_affiliation = character()) {
+                                     religious_affiliation = character(),
+                                     multimedia_links = character()) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
-  address_lines <- c(address_first_line, city, state, postal_code, country)
+  if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
-  if(length(address_lines) > 4) address_lines <- address_lines[1:4]
-  
-  if(length(address_lines) == 0) {
-    
-    event_address <- ADDRESS_STRUCTURE(character())
-    
-  } else {
-    
-    event_address <- ADDRESS_STRUCTURE(all_address_lines = address_lines,
-                                       address_city = city,
-                                       address_state = state,
-                                       address_postal_code = postal_code,
-                                       address_country = country,
-                                       phone_number = phone_number,
-                                       address_email = email,
-                                       address_fax = fax,
-                                       address_web_page = web_page)
-  }
-  
+  event_address <- ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+                                     address_city = city,
+                                     address_state = state,
+                                     address_postal_code = postal_code,
+                                     address_country = country,
+                                     phone_number = phone_number,
+                                     address_email = email,
+                                     address_fax = fax,
+                                     address_web_page = web_page)
   
   plac_notes <- purrr::map(place_notes, ~ if(grepl(xref_pattern(), .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+  
+  media_links <- purrr::map_chr(multimedia_links, find_xref, 
+                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+    purrr::map(MULTIMEDIA_LINK)
+  
   
   if(length(place_name) == 0) {
     
@@ -76,11 +72,10 @@ add_individual_attribute <- function(gedcom,
   } else {
     
     event_place <- PLACE_STRUCTURE(place_name = place_name,
-                                   place_hierarchy = place_hierarchy,
                                    place_phonetic_variation = place_phonetic_variation,
-                                   phonetic_type = phonetic_type,
-                                   place_romanized_variation = place_romanized_variation,
-                                   romanized_type = romanized_type,
+                                   phonetisation_method = phonetisation_method,
+                                   place_romanised_variation = place_romanised_variation,
+                                   romanisation_method = romanisation_method,
                                    place_latitude = place_latitude,
                                    place_longitude = place_longitude,
                                    notes = plac_notes)
@@ -96,14 +91,16 @@ add_individual_attribute <- function(gedcom,
                            responsible_agency = responsible_agency,
                            religious_affiliation = religious_affiliation,
                            cause_of_event = event_cause,
-                           notes = even_notes)
+                           notes = even_notes,
+                           multimedia_links = media_links)
   
   details2 <- INDIVIDUAL_EVENT_DETAIL(event_details = details1,
                                       age_at_event = age_at_event)
   
   attribute_str <- INDIVIDUAL_ATTRIBUTE_STRUCTURE(attribute_type = attribute_type,
                                                   attribute_descriptor = attribute_descriptor,
-                                                  individual_event_details = details2) %>% add_levels(1)
+                                                  individual_event_details = details2,
+                                                  user_reference_type = user_reference_type) %>% add_levels(1)
   
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
@@ -168,14 +165,9 @@ rlang::fn_fmls(add_individual_attribute_religion) <- purrr::list_modify(rlang::f
                                                                      attribute_type = "RELI")
 #' @export
 #' @rdname add_individual_attribute
-add_individual_attribute_residence <- purrr::partial(add_individual_attribute, attribute_type = "RESI")
+add_individual_attribute_residence <- purrr::partial(add_individual_attribute, attribute_type = "RESI", attribute_descriptor = "")
 rlang::fn_fmls(add_individual_attribute_residence) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
-                                                                     attribute_type = "RESI")
-#' @export
-#' @rdname add_individual_attribute
-add_individual_attribute_social_sec_num <- purrr::partial(add_individual_attribute, attribute_type = "SSN")
-rlang::fn_fmls(add_individual_attribute_social_sec_num) <- purrr::list_modify(rlang::fn_fmls(add_individual_attribute), 
-                                                                     attribute_type = "SSN")
+                                                                     attribute_type = "RESI", attribute_descriptor = "")
 #' @export
 #' @rdname add_individual_attribute
 add_individual_attribute_nobility_title <- purrr::partial(add_individual_attribute, attribute_type = "TITL")

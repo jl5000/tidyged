@@ -13,7 +13,6 @@
 \alias{add_individual_attribute_possessions}
 \alias{add_individual_attribute_religion}
 \alias{add_individual_attribute_residence}
-\alias{add_individual_attribute_social_sec_num}
 \alias{add_individual_attribute_nobility_title}
 \alias{add_individual_attribute_other}
 \title{Add an attribute associated with an individual}
@@ -25,18 +24,18 @@ add_individual_attribute(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -46,7 +45,8 @@ add_individual_attribute(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_caste(
@@ -56,18 +56,18 @@ add_individual_attribute_caste(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -77,7 +77,8 @@ add_individual_attribute_caste(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_phys_descr(
@@ -87,18 +88,18 @@ add_individual_attribute_phys_descr(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -108,7 +109,8 @@ add_individual_attribute_phys_descr(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_education(
@@ -118,18 +120,18 @@ add_individual_attribute_education(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -139,7 +141,8 @@ add_individual_attribute_education(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_national_id(
@@ -149,18 +152,18 @@ add_individual_attribute_national_id(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -170,7 +173,8 @@ add_individual_attribute_national_id(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_nationality(
@@ -180,18 +184,18 @@ add_individual_attribute_nationality(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -201,7 +205,8 @@ add_individual_attribute_nationality(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_num_children(
@@ -211,18 +216,18 @@ add_individual_attribute_num_children(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -232,7 +237,8 @@ add_individual_attribute_num_children(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_num_marriages(
@@ -242,18 +248,18 @@ add_individual_attribute_num_marriages(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -263,7 +269,8 @@ add_individual_attribute_num_marriages(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_occupation(
@@ -273,18 +280,18 @@ add_individual_attribute_occupation(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -294,7 +301,8 @@ add_individual_attribute_occupation(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_possessions(
@@ -304,18 +312,18 @@ add_individual_attribute_possessions(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -325,7 +333,8 @@ add_individual_attribute_possessions(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_religion(
@@ -335,18 +344,18 @@ add_individual_attribute_religion(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -356,28 +365,29 @@ add_individual_attribute_religion(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_residence(
   gedcom,
   attribute_type = "RESI",
-  attribute_descriptor,
+  attribute_descriptor = "",
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -387,38 +397,8 @@ add_individual_attribute_residence(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
-)
-
-add_individual_attribute_social_sec_num(
-  gedcom,
-  attribute_type = "SSN",
-  attribute_descriptor,
-  fact_classification = character(),
-  event_date = date_value(),
-  event_cause = character(),
-  age_at_event = character(),
-  event_notes = character(),
-  place_name = character(),
-  place_hierarchy = character(),
-  place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
-  place_latitude = character(),
-  place_longitude = character(),
-  place_notes = character(),
-  address_first_line = character(),
-  city = character(),
-  state = character(),
-  postal_code = character(),
-  country = character(),
-  phone_number = character(),
-  email = character(),
-  fax = character(),
-  web_page = character(),
-  responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_nobility_title(
@@ -428,18 +408,18 @@ add_individual_attribute_nobility_title(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -449,7 +429,8 @@ add_individual_attribute_nobility_title(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 
 add_individual_attribute_other(
@@ -459,18 +440,18 @@ add_individual_attribute_other(
   fact_classification = character(),
   event_date = date_value(),
   event_cause = character(),
+  user_reference_type = character(),
   age_at_event = character(),
   event_notes = character(),
   place_name = character(),
-  place_hierarchy = character(),
   place_phonetic_variation = character(),
-  phonetic_type = character(),
-  place_romanized_variation = character(),
-  romanized_type = character(),
+  phonetisation_method = character(),
+  place_romanised_variation = character(),
+  romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
   place_notes = character(),
-  address_first_line = character(),
+  local_address_lines = character(),
   city = character(),
   state = character(),
   postal_code = character(),
@@ -480,7 +461,8 @@ add_individual_attribute_other(
   fax = character(),
   web_page = character(),
   responsible_agency = character(),
-  religious_affiliation = character()
+  religious_affiliation = character(),
+  multimedia_links = character()
 )
 }
 \arguments{
@@ -512,19 +494,15 @@ These could be xrefs to existing Note records.}
 \item{place_name}{The jurisdictional name of the place where the event took place.
 Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."}
 
-\item{place_hierarchy}{This shows the jurisdictional entities that are named in a sequence
-from the lowest to the highest jurisdiction. The jurisdictions are separated by commas,
-and any jurisdiction's name that is missing is still accounted for by a comma.}
-
 \item{place_phonetic_variation}{A character vector of phonetic variations of the place name.}
 
-\item{phonetic_type}{A character vector giving the method used in transforming the text to
+\item{phonetisation_method}{A character vector giving the method used in transforming the text to
 the corresponding phonetic variation. If this argument is used, it must be the same size
 as the place_phonetic_variation argument.}
 
-\item{place_romanized_variation}{A character vector of romanized variations of the place name.}
+\item{place_romanised_variation}{A character vector of romanized variations of the place name.}
 
-\item{romanized_type}{A character vector giving the method used in transforming the text to
+\item{romanisation_method}{A character vector giving the method used in transforming the text to
 the corresponding romanized variation. If this argument is used, it must be the same size
 as the place_romanized_variation argument.}
 
@@ -541,7 +519,7 @@ base meridian coordinate. For example:
 \item{place_notes}{A character vector of notes accompanying the event place.
 These could be xrefs to existing Note records.}
 
-\item{address_first_line}{The first line of the event address.}
+\item{local_address_lines}{The first line of the event address.}
 
 \item{city}{The city of the event address.}
 

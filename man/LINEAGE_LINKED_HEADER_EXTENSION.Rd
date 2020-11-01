@@ -9,7 +9,7 @@ LINEAGE_LINKED_HEADER_EXTENSION(
   product_version_number = utils::packageVersion("tidygedcom"),
   name_of_product = "tidygedcom",
   name_of_business = "Jamie Lendrum",
-  business_address = ADDRESS_STRUCTURE(),
+  business_address = ADDRESS_STRUCTURE(address_email = "jalendrum@gmail.com"),
   name_of_source_data = character(),
   publication_date_source_data = date_exact(),
   copyright_source_data = character(),

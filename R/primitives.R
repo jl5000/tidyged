@@ -107,7 +107,7 @@ validate_adopted_by_which_parent <- function(input, max_dim) {
 }
 validate_age_at_event <- function(input, max_dim) {
   validate_input_size(input, max_dim, 2, 13)
-  validate_input_pattern(input, age_at_event_pattern)
+  validate_input_pattern(input, age_at_event_pattern())
 }
 validate_attribute_descriptor <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)

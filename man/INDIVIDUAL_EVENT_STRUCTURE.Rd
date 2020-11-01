@@ -6,6 +6,7 @@
 \usage{
 INDIVIDUAL_EVENT_STRUCTURE(
   event_type_individual,
+  event_descriptor = "",
   individual_event_details = INDIVIDUAL_EVENT_DETAIL(),
   xref_fam = character(),
   adopted_by_which_parent = character()
@@ -13,6 +14,11 @@ INDIVIDUAL_EVENT_STRUCTURE(
 }
 \arguments{
 \item{event_type_individual}{A code used to indicate the type of individual event.}
+
+\item{event_descriptor}{Text describing a particular event pertaining to the individual or family.
+This event value is usually assigned to the EVEN tag. The classification as to the difference
+between this specific event and other occurrences of the EVENt tag is indicated by the use of
+a subordinate TYPE tag selected from the EVENT_DETAIL structure.}
 
 \item{individual_event_details}{An INDIVIDUAL_EVENT_DETAIL() object giving details of the event.}
 

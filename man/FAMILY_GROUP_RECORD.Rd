@@ -2,7 +2,7 @@
 % Please edit documentation in R/records.R
 \name{FAMILY_GROUP_RECORD}
 \alias{FAMILY_GROUP_RECORD}
-\title{Construct the FAMILY_RECORD tibble}
+\title{Construct the FAMILY_GROUP_RECORD tibble}
 \usage{
 FAMILY_GROUP_RECORD(
   xref_fam,

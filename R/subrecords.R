@@ -122,10 +122,10 @@ LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
 #'          address_state = "state",
 #'          address_postal_code = "XYZ123",
 #'          address_country = "country",
-#'          phone_number = 1234567890,
-#'          address_email = "email@domain.co.uk",
-#'          address_fax = "987654321",
-#'          address_web_page = "http://www.domain.com"), "json2")
+#'          phone_number = 1:3 * 6345645,
+#'          address_email = c("email1@domain.co.uk","email2@domain.co.uk","email3@domain.co.uk"),
+#'          address_fax = 4:6 * 937463,
+#'          address_web_page = c("http://www.domain1.com","http://www.domain2.com","http://www.domain3.com")), "json2")
 #'   
 #' @return A tidy tibble containing the ADDRESS_STRUCTURE part of a GEDCOM file.
 ADDRESS_STRUCTURE <- function(local_address_lines = character(),
@@ -195,7 +195,8 @@ ADDRESS_STRUCTURE <- function(local_address_lines = character(),
 #' 
 #' expect_snapshot_value(ASSOCIATION_STRUCTURE("@I1@", "Godfather"), "json2")
 #' expect_snapshot_value(ASSOCIATION_STRUCTURE("@I1@", "Father", 
-#'              notes = list(NOTE_STRUCTURE(user_text = "This is a note"))), "json2")
+#'              notes = list(NOTE_STRUCTURE(user_text = "This is a note")),
+#'              source_citations = list(SOURCE_CITATION("@S1@"))), "json2")
 #'              
 #' @return A tidy tibble containing the ASSOCIATION_STRUCTURE part of a GEDCOM file.
 ASSOCIATION_STRUCTURE <- function(xref_indi,

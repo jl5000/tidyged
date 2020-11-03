@@ -2,7 +2,24 @@
 
 context("File R/primitives.R: @tests")
 
-test_that("Function validate_date() @ L42", {
+test_that("Function validate_input_size() @ L6", {
+  expect_error(validate_input_size(1:2, 1))
+  expect_error(validate_input_size("123456", 1, min_char = 7))
+  expect_error(validate_input_size("123456", 1, max_char = 5))
+})
+
+
+test_that("Function validate_input_pattern() @ L19", {
+  expect_error(validate_input_pattern("Test string", "Tast string"))
+})
+
+
+test_that("Function validate_input_choice() @ L30", {
+  expect_error(validate_input_choice(20, 22:28))
+})
+
+
+test_that("Function validate_date() @ L49", {
   expect_error(validate_date(2005, day1 = 15))
   expect_error(validate_date(2005, 10, 15, month2 = 4))
   expect_error(validate_date(2005, 10, 15, day2 = 15))

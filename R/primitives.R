@@ -1,5 +1,8 @@
 
-
+#' @tests
+#' expect_error(validate_input_size(1:2, 1))
+#' expect_error(validate_input_size("123456", 1, min_char = 7))
+#' expect_error(validate_input_size("123456", 1, max_char = 5))
 validate_input_size <- function(input, max_dim, min_char = NULL, max_char = NULL) {
   if (length(input) > max_dim)
     stop("Input ", input, " has too many dimensions. The limit is ", max_dim)
@@ -11,6 +14,8 @@ validate_input_size <- function(input, max_dim, min_char = NULL, max_char = NULL
     stop("Input ", input, " has too few characters. The minimum is ", min_char)
 }
 
+#' @tests
+#' expect_error(validate_input_pattern("Test string", "Tast string"))
 validate_input_pattern <- function(input, pattern) {
   if (length(input) > 0) {
     for (i in input) {
@@ -20,6 +25,8 @@ validate_input_pattern <- function(input, pattern) {
   }
 }
 
+#' @tests
+#' expect_error(validate_input_choice(20, 22:28))
 validate_input_choice <- function(input, choices) {
   if (length(input) == 1 && input %nin% choices) 
     stop("Invalid argument value: ", input, ".\n  The valid values are: ", 

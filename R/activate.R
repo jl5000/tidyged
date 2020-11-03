@@ -203,7 +203,7 @@ activate_note_record <- function(gedcom,
     
     xref <- find_xref(gedcom, 
                       xrefs_notes(gedcom), 
-                      c("NOTE", "CONT", "CONC"), 
+                      "NOTE", 
                       note_excerpt)
   }
   

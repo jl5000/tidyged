@@ -211,7 +211,7 @@
         "row.names": {
           "type": "integer",
           "attributes": {},
-          "value": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+          "value": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
         },
         "class": {
           "type": "character",
@@ -223,22 +223,22 @@
         {
           "type": "double",
           "attributes": {},
-          "value": [0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0]
+          "value": [0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["ADDR", "ADR1", "ADR2", "ADR3", "CITY", "STAE", "POST", "CTRY", "PHON", "EMAIL", "FAX", "WWW"]
+          "value": ["ADDR", "ADR1", "ADR2", "ADR3", "CITY", "STAE", "POST", "CTRY", "PHON", "PHON", "PHON", "EMAIL", "EMAIL", "EMAIL", "FAX", "FAX", "FAX", "WWW", "WWW", "WWW"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["", "road1", "road2", "road3", "city", "state", "XYZ123", "country", "1234567890", "email@domain.co.uk", "987654321", "http://www.domain.com"]
+          "value": ["", "road1", "road2", "road3", "city", "state", "XYZ123", "country", "6345645", "12691290", "19036935", "email1@domain.co.uk", "email2@domain.co.uk", "email3@domain.co.uk", "3749852", "4687315", "5624778", "http://www.domain1.com", "http://www.domain2.com", "http://www.domain3.com"]
         }
       ]
     }
 
-# Function ASSOCIATION_STRUCTURE() @ L201
+# Function ASSOCIATION_STRUCTURE() @ L202
 
     {
       "type": "list",
@@ -291,7 +291,7 @@
         "row.names": {
           "type": "integer",
           "attributes": {},
-          "value": [1, 2, 3]
+          "value": [1, 2, 3, 4]
         },
         "class": {
           "type": "character",
@@ -303,22 +303,22 @@
         {
           "type": "double",
           "attributes": {},
-          "value": [0, 1, 1]
+          "value": [0, 1, 1, 1]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["ASSO", "RELA", "NOTE"]
+          "value": ["ASSO", "RELA", "SOUR", "NOTE"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["@I1@", "Father", "This is a note"]
+          "value": ["@I1@", "Father", "@S1@", "This is a note"]
         }
       ]
     }
 
-# Function CHANGE_DATE() @ L236
+# Function CHANGE_DATE() @ L237
 
     {
       "type": "list",
@@ -438,7 +438,7 @@
       ]
     }
 
-# Function CHILD_TO_FAMILY_LINK() @ L269
+# Function CHILD_TO_FAMILY_LINK() @ L270
 
     {
       "type": "list",
@@ -518,7 +518,7 @@
       ]
     }
 
-# Function EVENT_DETAIL() @ L303
+# Function EVENT_DETAIL() @ L304
 
     {
       "type": "list",
@@ -638,7 +638,7 @@
       ]
     }
 
-# Function FAMILY_EVENT_DETAIL() @ L350
+# Function FAMILY_EVENT_DETAIL() @ L351
 
     {
       "type": "list",
@@ -758,7 +758,7 @@
       ]
     }
 
-# Function FAMILY_EVENT_STRUCTURE() @ L394
+# Function FAMILY_EVENT_STRUCTURE() @ L395
 
     {
       "type": "list",
@@ -918,7 +918,7 @@
       ]
     }
 
-# Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L434
+# Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L435
 
     {
       "type": "list",
@@ -998,7 +998,7 @@
       ]
     }
 
-# Function INDIVIDUAL_EVENT_DETAIL() @ L489
+# Function INDIVIDUAL_EVENT_DETAIL() @ L490
 
     {
       "type": "list",
@@ -1038,7 +1038,7 @@
       ]
     }
 
-# Function INDIVIDUAL_EVENT_STRUCTURE() @ L523
+# Function INDIVIDUAL_EVENT_STRUCTURE() @ L524
 
     {
       "type": "list",
@@ -1198,7 +1198,7 @@
       ]
     }
 
-# Function NOTE_STRUCTURE() @ L590
+# Function NOTE_STRUCTURE() @ L591
 
     {
       "type": "list",
@@ -1278,7 +1278,7 @@
       ]
     }
 
-# Function PERSONAL_NAME_PIECES() @ L631
+# Function PERSONAL_NAME_PIECES() @ L632
 
     {
       "type": "list",
@@ -1358,7 +1358,7 @@
       ]
     }
 
-# Function PERSONAL_NAME_STRUCTURE() @ L700
+# Function PERSONAL_NAME_STRUCTURE() @ L701
 
     {
       "type": "list",
@@ -1478,7 +1478,7 @@
       ]
     }
 
-# Function PLACE_STRUCTURE() @ L783
+# Function PLACE_STRUCTURE() @ L784
 
     {
       "type": "list",
@@ -1518,7 +1518,7 @@
       ]
     }
 
-# Function SOURCE_CITATION() @ L855
+# Function SOURCE_CITATION() @ L856
 
     {
       "type": "list",
@@ -1678,7 +1678,7 @@
       ]
     }
 
-# Function SOURCE_REPOSITORY_CITATION() @ L910
+# Function SOURCE_REPOSITORY_CITATION() @ L911
 
     {
       "type": "list",
@@ -1718,7 +1718,7 @@
       ]
     }
 
-# Function SPOUSE_TO_FAMILY_LINK() @ L940
+# Function SPOUSE_TO_FAMILY_LINK() @ L941
 
     {
       "type": "list",

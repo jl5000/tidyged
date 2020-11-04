@@ -12,12 +12,12 @@
 #'
 #' @param gedcom A tidygedcom object.
 #' @param events_recorded An enumeration of the different kinds of events that were recorded 
-#' in this source. Each enumeration is separated by a comma. See the Gedcom 5.5.1 Standard for 
+#' in this source. Each enumeration is separated by a comma. See the Gedcom 5.5.5 Specification for 
 #' more details. 
 #' @param date_period_covered A date_period() object indicating the time period of events
 #' covered by this source.
 #' @param jurisdiction A character string indicating the lowest level jurisdiction encompassing
-#' all places named in this source. See the Gedcom 5.5.1 Standard for more details. 
+#' all places named in this source. See the Gedcom 5.5.5 Specification for more details. 
 #' @param responsible_agency The organisation, institution, corporation, person, or other 
 #' entity that has responsibility for the source data.
 #' @param originator The person, agency, or entity who created the record. 
@@ -31,7 +31,7 @@
 #' This indicates notes or text that are actually contained in the source document, 
 #' not the submitter's opinion about the source.
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify 
-#' this record. See the Gedcom 5.5.1 Standard for more details.
+#' this record. See the Gedcom 5.5.5 Specification for more details.
 #' @param user_reference_type A user-defined definition of the user_reference_number.
 #' @param automated_record_id A unique record identification number assigned to the record by 
 #' the source system. 

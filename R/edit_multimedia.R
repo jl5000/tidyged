@@ -19,7 +19,7 @@
 #' @param title The title of the multimedia file(s). If this is defined, it must be a character
 #' vector the same size as file_reference and format.
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify 
-#' this record. See the Gedcom 5.5.1 Standard for more details.
+#' this record. See the Gedcom 5.5.5 Specification for more details.
 #' @param user_reference_type A user-defined definition of the user_reference_number.
 #' @param automated_record_id A unique record identification number assigned to the record by 
 #' the source system. 

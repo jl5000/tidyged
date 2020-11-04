@@ -41,7 +41,7 @@ library(tidygedcom)
 tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_individual(sex = "M", individual_notes = "The central character in the Star Wars Skywalker Saga") %>%
   add_individual_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>% 
-  add_individual_event(event_type = "DEAT", age_at_event = "45y", cause_of_event = "Killed by son Luke",
+  add_individual_event_death(age_at_event = "45y", event_cause = "Killed by son Luke",
                        place_name = "Second Death Star", place_notes = "Orbiting Endor System") %>% 
   add_individual_attribute(attribute_type = "RELI", attribute_descriptor = "Jedi") %>% 
   add_individual_attribute(attribute_type = "PROP", attribute_descriptor = "Lightsaber") %>%
@@ -51,7 +51,7 @@ tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_individual_names("Leia Organa") %>% 
   add_individual(sex = "M") %>%
   add_individual_names("Luke Skywalker") %>% 
-  add_family(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
+  add_family_group(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
   add_individual(sex = "M") %>% 
   add_individual_names("Obi-Wan Kenobi") %>% 
   activate_individual_record("Anakin") %>% 
@@ -59,7 +59,7 @@ tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_note("Based on Star Wars") %>% 
   add_source(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
   add_repository("The Skywalker Saga") %>% 
-  add_multimedia(file_reference = "XYZ", format = "jpg")
+  add_multimedia(file_reference = "XYZ", format = "JPG")
 
 tg
 ```
@@ -91,7 +91,7 @@ Two sister packages are planned:
 
 ## Current status
 
-* The GEDCOM 5.5.1 specification has been implemented. This is the bulk of the internal data structures required (params.R, structures.R, records.R, and validate_params.R);
+* The GEDCOM 5.5.5 specification has been implemented. This is the bulk of the internal data structures required (params.R, structures.R, records.R, and validate_params.R);
 * Some initial functions to summarise tidygedcom objects have been completed (interrogate.R);
 * Functions to import, export and create tidygedcom objects have been completed (import_export_create.R);
 * Current work is on updating code for GEDCOM 5.5.5 and the modification of tidygedcom objects;

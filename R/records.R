@@ -2,7 +2,6 @@
 # First any inputs that could be numbers are converted to characters
 # Then inputs are then checked to ensure they do not breach size limits
 #   Structures are not checked for character length
-#   Note values which could be split up over several lines are not checked for character length
 # Then the outputs dataframe is constructed:
 # Inputs which are not structures or lists are placed straight into tibbles
 # Inputs which are lists of dataframes are first binded by row, and then levels pushed down
@@ -11,6 +10,21 @@
 # For records, an additional finalising step is performed which fills missing ids
 
 
+#' Construct the GEDCOM_HEADER tibble
+#' 
+#' This function constructs a tibble representation of the GEDCOM_HEADER from the GEDCOM 5.5.5
+#' specification.
+#'
+#' @inheritParams parameter_definitions
+#' @param header_extension A LINEAGE_LINKED_HEADER_EXTENSION() object providing more information
+#' about the GEDCOM file.
+#' @tests
+#' expect_error(GEDCOM_HEADER("ANSEL"))
+#' expect_snapshot_value(GEDCOM_HEADER(), "json2")
+#' expect_snapshot_value(GEDCOM_HEADER(
+#'         header_extension = LINEAGE_LINKED_HEADER_EXTENSION(language_of_text = "English")), "json2")
+#' 
+#' @return A tidy tibble containing a GEDCOM_HEADER part of a GEDCOM file.
 GEDCOM_HEADER <- function(character_encoding = "UTF-8",
                           gedcom_version_number = "5.5.5",
                           gedcom_form = "LINEAGE-LINKED",
@@ -29,7 +43,7 @@ GEDCOM_HEADER <- function(character_encoding = "UTF-8",
     tibble::tibble(level = 2, tag = "FORM", value = gedcom_form),
     tibble::tibble(level = 3, tag = "VERS", value = gedcom_version_number),
     tibble::tibble(level = 1, tag = "CHAR", value = character_encoding),
-    header_extension %>% dplyr::bind_rows() %>% add_levels(1),
+    header_extension %>% add_levels(1),
   ) %>% 
     finalise()
   
@@ -40,7 +54,7 @@ GEDCOM_HEADER <- function(character_encoding = "UTF-8",
 
 #' Construct the FAMILY_GROUP_RECORD tibble
 #' 
-#' This function constructs a tibble representation of the FAMILY_RECORD from the GEDCOM 5.5.1
+#' This function constructs a tibble representation of the FAMILY_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
 #' @inheritParams parameter_definitions
@@ -119,7 +133,7 @@ FAMILY_GROUP_RECORD <- function(xref_fam,
 
 #' Construct the INDIVIDUAL_RECORD tibble
 #' 
-#' This function constructs a tibble representation of the INDIVIDUAL_RECORD from the GEDCOM 5.5.1
+#' This function constructs a tibble representation of the INDIVIDUAL_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
 #' @inheritParams parameter_definitions
@@ -205,7 +219,7 @@ INDIVIDUAL_RECORD <- function(xref_indi,
 
 #' Construct the MULTIMEDIA_RECORD tibble
 #' 
-#' This function constructs a tibble representation of the MULTIMEDIA_RECORD from the GEDCOM 5.5.1
+#' This function constructs a tibble representation of the MULTIMEDIA_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
 #' @inheritParams parameter_definitions
@@ -295,7 +309,7 @@ MULTIMEDIA_RECORD <- function(xref_obje,
 
 #' Construct the NOTE_RECORD tibble
 #' 
-#' This function constructs a tibble representation of the NOTE_RECORD from the GEDCOM 5.5.1
+#' This function constructs a tibble representation of the NOTE_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
 #' @inheritParams parameter_definitions
@@ -352,7 +366,7 @@ NOTE_RECORD <- function(xref_note,
 
 #' Construct the REPOSITORY_RECORD tibble
 #' 
-#' This function constructs a tibble representation of the REPOSITORY_RECORD from the GEDCOM 5.5.1
+#' This function constructs a tibble representation of the REPOSITORY_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
 #' @inheritParams parameter_definitions
@@ -414,7 +428,7 @@ REPOSITORY_RECORD <- function(xref_repo,
 
 #' Construct the SOURCE_RECORD tibble
 #' 
-#' This function constructs a tibble representation of the SOURCE_RECORD from the GEDCOM 5.5.1
+#' This function constructs a tibble representation of the SOURCE_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
 #' @inheritParams parameter_definitions
@@ -558,7 +572,7 @@ SUBMITTER_RECORD <- function(xref_subm,
 
 #' Construct the FOOTER_SECTION tibble
 #' 
-#' This function constructs a tibble representation of the FOOTER_SECTION from the GEDCOM 5.5.1
+#' This function constructs a tibble representation of the FOOTER_SECTION from the GEDCOM 5.5.5
 #' specification.
 #'
 #' @tests

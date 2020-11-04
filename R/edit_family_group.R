@@ -27,7 +27,7 @@
 #' @param number_of_children The reported number of children known to belong to this family, 
 #' regardless of whether the associated children are represented here.
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify 
-#' this record. See the Gedcom 5.5.1 Standard for more details.
+#' this record. See the Gedcom 5.5.5 Specification for more details.
 #' @param user_reference_type A user-defined definition of the user_reference_number.
 #' @param automated_record_id A unique record identification number assigned to the record by 
 #' the source system. 
@@ -93,7 +93,7 @@ add_family_group <- function(gedcom,
       set_active_record(xref_chil) %>% 
       add_individual_family_link_as_child(xref) 
     
-    message("Family link also added to the Individual record for child ", i)
+    message("Family link also added to the Individual record for child ", xref_chil)
   }
   
   set_active_record(temp, xref)

@@ -57,6 +57,6 @@ the current date is used.}
 A tidy tibble containing a FAMILY_RECORD part of a GEDCOM file.
 }
 \description{
-This function constructs a tibble representation of the FAMILY_RECORD from the GEDCOM 5.5.1
+This function constructs a tibble representation of the FAMILY_RECORD from the GEDCOM 5.5.5
 specification.
 }

@@ -34,7 +34,7 @@ vector the same size as file_reference and format.}
 vector the same size as file_reference and format.}
 
 \item{user_reference_number}{A user-defined number or text that the submitter uses to identify
-this record. See the Gedcom 5.5.1 Standard for more details.}
+this record. See the Gedcom 5.5.5 Specification for more details.}
 
 \item{user_reference_type}{A user-defined definition of the user_reference_number.}
 

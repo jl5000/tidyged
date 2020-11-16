@@ -53,6 +53,6 @@ the current date is used.}
 A tidy tibble containing a MULTIMEDIA_RECORD part of a GEDCOM file.
 }
 \description{
-This function constructs a tibble representation of the MULTIMEDIA_RECORD from the GEDCOM 5.5.1
+This function constructs a tibble representation of the MULTIMEDIA_RECORD from the GEDCOM 5.5.5
 specification.
 }

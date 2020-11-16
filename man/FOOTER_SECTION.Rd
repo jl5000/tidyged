@@ -10,6 +10,6 @@ FOOTER_SECTION()
 A tidy tibble containing a FOOTER_SECTION part of a GEDCOM file.
 }
 \description{
-This function constructs a tibble representation of the FOOTER_SECTION from the GEDCOM 5.5.1
+This function constructs a tibble representation of the FOOTER_SECTION from the GEDCOM 5.5.5
 specification.
 }

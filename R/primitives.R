@@ -293,7 +293,7 @@ validate_national_or_tribal_origin <- function(input, max_dim) {
 validate_nobility_type_title <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
-validate_number_of_relationhips <- function(input, max_dim) {
+validate_number_of_relationships <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 3)
 }
 validate_occupation <- function(input, max_dim) {

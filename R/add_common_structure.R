@@ -34,8 +34,7 @@ add_source_citation_to_record <- function(gedcom) {
   
   if(is_repository(gedcom, xref) |
      is_source(gedcom, xref) |
-     is_submitter(gedcom, xref) |
-     is_submission(gedcom, xref))
+     is_submitter(gedcom, xref))
     stop("Source citations cannot be added to the active record")
   
   

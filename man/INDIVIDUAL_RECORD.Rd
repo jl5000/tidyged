@@ -65,6 +65,6 @@ the current date is used.}
 A tidy tibble containing an INDIVIDUAL_RECORD part of a GEDCOM file.
 }
 \description{
-This function constructs a tibble representation of the INDIVIDUAL_RECORD from the GEDCOM 5.5.1
+This function constructs a tibble representation of the INDIVIDUAL_RECORD from the GEDCOM 5.5.5
 specification.
 }

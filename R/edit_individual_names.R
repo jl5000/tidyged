@@ -194,7 +194,7 @@ remove_individual_name_var <- function(gedcom,
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
-  remove_section(gedcom, 2, if_else(phonetic_variation, "FONE", "ROMN"), 
+  remove_section(gedcom, 2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
                  variation_name, xrefs = get_active_record(gedcom))
   
 }

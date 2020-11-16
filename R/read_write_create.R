@@ -46,7 +46,7 @@ read_gedcom <- function(filepath) {
 #' This function reads the Byte Order Mark of a GEDCOM file in order to determine its encoding.
 #' It only checks for UTF-8 or UTF-16 - if neither of these are found it throws an error.
 #'
-#' @param filepath 
+#' @param filepath TODO
 #'
 #' @return A character string indicating the encoding of the file.
 read_gedcom_encoding <- function(filepath) {
@@ -105,7 +105,7 @@ write_gedcom <- function(gedcom, filepath) {
   
   gedcom %>%
     update_header_with_filename(filename = basename(filepath)) %>% 
-    dplyr::mutate(value = str_replace_all(value, "@", "@@")) %>% 
+    dplyr::mutate(value = stringr::str_replace_all(value, "@", "@@")) %>% 
     split_gedcom_values(char_limit = .pkgenv$gedcom_phys_value_limit) %>% 
     dplyr::mutate(record = dplyr::if_else(dplyr::lag(record) == record, "", record)) %>% 
     dplyr::mutate(record = dplyr::if_else(record == "TR", "", record)) %>% 
@@ -247,7 +247,7 @@ gedcom <- function(submitter_details = subm(),
 #' the source system. 
 #' @param submitter_notes A character vector of notes accompanying this Submitter record.
 #' These could be xrefs to existing Note records.
-#' @param multimedia_links
+#' @param multimedia_links TODO
 #'
 #' @return A Submitter record to be incorporated into a new tidygedcom object.
 #' @export

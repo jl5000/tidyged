@@ -63,7 +63,7 @@ add_individual_event <- function(gedcom,
                                  event_type,
                                  event_descriptor = character(),
                                  event_classification = character(),
-                                 event_date = date_value(),
+                                 event_date = tidygedcom::date_value(),
                                  event_cause = character(),
                                  age_at_event = character(),
                                  event_notes = character(),
@@ -183,7 +183,7 @@ rlang::fn_fmls(add_individual_event_burial) <- purrr::list_modify(rlang::fn_fmls
 add_individual_event_cremation <- purrr::partial(add_individual_event, event_type = "CREM", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_cremation) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
                                                                  event_type = "CREM", event_descriptor = "")
-    #' @export
+#' @export
 #' @rdname add_individual_event
 add_individual_event_adoption <- purrr::partial(add_individual_event, event_type = "ADOP", event_descriptor = "")
 rlang::fn_fmls(add_individual_event_adoption) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 

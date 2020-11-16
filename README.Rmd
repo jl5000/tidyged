@@ -43,8 +43,8 @@ tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_individual_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>% 
   add_individual_event_death(age_at_event = "45y", event_cause = "Killed by son Luke",
                        place_name = "Second Death Star", place_notes = "Orbiting Endor System") %>% 
-  add_individual_attribute(attribute_type = "RELI", attribute_descriptor = "Jedi") %>% 
-  add_individual_attribute(attribute_type = "PROP", attribute_descriptor = "Lightsaber") %>%
+  add_individual_attribute_religion(attribute_descriptor = "Jedi") %>% 
+  add_individual_attribute_possessions(attribute_descriptor = "Lightsaber") %>%
   add_individual(sex = "F", individual_notes = "Queen of Naboo") %>%
   add_individual_names("Padme Amidala") %>% 
   add_individual(sex = "F") %>% 

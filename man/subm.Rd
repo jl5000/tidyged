@@ -47,7 +47,7 @@ the source system.}
 \item{submitter_notes}{A character vector of notes accompanying this Submitter record.
 These could be xrefs to existing Note records.}
 
-\item{multimedia_links}{}
+\item{multimedia_links}{TODO}
 }
 \value{
 A Submitter record to be incorporated into a new tidygedcom object.

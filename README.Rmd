@@ -1,7 +1,6 @@
 ---
-title: "tidygedcom"
 output:
-  html_document:
+  github_document:
     df_print: paged
 ---
 

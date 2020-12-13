@@ -9,7 +9,7 @@ add_family_group(
   husband = character(),
   wife = character(),
   children = character(),
-  child_linkage_types = character(),
+  child_linkage_types = rep("birth", length(children)),
   number_of_children = character(),
   user_reference_number = character(),
   user_reference_type = character(),
@@ -33,7 +33,7 @@ to match to an individual name.}
 
 \item{child_linkage_types}{Codes used to indicate the child to family relationships. If defined,
 this must be a character vector the same size as children. Values must be one of:
-adopted, birth, foster, sealing.}
+"birth" (default), "adopted", or "foster".}
 
 \item{number_of_children}{The reported number of children known to belong to this family,
 regardless of whether the associated children are represented here.}

@@ -23,7 +23,7 @@
 #' to match to an individual name.
 #' @param child_linkage_types Codes used to indicate the child to family relationships. If defined,
 #' this must be a character vector the same size as children. Values must be one of:
-#' adopted, birth, foster, sealing.
+#' "birth" (default), "adopted", or "foster".
 #' @param number_of_children The reported number of children known to belong to this family, 
 #' regardless of whether the associated children are represented here.
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify 
@@ -43,7 +43,7 @@ add_family_group <- function(gedcom,
                              husband = character(),
                              wife = character(),
                              children = character(),
-                             child_linkage_types = character(),
+                             child_linkage_types = rep("birth", length(children)),
                              number_of_children = character(),
                              user_reference_number = character(),
                              user_reference_type = character(),
@@ -78,14 +78,22 @@ add_family_group <- function(gedcom,
                                     multimedia_links = media_links) 
   
   temp <- gedcom %>%
-    tibble::add_row(fam_record, .before = nrow(.)) %>%
-    set_active_record(xref_husb) %>% 
-    add_individual_family_link_as_spouse(xref) %>%
-    set_active_record(xref_wife) %>% 
-    add_individual_family_link_as_spouse(xref)
+    tibble::add_row(fam_record, .before = nrow(.))
   
-  message("Family link also added to the Individual record for husband")
-  message("Family link also added to the Individual record for wife")
+  if(length(xref_husb) == 1) {
+    temp <- temp %>%
+      set_active_record(xref_husb) %>% 
+      add_individual_family_link_as_spouse(xref)
+    
+    message("Family link also added to the Individual record for husband")
+  }
+  if(length(xref_wife) == 1) {
+    temp <- temp %>%
+      set_active_record(xref_wife) %>% 
+      add_individual_family_link_as_spouse(xref)
+    
+    message("Family link also added to the Individual record for wife")
+  }
   
   for(xref_chil in xrefs_chil) {
     #TODO: Linkage type

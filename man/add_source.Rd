@@ -67,6 +67,9 @@ These could be xrefs to existing Note records.}
 
 \item{source_notes}{A character vector of notes accompanying this Source record.
 These could be xrefs to existing Note records.}
+
+\item{multimedia_links}{A character vector of multimedia file references accompanying this
+source. These could be xrefs to existing Multimedia records.}
 }
 \value{
 An updated tidygedcom object including the Source record.

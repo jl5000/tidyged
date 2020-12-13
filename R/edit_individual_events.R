@@ -5,6 +5,7 @@
 #' 
 #' @param event_type The type of event. This should be automatically populated with the appropriate
 #' event function.
+#' @param event_descriptor Text describing the type of event. This should only be used for "other" events.
 #' @param family_xref The xref of the family associated of which this individual is a child.
 #' Only used for birth, christening, or adoption events.
 #' @param adopting_parent A code which shows which parent in the associated family adopted this 
@@ -56,6 +57,8 @@
 #' on a death certificate.
 #' @param event_notes A character vector of notes accompanying the event.
 #' These could be xrefs to existing Note records.
+#' @param multimedia_links A character vector of multimedia file references accompanying this
+#' event. These could be xrefs to existing Multimedia records.
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this event.
@@ -63,7 +66,7 @@ add_individual_event <- function(gedcom,
                                  event_type,
                                  event_descriptor = character(),
                                  event_classification = character(),
-                                 event_date = tidygedcom::date_value(),
+                                 event_date = date_value(),
                                  event_cause = character(),
                                  age_at_event = character(),
                                  event_notes = character(),

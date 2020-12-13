@@ -39,6 +39,8 @@
 #' These could be xrefs to existing Note records.
 #' @param source_notes A character vector of notes accompanying this Source record.
 #' These could be xrefs to existing Note records.
+#' @param multimedia_links A character vector of multimedia file references accompanying this
+#' source. These could be xrefs to existing Multimedia records.
 #'
 #' @return An updated tidygedcom object including the Source record.
 #' @export

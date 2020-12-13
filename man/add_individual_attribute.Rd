@@ -483,6 +483,8 @@ with others).}
 Normally this will be used for a death event to show cause of death, such as might be listed
 on a death certificate.}
 
+\item{user_reference_type}{TODO}
+
 \item{age_at_event}{A character string that indicates the age in years, months, and days
 that the individual was at the time of the event. Any combination of these is permitted.
 Any labels must come after their corresponding number, for example; "4y 8m 10d".
@@ -541,6 +543,9 @@ These could be xrefs to existing Note records.}
 entity that has responsibility for the event data.}
 
 \item{religious_affiliation}{A name of the religion with which this event was affiliated.}
+
+\item{multimedia_links}{A character vector of multimedia file references accompanying this
+attribute. These could be xrefs to existing Multimedia records.}
 }
 \value{
 An updated tidygedcom object with an expanded Individual record including

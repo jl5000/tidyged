@@ -10,6 +10,9 @@
 #' @param fact_classification A descriptive word or phrase used to further classify this 
 #' attribute. This should be used whenever the 'other' attribute is used (but can also be used
 #' with others).
+#' @param user_reference_type TODO
+#' @param multimedia_links A character vector of multimedia file references accompanying this
+#' attribute. These could be xrefs to existing Multimedia records.
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this attribute.

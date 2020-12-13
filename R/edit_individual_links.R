@@ -1,4 +1,16 @@
 
+
+#' Add an association with another individual
+#'
+#' @param gedcom A tidygedcom object.
+#' @param associated_with A character string identifying the associated individual. This can either 
+#' be an xref or a regular expression to match to an individual name.
+#' @param association A word or phrase stating the nature of the association.
+#' @param association_notes A character vector of notes accompanying this association.
+#' These could be xrefs to existing Note records.
+#'
+#' @return An updated tidygedcom object with an expanded Individual record including
+#' this association.
 #' @export
 add_individual_association <- function(gedcom,
                                        associated_with,
@@ -24,6 +36,15 @@ add_individual_association <- function(gedcom,
   
 }
 
+#' Add a family link as a spouse
+#'
+#' @param gedcom A tidygedcom object.
+#' @param family_xref The xref of the family associated of which this individual is a spouse.
+#' @param linkage_notes A character vector of notes accompanying this linkage.
+#' These could be xrefs to existing Note records.
+#'
+#' @return An updated tidygedcom object with an expanded Individual record including
+#' this family link.
 #' @export
 add_individual_family_link_as_spouse <- function(gedcom, 
                                                  family_xref,
@@ -43,10 +64,21 @@ add_individual_family_link_as_spouse <- function(gedcom,
     finalise()
 }
 
+#' Add a family link as a child
+#'
+#' @param gedcom A tidygedcom object.
+#' @param family_xref The xref of the family associated of which this individual is a child.
+#' @param linkage_type A code used to indicate the child to family relationship. Either, 
+#' "birth" (default), "foster", or "adopted".
+#' @param linkage_notes A character vector of notes accompanying this linkage.
+#' These could be xrefs to existing Note records.
+#'
+#' @return An updated tidygedcom object with an expanded Individual record including
+#' this family link.
 #' @export
 add_individual_family_link_as_child <- function(gedcom, 
                                                 family_xref,
-                                                linkage_type = character(),
+                                                linkage_type = "birth",
                                                 linkage_notes = character()) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)

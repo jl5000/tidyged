@@ -1,5 +1,8 @@
 ---
-output: github_document
+title: "tidygedcom"
+output:
+  html_document:
+    df_print: paged
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->

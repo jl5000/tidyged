@@ -33,6 +33,9 @@ An example is below:
 
 ``` r
 library(tidygedcom)
+#> If importing existing GEDCOM files, you should ensure that they are error free.
+#> This package assumes imported GEDCOM files are valid and very few validation checks are carried out.
+#> Several GEDCOM validators are available, including an online validator at http://ged-inline.elasticbeanstalk.com/
 
 tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_individual(sex = "M", individual_notes = "The central character in the Star Wars Skywalker Saga") %>%
@@ -61,16 +64,99 @@ tg <- gedcom(subm("Jamie Lendrum")) %>%
 #> Family link also added to the Individual record for child @I4@
 #> Family link also added to the Individual record for child @I3@
 
-tg
+print(tg, n = Inf)
+#> # A tibble: 88 x 4
+#>    level record tag   value                                                  
+#>    <dbl> <chr>  <chr> <chr>                                                  
+#>  1     0 HD     HEAD  ""                                                     
+#>  2     1 HD     GEDC  ""                                                     
+#>  3     2 HD     VERS  "5.5.5"                                                
+#>  4     2 HD     FORM  "LINEAGE-LINKED"                                       
+#>  5     3 HD     VERS  "5.5.5"                                                
+#>  6     1 HD     CHAR  "UTF-8"                                                
+#>  7     1 HD     SOUR  "tidygedcom"                                           
+#>  8     2 HD     VERS  "0.0.0.900"                                            
+#>  9     2 HD     NAME  "tidygedcom"                                           
+#> 10     2 HD     CORP  "Jamie Lendrum"                                        
+#> 11     3 HD     ADDR  ""                                                     
+#> 12     3 HD     EMAIL "jalendrum@gmail.com"                                  
+#> 13     1 HD     DATE  "13 DEC 2020"                                          
+#> 14     1 HD     SUBM  "@U1@"                                                 
+#> 15     0 @U1@   SUBM  ""                                                     
+#> 16     1 @U1@   NAME  "Jamie Lendrum"                                        
+#> 17     1 @U1@   CHAN  ""                                                     
+#> 18     2 @U1@   DATE  "13 DEC 2020"                                          
+#> 19     0 @I1@   INDI  ""                                                     
+#> 20     1 @I1@   SEX   "M"                                                    
+#> 21     1 @I1@   CHAN  ""                                                     
+#> 22     2 @I1@   DATE  "13 DEC 2020"                                          
+#> 23     1 @I1@   NOTE  "The central character in the Star Wars Skywalker Saga"
+#> 24     1 @I1@   NAME  "Anakin Skywalker"                                     
+#> 25     2 @I1@   TYPE  "birth"                                                
+#> 26     2 @I1@   GIVN  "Anakin"                                               
+#> 27     2 @I1@   SURN  "Skywalker"                                            
+#> 28     1 @I1@   DEAT  "Y"                                                    
+#> 29     2 @I1@   PLAC  "Second Death Star"                                    
+#> 30     3 @I1@   NOTE  "Orbiting Endor System"                                
+#> 31     2 @I1@   CAUS  "Killed by son Luke"                                   
+#> 32     2 @I1@   AGE   "45y"                                                  
+#> 33     1 @I1@   RELI  "Jedi"                                                 
+#> 34     1 @I1@   PROP  "Lightsaber"                                           
+#> 35     1 @I1@   FAMS  "@F1@"                                                 
+#> 36     1 @I1@   ASSO  "@I5@"                                                 
+#> 37     2 @I1@   RELA  "Master"                                               
+#> 38     0 @I2@   INDI  ""                                                     
+#> 39     1 @I2@   SEX   "F"                                                    
+#> 40     1 @I2@   CHAN  ""                                                     
+#> 41     2 @I2@   DATE  "13 DEC 2020"                                          
+#> 42     1 @I2@   NOTE  "Queen of Naboo"                                       
+#> 43     1 @I2@   NAME  "Padme Amidala"                                        
+#> 44     1 @I2@   FAMS  "@F1@"                                                 
+#> 45     0 @I3@   INDI  ""                                                     
+#> 46     1 @I3@   SEX   "F"                                                    
+#> 47     1 @I3@   CHAN  ""                                                     
+#> 48     2 @I3@   DATE  "13 DEC 2020"                                          
+#> 49     1 @I3@   NAME  "Leia Organa"                                          
+#> 50     1 @I3@   FAMC  "@F1@"                                                 
+#> 51     2 @I3@   PEDI  "birth"                                                
+#> 52     0 @I4@   INDI  ""                                                     
+#> 53     1 @I4@   SEX   "M"                                                    
+#> 54     1 @I4@   CHAN  ""                                                     
+#> 55     2 @I4@   DATE  "13 DEC 2020"                                          
+#> 56     1 @I4@   NAME  "Luke Skywalker"                                       
+#> 57     1 @I4@   FAMC  "@F1@"                                                 
+#> 58     2 @I4@   PEDI  "birth"                                                
+#> 59     0 @F1@   FAM   ""                                                     
+#> 60     1 @F1@   HUSB  "@I1@"                                                 
+#> 61     1 @F1@   WIFE  "@I2@"                                                 
+#> 62     1 @F1@   CHIL  "@I4@"                                                 
+#> 63     1 @F1@   CHIL  "@I3@"                                                 
+#> 64     1 @F1@   CHAN  ""                                                     
+#> 65     2 @F1@   DATE  "13 DEC 2020"                                          
+#> 66     0 @I5@   INDI  ""                                                     
+#> 67     1 @I5@   SEX   "M"                                                    
+#> 68     1 @I5@   CHAN  ""                                                     
+#> 69     2 @I5@   DATE  "13 DEC 2020"                                          
+#> 70     1 @I5@   NAME  "Obi-Wan Kenobi"                                       
+#> 71     0 @N1@   NOTE  "Based on Star Wars"                                   
+#> 72     1 @N1@   CHAN  ""                                                     
+#> 73     2 @N1@   DATE  "13 DEC 2020"                                          
+#> 74     0 @S1@   SOUR  ""                                                     
+#> 75     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                     
+#> 76     1 @S1@   ABBR  "Star Wars"                                            
+#> 77     1 @S1@   CHAN  ""                                                     
+#> 78     2 @S1@   DATE  "13 DEC 2020"                                          
+#> 79     0 @R1@   REPO  ""                                                     
+#> 80     1 @R1@   NAME  "The Skywalker Saga"                                   
+#> 81     1 @R1@   CHAN  ""                                                     
+#> 82     2 @R1@   DATE  "13 DEC 2020"                                          
+#> 83     0 @O1@   OBJE  ""                                                     
+#> 84     1 @O1@   FILE  "XYZ"                                                  
+#> 85     2 @O1@   FORM  "JPG"                                                  
+#> 86     1 @O1@   CHAN  ""                                                     
+#> 87     2 @O1@   DATE  "13 DEC 2020"                                          
+#> 88     0 TR     TRLR  ""
 ```
-
-<div data-pagedtable="false">
-
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["level"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["record"],"name":[2],"type":["chr"],"align":["left"]},{"label":["tag"],"name":[3],"type":["chr"],"align":["left"]},{"label":["value"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"0","2":"HD","3":"HEAD","4":""},{"1":"1","2":"HD","3":"GEDC","4":""},{"1":"2","2":"HD","3":"VERS","4":"5.5.5"},{"1":"2","2":"HD","3":"FORM","4":"LINEAGE-LINKED"},{"1":"3","2":"HD","3":"VERS","4":"5.5.5"},{"1":"1","2":"HD","3":"CHAR","4":"UTF-8"},{"1":"1","2":"HD","3":"SOUR","4":"tidygedcom"},{"1":"2","2":"HD","3":"VERS","4":"0.0.0.900"},{"1":"2","2":"HD","3":"NAME","4":"tidygedcom"},{"1":"2","2":"HD","3":"CORP","4":"Jamie Lendrum"},{"1":"3","2":"HD","3":"ADDR","4":""},{"1":"3","2":"HD","3":"EMAIL","4":"jalendrum@gmail.com"},{"1":"1","2":"HD","3":"DATE","4":"13 DEC 2020"},{"1":"1","2":"HD","3":"SUBM","4":"@U1@"},{"1":"0","2":"@U1@","3":"SUBM","4":""},{"1":"1","2":"@U1@","3":"NAME","4":"Jamie Lendrum"},{"1":"1","2":"@U1@","3":"CHAN","4":""},{"1":"2","2":"@U1@","3":"DATE","4":"13 DEC 2020"},{"1":"0","2":"@I1@","3":"INDI","4":""},{"1":"1","2":"@I1@","3":"SEX","4":"M"},{"1":"1","2":"@I1@","3":"CHAN","4":""},{"1":"2","2":"@I1@","3":"DATE","4":"13 DEC 2020"},{"1":"1","2":"@I1@","3":"NOTE","4":"The central character in the Star Wars Skywalker Saga"},{"1":"1","2":"@I1@","3":"NAME","4":"Anakin Skywalker"},{"1":"2","2":"@I1@","3":"TYPE","4":"birth"},{"1":"2","2":"@I1@","3":"GIVN","4":"Anakin"},{"1":"2","2":"@I1@","3":"SURN","4":"Skywalker"},{"1":"1","2":"@I1@","3":"DEAT","4":"Y"},{"1":"2","2":"@I1@","3":"PLAC","4":"Second Death Star"},{"1":"3","2":"@I1@","3":"NOTE","4":"Orbiting Endor System"},{"1":"2","2":"@I1@","3":"CAUS","4":"Killed by son Luke"},{"1":"2","2":"@I1@","3":"AGE","4":"45y"},{"1":"1","2":"@I1@","3":"RELI","4":"Jedi"},{"1":"1","2":"@I1@","3":"PROP","4":"Lightsaber"},{"1":"1","2":"@I1@","3":"FAMS","4":"@F1@"},{"1":"1","2":"@I1@","3":"ASSO","4":"@I5@"},{"1":"2","2":"@I1@","3":"RELA","4":"Master"},{"1":"0","2":"@I2@","3":"INDI","4":""},{"1":"1","2":"@I2@","3":"SEX","4":"F"},{"1":"1","2":"@I2@","3":"CHAN","4":""},{"1":"2","2":"@I2@","3":"DATE","4":"13 DEC 2020"},{"1":"1","2":"@I2@","3":"NOTE","4":"Queen of Naboo"},{"1":"1","2":"@I2@","3":"NAME","4":"Padme Amidala"},{"1":"1","2":"@I2@","3":"FAMS","4":"@F1@"},{"1":"0","2":"@I3@","3":"INDI","4":""},{"1":"1","2":"@I3@","3":"SEX","4":"F"},{"1":"1","2":"@I3@","3":"CHAN","4":""},{"1":"2","2":"@I3@","3":"DATE","4":"13 DEC 2020"},{"1":"1","2":"@I3@","3":"NAME","4":"Leia Organa"},{"1":"1","2":"@I3@","3":"FAMC","4":"@F1@"},{"1":"2","2":"@I3@","3":"PEDI","4":"birth"},{"1":"0","2":"@I4@","3":"INDI","4":""},{"1":"1","2":"@I4@","3":"SEX","4":"M"},{"1":"1","2":"@I4@","3":"CHAN","4":""},{"1":"2","2":"@I4@","3":"DATE","4":"13 DEC 2020"},{"1":"1","2":"@I4@","3":"NAME","4":"Luke Skywalker"},{"1":"1","2":"@I4@","3":"FAMC","4":"@F1@"},{"1":"2","2":"@I4@","3":"PEDI","4":"birth"},{"1":"0","2":"@F1@","3":"FAM","4":""},{"1":"1","2":"@F1@","3":"HUSB","4":"@I1@"},{"1":"1","2":"@F1@","3":"WIFE","4":"@I2@"},{"1":"1","2":"@F1@","3":"CHIL","4":"@I4@"},{"1":"1","2":"@F1@","3":"CHIL","4":"@I3@"},{"1":"1","2":"@F1@","3":"CHAN","4":""},{"1":"2","2":"@F1@","3":"DATE","4":"13 DEC 2020"},{"1":"0","2":"@I5@","3":"INDI","4":""},{"1":"1","2":"@I5@","3":"SEX","4":"M"},{"1":"1","2":"@I5@","3":"CHAN","4":""},{"1":"2","2":"@I5@","3":"DATE","4":"13 DEC 2020"},{"1":"1","2":"@I5@","3":"NAME","4":"Obi-Wan Kenobi"},{"1":"0","2":"@N1@","3":"NOTE","4":"Based on Star Wars"},{"1":"1","2":"@N1@","3":"CHAN","4":""},{"1":"2","2":"@N1@","3":"DATE","4":"13 DEC 2020"},{"1":"0","2":"@S1@","3":"SOUR","4":""},{"1":"1","2":"@S1@","3":"TITL","4":"Star Wars Episode IV: A New Hope"},{"1":"1","2":"@S1@","3":"ABBR","4":"Star Wars"},{"1":"1","2":"@S1@","3":"CHAN","4":""},{"1":"2","2":"@S1@","3":"DATE","4":"13 DEC 2020"},{"1":"0","2":"@R1@","3":"REPO","4":""},{"1":"1","2":"@R1@","3":"NAME","4":"The Skywalker Saga"},{"1":"1","2":"@R1@","3":"CHAN","4":""},{"1":"2","2":"@R1@","3":"DATE","4":"13 DEC 2020"},{"1":"0","2":"@O1@","3":"OBJE","4":""},{"1":"1","2":"@O1@","3":"FILE","4":"XYZ"},{"1":"2","2":"@O1@","3":"FORM","4":"JPG"},{"1":"1","2":"@O1@","3":"CHAN","4":""},{"1":"2","2":"@O1@","3":"DATE","4":"13 DEC 2020"},{"1":"0","2":"TR","3":"TRLR","4":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-
-</div>
 
 Just like a ggplot object requires aesthetics, a GEDCOM file requires
 details of a submitter. If no submitter details are given, the username
@@ -115,27 +201,22 @@ summary(tg)
 #>  Product Source:      Jamie Lendrum
 
 df_individuals(tg)
-```
-
-<div data-pagedtable="false">
-
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["xref"],"name":[1],"type":["chr"],"align":["left"]},{"label":["name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["sex"],"name":[3],"type":["chr"],"align":["left"]},{"label":["date_of_birth"],"name":[4],"type":["chr"],"align":["left"]},{"label":["place_of_birth"],"name":[5],"type":["chr"],"align":["left"]},{"label":["date_of_death"],"name":[6],"type":["chr"],"align":["left"]},{"label":["place_of_death"],"name":[7],"type":["chr"],"align":["left"]},{"label":["mother"],"name":[8],"type":["chr"],"align":["left"]},{"label":["father"],"name":[9],"type":["chr"],"align":["left"]},{"label":["num_siblings"],"name":[10],"type":["chr"],"align":["left"]},{"label":["num_children"],"name":[11],"type":["int"],"align":["right"]},{"label":["last_modified"],"name":[12],"type":["chr"],"align":["left"]}],"data":[{"1":"@I1@","2":"Anakin Skywalker","3":"M","4":"","5":"","6":"","7":"Second Death Star","8":"","9":"","10":"","11":"2","12":"13 DEC 2020"},{"1":"@I2@","2":"Padme Amidala","3":"F","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"2","12":"13 DEC 2020"},{"1":"@I3@","2":"Leia Organa","3":"F","4":"","5":"","6":"","7":"","8":"Padme Amidala","9":"Anakin Skywalker","10":"1","11":"0","12":"13 DEC 2020"},{"1":"@I4@","2":"Luke Skywalker","3":"M","4":"","5":"","6":"","7":"","8":"Padme Amidala","9":"Anakin Skywalker","10":"1","11":"0","12":"13 DEC 2020"},{"1":"@I5@","2":"Obi-Wan Kenobi","3":"M","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"0","12":"13 DEC 2020"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-
-</div>
-
-``` r
+#> # A tibble: 5 x 12
+#>   xref  name  sex   date_of_birth place_of_birth date_of_death place_of_death
+#>   <chr> <chr> <chr> <chr>         <chr>          <chr>         <chr>         
+#> 1 @I1@  Anak… M     ""            ""             ""            "Second Death…
+#> 2 @I2@  Padm… F     ""            ""             ""            ""            
+#> 3 @I3@  Leia… F     ""            ""             ""            ""            
+#> 4 @I4@  Luke… M     ""            ""             ""            ""            
+#> 5 @I5@  Obi-… M     ""            ""             ""            ""            
+#> # … with 5 more variables: mother <chr>, father <chr>, num_siblings <chr>,
+#> #   num_children <int>, last_modified <chr>
 df_families(tg)
+#> # A tibble: 1 x 7
+#>   xref  husband   wife   marriage_date marriage_place num_children last_modified
+#>   <chr> <chr>     <chr>  <chr>         <chr>          <chr>        <chr>        
+#> 1 @F1@  Anakin S… Padme… ""            ""             2            13 DEC 2020
 ```
-
-<div data-pagedtable="false">
-
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["xref"],"name":[1],"type":["chr"],"align":["left"]},{"label":["husband"],"name":[2],"type":["chr"],"align":["left"]},{"label":["wife"],"name":[3],"type":["chr"],"align":["left"]},{"label":["marriage_date"],"name":[4],"type":["chr"],"align":["left"]},{"label":["marriage_place"],"name":[5],"type":["chr"],"align":["left"]},{"label":["num_children"],"name":[6],"type":["chr"],"align":["left"]},{"label":["last_modified"],"name":[7],"type":["chr"],"align":["left"]}],"data":[{"1":"@F1@","2":"Anakin Skywalker","3":"Padme Amidala","4":"","5":"","6":"2","7":"13 DEC 2020"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-
-</div>
 
 This package allows limited editing of `tidygedcom` objects
 (adding/removing records, as well as the addition of some record

@@ -1,7 +1,5 @@
 ---
-output:
-  github_document:
-    df_print: paged
+output:  github_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -63,7 +61,7 @@ tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_repository("The Skywalker Saga") %>% 
   add_multimedia(file_reference = "XYZ", format = "JPG")
 
-tg
+print(tg, n = Inf)
 ```
 
 

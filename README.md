@@ -9,7 +9,7 @@
 
 Import, create, and summarise family tree GEDCOM files using tidy
 dataframes. This package is still in heavy development with the first
-operational version unlikely to be complete before October 2020.
+operational version unlikely to be complete before January 2021.
 
 ## Installation
 
@@ -40,17 +40,17 @@ library(tidygedcom)
 tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_individual(sex = "M", individual_notes = "The central character in the Star Wars Skywalker Saga") %>%
   add_individual_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>% 
-  add_individual_event(event_type = "DEAT", age_at_event = "45y", cause_of_event = "Killed by son Luke",
+  add_individual_event_death(age_at_event = "45y", event_cause = "Killed by son Luke",
                        place_name = "Second Death Star", place_notes = "Orbiting Endor System") %>% 
-  add_individual_attribute(attribute_type = "RELI", attribute_descriptor = "Jedi") %>% 
-  add_individual_attribute(attribute_type = "PROP", attribute_descriptor = "Lightsaber") %>%
+  add_individual_attribute_religion(attribute_descriptor = "Jedi") %>% 
+  add_individual_attribute_possessions(attribute_descriptor = "Lightsaber") %>%
   add_individual(sex = "F", individual_notes = "Queen of Naboo") %>%
   add_individual_names("Padme Amidala") %>% 
   add_individual(sex = "F") %>% 
   add_individual_names("Leia Organa") %>% 
   add_individual(sex = "M") %>%
   add_individual_names("Luke Skywalker") %>% 
-  add_family(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia"), submitters = "Jamie") %>%
+  add_family_group(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
   add_individual(sex = "M") %>% 
   add_individual_names("Obi-Wan Kenobi") %>% 
   activate_individual_record("Anakin") %>% 
@@ -58,28 +58,27 @@ tg <- gedcom(subm("Jamie Lendrum")) %>%
   add_note("Based on Star Wars") %>% 
   add_source(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
   add_repository("The Skywalker Saga") %>% 
-  add_submitter("George Lucas") %>%
-  add_multimedia(file_reference = "XYZ", format = "jpg")
+  add_multimedia(file_reference = "XYZ", format = "JPG")
 #> Family link also added to the Individual record for husband
 #> Family link also added to the Individual record for wife
-#> Family link also added to the Individual record for child 1
-#> Family link also added to the Individual record for child 2
+#> Family link also added to the Individual record for child @I4@
+#> Family link also added to the Individual record for child @I3@
 
 tg
-#> # A tibble: 86 x 4
+#> # A tibble: 88 x 4
 #>    level record tag   value           
 #>    <dbl> <chr>  <chr> <chr>           
 #>  1     0 HD     HEAD  ""              
-#>  2     1 HD     SOUR  "tidygedcom"    
-#>  3     2 HD     VERS  "0.0.0.9000"    
-#>  4     1 HD     DATE  "02 AUG 2020"   
-#>  5     1 HD     SUBM  "@U1@"          
-#>  6     1 HD     GEDC  ""              
-#>  7     2 HD     VERS  "5.5.1"         
-#>  8     2 HD     FORM  "Lineage-Linked"
-#>  9     1 HD     CHAR  "UTF-8"         
-#> 10     0 @U1@   SUBM  ""              
-#> # … with 76 more rows
+#>  2     1 HD     GEDC  ""              
+#>  3     2 HD     VERS  "5.5.5"         
+#>  4     2 HD     FORM  "LINEAGE-LINKED"
+#>  5     3 HD     VERS  "5.5.5"         
+#>  6     1 HD     CHAR  "UTF-8"         
+#>  7     1 HD     SOUR  "tidygedcom"    
+#>  8     2 HD     VERS  "0.0.0.900"     
+#>  9     2 HD     NAME  "tidygedcom"    
+#> 10     2 HD     CORP  "Jamie Lendrum" 
+#> # … with 78 more rows
 ```
 
 Just like a ggplot object requires aesthetics, a GEDCOM file requires
@@ -95,17 +94,16 @@ objects:
 
 ``` r
 num_indi(tg)
-#> [1] 5
+#> [1] 0
 num_fam(tg)
 #> [1] 1
 
 str(tg)
-#> GEDCOM version 5.5.1 (Lineage-Linked)
+#> GEDCOM version 5.5.5 (LINEAGE-LINKED)
 #> 
-#> Individuals:     5
+#> Individuals:     0
 #> Families:        1
-#> Submitters:      2
-#> Submissions:     0
+#> Submitters:      1
 #> Multimedia objects:  1
 #> Notes:           1
 #> Sources:     1
@@ -121,9 +119,9 @@ summary(tg)
 #>  Copyright:        
 #>  
 #>  Source system:   tidygedcom 
-#>  Source system version:  0.0.0.9000 
-#>  Product Name:         
-#>  Product Source:     
+#>  Source system version:  5.5.5 
+#>  Product Name:        tidygedcom 
+#>  Product Source:      Jamie Lendrum
 
 df_individuals(tg)
 #> # A tibble: 5 x 12
@@ -140,7 +138,7 @@ df_families(tg)
 #> # A tibble: 1 x 7
 #>   xref  husband   wife   marriage_date marriage_place num_children last_modified
 #>   <chr> <chr>     <chr>  <chr>         <chr>          <chr>        <chr>        
-#> 1 @F1@  Anakin S… Padme… ""            ""             2            02 AUG 2020
+#> 1 @F1@  Anakin S… Padme… ""            ""             2            13 DEC 2020
 ```
 
 This package allows limited editing of `tidygedcom` objects
@@ -154,27 +152,27 @@ functions.
 
 Two sister packages are planned:
 
-  - `tgvis` will allow visualisation of `tidygedcom` objects;
-  - `tgedit` will provide a shiny app to edit `tidygedcom` objects.
+  - `shinygedcom` will provide a shiny app to edit `tidygedcom` objects;
+  - `visgedcom` will allow visualisation of `tidygedcom` objects.
 
 ## Current status
 
-  - The GEDCOM 5.5.1 specification has been implemented. This is the
+  - The GEDCOM 5.5.5 specification has been implemented. This is the
     bulk of the internal data structures required (params.R,
     structures.R, records.R, and validate\_params.R);
   - Some initial functions to summarise tidygedcom objects have been
     completed (interrogate.R);
   - Functions to import, export and create tidygedcom objects have been
     completed (import\_export\_create.R);
-  - Current work is on the modification of tidygedcom objects;
+  - Current work is on updating code for GEDCOM 5.5.5 and the
+    modification of tidygedcom objects;
   - Some simple validation checks have been written
     (validate\_gedcom.R), but there won’t be an extensive functionality
     for this given the number of GEDCOM validators available ([such as
     this one](http://ged-inline.elasticbeanstalk.com/validate)).
-  - Work on `tgvis` and `tgedit` will begin once an initial version of
-    `tidygedcom` is complete.
+  - Work on `shinygedcom` and `visgedcom` will begin once an initial
+    version of `tidygedcom` is complete.
 
 ## References
 
-  - [The GEDCOM Standard -
-    Release 5.5.1](https://edge.fscdn.org/assets/img/documents/ged551-5bac5e57fe88dd37df0e153d9c515335.pdf)
+  - [The GEDCOM 5.5.5 Specification](https://www.gedcom.org/gedcom.html)

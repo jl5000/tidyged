@@ -52,61 +52,61 @@ add_family_event <- function(gedcom,
 #' @rdname add_family_event
 #' @export
 add_family_event_annulment <- purrr::partial(add_family_event, event_type = "ANUL", event_descriptor = "")
-rlang::fn_fmls(add_family_event_annulment) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "ANUL", event_descriptor = "")
+# formals(add_family_event_annulment) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "ANUL", event_descriptor = "")
 #' @rdname add_family_event
 #' @export
 add_family_event_census <- purrr::partial(add_family_event, event_type = "CENS", event_descriptor = "")
-rlang::fn_fmls(add_family_event_census) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "CENS", event_descriptor = "")
+# formals(add_family_event_census) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "CENS", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
 add_family_event_divorce <- purrr::partial(add_family_event, event_type = "DIV", event_descriptor = "")
-rlang::fn_fmls(add_family_event_divorce) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "DIV", event_descriptor = "")
+# formals(add_family_event_divorce) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "DIV", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
 add_family_event_divorce_filed <- purrr::partial(add_family_event, event_type = "DIVF", event_descriptor = "")
-rlang::fn_fmls(add_family_event_divorce_filed) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "DIVF", event_descriptor = "")
+# formals(add_family_event_divorce_filed) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "DIVF", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
 add_family_event_engagement <- purrr::partial(add_family_event, event_type = "ENGA", event_descriptor = "")
-rlang::fn_fmls(add_family_event_engagement) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "ENGA", event_descriptor = "")
+# formals(add_family_event_engagement) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "ENGA", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
 add_family_event_marriage_banns <- purrr::partial(add_family_event, event_type = "MARB", event_descriptor = "")
-rlang::fn_fmls(add_family_event_marriage_banns) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "MARB", event_descriptor = "")
+# formals(add_family_event_marriage_banns) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "MARB", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
 add_family_event_marriage_contract <- purrr::partial(add_family_event, event_type = "MARC", event_descriptor = "")
-rlang::fn_fmls(add_family_event_marriage_contract) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "MARC", event_descriptor = "")
+# formals(add_family_event_marriage_contract) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "MARC", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
 add_family_event_marriage <- purrr::partial(add_family_event, event_type = "MARR", event_descriptor = "")
-rlang::fn_fmls(add_family_event_marriage) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "MARR", event_descriptor = "")
+# formals(add_family_event_marriage) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "MARR", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
 add_family_event_marriage_license <- purrr::partial(add_family_event, event_type = "MARL", event_descriptor = "")
-rlang::fn_fmls(add_family_event_marriage_license) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "MARL", event_descriptor = "")
+# formals(add_family_event_marriage_license) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "MARL", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
 add_family_event_marriage_settlement <- purrr::partial(add_family_event, event_type = "MARS", event_descriptor = "")
-rlang::fn_fmls(add_family_event_marriage_settlement) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "MARS", event_descriptor = "")
+# formals(add_family_event_marriage_settlement) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "MARS", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
 add_family_event_residence <- purrr::partial(add_family_event, event_type = "RESI", event_descriptor = "")
-rlang::fn_fmls(add_family_event_residence) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "RESI", event_descriptor = "")
+# formals(add_family_event_residence) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "RESI", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
 add_family_event_other <- purrr::partial(add_family_event, event_type = "EVEN")
-rlang::fn_fmls(add_family_event_other) <- purrr::list_modify(rlang::fn_fmls(add_family_event), 
-                                                              event_type = "EVEN")
+# formals(add_family_event_other) <- purrr::list_modify(formals(add_family_event), 
+#                                                               event_type = "EVEN")
 

@@ -62,9 +62,10 @@
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this event.
+#' @export
 add_individual_event <- function(gedcom,
                                  event_type,
-                                 event_descriptor = character(),
+                                 event_descriptor = "",
                                  event_classification = character(),
                                  event_date = date_value(),
                                  event_cause = character(),
@@ -147,6 +148,7 @@ add_individual_event <- function(gedcom,
                                       age_at_event = age_at_event)
   
   event_str <- INDIVIDUAL_EVENT_STRUCTURE(event_type_individual = event_type,
+                                          event_descriptor = event_descriptor,
                                           individual_event_details = details2,
                                           xref_fam = family_xref,
                                           adopted_by_which_parent = adopting_parent) %>% add_levels(1)
@@ -164,106 +166,106 @@ add_individual_event <- function(gedcom,
 #' @export
 #' @rdname add_individual_event
 add_individual_event_birth <- purrr::partial(add_individual_event, event_type = "BIRT", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_birth) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                  event_type = "BIRT", event_descriptor = "")
+# formals(add_individual_event_birth) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                   event_type = "BIRT", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_christening <- purrr::partial(add_individual_event, event_type = "CHR", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_christening) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "CHR", event_descriptor = "")
+# formals(add_individual_event_christening) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "CHR", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_death <- purrr::partial(add_individual_event, event_type = "DEAT", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_death) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "DEAT", event_descriptor = "")
+# formals(add_individual_event_death) <- purrr::list_modify(formals(add_individual_event),
+#                                                                  event_type = "DEAT", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_burial <- purrr::partial(add_individual_event, event_type = "BURI", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_burial) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "BURI", event_descriptor = "")
+# formals(add_individual_event_burial) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "BURI", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_cremation <- purrr::partial(add_individual_event, event_type = "CREM", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_cremation) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "CREM", event_descriptor = "")
+# formals(add_individual_event_cremation) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "CREM", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_adoption <- purrr::partial(add_individual_event, event_type = "ADOP", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_adoption) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "ADOP", event_descriptor = "")
+# formals(add_individual_event_adoption) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "ADOP", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_baptism <- purrr::partial(add_individual_event, event_type = "BAPM", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_baptism) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "BAPM", event_descriptor = "")
+# formals(add_individual_event_baptism) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "BAPM", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_bar_mitzvah <- purrr::partial(add_individual_event, event_type = "BARM", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_bar_mitzvah) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "BARM", event_descriptor = "")
+# formals(add_individual_event_bar_mitzvah) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "BARM", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_bas_mitzvah <- purrr::partial(add_individual_event, event_type = "BASM", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_bas_mitzvah) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "BASM", event_descriptor = "")
+# formals(add_individual_event_bas_mitzvah) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "BASM", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_adult_christening <- purrr::partial(add_individual_event, event_type = "CHRA", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_adult_christening) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "CHRA", event_descriptor = "")
+# formals(add_individual_event_adult_christening) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "CHRA", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_confirmation <- purrr::partial(add_individual_event, event_type = "CONF", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_confirmation) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "CONF", event_descriptor = "")
+# formals(add_individual_event_confirmation) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "CONF", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_first_communion <- purrr::partial(add_individual_event, event_type = "FCOM", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_first_communion) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "FCOM", event_descriptor = "")
+# formals(add_individual_event_first_communion) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "FCOM", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_naturalization <- purrr::partial(add_individual_event, event_type = "NATU", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_naturalization) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "NATU", event_descriptor = "")
+# formals(add_individual_event_naturalization) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "NATU", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_emigration <- purrr::partial(add_individual_event, event_type = "EMIG", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_emigration) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "EMIG", event_descriptor = "")
+# formals(add_individual_event_emigration) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "EMIG", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_immigration <- purrr::partial(add_individual_event, event_type = "IMMI", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_immigration) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "IMMI", event_descriptor = "")
+# formals(add_individual_event_immigration) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "IMMI", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_census <- purrr::partial(add_individual_event, event_type = "CENS", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_census) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "CENS", event_descriptor = "")
+# formals(add_individual_event_census) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "CENS", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_probate <- purrr::partial(add_individual_event, event_type = "PROB", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_probate) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "PROB", event_descriptor = "")
+# formals(add_individual_event_probate) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "PROB", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_will <- purrr::partial(add_individual_event, event_type = "WILL", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_will) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "WILL", event_descriptor = "")
+# formals(add_individual_event_will) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "WILL", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_graduation <- purrr::partial(add_individual_event, event_type = "GRAD", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_graduation) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "GRAD", event_descriptor = "")
+# formals(add_individual_event_graduation) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "GRAD", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_retirement <- purrr::partial(add_individual_event, event_type = "RETI", event_descriptor = "")
-rlang::fn_fmls(add_individual_event_retirement) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "RETI", event_descriptor = "")
+# formals(add_individual_event_retirement) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "RETI", event_descriptor = "")
 #' @export
 #' @rdname add_individual_event
 add_individual_event_other <- purrr::partial(add_individual_event, event_type = "EVEN")
-rlang::fn_fmls(add_individual_event_other) <- purrr::list_modify(rlang::fn_fmls(add_individual_event), 
-                                                                 event_type = "EVEN")
+# formals(add_individual_event_other) <- purrr::list_modify(formals(add_individual_event), 
+#                                                                  event_type = "EVEN")
 

@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-Import, create, and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version unlikely to be complete before December 2020.
+Import, create, and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version unlikely to be complete before January 2021.
 
 ## Installation
 

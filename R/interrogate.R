@@ -11,7 +11,7 @@ unique_record_count <- function(gedcom, tag) {sum(gedcom$level == 0 & gedcom$tag
 #'
 #' @return The number of records of the relevant type.
 #' @export
-num_indi <- function(gedcom) { unique_record_count(gedcom,.pkgenv$.pkgenv$record_tag_indi) }
+num_indi <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_indi) }
 
 #' @export
 #' @rdname num_indi

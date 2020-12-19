@@ -156,6 +156,8 @@ entity that has responsibility for the event data.}
 
 \item{multimedia_links}{A character vector of multimedia file references accompanying this
 attribute. These could be xrefs to existing Multimedia records.}
+
+\item{...}{See arguments for main function. The attribute_type/event_type do not need to be populated.}
 }
 \value{
 An updated tidygedcom object with an expanded Individual record including

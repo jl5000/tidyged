@@ -11,7 +11,7 @@
 #' @param wife_age_at_event A character string that indicates the age in years, months, and days 
 #' that the wife was at the time of the event. Any combination of these is permitted. 
 #' Any labels must come after their corresponding number, for example; "4y 8m 10d".
-#' 
+#' @param ... See arguments for main function. The attribute_type/event_type do not need to be populated.
 #' @return An updated tidygedcom object with an expanded Family group record including
 #' this event.
 add_family_event <- function(gedcom,

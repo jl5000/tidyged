@@ -59,7 +59,7 @@
 #' These could be xrefs to existing Note records.
 #' @param multimedia_links A character vector of multimedia file references accompanying this
 #' event. These could be xrefs to existing Multimedia records.
-#'
+#' @param ... See arguments for main function. The attribute_type/event_type do not need to be populated.
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this event.
 #' @export

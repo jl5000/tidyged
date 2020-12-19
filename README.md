@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/jl5000/tidygedcom/workflows/R-CMD-check/badge.svg)](https://github.com/jl5000/tidygedcom/actions)
 <!-- badges: end -->
 
 Import, create, and summarise family tree GEDCOM files using tidy
@@ -80,16 +81,16 @@ print(tg, n = Inf)
 #> 10     2 HD     CORP  "Jamie Lendrum"                                        
 #> 11     3 HD     ADDR  ""                                                     
 #> 12     3 HD     EMAIL "jalendrum@gmail.com"                                  
-#> 13     1 HD     DATE  "13 DEC 2020"                                          
+#> 13     1 HD     DATE  "19 DEC 2020"                                          
 #> 14     1 HD     SUBM  "@U1@"                                                 
 #> 15     0 @U1@   SUBM  ""                                                     
 #> 16     1 @U1@   NAME  "Jamie Lendrum"                                        
 #> 17     1 @U1@   CHAN  ""                                                     
-#> 18     2 @U1@   DATE  "13 DEC 2020"                                          
+#> 18     2 @U1@   DATE  "19 DEC 2020"                                          
 #> 19     0 @I1@   INDI  ""                                                     
 #> 20     1 @I1@   SEX   "M"                                                    
 #> 21     1 @I1@   CHAN  ""                                                     
-#> 22     2 @I1@   DATE  "13 DEC 2020"                                          
+#> 22     2 @I1@   DATE  "19 DEC 2020"                                          
 #> 23     1 @I1@   NOTE  "The central character in the Star Wars Skywalker Saga"
 #> 24     1 @I1@   NAME  "Anakin Skywalker"                                     
 #> 25     2 @I1@   TYPE  "birth"                                                
@@ -108,21 +109,21 @@ print(tg, n = Inf)
 #> 38     0 @I2@   INDI  ""                                                     
 #> 39     1 @I2@   SEX   "F"                                                    
 #> 40     1 @I2@   CHAN  ""                                                     
-#> 41     2 @I2@   DATE  "13 DEC 2020"                                          
+#> 41     2 @I2@   DATE  "19 DEC 2020"                                          
 #> 42     1 @I2@   NOTE  "Queen of Naboo"                                       
 #> 43     1 @I2@   NAME  "Padme Amidala"                                        
 #> 44     1 @I2@   FAMS  "@F1@"                                                 
 #> 45     0 @I3@   INDI  ""                                                     
 #> 46     1 @I3@   SEX   "F"                                                    
 #> 47     1 @I3@   CHAN  ""                                                     
-#> 48     2 @I3@   DATE  "13 DEC 2020"                                          
+#> 48     2 @I3@   DATE  "19 DEC 2020"                                          
 #> 49     1 @I3@   NAME  "Leia Organa"                                          
 #> 50     1 @I3@   FAMC  "@F1@"                                                 
 #> 51     2 @I3@   PEDI  "birth"                                                
 #> 52     0 @I4@   INDI  ""                                                     
 #> 53     1 @I4@   SEX   "M"                                                    
 #> 54     1 @I4@   CHAN  ""                                                     
-#> 55     2 @I4@   DATE  "13 DEC 2020"                                          
+#> 55     2 @I4@   DATE  "19 DEC 2020"                                          
 #> 56     1 @I4@   NAME  "Luke Skywalker"                                       
 #> 57     1 @I4@   FAMC  "@F1@"                                                 
 #> 58     2 @I4@   PEDI  "birth"                                                
@@ -132,29 +133,29 @@ print(tg, n = Inf)
 #> 62     1 @F1@   CHIL  "@I4@"                                                 
 #> 63     1 @F1@   CHIL  "@I3@"                                                 
 #> 64     1 @F1@   CHAN  ""                                                     
-#> 65     2 @F1@   DATE  "13 DEC 2020"                                          
+#> 65     2 @F1@   DATE  "19 DEC 2020"                                          
 #> 66     0 @I5@   INDI  ""                                                     
 #> 67     1 @I5@   SEX   "M"                                                    
 #> 68     1 @I5@   CHAN  ""                                                     
-#> 69     2 @I5@   DATE  "13 DEC 2020"                                          
+#> 69     2 @I5@   DATE  "19 DEC 2020"                                          
 #> 70     1 @I5@   NAME  "Obi-Wan Kenobi"                                       
 #> 71     0 @N1@   NOTE  "Based on Star Wars"                                   
 #> 72     1 @N1@   CHAN  ""                                                     
-#> 73     2 @N1@   DATE  "13 DEC 2020"                                          
+#> 73     2 @N1@   DATE  "19 DEC 2020"                                          
 #> 74     0 @S1@   SOUR  ""                                                     
 #> 75     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                     
 #> 76     1 @S1@   ABBR  "Star Wars"                                            
 #> 77     1 @S1@   CHAN  ""                                                     
-#> 78     2 @S1@   DATE  "13 DEC 2020"                                          
+#> 78     2 @S1@   DATE  "19 DEC 2020"                                          
 #> 79     0 @R1@   REPO  ""                                                     
 #> 80     1 @R1@   NAME  "The Skywalker Saga"                                   
 #> 81     1 @R1@   CHAN  ""                                                     
-#> 82     2 @R1@   DATE  "13 DEC 2020"                                          
+#> 82     2 @R1@   DATE  "19 DEC 2020"                                          
 #> 83     0 @O1@   OBJE  ""                                                     
 #> 84     1 @O1@   FILE  "XYZ"                                                  
 #> 85     2 @O1@   FORM  "JPG"                                                  
 #> 86     1 @O1@   CHAN  ""                                                     
-#> 87     2 @O1@   DATE  "13 DEC 2020"                                          
+#> 87     2 @O1@   DATE  "19 DEC 2020"                                          
 #> 88     0 TR     TRLR  ""
 ```
 
@@ -171,14 +172,14 @@ objects:
 
 ``` r
 num_indi(tg)
-#> [1] 0
+#> [1] 5
 num_fam(tg)
 #> [1] 1
 
 str(tg)
 #> GEDCOM version 5.5.5 (LINEAGE-LINKED)
 #> 
-#> Individuals:     0
+#> Individuals:     5
 #> Families:        1
 #> Submitters:      1
 #> Multimedia objects:  1
@@ -215,7 +216,7 @@ df_families(tg)
 #> # A tibble: 1 x 7
 #>   xref  husband   wife   marriage_date marriage_place num_children last_modified
 #>   <chr> <chr>     <chr>  <chr>         <chr>          <chr>        <chr>        
-#> 1 @F1@  Anakin S… Padme… ""            ""             2            13 DEC 2020
+#> 1 @F1@  Anakin S… Padme… ""            ""             2            19 DEC 2020
 ```
 
 This package allows limited editing of `tidygedcom` objects

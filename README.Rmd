@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # tidygedcom
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/jl5000/tidygedcom/workflows/R-CMD-check/badge.svg)](https://github.com/jl5000/tidygedcom/actions)
 <!-- badges: end -->
 
 Import, create, and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version unlikely to be complete before January 2021.

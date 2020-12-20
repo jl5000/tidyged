@@ -3,7 +3,7 @@
 S3method(str,tidygedcom)
 S3method(summary,tidygedcom)
 export("%>%")
-export(activate_family_record)
+export(activate_family_group_record)
 export(activate_individual_record)
 export(activate_multimedia_record)
 export(activate_note_record)

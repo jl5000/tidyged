@@ -46,7 +46,7 @@ this record. See the Gedcom 5.5.5 Specification for more details.}
 \item{automated_record_id}{A unique record identification number assigned to the record by
 the source system.}
 
-\item{family_notes}{A character vector of notes accompanying this Family record. These could be
+\item{family_notes}{A character vector of notes accompanying this Family group record. These could be
 xrefs to existing Note records.}
 
 \item{multimedia_links}{A character vector of multimedia file references accompanying this

@@ -106,18 +106,18 @@ activate_individual_record <- function(gedcom,
 }
 
 
-#' Activate a Family record
+#' Activate a Family group record
 #' 
-#' This allows a mechanism to easily edit particular records. For Family records, the explicit xref 
-#' is required. 
+#' This allows a mechanism to easily edit particular records. For Family group records, 
+#' the explicit xref is required. 
 #'
 #' @param gedcom A tidygedcom object 
-#' @param xref The xref of the Family record to activate
+#' @param xref The xref of the Family group record to activate
 #'
 #' @return The same tidygedcom object with "active_record" attribute set to the specific 
-#' Family record to allow easy editing.
+#' Family group record to allow easy editing.
 #' @export
-activate_family_record <- function(gedcom, 
+activate_family_group_record <- function(gedcom, 
                                    xref) {
   
   set_active_record(gedcom, xref)

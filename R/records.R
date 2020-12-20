@@ -54,7 +54,7 @@ GEDCOM_HEADER <- function(character_encoding = "UTF-8",
 
 #' Construct the FAMILY_GROUP_RECORD tibble
 #' 
-#' This function constructs a tibble representation of the FAMILY_RECORD from the GEDCOM 5.5.5
+#' This function constructs a tibble representation of the FAMILY_GROUP_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
 #' @inheritParams parameter_definitions
@@ -70,7 +70,7 @@ GEDCOM_HEADER <- function(character_encoding = "UTF-8",
 #'                              1, "@F1@", "CHAN",                     "",
 #'                              2, "@F1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
-#' @return A tidy tibble containing a FAMILY_RECORD part of a GEDCOM file.
+#' @return A tidy tibble containing a FAMILY_GROUP_RECORD part of a GEDCOM file.
 FAMILY_GROUP_RECORD <- function(xref_fam,
                                 events = list(),
                                 xref_husb = character(),

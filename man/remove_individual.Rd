@@ -19,7 +19,7 @@ An updated tidygedcom object excluding the active Individual record.
 This function removes an active Individual record from the tidygedcom object.
 }
 \details{
-At a minimum it will also remove references to this individual in Family records.
+At a minimum it will also remove references to this individual in Family group records.
 If remove_associations is TRUE (default) it will remove associations with this
 individual in other Individual records.
 }

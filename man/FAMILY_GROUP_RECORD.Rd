@@ -54,9 +54,9 @@ the current date is used.}
 \item{multimedia_links}{A list of MULTIMEDIA_LINK() objects}
 }
 \value{
-A tidy tibble containing a FAMILY_RECORD part of a GEDCOM file.
+A tidy tibble containing a FAMILY_GROUP_RECORD part of a GEDCOM file.
 }
 \description{
-This function constructs a tibble representation of the FAMILY_RECORD from the GEDCOM 5.5.5
+This function constructs a tibble representation of the FAMILY_GROUP_RECORD from the GEDCOM 5.5.5
 specification.
 }

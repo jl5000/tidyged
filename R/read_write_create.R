@@ -14,8 +14,7 @@
 #' read_gedcom("C:/my_family.ged")
 #' }
 read_gedcom <- function(filepath) {
-  # TODO: Reject leading whitespace 
-  
+
   gedcom_encoding <- read_gedcom_encoding(filepath)
   
   if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")

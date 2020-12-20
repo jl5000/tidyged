@@ -12,7 +12,7 @@
 validate_gedcom <- function(gedcom) {
   
   validate_header(gedcom)
-  
+
   if(sum(gedcom$level == 0 & gedcom$tag == "HEAD") != 1) stop("GEDCOM has no single header")
   if(sum(gedcom$level == 0 & gedcom$tag == "TRLR") != 1) stop("GEDCOM has no single trailer")
   if(num_subm(gedcom) > 1) stop("File has more than one submitter record")
@@ -31,3 +31,4 @@ validate_header <- function(gedcom) {
     stop("Malformed header")
   
 }
+

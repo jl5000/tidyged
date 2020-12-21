@@ -12,6 +12,7 @@
 #' that the wife was at the time of the event. Any combination of these is permitted. 
 #' Any labels must come after their corresponding number, for example; "4y 8m 10d".
 #' @param ... See arguments for main function. The attribute_type/event_type do not need to be populated.
+#' 
 #' @return An updated tidygedcom object with an expanded Family group record including
 #' this event.
 add_family_event <- function(gedcom,
@@ -45,6 +46,69 @@ add_family_event <- function(gedcom,
                              multimedia_links = character()) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_fam, is_family)
+  
+  if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
+  
+  event_address <- ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+                                     address_city = city,
+                                     address_state = state,
+                                     address_postal_code = postal_code,
+                                     address_country = country,
+                                     phone_number = phone_number,
+                                     address_email = email,
+                                     address_fax = fax,
+                                     address_web_page = web_page)
+  
+  plac_notes <- purrr::map(place_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+  
+  if(length(place_name) == 0) {
+    
+    event_place <- PLACE_STRUCTURE(character())
+    
+  } else {
+    
+    event_place <- PLACE_STRUCTURE(place_name = place_name,
+                                   place_phonetic_variation = place_phonetic_variation,
+                                   phonetisation_method = phonetisation_method,
+                                   place_romanised_variation = place_romanised_variation,
+                                   romanisation_method = romanisation_method,
+                                   place_latitude = place_latitude,
+                                   place_longitude = place_longitude,
+                                   notes = plac_notes)
+  }
+  
+  even_notes <- purrr::map(event_notes, ~ if(grepl(xref_pattern(), .x)) {
+    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+  
+  media_links <- purrr::map_chr(multimedia_links, find_xref, 
+                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+    purrr::map(MULTIMEDIA_LINK)
+  
+  details1 <- EVENT_DETAIL(event_or_fact_classification = event_classification,
+                           date = event_date,
+                           place = event_place,
+                           address = event_address,
+                           responsible_agency = responsible_agency,
+                           religious_affiliation = religious_affiliation,
+                           cause_of_event = event_cause,
+                           notes = even_notes,
+                           multimedia_links = media_links)
+  
+  details2 <- FAMILY_EVENT_DETAIL(husband_age_at_event = husband_age_at_event,
+                                  wife_age_at_event = wife_age_at_event,
+                                  event_details = details1)
+  
+  event_str <- FAMILY_EVENT_STRUCTURE(event_type_family = event_type,
+                                          event_descriptor = event_descriptor,
+                                          family_event_details = details2) %>% add_levels(1)
+  
+  
+  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "FAM")
+  
+  gedcom %>%
+    tibble::add_row(event_str, .before = next_row) %>% 
+    finalise()
   
 }
 

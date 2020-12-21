@@ -7,6 +7,8 @@
 #' simple since there are a wealth of GEDCOM validators already available.
 #'
 #' @param gedcom A tidygedcom object
+#' @param expected_encoding A character string given the expected file encoding. One of
+#' "UTF-8", "UTF-16LE", or "UTF-16BE".
 #'
 #' @return Nothing
 validate_gedcom <- function(gedcom, expected_encoding) {
@@ -23,6 +25,15 @@ validate_gedcom <- function(gedcom, expected_encoding) {
 }
 
 
+#' Validate a GEDCOM header
+#' 
+#' Check the GEDCOM header is properly formed.
+#' 
+#' @param gedcom A tidygedcom object
+#' @param expected_encoding A character string given the expected file encoding. One of
+#' "UTF-8", "UTF-16LE", or "UTF-16BE".
+#'
+#' @return Nothing
 validate_header <- function(gedcom, expected_encoding) {
   
   if(!all.equal(gedcom$level[1:6], c(0,1,2,2,3,1)) |

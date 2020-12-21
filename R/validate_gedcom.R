@@ -9,9 +9,9 @@
 #' @param gedcom A tidygedcom object
 #'
 #' @return Nothing
-validate_gedcom <- function(gedcom) {
+validate_gedcom <- function(gedcom, expected_encoding) {
   
-  validate_header(gedcom)
+  validate_header(gedcom, expected_encoding)
 
   if(sum(gedcom$level == 0 & gedcom$tag == "HEAD") != 1) stop("GEDCOM has no single header")
   if(sum(gedcom$level == 0 & gedcom$tag == "TRLR") != 1) stop("GEDCOM has no single trailer")
@@ -23,12 +23,23 @@ validate_gedcom <- function(gedcom) {
 }
 
 
-validate_header <- function(gedcom) {
+validate_header <- function(gedcom, expected_encoding) {
   
   if(!all.equal(gedcom$level[1:6], c(0,1,2,2,3,1)) |
      !all.equal(gedcom$tag[1:6], c("HEAD","GEDC","VERS","FORM","VERS","CHAR")) |
-     !all.equal(gedcom$value[1:6], c("", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8")))
+     !all.equal(gedcom$value[1:5], c("", "", "5.5.5", "LINEAGE-LINKED", "5.5.5")))
     stop("Malformed header")
+  
+  char <- dplyr::filter(gedcom, record == "HD", tag == "CHAR")$value
+  
+  if(expected_encoding == "UTF-8") {
+    if(char != "UTF-8") stop("Character encodings do not match")
+  } else if(expected_encoding %in% c("UTF-16BE", "UTF-16LE")) {
+    if(char != "UNICODE") stop("Character encodings do not match")
+  } else {
+    stop("Character encoding not recognised")
+  }
+    
   
 }
 

@@ -4,7 +4,7 @@
 #'
 #' Imports a *.ged file and creates a tidygedcom object.
 #'
-#' @param filepath The full filepath of the GEDCOM file
+#' @param filepath The full filepath of the GEDCOM file.
 #'
 #' @return A tidygedcom object
 #' @export
@@ -22,9 +22,10 @@ read_gedcom <- function(filepath) {
   
   ged <- readr::read_lines(filepath, locale = readr::locale(encoding = gedcom_encoding)) %>% 
     stringr::str_trim(side = "left") %>% 
+    check_line_lengths(.pkgenv$gedcom_line_length_limit) %>%
     tibble::tibble(value = .) %>%
     tidyr::extract(value, into = c("level", "record", "tag", "value"), 
-                   regex = "^(\\d) (@.+@)? ?(\\w{3,5}) ?(.*)$") %>%
+                   regex = "^\\w*(\\d) (@.+@)? ?(\\w{3,5}) ?(.*)$") %>%
     dplyr::mutate(record = dplyr::if_else(tag == "HEAD", "HD", record),
                   record = dplyr::if_else(tag == "TRLR", "TR", record),
                   record = dplyr::na_if(record, "")) %>%
@@ -34,7 +35,7 @@ read_gedcom <- function(filepath) {
     combine_gedcom_values() %>% 
     set_class_to_tidygedcom()
 
-  validate_gedcom(ged)
+  validate_gedcom(ged, gedcom_encoding)
   ged
   
 }
@@ -45,7 +46,7 @@ read_gedcom <- function(filepath) {
 #' This function reads the Byte Order Mark of a GEDCOM file in order to determine its encoding.
 #' It only checks for UTF-8 or UTF-16 - if neither of these are found it throws an error.
 #'
-#' @param filepath TODO
+#' @param filepath The full filepath of the GEDCOM file.
 #'
 #' @return A character string indicating the encoding of the file.
 read_gedcom_encoding <- function(filepath) {
@@ -57,11 +58,25 @@ read_gedcom_encoding <- function(filepath) {
   } else if(all.equal(as.character(readBin(filepath, 'raw', 2)), .pkgenv$BOM_UTF16_LE)) {
     return("UTF-16LE")
   } else {
-    stop("Invalid file encoding. Only UTF-8 and UTF-16 are supported")
+    stop("Invalid file encoding. Only UTF-8 and UTF-16 Byte Order Marks are supported")
   }
   
 }
 
+
+#' Check the line lengths of a GEDCOM file
+#' 
+#' @param lines A character vector of GEDCOM lines.
+#' @param limit The maximum length of a line allowed.
+#'
+#' @return The input character vector
+check_line_lengths <- function(lines, limit) {
+  
+  if(any(nchar(lines) > limit)) 
+    stop("This is not a GEDCOM 5.5.5 file. The following lines are too long: ", which(lines > limit))
+  
+  lines
+}
 
 
 #' Convert the GEDCOM grammar to the GEDCOM form

@@ -7,7 +7,7 @@
 read_gedcom_encoding(filepath)
 }
 \arguments{
-\item{filepath}{TODO}
+\item{filepath}{The full filepath of the GEDCOM file.}
 }
 \value{
 A character string indicating the encoding of the file.

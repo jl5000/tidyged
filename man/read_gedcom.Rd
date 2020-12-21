@@ -7,7 +7,7 @@
 read_gedcom(filepath)
 }
 \arguments{
-\item{filepath}{The full filepath of the GEDCOM file}
+\item{filepath}{The full filepath of the GEDCOM file.}
 }
 \value{
 A tidygedcom object

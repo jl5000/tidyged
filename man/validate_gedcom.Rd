@@ -4,7 +4,7 @@
 \alias{validate_gedcom}
 \title{Validate a GEDCOM file}
 \usage{
-validate_gedcom(gedcom)
+validate_gedcom(gedcom, expected_encoding)
 }
 \arguments{
 \item{gedcom}{A tidygedcom object}

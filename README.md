@@ -229,22 +229,37 @@ summary(tg)
 #>  Product name:            tidygedcom 
 #>  Product source:          Jamie Lendrum
 
-df_individuals(tg)
+df_individuals(tg) %>% print(n = Inf, width = Inf)
 #> # A tibble: 5 x 12
-#>   xref  name  sex   date_of_birth place_of_birth date_of_death place_of_death
-#>   <chr> <chr> <chr> <chr>         <chr>          <chr>         <chr>         
-#> 1 @I1@  Anak… M     ""            ""             ""            "Second Death…
-#> 2 @I2@  Padm… F     ""            ""             ""            ""            
-#> 3 @I3@  Leia… F     ""            ""             ""            ""            
-#> 4 @I4@  Luke… M     ""            ""             ""            ""            
-#> 5 @I5@  Obi-… M     ""            ""             ""            ""            
-#> # … with 5 more variables: mother <chr>, father <chr>, num_siblings <chr>,
-#> #   num_children <int>, last_modified <chr>
-df_families(tg)
+#>   xref  name             sex   date_of_birth place_of_birth date_of_death
+#>   <chr> <chr>            <chr> <chr>         <chr>          <chr>        
+#> 1 @I1@  Anakin Skywalker M     ""            ""             ""           
+#> 2 @I2@  Padme Amidala    F     ""            ""             ""           
+#> 3 @I3@  Leia Skywalker   F     ""            ""             ""           
+#> 4 @I4@  Luke Skywalker   M     ""            ""             ""           
+#> 5 @I5@  Obi-Wan Kenobi   M     ""            ""             ""           
+#>   place_of_death      mother          father             num_siblings
+#>   <chr>               <chr>           <chr>              <chr>       
+#> 1 "Second Death Star" ""              ""                 ""          
+#> 2 ""                  ""              ""                 ""          
+#> 3 ""                  "Padme Amidala" "Anakin Skywalker" "1"         
+#> 4 ""                  "Padme Amidala" "Anakin Skywalker" "1"         
+#> 5 ""                  ""              ""                 ""          
+#>   num_children last_modified
+#>          <int> <chr>        
+#> 1            2 21 DEC 2020  
+#> 2            2 21 DEC 2020  
+#> 3            0 21 DEC 2020  
+#> 4            0 21 DEC 2020  
+#> 5            0 21 DEC 2020
+df_families(tg) %>% print(n = Inf, width = Inf)
 #> # A tibble: 1 x 7
-#>   xref  husband   wife   marriage_date marriage_place num_children last_modified
-#>   <chr> <chr>     <chr>  <chr>         <chr>          <chr>        <chr>        
-#> 1 @F1@  Anakin S… Padme… ""            ""             2            21 DEC 2020
+#>   xref  husband          wife          marriage_date marriage_place num_children
+#>   <chr> <chr>            <chr>         <chr>         <chr>          <chr>       
+#> 1 @F1@  Anakin Skywalker Padme Amidala ""            ""             2           
+#>   last_modified
+#>   <chr>        
+#> 1 21 DEC 2020
 ```
 
 This package allows limited editing of `tidygedcom` objects

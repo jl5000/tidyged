@@ -39,24 +39,28 @@ An example is below:
 ```{r example}
 library(tidygedcom)
 
-tg <- gedcom(subm("Jamie Lendrum")) %>%
+tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family") %>%
   add_individual(sex = "M", individual_notes = "The central character in the Star Wars Skywalker Saga") %>%
-  add_individual_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>% 
-  add_individual_event_death(age_at_event = "45y", event_cause = "Killed by son Luke",
-                       place_name = "Second Death Star", place_notes = "Orbiting Endor System") %>% 
-  add_individual_attribute_religion(attribute_descriptor = "Jedi") %>% 
-  add_individual_attribute_possessions(attribute_descriptor = "Lightsaber") %>%
+  add_individual_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>%
+  add_individual_names("Darth Vader", type = "given", given = "Darth Vader") %>%
   add_individual(sex = "F", individual_notes = "Queen of Naboo") %>%
-  add_individual_names("Padme Amidala") %>% 
+  add_individual_names("Padme Amidala", given = "Padme", surname = "Amidala") %>% 
   add_individual(sex = "F") %>% 
-  add_individual_names("Leia Organa") %>% 
+  add_individual_names("Leia Skywalker", type = "birth", given = "Leia", surname = "Skywalker") %>%
+  add_individual_names("Princess Leia Organa", type = "adoptive", 
+                       prefix = "Princess", given = "Leia", surname = "Organa") %>% 
   add_individual(sex = "M") %>%
-  add_individual_names("Luke Skywalker") %>% 
-  add_family_group(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
+  add_individual_names("Luke Skywalker", type = "birth", given = "Luke", surname = "Skywalker") %>% 
   add_individual(sex = "M") %>% 
-  add_individual_names("Obi-Wan Kenobi") %>% 
+  add_individual_names("Obi-Wan Kenobi", type = "birth", given = "Obi-Wan", 
+                       nickname = "Ben", surname = "Kenobi") %>% 
+  add_family_group(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
   activate_individual_record("Anakin") %>% 
   add_individual_association("Obi-Wan", association = "Master") %>% 
+  add_individual_event_death(age_at_event = "45y", event_cause = "Killed by son Luke",
+                             place_name = "Second Death Star", place_notes = "Orbiting Endor System") %>% 
+  add_individual_attribute_religion(attribute_descriptor = "Jedi") %>% 
+  add_individual_attribute_possessions(attribute_descriptor = "Lightsaber") %>%
   add_note("Based on Star Wars") %>% 
   add_source(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
   add_repository("The Skywalker Saga") %>% 

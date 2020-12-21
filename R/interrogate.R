@@ -51,19 +51,20 @@ num_sour <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_so
 summary.tidygedcom <- function(object, ...) {
   eol <- "\n"
   subm_name <- gedcom_value(object, "HD", "SUBM", 1)
+  title_width <- nchar("Source system version:") + 2
   
   paste("GEDCOM file summary:", eol, eol,
-        "Submitter:", "\t", "\t", gedcom_value(object, subm_name, "NAME", 1), eol, 
-        "Description:", "\t", "\t", gedcom_value(object, "HD", "NOTE", 1), eol,
-        "Language:", "\t", "\t", gedcom_value(object, "HD", "LANG", 1), eol,
-        "Character Set:", "\t", gedcom_value(object, "HD", "CHAR", 1), eol, eol,
+        stringr::str_pad("Submitter:", title_width, "right"), gedcom_value(object, subm_name, "NAME", 1), eol, 
+        stringr::str_pad("Description:", title_width, "right"), gedcom_value(object, "HD", "NOTE", 1), eol,
+        stringr::str_pad("Language:", title_width, "right"), gedcom_value(object, "HD", "LANG", 1), eol,
+        stringr::str_pad("Character set:", title_width, "right"), gedcom_value(object, "HD", "CHAR", 1), eol, eol,
         
-        "Copyright:", "\t", "\t", gedcom_value(object, "HD", "COPR", 1), eol, eol,
+        stringr::str_pad("Copyright:", title_width, "right"), gedcom_value(object, "HD", "COPR", 1), eol, eol,
         
-        "Source system:", "\t", gedcom_value(object, "HD", "SOUR", 1), eol,
-        "Source system version: ", gedcom_value(object, "HD", "VERS", 2), eol,
-        "Product Name:", "\t", "\t", gedcom_value(object, "HD", "NAME", 2), eol,
-        "Product Source:", "\t", gedcom_value(object, "HD", "CORP", 2), eol
+        stringr::str_pad("Source system:", title_width, "right"), gedcom_value(object, "HD", "SOUR", 1), eol,
+        stringr::str_pad("Source system version:", title_width, "right"), gedcom_value(object, "HD", "VERS", 2, "SOUR"), eol,
+        stringr::str_pad("Product name:", title_width, "right"), gedcom_value(object, "HD", "NAME", 2), eol,
+        stringr::str_pad("Product source:", title_width, "right"), gedcom_value(object, "HD", "CORP", 2), eol
   ) %>% cat()
 }
 
@@ -79,14 +80,16 @@ summary.tidygedcom <- function(object, ...) {
 str.tidygedcom <- function(object, ...) {
   eol <- "\n"
   gedc_row <- which(object$tag == "GEDC")
+  title_width <- nchar("Multimedia objects:") + 2
+  
   paste0("GEDCOM version ", object$value[gedc_row + 1], " (", object$value[gedc_row + 2], ")", eol, eol,
-        "Individuals:\t\t", num_indi(object), eol,
-        "Families:\t\t", num_fam(object), eol,
-        "Submitters:\t\t", num_subm(object), eol,
-        "Multimedia objects:\t", num_media(object), eol, 
-        "Notes:\t\t\t", num_note(object), eol,
-        "Sources:\t\t", num_sour(object), eol,
-        "Repositories:\t\t", num_repo(object), eol 
+         stringr::str_pad("Individuals:", title_width, "right"), num_indi(object), eol,
+         stringr::str_pad("Families:", title_width, "right"), num_fam(object), eol,
+         stringr::str_pad("Submitters:", title_width, "right"), num_subm(object), eol,
+         stringr::str_pad("Multimedia objects:", title_width, "right"), num_media(object), eol, 
+         stringr::str_pad("Notes:", title_width, "right"), num_note(object), eol,
+         stringr::str_pad("Sources:", title_width, "right"), num_sour(object), eol,
+         stringr::str_pad("Repositories:", title_width, "right"), num_repo(object), eol 
   ) %>% cat()
 }
 

@@ -39,7 +39,8 @@ An example is below:
 ```{r example}
 library(tidygedcom)
 
-tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family") %>%
+tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family", language = "English",
+             gedcom_copyright = "Disney") %>%
   add_individual(sex = "M", individual_notes = "The central character in the Star Wars Skywalker Saga") %>%
   add_individual_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>%
   add_individual_names("Darth Vader", type = "given", given = "Darth Vader") %>%

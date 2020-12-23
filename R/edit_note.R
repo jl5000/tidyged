@@ -39,6 +39,9 @@ add_note <- function(gedcom,
 #'
 #' @return An updated tidygedcom object excluding the active Note record.
 #' @export
+#' @tests
+#' expect_equal(gedcom(subm()),
+#'              gedcom(subm()) %>% add_note("text") %>% remove_note())
 remove_note <- function(gedcom) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_note, is_note)

@@ -1,4 +1,4 @@
-# Function add_individual() @ L38
+# Function add_individual() @ L35
 
     {
       "type": "list",
@@ -16,7 +16,7 @@
         "row.names": {
           "type": "integer",
           "attributes": {},
-          "value": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+          "value": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
         },
         "active_record": {
           "type": "character",
@@ -28,22 +28,22 @@
         {
           "type": "double",
           "attributes": {},
-          "value": [0, 1, 2, 2, 3, 1, 1, 2, 2, 2, 3, 3, 3, 1, 1, 0, 1, 0, 1, 1, 2, 1, 1, 1, 0]
+          "value": [0, 1, 2, 2, 3, 1, 1, 2, 2, 2, 3, 3, 1, 1, 0, 1, 1, 2, 0, 1, 1, 2, 1, 1, 2, 1, 1, 0]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "@U1@", "@U1@", "@I1@", "@I1@", "@I1@", "@I1@", "@I1@", "@I1@", "@I1@", "TR"]
+          "value": ["HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "@U1@", "@U1@", "@U1@", "@U1@", "@I1@", "@I1@", "@I1@", "@I1@", "@I1@", "@I1@", "@I1@", "@I1@", "@I1@", "TR"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["HEAD", "GEDC", "VERS", "FORM", "VERS", "CHAR", "SOUR", "VERS", "NAME", "CORP", "ADDR", "EMAIL", "DATE", "DATE", "SUBM", "SUBM", "NAME", "INDI", "SEX", "REFN", "TYPE", "RIN", "NOTE", "NOTE", "TRLR"]
+          "value": ["HEAD", "GEDC", "VERS", "FORM", "VERS", "CHAR", "SOUR", "VERS", "NAME", "CORP", "ADDR", "EMAIL", "DATE", "SUBM", "SUBM", "NAME", "CHAN", "DATE", "INDI", "SEX", "REFN", "TYPE", "RIN", "CHAN", "DATE", "NOTE", "NOTE", "TRLR"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidygedcom", "0.0.0.900", "tidygedcom", "Jamie Lendrum", "", "jalendrum@gmail.com", "25 DEC 2020", "23 DEC 2020", "@U1@", "", "Me", "", "M", "1234", "something", "5678", "Note1", "Note 2", ""]
+          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidygedcom", "0.0.0.900", "tidygedcom", "Jamie Lendrum", "", "jalendrum@gmail.com", "23 DEC 2020", "@U1@", "", "Me", "", "23 DEC 2020", "", "M", "1234", "something", "5678", "", "23 DEC 2020", "Note1", "Note 2", ""]
         }
       ]
     }

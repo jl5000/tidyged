@@ -81,6 +81,9 @@ add_repository <- function(gedcom,
 #'
 #' @return An updated tidygedcom object excluding the active Repository record.
 #' @export
+#' @tests
+#' expect_equal(gedcom(subm()),
+#'              gedcom(subm()) %>% add_repository("text") %>% remove_repository())
 remove_repository <- function(gedcom) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_repo, is_repository)

@@ -10,7 +10,8 @@
 #' @param gedcom A tidygedcom object.
 #' @param file_reference A character vector of references for the files, typically a filepath or URL.
 #' @param format A character vector indicating the format of each multimedia file. 
-#' Currently limited to one of: bmp, gif, jpg, ole, pcx, tif, wav.
+#' Currently limited to one of: "AAC", "AVI", "BMP", "ePub", "FLAC", "GIF", "JPEG", "JPG", 
+#' "MKV", "mobi", "MP3", "PCX", "PDF", "PNG", "TIFF", "TIF", "WAV".
 #' A format must be defined for each file reference given.
 #' @param source_media A code that indicates the type of material in which the referenced 
 #' source is stored. Must be one of: audio, book, card, electronic, fiche, film, magazine,
@@ -64,6 +65,11 @@ add_multimedia <- function(gedcom,
 #'
 #' @return An updated tidygedcom object excluding the active Multimedia record.
 #' @export
+#' @tests
+#' expect_equal(gedcom(subm()),
+#'              gedcom(subm()) %>% 
+#'              add_multimedia("test", "BMP") %>% 
+#'              remove_multimedia())
 remove_multimedia <- function(gedcom) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_obje, is_multimedia)

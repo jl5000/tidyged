@@ -22,7 +22,8 @@ add_multimedia(
 \item{file_reference}{A character vector of references for the files, typically a filepath or URL.}
 
 \item{format}{A character vector indicating the format of each multimedia file.
-Currently limited to one of: bmp, gif, jpg, ole, pcx, tif, wav.
+Currently limited to one of: "AAC", "AVI", "BMP", "ePub", "FLAC", "GIF", "JPEG", "JPG",
+"MKV", "mobi", "MP3", "PCX", "PDF", "PNG", "TIFF", "TIF", "WAV".
 A format must be defined for each file reference given.}
 
 \item{source_media}{A code that indicates the type of material in which the referenced

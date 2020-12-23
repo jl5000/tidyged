@@ -126,6 +126,22 @@ add_family_group <- function(gedcom,
 #' @return An updated tidygedcom object excluding the active Family group record (and potentially the 
 #' individuals within it).
 #' @export
+#' @tests
+#' expect_equal(gedcom(subm()) %>% 
+#'                add_individual() %>% 
+#'                add_individual() %>% 
+#'                null_active_record(),
+#'              gedcom(subm()) %>% 
+#'                add_individual() %>% 
+#'                add_individual() %>% 
+#'                add_family_group(husband = "@I1@", wife = "@I2@") %>% 
+#'                remove_family_group())
+#' expect_equal(gedcom(subm()),
+#'              gedcom(subm()) %>% 
+#'                add_individual() %>% 
+#'                add_individual() %>% 
+#'                add_family_group(husband = "@I1@", wife = "@I2@") %>% 
+#'                remove_family_group(remove_individuals = TRUE))
 remove_family_group <- function(gedcom, remove_individuals = FALSE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_fam, is_family)
@@ -134,22 +150,23 @@ remove_family_group <- function(gedcom, remove_individuals = FALSE) {
   ind_xrefs <- unique(dplyr::filter(gedcom, record == active_record,
                                     tag %in% c("HUSB", "WIFE", "CHIL"))$value)
   
-  temp <- remove_section(gedcom, 1, "FAMC", active_record) %>% 
-    remove_section(2, "FAMC", active_record) %>% 
-    remove_section(1, "FAMS", active_record) %>% 
-    remove_section(2, "FAMS", active_record)
-  
   if(remove_individuals) {
     
     for(xref in ind_xrefs) {
       
-      temp <- activate_individual_record(temp, xref = xref) %>% 
+      gedcom <- activate_individual_record(gedcom, xref = xref) %>% 
         remove_individual()
       
     }
   }
   
-  null_active_record(temp)  
+  gedcom %>% 
+    remove_section(1, "FAMC", active_record) %>% 
+    remove_section(2, "FAMC", active_record) %>% 
+    remove_section(1, "FAMS", active_record) %>% 
+    remove_section(2, "FAMS", active_record) %>% 
+    dplyr::filter(record != active_record, value != active_record) %>%
+    null_active_record()  
 }
 
 

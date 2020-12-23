@@ -153,6 +153,9 @@ remove_source_repository_citation <- function(gedcom,
 #'
 #' @return An updated tidygedcom object excluding the active Source record.
 #' @export
+#' @tests
+#' expect_equal(gedcom(subm()),
+#'              gedcom(subm()) %>% add_source(title = "text") %>% remove_source())
 remove_source <- function(gedcom) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_sour, is_source)

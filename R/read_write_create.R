@@ -70,6 +70,10 @@ read_gedcom_encoding <- function(filepath) {
 #' @param limit The maximum length of a line allowed.
 #'
 #' @return The input character vector
+#' @tests
+#' expect_error(check_line_lengths(c("the", "quick", "brown", "fox"), 4))
+#' expect_equal(check_line_lengths(c("the", "quick", "brown", "fox"), 5),
+#'                                 c("the", "quick", "brown", "fox"))
 check_line_lengths <- function(lines, limit) {
   
   if(any(nchar(lines) > limit)) 

@@ -17,3 +17,8 @@ Nothing
 \description{
 Save a tidygedcom object to disk as a GEDCOM file
 }
+\details{
+This function prepares the tidygedcom object and then writes it to the filepath.
+Steps taken include escaping "@" signs (with another "@") and splitting long lines onto
+separate lines.
+}

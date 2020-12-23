@@ -110,6 +110,10 @@ combine_gedcom_values <- function(gedcom) {
 }
 
 #' Save a tidygedcom object to disk as a GEDCOM file
+#' 
+#' @details This function prepares the tidygedcom object and then writes it to the filepath.
+#' Steps taken include escaping "@" signs (with another "@") and splitting long lines onto
+#' separate lines.
 #'
 #' @param gedcom A tidygedcom object.
 #' @param filepath The full filepath to write to.
@@ -123,7 +127,9 @@ write_gedcom <- function(gedcom, filepath) {
   
   gedcom %>%
     update_header_with_filename(filename = basename(filepath)) %>% 
-    dplyr::mutate(value = stringr::str_replace_all(value, "@", "@@")) %>% 
+    dplyr::mutate(value = dplyr::if_else(stringr::str_detect(value, xref_pattern()),
+                                         value,
+                                         stringr::str_replace_all(value, "@", "@@"))) %>% 
     split_gedcom_values(char_limit = .pkgenv$gedcom_phys_value_limit) %>% 
     dplyr::mutate(record = dplyr::if_else(dplyr::lag(record) == record, "", record)) %>% 
     dplyr::mutate(record = dplyr::if_else(record == "TR", "", record)) %>% 

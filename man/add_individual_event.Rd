@@ -55,7 +55,8 @@ add_individual_event(
   religious_affiliation = character(),
   family_xref = character(),
   adopting_parent = character(),
-  multimedia_links = character()
+  multimedia_links = character(),
+  update_date_changed = TRUE
 )
 
 add_individual_event_birth(...)
@@ -185,6 +186,8 @@ individual. Either "HUSB", "WIFE", or "BOTH".}
 
 \item{multimedia_links}{A character vector of multimedia file references accompanying this
 event. These could be xrefs to existing Multimedia records.}
+
+\item{update_date_changed}{Whether to add/update the change date for the record.}
 
 \item{...}{See arguments for main function. The attribute_type/event_type do not need to be populated.}
 }

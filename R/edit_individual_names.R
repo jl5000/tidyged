@@ -24,6 +24,7 @@
 #' parts, e.g. Jr. Different name suffix parts are separated by a comma.
 #' @param name_notes A character vector of notes accompanying this name.
 #' These could be xrefs to existing Note records.
+#' @param update_date_changed Whether to add/update the change date for the record.
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' these names.
@@ -37,7 +38,8 @@ add_individual_names <- function(gedcom,
                                  surname_prefix = character(),
                                  surname = character(),
                                  suffix = character(),
-                                 name_notes = character()) {
+                                 name_notes = character(),
+                                 update_date_changed = TRUE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
@@ -55,6 +57,11 @@ add_individual_names <- function(gedcom,
   name_str <- PERSONAL_NAME_STRUCTURE(name_personal = name,
                                       name_type = type,
                                       name_pieces = name_pieces) %>% add_levels(1)
+  
+  if(update_date_changed) {
+    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    name_str <- dplyr::bind_rows(name_str, CHANGE_DATE())
+  }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
@@ -85,6 +92,7 @@ add_individual_names <- function(gedcom,
 #' parts, e.g. Jr. Different name suffix parts are separated by a comma.
 #' @param variation_notes A character vector of notes accompanying this name variation.
 #' These could be xrefs to existing Note records.
+#' @param update_date_changed Whether to add/update the change date for the record.
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' these name variants.
@@ -100,7 +108,8 @@ add_individual_names_var <- function(gedcom,
                                      surname_prefix = character(),
                                      surname = character(),
                                      suffix = character(),
-                                     variation_notes = character()) {
+                                     variation_notes = character(),
+                                     update_date_changed = TRUE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
@@ -150,6 +159,11 @@ add_individual_names_var <- function(gedcom,
                                       romanised_name_pieces = rom_name_pieces) %>% 
     dplyr::filter(tag != "NAME") %>%
     add_levels(1)
+  
+  if(update_date_changed) {
+    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    name_str <- dplyr::bind_rows(name_str, CHANGE_DATE())
+  }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 1, "NAME", primary_name)
   

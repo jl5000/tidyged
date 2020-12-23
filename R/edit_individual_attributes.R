@@ -13,6 +13,7 @@
 #' @param user_reference_type TODO
 #' @param multimedia_links A character vector of multimedia file references accompanying this
 #' attribute. These could be xrefs to existing Multimedia records.
+#' @param update_date_changed Whether to add/update the change date for the record.
 #' @param ... See arguments for main function. The attribute_type/event_type do not need to be populated.
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this attribute.
@@ -44,7 +45,8 @@ add_individual_attribute <- function(gedcom,
                                      web_page = character(),
                                      responsible_agency = character(),
                                      religious_affiliation = character(),
-                                     multimedia_links = character()) {
+                                     multimedia_links = character(),
+                                     update_date_changed = TRUE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
@@ -105,6 +107,10 @@ add_individual_attribute <- function(gedcom,
                                                   individual_event_details = details2,
                                                   user_reference_type = user_reference_type) %>% add_levels(1)
   
+  if(update_date_changed) {
+    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    attribute_str <- dplyr::bind_rows(attribute_str, CHANGE_DATE())
+  }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   

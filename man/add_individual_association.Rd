@@ -8,7 +8,8 @@ add_individual_association(
   gedcom,
   associated_with,
   association,
-  association_notes = character()
+  association_notes = character(),
+  update_date_changed = TRUE
 )
 }
 \arguments{
@@ -21,6 +22,8 @@ be an xref or a regular expression to match to an individual name.}
 
 \item{association_notes}{A character vector of notes accompanying this association.
 These could be xrefs to existing Note records.}
+
+\item{update_date_changed}{Whether to add/update the change date for the record.}
 }
 \value{
 An updated tidygedcom object with an expanded Individual record including

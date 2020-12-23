@@ -10,7 +10,7 @@
 #' this record. See the Gedcom 5.5.5 Specification for more details.
 #' @param user_reference_type A user-defined definition of the user_reference_number.
 #' @param automated_record_id A unique record identification number assigned to the record by 
-#' the source system.  
+#' the source system.
 #'
 #' @return An updated tidygedcom object including the Note record.
 #' @export

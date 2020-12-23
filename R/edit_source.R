@@ -106,13 +106,15 @@ add_source <- function(gedcom,
 #' be an xref or a regular expression to match to a repository name.
 #' @param call_number An identification or reference description used to file 
 #' and retrieve items from the holdings of a repository.
+#' @param update_date_changed Whether to add/update the change date for the record.
 #'
 #' @return An updated tidygedcom object with an expanded Source record including
 #' this repository citation.
 #' @export
 add_source_repository_citation <- function(gedcom,
                                            repository,
-                                           call_number = character()) {
+                                           call_number = character(),
+                                           update_date_changed = TRUE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_sour, is_source)
   
@@ -120,6 +122,11 @@ add_source_repository_citation <- function(gedcom,
   
   citation <- SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,
                                          source_call_number = call_number) %>% add_levels(1)
+  
+  if(update_date_changed) {
+    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    citation <- dplyr::bind_rows(citation, CHANGE_DATE())
+  }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "SOUR")
   

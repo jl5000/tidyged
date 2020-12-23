@@ -59,6 +59,7 @@
 #' These could be xrefs to existing Note records.
 #' @param multimedia_links A character vector of multimedia file references accompanying this
 #' event. These could be xrefs to existing Multimedia records.
+#' @param update_date_changed Whether to add/update the change date for the record.
 #' @param ... See arguments for main function. The attribute_type/event_type do not need to be populated.
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this event.
@@ -92,7 +93,8 @@ add_individual_event <- function(gedcom,
                                  religious_affiliation = character(),
                                  family_xref = character(),
                                  adopting_parent = character(),
-                                 multimedia_links = character()) {
+                                 multimedia_links = character(),
+                                 update_date_changed = TRUE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
@@ -153,6 +155,10 @@ add_individual_event <- function(gedcom,
                                           xref_fam = family_xref,
                                           adopted_by_which_parent = adopting_parent) %>% add_levels(1)
   
+  if(update_date_changed) {
+    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    event_str <- dplyr::bind_rows(event_str, CHANGE_DATE())
+  }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   

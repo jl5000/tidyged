@@ -14,7 +14,8 @@ add_individual_names(
   surname_prefix = character(),
   surname = character(),
   suffix = character(),
-  name_notes = character()
+  name_notes = character(),
+  update_date_changed = TRUE
 )
 }
 \arguments{
@@ -46,6 +47,8 @@ parts, e.g. Jr. Different name suffix parts are separated by a comma.}
 
 \item{name_notes}{A character vector of notes accompanying this name.
 These could be xrefs to existing Note records.}
+
+\item{update_date_changed}{Whether to add/update the change date for the record.}
 }
 \value{
 An updated tidygedcom object with an expanded Individual record including

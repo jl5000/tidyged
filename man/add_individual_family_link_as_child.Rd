@@ -8,7 +8,8 @@ add_individual_family_link_as_child(
   gedcom,
   family_xref,
   linkage_type = "birth",
-  linkage_notes = character()
+  linkage_notes = character(),
+  update_date_changed = TRUE
 )
 }
 \arguments{
@@ -21,6 +22,8 @@ add_individual_family_link_as_child(
 
 \item{linkage_notes}{A character vector of notes accompanying this linkage.
 These could be xrefs to existing Note records.}
+
+\item{update_date_changed}{Whether to add/update the change date for the record.}
 }
 \value{
 An updated tidygedcom object with an expanded Individual record including

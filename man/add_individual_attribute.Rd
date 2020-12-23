@@ -46,7 +46,8 @@ add_individual_attribute(
   web_page = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  multimedia_links = character()
+  multimedia_links = character(),
+  update_date_changed = TRUE
 )
 
 add_individual_attribute_caste(...)
@@ -156,6 +157,8 @@ entity that has responsibility for the event data.}
 
 \item{multimedia_links}{A character vector of multimedia file references accompanying this
 attribute. These could be xrefs to existing Multimedia records.}
+
+\item{update_date_changed}{Whether to add/update the change date for the record.}
 
 \item{...}{See arguments for main function. The attribute_type/event_type do not need to be populated.}
 }

@@ -11,6 +11,7 @@
 #' @param wife_age_at_event A character string that indicates the age in years, months, and days 
 #' that the wife was at the time of the event. Any combination of these is permitted. 
 #' Any labels must come after their corresponding number, for example; "4y 8m 10d".
+#' @param update_date_changed Whether to add/update the change date for the record.
 #' @param ... See arguments for main function. The attribute_type/event_type do not need to be populated.
 #' 
 #' @return An updated tidygedcom object with an expanded Family group record including
@@ -43,7 +44,8 @@ add_family_event <- function(gedcom,
                              web_page = character(),
                              responsible_agency = character(),
                              religious_affiliation = character(),
-                             multimedia_links = character()) {
+                             multimedia_links = character(),
+                             update_date_changed = TRUE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_fam, is_family)
   
@@ -103,9 +105,13 @@ add_family_event <- function(gedcom,
                                           event_descriptor = event_descriptor,
                                           family_event_details = details2) %>% add_levels(1)
   
+  if(update_date_changed) {
+    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    event_str <- dplyr::bind_rows(event_str, CHANGE_DATE())
+  }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "FAM")
-  
+
   gedcom %>%
     tibble::add_row(event_str, .before = next_row) %>% 
     finalise()

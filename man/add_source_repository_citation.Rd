@@ -4,7 +4,12 @@
 \alias{add_source_repository_citation}
 \title{Add a source repository citation to a source record}
 \usage{
-add_source_repository_citation(gedcom, repository, call_number = character())
+add_source_repository_citation(
+  gedcom,
+  repository,
+  call_number = character(),
+  update_date_changed = TRUE
+)
 }
 \arguments{
 \item{gedcom}{A tidygedcom object.}
@@ -14,6 +19,8 @@ be an xref or a regular expression to match to a repository name.}
 
 \item{call_number}{An identification or reference description used to file
 and retrieve items from the holdings of a repository.}
+
+\item{update_date_changed}{Whether to add/update the change date for the record.}
 }
 \value{
 An updated tidygedcom object with an expanded Source record including

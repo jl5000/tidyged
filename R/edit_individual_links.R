@@ -8,6 +8,7 @@
 #' @param association A word or phrase stating the nature of the association.
 #' @param association_notes A character vector of notes accompanying this association.
 #' These could be xrefs to existing Note records.
+#' @param update_date_changed Whether to add/update the change date for the record.
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this association.
@@ -15,7 +16,8 @@
 add_individual_association <- function(gedcom,
                                        associated_with,
                                        association,
-                                       association_notes = character()) {
+                                       association_notes = character(),
+                                       update_date_changed = TRUE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
@@ -27,6 +29,11 @@ add_individual_association <- function(gedcom,
   asso_str <- ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
                                     relation_is_descriptor = association,
                                     notes = asso_notes) %>% add_levels(1)
+  
+  if(update_date_changed) {
+    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    asso_str <- dplyr::bind_rows(asso_str, CHANGE_DATE())
+  }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
@@ -42,13 +49,15 @@ add_individual_association <- function(gedcom,
 #' @param family_xref The xref of the family associated of which this individual is a spouse.
 #' @param linkage_notes A character vector of notes accompanying this linkage.
 #' These could be xrefs to existing Note records.
+#' @param update_date_changed Whether to add/update the change date for the record.
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this family link.
 #' @export
 add_individual_family_link_as_spouse <- function(gedcom, 
                                                  family_xref,
-                                                 linkage_notes = character()) {
+                                                 linkage_notes = character(),
+                                                 update_date_changed = TRUE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   
@@ -56,6 +65,11 @@ add_individual_family_link_as_spouse <- function(gedcom,
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
   link <- SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% add_levels(1)
+  
+  if(update_date_changed) {
+    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    link <- dplyr::bind_rows(link, CHANGE_DATE())
+  }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   
@@ -72,6 +86,7 @@ add_individual_family_link_as_spouse <- function(gedcom,
 #' "birth" (default), "foster", or "adopted".
 #' @param linkage_notes A character vector of notes accompanying this linkage.
 #' These could be xrefs to existing Note records.
+#' @param update_date_changed Whether to add/update the change date for the record.
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this family link.
@@ -79,7 +94,8 @@ add_individual_family_link_as_spouse <- function(gedcom,
 add_individual_family_link_as_child <- function(gedcom, 
                                                 family_xref,
                                                 linkage_type = "birth",
-                                                linkage_notes = character()) {
+                                                linkage_notes = character(),
+                                                update_date_changed = TRUE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
   

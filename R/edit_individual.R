@@ -48,7 +48,7 @@ add_individual <- function(gedcom,
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
     purrr::map(MULTIMEDIA_LINK)
-  
+
   ind_record <- INDIVIDUAL_RECORD(xref_indi = xref,
                                   sex_value = sex,
                                   user_reference_number = user_reference_number,

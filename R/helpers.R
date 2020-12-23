@@ -73,7 +73,7 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   if(nrow(gedcom_filtered) == 0) return("")
   
   active <- is.null(after_tag)
-  for(i in 1:nrow(gedcom_filtered)) {
+  for(i in seq_len(nrow(gedcom_filtered))) {
     if(is.null(after_tag)) {
       active <- TRUE
     } else if(gedcom_filtered$tag[i] == after_tag && gedcom_filtered$level[i] < level) {
@@ -179,7 +179,7 @@ find_insertion_point <- function(gedcom,
                                  parent_value = NULL) {
   
   active <- FALSE
-  for(i in 1:nrow(gedcom)) {
+  for(i in seq_len(nrow(gedcom))) {
     
     if(active && gedcom$level[i] <= parent_level) break
     
@@ -202,10 +202,10 @@ remove_section <- function(gedcom,
   
   no_xrefs_defined <- length(xrefs) == 0
   
-  rows_to_remove <- c()
+  rows_to_remove <- integer()
   
   active <- FALSE
-  for(i in 1:nrow(gedcom)) {
+  for(i in seq_len(nrow(gedcom))) {
     
     if(active) {
       if(gedcom$level[i] <= containing_level) {

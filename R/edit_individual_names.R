@@ -119,7 +119,7 @@ add_individual_names_var <- function(gedcom,
   if(phonetic_variation) {
     
     name_phonetic_var <- variation_name
-    phonetic_type <- type
+    phonetisation_method <- type
     phon_name_pieces <- list(PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                                   name_piece_given = given, 
                                                   name_piece_nickname = nickname, 
@@ -134,7 +134,7 @@ add_individual_names_var <- function(gedcom,
   } else {
     
     name_romanised_var <- variation_name
-    romanisation <- type
+    romanisation_method <- type
     rom_name_pieces <- list(PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                                  name_piece_given = given, 
                                                  name_piece_nickname = nickname, 
@@ -181,6 +181,13 @@ add_individual_names_var <- function(gedcom,
 #' @return An updated tidygedcom object with an Individual record excluding
 #' this personal name (and components).
 #' @export
+#' @tests
+#' expect_equal(gedcom(subm()) %>% 
+#'                add_individual(),
+#'              gedcom(subm()) %>% 
+#'                add_individual() %>% 
+#'                add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
+#'                remove_individual_name("Joe Bloggs"))  
 remove_individual_name <- function(gedcom,
                                     name) {
   
@@ -202,6 +209,15 @@ remove_individual_name <- function(gedcom,
 #' @return An updated tidygedcom object with an Individual record excluding
 #' this personal name variation (and components).
 #' @export
+#' @tests
+#' expect_equal(gedcom(subm()) %>% 
+#'                add_individual() %>% 
+#'                add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs"),
+#'              gedcom(subm()) %>% 
+#'                add_individual() %>% 
+#'                add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
+#'                add_individual_names_var("Joe Bloggs", "Jo Blogs", "spelling error") %>% 
+#'                remove_individual_name_var("Jo Blogs"))
 remove_individual_name_var <- function(gedcom,
                                        variation_name,
                                        phonetic_variation = TRUE) {

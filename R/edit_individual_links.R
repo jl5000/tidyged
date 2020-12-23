@@ -31,7 +31,7 @@ add_individual_association <- function(gedcom,
                                     notes = asso_notes) %>% add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
     asso_str <- dplyr::bind_rows(asso_str, CHANGE_DATE() %>% add_levels(1))
   }
   
@@ -67,7 +67,7 @@ add_individual_family_link_as_spouse <- function(gedcom,
   link <- SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
     link <- dplyr::bind_rows(link, CHANGE_DATE() %>% add_levels(1))
   }
   
@@ -107,7 +107,7 @@ add_individual_family_link_as_child <- function(gedcom,
                                notes = link_notes) %>% add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
     link <- dplyr::bind_rows(link, CHANGE_DATE() %>% add_levels(1))
   }
   

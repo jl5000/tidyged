@@ -59,7 +59,7 @@ add_individual_names <- function(gedcom,
                                       name_pieces = name_pieces) %>% add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
     name_str <- dplyr::bind_rows(name_str, CHANGE_DATE() %>% add_levels(1))
   }
   
@@ -161,7 +161,7 @@ add_individual_names_var <- function(gedcom,
     add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
     name_str <- dplyr::bind_rows(name_str, CHANGE_DATE() %>% add_levels(1))
   }
   

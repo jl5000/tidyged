@@ -156,7 +156,7 @@ add_individual_event <- function(gedcom,
                                           adopted_by_which_parent = adopting_parent) %>% add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
     event_str <- dplyr::bind_rows(event_str, CHANGE_DATE() %>% add_levels(1))
   }
   

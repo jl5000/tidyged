@@ -108,7 +108,7 @@ add_individual_attribute <- function(gedcom,
                                                   user_reference_type = user_reference_type) %>% add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
     attribute_str <- dplyr::bind_rows(attribute_str, CHANGE_DATE() %>% add_levels(1))
   }
   

@@ -26,6 +26,12 @@
 #'
 #' @return An updated tidygedcom object including the Individual record.
 #' @export
+#' @tests
+#' expect_snapshot_value(add_individual(gedcom(subm("Me")),
+#'                                      sex = "M", user_reference_number = 1234,
+#'                                      user_reference_type = "something",
+#'                                      automated_record_id = "5678",
+#'                                      individual_notes = c("Note1", "Note 2")), "json2")
 add_individual <- function(gedcom,
                            sex = "U",
                            user_reference_number = character(),

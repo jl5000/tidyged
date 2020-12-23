@@ -125,7 +125,7 @@ add_source_repository_citation <- function(gedcom,
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
-    citation <- dplyr::bind_rows(citation, CHANGE_DATE())
+    citation <- dplyr::bind_rows(citation, CHANGE_DATE() %>% add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "SOUR")

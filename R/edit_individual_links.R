@@ -32,7 +32,7 @@ add_individual_association <- function(gedcom,
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
-    asso_str <- dplyr::bind_rows(asso_str, CHANGE_DATE())
+    asso_str <- dplyr::bind_rows(asso_str, CHANGE_DATE() %>% add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
@@ -68,7 +68,7 @@ add_individual_family_link_as_spouse <- function(gedcom,
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
-    link <- dplyr::bind_rows(link, CHANGE_DATE())
+    link <- dplyr::bind_rows(link, CHANGE_DATE() %>% add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
@@ -105,6 +105,11 @@ add_individual_family_link_as_child <- function(gedcom,
   link <- CHILD_TO_FAMILY_LINK(xref_fam = family_xref,
                                pedigree_linkage_type = linkage_type,
                                notes = link_notes) %>% add_levels(1)
+  
+  if(update_date_changed) {
+    gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
+    link <- dplyr::bind_rows(link, CHANGE_DATE() %>% add_levels(1))
+  }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
   

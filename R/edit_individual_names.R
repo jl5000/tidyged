@@ -60,7 +60,7 @@ add_individual_names <- function(gedcom,
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
-    name_str <- dplyr::bind_rows(name_str, CHANGE_DATE())
+    name_str <- dplyr::bind_rows(name_str, CHANGE_DATE() %>% add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
@@ -162,7 +162,7 @@ add_individual_names_var <- function(gedcom,
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
-    name_str <- dplyr::bind_rows(name_str, CHANGE_DATE())
+    name_str <- dplyr::bind_rows(name_str, CHANGE_DATE() %>% add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 1, "NAME", primary_name)

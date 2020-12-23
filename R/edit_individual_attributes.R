@@ -109,7 +109,7 @@ add_individual_attribute <- function(gedcom,
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
-    attribute_str <- dplyr::bind_rows(attribute_str, CHANGE_DATE())
+    attribute_str <- dplyr::bind_rows(attribute_str, CHANGE_DATE() %>% add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")

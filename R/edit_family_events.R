@@ -107,7 +107,7 @@ add_family_event <- function(gedcom,
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", xrefs = get_active_record(gedcom))
-    event_str <- dplyr::bind_rows(event_str, CHANGE_DATE())
+    event_str <- dplyr::bind_rows(event_str, CHANGE_DATE() %>% add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "FAM")

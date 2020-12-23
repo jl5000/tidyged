@@ -7,6 +7,7 @@
 
 [![R-CMD-check](https://github.com/jl5000/tidygedcom/workflows/R-CMD-check/badge.svg)](https://github.com/jl5000/tidygedcom/actions)
 [![](https://codecov.io/gh/jl5000/tidygedcom/branch/master/graph/badge.svg)](https://codecov.io/gh/jl5000/tidygedcom)
+[![CodeFactor](https://www.codefactor.io/repository/github/jl5000/tidygedcom/badge)](https://www.codefactor.io/repository/github/jl5000/tidygedcom)
 <!-- badges: end -->
 
 Import, create, and summarise family tree GEDCOM files using tidy

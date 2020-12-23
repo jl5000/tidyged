@@ -192,6 +192,8 @@ ADDRESS_STRUCTURE <- function(local_address_lines = character(),
 #' expect_error(ASSOCIATION_STRUCTURE())
 #' expect_error(ASSOCIATION_STRUCTURE("@1@"))
 #' expect_error(ASSOCIATION_STRUCTURE(c("@1@", "@2@"), "Godfather"))
+#' expect_equal(ASSOCIATION_STRUCTURE(character()), tibble::tibble())
+#' expect_equal(ASSOCIATION_STRUCTURE("", character()), tibble::tibble())
 #' 
 #' expect_snapshot_value(ASSOCIATION_STRUCTURE("@I1@", "Godfather"), "json2")
 #' expect_snapshot_value(ASSOCIATION_STRUCTURE("@I1@", "Father", 
@@ -262,6 +264,7 @@ CHANGE_DATE <- function(change_date = date_exact(),
 #' @tests
 #' expect_error(CHILD_TO_FAMILY_LINK())
 #' expect_error(CHILD_TO_FAMILY_LINK("@1@", pedigree_linkage_type = "foste"))
+#' expect_equal(CHILD_TO_FAMILY_LINK(character()), tibble::tibble())
 #' 
 #' expect_snapshot_value(CHILD_TO_FAMILY_LINK("@F1@"), "json2")
 #' expect_snapshot_value(CHILD_TO_FAMILY_LINK("@F1@", "birth"), "json2")
@@ -384,7 +387,7 @@ FAMILY_EVENT_DETAIL <- function(husband_age_at_event = character(),
 #' @tests
 #' expect_error(FAMILY_EVENT_STRUCTURE())
 #' expect_error(FAMILY_EVENT_STRUCTURE("TEST"))
-#' 
+#' expect_equal(FAMILY_EVENT_STRUCTURE(character()), tibble::tibble())
 #' expect_snapshot_value(FAMILY_EVENT_STRUCTURE("CENS"), "json2")
 #' expect_snapshot_value(FAMILY_EVENT_STRUCTURE("EVEN"), "json2")
 #' expect_snapshot_value(FAMILY_EVENT_STRUCTURE("EVEN", "Random event"), "json2")
@@ -426,7 +429,8 @@ FAMILY_EVENT_STRUCTURE <- function(event_type_family,
 #' expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE(c("FACT", "EDUC"), "This is a fact"))
 #' expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("FACT", "This is a fact"))
 #' expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE("IDNO", 123456))
-#' 
+#' expect_equal(INDIVIDUAL_ATTRIBUTE_STRUCTURE(character()), tibble::tibble())
+#' expect_equal(INDIVIDUAL_ATTRIBUTE_STRUCTURE("", character()), tibble::tibble())
 #' expect_snapshot_value(INDIVIDUAL_ATTRIBUTE_STRUCTURE("NATI", "British"), "json2")
 #' expect_snapshot_value(INDIVIDUAL_ATTRIBUTE_STRUCTURE("NATI", "British", 
 #'                      individual_event_details = INDIVIDUAL_EVENT_DETAIL(age_at_event = "0y")), "json2")
@@ -513,7 +517,7 @@ INDIVIDUAL_EVENT_DETAIL <- function(event_details = EVENT_DETAIL(),
 #' expect_error(INDIVIDUAL_EVENT_STRUCTURE())
 #' expect_error(INDIVIDUAL_EVENT_STRUCTURE("BLAH"))
 #' expect_error(INDIVIDUAL_EVENT_STRUCTURE("ADOP", adopted_by_which_parent = "WHO"))
-#' 
+#' expect_equal(INDIVIDUAL_EVENT_STRUCTURE(character()), tibble::tibble())
 #' expect_snapshot_value(INDIVIDUAL_EVENT_STRUCTURE("BIRT"), "json2")
 #' expect_snapshot_value(INDIVIDUAL_EVENT_STRUCTURE("CHRA"), "json2")
 #' expect_snapshot_value(INDIVIDUAL_EVENT_STRUCTURE("BIRT", xref_fam = "@F4@"), "json2")
@@ -564,6 +568,7 @@ INDIVIDUAL_EVENT_STRUCTURE <- function(event_type_individual,
 #' @inheritParams parameter_definitions
 #' @tests
 #' expect_error(MULTIMEDIA_LINK("ref"))
+#' expect_equal(MULTIMEDIA_LINK(character()), tibble::tibble())
 #' @return A tidy tibble containing the MULTIMEDIA_LINK part of a GEDCOM file.
 MULTIMEDIA_LINK <- function(xref_obje) {
   
@@ -583,7 +588,7 @@ MULTIMEDIA_LINK <- function(xref_obje) {
 #' @inheritParams parameter_definitions
 #' @tests
 #' expect_error(NOTE_STRUCTURE(user_text = c("test1", "test2")))
-#' 
+#' expect_equal(NOTE_STRUCTURE(), tibble::tibble())
 #' expect_snapshot_value(NOTE_STRUCTURE("@T1@"), "json2")
 #' expect_snapshot_value(NOTE_STRUCTURE(user_text = "test text"), "json2")
 #' 
@@ -681,7 +686,8 @@ PERSONAL_NAME_PIECES <- function(name_piece_prefix = character(),
 #'                           phonetisation_method = c("Can't spell", "Can't spell"),
 #'                           phonetic_name_pieces = list(PERSONAL_NAME_PIECES(name_piece_given = "Joe", 
 #'                                                                            name_piece_surname = "Blogs"))))
-#'                                                                            
+#' expect_equal(PERSONAL_NAME_STRUCTURE(character()), tibble::tibble())  
+#'                                                                                                                                                      
 #' expect_snapshot_value(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/", 
 #'                                      name_pieces = PERSONAL_NAME_PIECES(name_piece_prefix = "Mr",
 #'                                                                         name_piece_surname = "Bloggs")), "json2")
@@ -843,6 +849,7 @@ PLACE_STRUCTURE <- function(place_name,
 #'
 #' @inheritParams parameter_definitions
 #' @tests
+#' expect_equal(SOURCE_CITATION(character()), tibble::tibble())
 #' expect_snapshot_value(SOURCE_CITATION("@S1@"), "json2")
 #' expect_snapshot_value(SOURCE_CITATION("@S1@", 
 #'               where_within_source = 3, event_type_cited_from = "event"), "json2")
@@ -904,7 +911,7 @@ SOURCE_CITATION <- function(xref_sour,
 #' @tests
 #' expect_error(SOURCE_REPOSITORY_CITATION())
 #' expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = c("123", "456")))
-#' 
+#' expect_equal(SOURCE_REPOSITORY_CITATION(character()), tibble::tibble())
 #' expect_snapshot_value(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = 123), "json2")
 #' 
 #' @return A tidy tibble containing the SOURCE_REPOSITORY_CITATION part of a GEDCOM file.
@@ -933,7 +940,7 @@ SOURCE_REPOSITORY_CITATION <- function(xref_repo,
 #' @inheritParams parameter_definitions
 #' @tests
 #' expect_error(SPOUSE_TO_FAMILY_LINK())
-#' 
+#' expect_equal(SPOUSE_TO_FAMILY_LINK(character()), tibble::tibble())
 #' expect_snapshot_value(SPOUSE_TO_FAMILY_LINK("@F2@", 
 #'                     list(NOTE_STRUCTURE(user_text = "test"))), "json2")
 #'                     

@@ -10,3 +10,9 @@ test_that("Function add_individual() @ L35", {
                                        individual_notes = c("Note1", "Note 2")), "json2")
 })
 
+
+test_that("Function remove_individual() @ L84", {
+  expect_equal(gedcom(subm()),
+               gedcom(subm()) %>% add_individual() %>% remove_individual())
+})
+

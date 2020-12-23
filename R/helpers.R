@@ -227,7 +227,7 @@ remove_section <- function(gedcom,
     }
   }
   
-  if(is.null(rows_to_remove)) {
+  if(length(rows_to_remove) == 0) {
     gedcom
   } else {
     dplyr::slice(gedcom, -rows_to_remove)

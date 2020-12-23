@@ -78,6 +78,9 @@ add_individual <- function(gedcom,
 #' @return An updated tidygedcom object excluding the active Individual record.
 #' 
 #' @export
+#' @tests
+#' expect_equal(gedcom(subm()),
+#'              gedcom(subm()) %>% add_individual() %>% remove_individual())
 remove_individual <- function(gedcom, remove_associations = TRUE) {
   
   check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)

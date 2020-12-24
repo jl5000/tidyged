@@ -31,7 +31,8 @@
 #'                                      sex = "M", user_reference_number = 1234,
 #'                                      user_reference_type = "something",
 #'                                      automated_record_id = "5678",
-#'                                      individual_notes = c("Note1", "Note 2")), "json2")
+#'                                      individual_notes = c("Note1", "Note 2")) %>% 
+#'                        remove_dates_for_tests(), "json2")
 add_individual <- function(gedcom,
                            sex = "U",
                            user_reference_number = character(),

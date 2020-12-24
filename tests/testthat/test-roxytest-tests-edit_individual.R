@@ -2,16 +2,17 @@
 
 context("File R/edit_individual.R: @tests")
 
-test_that("Function add_individual() @ L35", {
+test_that("Function add_individual() @ L36", {
   expect_snapshot_value(add_individual(gedcom(subm("Me")),
                                        sex = "M", user_reference_number = 1234,
                                        user_reference_type = "something",
                                        automated_record_id = "5678",
-                                       individual_notes = c("Note1", "Note 2")), "json2")
+                                       individual_notes = c("Note1", "Note 2")) %>% 
+                         remove_dates_for_tests(), "json2")
 })
 
 
-test_that("Function remove_individual() @ L84", {
+test_that("Function remove_individual() @ L85", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) %>% add_individual() %>% remove_individual())
 })

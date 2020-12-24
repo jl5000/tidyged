@@ -233,3 +233,11 @@ remove_section <- function(gedcom,
     dplyr::slice(gedcom, -rows_to_remove)
   }
 }
+
+remove_dates_for_tests <- function(gedcom) {
+  
+  gedcom %>% 
+    remove_section(1, "CHAN", "") %>% 
+    dplyr::filter(!(level == 1 & record == "HD" & tag == "DATE"))
+  
+}

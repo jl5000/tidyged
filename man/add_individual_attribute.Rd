@@ -22,7 +22,7 @@ add_individual_attribute(
   attribute_type,
   attribute_descriptor,
   fact_classification = character(),
-  event_date = tidygedcom::date_value(),
+  event_date = date_value(),
   event_cause = character(),
   user_reference_type = character(),
   age_at_event = character(),

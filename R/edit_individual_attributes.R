@@ -17,11 +17,17 @@
 #' @param ... See arguments for main function. The attribute_type/event_type do not need to be populated.
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' this attribute.
+#' @tests
+#' expect_snapshot_value(gedcom(subm("Me")) %>% 
+#'                        add_individual(sex = "M") %>% 
+#'                        add_individual_attribute_occupation(attribute_descriptor = "Jedi",
+#'                                                            update_date_changed = FALSE) %>% 
+#'                        remove_dates_for_tests(), "json2")
 add_individual_attribute <- function(gedcom,
                                      attribute_type,
                                      attribute_descriptor,
                                      fact_classification = character(),
-                                     event_date = tidygedcom::date_value(),
+                                     event_date = date_value(),
                                      event_cause = character(),
                                      user_reference_type = character(),
                                      age_at_event = character(),

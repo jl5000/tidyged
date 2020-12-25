@@ -1,0 +1,47 @@
+---
+title: "Introduction to GEDCOM"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## What is GEDCOM?
+
+Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by `tidygedcom`.
+
+## What does a GEDCOM file look like?
+
+A GEDCOM file is a plain text file (with extension .ged or .GED), which contains **records**. These records contain information on:
+
+* Family groups (i.e. nuclear families)
+* Individuals
+* Multimedia
+* Sources
+* Repositories (which contain sources)
+* Notes
+
+There are also special records that appear once and only once in a file; a header (at the beginning), trailer (at the end), and submitter record (directly after the header).
+
+A sample file looks like this:
+
+```{r}
+readLines("https://www.gedcom.org/samples/555SAMPLE.GED")
+```
+
+Each record is a nested structure containing one or more lines where the number at the beginning of the line indicates the level in the hierarchy. New records begin at level 0. In the above file, the submitter record begins at line `r which(readLines("https://www.gedcom.org/samples/555SAMPLE.GED") == "0 @U1@ SUBM")`.
+
+## What's on a GEDCOM line?
+
+Aside from the level in the hierarchy, a GEDCOM line can contain three other types of data:
+
+* The **tag**, given immediately after the level which indicates the information being provided on the line;
+* A **line value** associated with the tag. For example, on line 6, the CHARacter encoding for the file is given as UTF-8;
+* The first line of records do not contain a line value. Instead an **xref** (or cross-reference) is given before the tag, which is surrounded by ampersands ("@XYZ@"). This allows records to link to other records.
+
+The [GEDCOM 5.5.5 specification](https://www.gedcom.org/gedcom.html) is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structure allowed for each record type, and this is what the `tidygedcom` package is designed to address.
+
+

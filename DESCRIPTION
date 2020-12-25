@@ -23,5 +23,6 @@ Imports:
     tibble
 Suggests: 
     testthat,
-    roxytest
+    roxytest,
+    rmarkdown
 Config/testthat/edition: 3

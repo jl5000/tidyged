@@ -5,3 +5,4 @@
 ^\.github$
 ^family\.R$
 ^vignettes/articles$
+^intro_to_gedcom\.Rmd$

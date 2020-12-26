@@ -208,6 +208,13 @@ df_families <- function(gedcom) {
 
 #' @rdname df_individuals
 #' @export
+#' @tests
+#' expect_snapshot_value(gedcom(subm("Me")) %>% 
+#'  add_multimedia(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") %>% 
+#'  add_multimedia(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") %>% 
+#'  add_multimedia(file_reference = "ref3", format = "PNG", source_media = "photo", title = "photo2") %>% 
+#'  remove_dates_for_tests() %>% 
+#'  df_multimedia(), "json2")
 df_multimedia <- function(gedcom) {
   
   obje_xrefs <- xrefs_multimedia(gedcom)
@@ -228,6 +235,13 @@ df_multimedia <- function(gedcom) {
 
 #' @rdname df_individuals
 #' @export
+#' @tests
+#' expect_snapshot_value(gedcom(subm("Me")) %>% 
+#'  add_source(originator = "author1", title = "book1") %>% 
+#'  add_source(originator = "author2", title = "book2") %>% 
+#'  add_source(originator = "author3", title = "book3") %>% 
+#'  remove_dates_for_tests() %>% 
+#'  df_sources(), "json2")
 df_sources <- function(gedcom) {
   
   sour_xrefs <- xrefs_sources(gedcom)
@@ -244,6 +258,13 @@ df_sources <- function(gedcom) {
 
 #' @rdname df_individuals
 #' @export
+#' @tests
+#' expect_snapshot_value(gedcom(subm("Me")) %>% 
+#'  add_repository(name = "repo1", city = "Brighton", state = "E. Sussex", country = "UK") %>% 
+#'  add_repository(name = "repo2", city = "Orlando", state = "Florida", country = "USA") %>% 
+#'  add_repository(name = "repo3", city = "Yokohama", country = "Japan") %>% 
+#'  remove_dates_for_tests() %>% 
+#'  df_repositories(), "json2")
 df_repositories <- function(gedcom) {
   
   repo_xrefs <- xrefs_repositories(gedcom)
@@ -264,6 +285,13 @@ df_repositories <- function(gedcom) {
 
 #' @rdname df_individuals
 #' @export
+#' @tests
+#' expect_snapshot_value(gedcom(subm("Me")) %>% 
+#'  add_note(text = "This is a note", user_reference_number = 1234) %>% 
+#'  add_note(text = "This is also a note", user_reference_number = 5678) %>% 
+#'  add_note(text = "This may be a note too", user_reference_number = 987643) %>% 
+#'  remove_dates_for_tests() %>% 
+#'  df_notes(), "json2")
 df_notes <- function(gedcom) {
   
   note_xrefs <- xrefs_notes(gedcom)

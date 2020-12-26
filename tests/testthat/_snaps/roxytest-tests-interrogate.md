@@ -143,3 +143,203 @@
       ]
     }
 
+# Function df_multimedia() @ L218
+
+    {
+      "type": "list",
+      "attributes": {
+        "names": {
+          "type": "character",
+          "attributes": {},
+          "value": ["xref", "file_ref", "file_title", "file_format", "source_media", "last_modified"]
+        },
+        "row.names": {
+          "type": "integer",
+          "attributes": {},
+          "value": [1, 2, 3]
+        },
+        "class": {
+          "type": "character",
+          "attributes": {},
+          "value": ["tbl_df", "tbl", "data.frame"]
+        }
+      },
+      "value": [
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["@O1@", "@O2@", "@O3@"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["ref1", "ref2", "ref3"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["sounds", "photo1", "photo2"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["WAV", "JPEG", "PNG"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["audio", "photo", "photo"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["", "", ""]
+        }
+      ]
+    }
+
+# Function df_sources() @ L245
+
+    {
+      "type": "list",
+      "attributes": {
+        "names": {
+          "type": "character",
+          "attributes": {},
+          "value": ["xref", "originator", "title", "last_modified"]
+        },
+        "row.names": {
+          "type": "integer",
+          "attributes": {},
+          "value": [1, 2, 3]
+        },
+        "class": {
+          "type": "character",
+          "attributes": {},
+          "value": ["tbl_df", "tbl", "data.frame"]
+        }
+      },
+      "value": [
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["@S1@", "@S2@", "@S3@"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["author1", "author2", "author3"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["book1", "book2", "book3"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["", "", ""]
+        }
+      ]
+    }
+
+# Function df_repositories() @ L268
+
+    {
+      "type": "list",
+      "attributes": {
+        "names": {
+          "type": "character",
+          "attributes": {},
+          "value": ["xref", "name", "city", "state", "country", "last_modified"]
+        },
+        "row.names": {
+          "type": "integer",
+          "attributes": {},
+          "value": [1, 2, 3]
+        },
+        "class": {
+          "type": "character",
+          "attributes": {},
+          "value": ["tbl_df", "tbl", "data.frame"]
+        }
+      },
+      "value": [
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["@R1@", "@R2@", "@R3@"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["repo1", "repo2", "repo3"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["Brighton", "Orlando", "Yokohama"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["E. Sussex", "Florida", ""]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["UK", "USA", "Japan"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["", "", ""]
+        }
+      ]
+    }
+
+# Function df_notes() @ L295
+
+    {
+      "type": "list",
+      "attributes": {
+        "names": {
+          "type": "character",
+          "attributes": {},
+          "value": ["xref", "ref", "text", "last_modified"]
+        },
+        "row.names": {
+          "type": "integer",
+          "attributes": {},
+          "value": [1, 2, 3]
+        },
+        "class": {
+          "type": "character",
+          "attributes": {},
+          "value": ["tbl_df", "tbl", "data.frame"]
+        }
+      },
+      "value": [
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["@N1@", "@N2@", "@N3@"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["1234", "5678", "987643"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["This is a note", "This is also a note", "This may be a note too"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["", "", ""]
+        }
+      ]
+    }
+

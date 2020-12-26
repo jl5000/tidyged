@@ -16,6 +16,19 @@
 #' 
 #' @return An updated tidygedcom object with an expanded Family group record including
 #' this event.
+#' @tests
+#' expect_snapshot_value(gedcom(subm("Me")) %>% 
+#'  add_individual(sex = "M") %>% 
+#'  add_individual_names("Joe Bloggs") %>% 
+#'  add_individual(sex = "F") %>% 
+#'  add_individual_names("Jess Bloggs") %>% 
+#'  add_individual(sex = "F") %>% 
+#'  add_individual_names("Jessie Bloggs") %>%
+#'  add_family_group(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
+#'  add_family_event(event_type = "MARR", 
+#'                   event_date = date_value(start_year = 1969, start_month = 1, start_day = 30),
+#'                   place_name = "Another place") %>% 
+#'  remove_dates_for_tests(), "json2")
 add_family_event <- function(gedcom,
                              event_type = character(),
                              event_descriptor = character(),

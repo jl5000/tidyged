@@ -13,6 +13,8 @@
 #' \dontrun{
 #' read_gedcom("C:/my_family.ged")
 #' }
+#' @tests
+#' expect_snapshot_value(read_gedcom("https://www.gedcom.org/samples/555SAMPLE.GED"), "json2")
 read_gedcom <- function(filepath) {
 
   gedcom_encoding <- read_gedcom_encoding(filepath)
@@ -152,6 +154,10 @@ write_gedcom <- function(gedcom, filepath) {
 #' @param filename The name of the file (with extension).
 #'
 #' @return An updated tidygedcom object with the updated filename.
+#' @tests
+#' expect_snapshot_value(gedcom(subm("Me")) %>% 
+#'                         update_header_with_filename("my_file.ged") %>% 
+#'                         remove_dates_for_tests(), "json2")
 update_header_with_filename <- function(gedcom, filename) {
   
   if(nrow(dplyr::filter(gedcom, record == "HD", tag == "FILE")) == 0) {

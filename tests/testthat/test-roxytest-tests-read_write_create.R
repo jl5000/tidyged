@@ -2,9 +2,28 @@
 
 context("File R/read_write_create.R: @tests")
 
-test_that("Function check_line_lengths() @ L77", {
+test_that("Function read_gedcom() @ L18", {
+  expect_snapshot_value(read_gedcom("https://www.gedcom.org/samples/555SAMPLE.GED"), "json2")
+})
+
+
+test_that("Function read_gedcom_encoding() @ L58", {
+  expect_equal(read_gedcom_encoding("https://www.gedcom.org/samples/555SAMPLE.GED"), "UTF-8")
+  expect_equal(read_gedcom_encoding("https://www.gedcom.org/samples/555SAMPLE16BE.GED"), "UTF-16BE")
+  expect_equal(read_gedcom_encoding("https://www.gedcom.org/samples/555SAMPLE16LE.GED"), "UTF-16LE")
+})
+
+
+test_that("Function check_line_lengths() @ L83", {
   expect_error(check_line_lengths(c("the", "quick", "brown", "fox"), 4))
   expect_equal(check_line_lengths(c("the", "quick", "brown", "fox"), 5),
                                   c("the", "quick", "brown", "fox"))
+})
+
+
+test_that("Function update_header_with_filename() @ L161", {
+  expect_snapshot_value(gedcom(subm("Me")) %>% 
+                          update_header_with_filename("my_file.ged") %>% 
+                          remove_dates_for_tests(), "json2")
 })
 

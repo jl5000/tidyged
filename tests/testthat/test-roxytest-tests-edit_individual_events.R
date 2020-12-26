@@ -2,12 +2,13 @@
 
 context("File R/edit_individual_events.R: @tests")
 
-test_that("Function add_individual_event() @ L74", {
+test_that("Function add_individual_event() @ L75", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
                          add_individual(sex = "M") %>% 
-                         add_individual_event_christening(event_date = date_value(start_year = 1956),
-                                                          age_at_event = "1y",
-                                                          update_date_changed = FALSE) %>% 
+                         add_individual_event(event_type = "CHR",
+                                              event_date = date_value(start_year = 1956),
+                                              age_at_event = "1y",
+                                              update_date_changed = FALSE) %>% 
                          remove_dates_for_tests(), "json2")
 })
 

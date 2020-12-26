@@ -20,8 +20,9 @@
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'                        add_individual(sex = "M") %>% 
-#'                        add_individual_attribute_occupation(attribute_descriptor = "Jedi",
-#'                                                            update_date_changed = FALSE) %>% 
+#'                        add_individual_attribute(attribute_type = "OCCU",
+#'                                                 attribute_descriptor = "Jedi",
+#'                                                 update_date_changed = FALSE) %>% 
 #'                        remove_dates_for_tests(), "json2")
 add_individual_attribute <- function(gedcom,
                                      attribute_type,

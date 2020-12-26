@@ -49,13 +49,17 @@ read_gedcom <- function(filepath) {
 #' @param filepath The full filepath of the GEDCOM file.
 #'
 #' @return A character string indicating the encoding of the file.
+#' @tests
+#' expect_equal(read_gedcom_encoding("https://www.gedcom.org/samples/555SAMPLE.GED"), "UTF-8")
+#' expect_equal(read_gedcom_encoding("https://www.gedcom.org/samples/555SAMPLE16BE.GED"), "UTF-16BE")
+#' expect_equal(read_gedcom_encoding("https://www.gedcom.org/samples/555SAMPLE16LE.GED"), "UTF-16LE")
 read_gedcom_encoding <- function(filepath) {
   
-  if(all.equal(as.character(readBin(filepath, 'raw', 3)), .pkgenv$BOM_UTF8)) {
+  if(identical(as.character(readBin(filepath, 'raw', 3)), .pkgenv$BOM_UTF8)) {
     return("UTF-8")  
-  } else if(all.equal(as.character(readBin(filepath, 'raw', 2)), .pkgenv$BOM_UTF16_BE)) {
+  } else if(identical(as.character(readBin(filepath, 'raw', 2)), .pkgenv$BOM_UTF16_BE)) {
     return("UTF-16BE")
-  } else if(all.equal(as.character(readBin(filepath, 'raw', 2)), .pkgenv$BOM_UTF16_LE)) {
+  } else if(identical(as.character(readBin(filepath, 'raw', 2)), .pkgenv$BOM_UTF16_LE)) {
     return("UTF-16LE")
   } else {
     stop("Invalid file encoding. Only UTF-8 and UTF-16 Byte Order Marks are supported")

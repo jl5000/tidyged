@@ -54,15 +54,22 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/implementation.html">Implementation of tidygedcom</a>
+      <a href="articles/01_intro_to_gedcom.html">Introduction to GEDCOM</a>
     </li>
     <li>
-      <a href="articles/intro_to_gedcom.html">Introduction to GEDCOM</a>
+      <a href="articles/02_implementation.html">Implementation of tidygedcom</a>
     </li>
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/jl5000/tidygedcom/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -94,7 +101,7 @@
 <p>The intent is to allow the user to import GEDCOM files or create them from scratch using a <code>ggplot2</code> type interface; starting with a base GEDCOM object (with only a header and trailer section) and adding records as you would add layers to a ggplot object (but instead using the pipe operator, %&gt;%).</p>
 <p>An example is below:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tidygedcom</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidygedcom/">tidygedcom</a></span><span class="op">)</span>
 <span class="co">#&gt; If importing existing GEDCOM files, you should ensure that they are error free.</span>
 <span class="co">#&gt; This package assumes imported GEDCOM files are valid and very few validation checks are carried out.</span>
 <span class="co">#&gt; Several GEDCOM validators are available, including an online validator at http://ged-inline.elasticbeanstalk.com/</span>
@@ -343,7 +350,14 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/jl5000/tidygedcom/">https://​github.com/​jl5000/​tidygedcom/​</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

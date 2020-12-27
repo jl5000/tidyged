@@ -22,7 +22,9 @@
 #'                        add_individual(sex = "M") %>% 
 #'                        add_individual_attribute(attribute_type = "OCCU",
 #'                                                 attribute_descriptor = "Jedi",
-#'                                                 update_date_changed = FALSE) %>% 
+#'                                                 local_address_lines = c("line1","line2","line3","line4"),
+#'                                                 place_name = "There",
+#'                                                 place_notes = "Place note") %>% 
 #'                        remove_dates_for_tests(), "json2")
 add_individual_attribute <- function(gedcom,
                                      attribute_type,

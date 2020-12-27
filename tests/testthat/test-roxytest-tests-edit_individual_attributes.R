@@ -2,12 +2,14 @@
 
 context("File R/edit_individual_attributes.R: @tests")
 
-test_that("Function add_individual_attribute() @ L27", {
+test_that("Function add_individual_attribute() @ L29", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
                          add_individual(sex = "M") %>% 
                          add_individual_attribute(attribute_type = "OCCU",
                                                   attribute_descriptor = "Jedi",
-                                                  update_date_changed = FALSE) %>% 
+                                                  local_address_lines = c("line1","line2","line3","line4"),
+                                                  place_name = "There",
+                                                  place_notes = "Place note") %>% 
                          remove_dates_for_tests(), "json2")
 })
 

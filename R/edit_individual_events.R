@@ -70,7 +70,9 @@
 #'                        add_individual_event(event_type = "CHR",
 #'                                             event_date = date_value(start_year = 1956),
 #'                                             age_at_event = "1y",
-#'                                             update_date_changed = FALSE) %>% 
+#'                                              local_address_lines = c("line1","line2","line3","line4"),
+#'                                              place_name = "There",
+#'                                              place_notes = "Place note") %>% 
 #'                        remove_dates_for_tests(), "json2")
 add_individual_event <- function(gedcom,
                                  event_type,

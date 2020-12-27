@@ -48,6 +48,11 @@ num_sour <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_so
 #'
 #' @return A printed summary of the GEDCOM file.
 #' @export
+#' @tests
+#' expect_snapshot_value(
+#'                gedcom(subm("Me"), gedcom_description = "descrip", language = "English",
+#'                       gedcom_copyright = "copyright statement") %>% 
+#'                 summary(), "json2")
 summary.tidygedcom <- function(object, ...) {
   eol <- "\n"
   subm_name <- gedcom_value(object, "HD", "SUBM", 1)
@@ -77,6 +82,21 @@ summary.tidygedcom <- function(object, ...) {
 #'
 #' @return A printed summary of the GEDCOM file structure.
 #' @export
+#' @tests
+#' expect_snapshot_value(
+#'  gedcom(subm("Me")) %>% 
+#'   add_individual() %>% 
+#'   add_individual() %>% 
+#'   add_individual() %>% 
+#'   add_family_group() %>% 
+#'   add_family_group() %>% 
+#'   add_multimedia("ref1", "AAC") %>% 
+#'   add_multimedia("ref1", "AAC") %>% 
+#'   add_source() %>% 
+#'   add_repository("repo") %>% 
+#'   add_note("note1") %>% 
+#'   add_note("note2") %>% 
+#'   str(), "json2")
 str.tidygedcom <- function(object, ...) {
   eol <- "\n"
   gedc_row <- which(object$tag == "GEDC")

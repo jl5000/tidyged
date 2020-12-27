@@ -2,14 +2,20 @@
 
 context("File R/read_write_create.R: @tests")
 
-test_that("Function read_gedcom() @ L20", {
+test_that("Function read_gedcom() @ L26", {
   expect_snapshot_value(
       read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")), 
+      "json2")
+  expect_snapshot_value(
+      read_gedcom(system.file("extdata", "555SAMPLE16BE.GED", package = "tidygedcom")), 
+      "json2")
+  expect_snapshot_value(
+      read_gedcom(system.file("extdata", "555SAMPLE16LE.GED", package = "tidygedcom")), 
       "json2")
 })
 
 
-test_that("Function read_gedcom_encoding() @ L66", {
+test_that("Function read_gedcom_encoding() @ L75", {
   expect_equal(
     read_gedcom_encoding(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")), 
     "UTF-8")
@@ -22,14 +28,14 @@ test_that("Function read_gedcom_encoding() @ L66", {
 })
 
 
-test_that("Function check_line_lengths() @ L91", {
+test_that("Function check_line_lengths() @ L100", {
   expect_error(check_line_lengths(c("the", "quick", "brown", "fox"), 4))
   expect_equal(check_line_lengths(c("the", "quick", "brown", "fox"), 5),
                                   c("the", "quick", "brown", "fox"))
 })
 
 
-test_that("Function update_header_with_filename() @ L169", {
+test_that("Function update_header_with_filename() @ L178", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
                           update_header_with_filename("my_file.ged") %>% 
                           remove_dates_for_tests(), "json2")

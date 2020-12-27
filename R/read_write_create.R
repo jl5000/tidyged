@@ -17,6 +17,12 @@
 #' expect_snapshot_value(
 #'     read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")), 
 #'     "json2")
+#' expect_snapshot_value(
+#'     read_gedcom(system.file("extdata", "555SAMPLE16BE.GED", package = "tidygedcom")), 
+#'     "json2")
+#' expect_snapshot_value(
+#'     read_gedcom(system.file("extdata", "555SAMPLE16LE.GED", package = "tidygedcom")), 
+#'     "json2")
 read_gedcom <- function(filepath) {
 
   gedcom_encoding <- read_gedcom_encoding(filepath)
@@ -24,7 +30,10 @@ read_gedcom <- function(filepath) {
   if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")
     stop("GEDCOM file should have a .ged extension")
   
-  ged <- readr::read_lines(filepath, locale = readr::locale(encoding = gedcom_encoding)) %>% 
+  con <- file(filepath, encoding = gedcom_encoding)
+  on.exit(close(con))
+  
+  ged <- readLines(con) %>% 
     stringr::str_trim(side = "left") %>% 
     check_line_lengths(.pkgenv$gedcom_line_length_limit) %>%
     tibble::tibble(value = .) %>%

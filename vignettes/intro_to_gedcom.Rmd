@@ -29,10 +29,10 @@ There are also special records that appear once and only once in a file; a heade
 A sample file looks like this:
 
 ```{r}
-readLines("https://www.gedcom.org/samples/555SAMPLE.GED")
+readLines(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom"))
 ```
 
-Each record is a nested structure containing one or more lines where the number at the beginning of the line indicates the level in the hierarchy. New records begin at level 0. In the above file, the submitter record begins at line `r which(readLines("https://www.gedcom.org/samples/555SAMPLE.GED") == "0 @U1@ SUBM")`.
+Each record is a nested structure containing one or more lines where the number at the beginning of the line indicates the level in the hierarchy. New records begin at level 0. In the above file, the submitter record begins at line `r which(readLines(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) == "0 @U1@ SUBM")`.
 
 ## What's on a GEDCOM line?
 
@@ -40,7 +40,7 @@ Aside from the level in the hierarchy, a GEDCOM line can contain three other typ
 
 * The **tag**, given immediately after the level which indicates the information being provided on the line;
 * A **line value** associated with the tag. For example, on line 6, the CHARacter encoding for the file is given as UTF-8;
-* The first line of records do not contain a line value. Instead an **xref** (or cross-reference) is given before the tag, which looks like @XYZ@. This allows records to link to other records. In the above example, the family group record beginning on line `r which(readLines("https://www.gedcom.org/samples/555SAMPLE.GED") == "0 @F1@ FAM")` references other individual records who are members of the family.
+* The first line of records do not contain a line value. Instead an **xref** (or cross-reference) is given before the tag, which looks like @XYZ@. This allows records to link to other records. In the above example, the family group record beginning on line `r which(readLines(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) == "0 @F1@ FAM")` references other individual records who are members of the family.
 
 The [GEDCOM 5.5.5 specification](https://www.gedcom.org/gedcom.html) is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structure allowed for each record type, and this is what the `tidygedcom` package is designed to automate.
 

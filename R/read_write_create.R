@@ -144,6 +144,8 @@ combine_gedcom_values <- function(gedcom) {
 #'
 #' @return Nothing
 #' @export
+#' @tests
+#' expect_warning(write_gedcom(gedcom(), "my_family.txt") %>% file.remove("my_family.txt"))
 write_gedcom <- function(gedcom, filepath) {
 
   if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")
@@ -206,6 +208,12 @@ update_header_with_filename <- function(gedcom, filename) {
 #' @param char_limit Maximum string length of values.
 #' @tests
 #' @return A tidygedcom object in the GEDCOM grammar ready to export.
+#' @tests
+#' expect_snapshot_value(
+#'                 gedcom(subm("Me")) %>% 
+#'                   add_source(title = paste(rep("a", 4095), collapse = "")) %>%
+#'                   remove_dates_for_tests() %>% 
+#'                   split_gedcom_values(248), "json2")
 split_gedcom_values <- function(gedcom, char_limit) {
   
   unique_delim <- "<>delimiter<>"

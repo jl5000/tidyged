@@ -14,6 +14,7 @@
 #' read_gedcom("C:/my_family.ged")
 #' }
 #' @tests
+#' expect_error(read_gedcom("my_family.txt"))
 #' expect_snapshot_value(
 #'     read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")), 
 #'     "json2")
@@ -25,10 +26,10 @@
 #'     "json2")
 read_gedcom <- function(filepath) {
 
-  gedcom_encoding <- read_gedcom_encoding(filepath)
-  
   if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")
     stop("GEDCOM file should have a .ged extension")
+  
+  gedcom_encoding <- read_gedcom_encoding(filepath)
   
   con <- file(filepath, encoding = gedcom_encoding)
   on.exit(close(con))
@@ -173,6 +174,9 @@ write_gedcom <- function(gedcom, filepath) {
 #' @return An updated tidygedcom object with the updated filename.
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
+#'                         update_header_with_filename("my_file.ged") %>% 
+#'                         remove_dates_for_tests(), "json2")
+#' expect_snapshot_value(read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) %>% 
 #'                         update_header_with_filename("my_file.ged") %>% 
 #'                         remove_dates_for_tests(), "json2")
 update_header_with_filename <- function(gedcom, filename) {

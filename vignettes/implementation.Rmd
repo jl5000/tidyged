@@ -1,0 +1,40 @@
+---
+title: "Implementation of tidygedcom"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Why tidygedcom?
+
+One of the main characteristics I wanted for this package was to hide the complexity of the GEDCOM specification. I began with what I wanted the user interface to look like and worked backwards from there. I felt that adopting a `tidyverse` feel to the package would enhance readability and would significantly flatten the learning curve for those who are familiar with `ggplot2`.
+
+## Data structures
+
+I spent a significant amount of time before writing any code considering my options for how the data would be stored under the hood. In [one blog post](https://r-house.netlify.com/2019/12/30/can-genealogical-data-be-tidy/) I considered storing genealogical data in tabular format as it is easier to deal with, but discounted it very quickly as it is not well suited to nested data.
+
+I toyed with the idea of using an off-the-shelf open source product like [GRAMPS](https://gramps-project.org/blog/) but I found it awkward to use and wanted something where I was in complete control.
+
+I also considered using data structures more suited to this type of data, such as JSON or graphs (using the `igraph` package). However, I discovered it would be quite difficult representing some of the structures in the GEDCOM specification to my satisfaction.
+
+It was some time before a better solution occurred to me, and that was to store the GEDCOM file almost as is, and just to split out the components of each line into their own columns, creating a tidy version of a GEDCOM file (hence the name `tidygedcom`). This would allow easy manipulation using existing `tidyverse` infrastructure, and some additional processing would be needed to deal with the ordered and nested nature of the file. Ironically, I had returned to the idea of a tidy dataframe that I had dismissed early on.
+
+## Implementation details
+
+The bulk of the internal data structures are represented in the `subrecords.R` file. These structures combine in various ways to create the top level records found in `records.R`. I have also painstakingly written functions to validate each line value separately in `primitives.R` and they are (mostly) all documented in one place in `params.R`. These four files form the bulk of the codification of the GEDCOM specification.
+
+The user is kept away from this infrastructure, and instead interacts with various wrapper functions found in the `edit_*.R` files and summary functions found in `interrogate.R`.
+
+## Future work
+
+At the time of writing, this package is getting quite large and difficult to mentally manage. It can be quite tricky implementing some of the functionality to edit existing files (rather than creating from scratch), and so the long term plan is to have a sister package to help with this interactively using `shiny` (`shinygedcom`). I would imagine that much of the functionality developed so far would best sit in that package, and so I am considering eventually de-scoping `tidygedcom` to only contain the core infrastructure (the four files mentioned above and some other helper functions).
+
+However, before work on `shinygedcom` begins, I would like to start a tidygedcom visualisation package, `visgedcom`, which will allow various views of genealogical data.
+
+
+

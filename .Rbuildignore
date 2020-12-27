@@ -6,3 +6,4 @@
 ^family\.R$
 ^vignettes/articles$
 ^vignettes/intro_to_gedcom\.Rmd$
+^vignettes/implementation\.Rmd$

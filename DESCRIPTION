@@ -7,6 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jalendrum@gmail.com")
 Description: Import/export, create, and summarise family tree GEDCOM files using tidy dataframes.
+URL: https://jl5000.github.io/tidygedcom/,
+    https://github.com/jl5000/tidygedcom
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

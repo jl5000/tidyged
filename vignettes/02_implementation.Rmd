@@ -26,7 +26,7 @@ It was some time before a better solution occurred to me, and that was to store 
 
 ## Implementation details
 
-The bulk of the internal data structures are represented in the `subrecords.R` file. These structures combine in various ways to create the top level records found in `records.R`. I have also painstakingly written functions to validate each line value separately in `primitives.R` and they are (mostly) all documented in one place in `params.R`. These four files form the bulk of the codification of the GEDCOM specification.
+The specifications of GEDCOM records are represented in the `records.R` file. These records are composed of various data structures found in `subrecords.R`. I have also painstakingly written functions to validate each line value separately in `primitives.R` and they are (mostly) all documented in one place in `params.R`. These four files form the bulk of the codification of the GEDCOM specification.
 
 The user is kept away from this infrastructure, and instead interacts with various wrapper functions found in the `edit_*.R` files and summary functions found in `interrogate.R`.
 

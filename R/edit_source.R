@@ -111,6 +111,13 @@ add_source <- function(gedcom,
 #' @return An updated tidygedcom object with an expanded Source record including
 #' this repository citation.
 #' @export
+#' @tests
+#' expect_snapshot_value(
+#'                  gedcom(subm("Me")) %>% 
+#'                  add_repository(name = "The library") %>% 
+#'                  add_source() %>% 
+#'                  add_source_repository_citation("library") %>%
+#'                  remove_dates_for_tests(), "json2")
 add_source_repository_citation <- function(gedcom,
                                            repository,
                                            call_number = character(),
@@ -136,6 +143,17 @@ add_source_repository_citation <- function(gedcom,
   
 }
 
+#' @tests
+#' expect_equal(gedcom(subm("Me")) %>% 
+#'                  add_repository(name = "The library") %>% 
+#'                  add_source() %>%
+#'                  remove_dates_for_tests(),
+#'              gedcom(subm("Me")) %>% 
+#'                  add_repository(name = "The library") %>% 
+#'                  add_source() %>% 
+#'                  add_source_repository_citation("library") %>%
+#'                  remove_source_repository_citation("library") %>% 
+#'                  remove_dates_for_tests())
 remove_source_repository_citation <- function(gedcom,
                                               repository) {
   

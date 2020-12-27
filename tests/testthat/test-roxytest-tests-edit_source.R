@@ -2,7 +2,31 @@
 
 context("File R/edit_source.R: @tests")
 
-test_that("Function remove_source() @ L159", {
+test_that("Function add_source_repository_citation() @ L121", {
+  expect_snapshot_value(
+                   gedcom(subm("Me")) %>% 
+                   add_repository(name = "The library") %>% 
+                   add_source() %>% 
+                   add_source_repository_citation("library") %>%
+                   remove_dates_for_tests(), "json2")
+})
+
+
+test_that("Function remove_source_repository_citation() @ L157", {
+  expect_equal(gedcom(subm("Me")) %>% 
+                   add_repository(name = "The library") %>% 
+                   add_source() %>%
+                   remove_dates_for_tests(),
+               gedcom(subm("Me")) %>% 
+                   add_repository(name = "The library") %>% 
+                   add_source() %>% 
+                   add_source_repository_citation("library") %>%
+                   remove_source_repository_citation("library") %>% 
+                   remove_dates_for_tests())
+})
+
+
+test_that("Function remove_source() @ L177", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) %>% add_source(title = "text") %>% remove_source())
 })

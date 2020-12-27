@@ -14,7 +14,9 @@
 #' read_gedcom("C:/my_family.ged")
 #' }
 #' @tests
-#' expect_snapshot_value(read_gedcom("https://www.gedcom.org/samples/555SAMPLE.GED"), "json2")
+#' expect_snapshot_value(
+#'     read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")), 
+#'     "json2")
 read_gedcom <- function(filepath) {
 
   gedcom_encoding <- read_gedcom_encoding(filepath)
@@ -52,9 +54,15 @@ read_gedcom <- function(filepath) {
 #'
 #' @return A character string indicating the encoding of the file.
 #' @tests
-#' expect_equal(read_gedcom_encoding("https://www.gedcom.org/samples/555SAMPLE.GED"), "UTF-8")
-#' expect_equal(read_gedcom_encoding("https://www.gedcom.org/samples/555SAMPLE16BE.GED"), "UTF-16BE")
-#' expect_equal(read_gedcom_encoding("https://www.gedcom.org/samples/555SAMPLE16LE.GED"), "UTF-16LE")
+#' expect_equal(
+#'   read_gedcom_encoding(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")), 
+#'   "UTF-8")
+#' expect_equal(
+#'   read_gedcom_encoding(system.file("extdata", "555SAMPLE16BE.GED", package = "tidygedcom")), 
+#'   "UTF-16BE")
+#' expect_equal(
+#'   read_gedcom_encoding(system.file("extdata", "555SAMPLE16LE.GED", package = "tidygedcom")), 
+#'   "UTF-16LE")
 read_gedcom_encoding <- function(filepath) {
   
   if(identical(as.character(readBin(filepath, 'raw', 3)), .pkgenv$BOM_UTF8)) {

@@ -2,7 +2,18 @@
 
 context("File R/edit_individual_names.R: @tests")
 
-test_that("Function remove_individual_name() @ L191", {
+test_that("Function add_individual_names_var() @ L108", {
+  expect_snapshot_value(
+                 gedcom(subm("Me")) %>% 
+                 add_individual() %>% 
+                 add_individual_names("Joe Bloggs") %>% 
+                 add_individual_names_var("Joe Bloggs", "JB", nickname = "JB", type = "tests", 
+                                           phonetic_variation = FALSE) %>% 
+                 remove_dates_for_tests(), "json2")
+})
+
+
+test_that("Function remove_individual_name() @ L199", {
   expect_equal(gedcom(subm()) %>% 
                  add_individual(),
                gedcom(subm()) %>% 
@@ -12,7 +23,7 @@ test_that("Function remove_individual_name() @ L191", {
 })
 
 
-test_that("Function remove_individual_name_var() @ L221", {
+test_that("Function remove_individual_name_var() @ L229", {
   expect_equal(gedcom(subm()) %>% 
                  add_individual() %>% 
                  add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs"),

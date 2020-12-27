@@ -97,6 +97,14 @@ add_individual_names <- function(gedcom,
 #' @return An updated tidygedcom object with an expanded Individual record including
 #' these name variants.
 #' @export
+#' @tests
+#' expect_snapshot_value(
+#'                gedcom(subm("Me")) %>% 
+#'                add_individual() %>% 
+#'                add_individual_names("Joe Bloggs") %>% 
+#'                add_individual_names_var("Joe Bloggs", "JB", nickname = "JB", type = "tests", 
+#'                                          phonetic_variation = FALSE) %>% 
+#'                remove_dates_for_tests(), "json2")
 add_individual_names_var <- function(gedcom,
                                      primary_name,
                                      variation_name,

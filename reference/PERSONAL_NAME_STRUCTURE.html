@@ -138,10 +138,10 @@ specification.</p>
   <span class='va'>name_personal</span>,
   name_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   name_pieces <span class='op'>=</span> <span class='fu'><a href='PERSONAL_NAME_PIECES.html'>PERSONAL_NAME_PIECES</a></span><span class='op'>(</span><span class='op'>)</span>,
-  name_phonetic_variation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  name_phonetic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   phonetisation_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   phonetic_name_pieces <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
-  name_romanised_variation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  name_romanised <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   romanisation_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   romanised_name_pieces <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
@@ -151,7 +151,8 @@ specification.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name_personal</th>
-      <td><p>The surname of an individual, if known, is enclosed between two slash (/) characters.
+      <td><p>The full name formed in the manner the name is normally spoken.
+The surname of an individual, if known, is enclosed between two slash (/) characters.
 The order of the name parts should be the order that the person would, by custom of their culture,
 have used when giving it to a recorder.</p></td>
     </tr>
@@ -164,8 +165,8 @@ have used when giving it to a recorder.</p></td>
       <td><p>A PERSONAL_NAME_PIECES() object giving the components of the name.</p></td>
     </tr>
     <tr>
-      <th>name_phonetic_variation</th>
-      <td><p>A character vector of phonetic variations of the name.</p></td>
+      <th>name_phonetic</th>
+      <td><p>A character vector of phonetic variations of the full name.</p></td>
     </tr>
     <tr>
       <th>phonetisation_method</th>
@@ -177,7 +178,7 @@ have used when giving it to a recorder.</p></td>
 of the phonetic name variations.</p></td>
     </tr>
     <tr>
-      <th>name_romanised_variation</th>
+      <th>name_romanised</th>
       <td><p>A character vector giving romanised variations of the name.</p></td>
     </tr>
     <tr>

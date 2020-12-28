@@ -136,9 +136,9 @@ specification.</p>
 
     <pre class="usage"><span class='fu'>PLACE_STRUCTURE</span><span class='op'>(</span>
   <span class='va'>place_name</span>,
-  place_phonetic_variation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  place_phonetic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   phonetisation_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  place_romanised_variation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  place_romanised <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   romanisation_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   place_latitude <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   place_longitude <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
@@ -151,10 +151,11 @@ specification.</p>
     <tr>
       <th>place_name</th>
       <td><p>The jurisdictional name of the place where the event took place.
-Jurisdictions are separated by commas.</p></td>
+Jurisdictions are separated by commas. No part of the place name may be replaced by an abbreviation.
+Place names are not terminated by a full stop or anything else.</p></td>
     </tr>
     <tr>
-      <th>place_phonetic_variation</th>
+      <th>place_phonetic</th>
       <td><p>A character vector of phonetic variations of the place name.</p></td>
     </tr>
     <tr>
@@ -162,7 +163,7 @@ Jurisdictions are separated by commas.</p></td>
       <td><p>Indicates the method used in transforming the text to the phonetic variation.</p></td>
     </tr>
     <tr>
-      <th>place_romanised_variation</th>
+      <th>place_romanised</th>
       <td><p>A character vector of romanised variations of the place name.</p></td>
     </tr>
     <tr>

@@ -6,9 +6,9 @@
 \usage{
 PLACE_STRUCTURE(
   place_name,
-  place_phonetic_variation = character(),
+  place_phonetic = character(),
   phonetisation_method = character(),
-  place_romanised_variation = character(),
+  place_romanised = character(),
   romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
@@ -17,13 +17,14 @@ PLACE_STRUCTURE(
 }
 \arguments{
 \item{place_name}{The jurisdictional name of the place where the event took place.
-Jurisdictions are separated by commas.}
+Jurisdictions are separated by commas. No part of the place name may be replaced by an abbreviation.
+Place names are not terminated by a full stop or anything else.}
 
-\item{place_phonetic_variation}{A character vector of phonetic variations of the place name.}
+\item{place_phonetic}{A character vector of phonetic variations of the place name.}
 
 \item{phonetisation_method}{Indicates the method used in transforming the text to the phonetic variation.}
 
-\item{place_romanised_variation}{A character vector of romanised variations of the place name.}
+\item{place_romanised}{A character vector of romanised variations of the place name.}
 
 \item{romanisation_method}{Indicates the method used in transforming the text to a romanised variation.}
 

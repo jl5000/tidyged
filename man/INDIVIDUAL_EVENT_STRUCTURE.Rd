@@ -13,7 +13,9 @@ INDIVIDUAL_EVENT_STRUCTURE(
 )
 }
 \arguments{
-\item{event_type_individual}{A code used to indicate the type of individual event.}
+\item{event_type_individual}{A code used to indicate the type of individual event. One of:
+"BIRT", "CHR", "DEAT", "BURI", "CREM", "ADOP", "BAPM", "BARM", "BASM", "CHRA", "CONF", "FCOM",
+"NATU", "EMIG", "IMMI", "CENS", "PROB", "WILL", "GRAD", "RETI", "EVEN".}
 
 \item{event_descriptor}{Text describing a particular event pertaining to the individual or family.
 This event value is usually assigned to the EVEN tag. The classification as to the difference

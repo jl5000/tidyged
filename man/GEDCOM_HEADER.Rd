@@ -12,7 +12,7 @@ GEDCOM_HEADER(
 )
 }
 \arguments{
-\item{character_encoding}{A code value that represents the character set to be used to
+\item{character_encoding}{A code value that represents the character set and encoding to be used to
 interpret this data. Allowed values: "UTF-8" and "UNICODE" (UTF-16).}
 
 \item{gedcom_version_number}{The version number of the specification used.}

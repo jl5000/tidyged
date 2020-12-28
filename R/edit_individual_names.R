@@ -78,7 +78,7 @@ add_individual_names <- function(gedcom,
 #' @param variation_name The full name variation.
 #' @param type Indicates the method used in transforming the text to the variation.
 #' @param phonetic_variation Whether the name variation is a phonetic variation
-#' (TRUE, default) or a romanized variation (FALSE).
+#' (TRUE, default) or a romanised variation (FALSE).
 #' @param prefix The name prefix, e.g. Cmdr.
 #' @param given The given name or earned name. Different given names are separated 
 #' by a comma.
@@ -159,10 +159,10 @@ add_individual_names_var <- function(gedcom,
   name_str <- PERSONAL_NAME_STRUCTURE(name_personal = "line filtered out below",
                                       name_type = character(),
                                       name_pieces = PERSONAL_NAME_PIECES(), 
-                                      name_phonetic_variation = name_phonetic_var,
+                                      name_phonetic = name_phonetic_var,
                                       phonetisation_method = phonetisation_method,
                                       phonetic_name_pieces = phon_name_pieces,
-                                      name_romanised_variation = name_romanised_var,
+                                      name_romanised = name_romanised_var,
                                       romanisation_method = romanisation_method,
                                       romanised_name_pieces = rom_name_pieces) %>% 
     dplyr::filter(tag != "NAME") %>%
@@ -212,7 +212,7 @@ remove_individual_name <- function(gedcom,
 #' @param gedcom A tidygedcom object.
 #' @param variation_name The personal name variation to remove.
 #' @param phonetic_variation Whether the name variation is a phonetic variation
-#' (TRUE, default) or a romanized variation (FALSE).
+#' (TRUE, default) or a romanised variation (FALSE).
 #'
 #' @return An updated tidygedcom object with an Individual record excluding
 #' this personal name variation (and components).

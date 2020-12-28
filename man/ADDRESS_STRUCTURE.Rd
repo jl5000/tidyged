@@ -17,19 +17,15 @@ ADDRESS_STRUCTURE(
 )
 }
 \arguments{
-\item{local_address_lines}{These address lines contain the address lines before the town/city.
-This can be a vector with up to 3 elements.}
+\item{local_address_lines}{The local address lines before the town/city. This can be a vector with up to 3 elements.}
 
-\item{address_city}{The name of the city/town used in the address. Isolated for sorting or indexing.}
+\item{address_city}{The name of the city/town used in the address.}
 
-\item{address_state}{The name of the province, state or similar country subdivision used in the address.
-Isolated for sorting or indexing.}
+\item{address_state}{The name of the province, state or similar country subdivision used in the address.}
 
-\item{address_postal_code}{The ZIP or postal code used by the various localities in handling of mail.
-Isolated for sorting or indexing.}
+\item{address_postal_code}{The ZIP or postal code used by the various localities in handling of mail.}
 
-\item{address_country}{The name of the country that pertains to the associated address. Isolated by some systems for
-sorting or indexing. Used in most cases to facilitate automatic sorting of mail.}
+\item{address_country}{The name of the country that pertains to the associated address.}
 
 \item{phone_number}{A phone number.}
 

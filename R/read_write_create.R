@@ -271,7 +271,7 @@ gedcom <- function(submitter_details = subm(),
   
   GEDCOM_HEADER(header_extension = 
     LINEAGE_LINKED_HEADER_EXTENSION(name_of_source_data = source_data_name,
-                                    publication_date_source_data = source_data_date,
+                                    publication_date = source_data_date,
                                     copyright_source_data = source_data_copyright,
                                     receiving_system_name = receiving_system,
                                     file_creation_date = current_date(),

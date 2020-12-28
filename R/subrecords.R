@@ -20,7 +20,7 @@
 #'                                                     4587375238427,
 #'                                                     "www.url.com"),
 #'                name_of_source_data = "source data name",
-#'                publication_date_source_data = date_exact(25,5,2009),
+#'                publication_date = date_exact(25,5,2009),
 #'                copyright_source_data = "source copyright",
 #'                receiving_system_name = "destination system",
 #'                file_creation_date = date_exact(3,4,2008),
@@ -38,7 +38,7 @@ LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
                                             name_of_business = "Jamie Lendrum",
                                             business_address = ADDRESS_STRUCTURE(address_email = "jalendrum@gmail.com"),
                                             name_of_source_data = character(),
-                                            publication_date_source_data = date_exact(),
+                                            publication_date = date_exact(),
                                             copyright_source_data = character(),
                                             receiving_system_name = character(),
                                             file_creation_date = date_exact(),
@@ -56,7 +56,7 @@ LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
   validate_name_of_product(name_of_product, 1)
   validate_name_of_business(name_of_business, 1)
   validate_name_of_source_data(name_of_source_data, 1)
-  validate_date_exact(publication_date_source_data, 1)
+  validate_date_exact(publication_date, 1)
   validate_copyright_source_data(copyright_source_data, 1)
   validate_receiving_system_name(receiving_system_name, 1)
   validate_date_exact(file_creation_date, 1)
@@ -75,7 +75,7 @@ LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
     tibble::tibble(level = 1, tag = "CORP", value = name_of_business),
     business_address %>% add_levels(2),
     tibble::tibble(level = 1, tag = "DATA", value = name_of_source_data),
-    tibble::tibble(level = 2, tag = "DATE", value = publication_date_source_data),
+    tibble::tibble(level = 2, tag = "DATE", value = publication_date),
     tibble::tibble(level = 2, tag = "COPR", value = copyright_source_data),
     tibble::tibble(level = 0, tag = "DATE", value = file_creation_date),
     tibble::tibble(level = 1, tag = "TIME", value = file_creation_time),
@@ -95,8 +95,7 @@ LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
 #' specification.
 #'
 #' @inheritParams parameter_definitions
-#' @param local_address_lines These address lines contain the address lines before the town/city.
-#' This can be a vector with up to 3 elements.
+#' 
 #' @tests
 #' expect_error(ADDRESS_STRUCTURE(letters[1:4]))
 #' expect_error(ADDRESS_STRUCTURE("address", address_city = 1:2))
@@ -677,12 +676,12 @@ PERSONAL_NAME_PIECES <- function(name_piece_prefix = character(),
 #' @tests
 #' expect_error(PERSONAL_NAME_STRUCTURE())
 #' expect_error(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
-#'                           name_phonetic_variation = c("Joe Blogs", "Jo Bloggs")))
+#'                           name_phonetic = c("Joe Blogs", "Jo Bloggs")))
 #' expect_error(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
-#'                           name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
+#'                           name_phonetic = c("Joe Blogs", "Jo Bloggs"),
 #'                           phonetisation_method = "Can't spell"))
 #' expect_error(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
-#'                           name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
+#'                           name_phonetic = c("Joe Blogs", "Jo Bloggs"),
 #'                           phonetisation_method = c("Can't spell", "Can't spell"),
 #'                           phonetic_name_pieces = list(PERSONAL_NAME_PIECES(name_piece_given = "Joe", 
 #'                                                                            name_piece_surname = "Blogs"))))
@@ -692,10 +691,10 @@ PERSONAL_NAME_PIECES <- function(name_piece_prefix = character(),
 #'                                      name_pieces = PERSONAL_NAME_PIECES(name_piece_prefix = "Mr",
 #'                                                                         name_piece_surname = "Bloggs")), "json2")
 #' expect_snapshot_value(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
-#'                                      name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
+#'                                      name_phonetic = c("Joe Blogs", "Jo Bloggs"),
 #'                                      phonetisation_method = c("Can't spell", "Can't spell")), "json2")
 #' expect_snapshot_value(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
-#'                                      name_phonetic_variation = c("Joe Blogs", "Jo Bloggs"),
+#'                                      name_phonetic = c("Joe Blogs", "Jo Bloggs"),
 #'                                      phonetisation_method = c("Can't spell", "Can't spell"),
 #'                                      phonetic_name_pieces = 
 #'                                        list(PERSONAL_NAME_PIECES(name_piece_given = "Joe", 
@@ -707,10 +706,10 @@ PERSONAL_NAME_PIECES <- function(name_piece_prefix = character(),
 PERSONAL_NAME_STRUCTURE <- function(name_personal,
                                     name_type = character(),
                                     name_pieces = PERSONAL_NAME_PIECES(), 
-                                    name_phonetic_variation = character(),
+                                    name_phonetic = character(),
                                     phonetisation_method = character(),
                                     phonetic_name_pieces = list(),
-                                    name_romanised_variation = character(),
+                                    name_romanised = character(),
                                     romanisation_method = character(),
                                     romanised_name_pieces = list()) {
   
@@ -718,22 +717,22 @@ PERSONAL_NAME_STRUCTURE <- function(name_personal,
   
   validate_name_personal(name_personal, 1)
   validate_name_type(name_type, 1)
-  validate_name_phonetic_variation(name_phonetic_variation, 1000)
+  validate_name_phonetic(name_phonetic, 1000)
   validate_phonetisation_method(phonetisation_method, 1000)
-  validate_name_romanised_variation(name_romanised_variation, 1000)
+  validate_name_romanised(name_romanised, 1000)
   validate_romanisation_method(romanisation_method, 1000)
   
-  if (length(name_phonetic_variation) != length(phonetisation_method))
+  if (length(name_phonetic) != length(phonetisation_method))
     stop("Each phonetic variation requires a phonetisation method")
-  if (length(name_romanised_variation) != length(romanisation_method))
+  if (length(name_romanised) != length(romanisation_method))
     stop("Each romanised variation requires a romanisation method")
   
-  if (length(name_phonetic_variation) != length(phonetic_name_pieces) &
-      length(name_phonetic_variation) > 0 & length(phonetic_name_pieces) > 0)
+  if (length(name_phonetic) != length(phonetic_name_pieces) &
+      length(name_phonetic) > 0 & length(phonetic_name_pieces) > 0)
     stop("Each phonetic variation requires a set of phonetic name pieces (even if empty)")
   
-  if (length(name_romanised_variation) != length(romanised_name_pieces) &
-      length(name_romanised_variation) > 0 & length(romanised_name_pieces) > 0)
+  if (length(name_romanised) != length(romanised_name_pieces) &
+      length(name_romanised) > 0 & length(romanised_name_pieces) > 0)
     stop("Each romanised variation requires a set of romanised name pieces (even if empty)")
   
   temp <- dplyr::bind_rows(
@@ -742,19 +741,19 @@ PERSONAL_NAME_STRUCTURE <- function(name_personal,
     name_pieces %>% add_levels(1)
   )
   
-  for (i in seq_along(name_phonetic_variation)) {
+  for (i in seq_along(name_phonetic)) {
     temp <- dplyr::bind_rows(
       temp,
-      tibble::tibble(level = 1, tag = "FONE", value = name_phonetic_variation[i]),
+      tibble::tibble(level = 1, tag = "FONE", value = name_phonetic[i]),
       tibble::tibble(level = 2, tag = "TYPE", value = phonetisation_method[i])
     )
     if (length(phonetic_name_pieces) > 0)
       temp <- dplyr::bind_rows(temp, phonetic_name_pieces[[i]] %>% add_levels(2))
   }
-  for (i in seq_along(name_romanised_variation)) {
+  for (i in seq_along(name_romanised)) {
     temp <- dplyr::bind_rows(
      temp,
-     tibble::tibble(level = 1, tag = "ROMN", value = name_romanised_variation[i]),
+     tibble::tibble(level = 1, tag = "ROMN", value = name_romanised[i]),
      tibble::tibble(level = 2, tag = "TYPE", value = romanisation_method[i])
     )
     if (length(romanised_name_pieces) > 0)
@@ -775,22 +774,22 @@ PERSONAL_NAME_STRUCTURE <- function(name_personal,
 #' expect_error(PLACE_STRUCTURE())
 #' expect_error(PLACE_STRUCTURE("Here", place_latitude = "N51.5", place_longitude = "E0.0"))
 #' expect_error(PLACE_STRUCTURE("London", 
-#'                   place_phonetic_variation = c("Lundon", "Lundun")))
+#'                   place_phonetic = c("Lundon", "Lundun")))
 #' expect_error(PLACE_STRUCTURE("London", 
-#'                   place_phonetic_variation = c("Lundon", "Lundun"),
+#'                   place_phonetic = c("Lundon", "Lundun"),
 #'                   phonetisation_method = "English accent"))
 #' 
 #' expect_snapshot_value(PLACE_STRUCTURE("Greenwich", 
-#'                              place_phonetic_variation = c("Grenidge", "Grenich"),
+#'                              place_phonetic = c("Grenidge", "Grenich"),
 #'                              phonetisation_method = c("English accent", "English accent"),
 #'                              place_latitude = "N51.5",
 #'                              place_longitude = "E0.00"), "json2")
 #'                              
 #' @return A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file.
 PLACE_STRUCTURE <- function(place_name,
-                            place_phonetic_variation = character(),
+                            place_phonetic = character(),
                             phonetisation_method = character(),
-                            place_romanised_variation = character(),
+                            place_romanised = character(),
                             romanisation_method = character(),
                             place_latitude = character(),
                             place_longitude = character(),
@@ -799,31 +798,31 @@ PLACE_STRUCTURE <- function(place_name,
   if (length(place_name) == 0) return(tibble::tibble())
   
   validate_place_name(place_name, 1)
-  validate_place_phonetic_variation(place_phonetic_variation, 1000)
+  validate_place_phonetic(place_phonetic, 1000)
   validate_phonetisation_method(phonetisation_method, 1000)
-  validate_place_romanised_variation(place_romanised_variation, 1000)
+  validate_place_romanised(place_romanised, 1000)
   validate_romanisation_method(romanisation_method, 1000)
   validate_place_latitude(place_latitude, 1)
   validate_place_longitude(place_longitude, 1)
   
-  if (length(place_phonetic_variation) != length(phonetisation_method))
+  if (length(place_phonetic) != length(phonetisation_method))
     stop("Each phonetic variation requires a phonetic type")
-  if (length(place_romanised_variation) != length(romanisation_method))
+  if (length(place_romanised) != length(romanisation_method))
     stop("Each romanised variation requires a romanised type")
   
   temp <- tibble::tibble(level = 0, tag = "PLAC", value = place_name)
   
-  for (i in seq_along(place_phonetic_variation)) {
+  for (i in seq_along(place_phonetic)) {
     temp <- dplyr::bind_rows(
       temp,
-      tibble::tibble(level = 1, tag = "FONE", value = place_phonetic_variation[i]),
+      tibble::tibble(level = 1, tag = "FONE", value = place_phonetic[i]),
       tibble::tibble(level = 2, tag = "TYPE", value = phonetisation_method[i])
     )
   }
-  for (i in seq_along(place_romanised_variation)) {
+  for (i in seq_along(place_romanised)) {
     temp <- dplyr::bind_rows(
       temp,
-      tibble::tibble(level = 1, tag = "ROMN", value = place_romanised_variation[i]),
+      tibble::tibble(level = 1, tag = "ROMN", value = place_romanised[i]),
       tibble::tibble(level = 2, tag = "TYPE", value = romanisation_method[i])
     )
   }

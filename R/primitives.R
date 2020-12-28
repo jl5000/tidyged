@@ -229,6 +229,13 @@ validate_language_id <- function(input, max_dim) {
 }
 validate_language_of_text <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 15)
+  choices <- c("Afrikaans", "Albanian", "Anglo-Saxon", "Catalan", "Catalan_Spn", "Czech", 
+               "Danish", "Dutch", "English", "Esperanto", "Estonian", "Faroese", "Finnish", 
+               "French", "German", "Hawaiian", "Hungarian", "Icelandic", "Indonesian", 
+               "Italian", "Latvian", "Lithuanian", "Navaho", "Norwegian", "Polish", 
+               "Portuguese", "Romanian", "Serbo_Croa", "Slovak", "Slovene", "Spanish", 
+               "Swedish", "Turkish", "Wendic")
+  validate_input_choice(input, choices)
 }
 validate_multimedia_file_reference <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 259)
@@ -254,7 +261,7 @@ validate_name_of_source_data <- function(input, max_dim) {
 validate_name_personal <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
-validate_name_phonetic_variation <- function(input, max_dim) {
+validate_name_phonetic <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
 validate_name_piece <- function(input, max_dim) {
@@ -278,7 +285,7 @@ validate_name_piece_surname <- function(input, max_dim) {
 validate_name_piece_surname_prefix <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 30)
 }
-validate_name_romanised_variation <- function(input, max_dim) {
+validate_name_romanised <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
 validate_name_text <- function(input, max_dim) {
@@ -324,10 +331,10 @@ validate_place_longitude <- function(input, max_dim) {
 validate_place_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
-validate_place_phonetic_variation <- function(input, max_dim) {
+validate_place_phonetic <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
-validate_place_romanised_variation <- function(input, max_dim) {
+validate_place_romanised <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
 validate_place_text <- function(input, max_dim) {
@@ -402,9 +409,6 @@ validate_source_publication_facts <- function(input, max_dim) {
 }
 validate_submitter_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 60)
-}
-validate_submitter_registered_rfn <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 30)
 }
 validate_system_id <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 20)

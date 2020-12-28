@@ -12,7 +12,7 @@ remove_individual_name_var(gedcom, variation_name, phonetic_variation = TRUE)
 \item{variation_name}{The personal name variation to remove.}
 
 \item{phonetic_variation}{Whether the name variation is a phonetic variation
-(TRUE, default) or a romanized variation (FALSE).}
+(TRUE, default) or a romanised variation (FALSE).}
 }
 \value{
 An updated tidygedcom object with an Individual record excluding

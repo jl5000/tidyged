@@ -27,9 +27,9 @@ add_family_event(
   event_date = date_value(),
   event_cause = character(),
   place_name = character(),
-  place_phonetic_variation = character(),
+  place_phonetic = character(),
   phonetisation_method = character(),
-  place_romanised_variation = character(),
+  place_romanised = character(),
   romanisation_method = character(),
   place_latitude = character(),
   place_longitude = character(),
@@ -105,17 +105,17 @@ on a death certificate.}
 \item{place_name}{The jurisdictional name of the place where the event took place.
 Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."}
 
-\item{place_phonetic_variation}{A character vector of phonetic variations of the place name.}
+\item{place_phonetic}{A character vector of phonetic variations of the place name.}
 
 \item{phonetisation_method}{A character vector giving the method used in transforming the text to
 the corresponding phonetic variation. If this argument is used, it must be the same size
-as the place_phonetic_variation argument.}
+as the place_phonetic argument.}
 
-\item{place_romanised_variation}{A character vector of romanized variations of the place name.}
+\item{place_romanised}{A character vector of romanised variations of the place name.}
 
 \item{romanisation_method}{A character vector giving the method used in transforming the text to
-the corresponding romanized variation. If this argument is used, it must be the same size
-as the place_romanized_variation argument.}
+the corresponding romanised variation. If this argument is used, it must be the same size
+as the place_romanised argument.}
 
 \item{place_latitude}{The value specifying the latitudinal coordinate of the event place.
 The latitude coordinate is the direction North or South from the equator in degrees and

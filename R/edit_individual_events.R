@@ -22,14 +22,14 @@
 #' @param event_date A date_value() object giving the date of the event.
 #' @param place_name The jurisdictional name of the place where the event took place. 
 #' Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."
-#' @param place_phonetic_variation A character vector of phonetic variations of the place name.
+#' @param place_phonetic A character vector of phonetic variations of the place name.
 #' @param phonetisation_method A character vector giving the method used in transforming the text to 
 #' the corresponding phonetic variation. If this argument is used, it must be the same size
-#' as the place_phonetic_variation argument.
-#' @param place_romanised_variation A character vector of romanized variations of the place name. 
+#' as the place_phonetic argument.
+#' @param place_romanised A character vector of romanised variations of the place name. 
 #' @param romanisation_method A character vector giving the method used in transforming the text to 
-#' the corresponding romanized variation. If this argument is used, it must be the same size
-#' as the place_romanized_variation argument.
+#' the corresponding romanised variation. If this argument is used, it must be the same size
+#' as the place_romanised argument.
 #' @param place_latitude The value specifying the latitudinal coordinate of the event place. 
 #' The latitude coordinate is the direction North or South from the equator in degrees and 
 #' fraction of degrees carried out to give the desired accuracy. 
@@ -83,9 +83,9 @@ add_individual_event <- function(gedcom,
                                  age_at_event = character(),
                                  event_notes = character(),
                                  place_name = character(),
-                                 place_phonetic_variation = character(),
+                                 place_phonetic = character(),
                                  phonetisation_method = character(),
-                                 place_romanised_variation = character(),
+                                 place_romanised = character(),
                                  romanisation_method = character(),
                                  place_latitude = character(),
                                  place_longitude = character(),
@@ -130,9 +130,9 @@ add_individual_event <- function(gedcom,
   } else {
     
     event_place <- PLACE_STRUCTURE(place_name = place_name,
-                                   place_phonetic_variation = place_phonetic_variation,
+                                   place_phonetic = place_phonetic,
                                    phonetisation_method = phonetisation_method,
-                                   place_romanised_variation = place_romanised_variation,
+                                   place_romanised = place_romanised,
                                    romanisation_method = romanisation_method,
                                    place_latitude = place_latitude,
                                    place_longitude = place_longitude,

@@ -14,7 +14,7 @@ CHILD_TO_FAMILY_LINK(
 \item{xref_fam}{An xref ID of a family group record.}
 
 \item{pedigree_linkage_type}{A code used to indicate the child to family relationship for pedigree navigation
-purposes.}
+purposes. One of "birth", "adopted", "foster".}
 
 \item{notes}{A list of NOTE_STRUCTURE() objects.}
 }

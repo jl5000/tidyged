@@ -20,7 +20,7 @@ EVENT_DETAIL(
 \arguments{
 \item{event_or_fact_classification}{A descriptive word or phrase used to further classify the parent
 event or attribute tag. This should be used whenever either of the generic EVEN or FACT tags are used.
-The value of this primative is responsible for classifying the generic event or fact being cited.}
+The value of this primitive is responsible for classifying the generic event or fact being cited.}
 
 \item{date}{A date_value() object giving the date of the event.}
 

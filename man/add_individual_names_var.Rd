@@ -31,7 +31,7 @@ regex pattern to match to existing names.}
 \item{type}{Indicates the method used in transforming the text to the variation.}
 
 \item{phonetic_variation}{Whether the name variation is a phonetic variation
-(TRUE, default) or a romanized variation (FALSE).}
+(TRUE, default) or a romanised variation (FALSE).}
 
 \item{prefix}{The name prefix, e.g. Cmdr.}
 

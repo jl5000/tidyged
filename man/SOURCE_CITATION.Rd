@@ -19,12 +19,12 @@ SOURCE_CITATION(
 \arguments{
 \item{xref_sour}{An xref ID of a source record.}
 
-\item{where_within_source}{Specific location with in the information referenced.}
+\item{where_within_source}{Specific location within the information referenced.}
 
 \item{event_type_cited_from}{A code that indicates the type of event which was responsible for the
 source entry being recorded. For example, if the entry was created to record a birth of a child,
 then the type would be BIRT regardless of the assertions made from that record, such as the mother's
-name or mother's birth date. This will allow a prioritized best view choice and a determination of
+name or mother's birth date. This will allow a prioritised best view choice and a determination of
 the certainty associated with the source used in asserting the cited fact.}
 
 \item{role_in_event}{Indicates what role this person played in the event that is being cited in this context.}

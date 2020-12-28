@@ -27,7 +27,8 @@ INDIVIDUAL_RECORD(
 
 \item{names}{A list of PERSONAL_NAME_STRUCTURE() objects giving the names associated with this individual.}
 
-\item{sex_value}{A code that indicates the sex of the individual.}
+\item{sex_value}{A code that indicates the sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
+"X" (intersex), or "N" (not recorded).}
 
 \item{events}{A list of INDIVIDUAL_EVENT_STRUCTURE() objects giving the events associated with
 this individual.}

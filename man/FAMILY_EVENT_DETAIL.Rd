@@ -13,11 +13,19 @@ FAMILY_EVENT_DETAIL(
 \arguments{
 \item{husband_age_at_event}{A string that indicates the age in years, months, and days that the
 principal was at the time of the associated event. Any labels must come after their
-corresponding number, for example; 4y 8m 10d.}
+corresponding number, for example; 4y 8m 10d.
+The line value should be normalised; it should for example not specify 2y 13m, but 3y 1m
+instead. Number of days is allowed to be 365 because of leap years.
+The YYY, MM and DDD values must not be zero; if a value equals zero, that part is left off.
+The values may not contain leading zeroes either.}
 
 \item{wife_age_at_event}{A string that indicates the age in years, months, and days that the
 principal was at the time of the associated event. Any labels must come after their
-corresponding number, for example; 4y 8m 10d.}
+corresponding number, for example; 4y 8m 10d.
+The line value should be normalised; it should for example not specify 2y 13m, but 3y 1m
+instead. Number of days is allowed to be 365 because of leap years.
+The YYY, MM and DDD values must not be zero; if a value equals zero, that part is left off.
+The values may not contain leading zeroes either.}
 
 \item{event_details}{An EVENT_DETAIL() object giving details of the event.}
 }

@@ -11,7 +11,7 @@ LINEAGE_LINKED_HEADER_EXTENSION(
   name_of_business = "Jamie Lendrum",
   business_address = ADDRESS_STRUCTURE(address_email = "jalendrum@gmail.com"),
   name_of_source_data = character(),
-  publication_date_source_data = date_exact(),
+  publication_date = date_exact(),
   copyright_source_data = character(),
   receiving_system_name = character(),
   file_creation_date = date_exact(),
@@ -40,7 +40,7 @@ It is defined and changed by the creators of the product.}
 this file. For example, the data may have been obtained from a CD-ROM disc that was named
 "U.S. 1880 CENSUS CD-ROM vol. 13."}
 
-\item{publication_date_source_data}{A date_exact() object giving the date this source was published or created.}
+\item{publication_date}{A date_exact() object giving the date this source was published or created.}
 
 \item{copyright_source_data}{A copyright statement required by the owner of data from
 which this information was downloaded.}

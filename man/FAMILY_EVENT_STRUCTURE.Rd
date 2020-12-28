@@ -11,7 +11,8 @@ FAMILY_EVENT_STRUCTURE(
 )
 }
 \arguments{
-\item{event_type_family}{A code used to indicate the type of family event.}
+\item{event_type_family}{A code used to indicate the type of family event. One of:
+"ANUL", "CENS", "DIV", "DIVF", "ENGA", "MARB", "MARC", "MARR", "MARL", "MARS", "RESI", "EVEN".}
 
 \item{event_descriptor}{Text describing a particular event pertaining to the individual or family.
 This event value is usually assigned to the EVEN tag. The classification as to the difference

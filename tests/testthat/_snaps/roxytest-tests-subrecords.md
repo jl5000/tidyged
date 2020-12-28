@@ -78,7 +78,7 @@
       ]
     }
 
-# Function ADDRESS_STRUCTURE() @ L131
+# Function ADDRESS_STRUCTURE() @ L130
 
     {
       "type": "list",
@@ -238,7 +238,7 @@
       ]
     }
 
-# Function ASSOCIATION_STRUCTURE() @ L204
+# Function ASSOCIATION_STRUCTURE() @ L203
 
     {
       "type": "list",
@@ -318,7 +318,7 @@
       ]
     }
 
-# Function CHANGE_DATE() @ L239
+# Function CHANGE_DATE() @ L238
 
     {
       "type": "list",
@@ -438,7 +438,7 @@
       ]
     }
 
-# Function CHILD_TO_FAMILY_LINK() @ L273
+# Function CHILD_TO_FAMILY_LINK() @ L272
 
     {
       "type": "list",
@@ -518,7 +518,7 @@
       ]
     }
 
-# Function EVENT_DETAIL() @ L307
+# Function EVENT_DETAIL() @ L306
 
     {
       "type": "list",
@@ -638,7 +638,7 @@
       ]
     }
 
-# Function FAMILY_EVENT_DETAIL() @ L354
+# Function FAMILY_EVENT_DETAIL() @ L353
 
     {
       "type": "list",
@@ -758,7 +758,7 @@
       ]
     }
 
-# Function FAMILY_EVENT_STRUCTURE() @ L398
+# Function FAMILY_EVENT_STRUCTURE() @ L397
 
     {
       "type": "list",
@@ -918,7 +918,7 @@
       ]
     }
 
-# Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L439
+# Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L438
 
     {
       "type": "list",
@@ -998,7 +998,7 @@
       ]
     }
 
-# Function INDIVIDUAL_EVENT_DETAIL() @ L494
+# Function INDIVIDUAL_EVENT_DETAIL() @ L493
 
     {
       "type": "list",
@@ -1038,7 +1038,7 @@
       ]
     }
 
-# Function INDIVIDUAL_EVENT_STRUCTURE() @ L528
+# Function INDIVIDUAL_EVENT_STRUCTURE() @ L527
 
     {
       "type": "list",
@@ -1198,7 +1198,7 @@
       ]
     }
 
-# Function NOTE_STRUCTURE() @ L596
+# Function NOTE_STRUCTURE() @ L595
 
     {
       "type": "list",
@@ -1278,7 +1278,7 @@
       ]
     }
 
-# Function PERSONAL_NAME_PIECES() @ L637
+# Function PERSONAL_NAME_PIECES() @ L636
 
     {
       "type": "list",
@@ -1358,7 +1358,7 @@
       ]
     }
 
-# Function PERSONAL_NAME_STRUCTURE() @ L707
+# Function PERSONAL_NAME_STRUCTURE() @ L706
 
     {
       "type": "list",
@@ -1478,7 +1478,7 @@
       ]
     }
 
-# Function PLACE_STRUCTURE() @ L790
+# Function PLACE_STRUCTURE() @ L789
 
     {
       "type": "list",
@@ -1518,7 +1518,7 @@
       ]
     }
 
-# Function SOURCE_CITATION() @ L863
+# Function SOURCE_CITATION() @ L862
 
     {
       "type": "list",
@@ -1678,7 +1678,7 @@
       ]
     }
 
-# Function SOURCE_REPOSITORY_CITATION() @ L918
+# Function SOURCE_REPOSITORY_CITATION() @ L917
 
     {
       "type": "list",
@@ -1718,7 +1718,7 @@
       ]
     }
 
-# Function SPOUSE_TO_FAMILY_LINK() @ L948
+# Function SPOUSE_TO_FAMILY_LINK() @ L947
 
     {
       "type": "list",

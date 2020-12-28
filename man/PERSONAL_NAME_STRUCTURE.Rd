@@ -8,16 +8,17 @@ PERSONAL_NAME_STRUCTURE(
   name_personal,
   name_type = character(),
   name_pieces = PERSONAL_NAME_PIECES(),
-  name_phonetic_variation = character(),
+  name_phonetic = character(),
   phonetisation_method = character(),
   phonetic_name_pieces = list(),
-  name_romanised_variation = character(),
+  name_romanised = character(),
   romanisation_method = character(),
   romanised_name_pieces = list()
 )
 }
 \arguments{
-\item{name_personal}{The surname of an individual, if known, is enclosed between two slash (/) characters.
+\item{name_personal}{The full name formed in the manner the name is normally spoken.
+The surname of an individual, if known, is enclosed between two slash (/) characters.
 The order of the name parts should be the order that the person would, by custom of their culture,
 have used when giving it to a recorder.}
 
@@ -25,14 +26,14 @@ have used when giving it to a recorder.}
 
 \item{name_pieces}{A PERSONAL_NAME_PIECES() object giving the components of the name.}
 
-\item{name_phonetic_variation}{A character vector of phonetic variations of the name.}
+\item{name_phonetic}{A character vector of phonetic variations of the full name.}
 
 \item{phonetisation_method}{Indicates the method used in transforming the text to the phonetic variation.}
 
 \item{phonetic_name_pieces}{A list of PERSONAL_NAME_PIECES() objects giving the components
 of the phonetic name variations.}
 
-\item{name_romanised_variation}{A character vector giving romanised variations of the name.}
+\item{name_romanised}{A character vector giving romanised variations of the name.}
 
 \item{romanisation_method}{Indicates the method used in transforming the text to a romanised variation.}
 

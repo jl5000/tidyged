@@ -54,7 +54,8 @@ the title of the larger work or series of which it is a part.}
 \item{source_filed_by_entry}{This entry is to provide a short title used for sorting, filing,
 and retrieving source records.}
 
-\item{source_publication_facts}{When and where the record was created.}
+\item{source_publication_facts}{When and where the record was created. For published works,
+this includes information such as the city of publication, name of the publisher, and year of publication.}
 
 \item{text_from_source}{A verbatim copy of any description contained within the source.
 This indicates notes or text that are actually contained in the source document, not the submitter's

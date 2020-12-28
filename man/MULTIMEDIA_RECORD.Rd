@@ -27,10 +27,13 @@ data may be obtained.}
 
 \item{multimedia_format}{Indicates the format of the multimedia data associated with the specific
 GEDCOM context. This allows processors to determine whether they can process the data object.
-Any linked files should contain the data required, in the indicated format, to process the file data.}
+Any linked files should contain the data required, in the indicated format, to process the file data. One of:
+"AAC", "AVI", "BMP", "ePub", "FLAC", "GIF", "JPEG", "JPG", "MKV", "mobi", "MP3", "PCX", "PDF", "PNG", "TIFF",
+"TIF", "WAV".}
 
 \item{source_media_type}{A media classification code that indicates the type of material in which
-the referenced source is stored.}
+the referenced source is stored. One of: "audio", "book", "card", "electronic", "fiche", "film",
+"magazine", "manuscript", "map", "newspaper", "photo", "tombstone", "video".}
 
 \item{descriptive_title}{The title of a work, record, item, or object.}
 

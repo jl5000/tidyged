@@ -35,7 +35,9 @@ simpsons <- gedcom(subm("Me")) %>%
 dplyr::filter(simpsons, tag %in% c("INDI", "NOTE"))
 ```
 
-In some records it is necessary to provide xrefs to link to other records, for example the family group record requires xrefs of the husband, wife, and/or children. It can be tedious to have to manually look up these xrefs, and so tidygedcom allows the user to instead enter an expression uniquely identifying these records:
+Note the unique xrefs in the record column.
+
+In some records it is necessary to provide xrefs to link to other records, for example the Family Group record requires xrefs of the husband, wife, and/or children. It can be tedious to have to manually look up these xrefs, and so tidygedcom allows the user to instead enter an expression uniquely identifying these records:
 
 ```{r}
 simpsons %>% 
@@ -51,7 +53,7 @@ If no match or more than one match is found, it will result in an error:
 simpsons %>% 
   add_family_group(husband = "Simpson", wife = "Marge", children = c("Bart", "Lisa")) 
 ```
-This functionality can be found when referencing all records, except the family group record. The following attributes are used to uniquely identify these records:
+This functionality can be found when referencing all records, except the Family Group record (where an xref must be provided). The following attributes are used to uniquely identify these records:
 
 * Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);
 * Multimedia: File reference (FILE);
@@ -61,7 +63,7 @@ This functionality can be found when referencing all records, except the family 
 
 ## Family links
 
-The `tidygedcom` package seeks to make cross-referencing as painless and automated as possible. When adding a family group record, as well as creating the record, it will also create the relevant links to the family group in the individual record for each member of the family:
+The `tidygedcom` package seeks to make cross-referencing as painless and automated as possible. When adding a Family Group record, as well as creating the record, it will also create the relevant links to the family group in the Individual record for each member of the family:
 
 ```{r}
 simpsons_fam <- simpsons %>% 
@@ -70,7 +72,9 @@ simpsons_fam <- simpsons %>%
 dplyr::filter(simpsons_fam, tag %in% c("FAMS", "FAMC"))
 ```
 
-If the family group is subsequently removed, then these links will also be removed:
+The lines above show particular lines in the Individual records where they are linked to the Family Group record either as a spouse (FAMS) or as a child (FAMC).
+
+If the Family Group record is subsequently removed, then these links will also be removed:
 
 ```{r}
 simpsons_no_fam <- simpsons_fam %>% 
@@ -83,9 +87,9 @@ waldo::compare(simpsons, simpsons_no_fam, ignore_attr = TRUE)
 
 
 
-Similarly, when removing an individual record, all associations with the individual will be removed in other individual records.
+Similarly, when removing an Individual record, all associations with the individual will be removed in other individual records.
 
-When removing a family group, the user also has the option of removing all trace of the individuals within the family group as well:
+When removing a Family Group record, the user also has the option of removing all trace of the individuals within the family group as well:
 
 ```{r}
 simpsons_no_fam_purge <- simpsons_fam %>% 
@@ -94,7 +98,15 @@ simpsons_no_fam_purge <- simpsons_fam %>%
 str(simpsons_no_fam_purge)
 ```
 
+Note that as well as having no families defined, we also now have no individuals.
+
 ## Shared events
+
+Genealogy is often about extracting as much useful information from sources as possible. For example, census information can be enormously useful in finding information on both families and individuals, such as names, ages, occupations, etc.
+
+These sources of information are usually produced as a result of important events, and there are specific data structures in the GEDCOM specification for individual events and family events. For the most part this makes sense, however family events can be problematic at times to properly represent and cite as evidence.
+
+An example of this is marriage events. These are classified as family events and are stored within relevant family group records. However, when taking an individual-centric view of GEDCOM files (i.e. looking at individual records), these marriages will not be recorded, missing vital information in an individual's life. This is problematic if using the 
 
 Functionality to come...
 

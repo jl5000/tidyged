@@ -2,7 +2,7 @@
 
 context("File R/edit_multimedia.R: @tests")
 
-test_that("Function remove_multimedia() @ L73", {
+test_that("Function remove_multimedia() @ L70", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) %>% 
                add_multimedia("test", "BMP") %>% 

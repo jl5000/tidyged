@@ -19,20 +19,17 @@ add_multimedia(
 \arguments{
 \item{gedcom}{A tidygedcom object.}
 
-\item{file_reference}{A character vector of references for the files, typically a filepath or URL.}
+\item{file_reference}{A reference for the file, typically a filepath or URL.}
 
-\item{format}{A character vector indicating the format of each multimedia file.
+\item{format}{A string indicating the format of the multimedia file.
 Currently limited to one of: "AAC", "AVI", "BMP", "ePub", "FLAC", "GIF", "JPEG", "JPG",
-"MKV", "mobi", "MP3", "PCX", "PDF", "PNG", "TIFF", "TIF", "WAV".
-A format must be defined for each file reference given.}
+"MKV", "mobi", "MP3", "PCX", "PDF", "PNG", "TIFF", "TIF", "WAV".}
 
 \item{source_media}{A code that indicates the type of material in which the referenced
 source is stored. Must be one of: audio, book, card, electronic, fiche, film, magazine,
-manuscript, map, newspaper, photo, tombstone, video. If this is defined, it must be a character
-vector the same size as file_reference and format.}
+manuscript, map, newspaper, photo, tombstone, video.}
 
-\item{title}{The title of the multimedia file(s). If this is defined, it must be a character
-vector the same size as file_reference and format.}
+\item{title}{The title of the multimedia file.}
 
 \item{user_reference_number}{A user-defined number or text that the submitter uses to identify
 this record. See the Gedcom 5.5.5 Specification for more details.}

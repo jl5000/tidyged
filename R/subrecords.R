@@ -569,6 +569,8 @@ INDIVIDUAL_EVENT_STRUCTURE <- function(event_type_individual,
 #' @tests
 #' expect_error(MULTIMEDIA_LINK("ref"))
 #' expect_equal(MULTIMEDIA_LINK(character()), tibble::tibble())
+#' expect_equal(MULTIMEDIA_LINK("@M1@"),
+#'       tibble::tibble(level = 0, tag = "OBJE", value = "@M1@"))
 #' @return A tidy tibble containing the MULTIMEDIA_LINK part of a GEDCOM file.
 MULTIMEDIA_LINK <- function(xref_obje) {
   
@@ -686,6 +688,16 @@ PERSONAL_NAME_PIECES <- function(name_piece_prefix = character(),
 #'                           phonetisation_method = c("Can't spell", "Can't spell"),
 #'                           phonetic_name_pieces = list(PERSONAL_NAME_PIECES(name_piece_given = "Joe", 
 #'                                                                            name_piece_surname = "Blogs"))))
+#' expect_error(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
+#'                           name_romanised = c("Joe Blogs", "Jo Bloggs")))
+#' expect_error(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
+#'                           name_romanised = c("Joe Blogs", "Jo Bloggs"),
+#'                           romanisation_method = "Can't spell"))
+#' expect_error(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
+#'                           name_romanised = c("Joe Blogs", "Jo Bloggs"),
+#'                           romanisation_method = c("Can't spell", "Can't spell"),
+#'                           romanised_name_pieces = list(PERSONAL_NAME_PIECES(name_piece_given = "Joe", 
+#'                                                                            name_piece_surname = "Blogs"))))
 #' expect_equal(PERSONAL_NAME_STRUCTURE(character()), tibble::tibble())  
 #'                                                                                                                                                      
 #' expect_snapshot_value(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/", 
@@ -779,13 +791,19 @@ PERSONAL_NAME_STRUCTURE <- function(name_personal,
 #' expect_error(PLACE_STRUCTURE("London", 
 #'                   place_phonetic = c("Lundon", "Lundun"),
 #'                   phonetisation_method = "English accent"))
-#' 
+#' expect_error(PLACE_STRUCTURE("London", 
+#'                   place_romanised = c("Lundon", "Lundun"),
+#'                   romanisation_method = "English accent"))
 #' expect_snapshot_value(PLACE_STRUCTURE("Greenwich", 
 #'                              place_phonetic = c("Grenidge", "Grenich"),
 #'                              phonetisation_method = c("English accent", "English accent"),
 #'                              place_latitude = "N51.5",
 #'                              place_longitude = "E0.00"), "json2")
-#'                              
+#' expect_snapshot_value(PLACE_STRUCTURE("Greenwich", 
+#'                              place_romanised = c("Grenidge", "Grenich"),
+#'                              romanisation_method = c("English accent", "English accent"),
+#'                              place_latitude = "N51.5",
+#'                              place_longitude = "E0.00"), "json2")                             
 #' @return A tidy tibble containing the PLACE_STRUCTURE part of a GEDCOM file.
 PLACE_STRUCTURE <- function(place_name,
                             place_phonetic = character(),

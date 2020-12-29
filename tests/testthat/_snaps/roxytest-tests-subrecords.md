@@ -1198,7 +1198,7 @@
       ]
     }
 
-# Function NOTE_STRUCTURE() @ L596
+# Function NOTE_STRUCTURE() @ L598
 
     {
       "type": "list",
@@ -1278,7 +1278,7 @@
       ]
     }
 
-# Function PERSONAL_NAME_PIECES() @ L637
+# Function PERSONAL_NAME_PIECES() @ L639
 
     {
       "type": "list",
@@ -1358,7 +1358,7 @@
       ]
     }
 
-# Function PERSONAL_NAME_STRUCTURE() @ L707
+# Function PERSONAL_NAME_STRUCTURE() @ L719
 
     {
       "type": "list",
@@ -1478,7 +1478,7 @@
       ]
     }
 
-# Function PLACE_STRUCTURE() @ L790
+# Function PLACE_STRUCTURE() @ L808
 
     {
       "type": "list",
@@ -1518,7 +1518,47 @@
       ]
     }
 
-# Function SOURCE_CITATION() @ L863
+---
+
+    {
+      "type": "list",
+      "attributes": {
+        "names": {
+          "type": "character",
+          "attributes": {},
+          "value": ["level", "tag", "value"]
+        },
+        "row.names": {
+          "type": "integer",
+          "attributes": {},
+          "value": [1, 2, 3, 4, 5, 6, 7, 8]
+        },
+        "class": {
+          "type": "character",
+          "attributes": {},
+          "value": ["tbl_df", "tbl", "data.frame"]
+        }
+      },
+      "value": [
+        {
+          "type": "double",
+          "attributes": {},
+          "value": [0, 1, 2, 1, 2, 1, 2, 2]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["PLAC", "ROMN", "TYPE", "ROMN", "TYPE", "MAP", "LATI", "LONG"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
+          "value": ["Greenwich", "Grenidge", "English accent", "Grenich", "English accent", "", "N51.5", "E0.00"]
+        }
+      ]
+    }
+
+# Function SOURCE_CITATION() @ L881
 
     {
       "type": "list",
@@ -1678,7 +1718,7 @@
       ]
     }
 
-# Function SOURCE_REPOSITORY_CITATION() @ L918
+# Function SOURCE_REPOSITORY_CITATION() @ L936
 
     {
       "type": "list",
@@ -1718,7 +1758,7 @@
       ]
     }
 
-# Function SPOUSE_TO_FAMILY_LINK() @ L948
+# Function SPOUSE_TO_FAMILY_LINK() @ L966
 
     {
       "type": "list",

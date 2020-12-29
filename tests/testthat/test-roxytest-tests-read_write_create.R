@@ -51,7 +51,7 @@ test_that("Function update_header_with_filename() @ L184", {
 })
 
 
-test_that("Function split_gedcom_values() @ L217", {
+test_that("Function split_gedcom_values() @ L216", {
   expect_snapshot_value(
                   gedcom(subm("Me")) %>% 
                     add_source(title = paste(rep("a", 4095), collapse = "")) %>%

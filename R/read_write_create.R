@@ -206,7 +206,6 @@ update_header_with_filename <- function(gedcom, filename) {
 #'
 #' @param gedcom A tidygedcom object.
 #' @param char_limit Maximum string length of values.
-#' @tests
 #' @return A tidygedcom object in the GEDCOM grammar ready to export.
 #' @tests
 #' expect_snapshot_value(

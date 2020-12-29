@@ -1,4 +1,12 @@
 
+#' Define parameters in GEDCOM 5.5.5 specification
+#' 
+#' Define all primitives used in GEDCOM records and subrecords.
+#' 
+#' @details This NULL function serves as a single location where all primitives are defined, mainly for
+#' efficiency and maintainability. The first values defined are given earlier in the specification and not
+#' with the rest of the primitives.
+#' 
 #' @param character_encoding A code value that represents the character set and encoding to be used to 
 #' interpret this data. Allowed values: "UTF-8" and "UNICODE" (UTF-16).
 #' @param gedcom_form A value that identifies the GEDCOM form used in this GEDCOM file. The value must be

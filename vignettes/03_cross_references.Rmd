@@ -1,0 +1,102 @@
+---
+title: "Cross references and automation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Cross references and automation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Cross references
+
+GEDCOM records are given unique identifiers known as xrefs (cross-references) to allow other records to link to them. These are alphanumeric strings surrounded by ampersands. The `tidygedcom` package creates these xrefs automatically:
+
+```{r}
+library(tidygedcom)
+
+simpsons <- gedcom(subm("Me")) %>% 
+  add_individual(sex = "M") %>% 
+  add_individual_names("Homer Simpson") %>% 
+  add_individual(sex = "F") %>% 
+  add_individual_names("Marge Simpson") %>%  
+  add_individual(sex = "F") %>% 
+  add_individual_names("Lisa Simpson") %>% 
+  add_individual(sex = "M") %>% 
+  add_individual_names("Bart Simpson") %>%  
+  add_note("These records have not yet been joined in a family group record")
+
+dplyr::filter(simpsons, tag %in% c("INDI", "NOTE"))
+```
+
+In some records it is necessary to provide xrefs to link to other records, for example the family group record requires xrefs of the husband, wife, and/or children. It can be tedious to have to manually look up these xrefs, and so tidygedcom allows the user to instead enter an expression uniquely identifying these records:
+
+```{r}
+simpsons %>% 
+  add_family_group(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa")) %>% 
+  dplyr::filter(record == "@F1@")
+```
+
+Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record).
+
+If no match or more than one match is found, it will result in an error:
+
+```{r, error = TRUE}
+simpsons %>% 
+  add_family_group(husband = "Simpson", wife = "Marge", children = c("Bart", "Lisa")) 
+```
+This functionality can be found when referencing all records, except the family group record. The following attributes are used to uniquely identify these records:
+
+* Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);
+* Multimedia: File reference (FILE);
+* Note: User text (NOTE);
+* Source: Title (TITL);
+* Repository: Name (NAME).
+
+## Family links
+
+The `tidygedcom` package seeks to make cross-referencing as painless and automated as possible. When adding a family group record, as well as creating the record, it will also create the relevant links to the family group in the individual record for each member of the family:
+
+```{r}
+simpsons_fam <- simpsons %>% 
+  add_family_group(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa")) 
+
+dplyr::filter(simpsons_fam, tag %in% c("FAMS", "FAMC"))
+```
+
+If the family group is subsequently removed, then these links will also be removed:
+
+```{r}
+simpsons_no_fam <- simpsons_fam %>% 
+  remove_family_group() 
+
+dplyr::filter(simpsons_no_fam, tag %in% c("FAMS", "FAMC"))
+
+waldo::compare(simpsons, simpsons_no_fam, ignore_attr = TRUE)
+```
+
+
+
+Similarly, when removing an individual record, all associations with the individual will be removed in other individual records.
+
+When removing a family group, the user also has the option of removing all trace of the individuals within the family group as well:
+
+```{r}
+simpsons_no_fam_purge <- simpsons_fam %>% 
+  remove_family_group(remove_individuals = TRUE) 
+
+str(simpsons_no_fam_purge)
+```
+
+## Shared events
+
+Functionality to come...
+
+
+

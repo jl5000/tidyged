@@ -26,5 +26,7 @@ Imports:
 Suggests: 
     testthat,
     roxytest,
-    rmarkdown
+    rmarkdown,
+    knitr
 Config/testthat/edition: 3
+VignetteBuilder: knitr

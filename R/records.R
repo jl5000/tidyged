@@ -70,6 +70,17 @@ GEDCOM_HEADER <- function(character_encoding = "UTF-8",
 #'                              1, "@F1@", "CHAN",                     "",
 #'                              2, "@F1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
+#' expect_equal(FAMILY_GROUP_RECORD("@F1@", user_reference_number = c(123, 456),
+#'                                  user_reference_type = c("type1", "type2")),
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
+#'                              0, "@F1@", "FAM",                      "",
+#'                              1, "@F1@", "REFN",   "123",
+#'                              2, "@F1@", "TYPE",   "type1",
+#'                              1, "@F1@", "REFN",   "456",
+#'                              2, "@F1@", "TYPE",   "type2",
+#'                              1, "@F1@", "CHAN",                     "",
+#'                              2, "@F1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+#'              ))
 #' @return A tidy tibble containing a FAMILY_GROUP_RECORD part of a GEDCOM file.
 FAMILY_GROUP_RECORD <- function(xref_fam,
                                 events = list(),
@@ -234,6 +245,17 @@ INDIVIDUAL_RECORD <- function(xref_indi,
 #'                              1, "@M1@", "CHAN",                      "",
 #'                              2, "@M1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
+#' expect_equal(MULTIMEDIA_RECORD("@M1@", "file_ref", "JPG",
+#'                                user_reference_number = 123, user_reference_type = "type"),
+#'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
+#'                              0, "@M1@", "OBJE",                      "",
+#'                              1, "@M1@", "FILE",              "file_ref",
+#'                              2, "@M1@", "FORM",                   "JPG",
+#'                              1, "@M1@", "REFN",                   "123",
+#'                              2, "@M1@", "TYPE",                   "type",
+#'                              1, "@M1@", "CHAN",                      "",
+#'                              2, "@M1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
+#'              ))
 #' @return A tidy tibble containing a MULTIMEDIA_RECORD part of a GEDCOM file.
 MULTIMEDIA_RECORD <- function(xref_obje,
                               multimedia_file_reference,
@@ -250,41 +272,25 @@ MULTIMEDIA_RECORD <- function(xref_obje,
   multimedia_file_reference <- as.character(multimedia_file_reference)
   user_reference_number <- as.character(user_reference_number)
   
-  if (length(multimedia_file_reference) != length(multimedia_format))
-    stop("Each file reference requires a media format")
-  
-  if (length(source_media_type) > 0 & length(source_media_type) != length(multimedia_file_reference))
-    stop("The number of media types must be the same as the number of file references")
-  
-  if (length(descriptive_title) > 0 & length(descriptive_title) != length(multimedia_file_reference))
-    stop("The number of desciptive titles must be the same as the number of file references")
-  
   if (length(user_reference_type) > 0 & length(user_reference_type) != length(user_reference_number))
     stop("The number of user reference types must be the same as the number of user reference numbers")
   
   validate_xref(xref_obje, 1)
-  validate_multimedia_file_reference(multimedia_file_reference, 1000)
-  validate_multimedia_format(multimedia_format, 1000)
-  validate_source_media_type(source_media_type, 1000)
-  validate_descriptive_title(descriptive_title, 1000)
+  validate_multimedia_file_reference(multimedia_file_reference, 1)
+  validate_multimedia_format(multimedia_format, 1)
+  validate_source_media_type(source_media_type, 1)
+  validate_descriptive_title(descriptive_title, 1)
   validate_user_reference_number(user_reference_number, 1000)
   validate_user_reference_type(user_reference_type, 1000)
   validate_automated_record_id(automated_record_id, 1)
   
-  temp <- tibble::tibble(level = 0, record = xref_obje, tag = "OBJE", value = "") 
-    
-  for (i in seq_along(multimedia_file_reference)) {
-    temp <- dplyr::bind_rows(temp,
-                             tibble::tibble(level = 1, tag = "FILE", value = multimedia_file_reference[i]),
-                             tibble::tibble(level = 2, tag = "FORM", value = multimedia_format[i]))
-    
-    if (length(source_media_type) > 0 )
-      temp <- dplyr::bind_rows(temp,
-                               tibble::tibble(level = 3, tag = "TYPE", value = source_media_type[i]))
-    if (length(descriptive_title) > 0 )
-      temp <- dplyr::bind_rows(temp,
-                               tibble::tibble(level = 2, tag = "TITL", value = descriptive_title[i]))
-  }
+  temp <- dplyr::bind_rows(
+       tibble::tibble(level = 0, record = xref_obje, tag = "OBJE", value = ""),
+       tibble::tibble(level = 1, tag = "FILE", value = multimedia_file_reference),
+       tibble::tibble(level = 2, tag = "FORM", value = multimedia_format),
+       tibble::tibble(level = 3, tag = "TYPE", value = source_media_type),
+       tibble::tibble(level = 2, tag = "TITL", value = descriptive_title)
+       )
     
   for (i in seq_along(user_reference_number)) {
     temp <- dplyr::bind_rows(temp,
@@ -316,9 +322,11 @@ MULTIMEDIA_RECORD <- function(xref_obje,
 #' @tests
 #' expect_error(NOTE_RECORD("@N1@", "This is a note",
 #'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
-#' expect_equal(NOTE_RECORD("@N1@", "This is a note"),
+#' expect_equal(NOTE_RECORD("@N1@", "This is a note", 123, "type"),
 #'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@N1@", "NOTE",        "This is a note",
+#'                              1, "@N1@", "REFN",        "123",
+#'                              2, "@N1@", "TYPE",        "type",
 #'                              1, "@N1@", "CHAN",                      "",
 #'                              2, "@N1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
@@ -374,10 +382,13 @@ NOTE_RECORD <- function(xref_note,
 #' @tests
 #' expect_error(REPOSITORY_RECORD("@R1@", "Repo name",
 #'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
-#' expect_equal(REPOSITORY_RECORD("@R1@", "Repo name"),
+#' expect_equal(REPOSITORY_RECORD("@R1@", "Repo name",
+#'                                user_reference_number = 123, user_reference_type = "type"),
 #'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@R1@", "REPO",                      "",
 #'                              1, "@R1@", "NAME",             "Repo name",
+#'                              1, "@R1@", "REFN",             "123",
+#'                              2, "@R1@", "TYPE",             "type",
 #'                              1, "@R1@", "CHAN",                      "",
 #'                              2, "@R1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))
@@ -437,9 +448,11 @@ REPOSITORY_RECORD <- function(xref_repo,
 #' @tests
 #' expect_error(SOURCE_RECORD("@S1@",
 #'                            user_reference_number = 123:125, user_reference_type = letters[1:2]))
-#' expect_equal(SOURCE_RECORD("@S1@"),
+#' expect_equal(SOURCE_RECORD("@S1@", user_reference_number = 234, user_reference_type = "type"),
 #'              tibble::tribble(~level,  ~record,   ~tag,                  ~value,
 #'                              0, "@S1@", "SOUR",                      "",
+#'                              1, "@S1@", "REFN",                      "234",
+#'                              2, "@S1@", "TYPE",                      "type",
 #'                              1, "@S1@", "CHAN",                      "",
 #'                              2, "@S1@", "DATE", toupper(format(Sys.Date(), "%d %b %Y"))
 #'              ))

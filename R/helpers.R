@@ -241,3 +241,15 @@ remove_dates_for_tests <- function(gedcom) {
     dplyr::filter(!(level == 1 & record == "HD" & tag == "DATE"))
   
 }
+
+remove_context_from_tests <- function() {
+  
+  files <- list.files("tests/testthat", "^test-.+.R$", full.names = TRUE)
+  
+  for (file in files) {
+    text <- readLines(file)
+    text <- purrr::discard(text, ~ substr(., 1, 7) == "context")
+    writeLines(text, file)
+  }
+  
+}

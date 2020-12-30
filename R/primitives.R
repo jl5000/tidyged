@@ -147,7 +147,7 @@ validate_certainty_assessment <- function(input, max_dim) {
   validate_input_choice(input, choices)
 }
 validate_character_encoding <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 5, 7)
+  validate_input_size(input, max_dim)
   choices <- c("UTF-8", "UNICODE")
   validate_input_choice(input, choices)
 }
@@ -174,9 +174,6 @@ validate_date_value <- function(input, max_dim) {
 }
 validate_descriptive_title <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
-}
-validate_event_attribute_type <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 15)
 }
 validate_event_descriptor <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 90)
@@ -224,9 +221,6 @@ validate_gedcom_version_number <- function(input, max_dim) {
 validate_id_number <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 30)
 }
-validate_language_id <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 90)
-}
 validate_language_of_text <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 15)
   choices <- c("Afrikaans", "Albanian", "Anglo-Saxon", "Catalan", "Catalan_Spn", "Czech", 
@@ -264,9 +258,6 @@ validate_name_personal <- function(input, max_dim) {
 validate_name_phonetic <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
-validate_name_piece <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 90)
-}
 validate_name_piece_given <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
@@ -286,9 +277,6 @@ validate_name_piece_surname_prefix <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 30)
 }
 validate_name_romanised <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 120)
-}
-validate_name_text <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
 validate_name_type <- function(input, max_dim) {
@@ -337,9 +325,6 @@ validate_place_phonetic <- function(input, max_dim) {
 validate_place_romanised <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
 }
-validate_place_text <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 120)
-}
 validate_possessions <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 248)
 }
@@ -350,12 +335,6 @@ validate_product_version_number <- function(input, max_dim) {
 validate_receiving_system_name <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 20)
 }
-validate_record_identifier <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 18)
-}
-validate_registered_resource_identifier <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 25)
-}
 validate_relation_is_descriptor <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 25)
 }
@@ -364,9 +343,6 @@ validate_religious_affiliation <- function(input, max_dim) {
 }
 validate_responsible_agency <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 120)
-}
-validate_role_descriptor <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 1, 25)
 }
 validate_role_in_event <- function(input, max_dim) {
   validate_input_size(input, max_dim, 3, 27)
@@ -438,8 +414,4 @@ validate_xref <- function(input, max_dim) {
   validate_input_size(input, max_dim)
   validate_input_pattern(input, xref_pattern())
 }
-validate_year <- function(input, max_dim) {
-  validate_input_size(input, max_dim, 3, 4)
-}
-
 

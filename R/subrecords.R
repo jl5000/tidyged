@@ -645,7 +645,7 @@ PERSONAL_NAME_PIECES <- function(name_piece_prefix = character(),
                                  notes = list(),
                                  source_citations = list()) {
   
-  validate_name_piece_suffix(name_piece_prefix, 1)
+  validate_name_piece_prefix(name_piece_prefix, 1)
   validate_name_piece_given(name_piece_given, 1)
   validate_name_piece_nickname(name_piece_nickname, 1)
   validate_name_piece_surname_prefix(name_piece_surname_prefix, 1)
@@ -872,7 +872,8 @@ PLACE_STRUCTURE <- function(place_name,
 #' expect_snapshot_value(SOURCE_CITATION("@S1@", 
 #'               where_within_source = 3, event_type_cited_from = "MARR"), "json2")
 #' expect_snapshot_value(SOURCE_CITATION("@S1@", 
-#'               where_within_source = 3, role_in_event = "HUSB"), "json2")
+#'               where_within_source = 3, role_in_event = "HUSB",
+#'               certainty_assessment = 2), "json2")
 #' expect_snapshot_value(SOURCE_CITATION("@S1@", where_within_source = 3, 
 #'                              event_type_cited_from = "CENS", 
 #'                              role_in_event = "WIFE"), "json2")

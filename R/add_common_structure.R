@@ -18,7 +18,7 @@ add_note_to_record <- function(gedcom) {
   #name_pieces
   #place_structure
   #source_citation
-  #source_repository_citation
+
     
 }
 

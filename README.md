@@ -88,7 +88,7 @@ print(tg, n = Inf)
 #>  10     2 HD     CORP  "Jamie Lendrum"                                        
 #>  11     3 HD     ADDR  ""                                                     
 #>  12     3 HD     EMAIL "jalendrum@gmail.com"                                  
-#>  13     1 HD     DATE  "23 DEC 2020"                                          
+#>  13     1 HD     DATE  "30 DEC 2020"                                          
 #>  14     1 HD     LANG  "English"                                              
 #>  15     1 HD     SUBM  "@U1@"                                                 
 #>  16     1 HD     COPR  "Disney"                                               
@@ -96,11 +96,11 @@ print(tg, n = Inf)
 #>  18     0 @U1@   SUBM  ""                                                     
 #>  19     1 @U1@   NAME  "Jamie Lendrum"                                        
 #>  20     1 @U1@   CHAN  ""                                                     
-#>  21     2 @U1@   DATE  "23 DEC 2020"                                          
+#>  21     2 @U1@   DATE  "30 DEC 2020"                                          
 #>  22     0 @I1@   INDI  ""                                                     
 #>  23     1 @I1@   SEX   "M"                                                    
 #>  24     1 @I1@   CHAN  ""                                                     
-#>  25     2 @I1@   DATE  "23 DEC 2020"                                          
+#>  25     2 @I1@   DATE  "30 DEC 2020"                                          
 #>  26     1 @I1@   NOTE  "The central character in the Star Wars Skywalker Saga"
 #>  27     1 @I1@   NAME  "Anakin Skywalker"                                     
 #>  28     2 @I1@   TYPE  "birth"                                                
@@ -122,7 +122,7 @@ print(tg, n = Inf)
 #>  44     0 @I2@   INDI  ""                                                     
 #>  45     1 @I2@   SEX   "F"                                                    
 #>  46     1 @I2@   CHAN  ""                                                     
-#>  47     2 @I2@   DATE  "23 DEC 2020"                                          
+#>  47     2 @I2@   DATE  "30 DEC 2020"                                          
 #>  48     1 @I2@   NOTE  "Queen of Naboo"                                       
 #>  49     1 @I2@   NAME  "Padme Amidala"                                        
 #>  50     2 @I2@   GIVN  "Padme"                                                
@@ -131,7 +131,7 @@ print(tg, n = Inf)
 #>  53     0 @I3@   INDI  ""                                                     
 #>  54     1 @I3@   SEX   "F"                                                    
 #>  55     1 @I3@   CHAN  ""                                                     
-#>  56     2 @I3@   DATE  "23 DEC 2020"                                          
+#>  56     2 @I3@   DATE  "30 DEC 2020"                                          
 #>  57     1 @I3@   NAME  "Leia Skywalker"                                       
 #>  58     2 @I3@   TYPE  "birth"                                                
 #>  59     2 @I3@   GIVN  "Leia"                                                 
@@ -146,7 +146,7 @@ print(tg, n = Inf)
 #>  68     0 @I4@   INDI  ""                                                     
 #>  69     1 @I4@   SEX   "M"                                                    
 #>  70     1 @I4@   CHAN  ""                                                     
-#>  71     2 @I4@   DATE  "23 DEC 2020"                                          
+#>  71     2 @I4@   DATE  "30 DEC 2020"                                          
 #>  72     1 @I4@   NAME  "Luke Skywalker"                                       
 #>  73     2 @I4@   TYPE  "birth"                                                
 #>  74     2 @I4@   GIVN  "Luke"                                                 
@@ -156,7 +156,7 @@ print(tg, n = Inf)
 #>  78     0 @I5@   INDI  ""                                                     
 #>  79     1 @I5@   SEX   "M"                                                    
 #>  80     1 @I5@   CHAN  ""                                                     
-#>  81     2 @I5@   DATE  "23 DEC 2020"                                          
+#>  81     2 @I5@   DATE  "30 DEC 2020"                                          
 #>  82     1 @I5@   NAME  "Obi-Wan Kenobi"                                       
 #>  83     2 @I5@   TYPE  "birth"                                                
 #>  84     2 @I5@   GIVN  "Obi-Wan"                                              
@@ -168,24 +168,24 @@ print(tg, n = Inf)
 #>  90     1 @F1@   CHIL  "@I4@"                                                 
 #>  91     1 @F1@   CHIL  "@I3@"                                                 
 #>  92     1 @F1@   CHAN  ""                                                     
-#>  93     2 @F1@   DATE  "23 DEC 2020"                                          
+#>  93     2 @F1@   DATE  "30 DEC 2020"                                          
 #>  94     0 @N1@   NOTE  "Based on Star Wars"                                   
 #>  95     1 @N1@   CHAN  ""                                                     
-#>  96     2 @N1@   DATE  "23 DEC 2020"                                          
+#>  96     2 @N1@   DATE  "30 DEC 2020"                                          
 #>  97     0 @S1@   SOUR  ""                                                     
 #>  98     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                     
 #>  99     1 @S1@   ABBR  "Star Wars"                                            
 #> 100     1 @S1@   CHAN  ""                                                     
-#> 101     2 @S1@   DATE  "23 DEC 2020"                                          
+#> 101     2 @S1@   DATE  "30 DEC 2020"                                          
 #> 102     0 @R1@   REPO  ""                                                     
 #> 103     1 @R1@   NAME  "The Skywalker Saga"                                   
 #> 104     1 @R1@   CHAN  ""                                                     
-#> 105     2 @R1@   DATE  "23 DEC 2020"                                          
+#> 105     2 @R1@   DATE  "30 DEC 2020"                                          
 #> 106     0 @O1@   OBJE  ""                                                     
 #> 107     1 @O1@   FILE  "XYZ"                                                  
 #> 108     2 @O1@   FORM  "JPG"                                                  
 #> 109     1 @O1@   CHAN  ""                                                     
-#> 110     2 @O1@   DATE  "23 DEC 2020"                                          
+#> 110     2 @O1@   DATE  "30 DEC 2020"                                          
 #> 111     0 TR     TRLR  ""
 ```
 
@@ -249,11 +249,11 @@ df_individuals(tg) %>% print(n = Inf, width = Inf)
 #> 5 ""                  ""              ""                 ""          
 #>   num_children last_modified
 #>          <int> <chr>        
-#> 1            2 23 DEC 2020  
-#> 2            2 23 DEC 2020  
-#> 3            0 23 DEC 2020  
-#> 4            0 23 DEC 2020  
-#> 5            0 23 DEC 2020
+#> 1            2 30 DEC 2020  
+#> 2            2 30 DEC 2020  
+#> 3            0 30 DEC 2020  
+#> 4            0 30 DEC 2020  
+#> 5            0 30 DEC 2020
 df_families(tg) %>% print(n = Inf, width = Inf)
 #> # A tibble: 1 x 7
 #>   xref  husband          wife          marriage_date marriage_place num_children
@@ -261,7 +261,7 @@ df_families(tg) %>% print(n = Inf, width = Inf)
 #> 1 @F1@  Anakin Skywalker Padme Amidala ""            ""             2           
 #>   last_modified
 #>   <chr>        
-#> 1 23 DEC 2020
+#> 1 30 DEC 2020
 ```
 
 This package allows limited editing of `tidygedcom` objects

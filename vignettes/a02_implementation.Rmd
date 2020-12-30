@@ -53,7 +53,7 @@ read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) %>%
 
 The cross-reference identifier is given in the record column. Event though these aren't given for the header and trailer records they are assigned as "HD" and "TR" respectively in the `tidygedcom` object.
 
-## Implementation details
+## File structure
 
 The specifications of GEDCOM records are represented in the `records.R` file. These records are composed of various data structures found in `subrecords.R`. I have also painstakingly written functions to validate each line value separately in `primitives.R` and they are (mostly) all documented in one place in `params.R`. These four files form the bulk of the codification of the GEDCOM specification.
 

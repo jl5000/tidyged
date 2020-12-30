@@ -16,13 +16,42 @@ One of the main characteristics I wanted for this package was to hide the comple
 
 ## Data structures
 
-I spent a significant amount of time before writing any code considering my options for how the data would be stored under the hood. In [one blog post](https://r-house.netlify.com/2019/12/30/can-genealogical-data-be-tidy/) I considered storing genealogical data in tabular format as it is easier to deal with, but discounted it very quickly as it is not well suited to nested data.
+I spent a significant amount of time before writing any code considering my options for how the data would be stored under the hood. In [one blog post](https://r-house.netlify.com/2019/12/30/can-genealogical-data-be-tidy/) I considered storing genealogical data in a relational table format as it is easier to deal with, but discounted it very quickly as it is not well suited to nested data (list columns are not ideal for this application).
 
 I toyed with the idea of using an off-the-shelf open source product like [GRAMPS](https://gramps-project.org/blog/) but I found it awkward to use and wanted something where I was in complete control.
 
 I also considered using data structures more suited to this type of data, such as JSON or graphs (using the `igraph` package). However, I discovered it would be quite difficult representing some of the structures in the GEDCOM specification to my satisfaction.
 
 It was some time before a better solution occurred to me, and that was to store the GEDCOM file almost as is, and just to split out the components of each line into their own columns, creating a tidy version of a GEDCOM file (hence the name `tidygedcom`). This would allow easy manipulation using existing `tidyverse` infrastructure, and some additional processing would be needed to deal with the ordered and nested nature of the file. Ironically, I had returned to the idea of a tidy dataframe that I had dismissed early on.
+
+## The `tidygedcom` object
+
+The `tidygedcom` object is a tibble representation of a GEDCOM file. Before we see how this is structured, let's see an example of a GEDCOM file:
+
+```{r}
+readLines(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom"))
+```
+
+Lines in a GEDCOM file can have a number of components:
+
+* **Level**: The level in the hierarchical structure. This appears for every line;
+* **Cross-reference identifier**: This signals the beginning of a new record (apart from header and trailer);
+* **Tag**: A short string given immediately after the level or cross-reference identifier (which looks like @XYZ@) that indicates the type of information being provided on the line. These are controlled values. User-defined tags have been allowed in other GEDCOM programs, but they are discouraged here;
+* **Cross-reference pointer**: This links to another record in the file (which looks like @XYZ@). In the above example, the Family Group record beginning on line `r which(readLines(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) == "0 @F1@ FAM")` references other Individual records who are members of the family;
+* A **line value** associated with the tag. For example, on line 6, the CHARacter encoding for the file is given as UTF-8.
+
+There will not be any lines that have all of these components. For example, the first line of records do not contain a line value. Also, a line will never have a cross-reference pointer and a line value defined. For this reason, the `tidygedcom` object treats cross-reference pointers as just another line value.
+
+The `tidygedcom` representation of the above GEDCOM file is given below:
+
+```{r}
+library(tidygedcom)
+
+read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) %>% 
+  print(n = Inf)
+```
+
+The cross-reference identifier is given in the record column. Event though these aren't given for the header and trailer records they are assigned as "HD" and "TR" respectively in the `tidygedcom` object.
 
 ## Implementation details
 

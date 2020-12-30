@@ -255,12 +255,12 @@ test_that("Function SOURCE_CITATION() @ L881", {
   expect_equal(SOURCE_CITATION(character()), tibble::tibble())
   expect_snapshot_value(SOURCE_CITATION("@S1@"), "json2")
   expect_snapshot_value(SOURCE_CITATION("@S1@", 
-                where_within_source = 3, event_type_cited_from = "event"), "json2")
+                where_within_source = 3, event_type_cited_from = "MARR"), "json2")
   expect_snapshot_value(SOURCE_CITATION("@S1@", 
-                where_within_source = 3, role_in_event = "a role"), "json2")
+                where_within_source = 3, role_in_event = "HUSB"), "json2")
   expect_snapshot_value(SOURCE_CITATION("@S1@", where_within_source = 3, 
-                               event_type_cited_from = "event", 
-                               role_in_event = "a role"), "json2")
+                               event_type_cited_from = "CENS", 
+                               role_in_event = "WIFE"), "json2")
 })
 
 

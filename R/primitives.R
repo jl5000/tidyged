@@ -370,6 +370,7 @@ validate_role_descriptor <- function(input, max_dim) {
 }
 validate_role_in_event <- function(input, max_dim) {
   validate_input_size(input, max_dim, 3, 27)
+  validate_input_pattern(input, "CHIL|HUSB|WIFE|MOTH|FATH|SPOU|\\(.+\\)")
 }
 validate_romanisation_method <- function(input, max_dim) {
   validate_input_size(input, max_dim, 5, 30)

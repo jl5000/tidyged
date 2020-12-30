@@ -38,7 +38,7 @@ Each record is a nested structure containing one or more lines where the number 
 
 Aside from the level in the hierarchy, a GEDCOM line can contain three other types of data:
 
-* The **tag**, given immediately after the level which indicates the information being provided on the line;
+* The **tag**, given immediately after the level which indicates the information being provided on the line. These are controlled values. User-defined tags have been allowed in other GEDCOM programs, but they are discouraged here;
 * A **line value** associated with the tag. For example, on line 6, the CHARacter encoding for the file is given as UTF-8;
 * The first line of records do not contain a line value. Instead an **xref** (or cross-reference) is given before the tag, which looks like @XYZ@. This allows records to link to other records. In the above example, the family group record beginning on line `r which(readLines(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) == "0 @F1@ FAM")` references other individual records who are members of the family.
 

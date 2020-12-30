@@ -24,7 +24,8 @@ add_note_to_record <- function(gedcom) {
 
 
 
-# not for repo/source/subn/subm record
+# only indi, fam, multi, note
+# asso, event detail, pers name pieces, 
 add_source_citation_to_record <- function(gedcom) {
   
   xref <- get_active_record(gedcom)

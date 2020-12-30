@@ -11,7 +11,7 @@
         "row.names": {
           "type": "integer",
           "attributes": {},
-          "value": [1, 2, 3, 4, 5, 6, 7, 8]
+          "value": [1, 2, 3, 4, 5, 6, 7]
         },
         "class": {
           "type": "character",
@@ -23,17 +23,17 @@
         {
           "type": "double",
           "attributes": {},
-          "value": [0, 0, 1, 1, 1, 2, 2, 2]
+          "value": [0, 1, 1, 1, 2, 2, 2]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["DEST", "SOUR", "VERS", "NAME", "CORP", "ADDR", "EMAIL", "WWW"]
+          "value": ["SOUR", "VERS", "NAME", "CORP", "ADDR", "EMAIL", "WWW"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["tidygedcom", "tidygedcom", "0.0.0.900", "tidygedcom", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidygedcom/"]
+          "value": ["tidygedcom", "0.0.0.900", "tidygedcom", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidygedcom/"]
         }
       ]
     }
@@ -1633,7 +1633,7 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["@S1@", "3", "event"]
+          "value": ["@S1@", "3", "MARR"]
         }
       ]
     }
@@ -1713,7 +1713,7 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["@S1@", "3", "event", "a role"]
+          "value": ["@S1@", "3", "CENS", "WIFE"]
         }
       ]
     }

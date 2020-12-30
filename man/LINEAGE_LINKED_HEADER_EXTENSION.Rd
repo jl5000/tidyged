@@ -14,7 +14,7 @@ LINEAGE_LINKED_HEADER_EXTENSION(
   name_of_source_data = character(),
   publication_date = date_exact(),
   copyright_source_data = character(),
-  receiving_system_name = "tidygedcom",
+  receiving_system_name = character(),
   file_creation_date = date_exact(),
   file_creation_time = character(),
   language_of_text = character(),

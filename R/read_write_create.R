@@ -264,9 +264,8 @@ gedcom <- function(submitter_details = subm(),
                    source_data_name = character(),
                    source_data_date = date_exact(),
                    source_data_copyright = character(),
-                   receiving_system = character(),
-                   language = character()) {
-  
+                   receiving_system = "tidygedcom",
+                   language = "English") {
   
   GEDCOM_HEADER(header_extension = 
     LINEAGE_LINKED_HEADER_EXTENSION(name_of_source_data = source_data_name,

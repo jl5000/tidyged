@@ -95,13 +95,13 @@ add_family_group <- function(gedcom,
     message("Family link also added to the Individual record for wife")
   }
   
-  for(xref_chil in xrefs_chil) {
-    #TODO: Linkage type
+  for(i in seq_along(xrefs_chil)) {
+  
     temp <- temp %>% 
-      set_active_record(xref_chil) %>% 
-      add_individual_family_link_as_child(xref) 
+      set_active_record(xrefs_chil[i]) %>% 
+      add_individual_family_link_as_child(xref, linkage_type = child_linkage_types[i]) 
     
-    message("Family link also added to the Individual record for child ", xref_chil)
+    message("Family link also added to the Individual record for child ", xrefs_chil[i])
   }
   
   set_active_record(temp, xref)

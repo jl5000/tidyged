@@ -100,6 +100,9 @@ add_family_event <- function(gedcom,
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
     purrr::map(MULTIMEDIA_LINK)
   
+  if(event_type == "MARR" & length(event_classification) == 0)
+    event_classification <- "marriage"
+  
   details1 <- EVENT_DETAIL(event_or_fact_classification = event_classification,
                            date = event_date,
                            place = event_place,
@@ -169,8 +172,8 @@ add_family_event_marriage_contract <- purrr::partial(add_family_event, event_typ
 #                                                               event_type = "MARC", event_descriptor = "")
 #' @export
 #' @rdname add_family_event
-add_family_event_marriage <- purrr::partial(add_family_event, event_type = "MARR", event_descriptor = "")
-# formals(add_family_event_marriage) <- purrr::list_modify(formals(add_family_event), 
+add_family_event_relationship <- purrr::partial(add_family_event, event_type = "MARR", event_descriptor = "")
+# formals(add_family_event_relationship) <- purrr::list_modify(formals(add_family_event), 
 #                                                               event_type = "MARR", event_descriptor = "")
 #' @export
 #' @rdname add_family_event

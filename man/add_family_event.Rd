@@ -9,7 +9,7 @@
 \alias{add_family_event_engagement}
 \alias{add_family_event_marriage_banns}
 \alias{add_family_event_marriage_contract}
-\alias{add_family_event_marriage}
+\alias{add_family_event_relationship}
 \alias{add_family_event_marriage_license}
 \alias{add_family_event_marriage_settlement}
 \alias{add_family_event_residence}
@@ -63,7 +63,7 @@ add_family_event_marriage_banns(...)
 
 add_family_event_marriage_contract(...)
 
-add_family_event_marriage(...)
+add_family_event_relationship(...)
 
 add_family_event_marriage_license(...)
 

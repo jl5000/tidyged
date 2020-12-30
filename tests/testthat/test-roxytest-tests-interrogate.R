@@ -44,8 +44,8 @@ test_that("Function df_individuals() @ L146", {
    add_individual_event_birth(event_date = date_value(start_year = 1970, about = TRUE),
                               place_name = "Elsewhere") %>%
    add_family_group(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
-   add_family_event_marriage(event_date = date_value(start_year = 1969, start_month = 1, start_day = 30),
-                             place_name = "Another place") %>% 
+   add_family_event_relationship(event_date = date_value(start_year = 1969, start_month = 1, start_day = 30),
+                                 place_name = "Another place") %>% 
    remove_dates_for_tests() %>% 
    df_individuals(), "json2")
 })
@@ -60,8 +60,8 @@ test_that("Function df_families() @ L204", {
    add_individual(sex = "F") %>% 
    add_individual_names("Jessie Bloggs") %>%
    add_family_group(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
-   add_family_event_marriage(event_date = date_value(start_year = 1969, start_month = 1, start_day = 30),
-                             place_name = "Another place") %>% 
+   add_family_event_relationship(event_date = date_value(start_year = 1969, start_month = 1, start_day = 30),
+                                 place_name = "Another place") %>% 
    remove_dates_for_tests() %>% 
    df_families(), "json2")
 })

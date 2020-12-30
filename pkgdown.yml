@@ -2,8 +2,8 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  01_intro_to_gedcom: 01_intro_to_gedcom.html
-  02_implementation: 02_implementation.html
-  cross_references: cross_references.html
-last_built: 2020-12-30T12:22Z
+  a01_intro_to_gedcom: a01_intro_to_gedcom.html
+  a02_implementation: a02_implementation.html
+  a03_cross_references: a03_cross_references.html
+last_built: 2020-12-30T12:51Z
 

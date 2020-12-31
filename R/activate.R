@@ -13,6 +13,11 @@ set_active_record <- function(gedcom, xref) {
   return(gedcom)
 }
 
+#' Get the active record in a tidygedcom object
+#' 
+#' @param gedcom A tidygedcom object.
+#' @return The xref of the active record.
+#'
 #' @export
 get_active_record <- function(gedcom) {
   attr(gedcom, "active_record")

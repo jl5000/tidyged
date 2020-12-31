@@ -33,7 +33,7 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["tidygedcom", "0.0.0.900", "tidygedcom", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidygedcom/"]
+          "value": ["tidygedcom", "0.0.0", "tidygedcom", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidygedcom/"]
         }
       ]
     }
@@ -73,12 +73,12 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["destination system", "tidygedcom", "0.0.0.900", "tidygedcom", "Jamie Lendrum", "", "Road name", "City", "State", "ABC", "UK", "123445567", "email@domain.com", "4587375238427", "www.url.com", "source data name", "25 MAY 2009", "source copyright", "3 APR 2008", "10:56:05", "English", "@U1@", "file.ged", "gedcom copyright", "gedcom_description"]
+          "value": ["destination system", "tidygedcom", "0.0.0", "tidygedcom", "Jamie Lendrum", "", "Road name", "City", "State", "ABC", "UK", "123445567", "email@domain.com", "4587375238427", "www.url.com", "source data name", "25 MAY 2009", "source copyright", "3 APR 2008", "10:56:05", "English", "@U1@", "file.ged", "gedcom copyright", "gedcom_description"]
         }
       ]
     }
 
-# Function ADDRESS_STRUCTURE() @ L131
+# Function ADDRESS_STRUCTURE() @ L133
 
     {
       "type": "list",
@@ -238,7 +238,7 @@
       ]
     }
 
-# Function ASSOCIATION_STRUCTURE() @ L204
+# Function ASSOCIATION_STRUCTURE() @ L206
 
     {
       "type": "list",
@@ -318,7 +318,7 @@
       ]
     }
 
-# Function CHANGE_DATE() @ L239
+# Function CHANGE_DATE() @ L241
 
     {
       "type": "list",
@@ -438,7 +438,7 @@
       ]
     }
 
-# Function CHILD_TO_FAMILY_LINK() @ L273
+# Function CHILD_TO_FAMILY_LINK() @ L275
 
     {
       "type": "list",
@@ -518,7 +518,7 @@
       ]
     }
 
-# Function EVENT_DETAIL() @ L307
+# Function EVENT_DETAIL() @ L309
 
     {
       "type": "list",
@@ -638,7 +638,7 @@
       ]
     }
 
-# Function FAMILY_EVENT_DETAIL() @ L354
+# Function FAMILY_EVENT_DETAIL() @ L356
 
     {
       "type": "list",
@@ -758,7 +758,7 @@
       ]
     }
 
-# Function FAMILY_EVENT_STRUCTURE() @ L398
+# Function FAMILY_EVENT_STRUCTURE() @ L400
 
     {
       "type": "list",
@@ -918,7 +918,7 @@
       ]
     }
 
-# Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L439
+# Function INDIVIDUAL_ATTRIBUTE_STRUCTURE() @ L441
 
     {
       "type": "list",
@@ -998,7 +998,7 @@
       ]
     }
 
-# Function INDIVIDUAL_EVENT_DETAIL() @ L494
+# Function INDIVIDUAL_EVENT_DETAIL() @ L496
 
     {
       "type": "list",
@@ -1038,7 +1038,7 @@
       ]
     }
 
-# Function INDIVIDUAL_EVENT_STRUCTURE() @ L528
+# Function INDIVIDUAL_EVENT_STRUCTURE() @ L530
 
     {
       "type": "list",
@@ -1198,7 +1198,7 @@
       ]
     }
 
-# Function NOTE_STRUCTURE() @ L598
+# Function NOTE_STRUCTURE() @ L600
 
     {
       "type": "list",
@@ -1278,7 +1278,7 @@
       ]
     }
 
-# Function PERSONAL_NAME_PIECES() @ L639
+# Function PERSONAL_NAME_PIECES() @ L641
 
     {
       "type": "list",
@@ -1358,7 +1358,7 @@
       ]
     }
 
-# Function PERSONAL_NAME_STRUCTURE() @ L719
+# Function PERSONAL_NAME_STRUCTURE() @ L721
 
     {
       "type": "list",
@@ -1478,7 +1478,7 @@
       ]
     }
 
-# Function PLACE_STRUCTURE() @ L808
+# Function PLACE_STRUCTURE() @ L810
 
     {
       "type": "list",
@@ -1558,7 +1558,7 @@
       ]
     }
 
-# Function SOURCE_CITATION() @ L882
+# Function SOURCE_CITATION() @ L884
 
     {
       "type": "list",
@@ -1718,7 +1718,7 @@
       ]
     }
 
-# Function SOURCE_REPOSITORY_CITATION() @ L937
+# Function SOURCE_REPOSITORY_CITATION() @ L939
 
     {
       "type": "list",
@@ -1758,7 +1758,7 @@
       ]
     }
 
-# Function SPOUSE_TO_FAMILY_LINK() @ L967
+# Function SPOUSE_TO_FAMILY_LINK() @ L969
 
     {
       "type": "list",

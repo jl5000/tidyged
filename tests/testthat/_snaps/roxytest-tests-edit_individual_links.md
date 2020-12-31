@@ -43,7 +43,7 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidygedcom", "tidygedcom", "0.0.0.900", "tidygedcom", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidygedcom/", "English", "@U1@", "", "Me", "", "U", "Joe Bloggs", "", "U", "Jimmy Bloggs", "@I1@", "Friend", ""]
+          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidygedcom", "tidygedcom", "0.0.0", "tidygedcom", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidygedcom/", "English", "@U1@", "", "Me", "", "U", "Joe Bloggs", "", "U", "Jimmy Bloggs", "@I1@", "Friend", ""]
         }
       ]
     }

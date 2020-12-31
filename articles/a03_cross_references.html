@@ -129,30 +129,34 @@
 <span class="co">#&gt; 4     0 @I4@   INDI  ""              </span>
 <span class="co">#&gt; 5     0 @N1@   NOTE  "This is a note"</span></code></pre></div>
 <p>Note the unique xrefs in the record column.</p>
-<p>In the above example a series of Individual records are created. After each record is created, the name(s) of the individual are defined without actually explicitly referencing the Individual record. This is because they are acting on the <strong><em>active record</em></strong>. A record becomes active when it is created or when it is explicitly created.</p>
-<p>We can query the active record using the <code>get_active_record()</code> function:</p>
+</div>
+<div id="activation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#activation" class="anchor"></a>Activation</h2>
+<p>In the above example a series of Individual records are created. After each record is created, the name(s) of the individual are defined without actually explicitly referencing the Individual record. This is because they are acting on the <em>active record</em>. A record becomes active when it is created or when it is explicitly activated.</p>
+<p>We can query the active record using the <code><a href="../reference/get_active_record.html">get_active_record()</a></code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">get_active_record</span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@N1@"</span></code></pre></div>
 <p>Since the last record to the be created was the Note record, it is the active record. The active record is stored as an attribute of the tibble.</p>
 <p>We can use activation to add to existing records. If we want to activate another record, we can activate it using the <code>activate_*_record()</code> family of functions together with its xref:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/activate_individual_record.html">activate_individual_record</a></span><span class="op">(</span><span class="st">"@I2@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">get_active_record</span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@I2@"</span></code></pre></div>
 <p>It can be tedious to have to manually look up these xrefs, and so <strong>tidygedcom</strong> allows the user to instead enter an expression uniquely identifying the record:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/activate_individual_record.html">activate_individual_record</a></span><span class="op">(</span><span class="st">"Marge"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">get_active_record</span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@I2@"</span></code></pre></div>
 <p>Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record).</p>
 <p>If no match or more than one match is found, it will result in an error:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/activate_individual_record.html">activate_individual_record</a></span><span class="op">(</span><span class="st">"Simpson"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">get_active_record</span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Error in find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", : More than one record found for the given regex: Homer Simpson, Marge Simpson, Lisa Simpson, Bart Simpson. </span>
 <span class="co">#&gt; Try being more specific or supplying the xref explicitly.</span></code></pre></div>
 <p>This functionality can be found when referencing all records, except the Family Group record (where an xref must be provided). The following attributes are used to uniquely identify these records:</p>

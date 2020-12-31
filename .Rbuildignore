@@ -5,5 +5,5 @@
 ^\.github$
 ^family\.R$
 ^vignettes/articles$
-^vignettes/01_intro_to_gedcom\.Rmd$
-^vignettes/02_implementation\.Rmd$
+^vignettes/a01_intro_to_gedcom\.Rmd$
+^vignettes/a02_implementation\.Rmd$

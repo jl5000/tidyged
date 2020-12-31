@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 
 ## Why tidygedcom?
 
-One of the main characteristics I wanted for this package was to hide the complexity of the GEDCOM specification. I began with what I wanted the user interface to look like and worked backwards from there. I felt that adopting a **tidygedcom** feel to the package would enhance readability and would significantly flatten the learning curve for those who are familiar with **ggplot2**.
+One of the main characteristics I wanted for this package was to hide the complexity of the GEDCOM specification. I began with what I wanted the user interface to look like and worked backwards from there. I felt that adopting a **tidyverse** feel to the package would enhance readability and would significantly flatten the learning curve for those who are familiar with **ggplot2**.
 
 ## Data structures
 

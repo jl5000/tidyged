@@ -37,7 +37,9 @@ dplyr::filter(simpsons, tag %in% c("INDI", "NOTE"))
 
 Note the unique xrefs in the record column.
 
-In the above example a series of Individual records are created. After each record is created, the name(s) of the individual are defined without actually explicitly referencing the Individual record. This is because they are acting on the ***active record***. A record becomes active when it is created or when it is explicitly created.
+## Activation
+
+In the above example a series of Individual records are created. After each record is created, the name(s) of the individual are defined without actually explicitly referencing the Individual record. This is because they are acting on the *active record*. A record becomes active when it is created or when it is explicitly activated.
 
 We can query the active record using the `get_active_record()` function:
 

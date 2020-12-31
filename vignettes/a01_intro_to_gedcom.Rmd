@@ -15,7 +15,7 @@ Genealogical Data Communication (GEDCOM) is a specification for storing and exch
 
 ## What does a GEDCOM file look like?
 
-A GEDCOM file is a plain text file (with extension .ged or .GED), which contains ***records***. These records contain information on:
+A GEDCOM file is a plain text file (with extension .ged or .GED), which contains *records*. These records contain information on:
 
 * Family groups (i.e. nuclear families)
 * Individuals

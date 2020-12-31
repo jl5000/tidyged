@@ -33,7 +33,7 @@ simpsons <- gedcom(subm("Me")) %>%
   add_note("These records have not yet been joined in a family group record")
 ```
 
-In some records it is necessary to provide xrefs to link to other records, for example the Family Group record requires xrefs of the husband, wife, and/or children. It can be tedious to have to manually look up these xrefs, and so tidygedcom allows the user to instead enter an expression uniquely identifying these records, just like activation:
+In some records it is necessary to provide xrefs to link to other records, for example the Family Group record requires xrefs of the husband, wife, and/or children. It can be tedious to have to manually look up these xrefs, and so **tidygedcom** allows the user to instead enter an expression uniquely identifying these records, just like activation:
 
 ```{r}
 simpsons %>% 

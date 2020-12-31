@@ -237,7 +237,7 @@ remove_section <- function(gedcom,
 remove_dates_for_tests <- function(gedcom) {
   
   gedcom %>% 
-    remove_section(1, "CHAN", "") %>% 
+    remove_change_dates() %>% 
     dplyr::filter(!(level == 1 & record == "HD" & tag == "DATE"))
   
 }
@@ -251,5 +251,18 @@ remove_context_from_tests <- function() {
     text <- purrr::discard(text, ~ substr(., 1, 7) == "context")
     writeLines(text, file)
   }
+  
+}
+
+#' Remove all CHANge dates
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return A tidygedcom object with all CHAN structures removed.
+#' @export
+remove_change_dates <- function(gedcom) {
+  
+  gedcom %>% 
+    remove_section(1, "CHAN", "")
   
 }

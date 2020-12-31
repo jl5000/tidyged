@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygedcom</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9194</span>
       </span>
     </div>
 
@@ -60,7 +60,10 @@
       <a href="../articles/a02_implementation.html">Implementation of tidygedcom</a>
     </li>
     <li>
-      <a href="../articles/a03_cross_references.html">Cross references and automation</a>
+      <a href="../articles/a03_cross_references.html">Cross references and activation</a>
+    </li>
+    <li>
+      <a href="../articles/a04_automation.html">Automation and shared events</a>
     </li>
   </ul>
 </li>
@@ -98,12 +101,12 @@
 <div id="what-is-gedcom" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-gedcom" class="anchor"></a>What is GEDCOM?</h2>
-<p>Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by <code>tidygedcom</code>.</p>
+<p>Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by <strong>tidygedcom</strong>.</p>
 </div>
 <div id="what-does-a-gedcom-file-look-like" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-a-gedcom-file-look-like" class="anchor"></a>What does a GEDCOM file look like?</h2>
-<p>A GEDCOM file is a plain text file (with extension .ged or .GED), which contains <strong>records</strong>. These records contain information on:</p>
+<p>A GEDCOM file is a plain text file (with extension .ged or .GED), which contains <strong><em>records</em></strong>. These records contain information on:</p>
 <ul>
 <li>Family groups (i.e. nuclear families)</li>
 <li>Individuals</li>
@@ -214,8 +217,8 @@
 <span class="co">#&gt; [96] "2 CTRY United States of America"                                                        </span>
 <span class="co">#&gt; [97] "0 TRLR"</span></code></pre></div>
 <p>Each record is a nested structure containing one or more lines where the number at the beginning of the line indicates the level in the hierarchy. New records begin at level 0. In the above file, the submitter record begins at line 19.</p>
-<p>You can learn more about the structure of GEDCOM files and <code>tidygedcom</code> representations of them in <code><a href="../articles/a02_implementation.html">vignette("a02_implementation")</a></code>.</p>
-<p>The <a href="https://www.gedcom.org/gedcom.html">GEDCOM 5.5.5 specification</a> is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structures allowed for each record type, and this is what the <code>tidygedcom</code> package is designed to automate.</p>
+<p>You can learn more about the structure of GEDCOM files and <strong>tidygedcom</strong> representations of them in <code><a href="../articles/a02_implementation.html">vignette("a02_implementation")</a></code>.</p>
+<p>The <a href="https://www.gedcom.org/gedcom.html">GEDCOM 5.5.5 specification</a> is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structures allowed for each record type, and this is what the <strong>tidygedcom</strong> package is designed to automate.</p>
 </div>
 <div id="gedcom-5-5-5" class="section level2">
 <h2 class="hasAnchor">

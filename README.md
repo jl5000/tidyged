@@ -40,8 +40,7 @@ library(tidygedcom)
 #> This package assumes imported GEDCOM files are valid and very few validation checks are carried out.
 #> Several GEDCOM validators are available, including an online validator at http://ged-inline.elasticbeanstalk.com/
 
-tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family", language = "English",
-             gedcom_copyright = "Disney") %>%
+tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family", gedcom_copyright = "Disney") %>%
   add_individual(sex = "M", individual_notes = "The central character in the Star Wars Skywalker Saga") %>%
   add_individual_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>%
   add_individual_names("Darth Vader", type = "given", given = "Darth Vader") %>%
@@ -73,7 +72,7 @@ tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family",
 #> Family link also added to the Individual record for child @I3@
 
 print(tg, n = Inf)
-#> # A tibble: 111 x 4
+#> # A tibble: 113 x 4
 #>     level record tag   value                                                  
 #>     <dbl> <chr>  <chr> <chr>                                                  
 #>   1     0 HD     HEAD  ""                                                     
@@ -82,25 +81,25 @@ print(tg, n = Inf)
 #>   4     2 HD     FORM  "LINEAGE-LINKED"                                       
 #>   5     3 HD     VERS  "5.5.5"                                                
 #>   6     1 HD     CHAR  "UTF-8"                                                
-#>   7     1 HD     SOUR  "tidygedcom"                                           
-#>   8     2 HD     VERS  "0.0.0.900"                                            
-#>   9     2 HD     NAME  "tidygedcom"                                           
-#>  10     2 HD     CORP  "Jamie Lendrum"                                        
-#>  11     3 HD     ADDR  ""                                                     
-#>  12     3 HD     EMAIL "jalendrum@gmail.com"                                  
-#>  13     1 HD     DATE  "30 DEC 2020"                                          
-#>  14     1 HD     LANG  "English"                                              
-#>  15     1 HD     SUBM  "@U1@"                                                 
-#>  16     1 HD     COPR  "Disney"                                               
-#>  17     1 HD     NOTE  "The Skywalker family"                                 
-#>  18     0 @U1@   SUBM  ""                                                     
-#>  19     1 @U1@   NAME  "Jamie Lendrum"                                        
-#>  20     1 @U1@   CHAN  ""                                                     
-#>  21     2 @U1@   DATE  "30 DEC 2020"                                          
-#>  22     0 @I1@   INDI  ""                                                     
-#>  23     1 @I1@   SEX   "M"                                                    
-#>  24     1 @I1@   CHAN  ""                                                     
-#>  25     2 @I1@   DATE  "30 DEC 2020"                                          
+#>   7     1 HD     DEST  "tidygedcom"                                           
+#>   8     1 HD     SOUR  "tidygedcom"                                           
+#>   9     2 HD     VERS  "0.0.0"                                                
+#>  10     2 HD     NAME  "tidygedcom"                                           
+#>  11     2 HD     CORP  "Jamie Lendrum"                                        
+#>  12     3 HD     ADDR  ""                                                     
+#>  13     3 HD     EMAIL "jalendrum@gmail.com"                                  
+#>  14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"                 
+#>  15     1 HD     DATE  "31 DEC 2020"                                          
+#>  16     1 HD     LANG  "English"                                              
+#>  17     1 HD     SUBM  "@U1@"                                                 
+#>  18     1 HD     COPR  "Disney"                                               
+#>  19     1 HD     NOTE  "The Skywalker family"                                 
+#>  20     0 @U1@   SUBM  ""                                                     
+#>  21     1 @U1@   NAME  "Jamie Lendrum"                                        
+#>  22     1 @U1@   CHAN  ""                                                     
+#>  23     2 @U1@   DATE  "31 DEC 2020"                                          
+#>  24     0 @I1@   INDI  ""                                                     
+#>  25     1 @I1@   SEX   "M"                                                    
 #>  26     1 @I1@   NOTE  "The central character in the Star Wars Skywalker Saga"
 #>  27     1 @I1@   NAME  "Anakin Skywalker"                                     
 #>  28     2 @I1@   TYPE  "birth"                                                
@@ -119,19 +118,19 @@ print(tg, n = Inf)
 #>  41     2 @I1@   AGE   "45y"                                                  
 #>  42     1 @I1@   RELI  "Jedi"                                                 
 #>  43     1 @I1@   PROP  "Lightsaber"                                           
-#>  44     0 @I2@   INDI  ""                                                     
-#>  45     1 @I2@   SEX   "F"                                                    
-#>  46     1 @I2@   CHAN  ""                                                     
-#>  47     2 @I2@   DATE  "30 DEC 2020"                                          
+#>  44     1 @I1@   CHAN  ""                                                     
+#>  45     2 @I1@   DATE  "31 DEC 2020"                                          
+#>  46     0 @I2@   INDI  ""                                                     
+#>  47     1 @I2@   SEX   "F"                                                    
 #>  48     1 @I2@   NOTE  "Queen of Naboo"                                       
 #>  49     1 @I2@   NAME  "Padme Amidala"                                        
 #>  50     2 @I2@   GIVN  "Padme"                                                
 #>  51     2 @I2@   SURN  "Amidala"                                              
 #>  52     1 @I2@   FAMS  "@F1@"                                                 
-#>  53     0 @I3@   INDI  ""                                                     
-#>  54     1 @I3@   SEX   "F"                                                    
-#>  55     1 @I3@   CHAN  ""                                                     
-#>  56     2 @I3@   DATE  "30 DEC 2020"                                          
+#>  53     1 @I2@   CHAN  ""                                                     
+#>  54     2 @I2@   DATE  "31 DEC 2020"                                          
+#>  55     0 @I3@   INDI  ""                                                     
+#>  56     1 @I3@   SEX   "F"                                                    
 #>  57     1 @I3@   NAME  "Leia Skywalker"                                       
 #>  58     2 @I3@   TYPE  "birth"                                                
 #>  59     2 @I3@   GIVN  "Leia"                                                 
@@ -143,50 +142,52 @@ print(tg, n = Inf)
 #>  65     2 @I3@   SURN  "Organa"                                               
 #>  66     1 @I3@   FAMC  "@F1@"                                                 
 #>  67     2 @I3@   PEDI  "birth"                                                
-#>  68     0 @I4@   INDI  ""                                                     
-#>  69     1 @I4@   SEX   "M"                                                    
-#>  70     1 @I4@   CHAN  ""                                                     
-#>  71     2 @I4@   DATE  "30 DEC 2020"                                          
+#>  68     1 @I3@   CHAN  ""                                                     
+#>  69     2 @I3@   DATE  "31 DEC 2020"                                          
+#>  70     0 @I4@   INDI  ""                                                     
+#>  71     1 @I4@   SEX   "M"                                                    
 #>  72     1 @I4@   NAME  "Luke Skywalker"                                       
 #>  73     2 @I4@   TYPE  "birth"                                                
 #>  74     2 @I4@   GIVN  "Luke"                                                 
 #>  75     2 @I4@   SURN  "Skywalker"                                            
 #>  76     1 @I4@   FAMC  "@F1@"                                                 
 #>  77     2 @I4@   PEDI  "birth"                                                
-#>  78     0 @I5@   INDI  ""                                                     
-#>  79     1 @I5@   SEX   "M"                                                    
-#>  80     1 @I5@   CHAN  ""                                                     
-#>  81     2 @I5@   DATE  "30 DEC 2020"                                          
+#>  78     1 @I4@   CHAN  ""                                                     
+#>  79     2 @I4@   DATE  "31 DEC 2020"                                          
+#>  80     0 @I5@   INDI  ""                                                     
+#>  81     1 @I5@   SEX   "M"                                                    
 #>  82     1 @I5@   NAME  "Obi-Wan Kenobi"                                       
 #>  83     2 @I5@   TYPE  "birth"                                                
 #>  84     2 @I5@   GIVN  "Obi-Wan"                                              
 #>  85     2 @I5@   NICK  "Ben"                                                  
 #>  86     2 @I5@   SURN  "Kenobi"                                               
-#>  87     0 @F1@   FAM   ""                                                     
-#>  88     1 @F1@   HUSB  "@I1@"                                                 
-#>  89     1 @F1@   WIFE  "@I2@"                                                 
-#>  90     1 @F1@   CHIL  "@I4@"                                                 
-#>  91     1 @F1@   CHIL  "@I3@"                                                 
-#>  92     1 @F1@   CHAN  ""                                                     
-#>  93     2 @F1@   DATE  "30 DEC 2020"                                          
-#>  94     0 @N1@   NOTE  "Based on Star Wars"                                   
-#>  95     1 @N1@   CHAN  ""                                                     
-#>  96     2 @N1@   DATE  "30 DEC 2020"                                          
-#>  97     0 @S1@   SOUR  ""                                                     
-#>  98     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                     
-#>  99     1 @S1@   ABBR  "Star Wars"                                            
-#> 100     1 @S1@   CHAN  ""                                                     
-#> 101     2 @S1@   DATE  "30 DEC 2020"                                          
-#> 102     0 @R1@   REPO  ""                                                     
-#> 103     1 @R1@   NAME  "The Skywalker Saga"                                   
-#> 104     1 @R1@   CHAN  ""                                                     
-#> 105     2 @R1@   DATE  "30 DEC 2020"                                          
-#> 106     0 @O1@   OBJE  ""                                                     
-#> 107     1 @O1@   FILE  "XYZ"                                                  
-#> 108     2 @O1@   FORM  "JPG"                                                  
-#> 109     1 @O1@   CHAN  ""                                                     
-#> 110     2 @O1@   DATE  "30 DEC 2020"                                          
-#> 111     0 TR     TRLR  ""
+#>  87     1 @I5@   CHAN  ""                                                     
+#>  88     2 @I5@   DATE  "31 DEC 2020"                                          
+#>  89     0 @F1@   FAM   ""                                                     
+#>  90     1 @F1@   HUSB  "@I1@"                                                 
+#>  91     1 @F1@   WIFE  "@I2@"                                                 
+#>  92     1 @F1@   CHIL  "@I4@"                                                 
+#>  93     1 @F1@   CHIL  "@I3@"                                                 
+#>  94     1 @F1@   CHAN  ""                                                     
+#>  95     2 @F1@   DATE  "31 DEC 2020"                                          
+#>  96     0 @N1@   NOTE  "Based on Star Wars"                                   
+#>  97     1 @N1@   CHAN  ""                                                     
+#>  98     2 @N1@   DATE  "31 DEC 2020"                                          
+#>  99     0 @S1@   SOUR  ""                                                     
+#> 100     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                     
+#> 101     1 @S1@   ABBR  "Star Wars"                                            
+#> 102     1 @S1@   CHAN  ""                                                     
+#> 103     2 @S1@   DATE  "31 DEC 2020"                                          
+#> 104     0 @R1@   REPO  ""                                                     
+#> 105     1 @R1@   NAME  "The Skywalker Saga"                                   
+#> 106     1 @R1@   CHAN  ""                                                     
+#> 107     2 @R1@   DATE  "31 DEC 2020"                                          
+#> 108     0 @O1@   OBJE  ""                                                     
+#> 109     1 @O1@   FILE  "XYZ"                                                  
+#> 110     2 @O1@   FORM  "JPG"                                                  
+#> 111     1 @O1@   CHAN  ""                                                     
+#> 112     2 @O1@   DATE  "31 DEC 2020"                                          
+#> 113     0 TR     TRLR  ""
 ```
 
 Just like a ggplot object requires aesthetics, a GEDCOM file requires
@@ -227,7 +228,7 @@ summary(tg)
 #>  Copyright:               Disney 
 #>  
 #>  Source system:           tidygedcom 
-#>  Source system version:   0.0.0.900 
+#>  Source system version:   0.0.0 
 #>  Product name:            tidygedcom 
 #>  Product source:          Jamie Lendrum
 
@@ -249,11 +250,11 @@ df_individuals(tg) %>% print(n = Inf, width = Inf)
 #> 5 ""                  ""              ""                 ""          
 #>   num_children last_modified
 #>          <int> <chr>        
-#> 1            2 30 DEC 2020  
-#> 2            2 30 DEC 2020  
-#> 3            0 30 DEC 2020  
-#> 4            0 30 DEC 2020  
-#> 5            0 30 DEC 2020
+#> 1            2 31 DEC 2020  
+#> 2            2 31 DEC 2020  
+#> 3            0 31 DEC 2020  
+#> 4            0 31 DEC 2020  
+#> 5            0 31 DEC 2020
 df_families(tg) %>% print(n = Inf, width = Inf)
 #> # A tibble: 1 x 7
 #>   xref  husband          wife          marriage_date marriage_place num_children
@@ -261,7 +262,7 @@ df_families(tg) %>% print(n = Inf, width = Inf)
 #> 1 @F1@  Anakin Skywalker Padme Amidala ""            ""             2           
 #>   last_modified
 #>   <chr>        
-#> 1 30 DEC 2020
+#> 1 31 DEC 2020
 ```
 
 This package allows limited editing of `tidygedcom` objects

@@ -12,6 +12,8 @@ set_active_record <- function(gedcom, xref) {
   if(length(xref) > 0) attr(gedcom, "active_record") <- xref 
   return(gedcom)
 }
+
+#' @export
 get_active_record <- function(gedcom) {
   attr(gedcom, "active_record")
 }

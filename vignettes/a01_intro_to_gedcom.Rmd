@@ -11,11 +11,11 @@ knitr::opts_chunk$set(
 
 ## What is GEDCOM?
 
-Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by `tidygedcom`.
+Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by **tidygedcom**.
 
 ## What does a GEDCOM file look like?
 
-A GEDCOM file is a plain text file (with extension .ged or .GED), which contains **records**. These records contain information on:
+A GEDCOM file is a plain text file (with extension .ged or .GED), which contains ***records***. These records contain information on:
 
 * Family groups (i.e. nuclear families)
 * Individuals
@@ -34,9 +34,9 @@ readLines(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom"))
 
 Each record is a nested structure containing one or more lines where the number at the beginning of the line indicates the level in the hierarchy. New records begin at level 0. In the above file, the submitter record begins at line `r which(readLines(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) == "0 @U1@ SUBM")`.
 
-You can learn more about the structure of GEDCOM files and `tidygedcom` representations of them in `vignette("a02_implementation")`.
+You can learn more about the structure of GEDCOM files and **tidygedcom** representations of them in `vignette("a02_implementation")`.
 
-The [GEDCOM 5.5.5 specification](https://www.gedcom.org/gedcom.html) is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structures allowed for each record type, and this is what the `tidygedcom` package is designed to automate.
+The [GEDCOM 5.5.5 specification](https://www.gedcom.org/gedcom.html) is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structures allowed for each record type, and this is what the **tidygedcom** package is designed to automate.
 
 ## GEDCOM 5.5.5
 

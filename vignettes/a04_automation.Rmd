@@ -1,0 +1,100 @@
+---
+title: "Automation and shared events"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Automation and shared events}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+In `vignette("a03_cross_references")`, the concept of record activation was introduced, using either record xrefs or other attributes of the record. In this vignette, we show how this same functionality is used to ease and automate the generation of new records. We begin by using the same example:
+
+```{r}
+library(tidygedcom)
+
+simpsons <- gedcom(subm("Me")) %>% 
+  add_individual(sex = "M") %>% 
+  add_individual_names("Homer Simpson") %>% 
+  add_individual(sex = "F") %>% 
+  add_individual_names("Marge Simpson") %>%  
+  add_individual(sex = "F") %>% 
+  add_individual_names("Lisa Simpson") %>% 
+  add_individual(sex = "M") %>% 
+  add_individual_names("Bart Simpson") %>%  
+  add_note("These records have not yet been joined in a family group record")
+```
+
+In some records it is necessary to provide xrefs to link to other records, for example the Family Group record requires xrefs of the husband, wife, and/or children. It can be tedious to have to manually look up these xrefs, and so tidygedcom allows the user to instead enter an expression uniquely identifying these records, just like activation:
+
+```{r}
+simpsons %>% 
+  add_family_group(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa")) %>% 
+  dplyr::filter(record == "@F1@")
+```
+
+Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record).
+
+If no match or more than one match is found, it will result in an error:
+
+```{r, error = TRUE}
+simpsons %>% 
+  add_family_group(husband = "Simpson", wife = "Marge", children = c("Bart", "Lisa")) 
+```
+
+## Family links
+
+The **tidygedcom** package seeks to make cross-referencing as painless and automated as possible. When adding a Family Group record, as well as creating the record, it will also create the relevant links to the family group in the Individual record for each member of the family:
+
+```{r}
+simpsons_fam <- simpsons %>% 
+  add_family_group(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa")) 
+
+dplyr::filter(simpsons_fam, tag %in% c("FAMS", "FAMC"))
+```
+
+The lines above show particular lines in the Individual records where they are linked to the Family Group record either as a spouse (FAMS) or as a child (FAMC).
+
+If the Family Group record is subsequently removed, then these links will also be removed:
+
+```{r}
+simpsons_no_fam <- simpsons_fam %>% 
+  remove_family_group() 
+
+dplyr::filter(simpsons_no_fam, tag %in% c("FAMS", "FAMC"))
+
+waldo::compare(simpsons, simpsons_no_fam, ignore_attr = TRUE)
+```
+
+
+Similarly, when removing an Individual record, all associations with the individual will be removed in other individual records.
+
+When removing a Family Group record, the user also has the option of removing all trace of the individuals within the family group as well:
+
+```{r}
+simpsons_no_fam_purge <- simpsons_fam %>% 
+  remove_family_group(remove_individuals = TRUE) 
+
+str(simpsons_no_fam_purge)
+```
+
+Note that as well as having no families defined, we also now have no individuals.
+
+## Shared events
+
+Genealogy is often about extracting as much useful information from sources as possible. For example, census information can be enormously useful in finding information on both families and individuals, such as names, ages, occupations, etc.
+
+These sources of information are usually produced as a result of important events, and there are specific data structures in the GEDCOM specification for individual events and family events. For the most part this makes sense, however family events can be problematic at times to properly represent and cite as evidence.
+
+An example of this is marriage events. These are classified as family events and are stored within relevant family group records. However, when taking an individual-centric view of GEDCOM files (i.e. looking at individual records), these marriages will not be recorded, missing vital information in an individual's life. This is problematic if using the 
+
+Functionality to come...
+

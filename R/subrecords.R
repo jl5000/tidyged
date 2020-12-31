@@ -51,6 +51,8 @@ LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
                                             gedcom_content_description = character()) {
   
   product_version_number <- as.character(product_version_number)
+  product_version_number <- stringr::str_extract(product_version_number, 
+                                                 "^\\d{1,3}\\.\\d{1,3}(\\.\\d{1,3})?")
   
   validate_system_id(system_id, 1)
   validate_product_version_number(product_version_number, 1)

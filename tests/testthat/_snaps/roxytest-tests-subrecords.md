@@ -1358,7 +1358,7 @@
       ]
     }
 
-# Function PERSONAL_NAME_STRUCTURE() @ L721
+# Function PERSONAL_NAME_STRUCTURE() @ L728
 
     {
       "type": "list",
@@ -1411,7 +1411,7 @@
         "row.names": {
           "type": "integer",
           "attributes": {},
-          "value": [1, 2, 3, 4, 5]
+          "value": [1, 2, 3, 4, 5, 6, 7, 8]
         },
         "class": {
           "type": "character",
@@ -1423,17 +1423,17 @@
         {
           "type": "double",
           "attributes": {},
-          "value": [0, 1, 2, 1, 2]
+          "value": [0, 1, 1, 2, 2, 1, 2, 2]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["NAME", "FONE", "TYPE", "FONE", "TYPE"]
+          "value": ["NAME", "SURN", "FONE", "TYPE", "SURN", "FONE", "TYPE", "SURN"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["Joe Bloggs", "Joe Blogs", "Can't spell", "Jo Bloggs", "Can't spell"]
+          "value": ["Joe /Bloggs/", "Bloggs", "Joe /Blogs/", "Can't spell", "Blogs", "Jo /Bloggs/", "Can't spell", "Bloggs"]
         }
       ]
     }
@@ -1451,7 +1451,7 @@
         "row.names": {
           "type": "integer",
           "attributes": {},
-          "value": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+          "value": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         },
         "class": {
           "type": "character",
@@ -1463,22 +1463,22 @@
         {
           "type": "double",
           "attributes": {},
-          "value": [0, 1, 2, 2, 2, 1, 2, 2, 2]
+          "value": [0, 1, 1, 2, 2, 2, 1, 2, 2, 2]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["NAME", "FONE", "TYPE", "GIVN", "SURN", "FONE", "TYPE", "GIVN", "SURN"]
+          "value": ["NAME", "SURN", "FONE", "TYPE", "GIVN", "SURN", "FONE", "TYPE", "GIVN", "SURN"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["Joe Bloggs", "Joe Blogs", "Can't spell", "Joe", "Blogs", "Jo Bloggs", "Can't spell", "Jo", "Bloggs"]
+          "value": ["Joe /Bloggs/", "Bloggs", "Joe Blogs", "Can't spell", "Joe", "Blogs", "Jo Bloggs", "Can't spell", "Jo", "Bloggs"]
         }
       ]
     }
 
-# Function PLACE_STRUCTURE() @ L810
+# Function PLACE_STRUCTURE() @ L836
 
     {
       "type": "list",
@@ -1558,7 +1558,7 @@
       ]
     }
 
-# Function SOURCE_CITATION() @ L884
+# Function SOURCE_CITATION() @ L910
 
     {
       "type": "list",
@@ -1718,7 +1718,7 @@
       ]
     }
 
-# Function SOURCE_REPOSITORY_CITATION() @ L939
+# Function SOURCE_REPOSITORY_CITATION() @ L965
 
     {
       "type": "list",
@@ -1758,7 +1758,7 @@
       ]
     }
 
-# Function SPOUSE_TO_FAMILY_LINK() @ L969
+# Function SPOUSE_TO_FAMILY_LINK() @ L995
 
     {
       "type": "list",

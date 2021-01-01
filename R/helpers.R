@@ -110,9 +110,20 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   cat(text)
 }
 
-get_individual_name <- function(gedcom, xref) { gedcom_value(gedcom, xref, "NAME", 1, "INDI") }
+get_individual_name <- function(gedcom, xref) { 
+  gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
+    stringr::str_remove_all("/")
+}
 
-
+temporarily_remove_name_slashes <- function(gedcom) {
+  
+  gedcom %>% 
+    dplyr::mutate(value = dplyr::if_else(purrr::map_lgl(record, is_individual, gedcom=gedcom) &
+                                           tag %in% c("NAME", "FONE", "ROMN"),
+                                         stringr::str_remove_all(value, "/"),
+                                         value))
+  
+}
 
 add_levels <- function(df, start_level) {
   
@@ -193,6 +204,24 @@ find_insertion_point <- function(gedcom,
   i
 }
 
+salvage_name_pieces <- function(full_name, name_pieces) {
+  
+  if(nrow(name_pieces) > 0) return(name_pieces)
+  
+  if(stringr::str_detect(full_name, "/.+/")) {
+    
+    surname <- full_name %>% 
+      stringr::str_extract("/.+/") %>% 
+      stringr::str_remove_all("/")
+    
+    name_pieces <- PERSONAL_NAME_PIECES(name_piece_surname = surname)
+    
+  } else {
+    stop("The name ", full_name, " is given without any name pieces")
+  }
+  
+  name_pieces
+}
 
 remove_section <- function(gedcom,
                            containing_level,

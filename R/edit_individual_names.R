@@ -75,7 +75,8 @@ add_individual_names <- function(gedcom,
 #' @param gedcom A tidygedcom object.
 #' @param primary_name The name for which this is a variation. This is treated as a
 #' regex pattern to match to existing names. 
-#' @param variation_name The full name variation.
+#' @param variation_name The full name variation. The surname, if known, should be enclosed between two 
+#' forward slash (/) characters. 
 #' @param type Indicates the method used in transforming the text to the variation.
 #' @param phonetic_variation Whether the name variation is a phonetic variation
 #' (TRUE, default) or a romanised variation (FALSE).
@@ -101,7 +102,7 @@ add_individual_names <- function(gedcom,
 #' expect_snapshot_value(
 #'                gedcom(subm("Me")) %>% 
 #'                add_individual() %>% 
-#'                add_individual_names("Joe Bloggs") %>% 
+#'                add_individual_names("Joe /Bloggs/") %>% 
 #'                add_individual_names_var("Joe Bloggs", "JB", nickname = "JB", type = "tests", 
 #'                                          phonetic_variation = FALSE) %>% 
 #'                remove_dates_for_tests(), "json2")
@@ -156,7 +157,12 @@ add_individual_names_var <- function(gedcom,
     
   }
   
-  name_str <- PERSONAL_NAME_STRUCTURE(name_personal = "line filtered out below",
+  # We don't need the first three arguments of this structure, so we've manipulated
+  # the inputs to ensure we can omit them.
+  # As we're entering an empty PERSONAL_NAME_PIECES object, it will derive a surname
+  # piece from part between forward slashes in name_personal. This then allows us to
+  # remove these lines explicitly.
+  name_str <- PERSONAL_NAME_STRUCTURE(name_personal = "line /filtered out/ below",
                                       name_type = character(),
                                       name_pieces = PERSONAL_NAME_PIECES(), 
                                       name_phonetic = name_phonetic_var,
@@ -166,6 +172,7 @@ add_individual_names_var <- function(gedcom,
                                       romanisation_method = romanisation_method,
                                       romanised_name_pieces = rom_name_pieces) %>% 
     dplyr::filter(tag != "NAME") %>%
+    dplyr::filter(!(tag == "SURN" & value == "filtered out")) %>% 
     add_levels(1)
   
   if(update_date_changed) {
@@ -173,7 +180,9 @@ add_individual_names_var <- function(gedcom,
     name_str <- dplyr::bind_rows(name_str, CHANGE_DATE() %>% add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 1, "NAME", primary_name)
+  next_row <- gedcom %>% 
+    temporarily_remove_name_slashes() %>% 
+    find_insertion_point(get_active_record(gedcom), 1, "NAME", primary_name)
   
   gedcom %>%
     tibble::add_row(name_str, .before = next_row) %>% 

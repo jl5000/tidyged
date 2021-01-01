@@ -26,7 +26,8 @@ add_individual_names_var(
 \item{primary_name}{The name for which this is a variation. This is treated as a
 regex pattern to match to existing names.}
 
-\item{variation_name}{The full name variation.}
+\item{variation_name}{The full name variation. The surname, if known, should be enclosed between two
+forward slash (/) characters.}
 
 \item{type}{Indicates the method used in transforming the text to the variation.}
 

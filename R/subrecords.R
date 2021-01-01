@@ -680,12 +680,19 @@ PERSONAL_NAME_PIECES <- function(name_piece_prefix = character(),
 #' of the romanised name variations.
 #' @tests
 #' expect_error(PERSONAL_NAME_STRUCTURE())
+#' expect_error(PERSONAL_NAME_STRUCTURE("Joe Bloggs"))
+#' expect_error(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/",
+#'                                      name_phonetic = "Jo Bloggs",
+#'                                      phonetisation_method = "Variant"))
+#' expect_error(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/",
+#'                                      name_romanised = "Jo Bloggs",
+#'                                      romanisation_method = "Variant"))
 #' expect_error(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
 #'                           name_phonetic = c("Joe Blogs", "Jo Bloggs")))
-#' expect_error(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
+#' expect_error(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/", 
 #'                           name_phonetic = c("Joe Blogs", "Jo Bloggs"),
 #'                           phonetisation_method = "Can't spell"))
-#' expect_error(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
+#' expect_error(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/", 
 #'                           name_phonetic = c("Joe Blogs", "Jo Bloggs"),
 #'                           phonetisation_method = c("Can't spell", "Can't spell"),
 #'                           phonetic_name_pieces = list(PERSONAL_NAME_PIECES(name_piece_given = "Joe", 
@@ -705,10 +712,10 @@ PERSONAL_NAME_PIECES <- function(name_piece_prefix = character(),
 #' expect_snapshot_value(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/", 
 #'                                      name_pieces = PERSONAL_NAME_PIECES(name_piece_prefix = "Mr",
 #'                                                                         name_piece_surname = "Bloggs")), "json2")
-#' expect_snapshot_value(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
-#'                                      name_phonetic = c("Joe Blogs", "Jo Bloggs"),
+#' expect_snapshot_value(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/", 
+#'                                      name_phonetic = c("Joe /Blogs/", "Jo /Bloggs/"),
 #'                                      phonetisation_method = c("Can't spell", "Can't spell")), "json2")
-#' expect_snapshot_value(PERSONAL_NAME_STRUCTURE("Joe Bloggs", 
+#' expect_snapshot_value(PERSONAL_NAME_STRUCTURE("Joe /Bloggs/", 
 #'                                      name_phonetic = c("Joe Blogs", "Jo Bloggs"),
 #'                                      phonetisation_method = c("Can't spell", "Can't spell"),
 #'                                      phonetic_name_pieces = 
@@ -739,16 +746,35 @@ PERSONAL_NAME_STRUCTURE <- function(name_personal,
   
   if (length(name_phonetic) != length(phonetisation_method))
     stop("Each phonetic variation requires a phonetisation method")
+  
   if (length(name_romanised) != length(romanisation_method))
     stop("Each romanised variation requires a romanisation method")
   
-  if (length(name_phonetic) != length(phonetic_name_pieces) &
-      length(name_phonetic) > 0 & length(phonetic_name_pieces) > 0)
-    stop("Each phonetic variation requires a set of phonetic name pieces (even if empty)")
+  name_pieces <- salvage_name_pieces(name_personal, name_pieces)
   
-  if (length(name_romanised) != length(romanised_name_pieces) &
-      length(name_romanised) > 0 & length(romanised_name_pieces) > 0)
-    stop("Each romanised variation requires a set of romanised name pieces (even if empty)")
+  if(length(name_phonetic) > 0) {
+    
+    if(length(phonetic_name_pieces) > 0) {
+      if (length(name_phonetic) != length(phonetic_name_pieces))
+        stop("Each phonetic variation requires a set of phonetic name pieces")
+    } else {
+      phonetic_name_pieces <- rep(list(PERSONAL_NAME_PIECES()), length(name_phonetic))
+      phonetic_name_pieces <- purrr::map2(name_phonetic, phonetic_name_pieces, salvage_name_pieces)
+    }
+    
+  }
+  
+  if(length(name_romanised) > 0) {
+    
+    if(length(romanised_name_pieces) > 0) {
+      if (length(name_romanised) != length(romanised_name_pieces))
+        stop("Each romanised variation requires a set of romanised name pieces")
+    } else {
+      romanised_name_pieces <- rep(list(PERSONAL_NAME_PIECES()), length(name_romanised))
+      romanised_name_pieces <-  purrr::map2(name_romanised, romanised_name_pieces, salvage_name_pieces)
+    }
+    
+  }
   
   temp <- dplyr::bind_rows(
     tibble::tibble(level = 0, tag = "NAME", value = name_personal),

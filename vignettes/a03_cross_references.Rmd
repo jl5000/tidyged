@@ -23,13 +23,13 @@ library(tidygedcom)
 
 simpsons <- gedcom(subm("Me")) %>% 
   add_individual(sex = "M") %>% 
-  add_individual_names("Homer Simpson") %>% 
+  add_individual_names("Homer /Simpson/") %>% 
   add_individual(sex = "F") %>% 
-  add_individual_names("Marge Simpson") %>%  
+  add_individual_names("Marge /Simpson/") %>%  
   add_individual(sex = "F") %>% 
-  add_individual_names("Lisa Simpson") %>% 
+  add_individual_names("Lisa /Simpson/") %>% 
   add_individual(sex = "M") %>% 
-  add_individual_names("Bart Simpson") %>%  
+  add_individual_names("Bart /Simpson/") %>%  
   add_note("This is a note")
 
 dplyr::filter(simpsons, tag %in% c("INDI", "NOTE"))
@@ -47,7 +47,7 @@ We can query the active record using the `get_active_record()` function:
 get_active_record(simpsons)
 ```
 
-Since the last record to the be created was the Note record, it is the active record. The active record is stored as an attribute of the tibble.
+Since the last record to be created was the Note record, it is the active record. The active record is stored as an attribute of the tibble.
 
 We can use activation to add to existing records. If we want to activate another record, we can activate it using the `activate_*_record()` family of functions together with its xref:
 
@@ -65,7 +65,7 @@ simpsons %>%
   get_active_record()
 ```
 
-Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record).
+Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record). Note that if forward-slashes are in the name, they should not be used in any expressions.
 
 If no match or more than one match is found, it will result in an error:
 

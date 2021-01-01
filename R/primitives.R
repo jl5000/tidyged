@@ -79,7 +79,6 @@ validate_date <- function(year1,
   if (date1 > date2) stop("First date is after second date")
 }
 
-
 validate_address_city <- function(input, max_dim) {
   validate_input_size(input, max_dim, 1, 60)
 }

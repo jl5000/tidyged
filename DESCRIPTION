@@ -1,6 +1,6 @@
 Package: tidygedcom
 Title: Handle GEDCOM Files Using Tidyverse Principles
-Version: 0.0.0.9194
+Version: 0.0.0
 Authors@R: 
     person(given = "Jamie",
            family = "Lendrum",

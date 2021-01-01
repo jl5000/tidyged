@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygedcom</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9194</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0</span>
       </span>
     </div>
 
@@ -113,13 +113,13 @@
 
 <span class="va">simpsons</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Homer Simpson"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Homer /Simpson/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Marge Simpson"</span><span class="op">)</span> <span class="op">%&gt;%</span>  
+  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Marge /Simpson/"</span><span class="op">)</span> <span class="op">%&gt;%</span>  
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Lisa Simpson"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Lisa /Simpson/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Bart Simpson"</span><span class="op">)</span> <span class="op">%&gt;%</span>  
+  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Bart /Simpson/"</span><span class="op">)</span> <span class="op">%&gt;%</span>  
   <span class="fu"><a href="../reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"This is a note"</span><span class="op">)</span>
 
 <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="va">tag</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"INDI"</span>, <span class="st">"NOTE"</span><span class="op">)</span><span class="op">)</span>
@@ -141,7 +141,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@N1@"</span></code></pre></div>
-<p>Since the last record to the be created was the Note record, it is the active record. The active record is stored as an attribute of the tibble.</p>
+<p>Since the last record to be created was the Note record, it is the active record. The active record is stored as an attribute of the tibble.</p>
 <p>We can use activation to add to existing records. If we want to activate another record, we can activate it using the <code>activate_*_record()</code> family of functions together with its xref:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
@@ -154,7 +154,7 @@
   <span class="fu"><a href="../reference/activate_individual_record.html">activate_individual_record</a></span><span class="op">(</span><span class="st">"Marge"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@I2@"</span></code></pre></div>
-<p>Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record).</p>
+<p>Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record). Note that if forward-slashes are in the name, they should not be used in any expressions.</p>
 <p>If no match or more than one match is found, it will result in an error:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 

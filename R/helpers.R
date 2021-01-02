@@ -292,7 +292,7 @@ remove_dates_for_tests <- function(gedcom) {
 
 remove_context_from_tests <- function() {
   
-  files <- list.files("tests/testthat", "^test-.+.R$", full.names = TRUE)
+  files <- list.files("tests/testthat", "^test-.+\\.R$", full.names = TRUE)
   
   for (file in files) {
     text <- readLines(file)

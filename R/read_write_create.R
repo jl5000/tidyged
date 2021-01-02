@@ -118,10 +118,13 @@ check_line_lengths <- function(lines, limit) {
 #' @return A tidygedcom object in the GEDCOM form.
 combine_gedcom_values <- function(gedcom) {
   
+  tags <- c("CONT", "CONC")
+  
   gedcom %>% 
     dplyr::mutate(row = dplyr::row_number()) %>% 
-    dplyr::mutate(tag = dplyr::if_else(tag == "CONC", NA_character_, tag),
-                  row = dplyr::if_else(tag == "CONC", NA_integer_, row)) %>%
+    dplyr::mutate(tag = dplyr::if_else(tag %in% tags, NA_character_, tag),
+                  row = dplyr::if_else(tag %in% tags, NA_integer_, row),
+                  value = dplyr::if_else(tag == "CONT", paste0("\n", value), value)) %>%
     tidyr::fill(tag, row, .direction = "down") %>%
     dplyr::group_by(record, tag, row) %>% 
     dplyr::summarise(level = min(level),

@@ -66,7 +66,10 @@
       <a href="../articles/a04_automation.html">Automation and shared events</a>
     </li>
     <li>
-      <a href="../articles/a05_change_dates.html">Recording change dates</a>
+      <a href="../articles/a05_individual_names.html">Naming individuals</a>
+    </li>
+    <li>
+      <a href="../articles/a06_change_dates.html">Recording change dates</a>
     </li>
   </ul>
 </li>
@@ -351,8 +354,9 @@
 <div id="future-work" class="section level2">
 <h2 class="hasAnchor">
 <a href="#future-work" class="anchor"></a>Future work</h2>
-<p>At the time of writing, this package is getting quite large and difficult to mentally manage. It can be quite tricky implementing some of the functionality to edit existing files (rather than creating from scratch), and so the long term plan is to have a sister package to help with this interactively using <strong>shiny</strong> (<strong>shinygedcom</strong>). I would imagine that much of the functionality developed so far would best sit in that package, and so I am considering eventually de-scoping <strong>tidygedcom</strong> to only contain the core infrastructure (the four files mentioned above and some other helper functions).</p>
-<p>However, before work on <strong>shinygedcom</strong> begins, I would like to start a tidygedcom visualisation package, <strong>visgedcom</strong>, which will allow various views of genealogical data.</p>
+<p>At the time of writing, this package is getting quite large and difficult to mentally manage. It can be quite tricky implementing some of the functionality to edit existing GEDCOM files (rather than creating from scratch), and so the long term plan is to have a sister package to help with this interactively using <strong>shiny</strong> (<strong>shinygedcom</strong>). However, before work on <strong>shinygedcom</strong> begins, I would like to start a tidygedcom visualisation package, <strong>visgedcom</strong>, which will allow various views of genealogical data.</p>
+<p>I am also considering eventually de-scoping <strong>tidygedcom</strong> to only contain the user interface functions and moving the core infrastructure (the four files mentioned above and some other helper functions) to a <strong>tidygedcom.internals</strong> package.</p>
+<p>There is also potential to generate another package to handle different types of source documents. With all these package ideas it’s turning into a small ecosystem - the <strong>gedcompendium</strong> perhaps.</p>
 </div>
   </div>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read the Byte Order Mark of the GEDCOM file — read_gedcom_encoding • tidygedcom</title>
+<title>Make an Individual name appear first in the Individual record — primary_individual_name • tidygedcom</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Read the Byte Order Mark of the GEDCOM file — read_gedcom_encoding" />
-<meta property="og:description" content="This function reads the Byte Order Mark of a GEDCOM file in order to determine its encoding.
-It only checks for UTF-8 or UTF-16 - if neither of these are found it throws an error." />
+<meta property="og:title" content="Make an Individual name appear first in the Individual record — primary_individual_name" />
+<meta property="og:description" content="Make an Individual name appear first in the Individual record" />
 
 
 
@@ -136,30 +135,33 @@ It only checks for UTF-8 or UTF-16 - if neither of these are found it throws an 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read the Byte Order Mark of the GEDCOM file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/read_write_create.R'><code>R/read_write_create.R</code></a></small>
-    <div class="hidden name"><code>read_gedcom_encoding.Rd</code></div>
+    <h1>Make an Individual name appear first in the Individual record</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/edit_individual_names.R'><code>R/edit_individual_names.R</code></a></small>
+    <div class="hidden name"><code>primary_individual_name.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function reads the Byte Order Mark of a GEDCOM file in order to determine its encoding.
-It only checks for UTF-8 or UTF-16 - if neither of these are found it throws an error.</p>
+    <p>Make an Individual name appear first in the Individual record</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_gedcom_encoding</span><span class='op'>(</span><span class='va'>filepath</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>primary_individual_name</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>name</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>filepath</th>
-      <td><p>The full filepath of the GEDCOM file.</p></td>
+      <th>gedcom</th>
+      <td><p>A tidygedcom object.</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p>The personal name to move.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character string indicating the encoding of the file.</p>
+    <p>An updated tidygedcom object with the promoted name in the Individual record</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

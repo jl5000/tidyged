@@ -151,6 +151,12 @@ combine_gedcom_values <- function(gedcom) {
 #' expect_warning(write_gedcom(gedcom(), "my_family.txt") %>% file.remove("my_family.txt"))
 write_gedcom <- function(gedcom, filepath) {
 
+  if(file.exists(filepath)) file.remove(filepath)
+  
+  con <- file(filepath, encoding = "UTF-8", open = "a")
+  writeChar("\ufeff", con, eos = NULL)
+  on.exit(close(con))
+  
   if(tolower(stringr::str_sub(filepath, -4, -1)) != ".ged")
     warning("Output is not being saved as a GEDCOM file (*.ged)")
   
@@ -164,9 +170,9 @@ write_gedcom <- function(gedcom, filepath) {
     dplyr::mutate(record = dplyr::if_else(record == "TR", "", record)) %>% 
     tidyr::replace_na(list(record = "")) %>% 
     dplyr::transmute(value = paste(level, record, tag, value)) %>% 
-    dplyr::mutate(value = stringr::str_replace_all(value, "  ", " ")) %>%
-    utils::write.table(filepath, na = "", col.names = FALSE, quote = FALSE, row.names = FALSE,
-                       fileEncoding = "UTF-8")
+    dplyr::pull(value) %>% 
+    stringr::str_replace_all("  ", " ") %>%
+    writeLines(con)
   
 }
 
@@ -259,7 +265,7 @@ split_gedcom_values <- function(gedcom, char_limit) {
 #' @param receiving_system The name of the system expected to process the GEDCOM-compatible file. 
 #' @param language The human language in which the data in the file is normally read or written.
 #'
-#' @return A minimal tidygedcom object 
+#' @return A minimal tidygedcom object. 
 #' @export
 gedcom <- function(submitter_details = subm(),
                    gedcom_description = character(),

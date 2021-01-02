@@ -2,7 +2,7 @@
 title: "Cross references and activation"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Cross references and automation}
+  %\VignetteIndexEntry{Cross references and activation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

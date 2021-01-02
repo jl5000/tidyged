@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Remove a Source record from a tidygedcom object — remove_source • tidygedcom</title>
+<title>Consolidate duplicated notes — consolidate_notes • tidygedcom</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Remove a Source record from a tidygedcom object — remove_source" />
-<meta property="og:description" content="Remove a Source record from a tidygedcom object" />
+<meta property="og:title" content="Consolidate duplicated notes — consolidate_notes" />
+<meta property="og:description" content="Consolidate duplicated notes" />
 
 
 
@@ -135,16 +135,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Remove a Source record from a tidygedcom object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/edit_source.R'><code>R/edit_source.R</code></a></small>
-    <div class="hidden name"><code>remove_source.Rd</code></div>
+    <h1>Consolidate duplicated notes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/edit_note.R'><code>R/edit_note.R</code></a></small>
+    <div class="hidden name"><code>consolidate_notes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Remove a Source record from a tidygedcom object</p>
+    <p>Consolidate duplicated notes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>remove_source</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>consolidate_notes</span><span class='op'>(</span><span class='va'>gedcom</span>, min_occurences <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,11 +153,15 @@
       <th>gedcom</th>
       <td><p>A tidygedcom object.</p></td>
     </tr>
+    <tr>
+      <th>min_occurences</th>
+      <td><p>How many duplicates to prompt creating a new Note record.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An updated tidygedcom object excluding the active Source record.</p>
+    <p>A tidygedcom object with all notes consolidated.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

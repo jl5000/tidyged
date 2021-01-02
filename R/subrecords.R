@@ -759,9 +759,8 @@ PERSONAL_NAME_STRUCTURE <- function(name_personal,
         stop("Each phonetic variation requires a set of phonetic name pieces")
     } else {
       phonetic_name_pieces <- rep(list(PERSONAL_NAME_PIECES()), length(name_phonetic))
-      phonetic_name_pieces <- purrr::map2(name_phonetic, phonetic_name_pieces, salvage_name_pieces)
     }
-    
+    phonetic_name_pieces <- purrr::map2(name_phonetic, phonetic_name_pieces, salvage_name_pieces)
   }
   
   if(length(name_romanised) > 0) {
@@ -771,9 +770,8 @@ PERSONAL_NAME_STRUCTURE <- function(name_personal,
         stop("Each romanised variation requires a set of romanised name pieces")
     } else {
       romanised_name_pieces <- rep(list(PERSONAL_NAME_PIECES()), length(name_romanised))
-      romanised_name_pieces <-  purrr::map2(name_romanised, romanised_name_pieces, salvage_name_pieces)
     }
-    
+    romanised_name_pieces <-  purrr::map2(name_romanised, romanised_name_pieces, salvage_name_pieces)
   }
   
   temp <- dplyr::bind_rows(

@@ -1478,7 +1478,7 @@
       ]
     }
 
-# Function PLACE_STRUCTURE() @ L836
+# Function PLACE_STRUCTURE() @ L834
 
     {
       "type": "list",
@@ -1558,7 +1558,7 @@
       ]
     }
 
-# Function SOURCE_CITATION() @ L910
+# Function SOURCE_CITATION() @ L908
 
     {
       "type": "list",
@@ -1718,7 +1718,7 @@
       ]
     }
 
-# Function SOURCE_REPOSITORY_CITATION() @ L965
+# Function SOURCE_REPOSITORY_CITATION() @ L963
 
     {
       "type": "list",
@@ -1758,7 +1758,7 @@
       ]
     }
 
-# Function SPOUSE_TO_FAMILY_LINK() @ L995
+# Function SPOUSE_TO_FAMILY_LINK() @ L993
 
     {
       "type": "list",

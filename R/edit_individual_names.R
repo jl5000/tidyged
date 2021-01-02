@@ -233,8 +233,8 @@ remove_individual_name <- function(gedcom,
 #'              gedcom(subm()) %>% 
 #'                add_individual() %>% 
 #'                add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
-#'                add_individual_names_var("Joe Bloggs", "Jo Blogs", "spelling error") %>% 
-#'                remove_individual_name_var("Jo Blogs"))
+#'                add_individual_names_var("Joe Bloggs", "Jo /Blogs/", "spelling error") %>% 
+#'                remove_individual_name_var("Jo /Blogs/"))
 remove_individual_name_var <- function(gedcom,
                                        variation_name,
                                        phonetic_variation = TRUE) {

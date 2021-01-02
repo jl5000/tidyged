@@ -1,0 +1,122 @@
+---
+title: "Naming individuals"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Naming individuals}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Introduction
+
+Within a GEDCOM file, individuals can be given more than one name. These can be different kinds of name such as birth name or adoptive name, or if there is uncertainty, variants of these based on conflicting evidence sources. There is also the ability to provide phonetic and romanised variants of names. Given this complexity, the name is not immediately defined when creating an Individual record.
+
+## Adding individual names
+
+The main function for providing names for an individual is `add_individual_names()`:
+
+```{r}
+library(tidygedcom)
+
+gedcom(subm("Me")) %>% 
+  add_individual() %>% 
+  add_individual_names("Leia /Skywalker/") %>% 
+  dplyr::filter(record == "@I1@")
+```
+In the GEDCOM specification, all names should also be accompanied by a set of name pieces, specifying the given name, surname, nickname, etc. In addition, full names should always be surrounded surnames with forward slashes. In **tidygedcom** this allows us to automatically generate a name piece if none are given. If we provide a name with no name pieces and no forward slashes, it will cause an error:
+
+```{r, error=TRUE}
+gedcom(subm("Me")) %>% 
+  add_individual() %>% 
+  add_individual_names("Leia Skywalker")
+```
+
+Ideally, as much information as possible should be given:
+
+```{r}
+gedcom(subm("Me")) %>% 
+  add_individual() %>% 
+  add_individual_names("Leia /Skywalker/", type = "birth", given = "Leia", surname = "Skywalker") %>% 
+  dplyr::filter(record == "@I1@")
+```
+
+## Phonetic and romanised names
+
+Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the `add_individual_names_var()` function. As a minimum, the original name, variant name, derivation method, and whether it is a phonetic or romanised variation should be given:
+
+```{r}
+gedcom(subm("Me")) %>% 
+  add_individual() %>% 
+  add_individual_names("Leia /Skywalker/", type = "birth", given = "Leia", surname = "Skywalker") %>% 
+  add_individual_names_var("Leia /Skywalker/", "Laya /Skywalker/", type = "As spoken",
+                           phonetic_variation = TRUE) %>% 
+  dplyr::filter(record == "@I1@")
+```
+
+
+As with the original name, if there are no name pieces or forward slashes, it will result in an error. Ideally we provide as much information as possible:
+
+```{r}
+gedcom(subm("Me")) %>% 
+  add_individual() %>% 
+  add_individual_names("Leia /Skywalker/", type = "birth", given = "Leia", surname = "Skywalker") %>% 
+  add_individual_names_var("Leia /Skywalker/", "Laya /Skywalker/", type = "As spoken", 
+                           phonetic_variation = TRUE, given = "Laya", surname = "Skywalker") %>% 
+  dplyr::filter(record == "@I1@")
+```
+
+
+## Name types
+
+All of the above define the variants for a single birth name. The `type` parameter can also define different names for the individual. Below we add a line to define an adoptive name:
+
+```{r}
+gedcom(subm("Me")) %>% 
+  add_individual() %>% 
+  add_individual_names("Leia /Skywalker/", type = "birth", given = "Leia", surname = "Skywalker") %>% 
+  add_individual_names_var("Leia /Skywalker/", "Laya /Skywalker/", type = "As spoken", 
+                           phonetic_variation = TRUE, given = "Laya", surname = "Skywalker") %>% 
+  add_individual_names("Leia /Organa/", type = "adoptive", given = "Leia", surname = "Organa") %>% 
+  dplyr::filter(record == "@I1@") %>% print(n = Inf)
+```
+
+## Conflicting names
+
+GEDCOM files can also record different names *of the same type*, due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:
+
+```{r}
+gedcom(subm("Me")) %>% 
+  add_individual() %>% 
+  add_individual_names("Leia /Skywalker/", type = "birth", given = "Leia", surname = "Skywalker") %>% 
+  add_individual_names_var("Leia /Skywalker/", "Laya /Skywalker/", type = "As spoken", 
+                           phonetic_variation = TRUE, given = "Laya", surname = "Skywalker") %>% 
+  add_individual_names("Leia /Organa/", type = "adoptive", given = "Leia", surname = "Organa") %>% 
+  add_individual_names("Leia /Skywaker/", type = "birth", given = "Leia", surname = "Skywaker") %>%
+  dplyr::filter(record == "@I1@") %>% print(n = Inf)
+```
+
+Generally conflicting names are arranged in order of confidence; the first name is more likely to be correct. If you want to promote a name to occur first in the record, you can use the `primary_individual_name()` function:
+
+```{r}
+gedcom(subm("Me")) %>% 
+  add_individual() %>% 
+  add_individual_names("Leia /Skywalker/", type = "birth", given = "Leia", surname = "Skywalker") %>% 
+  add_individual_names_var("Leia /Skywalker/", "Laya /Skywalker/", type = "As spoken", 
+                           phonetic_variation = TRUE, given = "Laya", surname = "Skywalker") %>% 
+  add_individual_names("Leia /Organa/", type = "adoptive", given = "Leia", surname = "Organa") %>% 
+  add_individual_names("Leia /Skywaker/", type = "birth", given = "Leia", surname = "Skywaker") %>%
+  primary_individual_name("Leia /Skywaker/") %>% 
+  dplyr::filter(record == "@I1@") %>% print(n = Inf)
+```
+
+Note that the subrecords of the Individual record (those at level 1) can appear in any order.
+
+

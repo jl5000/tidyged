@@ -65,8 +65,8 @@ set_class_to_tidygedcom <- function(gedcom) {
 #' @param level The level number of the value
 #' @param after_tag Whether the tag should be subordinate to this parent tag 
 #'
-#' @return The particular value fitting the criteria of the input arguments. If not value is found,
-#' an empty string is returned. The function will automatically combine values split over CONT and CONC tags.
+#' @return The particular value fitting the criteria of the input arguments. If no value is found,
+#' an empty string is returned.
 gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   
   gedcom_filtered <- dplyr::filter(gedcom, record %in% record_xref)
@@ -223,7 +223,9 @@ salvage_name_pieces <- function(full_name, name_pieces) {
   name_pieces
 }
 
-remove_section <- function(gedcom,
+
+
+identify_section <- function(gedcom,
                            containing_level,
                            containing_tag,
                            containing_value,
@@ -255,12 +257,29 @@ remove_section <- function(gedcom,
       
     }
   }
+  rows_to_remove
+  
+}
+
+
+remove_section <- function(gedcom,
+                           containing_level,
+                           containing_tag,
+                           containing_value,
+                           xrefs = character()) {
+  
+  rows_to_remove <- identify_section(gedcom,
+                                     containing_level,
+                                     containing_tag,
+                                     containing_value,
+                                     xrefs)
   
   if(length(rows_to_remove) == 0) {
     gedcom
   } else {
     dplyr::slice(gedcom, -rows_to_remove)
   }
+  
 }
 
 remove_dates_for_tests <- function(gedcom) {

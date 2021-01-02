@@ -245,3 +245,26 @@ remove_individual_name_var <- function(gedcom,
                  variation_name, xrefs = get_active_record(gedcom))
   
 }
+
+
+#' Make an Individual name appear first in the Individual record
+#'
+#' @param gedcom A tidygedcom object.
+#' @param name The personal name to move.
+#'
+#' @return An updated tidygedcom object with the promoted name in the Individual record
+#' @export
+primary_individual_name <- function(gedcom, name) {
+  
+  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
+  
+  rows_to_move <- identify_section(gedcom, 1, "NAME", name)
+  
+  section <- gedcom[rows_to_move,]
+  gedcom <- gedcom[-rows_to_move,]
+  
+  next_row <- identify_section(gedcom, 0, "INDI", "", xrefs = get_active_record(gedcom))[2]
+
+  gedcom %>%
+    tibble::add_row(section, .before = next_row)
+}

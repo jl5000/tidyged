@@ -61,9 +61,13 @@ The user is kept away from this infrastructure, and instead interacts with vario
 
 ## Future work
 
-At the time of writing, this package is getting quite large and difficult to mentally manage. It can be quite tricky implementing some of the functionality to edit existing files (rather than creating from scratch), and so the long term plan is to have a sister package to help with this interactively using **shiny** (**shinygedcom**). I would imagine that much of the functionality developed so far would best sit in that package, and so I am considering eventually de-scoping **tidygedcom** to only contain the core infrastructure (the four files mentioned above and some other helper functions).
+At the time of writing, this package is getting quite large and difficult to mentally manage. It can be quite tricky implementing some of the functionality to edit existing GEDCOM files (rather than creating from scratch), and so the long term plan is to have a sister package to help with this interactively using **shiny** (**shinygedcom**). However, before work on **shinygedcom** begins, I would like to start a tidygedcom visualisation package, **visgedcom**, which will allow various views of genealogical data.
 
-However, before work on **shinygedcom** begins, I would like to start a tidygedcom visualisation package, **visgedcom**, which will allow various views of genealogical data.
+I am also considering eventually de-scoping **tidygedcom** to only contain the user interface functions and moving the core infrastructure (the four files mentioned above and some other helper functions) to a **tidygedcom.internals** package.
+
+There is also potential to generate another package to handle different types of source documents. With all these package ideas it's turning into a small ecosystem - the **gedcompendium** perhaps.
+
+
 
 
 

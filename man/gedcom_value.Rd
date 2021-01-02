@@ -18,8 +18,8 @@ gedcom_value(gedcom, record_xref, tag, level, after_tag = NULL)
 \item{after_tag}{Whether the tag should be subordinate to this parent tag}
 }
 \value{
-The particular value fitting the criteria of the input arguments. If not value is found,
-an empty string is returned. The function will automatically combine values split over CONT and CONC tags.
+The particular value fitting the criteria of the input arguments. If no value is found,
+an empty string is returned.
 }
 \description{
 Extract a particular value from a tidygedcom object

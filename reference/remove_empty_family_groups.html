@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Construct the INDIVIDUAL_EVENT_STRUCTURE tibble — INDIVIDUAL_EVENT_STRUCTURE • tidygedcom</title>
+<title>Remove Family Group records with no members — remove_empty_family_groups • tidygedcom</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Construct the INDIVIDUAL_EVENT_STRUCTURE tibble — INDIVIDUAL_EVENT_STRUCTURE" />
-<meta property="og:description" content="This function constructs a tibble representation of the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM 5.5.5
-specification." />
+<meta property="og:title" content="Remove Family Group records with no members — remove_empty_family_groups" />
+<meta property="og:description" content="Remove Family Group records with no members" />
 
 
 
@@ -136,58 +135,29 @@ specification." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Construct the INDIVIDUAL_EVENT_STRUCTURE tibble</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/subrecords.R'><code>R/subrecords.R</code></a></small>
-    <div class="hidden name"><code>INDIVIDUAL_EVENT_STRUCTURE.Rd</code></div>
+    <h1>Remove Family Group records with no members</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/edit_family_group.R'><code>R/edit_family_group.R</code></a></small>
+    <div class="hidden name"><code>remove_empty_family_groups.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function constructs a tibble representation of the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM 5.5.5
-specification.</p>
+    <p>Remove Family Group records with no members</p>
     </div>
 
-    <pre class="usage"><span class='fu'>INDIVIDUAL_EVENT_STRUCTURE</span><span class='op'>(</span>
-  <span class='va'>event_type_individual</span>,
-  event_descriptor <span class='op'>=</span> <span class='st'>""</span>,
-  individual_event_details <span class='op'>=</span> <span class='fu'><a href='INDIVIDUAL_EVENT_DETAIL.html'>INDIVIDUAL_EVENT_DETAIL</a></span><span class='op'>(</span><span class='op'>)</span>,
-  xref_fam <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  adopted_by_which_parent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>remove_empty_family_groups</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>event_type_individual</th>
-      <td><p>A code used to indicate the type of individual event. One of:
-"BIRT", "CHR", "DEAT", "BURI", "CREM", "ADOP", "BAPM", "BARM", "BASM", "CHRA", "CONF", "FCOM",
-"NATU", "EMIG", "IMMI", "CENS", "PROB", "WILL", "GRAD", "RETI", "EVEN".</p></td>
-    </tr>
-    <tr>
-      <th>event_descriptor</th>
-      <td><p>Text describing a particular event pertaining to the individual or family.
-This event value is usually assigned to the EVEN tag. The classification as to the difference
-between this specific event and other occurrences of the EVENt tag is indicated by the use of
-a subordinate TYPE tag selected from the EVENT_DETAIL structure.</p></td>
-    </tr>
-    <tr>
-      <th>individual_event_details</th>
-      <td><p>An INDIVIDUAL_EVENT_DETAIL() object giving details of the event.</p></td>
-    </tr>
-    <tr>
-      <th>xref_fam</th>
-      <td><p>An xref ID of a Family Group record.</p></td>
-    </tr>
-    <tr>
-      <th>adopted_by_which_parent</th>
-      <td><p>A code which shows which parent in the associated family group record adopted this person.
-Use "HUSB" for husband, "WIFE" for wife, or "BOTH" for both.</p></td>
+      <th>gedcom</th>
+      <td><p>A tidygedcom object.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tidy tibble containing the INDIVIDUAL_EVENT_STRUCTURE part of a GEDCOM file.</p>
+    <p>A new tidygedcom object with empty Family Group records removed.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

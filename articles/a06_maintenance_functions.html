@@ -279,7 +279,7 @@
 <div id="empty-family-groups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#empty-family-groups" class="anchor"></a>Empty family groups</h2>
-<p>If there are any Family Group records with no references to Individual records, they can be removed automatically with the <code>remove_empty_family_groups()</code> function. In the function below we create 6 family group records, half with members, half without:</p>
+<p>If there are any Family Group records with no references to Individual records, they can be removed automatically with the <code><a href="../reference/remove_empty_family_groups.html">remove_empty_family_groups()</a></code> function. In the function below we create 6 family group records, half with members, half without:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -292,7 +292,7 @@
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span>children <span class="op">=</span> <span class="st">"@I3@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">remove_empty_family_groups</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/remove_empty_family_groups.html">remove_empty_family_groups</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/num_indi.html">num_fam</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Family link also added to the Individual record for husband: @I1@</span>
 <span class="co">#&gt; Family link also added to the Individual record for wife: @I2@</span>

@@ -348,7 +348,7 @@
 <div id="file-structure" class="section level2">
 <h2 class="hasAnchor">
 <a href="#file-structure" class="anchor"></a>File structure</h2>
-<p>The specifications of GEDCOM records are represented in the <code>records.R</code> file. These records are composed of various data structures found in <code>subrecords.R</code>. I have also painstakingly written functions to validate each line value separately in <code>primitives.R</code> and they are (mostly) all documented in one place in <code>params.R</code>. These four files form the bulk of the codification of the GEDCOM specification.</p>
+<p>The specifications of GEDCOM records are represented in the <code>records.R</code> file. These records are composed of various data structures found in <code>subrecords.R</code>. I have also painstakingly written functions to validate each line value separately in <code>validate_primitives.R</code> and they are (mostly) all documented in one place in <code>docs_primitives.R</code>. These four files form the bulk of the codification of the GEDCOM specification.</p>
 <p>The user is kept away from this infrastructure, and instead interacts with various wrapper functions found in the <code>edit_*.R</code> files and summary functions found in <code>interrogate.R</code>.</p>
 </div>
 <div id="future-work" class="section level2">

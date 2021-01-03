@@ -7,7 +7,7 @@
 SOURCE_REPOSITORY_CITATION(xref_repo, source_call_number = character())
 }
 \arguments{
-\item{xref_repo}{An xref ID of a repository record.}
+\item{xref_repo}{An xref ID of a Repository record.}
 
 \item{source_call_number}{An identification or reference description used to file and retrieve items
 from the holdings of a repository.}

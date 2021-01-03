@@ -96,7 +96,7 @@ add_source <- function(gedcom,
 }
 
 
-#' Add a source repository citation to a source record
+#' Add a source repository citation to a Source record
 #'
 #' This structure is used within a source record to point to a name and 
 #' address record of the holder of the source document.

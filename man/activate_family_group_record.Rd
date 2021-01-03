@@ -2,7 +2,7 @@
 % Please edit documentation in R/activate.R
 \name{activate_family_group_record}
 \alias{activate_family_group_record}
-\title{Activate a Family group record}
+\title{Activate a Family Group record}
 \usage{
 activate_family_group_record(gedcom, xref)
 }

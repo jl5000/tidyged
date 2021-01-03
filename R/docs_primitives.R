@@ -3,10 +3,10 @@
 #' 
 #' Define all primitives used in GEDCOM records and subrecords.
 #' 
-#' @details This NULL function serves as a single location where all primitives are defined, mainly for
+#' @details This empty function serves as a single location where all primitives are defined, mainly for
 #' efficiency and maintainability. The first values defined are given earlier in the specification and not
 #' with the rest of the primitives.
-#' 
+#' @name primitive_definitions
 #' @param character_encoding A code value that represents the character set and encoding to be used to 
 #' interpret this data. Allowed values: "UTF-8" and "UNICODE" (UTF-16).
 #' @param gedcom_form A value that identifies the GEDCOM form used in this GEDCOM file. The value must be
@@ -197,13 +197,13 @@
 #' @param user_reference_type A user-defined definition of the user_reference_number.
 #' @param user_text Free-form user text. Comments, opinions. 
 #' @param where_within_source Specific location within the information referenced. 
-#' @param xref_fam An xref ID of a family group record.
-#' @param xref_indi An xref ID of an individual record.
-#' @param xref_sour An xref ID of a source record.
-#' @param xref_repo An xref ID of a repository record.
-#' @param xref_obje An xref ID of a multimedia record.
-#' @param xref_note An xref ID of a note record. 
-#' @param xref_subm An xref ID of a submitter record.
+#' @param xref_fam An xref ID of a Family Group record.
+#' @param xref_indi An xref ID of an Individual record.
+#' @param xref_sour An xref ID of a Source record.
+#' @param xref_repo An xref ID of a Repository record.
+#' @param xref_obje An xref ID of a Multimedia record.
+#' @param xref_note An xref ID of a Note record. 
+#' @param xref_subm An xref ID of a Submitter record.
 #' 
 #' @param date_changed A CHANGE_DATE() object giving the time this record was last modified. If not provided,
 #' the current date is used.
@@ -211,6 +211,5 @@
 #' @param source_citations A list of SOURCE_CITATION() objects.
 #' @param source_repository_citations A list of SOURCE_REPOSITORY_CITATION() objects.
 #' @param multimedia_links A list of MULTIMEDIA_LINK() objects
-#' @name parameter_definitions
 NULL
 

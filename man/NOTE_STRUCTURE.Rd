@@ -7,7 +7,7 @@
 NOTE_STRUCTURE(xref_note = character(), user_text = character())
 }
 \arguments{
-\item{xref_note}{An xref ID of a note record.}
+\item{xref_note}{An xref ID of a Note record.}
 
 \item{user_text}{Free-form user text. Comments, opinions.}
 }

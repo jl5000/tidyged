@@ -55,7 +55,7 @@ The cross-reference identifier is given in the record column. Event though these
 
 ## File structure
 
-The specifications of GEDCOM records are represented in the `records.R` file. These records are composed of various data structures found in `subrecords.R`. I have also painstakingly written functions to validate each line value separately in `primitives.R` and they are (mostly) all documented in one place in `params.R`. These four files form the bulk of the codification of the GEDCOM specification.
+The specifications of GEDCOM records are represented in the `records.R` file. These records are composed of various data structures found in `subrecords.R`. I have also painstakingly written functions to validate each line value separately in `validate_primitives.R` and they are (mostly) all documented in one place in `docs_primitives.R`. These four files form the bulk of the codification of the GEDCOM specification.
 
 The user is kept away from this infrastructure, and instead interacts with various wrapper functions found in the `edit_*.R` files and summary functions found in `interrogate.R`.
 

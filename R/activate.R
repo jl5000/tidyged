@@ -114,7 +114,7 @@ activate_individual_record <- function(gedcom,
 }
 
 
-#' Activate a Family group record
+#' Activate a Family Group record
 #' 
 #' This allows a mechanism to easily edit particular records. For Family group records, 
 #' the explicit xref is required. 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/edit_source.R
 \name{add_source_repository_citation}
 \alias{add_source_repository_citation}
-\title{Add a source repository citation to a source record}
+\title{Add a source repository citation to a Source record}
 \usage{
 add_source_repository_citation(
   gedcom,

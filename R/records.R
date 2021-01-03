@@ -15,7 +15,7 @@
 #' This function constructs a tibble representation of the GEDCOM_HEADER from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param header_extension A LINEAGE_LINKED_HEADER_EXTENSION() object providing more information
 #' about the GEDCOM file.
 #' @tests
@@ -57,7 +57,7 @@ GEDCOM_HEADER <- function(character_encoding = "UTF-8",
 #' This function constructs a tibble representation of the FAMILY_GROUP_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param events A list of FAMILY_EVENT_STRUCTURE() objects giving events associated with this family.
 #' @param xref_husb An xref ID of the husband.
 #' @param xref_wife An xref ID of the wife.
@@ -147,7 +147,7 @@ FAMILY_GROUP_RECORD <- function(xref_fam,
 #' This function constructs a tibble representation of the INDIVIDUAL_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param names A list of PERSONAL_NAME_STRUCTURE() objects giving the names associated with this individual.
 #' @param events A list of INDIVIDUAL_EVENT_STRUCTURE() objects giving the events associated with
 #' this individual.
@@ -233,7 +233,7 @@ INDIVIDUAL_RECORD <- function(xref_indi,
 #' This function constructs a tibble representation of the MULTIMEDIA_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_error(MULTIMEDIA_RECORD("@M1@", "file_ref", "JPG",
 #'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
@@ -318,7 +318,7 @@ MULTIMEDIA_RECORD <- function(xref_obje,
 #' This function constructs a tibble representation of the NOTE_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_error(NOTE_RECORD("@N1@", "This is a note",
 #'                                user_reference_number = 123:125, user_reference_type = letters[1:2]))
@@ -377,7 +377,7 @@ NOTE_RECORD <- function(xref_note,
 #' This function constructs a tibble representation of the REPOSITORY_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param address An ADDRESS_STRUCTURE() object giving details of the repository address.
 #' @tests
 #' expect_error(REPOSITORY_RECORD("@R1@", "Repo name",
@@ -442,7 +442,7 @@ REPOSITORY_RECORD <- function(xref_repo,
 #' This function constructs a tibble representation of the SOURCE_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param date_period_covered A date_period() object associated with the period covered by the course. 
 #' @param data_notes A list of NOTE_STRUCTURE() objects associated with the data in this source.
 #' @tests
@@ -546,7 +546,7 @@ SOURCE_RECORD <- function(xref_sour,
 #' This function constructs a tibble representation of the SUBMITTER_RECORD from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param address An ADDRESS_STRUCTURE() object giving address details of the submitter.
 #' @tests
 #' expect_equal(SUBMITTER_RECORD("@S1@", "Joe Bloggs"),

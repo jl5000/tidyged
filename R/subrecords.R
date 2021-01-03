@@ -4,7 +4,7 @@
 #' This function constructs a tibble representation of the LINEAGE_LINKED_HEADER_EXTENSION 
 #' from the GEDCOM 5.5.5 specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param business_address An ADDRESS_STRUCTURE() object giving the address of the business.
 #'
 #' @tests
@@ -97,7 +97,7 @@ LINEAGE_LINKED_HEADER_EXTENSION <- function(system_id = "tidygedcom",
 #' This function constructs a tibble representation of the ADDRESS_STRUCTURE from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' 
 #' @tests
 #' expect_error(ADDRESS_STRUCTURE(letters[1:4]))
@@ -189,7 +189,7 @@ ADDRESS_STRUCTURE <- function(local_address_lines = character(),
 #' This function constructs a tibble representation of the ASSOCIATION_STRUCTURE from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_error(ASSOCIATION_STRUCTURE())
 #' expect_error(ASSOCIATION_STRUCTURE("@1@"))
@@ -228,7 +228,7 @@ ASSOCIATION_STRUCTURE <- function(xref_indi,
 #' This function constructs a tibble representation of the CHANGE_DATE from the GEDCOM 5.5.5
 #' specification.
 #' 
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param change_date A date_exact() object giving the date that this data was changed.
 #' @tests
 #' expect_snapshot_value(CHANGE_DATE(date_exact(5, 10, 1990)), "json2")
@@ -262,7 +262,7 @@ CHANGE_DATE <- function(change_date = date_exact(),
 #' This function constructs a tibble representation of the CHILD_TO_FAMILY_LINK from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_error(CHILD_TO_FAMILY_LINK())
 #' expect_error(CHILD_TO_FAMILY_LINK("@1@", pedigree_linkage_type = "foste"))
@@ -294,7 +294,7 @@ CHILD_TO_FAMILY_LINK <- function(xref_fam,
 #' This function constructs a tibble representation of the EVENT_DETAIL from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param date A date_value() object giving the date of the event.
 #' @param place A PLACE_STRUCTURE() object giving the location of the event.
 #' @param address An ADDRESS_STRUCTURE() object giving the address of the event.
@@ -343,7 +343,7 @@ EVENT_DETAIL <- function(event_or_fact_classification = character(),
 #' This function constructs a tibble representation of the FAMILY_EVENT_DETAIL from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param event_details An EVENT_DETAIL() object giving details of the event.
 #' @tests
 #' expect_equal(dim(FAMILY_EVENT_DETAIL()), c(0, 3))  
@@ -384,7 +384,7 @@ FAMILY_EVENT_DETAIL <- function(husband_age_at_event = character(),
 #' This function constructs a tibble representation of the FAMILY_EVENT_STRUCTURE from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param family_event_details A FAMILY_EVENT_DETAIL() object giving details of the event.
 #' @tests
 #' expect_error(FAMILY_EVENT_STRUCTURE())
@@ -422,7 +422,7 @@ FAMILY_EVENT_STRUCTURE <- function(event_type_family,
 #' This function constructs a tibble representation of the INDIVIDUAL_ATTRIBUTE_STRUCTURE from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param individual_event_details An INDIVIDUAL_EVENT_DETAIL() object giving details of the attribute.
 #' @tests
 #' expect_error(INDIVIDUAL_ATTRIBUTE_STRUCTURE())
@@ -485,7 +485,7 @@ INDIVIDUAL_ATTRIBUTE_STRUCTURE <- function(attribute_type,
 #' This function constructs a tibble representation of the INDIVIDUAL_EVENT_DETAIL from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param event_details An EVENT_DETAIL() object giving details of the event.
 #' @tests
 #' expect_equal(dim(INDIVIDUAL_EVENT_DETAIL()), c(0, 3))  
@@ -513,7 +513,7 @@ INDIVIDUAL_EVENT_DETAIL <- function(event_details = EVENT_DETAIL(),
 #' This function constructs a tibble representation of the INDIVIDUAL_EVENT_STRUCTURE from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param individual_event_details An INDIVIDUAL_EVENT_DETAIL() object giving details of the event.
 #' @tests
 #' expect_error(INDIVIDUAL_EVENT_STRUCTURE())
@@ -567,7 +567,7 @@ INDIVIDUAL_EVENT_STRUCTURE <- function(event_type_individual,
 #' This function constructs a tibble representation of the MULTIMEDIA_LINK from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_error(MULTIMEDIA_LINK("ref"))
 #' expect_equal(MULTIMEDIA_LINK(character()), tibble::tibble())
@@ -589,7 +589,7 @@ MULTIMEDIA_LINK <- function(xref_obje) {
 #' This function constructs a tibble representation of the NOTE_STRUCTURE from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_error(NOTE_STRUCTURE(user_text = c("test1", "test2")))
 #' expect_equal(NOTE_STRUCTURE(), tibble::tibble())
@@ -626,7 +626,7 @@ NOTE_STRUCTURE <- function(xref_note = character(),
 #' This function constructs a tibble representation of the PERSONAL_NAME_PIECES from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_equal(dim(PERSONAL_NAME_PIECES()), c(0, 3))
 #' 
@@ -672,7 +672,7 @@ PERSONAL_NAME_PIECES <- function(name_piece_prefix = character(),
 #' This function constructs a tibble representation of the PERSONAL_NAME_STRUCTURE from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @param name_pieces A PERSONAL_NAME_PIECES() object giving the components of the name.
 #' @param phonetic_name_pieces A list of PERSONAL_NAME_PIECES() objects giving the components 
 #' of the phonetic name variations.
@@ -808,7 +808,7 @@ PERSONAL_NAME_STRUCTURE <- function(name_personal,
 #' This function constructs a tibble representation of the PLACE_STRUCTURE from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_error(PLACE_STRUCTURE())
 #' expect_error(PLACE_STRUCTURE("Here", place_latitude = "N51.5", place_longitude = "E0.0"))
@@ -891,7 +891,7 @@ PLACE_STRUCTURE <- function(place_name,
 #' This function constructs a tibble representation of the SOURCE_CITATION from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_equal(SOURCE_CITATION(character()), tibble::tibble())
 #' expect_snapshot_value(SOURCE_CITATION("@S1@"), "json2")
@@ -952,7 +952,7 @@ SOURCE_CITATION <- function(xref_sour,
 #' This function constructs a tibble representation of the SOURCE_REPOSITORY_CITATION from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_error(SOURCE_REPOSITORY_CITATION())
 #' expect_error(SOURCE_REPOSITORY_CITATION("@R1@", source_call_number = c("123", "456")))
@@ -982,7 +982,7 @@ SOURCE_REPOSITORY_CITATION <- function(xref_repo,
 #' This function constructs a tibble representation of the SPOUSE_TO_FAMILY_LINK from the GEDCOM 5.5.5
 #' specification.
 #'
-#' @inheritParams parameter_definitions
+#' @inheritParams primitive_definitions
 #' @tests
 #' expect_error(SPOUSE_TO_FAMILY_LINK())
 #' expect_equal(SPOUSE_TO_FAMILY_LINK(character()), tibble::tibble())

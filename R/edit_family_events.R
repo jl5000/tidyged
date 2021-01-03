@@ -1,6 +1,6 @@
 
 
-#' Add a family event to a family group record
+#' Add a family event to a Family Group record
 #'
 #' @inheritParams add_individual_event
 #' @param event_descriptor A short description of the event.

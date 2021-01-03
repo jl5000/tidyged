@@ -21,7 +21,7 @@ FAMILY_GROUP_RECORD(
 )
 }
 \arguments{
-\item{xref_fam}{An xref ID of a family group record.}
+\item{xref_fam}{An xref ID of a Family Group record.}
 
 \item{events}{A list of FAMILY_EVENT_STRUCTURE() objects giving events associated with this family.}
 

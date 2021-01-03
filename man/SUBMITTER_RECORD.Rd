@@ -15,7 +15,7 @@ SUBMITTER_RECORD(
 )
 }
 \arguments{
-\item{xref_subm}{An xref ID of a submitter record.}
+\item{xref_subm}{An xref ID of a Submitter record.}
 
 \item{submitter_name}{The name of the submitter formatted for display and address generation.}
 

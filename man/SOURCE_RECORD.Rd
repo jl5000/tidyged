@@ -26,7 +26,7 @@ SOURCE_RECORD(
 )
 }
 \arguments{
-\item{xref_sour}{An xref ID of a source record.}
+\item{xref_sour}{An xref ID of a Source record.}
 
 \item{events_recorded}{An enumeration of the different kinds of events that were recorded in a
 particular source. Each enumeration is separated by a comma. Such as a parish register of births,

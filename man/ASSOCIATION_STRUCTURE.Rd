@@ -12,7 +12,7 @@ ASSOCIATION_STRUCTURE(
 )
 }
 \arguments{
-\item{xref_indi}{An xref ID of an individual record.}
+\item{xref_indi}{An xref ID of an Individual record.}
 
 \item{relation_is_descriptor}{A word or phrase that states object 1's relation is object 2.}
 

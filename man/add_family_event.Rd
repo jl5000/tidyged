@@ -14,7 +14,7 @@
 \alias{add_family_event_marriage_settlement}
 \alias{add_family_event_residence}
 \alias{add_family_event_other}
-\title{Add a family event to a family group record}
+\title{Add a family event to a Family Group record}
 \usage{
 add_family_event(
   gedcom,
@@ -165,5 +165,5 @@ An updated tidygedcom object with an expanded Family group record including
 this event.
 }
 \description{
-Add a family event to a family group record
+Add a family event to a Family Group record
 }

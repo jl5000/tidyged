@@ -16,7 +16,7 @@ REPOSITORY_RECORD(
 )
 }
 \arguments{
-\item{xref_repo}{An xref ID of a repository record.}
+\item{xref_repo}{An xref ID of a Repository record.}
 
 \item{name_of_repository}{The official name of the archive in which the stated source material is stored.}
 

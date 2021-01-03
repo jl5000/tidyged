@@ -56,7 +56,7 @@ which this information was downloaded.}
 written. It is used primarily by programs to select language-specific sorting sequences and phonetic
 name matching algorithms.}
 
-\item{xref_subm}{An xref ID of a submitter record.}
+\item{xref_subm}{An xref ID of a Submitter record.}
 
 \item{gedcom_file_name}{The name of the GEDCOM file. A GEDCOM file name should use the format
 basename.ext, and use the file extension .GED (or .ged).}

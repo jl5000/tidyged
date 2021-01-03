@@ -23,7 +23,7 @@ INDIVIDUAL_RECORD(
 )
 }
 \arguments{
-\item{xref_indi}{An xref ID of an individual record.}
+\item{xref_indi}{An xref ID of an Individual record.}
 
 \item{names}{A list of PERSONAL_NAME_STRUCTURE() objects giving the names associated with this individual.}
 

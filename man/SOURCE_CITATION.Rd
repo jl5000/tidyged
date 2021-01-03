@@ -17,7 +17,7 @@ SOURCE_CITATION(
 )
 }
 \arguments{
-\item{xref_sour}{An xref ID of a source record.}
+\item{xref_sour}{An xref ID of a Source record.}
 
 \item{where_within_source}{Specific location within the information referenced.}
 

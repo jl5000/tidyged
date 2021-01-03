@@ -7,7 +7,7 @@
 MULTIMEDIA_LINK(xref_obje)
 }
 \arguments{
-\item{xref_obje}{An xref ID of a multimedia record.}
+\item{xref_obje}{An xref ID of a Multimedia record.}
 }
 \value{
 A tidy tibble containing the MULTIMEDIA_LINK part of a GEDCOM file.

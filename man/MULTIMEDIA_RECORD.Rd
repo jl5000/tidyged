@@ -19,7 +19,7 @@ MULTIMEDIA_RECORD(
 )
 }
 \arguments{
-\item{xref_obje}{An xref ID of a multimedia record.}
+\item{xref_obje}{An xref ID of a Multimedia record.}
 
 \item{multimedia_file_reference}{A complete local or remote file reference to the auxiliary data
 to be linked to the GEDCOM context. Remote reference would include a network address where the multimedia

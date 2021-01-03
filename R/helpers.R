@@ -111,8 +111,11 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
 }
 
 get_individual_name <- function(gedcom, xref) { 
-  gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
+  name <- gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
     stringr::str_remove_all("/")
+  
+  if (name == "") name <- xref
+  name
 }
 
 temporarily_remove_name_slashes <- function(gedcom) {

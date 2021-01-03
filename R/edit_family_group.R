@@ -85,14 +85,16 @@ add_family_group <- function(gedcom,
       set_active_record(xref_husb) %>% 
       add_individual_family_link_as_spouse(xref)
     
-    message("Family link also added to the Individual record for husband")
+    message("Family link also added to the Individual record for husband: ", 
+            get_individual_name(temp, xref_husb))
   }
   if(length(xref_wife) == 1) {
     temp <- temp %>%
       set_active_record(xref_wife) %>% 
       add_individual_family_link_as_spouse(xref)
     
-    message("Family link also added to the Individual record for wife")
+    message("Family link also added to the Individual record for wife: ",
+            get_individual_name(temp, xref_wife))
   }
   
   for(i in seq_along(xrefs_chil)) {
@@ -101,7 +103,8 @@ add_family_group <- function(gedcom,
       set_active_record(xrefs_chil[i]) %>% 
       add_individual_family_link_as_child(xref, linkage_type = child_linkage_types[i]) 
     
-    message("Family link also added to the Individual record for child ", xrefs_chil[i])
+    message("Family link also added to the Individual record for child: ",
+            get_individual_name(temp, xrefs_chil[i]))
   }
   
   set_active_record(temp, xref)
@@ -147,10 +150,10 @@ remove_family_group <- function(gedcom, remove_individuals = FALSE) {
   check_active_record_valid(gedcom, .pkgenv$record_string_fam, is_family)
   active_record <- get_active_record(gedcom)
   
-  ind_xrefs <- unique(dplyr::filter(gedcom, record == active_record,
-                                    tag %in% c("HUSB", "WIFE", "CHIL"))$value)
-  
   if(remove_individuals) {
+    
+    ind_xrefs <- unique(dplyr::filter(gedcom, record == active_record,
+                                      tag %in% c("HUSB", "WIFE", "CHIL"))$value)
     
     for(xref in ind_xrefs) {
       
@@ -170,3 +173,34 @@ remove_family_group <- function(gedcom, remove_individuals = FALSE) {
 }
 
 
+
+#' Remove Family Group records with no members
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return A new tidygedcom object with empty Family Group records removed.
+#' @export
+remove_empty_family_groups <- function(gedcom) {
+  
+  tags <- c("HUSB", "WIFE", "CHIL")
+  fam_xrefs <- xrefs_families(gedcom)
+  num_removed <- 0
+  
+  for(xref in fam_xrefs) {
+    
+    members <- dplyr::filter(gedcom, record == xref, tag %in% tags)
+    
+    if(nrow(members) == 0) {
+      gedcom <- gedcom %>% 
+        activate_family_group_record(xref) %>% 
+        remove_family_group()
+      
+      num_removed <- num_removed + 1
+    }
+    
+  }
+ 
+  message(num_removed, " empty family groups removed.")
+  gedcom
+  
+}

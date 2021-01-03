@@ -37,7 +37,7 @@ obtained.}
 \item{language}{The human language in which the data in the file is normally read or written.}
 }
 \value{
-A minimal tidygedcom object
+A minimal tidygedcom object.
 }
 \description{
 This function creates a minimal tidygedcom object with header and footer sections and a single submitter record.

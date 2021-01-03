@@ -62,3 +62,22 @@ The `consolidate_notes()` function will simplify the file, replacing note values
 consolidate_notes(notes) %>% print(n = Inf)
 ```
 
+## Empty family groups
+
+If there are any Family Group records with no references to Individual records, they can be removed automatically with the `remove_empty_family_groups()` function. In the function below we create 6 family group records, half with members, half without:
+
+```{r}
+gedcom(subm("Me")) %>% 
+  add_individual() %>% 
+  add_individual() %>% 
+  add_individual() %>% 
+  add_individual() %>% 
+  add_family_group(husband = "@I1@", wife = "@I2@") %>% 
+  add_family_group() %>% 
+  add_family_group(husband = "@I4@") %>% 
+  add_family_group() %>% 
+  add_family_group(children = "@I3@") %>% 
+  add_family_group() %>% 
+  remove_empty_family_groups() %>%
+  num_fam()
+```

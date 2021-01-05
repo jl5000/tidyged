@@ -1,0 +1,17 @@
+home:
+  title: An R package for handling GEDCOM files
+  description: Describe your family tree using the tidyverse
+  
+articles:
+- title: Articles
+  contents:
+  - intro_to_gedcom
+  - implementation
+  - cross_references
+  - automation
+  - individual_names
+  - maintenance_functions
+  
+template:
+  params:
+    bootswatch: sandstone

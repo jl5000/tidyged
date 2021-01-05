@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-In `vignette("a03_cross_references")`, the concept of record activation was introduced, using either record xrefs or other attributes of the record. In this vignette, we show how this same functionality is used to ease and automate the generation of new records. We begin by using the same example:
+In `vignette("cross_references")`, the concept of record activation was introduced, using either record xrefs or other attributes of the record. In this vignette, we show how this same functionality is used to ease and automate the generation of new records. We begin by using the same example:
 
 ```{r}
 library(tidygedcom)

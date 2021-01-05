@@ -18,7 +18,7 @@ One of the main characteristics I wanted for this package was to hide the comple
 
 I spent a significant amount of time before writing any code considering my options for how the data would be stored under the hood. In [one blog post](https://r-house.netlify.com/2019/12/30/can-genealogical-data-be-tidy/) I considered storing genealogical data in a relational table format as it is easier to deal with, but discounted it very quickly as it is not well suited to nested data (list columns are not ideal for this application).
 
-I toyed with the idea of using an off-the-shelf open source product like [GRAMPS](https://gramps-project.org/blog/) but I found it awkward to use and wanted something where I was in complete control.
+I toyed with the idea of using an off-the-shelf open source product like [GRAMPS](https://gramps-project.org/blog/) but I found it awkward to use and wanted something where I was in complete control, taking full advantage of the strengths of R.
 
 I also considered using data structures more suited to this type of data, such as JSON or graphs (using the **igraph** package). However, I discovered it would be quite difficult representing some of the structures in the GEDCOM specification to my satisfaction.
 
@@ -52,6 +52,10 @@ read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) %>%
 ```
 
 The cross-reference identifier is given in the record column. Event though these aren't given for the header and trailer records they are assigned as "HD" and "TR" respectively in the **tidygedcom** object.
+
+Many GEDCOM processors modify the data on import, perhaps ignoring custom tags. This package reads the file as-is, and the only modification of the file is in line with that recommended in the GEDCOM 5.5.5 specification, specifically; replacing double '@' symbols with single ones, and merging CONC/CONT lines. 
+
+If you want to modify single values in a GEDCOM or do a simple Find/Replace, then this is straightforward to achieve with a simple text editor.
 
 ## File structure
 

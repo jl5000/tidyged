@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Cross references
 
-GEDCOM records are given unique identifiers known as xrefs (cross-references) to allow other records to link to them. These are alphanumeric strings surrounded by ampersands. The **tidygedcom** package creates these xrefs automatically:
+GEDCOM records are given unique identifiers known as xrefs (cross-references) to allow other records to link to them. These are alphanumeric strings surrounded by '@' symbols. The **tidygedcom** package creates these xrefs automatically:
 
 ```{r}
 library(tidygedcom)

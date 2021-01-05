@@ -73,6 +73,7 @@ summary.tidygedcom <- function(object, ...) {
   ) %>% cat()
 }
 
+
 #' Get the structure of a tidygedcom object
 #'
 #' This function gives a breakdown of record counts in the GEDCOM file.

@@ -3,10 +3,12 @@ home:
   description: Describe your family tree using the tidyverse
 
 articles:
-- title: Read more about the functionality of `tidygedcom`
+- title: Overviews
   contents:
   - intro_to_gedcom
   - implementation
+- title: Features
+  contents:
   - cross_references
   - automation
   - individual_names

@@ -3,8 +3,7 @@ home:
   description: Describe your family tree using the tidyverse
 
 articles:
-- title: Articles
-  navbar: ~
+- title: Read more about the functionality of `tidygedcom`:
   contents:
   - intro_to_gedcom
   - implementation

@@ -14,8 +14,7 @@ add_note_to_record <- function(gedcom, note) {
   
   response1 <- menu(c("No", "Yes", "Absolutely!"), 
                      title = paste("You are about the add the following note to the record:", note,
-                                   ifelse(grepl(xref_pattern(), note), paste0("(", note_text ,")"), ""))
-                    )
+                                   ifelse(grepl(xref_pattern(), note), paste0("(", note_text ,")"), "")))
                     
   if(response1 %in% 0:1) return(gedcom)
   
@@ -36,25 +35,42 @@ add_note_to_record <- function(gedcom, note) {
         dplyr::pull(value) %>% 
         purrr::map_chr(get_individual_name, gedcom = gedcom)
       
+      if(length(associations) == 0) stop("Error: No associations found")
+      
       response3 <- menu(associations, title = "Which association should the note be attached to? (Select 0 to cancel)")
       
-      
+      # add note
       
     } else if(response2 == 3) {
       # get family links
       links <- dplyr::filter(gedcom, record == xref, tag %in% c("FAMS", "FAMC")) %>% 
         dplyr::pull(value)
       
-      response3 <- menu(links, title = "Which family link should the note be attached to?")
+      if(length(links) == 0) stop("Error: No family links found")
+      
+      response3 <- menu(purrr::map_chr(links, get_family_group_description, gedcom=gedcom), 
+                        title = "Which family link should the note be attached to?")
+      
+      
       
     } else if(response2 == 4) {
       # get events
+      
+      if(length(events) == 0) stop("Error: No events found")
+      
+      response3 <- menu(events, title = "Which event should the note be attached to? (Select 0 to cancel)")
     } else if(response2 == 5) {
       # get attributes
+      
+      if(length(attributes) == 0) stop("Error: No attributes found")
+      
+      response3 <- menu(attributes, title = "Which attribute should the note be attached to? (Select 0 to cancel)")
     } else if(response2 == 6) {
       # get names
       names <- dplyr::filter(gedcom, record == xref, tag %in% c("NAME", "FONE", "ROMN")) %>% 
         dplyr::pull(value)
+      
+      if(length(names) == 0) stop("Error: No names found")
       
       response3 <- menu(names, title = "Which name should the note be attached to?")
       
@@ -63,7 +79,12 @@ add_note_to_record <- function(gedcom, note) {
       sources <- dplyr::filter(gedcom, record == xref, tag == "SOUR") %>% 
         dplyr::pull(value)
       
-      response3 <- menu(sources, title = "Which source citation should the note be attached to?")     
+      if(length(sources) == 0) stop("Error: No source citations found")
+        
+      response3 <- menu(sources, title = "Which source citation should the note be attached to?")
+     
+      
+           
     }
     
     

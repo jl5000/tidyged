@@ -118,6 +118,29 @@ get_individual_name <- function(gedcom, xref) {
   name
 }
 
+get_family_group_description <- function(gedcom, xref) {
+  
+  husb <- dplyr::filter(gedcom, record == xref, tag == "HUSB")$value
+  wife <- dplyr::filter(gedcom, record == xref, tag == "WIFE")$value
+  chil <- dplyr::filter(gedcom, record == xref, tag == "CHIL")$value
+  
+  husb_str <- ifelse(length(husb) == 0, 
+                     "no husband", 
+                     paste("husband:", get_individual_name(gedcom, husb)))
+  
+  wife_str <- ifelse(length(wife) == 0, 
+                     "no wife", 
+                     paste("wife:", get_individual_name(gedcom, wife)))
+  
+  chil_str <- ifelse(length(chil) == 0, 
+                     "no children", 
+                     paste("children:", paste(purrr::map_chr(chil, get_individual_name, gedcom=gedcom),
+                                               collapse = ", ")))
+  
+  paste0("Family ", xref, " with ", husb_str, ", ", wife_str, ", and ", chil_str)
+  
+}
+
 temporarily_remove_name_slashes <- function(gedcom) {
   
   gedcom %>% 

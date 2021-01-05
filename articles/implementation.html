@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Implementation of tidygedcom • tidygedcom</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygedcom</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0</span>
       </span>
     </div>
 
@@ -46,23 +46,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/implementation.html">Implementation of tidygedcom</a>
-    </li>
-    <li>
-      <a href="../articles/intro_to_gedcom.html">Introduction to GEDCOM</a>
-    </li>
-  </ul>
+  <a href="../articles/index.html">Articles</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/jl5000/tidygedcom/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -78,7 +73,7 @@
       <h1 data-toc-skip>Implementation of tidygedcom</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidygedcom/blob/master/vignettes/implementation.Rmd"><code>vignettes/implementation.Rmd</code></a></small>
       <div class="hidden name"><code>implementation.Rmd</code></div>
 
     </div>
@@ -88,27 +83,258 @@
 <div id="why-tidygedcom" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-tidygedcom" class="anchor"></a>Why tidygedcom?</h2>
-<p>One of the main characteristics I wanted for this package was to hide the complexity of the GEDCOM specification. I began with what I wanted the user interface to look like and worked backwards from there. I felt that adopting a <code>tidyverse</code> feel to the package would enhance readability and would significantly flatten the learning curve for those who are familiar with <code>ggplot2</code>.</p>
+<p>One of the main characteristics I wanted for this package was to hide the complexity of the GEDCOM specification. I began with what I wanted the user interface to look like and worked backwards from there. I felt that adopting a <strong>tidyverse</strong> feel to the package would enhance readability and would significantly flatten the learning curve for those who are familiar with <strong>ggplot2</strong>.</p>
 </div>
 <div id="data-structures" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-structures" class="anchor"></a>Data structures</h2>
-<p>I spent a significant amount of time before writing any code considering my options for how the data would be stored under the hood. In <a href="https://r-house.netlify.com/2019/12/30/can-genealogical-data-be-tidy/">one blog post</a> I considered storing genealogical data in tabular format as it is easier to deal with, but discounted it very quickly as it is not well suited to nested data.</p>
-<p>I toyed with the idea of using an off-the-shelf open source product like <a href="https://gramps-project.org/blog/">GRAMPS</a> but I found it awkward to use and wanted something where I was in complete control.</p>
-<p>I also considered using data structures more suited to this type of data, such as JSON or graphs (using the <code>igraph</code> package). However, I discovered it would be quite difficult representing some of the structures in the GEDCOM specification to my satisfaction.</p>
-<p>It was some time before a better solution occurred to me, and that was to store the GEDCOM file almost as is, and just to split out the components of each line into their own columns, creating a tidy version of a GEDCOM file (hence the name <code>tidygedcom</code>). This would allow easy manipulation using existing <code>tidyverse</code> infrastructure, and some additional processing would be needed to deal with the ordered and nested nature of the file. Ironically, I had returned to the idea of a tidy dataframe that I had dismissed early on.</p>
+<p>I spent a significant amount of time before writing any code considering my options for how the data would be stored under the hood. In <a href="https://r-house.netlify.com/2019/12/30/can-genealogical-data-be-tidy/">one blog post</a> I considered storing genealogical data in a relational table format as it is easier to deal with, but discounted it very quickly as it is not well suited to nested data (list columns are not ideal for this application).</p>
+<p>I toyed with the idea of using an off-the-shelf open source product like <a href="https://gramps-project.org/blog/">GRAMPS</a> but I found it awkward to use and wanted something where I was in complete control, taking full advantage of the strengths of R.</p>
+<p>I also considered using data structures more suited to this type of data, such as JSON or graphs (using the <strong>igraph</strong> package). However, I discovered it would be quite difficult representing some of the structures in the GEDCOM specification to my satisfaction.</p>
+<p>It was some time before a better solution occurred to me, and that was to store the GEDCOM file almost as is, and just to split out the components of each line into their own columns, creating a tidy version of a GEDCOM file (hence the name <strong>tidygedcom</strong>). This would allow easy manipulation using existing <strong>tidyverse</strong> infrastructure, and some additional processing would be needed to deal with the ordered and nested nature of the file. Ironically, I had returned to the idea of a tidy dataframe that I had dismissed early on.</p>
 </div>
-<div id="implementation-details" class="section level2">
+<div id="the-tidygedcom-object" class="section level2">
 <h2 class="hasAnchor">
-<a href="#implementation-details" class="anchor"></a>Implementation details</h2>
-<p>The bulk of the internal data structures are represented in the <code>subrecords.R</code> file. These structures combine in various ways to create the top level records found in <code>records.R</code>. I have also painstakingly written functions to validate each line value separately in <code>primitives.R</code> and they are (mostly) all documented in one place in <code>params.R</code>. These four files form the bulk of the codification of the GEDCOM specification.</p>
+<a href="#the-tidygedcom-object" class="anchor"></a>The tidygedcom object</h2>
+<p>The <strong>tidygedcom</strong> object is a tibble representation of a GEDCOM file. Before we see how this is structured, let’s see an example of a GEDCOM file:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"555SAMPLE.GED"</span>, package <span class="op">=</span> <span class="st">"tidygedcom"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;  [1] "0 HEAD"                                                                                 </span>
+<span class="co">#&gt;  [2] "1 GEDC"                                                                                 </span>
+<span class="co">#&gt;  [3] "2 VERS 5.5.5"                                                                           </span>
+<span class="co">#&gt;  [4] "2 FORM LINEAGE-LINKED"                                                                  </span>
+<span class="co">#&gt;  [5] "3 VERS 5.5.5"                                                                           </span>
+<span class="co">#&gt;  [6] "1 CHAR UTF-8"                                                                           </span>
+<span class="co">#&gt;  [7] "1 SOUR GS"                                                                              </span>
+<span class="co">#&gt;  [8] "2 NAME GEDCOM Specification"                                                            </span>
+<span class="co">#&gt;  [9] "2 VERS 5.5.5"                                                                           </span>
+<span class="co">#&gt; [10] "2 CORP gedcom.org"                                                                      </span>
+<span class="co">#&gt; [11] "3 ADDR"                                                                                 </span>
+<span class="co">#&gt; [12] "4 CITY LEIDEN"                                                                          </span>
+<span class="co">#&gt; [13] "3 WWW www.gedcom.org"                                                                   </span>
+<span class="co">#&gt; [14] "1 DATE 2 Oct 2019"                                                                      </span>
+<span class="co">#&gt; [15] "2 TIME 0:00:00"                                                                         </span>
+<span class="co">#&gt; [16] "1 FILE 555Sample.ged"                                                                   </span>
+<span class="co">#&gt; [17] "1 LANG English"                                                                         </span>
+<span class="co">#&gt; [18] "1 SUBM @U1@"                                                                            </span>
+<span class="co">#&gt; [19] "0 @U1@ SUBM"                                                                            </span>
+<span class="co">#&gt; [20] "1 NAME Reldon Poulson"                                                                  </span>
+<span class="co">#&gt; [21] "1 ADDR "                                                                                </span>
+<span class="co">#&gt; [22] "2 ADR1 1900 43rd Street West"                                                           </span>
+<span class="co">#&gt; [23] "2 CITY Billings"                                                                        </span>
+<span class="co">#&gt; [24] "2 STAE Montana"                                                                         </span>
+<span class="co">#&gt; [25] "2 POST 68051"                                                                           </span>
+<span class="co">#&gt; [26] "2 CTRY United States of America"                                                        </span>
+<span class="co">#&gt; [27] "1 PHON +1 (406) 555-1232"                                                               </span>
+<span class="co">#&gt; [28] "0 @I1@ INDI"                                                                            </span>
+<span class="co">#&gt; [29] "1 NAME Robert Eugene /Williams/"                                                        </span>
+<span class="co">#&gt; [30] "2 SURN Williams"                                                                        </span>
+<span class="co">#&gt; [31] "2 GIVN Robert Eugene"                                                                   </span>
+<span class="co">#&gt; [32] "1 SEX M"                                                                                </span>
+<span class="co">#&gt; [33] "1 BIRT"                                                                                 </span>
+<span class="co">#&gt; [34] "2 DATE 2 Oct 1822"                                                                      </span>
+<span class="co">#&gt; [35] "2 PLAC Weston, Madison, Connecticut, United States of America"                          </span>
+<span class="co">#&gt; [36] "2 SOUR @S1@"                                                                            </span>
+<span class="co">#&gt; [37] "3 PAGE Sec. 2, p. 45"                                                                   </span>
+<span class="co">#&gt; [38] "1 DEAT"                                                                                 </span>
+<span class="co">#&gt; [39] "2 DATE 14 Apr 1905"                                                                     </span>
+<span class="co">#&gt; [40] "2 PLAC Stamford, Fairfield, Connecticut, United States of America"                      </span>
+<span class="co">#&gt; [41] "1 BURI"                                                                                 </span>
+<span class="co">#&gt; [42] "2 PLAC Spring Hill Cemetery, Stamford, Fairfield, Connecticut, United States of America"</span>
+<span class="co">#&gt; [43] "1 FAMS @F1@"                                                                            </span>
+<span class="co">#&gt; [44] "1 FAMS @F2@"                                                                            </span>
+<span class="co">#&gt; [45] "1 RESI "                                                                                </span>
+<span class="co">#&gt; [46] "2 DATE from 1900 to 1905"                                                               </span>
+<span class="co">#&gt; [47] "0 @I2@ INDI"                                                                            </span>
+<span class="co">#&gt; [48] "1 NAME Mary Ann /Wilson/"                                                               </span>
+<span class="co">#&gt; [49] "2 SURN Wilson"                                                                          </span>
+<span class="co">#&gt; [50] "2 GIVN Mary Ann"                                                                        </span>
+<span class="co">#&gt; [51] "1 SEX F"                                                                                </span>
+<span class="co">#&gt; [52] "1 BIRT"                                                                                 </span>
+<span class="co">#&gt; [53] "2 DATE BEF 1828"                                                                        </span>
+<span class="co">#&gt; [54] "2 PLAC Connecticut, United States of America"                                           </span>
+<span class="co">#&gt; [55] "1 FAMS @F1@"                                                                            </span>
+<span class="co">#&gt; [56] "0 @I3@ INDI"                                                                            </span>
+<span class="co">#&gt; [57] "1 NAME Joe /Williams/"                                                                  </span>
+<span class="co">#&gt; [58] "2 SURN Williams"                                                                        </span>
+<span class="co">#&gt; [59] "2 GIVN Joe"                                                                             </span>
+<span class="co">#&gt; [60] "1 SEX M"                                                                                </span>
+<span class="co">#&gt; [61] "1 BIRT"                                                                                 </span>
+<span class="co">#&gt; [62] "2 DATE 11 Jun 1861"                                                                     </span>
+<span class="co">#&gt; [63] "2 PLAC Idaho Falls, Bonneville, Idaho, United States of America"                        </span>
+<span class="co">#&gt; [64] "1 FAMC @F1@"                                                                            </span>
+<span class="co">#&gt; [65] "1 FAMC @F2@"                                                                            </span>
+<span class="co">#&gt; [66] "2 PEDI adopted"                                                                         </span>
+<span class="co">#&gt; [67] "1 ADOP "                                                                                </span>
+<span class="co">#&gt; [68] "2 DATE 16 Mar 1864"                                                                     </span>
+<span class="co">#&gt; [69] "0 @F1@ FAM"                                                                             </span>
+<span class="co">#&gt; [70] "1 HUSB @I1@"                                                                            </span>
+<span class="co">#&gt; [71] "1 WIFE @I2@"                                                                            </span>
+<span class="co">#&gt; [72] "1 CHIL @I3@"                                                                            </span>
+<span class="co">#&gt; [73] "1 MARR"                                                                                 </span>
+<span class="co">#&gt; [74] "2 DATE Dec 1859"                                                                        </span>
+<span class="co">#&gt; [75] "2 PLAC Rapid City, Pennington, South Dakota, United States of America"                  </span>
+<span class="co">#&gt; [76] "0 @F2@ FAM"                                                                             </span>
+<span class="co">#&gt; [77] "1 HUSB @I1@"                                                                            </span>
+<span class="co">#&gt; [78] "1 CHIL @I3@"                                                                            </span>
+<span class="co">#&gt; [79] "0 @S1@ SOUR"                                                                            </span>
+<span class="co">#&gt; [80] "1 DATA"                                                                                 </span>
+<span class="co">#&gt; [81] "2 EVEN BIRT, DEAT, MARR"                                                                </span>
+<span class="co">#&gt; [82] "3 DATE FROM Jan 1820 TO DEC 1825"                                                       </span>
+<span class="co">#&gt; [83] "3 PLAC Madison, Connecticut, United States of America"                                  </span>
+<span class="co">#&gt; [84] "2 AGNC Madison County Court"                                                            </span>
+<span class="co">#&gt; [85] "1 TITL Madison County Birth, Death, and Marriage Records"                               </span>
+<span class="co">#&gt; [86] "1 ABBR Madison BMD Records"                                                             </span>
+<span class="co">#&gt; [87] "1 REPO @R1@"                                                                            </span>
+<span class="co">#&gt; [88] "2 CALN 13B-1234.01"                                                                     </span>
+<span class="co">#&gt; [89] "0 @R1@ REPO"                                                                            </span>
+<span class="co">#&gt; [90] "1 NAME Family History Library"                                                          </span>
+<span class="co">#&gt; [91] "1 ADDR"                                                                                 </span>
+<span class="co">#&gt; [92] "2 ADR1 35 N West Temple Street"                                                         </span>
+<span class="co">#&gt; [93] "2 CITY Salt Lake City"                                                                  </span>
+<span class="co">#&gt; [94] "2 STAE Utah"                                                                            </span>
+<span class="co">#&gt; [95] "2 POST 84150"                                                                           </span>
+<span class="co">#&gt; [96] "2 CTRY United States of America"                                                        </span>
+<span class="co">#&gt; [97] "0 TRLR"</span></code></pre></div>
+<p>Lines in a GEDCOM file can have a number of components:</p>
+<ul>
+<li>
+<strong>Level</strong>: The level in the hierarchical structure. This appears for every line;</li>
+<li>
+<strong>Cross-reference identifier</strong>: A string (which looks like <span class="citation">@XYZ</span>@) that signals the beginning of a new record (apart from header and trailer);</li>
+<li>
+<strong>Tag</strong>: A short string given immediately after the level or cross-reference identifier that indicates the type of information being provided on the line. These are controlled values. User-defined tags have been allowed in other GEDCOM programs, but they are discouraged here;</li>
+<li>
+<strong>Cross-reference pointer</strong>: This links to another record in the file (which looks like <span class="citation">@XYZ</span>@). In the above example, the Family Group record beginning on line 69 references other Individual records who are members of the family;</li>
+<li>
+<strong>Line value</strong>: The value associated with the tag. For example, on line 6, the CHARacter encoding for the file is given as UTF-8.</li>
+</ul>
+<p>There will not be any lines that have all of these components. For example, the first line of records do not contain a line value. Also, a line will never have a cross-reference pointer and a line value defined. For this reason, the <strong>tidygedcom</strong> object treats cross-reference pointers as just another line value.</p>
+<p>The <strong>tidygedcom</strong> representation of the above GEDCOM file is given below:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidygedcom/">tidygedcom</a></span><span class="op">)</span>
+<span class="co">#&gt; If importing existing GEDCOM files, you should ensure that they are error free.</span>
+<span class="co">#&gt; This package assumes imported GEDCOM files are valid and very few validation checks are carried out.</span>
+<span class="co">#&gt; Several GEDCOM validators are available, including an online validator at http://ged-inline.elasticbeanstalk.com/</span>
+
+<span class="fu"><a href="../reference/read_gedcom.html">read_gedcom</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"555SAMPLE.GED"</span>, package <span class="op">=</span> <span class="st">"tidygedcom"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 97 x 4</span>
+<span class="co">#&gt;    level record tag   value                                                     </span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                                     </span>
+<span class="co">#&gt;  1     0 HD     HEAD  ""                                                        </span>
+<span class="co">#&gt;  2     1 HD     GEDC  ""                                                        </span>
+<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                                                   </span>
+<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                                          </span>
+<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                                                   </span>
+<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                                                   </span>
+<span class="co">#&gt;  7     1 HD     SOUR  "GS"                                                      </span>
+<span class="co">#&gt;  8     2 HD     NAME  "GEDCOM Specification"                                    </span>
+<span class="co">#&gt;  9     2 HD     VERS  "5.5.5"                                                   </span>
+<span class="co">#&gt; 10     2 HD     CORP  "gedcom.org"                                              </span>
+<span class="co">#&gt; 11     3 HD     ADDR  ""                                                        </span>
+<span class="co">#&gt; 12     4 HD     CITY  "LEIDEN"                                                  </span>
+<span class="co">#&gt; 13     3 HD     WWW   "www.gedcom.org"                                          </span>
+<span class="co">#&gt; 14     1 HD     DATE  "2 Oct 2019"                                              </span>
+<span class="co">#&gt; 15     2 HD     TIME  "0:00:00"                                                 </span>
+<span class="co">#&gt; 16     1 HD     FILE  "555Sample.ged"                                           </span>
+<span class="co">#&gt; 17     1 HD     LANG  "English"                                                 </span>
+<span class="co">#&gt; 18     1 HD     SUBM  "@U1@"                                                    </span>
+<span class="co">#&gt; 19     0 @U1@   SUBM  ""                                                        </span>
+<span class="co">#&gt; 20     1 @U1@   NAME  "Reldon Poulson"                                          </span>
+<span class="co">#&gt; 21     1 @U1@   ADDR  ""                                                        </span>
+<span class="co">#&gt; 22     2 @U1@   ADR1  "1900 43rd Street West"                                   </span>
+<span class="co">#&gt; 23     2 @U1@   CITY  "Billings"                                                </span>
+<span class="co">#&gt; 24     2 @U1@   STAE  "Montana"                                                 </span>
+<span class="co">#&gt; 25     2 @U1@   POST  "68051"                                                   </span>
+<span class="co">#&gt; 26     2 @U1@   CTRY  "United States of America"                                </span>
+<span class="co">#&gt; 27     1 @U1@   PHON  "+1 (406) 555-1232"                                       </span>
+<span class="co">#&gt; 28     0 @I1@   INDI  ""                                                        </span>
+<span class="co">#&gt; 29     1 @I1@   NAME  "Robert Eugene /Williams/"                                </span>
+<span class="co">#&gt; 30     2 @I1@   SURN  "Williams"                                                </span>
+<span class="co">#&gt; 31     2 @I1@   GIVN  "Robert Eugene"                                           </span>
+<span class="co">#&gt; 32     1 @I1@   SEX   "M"                                                       </span>
+<span class="co">#&gt; 33     1 @I1@   BIRT  ""                                                        </span>
+<span class="co">#&gt; 34     2 @I1@   DATE  "2 Oct 1822"                                              </span>
+<span class="co">#&gt; 35     2 @I1@   PLAC  "Weston, Madison, Connecticut, United States of America"  </span>
+<span class="co">#&gt; 36     2 @I1@   SOUR  "@S1@"                                                    </span>
+<span class="co">#&gt; 37     3 @I1@   PAGE  "Sec. 2, p. 45"                                           </span>
+<span class="co">#&gt; 38     1 @I1@   DEAT  ""                                                        </span>
+<span class="co">#&gt; 39     2 @I1@   DATE  "14 Apr 1905"                                             </span>
+<span class="co">#&gt; 40     2 @I1@   PLAC  "Stamford, Fairfield, Connecticut, United States of Ameri…</span>
+<span class="co">#&gt; 41     1 @I1@   BURI  ""                                                        </span>
+<span class="co">#&gt; 42     2 @I1@   PLAC  "Spring Hill Cemetery, Stamford, Fairfield, Connecticut, …</span>
+<span class="co">#&gt; 43     1 @I1@   FAMS  "@F1@"                                                    </span>
+<span class="co">#&gt; 44     1 @I1@   FAMS  "@F2@"                                                    </span>
+<span class="co">#&gt; 45     1 @I1@   RESI  ""                                                        </span>
+<span class="co">#&gt; 46     2 @I1@   DATE  "from 1900 to 1905"                                       </span>
+<span class="co">#&gt; 47     0 @I2@   INDI  ""                                                        </span>
+<span class="co">#&gt; 48     1 @I2@   NAME  "Mary Ann /Wilson/"                                       </span>
+<span class="co">#&gt; 49     2 @I2@   SURN  "Wilson"                                                  </span>
+<span class="co">#&gt; 50     2 @I2@   GIVN  "Mary Ann"                                                </span>
+<span class="co">#&gt; 51     1 @I2@   SEX   "F"                                                       </span>
+<span class="co">#&gt; 52     1 @I2@   BIRT  ""                                                        </span>
+<span class="co">#&gt; 53     2 @I2@   DATE  "BEF 1828"                                                </span>
+<span class="co">#&gt; 54     2 @I2@   PLAC  "Connecticut, United States of America"                   </span>
+<span class="co">#&gt; 55     1 @I2@   FAMS  "@F1@"                                                    </span>
+<span class="co">#&gt; 56     0 @I3@   INDI  ""                                                        </span>
+<span class="co">#&gt; 57     1 @I3@   NAME  "Joe /Williams/"                                          </span>
+<span class="co">#&gt; 58     2 @I3@   SURN  "Williams"                                                </span>
+<span class="co">#&gt; 59     2 @I3@   GIVN  "Joe"                                                     </span>
+<span class="co">#&gt; 60     1 @I3@   SEX   "M"                                                       </span>
+<span class="co">#&gt; 61     1 @I3@   BIRT  ""                                                        </span>
+<span class="co">#&gt; 62     2 @I3@   DATE  "11 Jun 1861"                                             </span>
+<span class="co">#&gt; 63     2 @I3@   PLAC  "Idaho Falls, Bonneville, Idaho, United States of America"</span>
+<span class="co">#&gt; 64     1 @I3@   FAMC  "@F1@"                                                    </span>
+<span class="co">#&gt; 65     1 @I3@   FAMC  "@F2@"                                                    </span>
+<span class="co">#&gt; 66     2 @I3@   PEDI  "adopted"                                                 </span>
+<span class="co">#&gt; 67     1 @I3@   ADOP  ""                                                        </span>
+<span class="co">#&gt; 68     2 @I3@   DATE  "16 Mar 1864"                                             </span>
+<span class="co">#&gt; 69     0 @F1@   FAM   ""                                                        </span>
+<span class="co">#&gt; 70     1 @F1@   HUSB  "@I1@"                                                    </span>
+<span class="co">#&gt; 71     1 @F1@   WIFE  "@I2@"                                                    </span>
+<span class="co">#&gt; 72     1 @F1@   CHIL  "@I3@"                                                    </span>
+<span class="co">#&gt; 73     1 @F1@   MARR  ""                                                        </span>
+<span class="co">#&gt; 74     2 @F1@   DATE  "Dec 1859"                                                </span>
+<span class="co">#&gt; 75     2 @F1@   PLAC  "Rapid City, Pennington, South Dakota, United States of A…</span>
+<span class="co">#&gt; 76     0 @F2@   FAM   ""                                                        </span>
+<span class="co">#&gt; 77     1 @F2@   HUSB  "@I1@"                                                    </span>
+<span class="co">#&gt; 78     1 @F2@   CHIL  "@I3@"                                                    </span>
+<span class="co">#&gt; 79     0 @S1@   SOUR  ""                                                        </span>
+<span class="co">#&gt; 80     1 @S1@   DATA  ""                                                        </span>
+<span class="co">#&gt; 81     2 @S1@   EVEN  "BIRT, DEAT, MARR"                                        </span>
+<span class="co">#&gt; 82     3 @S1@   DATE  "FROM Jan 1820 TO DEC 1825"                               </span>
+<span class="co">#&gt; 83     3 @S1@   PLAC  "Madison, Connecticut, United States of America"          </span>
+<span class="co">#&gt; 84     2 @S1@   AGNC  "Madison County Court"                                    </span>
+<span class="co">#&gt; 85     1 @S1@   TITL  "Madison County Birth, Death, and Marriage Records"       </span>
+<span class="co">#&gt; 86     1 @S1@   ABBR  "Madison BMD Records"                                     </span>
+<span class="co">#&gt; 87     1 @S1@   REPO  "@R1@"                                                    </span>
+<span class="co">#&gt; 88     2 @S1@   CALN  "13B-1234.01"                                             </span>
+<span class="co">#&gt; 89     0 @R1@   REPO  ""                                                        </span>
+<span class="co">#&gt; 90     1 @R1@   NAME  "Family History Library"                                  </span>
+<span class="co">#&gt; 91     1 @R1@   ADDR  ""                                                        </span>
+<span class="co">#&gt; 92     2 @R1@   ADR1  "35 N West Temple Street"                                 </span>
+<span class="co">#&gt; 93     2 @R1@   CITY  "Salt Lake City"                                          </span>
+<span class="co">#&gt; 94     2 @R1@   STAE  "Utah"                                                    </span>
+<span class="co">#&gt; 95     2 @R1@   POST  "84150"                                                   </span>
+<span class="co">#&gt; 96     2 @R1@   CTRY  "United States of America"                                </span>
+<span class="co">#&gt; 97     0 TR     TRLR  ""</span></code></pre></div>
+<p>The cross-reference identifier is given in the record column. Event though these aren’t given for the header and trailer records they are assigned as “HD” and “TR” respectively in the <strong>tidygedcom</strong> object.</p>
+<p>Many GEDCOM processors modify the data on import, perhaps ignoring custom tags. This package reads the file as-is, and the only modification of the file is in line with that recommended in the GEDCOM 5.5.5 specification, specifically; replacing double ‘@’ symbols with single ones, and merging CONC/CONT lines.</p>
+<p>If you want to modify single values in a GEDCOM or do a simple Find/Replace, then this is straightforward to achieve with a simple text editor.</p>
+</div>
+<div id="file-structure" class="section level2">
+<h2 class="hasAnchor">
+<a href="#file-structure" class="anchor"></a>File structure</h2>
+<p>The specifications of GEDCOM records are represented in the <code>records.R</code> file. These records are composed of various data structures found in <code>subrecords.R</code>. I have also painstakingly written functions to validate each line value separately in <code>validate_primitives.R</code> and they are (mostly) all documented in one place in <code>docs_primitives.R</code>. These four files form the bulk of the codification of the GEDCOM specification.</p>
 <p>The user is kept away from this infrastructure, and instead interacts with various wrapper functions found in the <code>edit_*.R</code> files and summary functions found in <code>interrogate.R</code>.</p>
 </div>
 <div id="future-work" class="section level2">
 <h2 class="hasAnchor">
 <a href="#future-work" class="anchor"></a>Future work</h2>
-<p>At the time of writing, this package is getting quite large and difficult to mentally manage. It can be quite tricky implementing some of the functionality to edit existing files (rather than creating from scratch), and so the long term plan is to have a sister package to help with this interactively using <code>shiny</code> (<code>shinygedcom</code>). I would imagine that much of the functionality developed so far would best sit in that package, and so I am considering eventually de-scoping <code>tidygedcom</code> to only contain the core infrastructure (the four files mentioned above and some other helper functions).</p>
-<p>However, before work on <code>shinygedcom</code> begins, I would like to start a tidygedcom visualisation package, <code>visgedcom</code>, which will allow various views of genealogical data.</p>
+<p>At the time of writing, this package is getting quite large and difficult to mentally manage. It can be quite tricky implementing some of the functionality to edit existing GEDCOM files (rather than creating from scratch), and so the long term plan is to have a sister package to help with this interactively using <strong>shiny</strong> (<strong>shinygedcom</strong>). However, before work on <strong>shinygedcom</strong> begins, I would like to start a tidygedcom visualisation package, <strong>visgedcom</strong>, which will allow various views of genealogical data.</p>
+<p>I am also considering eventually de-scoping <strong>tidygedcom</strong> to only contain the user interface functions and moving the core infrastructure (the four files mentioned above and some other helper functions) to a <strong>tidygedcom.internals</strong> package.</p>
+<p>There is also potential to generate another package to handle different types of source documents. With all these package ideas it’s turning into a small ecosystem - the <strong>gedcompendium</strong> perhaps.</p>
 </div>
   </div>
 

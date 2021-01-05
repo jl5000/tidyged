@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Introduction to GEDCOM • tidygedcom</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidygedcom</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0</span>
       </span>
     </div>
 
@@ -46,23 +46,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/implementation.html">Implementation of tidygedcom</a>
-    </li>
-    <li>
-      <a href="../articles/intro_to_gedcom.html">Introduction to GEDCOM</a>
-    </li>
-  </ul>
+  <a href="../articles/index.html">Articles</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/jl5000/tidygedcom/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -78,7 +73,7 @@
       <h1 data-toc-skip>Introduction to GEDCOM</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidygedcom/blob/master/vignettes/intro_to_gedcom.Rmd"><code>vignettes/intro_to_gedcom.Rmd</code></a></small>
       <div class="hidden name"><code>intro_to_gedcom.Rmd</code></div>
 
     </div>
@@ -88,12 +83,12 @@
 <div id="what-is-gedcom" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-gedcom" class="anchor"></a>What is GEDCOM?</h2>
-<p>Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by <code>tidygedcom</code>.</p>
+<p>Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by <strong>tidygedcom</strong>.</p>
 </div>
 <div id="what-does-a-gedcom-file-look-like" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-a-gedcom-file-look-like" class="anchor"></a>What does a GEDCOM file look like?</h2>
-<p>A GEDCOM file is a plain text file (with extension .ged or .GED), which contains <strong>records</strong>. These records contain information on:</p>
+<p>A GEDCOM file is a plain text file (with extension .ged or .GED), which contains <em>records</em>. These records contain information on:</p>
 <ul>
 <li>Family groups (i.e. nuclear families)</li>
 <li>Individuals</li>
@@ -204,17 +199,13 @@
 <span class="co">#&gt; [96] "2 CTRY United States of America"                                                        </span>
 <span class="co">#&gt; [97] "0 TRLR"</span></code></pre></div>
 <p>Each record is a nested structure containing one or more lines where the number at the beginning of the line indicates the level in the hierarchy. New records begin at level 0. In the above file, the submitter record begins at line 19.</p>
+<p>You can learn more about the structure of GEDCOM files and <strong>tidygedcom</strong> representations of them in <code><a href="../articles/implementation.html">vignette("implementation")</a></code>.</p>
+<p>The <a href="https://www.gedcom.org/gedcom.html">GEDCOM 5.5.5 specification</a> is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structures allowed for each record type, and this is what the <strong>tidygedcom</strong> package is designed to automate.</p>
 </div>
-<div id="whats-on-a-gedcom-line" class="section level2">
+<div id="gedcom-5-5-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#whats-on-a-gedcom-line" class="anchor"></a>What’s on a GEDCOM line?</h2>
-<p>Aside from the level in the hierarchy, a GEDCOM line can contain three other types of data:</p>
-<ul>
-<li>The <strong>tag</strong>, given immediately after the level which indicates the information being provided on the line;</li>
-<li>A <strong>line value</strong> associated with the tag. For example, on line 6, the CHARacter encoding for the file is given as UTF-8;</li>
-<li>The first line of records do not contain a line value. Instead an <strong>xref</strong> (or cross-reference) is given before the tag, which looks like <span class="citation">@XYZ</span>@. This allows records to link to other records. In the above example, the family group record beginning on line 69 references other individual records who are members of the family.</li>
-</ul>
-<p>The <a href="https://www.gedcom.org/gedcom.html">GEDCOM 5.5.5 specification</a> is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structure allowed for each record type, and this is what the <code>tidygedcom</code> package is designed to automate.</p>
+<a href="#gedcom-5-5-5" class="anchor"></a>GEDCOM 5.5.5</h2>
+<p>GEDCOM 5.5.5 is a relatively recent update, considering the previous release, 5.5.1, was first released in 1999. Version 5.5.5 is a maintenance release which simplifies and clarifies the standard considerably, but has not yet been embraced widely in the genealogical community. Notwithstanding, it is the best version of GEDCOM available which doesn’t stray from the standards put in place over the last decades. A good proportion of genealogists use products like Family Tree Maker, RootsMagic, and Gramps, all of which extend the GEDCOM grammar in different ways.</p>
 </div>
   </div>
 

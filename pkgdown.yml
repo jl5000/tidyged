@@ -2,11 +2,11 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  a01_intro_to_gedcom: a01_intro_to_gedcom.html
-  a02_implementation: a02_implementation.html
-  a03_cross_references: a03_cross_references.html
-  a04_automation: a04_automation.html
-  a05_individual_names: a05_individual_names.html
-  a06_maintenance_functions: a06_maintenance_functions.html
-last_built: 2021-01-03T12:55Z
+  automation: automation.html
+  cross_references: cross_references.html
+  implementation: implementation.html
+  individual_names: individual_names.html
+  intro_to_gedcom: intro_to_gedcom.html
+  maintenance_functions: maintenance_functions.html
+last_built: 2021-01-05T16:02Z
 

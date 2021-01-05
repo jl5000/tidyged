@@ -2,8 +2,6 @@ home:
   title: An R package for handling GEDCOM files
   description: Describe your family tree using the tidyverse
 
-navbar:
-- 
 articles:
 - title: Articles
   navbar: ~

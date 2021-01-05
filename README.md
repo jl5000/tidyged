@@ -11,7 +11,8 @@
 [![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-> Families are messy - but the data describing them doesn’t need to be.
+> Families can be difficult - but the data describing them doesn’t need
+> to be
 
 Import, create, and summarise family tree GEDCOM files using tidy
 dataframes. This package is still in heavy development with the first

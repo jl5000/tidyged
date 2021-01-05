@@ -14,4 +14,4 @@ articles:
   
 template:
   params:
-    bootswatch: sandstone
+    bootswatch: yeti

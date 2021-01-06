@@ -133,6 +133,7 @@ personal names.</p>
   surname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   suffix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   name_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   update_date_changed <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
@@ -187,6 +188,10 @@ parts, e.g. Jr. Different name suffix parts are separated by a comma.</p></td>
       <th>name_notes</th>
       <td><p>A character vector of notes accompanying this name.
 These could be xrefs to existing Note records.</p></td>
+    </tr>
+    <tr>
+      <th>xref</th>
+      <td><p>The xref of a record to act on if one is not activated (will override active record).</p></td>
     </tr>
     <tr>
       <th>update_date_changed</th>

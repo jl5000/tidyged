@@ -126,6 +126,7 @@ address record of the holder of the source document.</p>
   <span class='va'>gedcom</span>,
   <span class='va'>repository</span>,
   call_number <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   update_date_changed <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
@@ -145,6 +146,10 @@ be an xref or a regular expression to match to a repository name.</p></td>
       <th>call_number</th>
       <td><p>An identification or reference description used to file
 and retrieve items from the holdings of a repository.</p></td>
+    </tr>
+    <tr>
+      <th>xref</th>
+      <td><p>The xref of a record to act on if one is not activated (will override active record).</p></td>
     </tr>
     <tr>
       <th>update_date_changed</th>

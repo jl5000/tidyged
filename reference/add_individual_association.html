@@ -125,6 +125,7 @@
   <span class='va'>associated_with</span>,
   <span class='va'>association</span>,
   association_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   update_date_changed <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
@@ -148,6 +149,10 @@ be an xref or a regular expression to match to an individual name.</p></td>
       <th>association_notes</th>
       <td><p>A character vector of notes accompanying this association.
 These could be xrefs to existing Note records.</p></td>
+    </tr>
+    <tr>
+      <th>xref</th>
+      <td><p>The xref of a record to act on if one is not activated (will override active record).</p></td>
     </tr>
     <tr>
       <th>update_date_changed</th>

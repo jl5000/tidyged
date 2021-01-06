@@ -124,22 +124,18 @@ or the xref can be provided explicitly. Providing a note excerpt instead of the
 xref can make your code more readable, provided that the excerpt returns a unique record!</p>
     </div>
 
-    <pre class="usage"><span class='fu'>activate_note_record</span><span class='op'>(</span><span class='va'>gedcom</span>, note_excerpt <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>, xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>activate_note_record</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>note</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>gedcom</th>
-      <td><p>A tidygedcom object</p></td>
+      <td><p>A tidygedcom object.</p></td>
     </tr>
     <tr>
-      <th>note_excerpt</th>
-      <td><p>An excerpt of the Note record to be activated</p></td>
-    </tr>
-    <tr>
-      <th>xref</th>
-      <td><p>The xref of the Note record to activate</p></td>
+      <th>note</th>
+      <td><p>The xref or an excerpt of the Note record to be activated.</p></td>
     </tr>
     </table>
 

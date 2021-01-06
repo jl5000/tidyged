@@ -120,7 +120,7 @@
     <p>Make an Individual name appear first in the Individual record</p>
     </div>
 
-    <pre class="usage"><span class='fu'>primary_individual_name</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>name</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>primary_individual_name</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>name</span>, xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -132,6 +132,10 @@
     <tr>
       <th>name</th>
       <td><p>The personal name to move.</p></td>
+    </tr>
+    <tr>
+      <th>xref</th>
+      <td><p>The xref of a record to act on if one is not activated (will override active record).</p></td>
     </tr>
     </table>
 

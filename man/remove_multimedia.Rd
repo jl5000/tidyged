@@ -4,10 +4,12 @@
 \alias{remove_multimedia}
 \title{Remove a Multimedia record from a tidygedcom object}
 \usage{
-remove_multimedia(gedcom)
+remove_multimedia(gedcom, xref = character())
 }
 \arguments{
 \item{gedcom}{A tidygedcom object.}
+
+\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 }
 \value{
 An updated tidygedcom object excluding the active Multimedia record.

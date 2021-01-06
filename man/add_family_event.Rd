@@ -46,6 +46,7 @@ add_family_event(
   responsible_agency = character(),
   religious_affiliation = character(),
   multimedia_links = character(),
+  xref = character(),
   update_date_changed = TRUE
 )
 
@@ -155,6 +156,8 @@ entity that has responsibility for the event data.}
 
 \item{multimedia_links}{A character vector of multimedia file references accompanying this
 event. These could be xrefs to existing Multimedia records.}
+
+\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
 \item{update_date_changed}{Whether to add/update the change date for the record.}
 

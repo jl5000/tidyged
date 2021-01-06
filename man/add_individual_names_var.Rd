@@ -17,6 +17,7 @@ add_individual_names_var(
   surname = character(),
   suffix = character(),
   variation_notes = character(),
+  xref = character(),
   update_date_changed = TRUE
 )
 }
@@ -53,6 +54,8 @@ parts, e.g. Jr. Different name suffix parts are separated by a comma.}
 
 \item{variation_notes}{A character vector of notes accompanying this name variation.
 These could be xrefs to existing Note records.}
+
+\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
 \item{update_date_changed}{Whether to add/update the change date for the record.}
 }

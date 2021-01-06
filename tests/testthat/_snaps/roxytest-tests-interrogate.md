@@ -4,13 +4,13 @@
       "type": "NULL"
     }
 
-# Function str.tidygedcom() @ L100
+# Function str.tidygedcom() @ L101
 
     {
       "type": "NULL"
     }
 
-# Function df_individuals() @ L146
+# Function df_individuals() @ L147
 
     {
       "type": "list",
@@ -95,7 +95,7 @@
       ]
     }
 
-# Function df_families() @ L204
+# Function df_families() @ L205
 
     {
       "type": "list",
@@ -155,7 +155,7 @@
       ]
     }
 
-# Function df_multimedia() @ L238
+# Function df_multimedia() @ L239
 
     {
       "type": "list",
@@ -210,7 +210,7 @@
       ]
     }
 
-# Function df_sources() @ L265
+# Function df_sources() @ L266
 
     {
       "type": "list",
@@ -255,7 +255,7 @@
       ]
     }
 
-# Function df_repositories() @ L288
+# Function df_repositories() @ L289
 
     {
       "type": "list",
@@ -310,7 +310,7 @@
       ]
     }
 
-# Function df_notes() @ L315
+# Function df_notes() @ L316
 
     {
       "type": "list",

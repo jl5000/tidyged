@@ -4,12 +4,12 @@
 \alias{activate_family_group_record}
 \title{Activate a Family Group record}
 \usage{
-activate_family_group_record(gedcom, xref)
+activate_family_group_record(gedcom, family)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidygedcom object.}
 
-\item{xref}{The xref of the Family group record to activate}
+\item{family}{The xref of the Family Group record to be activated.}
 }
 \value{
 The same tidygedcom object with "active_record" attribute set to the specific

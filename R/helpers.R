@@ -170,6 +170,54 @@ finalise <- function(df, global_start_level = 0) {
 }
 
 
+get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_fn) {
+  
+  if (length(xref_or_descriptor) == 0) {
+    
+    xref <- get_active_record(gedcom)
+    
+  } else if (grepl(xref_pattern(), xref_or_descriptor)) {
+    
+    xref <- xref_or_descriptor
+    
+  } else {
+    
+    if (record_type == .pkgenv$record_string_indi) {
+      
+      xref <- find_xref(gedcom, xefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), xref_or_descriptor)
+      
+    } else if(record_type == .pkgenv$record_string_fam) {
+      
+      stop("The selected family record is not valid")
+      
+    } else if(record_type == .pkgenv$record_string_repo) {
+      
+      xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", xref_or_descriptor) 
+      
+    } else if(record_type == .pkgenv$record_string_sour) {
+      
+      xref <- find_xref(gedcom, xrefs_sources(gedcom), "TITL", xref_or_descriptor)
+      
+    } else if(record_type == .pkgenv$record_string_obje) {
+      
+      xref <- find_xref(gedcom, xrefs_multimedia(gedcom), "FILE", xref_or_descriptor)
+      
+    } else if(record_type == .pkgenv$record_string_note) {
+      
+      xref <- find_xref(gedcom, xrefs_notes(gedcom), "NOTE", xref_or_descriptor)
+    }
+    
+  }
+
+  if(is.null(xref))
+    stop("No xref is provided and no ", record_type, " record is activated.")
+  
+  if(!record_type_fn(gedcom, xref))
+    stop("The provided or active record is not a ", record_type, " record")
+  
+  xref
+}
+
 #' Create a new xref for a record
 #' 
 #' This function is used to assign xrefs to new records that are created.

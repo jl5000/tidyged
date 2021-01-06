@@ -4,18 +4,12 @@
 \alias{activate_multimedia_record}
 \title{Activate a Multimedia record}
 \usage{
-activate_multimedia_record(
-  gedcom,
-  file_reference = character(),
-  xref = character()
-)
+activate_multimedia_record(gedcom, multimedia)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidygedcom object.}
 
-\item{file_reference}{The file reference of the Multimedia record to be activated}
-
-\item{xref}{The xref of the Multimedia record to activate}
+\item{multimedia}{The xref or file reference of the Multimedia record to be activated.}
 }
 \value{
 The same tidygedcom object with "active_record" attribute set to the specific

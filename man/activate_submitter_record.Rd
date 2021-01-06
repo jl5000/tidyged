@@ -4,18 +4,12 @@
 \alias{activate_submitter_record}
 \title{Activate a Submitter record}
 \usage{
-activate_submitter_record(
-  gedcom,
-  submitter_name = character(),
-  xref = character()
-)
+activate_submitter_record(gedcom, submitter)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidygedcom object.}
 
-\item{submitter_name}{The name of the submitter whose record should be activated}
-
-\item{xref}{The xref of the Submitter record to activate}
+\item{submitter}{The xref or name of the Submitter record to be activated.}
 }
 \value{
 The same tidygedcom object with "active_record" attribute set to the specific

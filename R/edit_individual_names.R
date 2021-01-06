@@ -24,6 +24,7 @@
 #' parts, e.g. Jr. Different name suffix parts are separated by a comma.
 #' @param name_notes A character vector of notes accompanying this name.
 #' These could be xrefs to existing Note records.
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param update_date_changed Whether to add/update the change date for the record.
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
@@ -39,9 +40,10 @@ add_individual_names <- function(gedcom,
                                  surname = character(),
                                  suffix = character(),
                                  name_notes = character(),
+                                 xref = character(),
                                  update_date_changed = TRUE) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
   nam_notes <- purrr::map(name_notes, ~ if(grepl(xref_pattern(), .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
@@ -59,15 +61,16 @@ add_individual_names <- function(gedcom,
                                       name_pieces = name_pieces) %>% add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     name_str <- dplyr::bind_rows(name_str, CHANGE_DATE() %>% add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(name_str, .before = next_row) %>% 
-    finalise()
+    finalise() %>% 
+    activate_individual_record(xref)
 }
 
 #' Add a variation of a personal name to an Individual record
@@ -93,6 +96,7 @@ add_individual_names <- function(gedcom,
 #' parts, e.g. Jr. Different name suffix parts are separated by a comma.
 #' @param variation_notes A character vector of notes accompanying this name variation.
 #' These could be xrefs to existing Note records.
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param update_date_changed Whether to add/update the change date for the record.
 #'
 #' @return An updated tidygedcom object with an expanded Individual record including
@@ -118,9 +122,10 @@ add_individual_names_var <- function(gedcom,
                                      surname = character(),
                                      suffix = character(),
                                      variation_notes = character(),
+                                     xref = character(),
                                      update_date_changed = TRUE) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
   name_notes <- purrr::map(variation_notes, ~ if(grepl(xref_pattern(), .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
@@ -176,17 +181,18 @@ add_individual_names_var <- function(gedcom,
     add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     name_str <- dplyr::bind_rows(name_str, CHANGE_DATE() %>% add_levels(1))
   }
   
   next_row <- gedcom %>% 
     temporarily_remove_name_slashes() %>% 
-    find_insertion_point(get_active_record(gedcom), 1, "NAME", primary_name)
+    find_insertion_point(xref, 1, "NAME", primary_name)
   
   gedcom %>%
     tibble::add_row(name_str, .before = next_row) %>% 
-    finalise()
+    finalise() %>% 
+    activate_individual_record(xref)
 }
 
 
@@ -194,6 +200,7 @@ add_individual_names_var <- function(gedcom,
 #'
 #' @param gedcom A tidygedcom object.
 #' @param name The personal name to remove.
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
 #' @return An updated tidygedcom object with an Individual record excluding
 #' this personal name (and components).
@@ -206,12 +213,13 @@ add_individual_names_var <- function(gedcom,
 #'                add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
 #'                remove_individual_name("Joe Bloggs"))  
 remove_individual_name <- function(gedcom,
-                                    name) {
+                                   name,
+                                   xref = character()) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
-  remove_section(gedcom, 1, "NAME", name,
-                 xrefs = get_active_record(gedcom))
+  remove_section(gedcom, 1, "NAME", name, xrefs = xref) %>% 
+    activate_individual_record(xref)
   
 }
 
@@ -222,6 +230,7 @@ remove_individual_name <- function(gedcom,
 #' @param variation_name The personal name variation to remove.
 #' @param phonetic_variation Whether the name variation is a phonetic variation
 #' (TRUE, default) or a romanised variation (FALSE).
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
 #' @return An updated tidygedcom object with an Individual record excluding
 #' this personal name variation (and components).
@@ -237,12 +246,14 @@ remove_individual_name <- function(gedcom,
 #'                remove_individual_name_var("Jo /Blogs/"))
 remove_individual_name_var <- function(gedcom,
                                        variation_name,
-                                       phonetic_variation = TRUE) {
+                                       phonetic_variation = TRUE,
+                                       xref = character()) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
   remove_section(gedcom, 2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
-                 variation_name, xrefs = get_active_record(gedcom))
+                 variation_name, xrefs = xref) %>% 
+    activate_individual_record(xref)
   
 }
 
@@ -251,20 +262,22 @@ remove_individual_name_var <- function(gedcom,
 #'
 #' @param gedcom A tidygedcom object.
 #' @param name The personal name to move.
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
 #' @return An updated tidygedcom object with the promoted name in the Individual record
 #' @export
-primary_individual_name <- function(gedcom, name) {
+primary_individual_name <- function(gedcom, name, xref = character()) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
   rows_to_move <- identify_section(gedcom, 1, "NAME", name)
   
   section <- gedcom[rows_to_move,]
   gedcom <- gedcom[-rows_to_move,]
   
-  next_row <- identify_section(gedcom, 0, "INDI", "", xrefs = get_active_record(gedcom))[2]
+  next_row <- identify_section(gedcom, 0, "INDI", "", xrefs = xref)[2]
 
   gedcom %>%
-    tibble::add_row(section, .before = next_row)
+    tibble::add_row(section, .before = next_row) %>% 
+    activate_individual_record(xref)
 }

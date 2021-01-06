@@ -4,14 +4,12 @@
 \alias{activate_note_record}
 \title{Activate a Note record}
 \usage{
-activate_note_record(gedcom, note_excerpt = character(), xref = character())
+activate_note_record(gedcom, note)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidygedcom object.}
 
-\item{note_excerpt}{An excerpt of the Note record to be activated}
-
-\item{xref}{The xref of the Note record to activate}
+\item{note}{The xref or an excerpt of the Note record to be activated.}
 }
 \value{
 The same tidygedcom object with "active_record" attribute set to the specific

@@ -9,7 +9,7 @@ test_that("Function summary.tidygedcom() @ L56", {
 })
 
 
-test_that("Function str.tidygedcom() @ L100", {
+test_that("Function str.tidygedcom() @ L101", {
   expect_snapshot_value(
    gedcom(subm("Me")) %>% 
     add_individual() %>% 
@@ -27,7 +27,7 @@ test_that("Function str.tidygedcom() @ L100", {
 })
 
 
-test_that("Function df_individuals() @ L146", {
+test_that("Function df_individuals() @ L147", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_individual(sex = "M") %>% 
    add_individual_names("Joe /Bloggs/") %>% 
@@ -51,7 +51,7 @@ test_that("Function df_individuals() @ L146", {
 })
 
 
-test_that("Function df_families() @ L204", {
+test_that("Function df_families() @ L205", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_individual(sex = "M") %>% 
    add_individual_names("Joe /Bloggs/") %>% 
@@ -67,7 +67,7 @@ test_that("Function df_families() @ L204", {
 })
 
 
-test_that("Function df_multimedia() @ L238", {
+test_that("Function df_multimedia() @ L239", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_multimedia(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") %>% 
    add_multimedia(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") %>% 
@@ -77,7 +77,7 @@ test_that("Function df_multimedia() @ L238", {
 })
 
 
-test_that("Function df_sources() @ L265", {
+test_that("Function df_sources() @ L266", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_source(originator = "author1", title = "book1") %>% 
    add_source(originator = "author2", title = "book2") %>% 
@@ -87,7 +87,7 @@ test_that("Function df_sources() @ L265", {
 })
 
 
-test_that("Function df_repositories() @ L288", {
+test_that("Function df_repositories() @ L289", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_repository(name = "repo1", city = "Brighton", state = "E. Sussex", country = "UK") %>% 
    add_repository(name = "repo2", city = "Orlando", state = "Florida", country = "USA") %>% 
@@ -97,7 +97,7 @@ test_that("Function df_repositories() @ L288", {
 })
 
 
-test_that("Function df_notes() @ L315", {
+test_that("Function df_notes() @ L316", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_note(text = "This is a note", user_reference_number = 1234) %>% 
    add_note(text = "This is also a note", user_reference_number = 5678) %>% 

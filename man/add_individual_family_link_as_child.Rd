@@ -9,6 +9,7 @@ add_individual_family_link_as_child(
   family_xref,
   linkage_type = "birth",
   linkage_notes = character(),
+  xref = character(),
   update_date_changed = TRUE
 )
 }
@@ -22,6 +23,8 @@ add_individual_family_link_as_child(
 
 \item{linkage_notes}{A character vector of notes accompanying this linkage.
 These could be xrefs to existing Note records.}
+
+\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
 \item{update_date_changed}{Whether to add/update the change date for the record.}
 }

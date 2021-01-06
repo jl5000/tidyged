@@ -4,12 +4,14 @@
 \alias{remove_individual_name}
 \title{Remove a personal name (and components) from an Individual record}
 \usage{
-remove_individual_name(gedcom, name)
+remove_individual_name(gedcom, name, xref = character())
 }
 \arguments{
 \item{gedcom}{A tidygedcom object.}
 
 \item{name}{The personal name to remove.}
+
+\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 }
 \value{
 An updated tidygedcom object with an Individual record excluding

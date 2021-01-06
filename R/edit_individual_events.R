@@ -59,6 +59,7 @@
 #' These could be xrefs to existing Note records.
 #' @param multimedia_links A character vector of multimedia file references accompanying this
 #' event. These could be xrefs to existing Multimedia records.
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param update_date_changed Whether to add/update the change date for the record.
 #' @param ... See arguments for main function. The attribute_type/event_type do not need to be populated.
 #' @return An updated tidygedcom object with an expanded Individual record including
@@ -104,9 +105,10 @@ add_individual_event <- function(gedcom,
                                  family_xref = character(),
                                  adopting_parent = character(),
                                  multimedia_links = character(),
+                                 xref = character(),
                                  update_date_changed = TRUE) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
@@ -166,15 +168,16 @@ add_individual_event <- function(gedcom,
                                           adopted_by_which_parent = adopting_parent) %>% add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     event_str <- dplyr::bind_rows(event_str, CHANGE_DATE() %>% add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "INDI")
+  next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(event_str, .before = next_row) %>% 
-    finalise()
+    finalise() %>% 
+    activate_individual_record(xref)
   
 }
 

@@ -4,12 +4,14 @@
 \alias{primary_individual_name}
 \title{Make an Individual name appear first in the Individual record}
 \usage{
-primary_individual_name(gedcom, name)
+primary_individual_name(gedcom, name, xref = character())
 }
 \arguments{
 \item{gedcom}{A tidygedcom object.}
 
 \item{name}{The personal name to move.}
+
+\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 }
 \value{
 An updated tidygedcom object with the promoted name in the Individual record

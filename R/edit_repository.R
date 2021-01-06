@@ -78,18 +78,19 @@ add_repository <- function(gedcom,
 #' Remove a Repository record from a tidygedcom object
 #'
 #' @param gedcom A tidygedcom object.
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
 #' @return An updated tidygedcom object excluding the active Repository record.
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
 #'              gedcom(subm()) %>% add_repository("text") %>% remove_repository())
-remove_repository <- function(gedcom) {
+remove_repository <- function(gedcom, xref = character()) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_repo, is_repository)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_repo, is_repository)
   
   gedcom %>% 
-    remove_section(1, "REPO", get_active_record(.)) %>% 
-    dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 
+    remove_section(1, "REPO", xref) %>% 
+    dplyr::filter(record != xref, value != xref) %>% 
     null_active_record()
 }

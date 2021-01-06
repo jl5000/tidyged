@@ -4,10 +4,12 @@
 \alias{remove_individual}
 \title{Remove an Individual record from a tidygedcom object}
 \usage{
-remove_individual(gedcom, remove_associations = TRUE)
+remove_individual(gedcom, xref = character(), remove_associations = TRUE)
 }
 \arguments{
 \item{gedcom}{A tidygedcom object.}
+
+\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
 \item{remove_associations}{Whether to also remove associations with this individual in
 other individual records. Defaults to TRUE.}

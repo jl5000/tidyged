@@ -4,14 +4,12 @@
 \alias{activate_source_record}
 \title{Activate a Source record}
 \usage{
-activate_source_record(gedcom, source_title = character(), xref = character())
+activate_source_record(gedcom, source)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidygedcom object.}
 
-\item{source_title}{The title of the Source record to be activated}
-
-\item{xref}{The xref of the Source record to activate}
+\item{source}{The xref or title of the Source record to be activated.}
 }
 \value{
 The same tidygedcom object with "active_record" attribute set to the specific

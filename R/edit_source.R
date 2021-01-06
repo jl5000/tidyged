@@ -106,6 +106,7 @@ add_source <- function(gedcom,
 #' be an xref or a regular expression to match to a repository name.
 #' @param call_number An identification or reference description used to file 
 #' and retrieve items from the holdings of a repository.
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param update_date_changed Whether to add/update the change date for the record.
 #'
 #' @return An updated tidygedcom object with an expanded Source record including
@@ -121,9 +122,10 @@ add_source <- function(gedcom,
 add_source_repository_citation <- function(gedcom,
                                            repository,
                                            call_number = character(),
+                                           xref = character(),
                                            update_date_changed = TRUE) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_source)
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
@@ -131,11 +133,11 @@ add_source_repository_citation <- function(gedcom,
                                          source_call_number = call_number) %>% add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     citation <- dplyr::bind_rows(citation, CHANGE_DATE() %>% add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "SOUR")
+  next_row <- find_insertion_point(gedcom, xref, 0, "SOUR")
   
   gedcom %>%
     tibble::add_row(citation, .before = next_row) %>% 
@@ -155,32 +157,36 @@ add_source_repository_citation <- function(gedcom,
 #'                  remove_source_repository_citation("library") %>% 
 #'                  remove_dates_for_tests())
 remove_source_repository_citation <- function(gedcom,
-                                              repository) {
+                                              repository,
+                                              xref = character()) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_source)
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
-  remove_section(gedcom, 1, "REPO", repo_xref, xrefs = get_active_record(gedcom))
+  remove_section(gedcom, 1, "REPO", repo_xref, xrefs = xref) %>% 
+    activate_source_record(xref)
   
 }
 
 #' Remove a Source record from a tidygedcom object
 #'
 #' @param gedcom A tidygedcom object.
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
 #' @return An updated tidygedcom object excluding the active Source record.
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
 #'              gedcom(subm()) %>% add_source(title = "text") %>% remove_source())
-remove_source <- function(gedcom) {
+remove_source <- function(gedcom,
+                          xref = character()) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_source)
   
   gedcom %>% 
-    remove_section(1, "SOUR", get_active_record(.)) %>% 
-    remove_section(2, "SOUR", get_active_record(.)) %>%
-    dplyr::filter(record != get_active_record(.), value != get_active_record(.)) %>% 
+    remove_section(1, "SOUR", xref) %>% 
+    remove_section(2, "SOUR", xref) %>%
+    dplyr::filter(record != xref, value != xref) %>% 
     null_active_record()
 }

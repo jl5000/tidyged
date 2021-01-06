@@ -73,6 +73,7 @@ add_individual <- function(gedcom,
 #' individual in other Individual records.
 #' 
 #' @param gedcom A tidygedcom object.
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param remove_associations Whether to also remove associations with this individual in 
 #' other individual records. Defaults to TRUE.
 #'
@@ -82,19 +83,20 @@ add_individual <- function(gedcom,
 #' @tests
 #' expect_equal(gedcom(subm()),
 #'              gedcom(subm()) %>% add_individual() %>% remove_individual())
-remove_individual <- function(gedcom, remove_associations = TRUE) {
+remove_individual <- function(gedcom, 
+                              xref = character(),
+                              remove_associations = TRUE) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_indi, is_individual)
-  active_record <- get_active_record(gedcom)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
   if(remove_associations) {
-    gedcom <- remove_section(gedcom, 1, "ASSO", active_record)
-    message("Associations with ", get_individual_name(gedcom, active_record),
+    gedcom <- remove_section(gedcom, 1, "ASSO", xref)
+    message("Associations with ", get_individual_name(gedcom, xref),
             " also removed")
   }
   
   gedcom %>% 
-    dplyr::filter(record != active_record, value != active_record) %>% 
+    dplyr::filter(record != xref, value != xref) %>% 
     null_active_record()
 }
 

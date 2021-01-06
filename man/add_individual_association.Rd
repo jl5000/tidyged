@@ -9,6 +9,7 @@ add_individual_association(
   associated_with,
   association,
   association_notes = character(),
+  xref = character(),
   update_date_changed = TRUE
 )
 }
@@ -22,6 +23,8 @@ be an xref or a regular expression to match to an individual name.}
 
 \item{association_notes}{A character vector of notes accompanying this association.
 These could be xrefs to existing Note records.}
+
+\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
 \item{update_date_changed}{Whether to add/update the change date for the record.}
 }

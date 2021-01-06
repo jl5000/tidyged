@@ -4,18 +4,12 @@
 \alias{activate_repository_record}
 \title{Activate a Repository record}
 \usage{
-activate_repository_record(
-  gedcom,
-  repository_name = character(),
-  xref = character()
-)
+activate_repository_record(gedcom, repository)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidygedcom object.}
 
-\item{repository_name}{The name of the repository whose record should be activated}
-
-\item{xref}{The xref of the Repository record to activate}
+\item{repository}{The xref or name of the Repository record to be activated.}
 }
 \value{
 The same tidygedcom object with "active_record" attribute set to the specific

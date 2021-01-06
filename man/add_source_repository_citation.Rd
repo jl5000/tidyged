@@ -8,6 +8,7 @@ add_source_repository_citation(
   gedcom,
   repository,
   call_number = character(),
+  xref = character(),
   update_date_changed = TRUE
 )
 }
@@ -19,6 +20,8 @@ be an xref or a regular expression to match to a repository name.}
 
 \item{call_number}{An identification or reference description used to file
 and retrieve items from the holdings of a repository.}
+
+\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
 \item{update_date_changed}{Whether to add/update the change date for the record.}
 }

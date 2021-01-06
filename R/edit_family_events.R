@@ -58,9 +58,10 @@ add_family_event <- function(gedcom,
                              responsible_agency = character(),
                              religious_affiliation = character(),
                              multimedia_links = character(),
+                             xref = character(),
                              update_date_changed = TRUE) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_fam, is_family)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_fam, is_family)
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
@@ -122,15 +123,16 @@ add_family_event <- function(gedcom,
                                           family_event_details = details2) %>% add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = get_active_record(gedcom))
+    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     event_str <- dplyr::bind_rows(event_str, CHANGE_DATE() %>% add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, get_active_record(gedcom), 0, "FAM")
+  next_row <- find_insertion_point(gedcom, xref, 0, "FAM")
 
   gedcom %>%
     tibble::add_row(event_str, .before = next_row) %>% 
-    finalise()
+    finalise() %>% 
+    activate_family_group_record(xref)
   
 }
 

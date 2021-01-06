@@ -4,18 +4,12 @@
 \alias{activate_individual_record}
 \title{Activate an Individual record}
 \usage{
-activate_individual_record(
-  gedcom,
-  individual_name = character(),
-  xref = character()
-)
+activate_individual_record(gedcom, individual)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidygedcom object.}
 
-\item{individual_name}{The name of the individual whose record should be activated}
-
-\item{xref}{The xref of the Individual record to activate}
+\item{individual}{The xref or name of the Individual record to be activated.}
 }
 \value{
 The same tidygedcom object with "active_record" attribute set to the specific

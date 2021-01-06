@@ -4,10 +4,12 @@
 \alias{remove_family_group}
 \title{Remove a Family group record from a tidygedcom object}
 \usage{
-remove_family_group(gedcom, remove_individuals = FALSE)
+remove_family_group(gedcom, xref = character(), remove_individuals = FALSE)
 }
 \arguments{
 \item{gedcom}{A tidygedcom object.}
+
+\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
 \item{remove_individuals}{Whether to also remove the individual records for all individuals
 in the family.}

@@ -123,6 +123,7 @@ add_family_group <- function(gedcom,
 #' all records for individuals in this family (including associations).
 #'
 #' @param gedcom A tidygedcom object.
+#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param remove_individuals Whether to also remove the individual records for all individuals
 #' in the family.
 #'
@@ -145,30 +146,30 @@ add_family_group <- function(gedcom,
 #'                add_individual() %>% 
 #'                add_family_group(husband = "@I1@", wife = "@I2@") %>% 
 #'                remove_family_group(remove_individuals = TRUE))
-remove_family_group <- function(gedcom, remove_individuals = FALSE) {
+remove_family_group <- function(gedcom, 
+                                xref = character(),
+                                remove_individuals = FALSE) {
   
-  check_active_record_valid(gedcom, .pkgenv$record_string_fam, is_family)
-  active_record <- get_active_record(gedcom)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_fam, is_family)
   
   if(remove_individuals) {
     
-    ind_xrefs <- unique(dplyr::filter(gedcom, record == active_record,
+    ind_xrefs <- unique(dplyr::filter(gedcom, record == xref,
                                       tag %in% c("HUSB", "WIFE", "CHIL"))$value)
     
-    for(xref in ind_xrefs) {
+    for(ind_xref in ind_xrefs) {
       
-      gedcom <- activate_individual_record(gedcom, xref = xref) %>% 
-        remove_individual()
+      gedcom <- remove_individual(gedcom, ind_xref)
       
     }
   }
   
   gedcom %>% 
-    remove_section(1, "FAMC", active_record) %>% 
-    remove_section(2, "FAMC", active_record) %>% 
-    remove_section(1, "FAMS", active_record) %>% 
-    remove_section(2, "FAMS", active_record) %>% 
-    dplyr::filter(record != active_record, value != active_record) %>%
+    remove_section(1, "FAMC", xref) %>% 
+    remove_section(2, "FAMC", xref) %>% 
+    remove_section(1, "FAMS", xref) %>% 
+    remove_section(2, "FAMS", xref) %>% 
+    dplyr::filter(record != xref, value != xref) %>%
     null_active_record()  
 }
 

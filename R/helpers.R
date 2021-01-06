@@ -184,7 +184,7 @@ get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_
     
     if (record_type == .pkgenv$record_string_indi) {
       
-      xref <- find_xref(gedcom, xefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), xref_or_descriptor)
+      xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), xref_or_descriptor)
       
     } else if(record_type == .pkgenv$record_string_fam) {
       

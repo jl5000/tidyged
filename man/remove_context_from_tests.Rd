@@ -6,9 +6,6 @@
 \usage{
 remove_context_from_tests()
 }
-\arguments{
-\item{gedcom}{A tidygedcom object.}
-}
 \value{
 Nothing.
 }

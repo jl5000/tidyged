@@ -413,8 +413,6 @@ remove_dates_for_tests <- function(gedcom) {
 #' @details This is a function used in development run after devtools::document().
 #' It removes all context() lines from test files inserted automatically by roxytest.
 #'
-#' @param gedcom A tidygedcom object.
-#'
 #' @return Nothing.
 remove_context_from_tests <- function() {
   

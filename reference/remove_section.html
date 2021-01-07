@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a new xref for a record — assign_xref • tidygedcom</title>
+<title>Remove a subrecord in a tidygedcom object — remove_section • tidygedcom</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Create a new xref for a record — assign_xref" />
-<meta property="og:description" content="This function is used to assign xrefs to new records that are created." />
+<meta property="og:title" content="Remove a subrecord in a tidygedcom object — remove_section" />
+<meta property="og:description" content="Remove a subrecord in a tidygedcom object" />
 
 
 
@@ -111,37 +111,51 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a new xref for a record</h1>
+    <h1>Remove a subrecord in a tidygedcom object</h1>
     <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
-    <div class="hidden name"><code>assign_xref.Rd</code></div>
+    <div class="hidden name"><code>remove_section.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function is used to assign xrefs to new records that are created.</p>
+    <p>Remove a subrecord in a tidygedcom object</p>
     </div>
 
-    <pre class="usage"><span class='fu'>assign_xref</span><span class='op'>(</span><span class='va'>type</span>, ref <span class='op'>=</span> <span class='fl'>0</span>, gedcom <span class='op'>=</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>remove_section</span><span class='op'>(</span>
+  <span class='va'>gedcom</span>,
+  <span class='va'>containing_level</span>,
+  <span class='va'>containing_tag</span>,
+  <span class='va'>containing_value</span>,
+  xrefs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>type</th>
-      <td><p>The type of record, given by one of the xref_prefix_*() functions.</p></td>
-    </tr>
-    <tr>
-      <th>ref</th>
-      <td><p>An explicit reference string (xref without the "@") if one is to be chosen manually.</p></td>
-    </tr>
-    <tr>
       <th>gedcom</th>
-      <td><p>A tidygedcom object</p></td>
+      <td><p>A tidygedcom object.</p></td>
+    </tr>
+    <tr>
+      <th>containing_level</th>
+      <td><p>The level of the first line of the subrecord.</p></td>
+    </tr>
+    <tr>
+      <th>containing_tag</th>
+      <td><p>The tag of the first line of the subrecord.</p></td>
+    </tr>
+    <tr>
+      <th>containing_value</th>
+      <td><p>The value of the first line of the subrecord.</p></td>
+    </tr>
+    <tr>
+      <th>xrefs</th>
+      <td><p>The xrefs of records containing the subrecord (default is all records).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An xref to use for a new record.</p>
+    <p>The tidygedcom object with the subrecord(s) removed.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

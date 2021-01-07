@@ -12,7 +12,7 @@
 \item{...}{Not used.}
 }
 \value{
-A printed summary of the GEDCOM file.
+A printed summary of the tidygedcom object.
 }
 \description{
 This function shows key information from the header of a tidygedcom object, including submitter

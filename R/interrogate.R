@@ -2,7 +2,6 @@
 
 unique_record_count <- function(gedcom, tag) {sum(gedcom$level == 0 & gedcom$tag == tag)}
 
-
 #' Get the number of records in a tidygedcom object
 #'
 #' These functions return the number of records of a particular type in a tidygedcom object.
@@ -38,6 +37,80 @@ num_repo <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_re
 num_sour <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_sour) }
 
 
+is_record_type <- function(gedcom, xref, tag) {
+  dplyr::filter(gedcom, record == xref)$tag[1] == tag
+}
+
+#' Check whether a given record is a particular type
+#'
+#' @param gedcom A tidygedcom object.
+#' @param xref The xref of the record.
+#'
+#' @return A logical indicating whether the record is of a particular type.
+#' @export
+is_individual <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_indi) }
+
+#' @export
+#' @rdname is_individual
+is_family <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_fam) }
+
+#' @export
+#' @rdname is_individual
+is_submitter <- function(gedcom, xref)  { is_record_type(gedcom, xref, .pkgenv$record_tag_subm) }
+
+#' @export
+#' @rdname is_individual
+is_repository <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_repo) }
+
+#' @export
+#' @rdname is_individual
+is_multimedia <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_obje) }
+
+#' @export
+#' @rdname is_individual
+is_note <- function(gedcom, xref)       { is_record_type(gedcom, xref, .pkgenv$record_tag_note) }
+
+#' @export
+#' @rdname is_individual
+is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_sour) }
+
+
+#' Get a description of a family
+#'
+#' @param gedcom A tidygedcom object.
+#' @param xref An xref of a Family group record.
+#'
+#' @return A character string describing the members of the family group.
+#' @export
+#' @tests
+#' expect_equal(gedcom() %>% add_family_group() %>% get_family_group_description("@F1@"),
+#'              "Family @F1@ with no husband, no wife, and no children")
+get_family_group_description <- function(gedcom, xref) {
+  
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_fam, is_family)
+  
+  husb <- dplyr::filter(gedcom, record == xref, tag == "HUSB")$value
+  wife <- dplyr::filter(gedcom, record == xref, tag == "WIFE")$value
+  chil <- dplyr::filter(gedcom, record == xref, tag == "CHIL")$value
+  
+  husb_str <- ifelse(length(husb) == 0, 
+                     "no husband", 
+                     paste("husband:", get_individual_name(gedcom, husb)))
+  
+  wife_str <- ifelse(length(wife) == 0, 
+                     "no wife", 
+                     paste("wife:", get_individual_name(gedcom, wife)))
+  
+  chil_str <- ifelse(length(chil) == 0, 
+                     "no children", 
+                     paste("children:", paste(purrr::map_chr(chil, get_individual_name, gedcom=gedcom),
+                                              collapse = ", ")))
+  
+  paste0("Family ", xref, " with ", husb_str, ", ", wife_str, ", and ", chil_str)
+  
+}
+
+
 #' Get a summary of a tidygedcom object
 #'
 #' This function shows key information from the header of a tidygedcom object, including submitter
@@ -46,7 +119,7 @@ num_sour <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_so
 #' @param object A tidygedcom object.
 #' @param ... Not used.
 #'
-#' @return A printed summary of the GEDCOM file.
+#' @return A printed summary of the tidygedcom object.
 #' @export
 #' @tests
 #' expect_snapshot_value(
@@ -56,6 +129,7 @@ num_sour <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_so
 summary.tidygedcom <- function(object, ...) {
   eol <- "\n"
   subm_name <- gedcom_value(object, "HD", "SUBM", 1)
+  # this is the longest string
   title_width <- nchar("Source system version:") + 2
   
   paste("GEDCOM file summary:", eol, eol,
@@ -81,7 +155,7 @@ summary.tidygedcom <- function(object, ...) {
 #' @param object A tidygedcom object.
 #' @param ... Not used.
 #'
-#' @return A printed summary of the GEDCOM file structure.
+#' @return A printed summary of records in the tidygedcom object.
 #' @export
 #' @tests
 #' expect_snapshot_value(

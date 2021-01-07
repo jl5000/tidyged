@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{remove_change_dates}
 \alias{remove_change_dates}
-\title{Remove all CHANge dates}
+\title{Remove all CHANge dates from a tidygedcom object}
 \usage{
 remove_change_dates(gedcom)
 }
@@ -13,5 +13,5 @@ remove_change_dates(gedcom)
 A tidygedcom object with all CHAN structures removed.
 }
 \description{
-Remove all CHANge dates
+Remove all CHANge dates from a tidygedcom object
 }

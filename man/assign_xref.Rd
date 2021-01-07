@@ -7,14 +7,14 @@
 assign_xref(type, ref = 0, gedcom = tibble::tibble())
 }
 \arguments{
-\item{type}{The type of record, given by one of the xref_prefix_*() functions}
+\item{type}{The type of record, given by one of the xref_prefix_*() functions.}
 
-\item{ref}{An explicit reference string (xref without the "@") if one is to be chosen manually}
+\item{ref}{An explicit reference string (xref without the "@") if one is to be chosen manually.}
 
 \item{gedcom}{A tidygedcom object}
 }
 \value{
-An xref to use for a new record
+An xref to use for a new record.
 }
 \description{
 This function is used to assign xrefs to new records that are created.

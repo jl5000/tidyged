@@ -12,7 +12,7 @@
 \item{...}{Not used.}
 }
 \value{
-A printed summary of the GEDCOM file structure.
+A printed summary of records in the tidygedcom object.
 }
 \description{
 This function gives a breakdown of record counts in the GEDCOM file.

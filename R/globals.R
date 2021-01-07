@@ -25,13 +25,13 @@ if(getRversion() >= "2.15.1")
 .pkgenv$record_tag_note <- "NOTE"
 .pkgenv$record_tag_sour <- "SOUR"
 
-.pkgenv$record_string_indi <- "individual"
-.pkgenv$record_string_fam <- "family group"
-.pkgenv$record_string_subm <- "submitter"
-.pkgenv$record_string_repo <- "repository"
-.pkgenv$record_string_obje <- "multimedia"
-.pkgenv$record_string_note <- "note"
-.pkgenv$record_string_sour <- "source"
+.pkgenv$record_string_indi <- "Individual"
+.pkgenv$record_string_fam <- "Family group"
+.pkgenv$record_string_subm <- "Submitter"
+.pkgenv$record_string_repo <- "Repository"
+.pkgenv$record_string_obje <- "Multimedia"
+.pkgenv$record_string_note <- "Note"
+.pkgenv$record_string_sour <- "Source"
 
 .pkgenv$BOM_UTF8 <- c("ef", "bb", "bf")
 .pkgenv$BOM_UTF16_LE <- c("ff", "fe")

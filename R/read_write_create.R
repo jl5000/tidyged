@@ -107,6 +107,11 @@ check_line_lengths <- function(lines, limit) {
 }
 
 
+set_class_to_tidygedcom <- function(gedcom) {
+  class(gedcom) <- c("tidygedcom", "tbl_df", "tbl", "data.frame")
+  gedcom
+}
+
 #' Convert the GEDCOM grammar to the GEDCOM form
 #' 
 #' This function applies concatenation indicated by CONC/CONT lines.

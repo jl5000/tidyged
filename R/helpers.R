@@ -2,42 +2,7 @@
 
 `%nin%` <- Negate(`%in%`)
 
-is_record_type <- function(gedcom, xref, tag) {
-  dplyr::filter(gedcom, record == xref)$tag[1] == tag
-}
 
-#' Check whether a given record is a particular type
-#'
-#' @param gedcom A tidygedcom object.
-#' @param xref The xref of the record.
-#'
-#' @return A logical indicating whether the record is of a particular type.
-#' @export
-is_individual <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_indi) }
-
-#' @export
-#' @rdname is_individual
-is_family <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_fam) }
-
-#' @export
-#' @rdname is_individual
-is_submitter <- function(gedcom, xref)  { is_record_type(gedcom, xref, .pkgenv$record_tag_subm) }
-
-#' @export
-#' @rdname is_individual
-is_repository <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_repo) }
-
-#' @export
-#' @rdname is_individual
-is_multimedia <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_obje) }
-
-#' @export
-#' @rdname is_individual
-is_note <- function(gedcom, xref)       { is_record_type(gedcom, xref, .pkgenv$record_tag_note) }
-
-#' @export
-#' @rdname is_individual
-is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_sour) }
 
 xrefs_record_type <- function(gedcom, record_tag) {
   dplyr::filter(gedcom, level == 0 & tag == record_tag)$record
@@ -51,22 +16,22 @@ xrefs_repositories <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$reco
 xrefs_notes <-        function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_note) }
 xrefs_multimedia <-   function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_obje) }
 
-set_class_to_tidygedcom <- function(gedcom) {
-  class(gedcom) <- c("tidygedcom", "tbl_df", "tbl", "data.frame")
-  gedcom
-}
-
 
 #' Extract a particular value from a tidygedcom object
 #'
-#' @param gedcom A tidygedcom object
-#' @param record_xref The xref of the record in which the value may exist
-#' @param tag The tag associated with the value
-#' @param level The level number of the value
-#' @param after_tag Whether the tag should be subordinate to this parent tag 
+#' @param gedcom A tidygedcom object.
+#' @param record_xref The xref of the record in which the value may exist.
+#' @param tag The tag associated with the value.
+#' @param level The level number of the value.
+#' @param after_tag Whether the tag should be subordinate to this parent tag. 
 #'
 #' @return The particular value fitting the criteria of the input arguments. If no value is found,
 #' an empty string is returned.
+#' @tests
+#' expect_equal(gedcom_value(gedcom(), "HD", "LANG", 1), "English")
+#' expect_equal(gedcom_value(gedcom(), "HD", "TEST", 1), "")
+#' expect_equal(gedcom_value(gedcom(), "HD", "VERS", 2), "5.5.5")
+#' expect_equal(gedcom_value(gedcom(), "HD", "VERS", 3), "5.5.5")
 gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   
   gedcom_filtered <- dplyr::filter(gedcom, record %in% record_xref)
@@ -110,7 +75,18 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
   cat(text)
 }
 
+
+#' Retrieve an individual name
+#'
+#' @param gedcom A tidygedcom object.
+#' @param xref A xref of an Individual record.
+#'
+#' @return The first name found in the Individual record (with no forward slashes). 
+#' If no name is found, the xref is returned.
 get_individual_name <- function(gedcom, xref) { 
+  # this value isn't actually used
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  
   name <- gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
     stringr::str_remove_all("/")
   
@@ -118,29 +94,15 @@ get_individual_name <- function(gedcom, xref) {
   name
 }
 
-get_family_group_description <- function(gedcom, xref) {
-  
-  husb <- dplyr::filter(gedcom, record == xref, tag == "HUSB")$value
-  wife <- dplyr::filter(gedcom, record == xref, tag == "WIFE")$value
-  chil <- dplyr::filter(gedcom, record == xref, tag == "CHIL")$value
-  
-  husb_str <- ifelse(length(husb) == 0, 
-                     "no husband", 
-                     paste("husband:", get_individual_name(gedcom, husb)))
-  
-  wife_str <- ifelse(length(wife) == 0, 
-                     "no wife", 
-                     paste("wife:", get_individual_name(gedcom, wife)))
-  
-  chil_str <- ifelse(length(chil) == 0, 
-                     "no children", 
-                     paste("children:", paste(purrr::map_chr(chil, get_individual_name, gedcom=gedcom),
-                                               collapse = ", ")))
-  
-  paste0("Family ", xref, " with ", husb_str, ", ", wife_str, ", and ", chil_str)
-  
-}
 
+
+
+
+#' Temporarily remove forward slashes from surnames
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return A tidygedcom object with all forward slashes removed from surnames.
 temporarily_remove_name_slashes <- function(gedcom) {
   
   gedcom %>% 
@@ -151,6 +113,14 @@ temporarily_remove_name_slashes <- function(gedcom) {
   
 }
 
+
+
+#' Push a tidygedcom structure down a number of levels
+#'
+#' @param df A tidygedcom structure.
+#' @param start_level How many levels to add on to the existing levels.
+#'
+#' @return The tidygedcom structure with modified levels.
 add_levels <- function(df, start_level) {
   
   if (nrow(df) == 0) return(df)
@@ -161,6 +131,13 @@ add_levels <- function(df, start_level) {
 }
 
 
+
+#' Finalise the formation of a tidygedcom record
+#'
+#' @param df A tidygedcom record tibble.
+#' @param global_start_level A global start level for records (default is 0).
+#'
+#' @return A final tidygedcom record tibble.
 finalise <- function(df, global_start_level = 0) {
   
   df %>% 
@@ -170,18 +147,40 @@ finalise <- function(df, global_start_level = 0) {
 }
 
 
+#' Derive a valid cross-reference identifier
+#' 
+#' Get a valid xref provided explicitly or implicitly (through an identifying attribute or
+#' active record).
+#' 
+#' @details This helper function is designed to derive and run validation checks on an xref
+#' provided explicitly or implicitly. An xref is provided implicitly either through the active
+#' record of the tidygedcom object, or through a descriptor identifying a unique record.
+#' 
+#' The descriptors used for each record are: name (individual, repository, and submitter), 
+#' title (source), file reference (multimedia), excerpt (note). 
+#' 
+#' Once found, the xref is checked to ensure it is of the appropriate type.
+#'
+#' @param gedcom A tidygedcom object.
+#' @param xref_or_descriptor An xref or descriptor uniquely identifying the record.
+#' @param record_type A character string describing the record type. Generally one of
+#' the global record_string_* values.
+#' @param record_type_fn A function to check the record type. Generally one of the is_*
+#' functions.
+#'
+#' @return A valid xref identifier.
 get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_fn) {
   
   if (length(xref_or_descriptor) == 0) {
-    
+    # xref not given explicitly, get it from active record
     xref <- get_active_record(gedcom)
     
   } else if (grepl(xref_pattern(), xref_or_descriptor)) {
-    
+    # xref given explicitly
     xref <- xref_or_descriptor
     
   } else {
-    
+    # xref given by descriptor, find it
     if (record_type == .pkgenv$record_string_indi) {
       
       xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), xref_or_descriptor)
@@ -205,6 +204,10 @@ get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_
     } else if(record_type == .pkgenv$record_string_note) {
       
       xref <- find_xref(gedcom, xrefs_notes(gedcom), "NOTE", xref_or_descriptor)
+      
+    } else if(record_type == .pkgenv$record_string_subm) {
+      
+      xref <- find_xref(gedcom, xrefs_submitters(gedcom), "NAME", xref_or_descriptor)
     }
     
   }
@@ -222,11 +225,11 @@ get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_
 #' 
 #' This function is used to assign xrefs to new records that are created.
 #'
-#' @param type The type of record, given by one of the xref_prefix_*() functions
-#' @param ref An explicit reference string (xref without the "@") if one is to be chosen manually
+#' @param type The type of record, given by one of the xref_prefix_*() functions.
+#' @param ref An explicit reference string (xref without the "@") if one is to be chosen manually.
 #' @param gedcom A tidygedcom object
 #'
-#' @return An xref to use for a new record
+#' @return An xref to use for a new record.
 assign_xref <- function(type, ref = 0, gedcom = tibble::tibble()) {
   
   if (ref == 0) {
@@ -253,10 +256,15 @@ assign_xref <- function(type, ref = 0, gedcom = tibble::tibble()) {
 
 
 
-
-
-
-
+#' Find a particular row position in a tidygedcom object.
+#'
+#' @param gedcom A tidygedcom object.
+#' @param xref The xref of the record where the insertion point will be.
+#' @param parent_level The level of the row where the insertion point will be.
+#' @param parent_tag The tag of the row where the insertion point will be.
+#' @param parent_value The value of the row where the insertion point will be.
+#'
+#' @return The row after the insertion point in the tidygedcom object.
 find_insertion_point <- function(gedcom,
                                  xref,
                                  parent_level,
@@ -278,6 +286,14 @@ find_insertion_point <- function(gedcom,
   i
 }
 
+
+
+#' Salvage a surname from name pieces
+#'
+#' @param full_name The full name of the individual.
+#' @param name_pieces The PERSONAL_NAME_PIECES() object associated with the name.
+#'
+#' @return A better populated PERSONAL_NAME_PIECES() object.
 salvage_name_pieces <- function(full_name, name_pieces) {
   
   if(nrow(name_pieces) > 0) return(name_pieces)
@@ -299,6 +315,15 @@ salvage_name_pieces <- function(full_name, name_pieces) {
 
 
 
+#' Identify the rows of a subrecord in a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object.
+#' @param containing_level The level of the first line of the subrecord.
+#' @param containing_tag The tag of the first line of the subrecord.
+#' @param containing_value The value of the first line of the subrecord.
+#' @param xrefs The xrefs of records containing the subrecord (default is all records).
+#'
+#' @return A vector of rows in the tidygedcom object of the subrecord(s).
 identify_section <- function(gedcom,
                            containing_level,
                            containing_tag,
@@ -336,6 +361,15 @@ identify_section <- function(gedcom,
 }
 
 
+#' Remove a subrecord in a tidygedcom object
+#'
+#' @param gedcom A tidygedcom object.
+#' @param containing_level The level of the first line of the subrecord.
+#' @param containing_tag The tag of the first line of the subrecord.
+#' @param containing_value The value of the first line of the subrecord.
+#' @param xrefs The xrefs of records containing the subrecord (default is all records).
+#'
+#' @return The tidygedcom object with the subrecord(s) removed.
 remove_section <- function(gedcom,
                            containing_level,
                            containing_tag,
@@ -356,6 +390,15 @@ remove_section <- function(gedcom,
   
 }
 
+
+#' Remove all creation dates from a tidygedcom object
+#' 
+#' @details This is a function used in tests so that the objects created do not
+#' change every time.
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return The tidygedcom object with creation dates removed.
 remove_dates_for_tests <- function(gedcom) {
   
   gedcom %>% 
@@ -364,6 +407,15 @@ remove_dates_for_tests <- function(gedcom) {
   
 }
 
+
+#' Remove all context lines from test files
+#' 
+#' @details This is a function used in development run after devtools::document().
+#' It removes all context() lines from test files inserted automatically by roxytest.
+#'
+#' @param gedcom A tidygedcom object.
+#'
+#' @return Nothing.
 remove_context_from_tests <- function() {
   
   files <- list.files("tests/testthat", "^test-.+\\.R$", full.names = TRUE)
@@ -376,7 +428,7 @@ remove_context_from_tests <- function() {
   
 }
 
-#' Remove all CHANge dates
+#' Remove all CHANge dates from a tidygedcom object
 #'
 #' @param gedcom A tidygedcom object.
 #'

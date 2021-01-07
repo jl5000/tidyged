@@ -7,15 +7,15 @@
 gedcom_value(gedcom, record_xref, tag, level, after_tag = NULL)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidygedcom object.}
 
-\item{record_xref}{The xref of the record in which the value may exist}
+\item{record_xref}{The xref of the record in which the value may exist.}
 
-\item{tag}{The tag associated with the value}
+\item{tag}{The tag associated with the value.}
 
-\item{level}{The level number of the value}
+\item{level}{The level number of the value.}
 
-\item{after_tag}{Whether the tag should be subordinate to this parent tag}
+\item{after_tag}{Whether the tag should be subordinate to this parent tag.}
 }
 \value{
 The particular value fitting the criteria of the input arguments. If no value is found,

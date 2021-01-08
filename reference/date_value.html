@@ -112,7 +112,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Construct a DATE_VALUE string</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/dates.R'><code>R/dates.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
     <div class="hidden name"><code>date_value.Rd</code></div>
     </div>
 
@@ -120,89 +120,8 @@
     <p>Construct a DATE_VALUE string</p>
     </div>
 
-    <pre class="usage"><span class='fu'>date_value</span><span class='op'>(</span>
-  start_year <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='op'>)</span>,
-  start_month <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='op'>)</span>,
-  start_day <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='op'>)</span>,
-  end_year <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='op'>)</span>,
-  end_month <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='op'>)</span>,
-  end_day <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='op'>)</span>,
-  from <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  to <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  before <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  after <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  between <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  about <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  calc <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  est <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>start_year</th>
-      <td><p>The year (or start year if a date range/period is provided). This value is required.</p></td>
-    </tr>
-    <tr>
-      <th>start_month</th>
-      <td><p>The month of the year (or start month if a date range/period is provided)</p></td>
-    </tr>
-    <tr>
-      <th>start_day</th>
-      <td><p>The day of the month (or start day if a date range/period is provided)</p></td>
-    </tr>
-    <tr>
-      <th>end_year</th>
-      <td><p>The end year</p></td>
-    </tr>
-    <tr>
-      <th>end_month</th>
-      <td><p>The end month of the year</p></td>
-    </tr>
-    <tr>
-      <th>end_day</th>
-      <td><p>The end day of the month</p></td>
-    </tr>
-    <tr>
-      <th>from</th>
-      <td><p>Whether the date given by start_year/month/day should be considered the beginning of a period.
-If 'to' is FALSE then the period is semi-infinite.</p></td>
-    </tr>
-    <tr>
-      <th>to</th>
-      <td><p>Whether the date given by end_year/month/day should be considered the end of a period.
-If 'from' is FALSE then the period is semi-infinite.</p></td>
-    </tr>
-    <tr>
-      <th>before</th>
-      <td><p>Whether the date given by start_year/month/day should be considered the end of a range.</p></td>
-    </tr>
-    <tr>
-      <th>after</th>
-      <td><p>Whether the date given by start_year/month/day should be considered the beginning of a range.</p></td>
-    </tr>
-    <tr>
-      <th>between</th>
-      <td><p>Whether the start and end dates should be considered as the bounds of a date range.</p></td>
-    </tr>
-    <tr>
-      <th>about</th>
-      <td><p>Whether the date given by start_year/month/day is approximate.</p></td>
-    </tr>
-    <tr>
-      <th>calc</th>
-      <td><p>Whether the date given by start_year/month/day is calculated from other values.</p></td>
-    </tr>
-    <tr>
-      <th>est</th>
-      <td><p>Whether the date given by start_year/month/day is estimated.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A DATE_VALUE string</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

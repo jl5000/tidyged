@@ -114,13 +114,13 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                    </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                 </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"</span>
-<span class="co">#&gt; 15     1 HD     DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 15     1 HD     DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                             </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                    </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                  </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 22     0 TR     TRLR  ""</span></code></pre></div>
 <p>See row 20 and the row after for the change date for the submitter record.</p>
 <p>By default this behaviour also applies when modifying existing records. If you would like to leave the change date alone when modifying a record, you can set <code>update_date_changed = FALSE</code> (it is TRUE by default).</p>
@@ -146,7 +146,7 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                    </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                 </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"</span>
-<span class="co">#&gt; 15     1 HD     DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 15     1 HD     DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                             </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                    </span>
@@ -181,20 +181,20 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                    </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                 </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"</span>
-<span class="co">#&gt; 15     1 HD     DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 15     1 HD     DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                             </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                    </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                  </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."             </span>
 <span class="co">#&gt; 23     1 @N1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 24     2 @N1@   DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 24     2 @N1@   DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 25     0 @I1@   INDI  ""                                    </span>
 <span class="co">#&gt; 26     1 @I1@   SEX   "U"                                   </span>
 <span class="co">#&gt; 27     1 @I1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 28     2 @I1@   DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 28     2 @I1@   DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 29     1 @I1@   NOTE  "This is a bespoke note."             </span>
 <span class="co">#&gt; 30     1 @I1@   NOTE  "This is a generic note."             </span>
 <span class="co">#&gt; 31     0 @R1@   REPO  ""                                    </span>
@@ -202,7 +202,7 @@
 <span class="co">#&gt; 33     1 @R1@   NOTE  "This is a bespoke note."             </span>
 <span class="co">#&gt; 34     1 @R1@   NOTE  "This is a generic note."             </span>
 <span class="co">#&gt; 35     1 @R1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 36     2 @R1@   DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 36     2 @R1@   DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 37     0 TR     TRLR  ""</span></code></pre></div>
 <p>In the above example, there is a generic note recorded in a top level Note record. This same note message has been used for the individual and repository defined, but they have been repeated rather than pointing to the Note record. There is also a repeated bespoke note given in the Individual and Repository records.</p>
 <p>The <code><a href="../reference/consolidate_notes.html">consolidate_notes()</a></code> function will simplify the file, replacing note values with pointers to top level Note records (creating them if necessary) if they are repeated:</p>
@@ -225,20 +225,20 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                    </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                 </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"</span>
-<span class="co">#&gt; 15     1 HD     DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 15     1 HD     DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                             </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                    </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                  </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."             </span>
 <span class="co">#&gt; 23     1 @N1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 24     2 @N1@   DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 24     2 @N1@   DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 25     0 @I1@   INDI  ""                                    </span>
 <span class="co">#&gt; 26     1 @I1@   SEX   "U"                                   </span>
 <span class="co">#&gt; 27     1 @I1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 28     2 @I1@   DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 28     2 @I1@   DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 29     1 @I1@   NOTE  "@N2@"                                </span>
 <span class="co">#&gt; 30     1 @I1@   NOTE  "@N1@"                                </span>
 <span class="co">#&gt; 31     0 @R1@   REPO  ""                                    </span>
@@ -246,10 +246,10 @@
 <span class="co">#&gt; 33     1 @R1@   NOTE  "@N2@"                                </span>
 <span class="co">#&gt; 34     1 @R1@   NOTE  "@N1@"                                </span>
 <span class="co">#&gt; 35     1 @R1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 36     2 @R1@   DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 36     2 @R1@   DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 37     0 @N2@   NOTE  "This is a bespoke note."             </span>
 <span class="co">#&gt; 38     1 @N2@   CHAN  ""                                    </span>
-<span class="co">#&gt; 39     2 @N2@   DATE  "07 JAN 2021"                         </span>
+<span class="co">#&gt; 39     2 @N2@   DATE  "08 JAN 2021"                         </span>
 <span class="co">#&gt; 40     0 TR     TRLR  ""</span></code></pre></div>
 </div>
 <div id="empty-family-groups" class="section level2">

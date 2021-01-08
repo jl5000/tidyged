@@ -30,7 +30,7 @@ add_individual_attribute <- function(gedcom,
                                      attribute_type,
                                      attribute_descriptor,
                                      fact_classification = character(),
-                                     event_date = date_value(),
+                                     event_date = tidygedcom.internals::date_value(),
                                      event_cause = character(),
                                      user_reference_type = character(),
                                      age_at_event = character(),
@@ -62,71 +62,79 @@ add_individual_attribute <- function(gedcom,
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
-  event_address <- ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
-                                     address_city = city,
-                                     address_state = state,
-                                     address_postal_code = postal_code,
-                                     address_country = country,
-                                     phone_number = phone_number,
-                                     address_email = email,
-                                     address_fax = fax,
-                                     address_web_page = web_page)
+  event_address <- tidygedcom.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+                                                           address_city = city,
+                                                           address_state = state,
+                                                           address_postal_code = postal_code,
+                                                           address_country = country,
+                                                           phone_number = phone_number,
+                                                           address_email = email,
+                                                           address_fax = fax,
+                                                           address_web_page = web_page)
   
   plac_notes <- purrr::map(place_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
-    purrr::map(MULTIMEDIA_LINK)
+    purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
   
   
   if(length(place_name) == 0) {
     
-    event_place <- PLACE_STRUCTURE(character())
+    event_place <- tidygedcom.internals::PLACE_STRUCTURE(character())
     
   } else {
     
-    event_place <- PLACE_STRUCTURE(place_name = place_name,
-                                   place_phonetic = place_phonetic,
-                                   phonetisation_method = phonetisation_method,
-                                   place_romanised = place_romanised,
-                                   romanisation_method = romanisation_method,
-                                   place_latitude = place_latitude,
-                                   place_longitude = place_longitude,
-                                   notes = plac_notes)
+    event_place <- tidygedcom.internals::PLACE_STRUCTURE(place_name = place_name,
+                                                         place_phonetic = place_phonetic,
+                                                         phonetisation_method = phonetisation_method,
+                                                         place_romanised = place_romanised,
+                                                         romanisation_method = romanisation_method,
+                                                         place_latitude = place_latitude,
+                                                         place_longitude = place_longitude,
+                                                         notes = plac_notes)
   }
   
   even_notes <- purrr::map(event_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
-  details1 <- EVENT_DETAIL(event_or_fact_classification = fact_classification,
-                           date = event_date,
-                           place = event_place,
-                           address = event_address,
-                           responsible_agency = responsible_agency,
-                           religious_affiliation = religious_affiliation,
-                           cause_of_event = event_cause,
-                           notes = even_notes,
-                           multimedia_links = media_links)
+  details1 <- tidygedcom.internals::EVENT_DETAIL(event_or_fact_classification = fact_classification,
+                                                 date = event_date,
+                                                 place = event_place,
+                                                 address = event_address,
+                                                 responsible_agency = responsible_agency,
+                                                 religious_affiliation = religious_affiliation,
+                                                 cause_of_event = event_cause,
+                                                 notes = even_notes,
+                                                 multimedia_links = media_links)
   
-  details2 <- INDIVIDUAL_EVENT_DETAIL(event_details = details1,
-                                      age_at_event = age_at_event)
+  details2 <- tidygedcom.internals::INDIVIDUAL_EVENT_DETAIL(event_details = details1,
+                                                            age_at_event = age_at_event)
   
-  attribute_str <- INDIVIDUAL_ATTRIBUTE_STRUCTURE(attribute_type = attribute_type,
-                                                  attribute_descriptor = attribute_descriptor,
-                                                  individual_event_details = details2,
-                                                  user_reference_type = user_reference_type) %>% add_levels(1)
+  attribute_str <- tidygedcom.internals::INDIVIDUAL_ATTRIBUTE_STRUCTURE(attribute_type = attribute_type,
+                                                                        attribute_descriptor = attribute_descriptor,
+                                                                        individual_event_details = details2,
+                                                                        user_reference_type = user_reference_type) %>% 
+    tidygedcom.internals::add_levels(1)
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    attribute_str <- dplyr::bind_rows(attribute_str, CHANGE_DATE() %>% add_levels(1))
+    attribute_str <- dplyr::bind_rows(attribute_str, tidygedcom.internals::CHANGE_DATE() %>% 
+                                        tidygedcom.internals::add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(attribute_str, .before = next_row) %>% 
-    finalise() %>% 
+    tidygedcom.internals::finalise() %>% 
     activate_individual_record(xref)
   
   

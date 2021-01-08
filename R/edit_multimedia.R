@@ -36,20 +36,23 @@ add_multimedia <- function(gedcom,
                            automated_record_id = character(),
                            multimedia_notes = character()) {
   
-  xref <- assign_xref(.pkgenv$xref_prefix_obje, gedcom = gedcom)
+  xref <- tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_obje, gedcom = gedcom)
   
   media_notes <- purrr::map(multimedia_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
-  media_record <- MULTIMEDIA_RECORD(xref_obje = xref,
-                                    multimedia_file_reference = file_reference,
-                                    multimedia_format = format,
-                                    source_media_type = source_media,
-                                    descriptive_title = title,
-                                    user_reference_number = user_reference_number,
-                                    user_reference_type = user_reference_type,
-                                    automated_record_id = automated_record_id,
-                                    notes = media_notes)
+  media_record <- tidygedcom.internals::MULTIMEDIA_RECORD(xref_obje = xref,
+                                                          multimedia_file_reference = file_reference,
+                                                          multimedia_format = format,
+                                                          source_media_type = source_media,
+                                                          descriptive_title = title,
+                                                          user_reference_number = user_reference_number,
+                                                          user_reference_type = user_reference_type,
+                                                          automated_record_id = automated_record_id,
+                                                          notes = media_notes)
   
   gedcom %>% 
     tibble::add_row(media_record, .before = nrow(.)) %>% 

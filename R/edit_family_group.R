@@ -51,7 +51,7 @@ add_family_group <- function(gedcom,
                              family_notes = character(),
                              multimedia_links = character()) {
   
-  xref <- assign_xref(.pkgenv$xref_prefix_fam, gedcom = gedcom)
+  xref <- tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_fam, gedcom = gedcom)
   
   xref_husb <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), husband)
   xref_wife <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), wife)
@@ -61,21 +61,24 @@ add_family_group <- function(gedcom,
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
-    purrr::map(MULTIMEDIA_LINK)
+    purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
   
   fam_notes <- purrr::map(family_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
-  fam_record <- FAMILY_GROUP_RECORD(xref_fam = xref,
-                                    xref_husb = xref_husb,
-                                    xref_wife = xref_wife,
-                                    xrefs_chil = xrefs_chil,
-                                    count_of_children = number_of_children,
-                                    user_reference_number = user_reference_number,
-                                    user_reference_type = user_reference_type,
-                                    automated_record_id = automated_record_id,
-                                    notes = fam_notes,
-                                    multimedia_links = media_links) 
+  fam_record <- tidygedcom.internals::FAMILY_GROUP_RECORD(xref_fam = xref,
+                                                          xref_husb = xref_husb,
+                                                          xref_wife = xref_wife,
+                                                          xrefs_chil = xrefs_chil,
+                                                          count_of_children = number_of_children,
+                                                          user_reference_number = user_reference_number,
+                                                          user_reference_type = user_reference_type,
+                                                          automated_record_id = automated_record_id,
+                                                          notes = fam_notes,
+                                                          multimedia_links = media_links) 
   
   temp <- gedcom %>%
     tibble::add_row(fam_record, .before = nrow(.))

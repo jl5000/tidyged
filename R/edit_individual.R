@@ -41,22 +41,25 @@ add_individual <- function(gedcom,
                            individual_notes = character(),
                            multimedia_links = character()) {
   
-  xref <- assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
+  xref <- tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
   
   indi_notes <- purrr::map(individual_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
-    purrr::map(MULTIMEDIA_LINK)
+    purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
 
-  ind_record <- INDIVIDUAL_RECORD(xref_indi = xref,
-                                  sex_value = sex,
-                                  user_reference_number = user_reference_number,
-                                  user_reference_type = user_reference_type,
-                                  automated_record_id = automated_record_id,
-                                  notes = indi_notes,
-                                  multimedia_links = media_links) 
+  ind_record <- tidygedcom.internals::INDIVIDUAL_RECORD(xref_indi = xref,
+                                                        sex_value = sex,
+                                                        user_reference_number = user_reference_number,
+                                                        user_reference_type = user_reference_type,
+                                                        automated_record_id = automated_record_id,
+                                                        notes = indi_notes,
+                                                        multimedia_links = media_links) 
   
   gedcom %>%
     tibble::add_row(ind_record, .before = nrow(.)) %>% 

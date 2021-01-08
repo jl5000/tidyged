@@ -34,22 +34,27 @@ add_individual_association <- function(gedcom,
   indi_xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), associated_with)
   
   asso_notes <- purrr::map(association_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
-  asso_str <- ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
-                                    relation_is_descriptor = association,
-                                    notes = asso_notes) %>% add_levels(1)
+  asso_str <- tidygedcom.internals::ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
+                                                          relation_is_descriptor = association,
+                                                          notes = asso_notes) %>% 
+    tidygedcom.internals::add_levels(1)
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    asso_str <- dplyr::bind_rows(asso_str, CHANGE_DATE() %>% add_levels(1))
+    asso_str <- dplyr::bind_rows(asso_str, tidygedcom.internals::CHANGE_DATE() %>% 
+                                   tidygedcom.internals::add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(asso_str, .before = next_row) %>% 
-    finalise() %>% 
+    tidygedcom.internals::finalise() %>% 
     activate_individual_record(xref)
   
 }
@@ -77,18 +82,20 @@ add_individual_family_link_as_spouse <- function(gedcom,
   link_notes <- purrr::map(linkage_notes, ~ if(grepl(xref_pattern(), .x)) {
     NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
   
-  link <- SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% add_levels(1)
+  link <- tidygedcom.internals::SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% 
+    tidygedcom.internals::add_levels(1)
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    link <- dplyr::bind_rows(link, CHANGE_DATE() %>% add_levels(1))
+    link <- dplyr::bind_rows(link, tidygedcom.internals::CHANGE_DATE() %>% 
+                               tidygedcom.internals::add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(link, .before = next_row) %>% 
-    finalise() %>% 
+    tidygedcom.internals::finalise() %>% 
     activate_individual_record(xref)
 }
 
@@ -116,21 +123,26 @@ add_individual_family_link_as_child <- function(gedcom,
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
   link_notes <- purrr::map(linkage_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
-  link <- CHILD_TO_FAMILY_LINK(xref_fam = family_xref,
-                               pedigree_linkage_type = linkage_type,
-                               notes = link_notes) %>% add_levels(1)
+  link <- tidygedcom.internals::CHILD_TO_FAMILY_LINK(xref_fam = family_xref,
+                                                     pedigree_linkage_type = linkage_type,
+                                                     notes = link_notes) %>% 
+    tidygedcom.internals::add_levels(1)
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    link <- dplyr::bind_rows(link, CHANGE_DATE() %>% add_levels(1))
+    link <- dplyr::bind_rows(link, tidygedcom.internals::CHANGE_DATE() %>% 
+                               tidygedcom.internals::add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(link, .before = next_row) %>% 
-    finalise() %>% 
+    tidygedcom.internals::finalise() %>% 
     activate_individual_record(xref)
 }

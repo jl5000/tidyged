@@ -22,12 +22,14 @@ Imports:
     stringr,
     purrr,
     lubridate,
-    tibble
+    tibble,
+    tidygedcom.internals
 Suggests: 
     testthat,
     roxytest,
     rmarkdown,
     knitr,
     waldo
+Remotes: jl5000/tidygedcom.internals
 Config/testthat/edition: 3
 VignetteBuilder: knitr

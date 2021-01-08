@@ -45,11 +45,11 @@ add_repository <- function(gedcom,
                            automated_record_id = character(),
                            repository_notes = character()) {
   
-  xref <- assign_xref(.pkgenv$xref_prefix_repo, gedcom = gedcom)
+  xref <- tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_repo, gedcom = gedcom)
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
-  address <- ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+  address <- tidygedcom.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
                                address_city = city,
                                address_state = state,
                                address_postal_code = postal_code,
@@ -60,15 +60,18 @@ add_repository <- function(gedcom,
                                address_web_page = web_page)
   
   repo_notes <- purrr::map(repository_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
-  repo_record <- REPOSITORY_RECORD(xref_repo = xref,
-                                   name_of_repository = name,
-                                   address = address,
-                                   user_reference_number = user_reference_number,
-                                   user_reference_type = user_reference_type,
-                                   automated_record_id = automated_record_id,
-                                   notes = repo_notes)
+  repo_record <- tidygedcom.internals::REPOSITORY_RECORD(xref_repo = xref,
+                                                         name_of_repository = name,
+                                                         address = address,
+                                                         user_reference_number = user_reference_number,
+                                                         user_reference_type = user_reference_type,
+                                                         automated_record_id = automated_record_id,
+                                                         notes = repo_notes)
   
   gedcom %>% 
     tibble::add_row(repo_record, .before = nrow(.)) %>% 

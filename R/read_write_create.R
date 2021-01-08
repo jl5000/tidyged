@@ -281,18 +281,18 @@ gedcom <- function(submitter_details = subm(),
                    receiving_system = "tidygedcom",
                    language = "English") {
   
-  GEDCOM_HEADER(header_extension = 
-    LINEAGE_LINKED_HEADER_EXTENSION(name_of_source_data = source_data_name,
-                                    publication_date = source_data_date,
-                                    copyright_source_data = source_data_copyright,
-                                    receiving_system_name = receiving_system,
-                                    file_creation_date = current_date(),
-                                    language_of_text = language,
-                                    xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
-                                    copyright_gedcom_file = gedcom_copyright,
-                                    gedcom_content_description = gedcom_description)) %>% 
+  tidygedcom.internals::GEDCOM_HEADER(header_extension = 
+                                        tidygedcom.internals::LINEAGE_LINKED_HEADER_EXTENSION(name_of_source_data = source_data_name,
+                                                                                              publication_date = source_data_date,
+                                                                                              copyright_source_data = source_data_copyright,
+                                                                                              receiving_system_name = receiving_system,
+                                                                                              file_creation_date = date_current(),
+                                                                                              language_of_text = language,
+                                                                                              xref_subm = tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_subm, 1),
+                                                                                              copyright_gedcom_file = gedcom_copyright,
+                                                                                              gedcom_content_description = gedcom_description)) %>% 
     dplyr::bind_rows(submitter_details, 
-                     FOOTER_SECTION()) %>%
+                     tidygedcom.internals::FOOTER_SECTION()) %>%
     set_class_to_tidygedcom()
   
 }
@@ -342,28 +342,31 @@ subm <- function(name = unname(Sys.info()["user"]),
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
-  address <- ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
-                               address_city = city,
-                               address_state = state,
-                               address_postal_code = postal_code,
-                               address_country = country,
-                               phone_number = phone_number,
-                               address_email = email,
-                               address_fax = fax,
-                               address_web_page = web_page)
+  address <- tidygedcom.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+                                                     address_city = city,
+                                                     address_state = state,
+                                                     address_postal_code = postal_code,
+                                                     address_country = country,
+                                                     phone_number = phone_number,
+                                                     address_email = email,
+                                                     address_fax = fax,
+                                                     address_web_page = web_page)
   
   subm_notes <- purrr::map(submitter_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
-    purrr::map(MULTIMEDIA_LINK)
+    purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
   
-  SUBMITTER_RECORD(xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
-                   submitter_name = name,
-                   address = address,
-                   automated_record_id = automated_record_id,
-                   notes = subm_notes,
-                   multimedia_links = media_links)
+  tidygedcom.internals::SUBMITTER_RECORD(xref_subm = tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_subm, 1),
+                                         submitter_name = name,
+                                         address = address,
+                                         automated_record_id = automated_record_id,
+                                         notes = subm_notes,
+                                         multimedia_links = media_links)
   
 }

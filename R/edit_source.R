@@ -61,35 +61,41 @@ add_source <- function(gedcom,
                        source_notes = character(),
                        multimedia_links = character()) {
   
-  xref <- assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
+  xref <- tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
   
   dat_notes <- purrr::map(data_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
   sour_notes <- purrr::map(source_notes, ~ if(grepl(xref_pattern(), .x)) {
-    NOTE_STRUCTURE(xref_note = .x) } else { NOTE_STRUCTURE(user_text = .x) }  )
+    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
+  } else { 
+    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
+  }  )
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
-    purrr::map(MULTIMEDIA_LINK)
+    purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
   
-  sour_record <- SOURCE_RECORD(xref_sour = xref,
-                               events_recorded = events_recorded,
-                               date_period_covered = date_period_covered,
-                               source_jurisdiction_place = jurisdiction,
-                               responsible_agency = responsible_agency,
-                               data_notes = dat_notes,
-                               source_originator = originator,
-                               source_descriptive_title = title,
-                               source_filed_by_entry = short_title,
-                               source_publication_facts = publication_detail,
-                               text_from_source = source_text,
-                               user_reference_number = user_reference_number,
-                               user_reference_type = user_reference_type,
-                               automated_record_id = automated_record_id,
-                               notes = sour_notes,
-                               multimedia_links = media_links)
-    
+  sour_record <- tidygedcom.internals::SOURCE_RECORD(xref_sour = xref,
+                                                     events_recorded = events_recorded,
+                                                     date_period_covered = date_period_covered,
+                                                     source_jurisdiction_place = jurisdiction,
+                                                     responsible_agency = responsible_agency,
+                                                     data_notes = dat_notes,
+                                                     source_originator = originator,
+                                                     source_descriptive_title = title,
+                                                     source_filed_by_entry = short_title,
+                                                     source_publication_facts = publication_detail,
+                                                     text_from_source = source_text,
+                                                     user_reference_number = user_reference_number,
+                                                     user_reference_type = user_reference_type,
+                                                     automated_record_id = automated_record_id,
+                                                     notes = sour_notes,
+                                                     multimedia_links = media_links)
+  
     gedcom %>% 
       tibble::add_row(sour_record, .before = nrow(.)) %>% 
       set_active_record(xref)
@@ -129,19 +135,21 @@ add_source_repository_citation <- function(gedcom,
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
-  citation <- SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,
-                                         source_call_number = call_number) %>% add_levels(1)
+  citation <- tidygedcom.internals::SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,
+                                                               source_call_number = call_number) %>% 
+    tidygedcom.internals::add_levels(1)
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    citation <- dplyr::bind_rows(citation, CHANGE_DATE() %>% add_levels(1))
+    citation <- dplyr::bind_rows(citation, tidygedcom.internals::CHANGE_DATE() %>% 
+                                   tidygedcom.internals::add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, xref, 0, "SOUR")
   
   gedcom %>%
     tibble::add_row(citation, .before = next_row) %>% 
-    finalise()
+    tidygedcom.internals::finalise()
   
 }
 

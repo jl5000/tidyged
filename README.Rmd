@@ -96,16 +96,10 @@ This package allows limited editing of `tidygedcom` objects (adding/removing rec
 
 ## Current status
 
-* The GEDCOM 5.5.5 specification has been implemented. This is the bulk of the internal data structures required (records.R, subrecords.R, validate_primitives.R, and docs_primitives.R);
-* Some initial functions to summarise tidygedcom objects have been completed (interrogate.R);
-* Functions to import, export and create tidygedcom objects have been completed (import_export_create.R);
-* Some simple validation checks have been written (validate_gedcom.R), but there won't be an extensive functionality for this given the number of GEDCOM validators available ([such as this one](http://ged-inline.elasticbeanstalk.com/validate)).
-* Current work is on implementing some sophisticated functionality for sources and events, and other utility functions;
-* Work on `shinygedcom` and `visgedcom` will begin once an initial version of `tidygedcom` is complete.
+The package and its internal data structures (contained in a separate `tidygedcom.internals` package) are almost complete and will soon be submitted to CRAN.
 
-Four further packages are also planned, to provide an ecosystem called the `gedcompendium`:
+Three further packages are also planned, to provide an ecosystem called the `gedcompendium`:
 
-* `tidygedcom.internals` will contain the internal data structures currently in this package;
 * `shinygedcom` will provide a shiny app to edit `tidygedcom` objects;
 * `visgedcom` will allow visualisation of `tidygedcom` objects;
 * `tidygedcom.sources` will provide functions to automate the representation of facts from various source documents (e.g. birth certificates, censuses).

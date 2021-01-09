@@ -288,7 +288,7 @@ gedcom <- function(submitter_details = subm(),
                                                                                               receiving_system_name = receiving_system,
                                                                                               file_creation_date = date_current(),
                                                                                               language_of_text = language,
-                                                                                              xref_subm = tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_subm, 1),
+                                                                                              xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
                                                                                               copyright_gedcom_file = gedcom_copyright,
                                                                                               gedcom_content_description = gedcom_description)) %>% 
     dplyr::bind_rows(submitter_details, 
@@ -362,7 +362,7 @@ subm <- function(name = unname(Sys.info()["user"]),
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
     purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
   
-  tidygedcom.internals::SUBMITTER_RECORD(xref_subm = tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_subm, 1),
+  tidygedcom.internals::SUBMITTER_RECORD(xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
                                          submitter_name = name,
                                          address = address,
                                          automated_record_id = automated_record_id,

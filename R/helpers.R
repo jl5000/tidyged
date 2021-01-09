@@ -17,6 +17,47 @@ xrefs_notes <-        function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$reco
 xrefs_multimedia <-   function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_obje) }
 
 
+
+#' Create a new xref for a record
+#' 
+#' This function is used to assign xrefs to new records that are created.
+#'
+#' @param type An alphabetic sequence to be used as a prefix for the xref identifier.
+#' GEDCOM files traditionally use a single letter to denote the type of record, e.g.
+#' I for Individual, F for Family group, etc.
+#' @param ref An explicit reference number after the type if one is to be chosen manually.
+#' @param gedcom A tidygedcom object.
+#'
+#' @return An xref to use for a new record.
+#' @export
+assign_xref <- function(type = "", ref = 0, gedcom = tibble::tibble()) {
+  
+  if (ref == 0) {
+    # Are there any existing records of this type?
+    gedcom_filt <- gedcom %>% 
+      dplyr::filter(stringr::str_detect(record, paste0("^@", type, "\\d+@$"))) 
+    
+    if(nrow(gedcom_filt) == 0) {
+      ref <- 1
+    } else {
+      ref <- gedcom_filt %>%
+        dplyr::pull(record) %>% 
+        unique() %>% 
+        purrr::keep(stringr::str_detect(., paste0("^@", type, "(\\d+)@$"))) %>% 
+        stringr::str_remove_all("@") %>% 
+        stringr::str_remove_all("[A-Za-z]") %>% 
+        as.numeric() %>% 
+        max() + 1
+      
+    }
+    
+  } 
+  paste0("@", type, ref, "@")
+}
+
+
+
+
 #' Extract a particular value from a tidygedcom object
 #'
 #' @param gedcom A tidygedcom object.

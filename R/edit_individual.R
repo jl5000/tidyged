@@ -41,7 +41,7 @@ add_individual <- function(gedcom,
                            individual_notes = character(),
                            multimedia_links = character()) {
   
-  xref <- tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
   
   indi_notes <- purrr::map(individual_notes, ~ if(grepl(xref_pattern(), .x)) {
     tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 

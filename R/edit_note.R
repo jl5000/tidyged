@@ -20,7 +20,7 @@ add_note <- function(gedcom,
                      user_reference_type = character(),
                      automated_record_id = character()) {
   
-  xref <- tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_note, gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_note, gedcom = gedcom)
   
   note_record <- tidygedcom.internals::NOTE_RECORD(xref_note = xref,
                                                    user_text = text,

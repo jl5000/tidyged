@@ -93,7 +93,7 @@ print(tg, n = Inf)
 #>  12     3 HD     ADDR  ""                                                     
 #>  13     3 HD     EMAIL "jalendrum@gmail.com"                                  
 #>  14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"                 
-#>  15     1 HD     DATE  "05 JAN 2021"                                          
+#>  15     1 HD     DATE  "09 JAN 2021"                                          
 #>  16     1 HD     LANG  "English"                                              
 #>  17     1 HD     SUBM  "@U1@"                                                 
 #>  18     1 HD     COPR  "Disney"                                               
@@ -101,7 +101,7 @@ print(tg, n = Inf)
 #>  20     0 @U1@   SUBM  ""                                                     
 #>  21     1 @U1@   NAME  "Jamie Lendrum"                                        
 #>  22     1 @U1@   CHAN  ""                                                     
-#>  23     2 @U1@   DATE  "05 JAN 2021"                                          
+#>  23     2 @U1@   DATE  "09 JAN 2021"                                          
 #>  24     0 @I1@   INDI  ""                                                     
 #>  25     1 @I1@   SEX   "M"                                                    
 #>  26     1 @I1@   NOTE  "The central character in the Star Wars Skywalker Saga"
@@ -123,7 +123,7 @@ print(tg, n = Inf)
 #>  42     1 @I1@   RELI  "Jedi"                                                 
 #>  43     1 @I1@   PROP  "Lightsaber"                                           
 #>  44     1 @I1@   CHAN  ""                                                     
-#>  45     2 @I1@   DATE  "05 JAN 2021"                                          
+#>  45     2 @I1@   DATE  "09 JAN 2021"                                          
 #>  46     0 @I2@   INDI  ""                                                     
 #>  47     1 @I2@   SEX   "F"                                                    
 #>  48     1 @I2@   NOTE  "Queen of Naboo"                                       
@@ -132,7 +132,7 @@ print(tg, n = Inf)
 #>  51     2 @I2@   SURN  "Amidala"                                              
 #>  52     1 @I2@   FAMS  "@F1@"                                                 
 #>  53     1 @I2@   CHAN  ""                                                     
-#>  54     2 @I2@   DATE  "05 JAN 2021"                                          
+#>  54     2 @I2@   DATE  "09 JAN 2021"                                          
 #>  55     0 @I3@   INDI  ""                                                     
 #>  56     1 @I3@   SEX   "F"                                                    
 #>  57     1 @I3@   NAME  "Leia Skywalker"                                       
@@ -147,7 +147,7 @@ print(tg, n = Inf)
 #>  66     1 @I3@   FAMC  "@F1@"                                                 
 #>  67     2 @I3@   PEDI  "birth"                                                
 #>  68     1 @I3@   CHAN  ""                                                     
-#>  69     2 @I3@   DATE  "05 JAN 2021"                                          
+#>  69     2 @I3@   DATE  "09 JAN 2021"                                          
 #>  70     0 @I4@   INDI  ""                                                     
 #>  71     1 @I4@   SEX   "M"                                                    
 #>  72     1 @I4@   NAME  "Luke Skywalker"                                       
@@ -157,7 +157,7 @@ print(tg, n = Inf)
 #>  76     1 @I4@   FAMC  "@F1@"                                                 
 #>  77     2 @I4@   PEDI  "birth"                                                
 #>  78     1 @I4@   CHAN  ""                                                     
-#>  79     2 @I4@   DATE  "05 JAN 2021"                                          
+#>  79     2 @I4@   DATE  "09 JAN 2021"                                          
 #>  80     0 @I5@   INDI  ""                                                     
 #>  81     1 @I5@   SEX   "M"                                                    
 #>  82     1 @I5@   NAME  "Obi-Wan Kenobi"                                       
@@ -166,31 +166,31 @@ print(tg, n = Inf)
 #>  85     2 @I5@   NICK  "Ben"                                                  
 #>  86     2 @I5@   SURN  "Kenobi"                                               
 #>  87     1 @I5@   CHAN  ""                                                     
-#>  88     2 @I5@   DATE  "05 JAN 2021"                                          
+#>  88     2 @I5@   DATE  "09 JAN 2021"                                          
 #>  89     0 @F1@   FAM   ""                                                     
 #>  90     1 @F1@   HUSB  "@I1@"                                                 
 #>  91     1 @F1@   WIFE  "@I2@"                                                 
 #>  92     1 @F1@   CHIL  "@I4@"                                                 
 #>  93     1 @F1@   CHIL  "@I3@"                                                 
 #>  94     1 @F1@   CHAN  ""                                                     
-#>  95     2 @F1@   DATE  "05 JAN 2021"                                          
+#>  95     2 @F1@   DATE  "09 JAN 2021"                                          
 #>  96     0 @N1@   NOTE  "Based on Star Wars"                                   
 #>  97     1 @N1@   CHAN  ""                                                     
-#>  98     2 @N1@   DATE  "05 JAN 2021"                                          
+#>  98     2 @N1@   DATE  "09 JAN 2021"                                          
 #>  99     0 @S1@   SOUR  ""                                                     
 #> 100     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                     
 #> 101     1 @S1@   ABBR  "Star Wars"                                            
 #> 102     1 @S1@   CHAN  ""                                                     
-#> 103     2 @S1@   DATE  "05 JAN 2021"                                          
+#> 103     2 @S1@   DATE  "09 JAN 2021"                                          
 #> 104     0 @R1@   REPO  ""                                                     
 #> 105     1 @R1@   NAME  "The Skywalker Saga"                                   
 #> 106     1 @R1@   CHAN  ""                                                     
-#> 107     2 @R1@   DATE  "05 JAN 2021"                                          
+#> 107     2 @R1@   DATE  "09 JAN 2021"                                          
 #> 108     0 @O1@   OBJE  ""                                                     
 #> 109     1 @O1@   FILE  "XYZ"                                                  
 #> 110     2 @O1@   FORM  "JPG"                                                  
 #> 111     1 @O1@   CHAN  ""                                                     
-#> 112     2 @O1@   DATE  "05 JAN 2021"                                          
+#> 112     2 @O1@   DATE  "09 JAN 2021"                                          
 #> 113     0 TR     TRLR  ""
 ```
 
@@ -254,11 +254,11 @@ df_individuals(tg) %>% print(n = Inf, width = Inf)
 #> 5 ""                  ""              ""                 ""          
 #>   num_children last_modified
 #>          <int> <chr>        
-#> 1            2 05 JAN 2021  
-#> 2            2 05 JAN 2021  
-#> 3            0 05 JAN 2021  
-#> 4            0 05 JAN 2021  
-#> 5            0 05 JAN 2021
+#> 1            2 09 JAN 2021  
+#> 2            2 09 JAN 2021  
+#> 3            0 09 JAN 2021  
+#> 4            0 09 JAN 2021  
+#> 5            0 09 JAN 2021
 df_families(tg) %>% print(n = Inf, width = Inf)
 #> # A tibble: 1 x 7
 #>   xref  husband          wife          marriage_date marriage_place num_children
@@ -266,7 +266,7 @@ df_families(tg) %>% print(n = Inf, width = Inf)
 #> 1 @F1@  Anakin Skywalker Padme Amidala ""            ""             2           
 #>   last_modified
 #>   <chr>        
-#> 1 05 JAN 2021
+#> 1 09 JAN 2021
 ```
 
 This package allows limited editing of `tidygedcom` objects
@@ -280,27 +280,13 @@ functions.
 
 ## Current status
 
-  - The GEDCOM 5.5.5 specification has been implemented. This is the
-    bulk of the internal data structures required (records.R,
-    subrecords.R, validate\_primitives.R, and docs\_primitives.R);
-  - Some initial functions to summarise tidygedcom objects have been
-    completed (interrogate.R);
-  - Functions to import, export and create tidygedcom objects have been
-    completed (import\_export\_create.R);
-  - Some simple validation checks have been written
-    (validate\_gedcom.R), but there won’t be an extensive functionality
-    for this given the number of GEDCOM validators available ([such as
-    this one](http://ged-inline.elasticbeanstalk.com/validate)).
-  - Current work is on implementing some sophisticated functionality for
-    sources and events, and other utility functions;
-  - Work on `shinygedcom` and `visgedcom` will begin once an initial
-    version of `tidygedcom` is complete.
+The package and its internal data structures (contained in a separate
+`tidygedcom.internals` package) are almost complete and will soon be
+submitted to CRAN.
 
-Four further packages are also planned, to provide an ecosystem called
+Three further packages are also planned, to provide an ecosystem called
 the `gedcompendium`:
 
-  - `tidygedcom.internals` will contain the internal data structures
-    currently in this package;
   - `shinygedcom` will provide a shiny app to edit `tidygedcom` objects;
   - `visgedcom` will allow visualisation of `tidygedcom` objects;
   - `tidygedcom.sources` will provide functions to automate the

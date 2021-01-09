@@ -57,19 +57,13 @@ Many GEDCOM processors modify the data on import, perhaps ignoring custom tags. 
 
 If you want to modify single values in a GEDCOM or do a simple Find/Replace, then this is straightforward to achieve with a simple text editor.
 
-## File structure
+## High-level architecture
 
-The specifications of GEDCOM records are represented in the `records.R` file. These records are composed of various data structures found in `subrecords.R`. I have also painstakingly written functions to validate each line value separately in `validate_primitives.R` and they are (mostly) all documented in one place in `docs_primitives.R`. These four files form the bulk of the codification of the GEDCOM specification.
+The **tidygedcom** package has a dependency on the **tidygedcom.internals** package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the `edit_*.R` files and summary functions found in `interrogate.R`.
 
-The user is kept away from this infrastructure, and instead interacts with various wrapper functions found in the `edit_*.R` files and summary functions found in `interrogate.R`.
+The **tidygedcom** package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to have a sister package to provide a **shiny** interface (**shinygedcom**). However, before work on **shinygedcom** begins, I would like to start a tidygedcom visualisation package, **visgedcom**, which will allow various views of genealogical data.
 
-## Future work
-
-At the time of writing, this package is getting quite large and difficult to mentally manage. It can be quite tricky implementing some of the functionality to edit existing GEDCOM files (rather than creating from scratch), and so the long term plan is to have a sister package to help with this interactively using **shiny** (**shinygedcom**). However, before work on **shinygedcom** begins, I would like to start a tidygedcom visualisation package, **visgedcom**, which will allow various views of genealogical data.
-
-I am also considering eventually de-scoping **tidygedcom** to only contain the user interface functions and moving the core infrastructure (the four files mentioned above and some other helper functions) to a **tidygedcom.internals** package.
-
-There is also potential to generate another package to handle different types of source documents. With all these package ideas it's turning into a small ecosystem - the **gedcompendium** perhaps.
+There is also potential to generate another package to handle different types of source documents. With all these package ideas it's turning into a small ecosystem - the **gedcompendium**.
 
 
 

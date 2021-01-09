@@ -51,7 +51,7 @@ add_family_group <- function(gedcom,
                              family_notes = character(),
                              multimedia_links = character()) {
   
-  xref <- tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_fam, gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_fam, gedcom = gedcom)
   
   xref_husb <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), husband)
   xref_wife <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), wife)

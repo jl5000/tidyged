@@ -61,7 +61,7 @@ add_source <- function(gedcom,
                        source_notes = character(),
                        multimedia_links = character()) {
   
-  xref <- tidygedcom.internals::assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
   
   dat_notes <- purrr::map(data_notes, ~ if(grepl(xref_pattern(), .x)) {
     tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 

@@ -25,7 +25,7 @@ is_note(gedcom, xref)
 is_source(gedcom, xref)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{xref}{The xref of the record.}
 }

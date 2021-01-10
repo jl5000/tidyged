@@ -1,5 +1,5 @@
 ---
-title: "Implementation of tidygedcom"
+title: "Implementation of tidyged"
 ---
 
 ```{r, include = FALSE}
@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 ```
 
 
-## Why tidygedcom?
+## Why tidyged?
 
 One of the main characteristics I wanted for this package was to hide the complexity of the GEDCOM specification. I began with what I wanted the user interface to look like and worked backwards from there. I felt that adopting a **tidyverse** feel to the package would enhance readability and would significantly flatten the learning curve for those who are familiar with **ggplot2**.
 
@@ -22,14 +22,14 @@ I toyed with the idea of using an off-the-shelf open source product like [GRAMPS
 
 I also considered using data structures more suited to this type of data, such as JSON or graphs (using the **igraph** package). However, I discovered it would be quite difficult representing some of the structures in the GEDCOM specification to my satisfaction.
 
-It was some time before a better solution occurred to me, and that was to store the GEDCOM file almost as is, and just to split out the components of each line into their own columns, creating a tidy version of a GEDCOM file (hence the name **tidygedcom**). This would allow easy manipulation using existing **tidyverse** infrastructure, and some additional processing would be needed to deal with the ordered and nested nature of the file. Ironically, I had returned to the idea of a tidy dataframe that I had dismissed early on.
+It was some time before a better solution occurred to me, and that was to store the GEDCOM file almost as is, and just to split out the components of each line into their own columns, creating a tidy version of a GEDCOM file (hence the name **tidyged**). This would allow easy manipulation using existing **tidyverse** infrastructure, and some additional processing would be needed to deal with the ordered and nested nature of the file. Ironically, I had returned to the idea of a tidy dataframe that I had dismissed early on.
 
-## The tidygedcom object
+## The tidyged object
 
-The **tidygedcom** object is a tibble representation of a GEDCOM file. Before we see how this is structured, let's see an example of a GEDCOM file:
+The **tidyged** object is a tibble representation of a GEDCOM file. Before we see how this is structured, let's see an example of a GEDCOM file:
 
 ```{r}
-readLines(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom"))
+readLines(system.file("extdata", "555SAMPLE.GED", package = "tidyged"))
 ```
 
 Lines in a GEDCOM file can have a number of components:
@@ -37,21 +37,21 @@ Lines in a GEDCOM file can have a number of components:
 * **Level**: The level in the hierarchical structure. This appears for every line;
 * **Cross-reference identifier**: A string (which looks like @XYZ@) that signals the beginning of a new record (apart from header and trailer);
 * **Tag**: A short string given immediately after the level or cross-reference identifier that indicates the type of information being provided on the line. These are controlled values. User-defined tags have been allowed in other GEDCOM programs, but they are discouraged here;
-* **Cross-reference pointer**: This links to another record in the file (which looks like @XYZ@). In the above example, the Family Group record beginning on line `r which(readLines(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) == "0 @F1@ FAM")` references other Individual records who are members of the family;
+* **Cross-reference pointer**: This links to another record in the file (which looks like @XYZ@). In the above example, the Family Group record beginning on line `r which(readLines(system.file("extdata", "555SAMPLE.GED", package = "tidyged")) == "0 @F1@ FAM")` references other Individual records who are members of the family;
 * **Line value**: The value associated with the tag. For example, on line 6, the CHARacter encoding for the file is given as UTF-8.
 
-There will not be any lines that have all of these components. For example, the first line of records do not contain a line value. Also, a line will never have a cross-reference pointer and a line value defined. For this reason, the **tidygedcom** object treats cross-reference pointers as just another line value.
+There will not be any lines that have all of these components. For example, the first line of records do not contain a line value. Also, a line will never have a cross-reference pointer and a line value defined. For this reason, the **tidyged** object treats cross-reference pointers as just another line value.
 
-The **tidygedcom** representation of the above GEDCOM file is given below:
+The **tidyged** representation of the above GEDCOM file is given below:
 
 ```{r}
-library(tidygedcom)
+library(tidyged)
 
-read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) %>% 
+read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged")) %>% 
   print(n = Inf)
 ```
 
-The cross-reference identifier is given in the record column. Event though these aren't given for the header and trailer records they are assigned as "HD" and "TR" respectively in the **tidygedcom** object.
+The cross-reference identifier is given in the record column. Event though these aren't given for the header and trailer records they are assigned as "HD" and "TR" respectively in the **tidyged** object.
 
 Many GEDCOM processors modify the data on import, perhaps ignoring custom tags. This package reads the file as-is, and the only modification of the file is in line with that recommended in the GEDCOM 5.5.5 specification, specifically; replacing double '@' symbols with single ones, and merging CONC/CONT lines. 
 
@@ -59,9 +59,9 @@ If you want to modify single values in a GEDCOM or do a simple Find/Replace, the
 
 ## High-level architecture
 
-The **tidygedcom** package has a dependency on the **tidygedcom.internals** package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the `edit_*.R` files and summary functions found in `interrogate.R`.
+The **tidyged** package has a dependency on the **tidyged.internals** package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the `edit_*.R` files and summary functions found in `interrogate.R`.
 
-The **tidygedcom** package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to have a sister package to provide a **shiny** interface (**shinygedcom**). However, before work on **shinygedcom** begins, I would like to start a tidygedcom visualisation package, **visgedcom**, which will allow various views of genealogical data.
+The **tidyged** package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to have a sister package to provide a **shiny** interface (**shinyged**). However, before work on **shinyged** begins, I would like to start a tidyged visualisation package, **visged**, which will allow various views of genealogical data.
 
 There is also potential to generate another package to handle different types of source documents. With all these package ideas it's turning into a small ecosystem - the **gedcompendium**.
 

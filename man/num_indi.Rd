@@ -8,7 +8,7 @@
 \alias{num_note}
 \alias{num_repo}
 \alias{num_sour}
-\title{Get the number of records in a tidygedcom object}
+\title{Get the number of records in a tidyged object}
 \usage{
 num_indi(gedcom)
 
@@ -25,11 +25,11 @@ num_repo(gedcom)
 num_sour(gedcom)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 }
 \value{
 The number of records of the relevant type.
 }
 \description{
-These functions return the number of records of a particular type in a tidygedcom object.
+These functions return the number of records of a particular type in a tidyged object.
 }

@@ -13,12 +13,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidygedcom
+# tidyged
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/jl5000/tidygedcom/workflows/R-CMD-check/badge.svg)](https://github.com/jl5000/tidygedcom/actions)
-[![](https://codecov.io/gh/jl5000/tidygedcom/branch/master/graph/badge.svg)](https://codecov.io/gh/jl5000/tidygedcom)
-[![CodeFactor](https://www.codefactor.io/repository/github/jl5000/tidygedcom/badge)](https://www.codefactor.io/repository/github/jl5000/tidygedcom)
+[![R-CMD-check](https://github.com/jl5000/tidyged/workflows/R-CMD-check/badge.svg)](https://github.com/jl5000/tidyged/actions)
+[![](https://codecov.io/gh/jl5000/tidyged/branch/master/graph/badge.svg)](https://codecov.io/gh/jl5000/tidyged)
+[![CodeFactor](https://www.codefactor.io/repository/github/jl5000/tidyged/badge)](https://www.codefactor.io/repository/github/jl5000/tidyged)
 [![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
@@ -32,7 +32,7 @@ You can install development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("jl5000/tidygedcom")
+devtools::install_github("jl5000/tidyged")
 ```
 
 ## Example
@@ -42,7 +42,7 @@ The intent is to allow the user to import GEDCOM files or create them from scrat
 An example is below:
 
 ```{r example}
-library(tidygedcom)
+library(tidyged)
 
 tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family", gedcom_copyright = "None") %>%
   add_individual(sex = "M", individual_notes = "The central character in the Star Wars Skywalker Saga") %>%
@@ -77,9 +77,9 @@ print(tg, n = Inf)
 
 Just like a ggplot object requires aesthetics, a GEDCOM file requires details of a submitter. If no submitter details are given, the username is used.
 
-Within the package, GEDCOM files are represented as a sub-class of tibble known as `tidygedcom` objects, allowing easy manipulation and exploitation of existing `tidyverse` infrastructure.
+Within the package, GEDCOM files are represented as a sub-class of tibble known as `tidyged` objects, allowing easy manipulation and exploitation of existing `tidyverse` infrastructure.
 
-A number of functions are available to provide summaries of `tidygedcom` objects:
+A number of functions are available to provide summaries of `tidyged` objects:
 
 ```{r}
 num_indi(tg)
@@ -92,17 +92,18 @@ df_individuals(tg) %>% print(n = Inf, width = Inf)
 df_families(tg) %>% print(n = Inf, width = Inf)
 ```
 
-This package allows limited editing of `tidygedcom` objects (adding/removing records, as well as the addition of some record substructures). Editing of existing records is made possible through 'activation' (much like the `tidygraph` package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of `activate_*_record()` functions.
+This package allows limited editing of `tidyged` objects (adding/removing records, as well as the addition of some record substructures). Editing of existing records is made possible through 'activation' (much like the `tidygraph` package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of `activate_*_record()` functions.
 
 ## Current status
 
-The package and its internal data structures (contained in a separate `tidygedcom.internals` package) are almost complete and will soon be submitted to CRAN.
+The package and its internal data structures (contained in a separate `tidyged.internals` package) are almost complete and will soon be submitted to CRAN.
 
-Three further packages are also planned, to provide an ecosystem called the `gedcompendium`:
+Four further packages are also planned, to provide an ecosystem called the `gedcompendium`:
 
-* `shinygedcom` will provide a shiny app to edit `tidygedcom` objects;
-* `visgedcom` will allow visualisation of `tidygedcom` objects;
-* `tidygedcom.sources` will provide functions to automate the representation of facts from various source documents (e.g. birth certificates, censuses).
+* `shinyged` will provide a shiny app to edit `tidyged` objects;
+* `visged` will allow visualisation of `tidyged` objects;
+* `autoged` will provide functions to automate the representation of facts from various source documents (e.g. birth certificates, censuses);
+* `safeged` will provide functions to help with the removal of sensitive data (e.g. on living individuals).
 
 ## References
 

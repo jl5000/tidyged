@@ -7,7 +7,7 @@
 validate_gedcom(gedcom, expected_encoding)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidyged object}
 
 \item{expected_encoding}{A character string given the expected file encoding. One of
 "UTF-8", "UTF-16LE", or "UTF-16BE".}

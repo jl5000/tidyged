@@ -22,7 +22,7 @@ add_individual_names_var(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{primary_name}{The name for which this is a variation. This is treated as a
 regex pattern to match to existing names.}
@@ -60,7 +60,7 @@ These could be xrefs to existing Note records.}
 \item{update_date_changed}{Whether to add/update the change date for the record.}
 }
 \value{
-An updated tidygedcom object with an expanded Individual record including
+An updated tidyged object with an expanded Individual record including
 these name variants.
 }
 \description{

@@ -11,7 +11,7 @@ test_that("Function add_individual() @ L36", {
 })
 
 
-test_that("Function remove_individual() @ L89", {
+test_that("Function remove_individual() @ L85", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) %>% add_individual() %>% remove_individual())
 })

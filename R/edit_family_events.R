@@ -14,7 +14,7 @@
 #' @param update_date_changed Whether to add/update the change date for the record.
 #' @param ... See arguments for main function. The attribute_type/event_type do not need to be populated.
 #' 
-#' @return An updated tidygedcom object with an expanded Family group record including
+#' @return An updated tidyged object with an expanded Family group record including
 #' this event.
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
@@ -65,7 +65,7 @@ add_family_event <- function(gedcom,
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
-  event_address <- tidygedcom.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+  event_address <- tidyged.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
                                                            address_city = city,
                                                            address_state = state,
                                                            address_postal_code = postal_code,
@@ -75,15 +75,15 @@ add_family_event <- function(gedcom,
                                                            address_fax = fax,
                                                            address_web_page = web_page)
   
-  plac_notes <- purrr::map(place_notes, tidygedcom.internals::NOTE_STRUCTURE)
+  plac_notes <- purrr::map(place_notes, tidyged.internals::NOTE_STRUCTURE)
   
   if(length(place_name) == 0) {
     
-    event_place <- tidygedcom.internals::PLACE_STRUCTURE(character())
+    event_place <- tidyged.internals::PLACE_STRUCTURE(character())
     
   } else {
     
-    event_place <- tidygedcom.internals::PLACE_STRUCTURE(place_name = place_name,
+    event_place <- tidyged.internals::PLACE_STRUCTURE(place_name = place_name,
                                                          place_phonetic = place_phonetic,
                                                          phonetisation_method = phonetisation_method,
                                                          place_romanised = place_romanised,
@@ -93,16 +93,16 @@ add_family_event <- function(gedcom,
                                                          notes = plac_notes)
   }
   
-  even_notes <- purrr::map(event_notes, tidygedcom.internals::NOTE_STRUCTURE)
+  even_notes <- purrr::map(event_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
-    purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
+    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
   
   if(event_type == "MARR" & length(event_classification) == 0)
     event_classification <- "marriage"
   
-  details1 <- tidygedcom.internals::EVENT_DETAIL(event_or_fact_classification = event_classification,
+  details1 <- tidyged.internals::EVENT_DETAIL(event_or_fact_classification = event_classification,
                                                  date = event_date,
                                                  place = event_place,
                                                  address = event_address,
@@ -112,26 +112,26 @@ add_family_event <- function(gedcom,
                                                  notes = even_notes,
                                                  multimedia_links = media_links)
   
-  details2 <- tidygedcom.internals::FAMILY_EVENT_DETAIL(husband_age_at_event = husband_age_at_event,
+  details2 <- tidyged.internals::FAMILY_EVENT_DETAIL(husband_age_at_event = husband_age_at_event,
                                                         wife_age_at_event = wife_age_at_event,
                                                         event_details = details1)
   
-  event_str <- tidygedcom.internals::FAMILY_EVENT_STRUCTURE(event_type_family = event_type,
+  event_str <- tidyged.internals::FAMILY_EVENT_STRUCTURE(event_type_family = event_type,
                                                             event_descriptor = event_descriptor,
                                                             family_event_details = details2) %>% 
-    tidygedcom.internals::add_levels(1)
+    tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    event_str <- dplyr::bind_rows(event_str, tidygedcom.internals::CHANGE_DATE() %>% 
-                                    tidygedcom.internals::add_levels(1))
+    event_str <- dplyr::bind_rows(event_str, tidyged.internals::CHANGE_DATE() %>% 
+                                    tidyged.internals::add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, xref, 0, "FAM")
 
   gedcom %>%
     tibble::add_row(event_str, .before = next_row) %>% 
-    tidygedcom.internals::finalise() %>% 
+    tidyged.internals::finalise() %>% 
     activate_family_group_record(xref)
   
 }

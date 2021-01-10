@@ -2,7 +2,7 @@
 % Please edit documentation in R/edit_repository.R
 \name{add_repository}
 \alias{add_repository}
-\title{Add a Repository record to a tidygedcom object}
+\title{Add a Repository record to a tidyged object}
 \usage{
 add_repository(
   gedcom,
@@ -23,7 +23,7 @@ add_repository(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{name}{The name of the repository.}
 
@@ -57,10 +57,10 @@ the source system.}
 These could be xrefs to existing Note records.}
 }
 \value{
-An updated tidygedcom object including the Repository record.
+An updated tidyged object including the Repository record.
 }
 \description{
-Add a Repository record to a tidygedcom object
+Add a Repository record to a tidyged object
 }
 \details{
 This function will automatically assign a unique xref for this record. Most users

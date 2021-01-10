@@ -7,12 +7,12 @@
 activate_individual_record(gedcom, individual)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{individual}{The xref or name of the Individual record to be activated.}
 }
 \value{
-The same tidygedcom object with "active_record" attribute set to the specific
+The same tidyged object with "active_record" attribute set to the specific
 Individual record to allow easy editing.
 }
 \description{

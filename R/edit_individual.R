@@ -1,7 +1,7 @@
 
 
 
-#' Add an Individual record to a tidygedcom object
+#' Add an Individual record to a tidyged object
 #'
 #' This function adds a new record for an individual.
 #'
@@ -11,7 +11,7 @@
 #' If you need to add further information about this individual (e.g. names), use the 
 #' add_individual_* functions.
 #' 
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param sex The sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
 #' "X" (intersex), or "N" (not recorded).
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify 
@@ -24,7 +24,7 @@
 #' @param multimedia_links A character vector of multimedia file references accompanying this 
 #' Individual record. These could be xrefs to existing Multimedia records.
 #'
-#' @return An updated tidygedcom object including the Individual record.
+#' @return An updated tidyged object including the Individual record.
 #' @export
 #' @tests
 #' expect_snapshot_value(add_individual(gedcom(subm("Me")),
@@ -43,13 +43,13 @@ add_individual <- function(gedcom,
   
   xref <- assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
   
-  indi_notes <- purrr::map(individual_notes, tidygedcom.internals::NOTE_STRUCTURE)
+  indi_notes <- purrr::map(individual_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
-    purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
+    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
 
-  ind_record <- tidygedcom.internals::INDIVIDUAL_RECORD(xref_indi = xref,
+  ind_record <- tidyged.internals::INDIVIDUAL_RECORD(xref_indi = xref,
                                                         sex_value = sex,
                                                         user_reference_number = user_reference_number,
                                                         user_reference_type = user_reference_type,
@@ -63,20 +63,20 @@ add_individual <- function(gedcom,
 }
 
 
-#' Remove an Individual record from a tidygedcom object
+#' Remove an Individual record from a tidyged object
 #' 
-#' This function removes an active Individual record from the tidygedcom object.
+#' This function removes an active Individual record from the tidyged object.
 #' 
 #' At a minimum it will also remove references to this individual in Family group records.
 #' If remove_associations is TRUE (default) it will remove associations with this
 #' individual in other Individual records.
 #' 
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param remove_associations Whether to also remove associations with this individual in 
 #' other individual records. Defaults to TRUE.
 #'
-#' @return An updated tidygedcom object excluding the active Individual record.
+#' @return An updated tidyged object excluding the active Individual record.
 #' 
 #' @export
 #' @tests

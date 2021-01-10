@@ -7,12 +7,12 @@
 set_active_record(gedcom, xref)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidyged object}
 
 \item{xref}{The xref of the record to activate}
 }
 \value{
-The same tidygedcom object with an "active_record" attribute set to the xref of the record
+The same tidyged object with an "active_record" attribute set to the xref of the record
 }
 \description{
 This allows an easy mechanism to edit particular records without specifying them each time.

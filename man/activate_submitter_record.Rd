@@ -7,12 +7,12 @@
 activate_submitter_record(gedcom, submitter)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{submitter}{The xref or name of the Submitter record to be activated.}
 }
 \value{
-The same tidygedcom object with "active_record" attribute set to the specific
+The same tidyged object with "active_record" attribute set to the specific
 Submitter record to allow easy editing.
 }
 \description{

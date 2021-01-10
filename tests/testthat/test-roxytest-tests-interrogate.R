@@ -7,7 +7,7 @@ test_that("Function get_family_group_description() @ L88", {
 })
 
 
-test_that("Function summary.tidygedcom() @ L129", {
+test_that("Function summary.tidyged() @ L129", {
   expect_snapshot_value(
                  gedcom(subm("Me"), gedcom_description = "descrip", language = "English",
                         gedcom_copyright = "copyright statement") %>% 
@@ -15,7 +15,7 @@ test_that("Function summary.tidygedcom() @ L129", {
 })
 
 
-test_that("Function str.tidygedcom() @ L175", {
+test_that("Function str.tidyged() @ L175", {
   expect_snapshot_value(
    gedcom(subm("Me")) %>% 
     add_individual() %>% 

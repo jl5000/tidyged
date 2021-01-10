@@ -2,12 +2,12 @@
 % Please edit documentation in R/read_write_create.R
 \name{write_gedcom}
 \alias{write_gedcom}
-\title{Save a tidygedcom object to disk as a GEDCOM file}
+\title{Save a tidyged object to disk as a GEDCOM file}
 \usage{
 write_gedcom(gedcom, filepath)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{filepath}{The full filepath to write to.}
 }
@@ -15,10 +15,10 @@ write_gedcom(gedcom, filepath)
 Nothing
 }
 \description{
-Save a tidygedcom object to disk as a GEDCOM file
+Save a tidyged object to disk as a GEDCOM file
 }
 \details{
-This function prepares the tidygedcom object and then writes it to the filepath.
+This function prepares the tidyged object and then writes it to the filepath.
 Steps taken include escaping "@" signs (with another "@") and splitting long lines onto
 separate lines.
 }

@@ -2,11 +2,11 @@
 
 #' Import a GEDCOM file
 #'
-#' Imports a *.ged file and creates a tidygedcom object.
+#' Imports a *.ged file and creates a tidyged object.
 #'
 #' @param filepath The full filepath of the GEDCOM file.
 #'
-#' @return A tidygedcom object
+#' @return A tidyged object
 #' @export
 #'
 #' @examples
@@ -16,13 +16,13 @@
 #' @tests
 #' expect_error(read_gedcom("my_family.txt"))
 #' expect_snapshot_value(
-#'     read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")), 
+#'     read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged")), 
 #'     "json2")
 #' expect_snapshot_value(
-#'     read_gedcom(system.file("extdata", "555SAMPLE16BE.GED", package = "tidygedcom")), 
+#'     read_gedcom(system.file("extdata", "555SAMPLE16BE.GED", package = "tidyged")), 
 #'     "json2")
 #' expect_snapshot_value(
-#'     read_gedcom(system.file("extdata", "555SAMPLE16LE.GED", package = "tidygedcom")), 
+#'     read_gedcom(system.file("extdata", "555SAMPLE16LE.GED", package = "tidyged")), 
 #'     "json2")
 read_gedcom <- function(filepath) {
 
@@ -47,7 +47,7 @@ read_gedcom <- function(filepath) {
     dplyr::mutate(level = as.numeric(level),
                   value = stringr::str_replace_all(value, "@@", "@")) %>% 
     combine_gedcom_values() %>% 
-    set_class_to_tidygedcom()
+    set_class_to_tidyged()
 
   validate_gedcom(ged, gedcom_encoding)
   ged
@@ -65,13 +65,13 @@ read_gedcom <- function(filepath) {
 #' @return A character string indicating the encoding of the file.
 #' @tests
 #' expect_equal(
-#'   read_gedcom_encoding(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")), 
+#'   read_gedcom_encoding(system.file("extdata", "555SAMPLE.GED", package = "tidyged")), 
 #'   "UTF-8")
 #' expect_equal(
-#'   read_gedcom_encoding(system.file("extdata", "555SAMPLE16BE.GED", package = "tidygedcom")), 
+#'   read_gedcom_encoding(system.file("extdata", "555SAMPLE16BE.GED", package = "tidyged")), 
 #'   "UTF-16BE")
 #' expect_equal(
-#'   read_gedcom_encoding(system.file("extdata", "555SAMPLE16LE.GED", package = "tidygedcom")), 
+#'   read_gedcom_encoding(system.file("extdata", "555SAMPLE16LE.GED", package = "tidyged")), 
 #'   "UTF-16LE")
 read_gedcom_encoding <- function(filepath) {
   
@@ -107,8 +107,8 @@ check_line_lengths <- function(lines, limit) {
 }
 
 
-set_class_to_tidygedcom <- function(gedcom) {
-  class(gedcom) <- c("tidygedcom", "tbl_df", "tbl", "data.frame")
+set_class_to_tidyged <- function(gedcom) {
+  class(gedcom) <- c("tidyged", "tbl_df", "tbl", "data.frame")
   gedcom
 }
 
@@ -118,9 +118,9 @@ set_class_to_tidygedcom <- function(gedcom) {
 #' 
 #' The function works by collapsing CONC/CONT lines using group-by/summarise.   
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #'
-#' @return A tidygedcom object in the GEDCOM form.
+#' @return A tidyged object in the GEDCOM form.
 combine_gedcom_values <- function(gedcom) {
   
   tags <- c("CONT", "CONC")
@@ -141,13 +141,13 @@ combine_gedcom_values <- function(gedcom) {
   
 }
 
-#' Save a tidygedcom object to disk as a GEDCOM file
+#' Save a tidyged object to disk as a GEDCOM file
 #' 
-#' @details This function prepares the tidygedcom object and then writes it to the filepath.
+#' @details This function prepares the tidyged object and then writes it to the filepath.
 #' Steps taken include escaping "@" signs (with another "@") and splitting long lines onto
 #' separate lines.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param filepath The full filepath to write to.
 #'
 #' @return Nothing
@@ -184,15 +184,15 @@ write_gedcom <- function(gedcom, filepath) {
 
 #' Update GEDCOM header with filename
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param filename The name of the file (with extension).
 #'
-#' @return An updated tidygedcom object with the updated filename.
+#' @return An updated tidyged object with the updated filename.
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'                         update_header_with_filename("my_file.ged") %>% 
 #'                         remove_dates_for_tests(), "json2")
-#' expect_snapshot_value(read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) %>% 
+#' expect_snapshot_value(read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged")) %>% 
 #'                         update_header_with_filename("my_file.ged") %>% 
 #'                         remove_dates_for_tests(), "json2")
 update_header_with_filename <- function(gedcom, filename) {
@@ -218,9 +218,9 @@ update_header_with_filename <- function(gedcom, filename) {
 #' This function only uses the CONC(atenation) tag for splitting values, and does
 #' not use the CONT(inuation) tag. This is because it is easier to implement.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param char_limit Maximum string length of values.
-#' @return A tidygedcom object in the GEDCOM grammar ready to export.
+#' @return A tidyged object in the GEDCOM grammar ready to export.
 #' @tests
 #' expect_snapshot_value(
 #'                 gedcom(subm("Me")) %>% 
@@ -253,9 +253,9 @@ split_gedcom_values <- function(gedcom, char_limit) {
 
 
 
-#' Create a base tidygedcom object
+#' Create a base tidyged object
 #' 
-#' This function creates a minimal tidygedcom object with header and footer sections and a single submitter record.
+#' This function creates a minimal tidyged object with header and footer sections and a single submitter record.
 #'  
 #' @param submitter_details Details of the submitter of the file (you?) using the subm() function. If no submitter
 #' name is provided, the username is used.
@@ -270,7 +270,7 @@ split_gedcom_values <- function(gedcom, char_limit) {
 #' @param receiving_system The name of the system expected to process the GEDCOM-compatible file. 
 #' @param language The human language in which the data in the file is normally read or written.
 #'
-#' @return A minimal tidygedcom object. 
+#' @return A minimal tidyged object. 
 #' @export
 gedcom <- function(submitter_details = subm(),
                    gedcom_description = character(),
@@ -278,11 +278,11 @@ gedcom <- function(submitter_details = subm(),
                    source_data_name = character(),
                    source_data_date = date_exact(),
                    source_data_copyright = character(),
-                   receiving_system = "tidygedcom",
+                   receiving_system = "tidyged",
                    language = "English") {
   
-  tidygedcom.internals::GEDCOM_HEADER(header_extension = 
-                                        tidygedcom.internals::LINEAGE_LINKED_HEADER_EXTENSION(name_of_source_data = source_data_name,
+  tidyged.internals::GEDCOM_HEADER(header_extension = 
+                                        tidyged.internals::LINEAGE_LINKED_HEADER_EXTENSION(name_of_source_data = source_data_name,
                                                                                               publication_date = source_data_date,
                                                                                               copyright_source_data = source_data_copyright,
                                                                                               receiving_system_name = receiving_system,
@@ -292,18 +292,18 @@ gedcom <- function(submitter_details = subm(),
                                                                                               copyright_gedcom_file = gedcom_copyright,
                                                                                               gedcom_content_description = gedcom_description)) %>% 
     dplyr::bind_rows(submitter_details, 
-                     tidygedcom.internals::FOOTER_SECTION()) %>%
-    set_class_to_tidygedcom()
+                     tidyged.internals::FOOTER_SECTION()) %>%
+    set_class_to_tidyged()
   
 }
 
 
 
-#' Define a Submitter record for a new tidygedcom object
+#' Define a Submitter record for a new tidyged object
 #'
 #' @details 
 #' This function is supposed to be used in the gedcom() function to define a
-#' new tidygedcom object.
+#' new tidyged object.
 #' 
 #' This submitter record identifies the individual or organization that contributed 
 #' information contained in the GEDCOM file.
@@ -324,7 +324,7 @@ gedcom <- function(submitter_details = subm(),
 #' These could be xrefs to existing Note records.
 #' @param multimedia_links TODO
 #'
-#' @return A Submitter record to be incorporated into a new tidygedcom object.
+#' @return A Submitter record to be incorporated into a new tidyged object.
 #' @export
 subm <- function(name = unname(Sys.info()["user"]),
                  local_address_lines = character(),
@@ -342,7 +342,7 @@ subm <- function(name = unname(Sys.info()["user"]),
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
-  address <- tidygedcom.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+  address <- tidyged.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
                                                      address_city = city,
                                                      address_state = state,
                                                      address_postal_code = postal_code,
@@ -352,13 +352,13 @@ subm <- function(name = unname(Sys.info()["user"]),
                                                      address_fax = fax,
                                                      address_web_page = web_page)
   
-  subm_notes <- purrr::map(submitter_notes, tidygedcom.internals::NOTE_STRUCTURE)
+  subm_notes <- purrr::map(submitter_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
-    purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
+    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
   
-  tidygedcom.internals::SUBMITTER_RECORD(xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
+  tidyged.internals::SUBMITTER_RECORD(xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
                                          submitter_name = name,
                                          address = address,
                                          automated_record_id = automated_record_id,

@@ -7,10 +7,10 @@
 remove_empty_family_groups(gedcom)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 }
 \value{
-A new tidygedcom object with empty Family Group records removed.
+A new tidyged object with empty Family Group records removed.
 }
 \description{
 Remove Family Group records with no members

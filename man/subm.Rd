@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_write_create.R
 \name{subm}
 \alias{subm}
-\title{Define a Submitter record for a new tidygedcom object}
+\title{Define a Submitter record for a new tidyged object}
 \usage{
 subm(
   name = unname(Sys.info()["user"]),
@@ -50,14 +50,14 @@ These could be xrefs to existing Note records.}
 \item{multimedia_links}{TODO}
 }
 \value{
-A Submitter record to be incorporated into a new tidygedcom object.
+A Submitter record to be incorporated into a new tidyged object.
 }
 \description{
-Define a Submitter record for a new tidygedcom object
+Define a Submitter record for a new tidyged object
 }
 \details{
 This function is supposed to be used in the gedcom() function to define a
-new tidygedcom object.
+new tidyged object.
 
 This submitter record identifies the individual or organization that contributed
 information contained in the GEDCOM file.

@@ -22,7 +22,7 @@ df_repositories(gedcom)
 df_notes(gedcom)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 }
 \value{
 A tibble summarising records where every row is a record.

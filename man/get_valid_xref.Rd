@@ -7,7 +7,7 @@
 get_valid_xref(gedcom, xref_or_descriptor, record_type, record_type_fn)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{xref_or_descriptor}{An xref or descriptor uniquely identifying the record.}
 
@@ -27,7 +27,7 @@ active record).
 \details{
 This helper function is designed to derive and run validation checks on an xref
 provided explicitly or implicitly. An xref is provided implicitly either through the active
-record of the tidygedcom object, or through a descriptor identifying a unique record.
+record of the tidyged object, or through a descriptor identifying a unique record.
 
 The descriptors used for each record are: name (individual, repository, and submitter),
 title (source), file reference (multimedia), excerpt (note).

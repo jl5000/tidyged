@@ -7,12 +7,12 @@
 activate_multimedia_record(gedcom, multimedia)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{multimedia}{The xref or file reference of the Multimedia record to be activated.}
 }
 \value{
-The same tidygedcom object with "active_record" attribute set to the specific
+The same tidyged object with "active_record" attribute set to the specific
 Multimedia record to allow easy editing.
 }
 \description{

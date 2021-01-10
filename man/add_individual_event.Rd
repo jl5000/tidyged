@@ -103,7 +103,7 @@ add_individual_event_retirement(...)
 add_individual_event_other(...)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{event_type}{The type of event. This should be automatically populated with the appropriate
 event function.}
@@ -195,7 +195,7 @@ event. These could be xrefs to existing Multimedia records.}
 \item{...}{See arguments for main function. The attribute_type/event_type do not need to be populated.}
 }
 \value{
-An updated tidygedcom object with an expanded Individual record including
+An updated tidyged object with an expanded Individual record including
 this event.
 }
 \description{

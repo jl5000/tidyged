@@ -12,7 +12,7 @@ remove_individual_name_var(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{variation_name}{The personal name variation to remove.}
 
@@ -22,7 +22,7 @@ remove_individual_name_var(
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 }
 \value{
-An updated tidygedcom object with an Individual record excluding
+An updated tidyged object with an Individual record excluding
 this personal name variation (and components).
 }
 \description{

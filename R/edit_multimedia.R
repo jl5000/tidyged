@@ -1,13 +1,13 @@
 
 
 
-#' Add a Multimedia record to a tidygedcom object
+#' Add a Multimedia record to a tidyged object
 #'
 #' @details This function will automatically assign a unique xref for this record. Most users
 #' will only need to use the file_reference, format, source_media, title, and 
 #' multimedia_notes parameters (and of course gedcom).
 #' 
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param file_reference A reference for the file, typically a filepath or URL.
 #' @param format A string indicating the format of the multimedia file. 
 #' Currently limited to one of: "AAC", "AVI", "BMP", "ePub", "FLAC", "GIF", "JPEG", "JPG", 
@@ -24,7 +24,7 @@
 #' @param multimedia_notes A character vector of notes accompanying this Multimedia record. These could be
 #' xrefs to existing Note records.
 #'
-#' @return An updated tidygedcom object including the Multimedia record.
+#' @return An updated tidyged object including the Multimedia record.
 #' @export
 add_multimedia <- function(gedcom,
                            file_reference,
@@ -38,9 +38,9 @@ add_multimedia <- function(gedcom,
   
   xref <- assign_xref(.pkgenv$xref_prefix_obje, gedcom = gedcom)
   
-  media_notes <- purrr::map(multimedia_notes, tidygedcom.internals::NOTE_STRUCTURE)
+  media_notes <- purrr::map(multimedia_notes, tidyged.internals::NOTE_STRUCTURE)
   
-  media_record <- tidygedcom.internals::MULTIMEDIA_RECORD(xref_obje = xref,
+  media_record <- tidyged.internals::MULTIMEDIA_RECORD(xref_obje = xref,
                                                           multimedia_file_reference = file_reference,
                                                           multimedia_format = format,
                                                           source_media_type = source_media,
@@ -55,12 +55,12 @@ add_multimedia <- function(gedcom,
     set_active_record(xref)
 }
 
-#' Remove a Multimedia record from a tidygedcom object
+#' Remove a Multimedia record from a tidyged object
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
-#' @return An updated tidygedcom object excluding the active Multimedia record.
+#' @return An updated tidyged object excluding the active Multimedia record.
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),

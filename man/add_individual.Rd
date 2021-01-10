@@ -2,7 +2,7 @@
 % Please edit documentation in R/edit_individual.R
 \name{add_individual}
 \alias{add_individual}
-\title{Add an Individual record to a tidygedcom object}
+\title{Add an Individual record to a tidyged object}
 \usage{
 add_individual(
   gedcom,
@@ -15,7 +15,7 @@ add_individual(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{sex}{The sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
 "X" (intersex), or "N" (not recorded).}
@@ -35,7 +35,7 @@ These could be xrefs to existing Note records.}
 Individual record. These could be xrefs to existing Multimedia records.}
 }
 \value{
-An updated tidygedcom object including the Individual record.
+An updated tidyged object including the Individual record.
 }
 \description{
 This function adds a new record for an individual.

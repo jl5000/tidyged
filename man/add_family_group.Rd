@@ -2,7 +2,7 @@
 % Please edit documentation in R/edit_family_group.R
 \name{add_family_group}
 \alias{add_family_group}
-\title{Add a Family Group record to a tidygedcom object}
+\title{Add a Family Group record to a tidyged object}
 \usage{
 add_family_group(
   gedcom,
@@ -19,7 +19,7 @@ add_family_group(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{husband}{A character string identifying the husband of this family. This can either
 be an xref or a regular expression to match to an individual name.}
@@ -53,7 +53,7 @@ xrefs to existing Note records.}
 Family group record. These could be xrefs to existing Multimedia records.}
 }
 \value{
-An updated tidygedcom object including the Family group record.
+An updated tidyged object including the Family group record.
 }
 \description{
 This function adds a record containing details of a family group.

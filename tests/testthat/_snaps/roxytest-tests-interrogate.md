@@ -1,10 +1,10 @@
-# Function summary.tidygedcom() @ L129
+# Function summary.tidyged() @ L129
 
     {
       "type": "NULL"
     }
 
-# Function str.tidygedcom() @ L175
+# Function str.tidyged() @ L175
 
     {
       "type": "NULL"

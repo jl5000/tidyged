@@ -2,7 +2,7 @@
 % Please edit documentation in R/edit_multimedia.R
 \name{add_multimedia}
 \alias{add_multimedia}
-\title{Add a Multimedia record to a tidygedcom object}
+\title{Add a Multimedia record to a tidyged object}
 \usage{
 add_multimedia(
   gedcom,
@@ -17,7 +17,7 @@ add_multimedia(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{file_reference}{A reference for the file, typically a filepath or URL.}
 
@@ -43,10 +43,10 @@ the source system.}
 xrefs to existing Note records.}
 }
 \value{
-An updated tidygedcom object including the Multimedia record.
+An updated tidyged object including the Multimedia record.
 }
 \description{
-Add a Multimedia record to a tidygedcom object
+Add a Multimedia record to a tidyged object
 }
 \details{
 This function will automatically assign a unique xref for this record. Most users

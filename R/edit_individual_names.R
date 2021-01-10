@@ -5,7 +5,7 @@
 #' This function can be applied to an Individual record several times to record
 #' personal names.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param name The full name of the individual. The order of the name parts should 
 #' be the order that the person would, by custom of their culture, have used when
 #' giving it to a recorder. The surname, if known, should be enclosed between two 
@@ -27,7 +27,7 @@
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param update_date_changed Whether to add/update the change date for the record.
 #'
-#' @return An updated tidygedcom object with an expanded Individual record including
+#' @return An updated tidyged object with an expanded Individual record including
 #' these names.
 #' @export
 add_individual_names <- function(gedcom,
@@ -45,9 +45,9 @@ add_individual_names <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
-  nam_notes <- purrr::map(name_notes, tidygedcom.internals::NOTE_STRUCTURE)
+  nam_notes <- purrr::map(name_notes, tidyged.internals::NOTE_STRUCTURE)
   
-  name_pieces <- tidygedcom.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
+  name_pieces <- tidyged.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                                             name_piece_given = given, 
                                                             name_piece_nickname = nickname, 
                                                             name_piece_surname_prefix = surname_prefix,
@@ -55,28 +55,28 @@ add_individual_names <- function(gedcom,
                                                             name_piece_suffix = suffix,
                                                             notes = nam_notes)
   
-  name_str <- tidygedcom.internals::PERSONAL_NAME_STRUCTURE(name_personal = name,
+  name_str <- tidyged.internals::PERSONAL_NAME_STRUCTURE(name_personal = name,
                                                             name_type = type,
                                                             name_pieces = name_pieces) %>% 
-    tidygedcom.internals::add_levels(1)
+    tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    name_str <- dplyr::bind_rows(name_str, tidygedcom.internals::CHANGE_DATE() %>% 
-                                   tidygedcom.internals::add_levels(1))
+    name_str <- dplyr::bind_rows(name_str, tidyged.internals::CHANGE_DATE() %>% 
+                                   tidyged.internals::add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(name_str, .before = next_row) %>% 
-    tidygedcom.internals::finalise() %>% 
+    tidyged.internals::finalise() %>% 
     activate_individual_record(xref)
 }
 
 #' Add a variation of a personal name to an Individual record
 #' 
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param primary_name The name for which this is a variation. This is treated as a
 #' regex pattern to match to existing names. 
 #' @param variation_name The full name variation. The surname, if known, should be enclosed between two 
@@ -100,7 +100,7 @@ add_individual_names <- function(gedcom,
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param update_date_changed Whether to add/update the change date for the record.
 #'
-#' @return An updated tidygedcom object with an expanded Individual record including
+#' @return An updated tidyged object with an expanded Individual record including
 #' these name variants.
 #' @export
 #' @tests
@@ -128,13 +128,13 @@ add_individual_names_var <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
-  name_notes <- purrr::map(variation_notes, tidygedcom.internals::NOTE_STRUCTURE)
+  name_notes <- purrr::map(variation_notes, tidyged.internals::NOTE_STRUCTURE)
   
   if(phonetic_variation) {
     
     name_phonetic_var <- variation_name
     phonetisation_method <- type
-    phon_name_pieces <- list(tidygedcom.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
+    phon_name_pieces <- list(tidyged.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                                                         name_piece_given = given, 
                                                                         name_piece_nickname = nickname, 
                                                                         name_piece_surname_prefix = surname_prefix,
@@ -149,7 +149,7 @@ add_individual_names_var <- function(gedcom,
     
     name_romanised_var <- variation_name
     romanisation_method <- type
-    rom_name_pieces <- list(tidygedcom.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
+    rom_name_pieces <- list(tidyged.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                                                        name_piece_given = given, 
                                                                        name_piece_nickname = nickname, 
                                                                        name_piece_surname_prefix = surname_prefix,
@@ -167,9 +167,9 @@ add_individual_names_var <- function(gedcom,
   # As we're entering an empty PERSONAL_NAME_PIECES object, it will derive a surname
   # piece from part between forward slashes in name_personal. This then allows us to
   # remove these lines explicitly.
-  name_str <- tidygedcom.internals::PERSONAL_NAME_STRUCTURE(name_personal = "line /filtered out/ below",
+  name_str <- tidyged.internals::PERSONAL_NAME_STRUCTURE(name_personal = "line /filtered out/ below",
                                       name_type = character(),
-                                      name_pieces = tidygedcom.internals::PERSONAL_NAME_PIECES(), 
+                                      name_pieces = tidyged.internals::PERSONAL_NAME_PIECES(), 
                                       name_phonetic = name_phonetic_var,
                                       phonetisation_method = phonetisation_method,
                                       phonetic_name_pieces = phon_name_pieces,
@@ -178,12 +178,12 @@ add_individual_names_var <- function(gedcom,
                                       romanised_name_pieces = rom_name_pieces) %>% 
     dplyr::filter(tag != "NAME") %>%
     dplyr::filter(!(tag == "SURN" & value == "filtered out")) %>% 
-    tidygedcom.internals::add_levels(1)
+    tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    name_str <- dplyr::bind_rows(name_str, tidygedcom.internals::CHANGE_DATE() %>% 
-                                   tidygedcom.internals::add_levels(1))
+    name_str <- dplyr::bind_rows(name_str, tidyged.internals::CHANGE_DATE() %>% 
+                                   tidyged.internals::add_levels(1))
   }
   
   next_row <- gedcom %>% 
@@ -192,18 +192,18 @@ add_individual_names_var <- function(gedcom,
   
   gedcom %>%
     tibble::add_row(name_str, .before = next_row) %>% 
-    tidygedcom.internals::finalise() %>% 
+    tidyged.internals::finalise() %>% 
     activate_individual_record(xref)
 }
 
 
 #' Remove a personal name (and components) from an Individual record
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param name The personal name to remove.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
-#' @return An updated tidygedcom object with an Individual record excluding
+#' @return An updated tidyged object with an Individual record excluding
 #' this personal name (and components).
 #' @export
 #' @tests
@@ -227,13 +227,13 @@ remove_individual_name <- function(gedcom,
 
 #' Remove a variation of a personal name from an Individual record
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param variation_name The personal name variation to remove.
 #' @param phonetic_variation Whether the name variation is a phonetic variation
 #' (TRUE, default) or a romanised variation (FALSE).
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
-#' @return An updated tidygedcom object with an Individual record excluding
+#' @return An updated tidyged object with an Individual record excluding
 #' this personal name variation (and components).
 #' @export
 #' @tests
@@ -261,11 +261,11 @@ remove_individual_name_var <- function(gedcom,
 
 #' Make an Individual name appear first in the Individual record
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param name The personal name to move.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
-#' @return An updated tidygedcom object with the promoted name in the Individual record
+#' @return An updated tidyged object with the promoted name in the Individual record
 #' @export
 primary_individual_name <- function(gedcom, name, xref = character()) {
   

@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{identify_section}
 \alias{identify_section}
-\title{Identify the rows of a subrecord in a tidygedcom object}
+\title{Identify the rows of a subrecord in a tidyged object}
 \usage{
 identify_section(
   gedcom,
@@ -13,7 +13,7 @@ identify_section(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{containing_level}{The level of the first line of the subrecord.}
 
@@ -24,8 +24,8 @@ identify_section(
 \item{xrefs}{The xrefs of records containing the subrecord (default is all records).}
 }
 \value{
-A vector of rows in the tidygedcom object of the subrecord(s).
+A vector of rows in the tidyged object of the subrecord(s).
 }
 \description{
-Identify the rows of a subrecord in a tidygedcom object
+Identify the rows of a subrecord in a tidyged object
 }

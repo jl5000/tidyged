@@ -2,7 +2,7 @@
 % Please edit documentation in R/edit_source.R
 \name{add_source}
 \alias{add_source}
-\title{Add a Source record to a tidygedcom object}
+\title{Add a Source record to a tidyged object}
 \usage{
 add_source(
   gedcom,
@@ -24,7 +24,7 @@ add_source(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{events_recorded}{An enumeration of the different kinds of events that were recorded
 in this source. Each enumeration is separated by a comma. See the Gedcom 5.5.5 Specification for
@@ -72,10 +72,10 @@ These could be xrefs to existing Note records.}
 source. These could be xrefs to existing Multimedia records.}
 }
 \value{
-An updated tidygedcom object including the Source record.
+An updated tidyged object including the Source record.
 }
 \description{
-Add a Source record to a tidygedcom object
+Add a Source record to a tidyged object
 }
 \details{
 This function will automatically assign a unique xref for this record. Most users

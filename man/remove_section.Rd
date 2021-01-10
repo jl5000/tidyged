@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{remove_section}
 \alias{remove_section}
-\title{Remove a subrecord in a tidygedcom object}
+\title{Remove a subrecord in a tidyged object}
 \usage{
 remove_section(
   gedcom,
@@ -13,7 +13,7 @@ remove_section(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{containing_level}{The level of the first line of the subrecord.}
 
@@ -24,8 +24,8 @@ remove_section(
 \item{xrefs}{The xrefs of records containing the subrecord (default is all records).}
 }
 \value{
-The tidygedcom object with the subrecord(s) removed.
+The tidyged object with the subrecord(s) removed.
 }
 \description{
-Remove a subrecord in a tidygedcom object
+Remove a subrecord in a tidyged object
 }

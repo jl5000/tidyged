@@ -14,7 +14,7 @@ add_individual_family_link_as_child(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{family_xref}{The xref of the family associated of which this individual is a child.}
 
@@ -29,7 +29,7 @@ These could be xrefs to existing Note records.}
 \item{update_date_changed}{Whether to add/update the change date for the record.}
 }
 \value{
-An updated tidygedcom object with an expanded Individual record including
+An updated tidyged object with an expanded Individual record including
 this family link.
 }
 \description{

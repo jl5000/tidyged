@@ -6,7 +6,7 @@
 #' This function is called when importing a GEDCOM file. The checks contained within are relatively
 #' simple since there are a wealth of GEDCOM validators already available.
 #'
-#' @param gedcom A tidygedcom object
+#' @param gedcom A tidyged object
 #' @param expected_encoding A character string given the expected file encoding. One of
 #' "UTF-8", "UTF-16LE", or "UTF-16BE".
 #'
@@ -29,7 +29,7 @@ validate_gedcom <- function(gedcom, expected_encoding) {
 #' 
 #' Check the GEDCOM header is properly formed.
 #' 
-#' @param gedcom A tidygedcom object
+#' @param gedcom A tidyged object
 #' @param expected_encoding A character string given the expected file encoding. One of
 #' "UTF-8", "UTF-16LE", or "UTF-16BE".
 #'

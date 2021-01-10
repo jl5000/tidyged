@@ -4,26 +4,26 @@
 test_that("Function read_gedcom() @ L27", {
   expect_error(read_gedcom("my_family.txt"))
   expect_snapshot_value(
-      read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")), 
+      read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged")), 
       "json2")
   expect_snapshot_value(
-      read_gedcom(system.file("extdata", "555SAMPLE16BE.GED", package = "tidygedcom")), 
+      read_gedcom(system.file("extdata", "555SAMPLE16BE.GED", package = "tidyged")), 
       "json2")
   expect_snapshot_value(
-      read_gedcom(system.file("extdata", "555SAMPLE16LE.GED", package = "tidygedcom")), 
+      read_gedcom(system.file("extdata", "555SAMPLE16LE.GED", package = "tidyged")), 
       "json2")
 })
 
 
 test_that("Function read_gedcom_encoding() @ L76", {
   expect_equal(
-    read_gedcom_encoding(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")), 
+    read_gedcom_encoding(system.file("extdata", "555SAMPLE.GED", package = "tidyged")), 
     "UTF-8")
   expect_equal(
-    read_gedcom_encoding(system.file("extdata", "555SAMPLE16BE.GED", package = "tidygedcom")), 
+    read_gedcom_encoding(system.file("extdata", "555SAMPLE16BE.GED", package = "tidyged")), 
     "UTF-16BE")
   expect_equal(
-    read_gedcom_encoding(system.file("extdata", "555SAMPLE16LE.GED", package = "tidygedcom")), 
+    read_gedcom_encoding(system.file("extdata", "555SAMPLE16LE.GED", package = "tidyged")), 
     "UTF-16LE")
 })
 
@@ -44,7 +44,7 @@ test_that("Function update_header_with_filename() @ L198", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
                           update_header_with_filename("my_file.ged") %>% 
                           remove_dates_for_tests(), "json2")
-  expect_snapshot_value(read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidygedcom")) %>% 
+  expect_snapshot_value(read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged")) %>% 
                           update_header_with_filename("my_file.ged") %>% 
                           remove_dates_for_tests(), "json2")
 })

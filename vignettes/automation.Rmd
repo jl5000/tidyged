@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 In `vignette("cross_references")`, the concept of record activation was introduced, using either record xrefs or other attributes of the record. In this vignette, we show how this same functionality is used to ease and automate the generation of new records. We begin by using the same example:
 
 ```{r}
-library(tidygedcom)
+library(tidyged)
 
 simpsons <- gedcom(subm("Me")) %>% 
   add_individual(sex = "M") %>% 
@@ -33,7 +33,7 @@ simpsons <- gedcom(subm("Me")) %>%
   add_note("These records have not yet been joined in a family group record")
 ```
 
-In some records it is necessary to provide xrefs to link to other records, for example the Family Group record requires xrefs of the husband, wife, and/or children. It can be tedious to have to manually look up these xrefs, and so **tidygedcom** allows the user to instead enter an expression uniquely identifying these records, just like activation:
+In some records it is necessary to provide xrefs to link to other records, for example the Family Group record requires xrefs of the husband, wife, and/or children. It can be tedious to have to manually look up these xrefs, and so **tidyged** allows the user to instead enter an expression uniquely identifying these records, just like activation:
 
 ```{r}
 simpsons %>% 
@@ -52,7 +52,7 @@ simpsons %>%
 
 ## Family links
 
-The **tidygedcom** package seeks to make cross-referencing as painless and automated as possible. When adding a Family Group record, as well as creating the record, it will also create the relevant links to the family group in the Individual record for each member of the family:
+The **tidyged** package seeks to make cross-referencing as painless and automated as possible. When adding a Family Group record, as well as creating the record, it will also create the relevant links to the family group in the Individual record for each member of the family:
 
 ```{r}
 simpsons_fam <- simpsons %>% 

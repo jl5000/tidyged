@@ -7,7 +7,7 @@
 find_xref(gedcom, record_xrefs, tags, search_pattern)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object}
+\item{gedcom}{A tidyged object}
 
 \item{record_xrefs}{A list of potential xrefs to consider}
 

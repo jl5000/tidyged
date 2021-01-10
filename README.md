@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidygedcom
+# tidyged
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/jl5000/tidygedcom/workflows/R-CMD-check/badge.svg)](https://github.com/jl5000/tidygedcom/actions)
-[![](https://codecov.io/gh/jl5000/tidygedcom/branch/master/graph/badge.svg)](https://codecov.io/gh/jl5000/tidygedcom)
-[![CodeFactor](https://www.codefactor.io/repository/github/jl5000/tidygedcom/badge)](https://www.codefactor.io/repository/github/jl5000/tidygedcom)
+[![R-CMD-check](https://github.com/jl5000/tidyged/workflows/R-CMD-check/badge.svg)](https://github.com/jl5000/tidyged/actions)
+[![](https://codecov.io/gh/jl5000/tidyged/branch/master/graph/badge.svg)](https://codecov.io/gh/jl5000/tidyged)
+[![CodeFactor](https://www.codefactor.io/repository/github/jl5000/tidyged/badge)](https://www.codefactor.io/repository/github/jl5000/tidyged)
 [![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
@@ -25,7 +25,7 @@ with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("jl5000/tidygedcom")
+devtools::install_github("jl5000/tidyged")
 ```
 
 ## Example
@@ -39,7 +39,7 @@ the pipe operator, %\>%).
 An example is below:
 
 ``` r
-library(tidygedcom)
+library(tidyged)
 #> If importing existing GEDCOM files, you should ensure that they are error free.
 #> This package assumes imported GEDCOM files are valid and very few validation checks are carried out.
 #> Several GEDCOM validators are available, including an online validator at http://ged-inline.elasticbeanstalk.com/
@@ -85,14 +85,14 @@ print(tg, n = Inf)
 #>   4     2 HD     FORM  "LINEAGE-LINKED"                                       
 #>   5     3 HD     VERS  "5.5.5"                                                
 #>   6     1 HD     CHAR  "UTF-8"                                                
-#>   7     1 HD     DEST  "tidygedcom"                                           
-#>   8     1 HD     SOUR  "tidygedcom"                                           
+#>   7     1 HD     DEST  "tidyged"                                              
+#>   8     1 HD     SOUR  "tidyged"                                              
 #>   9     2 HD     VERS  "0.0.0"                                                
-#>  10     2 HD     NAME  "tidygedcom"                                           
+#>  10     2 HD     NAME  "tidyged"                                              
 #>  11     2 HD     CORP  "Jamie Lendrum"                                        
 #>  12     3 HD     ADDR  ""                                                     
 #>  13     3 HD     EMAIL "jalendrum@gmail.com"                                  
-#>  14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"                 
+#>  14     3 HD     WWW   "https://jl5000.github.io/tidyged/"                    
 #>  15     1 HD     DATE  "10 JAN 2021"                                          
 #>  16     1 HD     LANG  "English"                                              
 #>  17     1 HD     SUBM  "@U1@"                                                 
@@ -199,10 +199,10 @@ details of a submitter. If no submitter details are given, the username
 is used.
 
 Within the package, GEDCOM files are represented as a sub-class of
-tibble known as `tidygedcom` objects, allowing easy manipulation and
+tibble known as `tidyged` objects, allowing easy manipulation and
 exploitation of existing `tidyverse` infrastructure.
 
-A number of functions are available to provide summaries of `tidygedcom`
+A number of functions are available to provide summaries of `tidyged`
 objects:
 
 ``` r
@@ -231,9 +231,9 @@ summary(tg)
 #>  
 #>  Copyright:               None 
 #>  
-#>  Source system:           tidygedcom 
+#>  Source system:           tidyged 
 #>  Source system version:   0.0.0 
-#>  Product name:            tidygedcom 
+#>  Product name:            tidyged 
 #>  Product source:          Jamie Lendrum
 
 df_individuals(tg) %>% print(n = Inf, width = Inf)
@@ -269,7 +269,7 @@ df_families(tg) %>% print(n = Inf, width = Inf)
 #> 1 10 JAN 2021
 ```
 
-This package allows limited editing of `tidygedcom` objects
+This package allows limited editing of `tidyged` objects
 (adding/removing records, as well as the addition of some record
 substructures). Editing of existing records is made possible through
 ‘activation’ (much like the `tidygraph` package). When a record is
@@ -281,17 +281,19 @@ functions.
 ## Current status
 
 The package and its internal data structures (contained in a separate
-`tidygedcom.internals` package) are almost complete and will soon be
+`tidyged.internals` package) are almost complete and will soon be
 submitted to CRAN.
 
-Three further packages are also planned, to provide an ecosystem called
+Four further packages are also planned, to provide an ecosystem called
 the `gedcompendium`:
 
-  - `shinygedcom` will provide a shiny app to edit `tidygedcom` objects;
-  - `visgedcom` will allow visualisation of `tidygedcom` objects;
-  - `tidygedcom.sources` will provide functions to automate the
-    representation of facts from various source documents (e.g. birth
-    certificates, censuses).
+  - `shinyged` will provide a shiny app to edit `tidyged` objects;
+  - `visged` will allow visualisation of `tidyged` objects;
+  - `autoged` will provide functions to automate the representation of
+    facts from various source documents (e.g. birth certificates,
+    censuses);
+  - `safeged` will provide functions to help with the removal of
+    sensitive data (e.g. on living individuals).
 
 ## References
 

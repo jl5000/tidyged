@@ -7,12 +7,12 @@
 split_gedcom_values(gedcom, char_limit)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{char_limit}{Maximum string length of values.}
 }
 \value{
-A tidygedcom object in the GEDCOM grammar ready to export.
+A tidyged object in the GEDCOM grammar ready to export.
 }
 \description{
 This function introduces CONC/CONT lines for line values that exceed the given number of characters.

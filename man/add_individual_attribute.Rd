@@ -22,7 +22,7 @@ add_individual_attribute(
   attribute_type,
   attribute_descriptor,
   fact_classification = character(),
-  event_date = tidygedcom.internals::date_value(),
+  event_date = tidyged.internals::date_value(),
   event_cause = character(),
   user_reference_type = character(),
   age_at_event = character(),
@@ -78,7 +78,7 @@ add_individual_attribute_nobility_title(...)
 add_individual_attribute_other(...)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{attribute_type}{The type of attribute. This should be automatically populated with the appropriate
 attribute function.}
@@ -166,7 +166,7 @@ attribute. These could be xrefs to existing Multimedia records.}
 \item{...}{See arguments for main function. The attribute_type/event_type do not need to be populated.}
 }
 \value{
-An updated tidygedcom object with an expanded Individual record including
+An updated tidyged object with an expanded Individual record including
 this attribute.
 }
 \description{

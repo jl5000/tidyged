@@ -2,18 +2,18 @@
 % Please edit documentation in R/helpers.R
 \name{remove_dates_for_tests}
 \alias{remove_dates_for_tests}
-\title{Remove all creation dates from a tidygedcom object}
+\title{Remove all creation dates from a tidyged object}
 \usage{
 remove_dates_for_tests(gedcom)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 }
 \value{
-The tidygedcom object with creation dates removed.
+The tidyged object with creation dates removed.
 }
 \description{
-Remove all creation dates from a tidygedcom object
+Remove all creation dates from a tidyged object
 }
 \details{
 This is a function used in tests so that the objects created do not

@@ -1,6 +1,6 @@
 
 
-#' Add a Repository record to a tidygedcom object
+#' Add a Repository record to a tidyged object
 #'
 #' @details This function will automatically assign a unique xref for this record. Most users
 #' will only need to use the sex, submitters, and individual_notes parameters (and of course gedcom).
@@ -8,7 +8,7 @@
 #' If you need to add further information about this individual (e.g. names), use the 
 #' add_individual_* functions.
 #' 
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param name The name of the repository.
 #' @param local_address_lines The first lines of the repository address.
 #' @param city The city of the repository.
@@ -27,7 +27,7 @@
 #' @param repository_notes A character vector of notes accompanying this Repository record.
 #' These could be xrefs to existing Note records.
 #'
-#' @return An updated tidygedcom object including the Repository record.
+#' @return An updated tidyged object including the Repository record.
 #' @export
 add_repository <- function(gedcom,
                            name,
@@ -49,7 +49,7 @@ add_repository <- function(gedcom,
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
-  address <- tidygedcom.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
+  address <- tidyged.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
                                address_city = city,
                                address_state = state,
                                address_postal_code = postal_code,
@@ -59,9 +59,9 @@ add_repository <- function(gedcom,
                                address_fax = fax,
                                address_web_page = web_page)
   
-  repo_notes <- purrr::map(repository_notes, tidygedcom.internals::NOTE_STRUCTURE)
+  repo_notes <- purrr::map(repository_notes, tidyged.internals::NOTE_STRUCTURE)
   
-  repo_record <- tidygedcom.internals::REPOSITORY_RECORD(xref_repo = xref,
+  repo_record <- tidyged.internals::REPOSITORY_RECORD(xref_repo = xref,
                                                          name_of_repository = name,
                                                          address = address,
                                                          user_reference_number = user_reference_number,
@@ -74,12 +74,12 @@ add_repository <- function(gedcom,
     set_active_record(xref)
 }
 
-#' Remove a Repository record from a tidygedcom object
+#' Remove a Repository record from a tidyged object
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
-#' @return An updated tidygedcom object excluding the active Repository record.
+#' @return An updated tidyged object excluding the active Repository record.
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),

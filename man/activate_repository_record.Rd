@@ -7,12 +7,12 @@
 activate_repository_record(gedcom, repository)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{repository}{The xref or name of the Repository record to be activated.}
 }
 \value{
-The same tidygedcom object with "active_record" attribute set to the specific
+The same tidyged object with "active_record" attribute set to the specific
 Repository record to allow easy editing.
 }
 \description{

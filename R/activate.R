@@ -4,18 +4,18 @@
 #' 
 #' This allows an easy mechanism to edit particular records without specifying them each time.
 #'
-#' @param gedcom A tidygedcom object
+#' @param gedcom A tidyged object
 #' @param xref The xref of the record to activate
 #'
-#' @return The same tidygedcom object with an "active_record" attribute set to the xref of the record
+#' @return The same tidyged object with an "active_record" attribute set to the xref of the record
 set_active_record <- function(gedcom, xref) {
   if(length(xref) > 0) attr(gedcom, "active_record") <- xref 
   return(gedcom)
 }
 
-#' Get the active record in a tidygedcom object
+#' Get the active record in a tidyged object
 #' 
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @return The xref of the active record.
 #'
 #' @export
@@ -39,7 +39,7 @@ null_active_record <- function(gedcom) {
 #' 
 #' Sometimes an xref may be provided directly, in which case it's returned straight back.
 #'
-#' @param gedcom A tidygedcom object
+#' @param gedcom A tidyged object
 #' @param record_xrefs A list of potential xrefs to consider
 #' @param tags The tags to look at when comparing values
 #' @param search_pattern A regex pattern to search for
@@ -80,10 +80,10 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
 #' (can be a regex pattern) or the xref can be provided explicitly. Providing the name instead of the
 #' xref can make your code more readable, provided that the name returns a unique record! 
 #'
-#' @param gedcom A tidygedcom object. 
+#' @param gedcom A tidyged object. 
 #' @param individual The xref or name of the Individual record to be activated.
 #'
-#' @return The same tidygedcom object with "active_record" attribute set to the specific 
+#' @return The same tidyged object with "active_record" attribute set to the specific 
 #' Individual record to allow easy editing.
 #' @export
 activate_individual_record <- function(gedcom, individual) {
@@ -98,10 +98,10 @@ activate_individual_record <- function(gedcom, individual) {
 #' This allows a mechanism to easily edit particular records. For Family group records, 
 #' the explicit xref is required. 
 #'
-#' @param gedcom A tidygedcom object. 
+#' @param gedcom A tidyged object. 
 #' @param family The xref of the Family Group record to be activated.
 #'
-#' @return The same tidygedcom object with "active_record" attribute set to the specific 
+#' @return The same tidyged object with "active_record" attribute set to the specific 
 #' Family group record to allow easy editing.
 #' @export
 activate_family_group_record <- function(gedcom, family) {
@@ -117,10 +117,10 @@ activate_family_group_record <- function(gedcom, family) {
 #' (can be a partial name) or the xref can be provided explicitly. Providing the name instead of the
 #' xref can make your code more readable, provided that the name returns a unique record! 
 #'
-#' @param gedcom A tidygedcom object. 
+#' @param gedcom A tidyged object. 
 #' @param submitter The xref or name of the Submitter record to be activated.
 #'
-#' @return The same tidygedcom object with "active_record" attribute set to the specific 
+#' @return The same tidyged object with "active_record" attribute set to the specific 
 #' Submitter record to allow easy editing.
 #' @export
 activate_submitter_record <- function(gedcom, submitter) {
@@ -136,10 +136,10 @@ activate_submitter_record <- function(gedcom, submitter) {
 #' or the xref can be provided explicitly. Providing the file reference instead of the
 #' xref can make your code more readable, provided that it returns a unique record! 
 #'
-#' @param gedcom A tidygedcom object. 
+#' @param gedcom A tidyged object. 
 #' @param multimedia The xref or file reference of the Multimedia record to be activated.
 #'
-#' @return The same tidygedcom object with "active_record" attribute set to the specific 
+#' @return The same tidyged object with "active_record" attribute set to the specific 
 #' Multimedia record to allow easy editing.
 #' @export
 activate_multimedia_record <- function(gedcom, multimedia) {
@@ -155,10 +155,10 @@ activate_multimedia_record <- function(gedcom, multimedia) {
 #' or the xref can be provided explicitly. Providing a note excerpt instead of the
 #' xref can make your code more readable, provided that the excerpt returns a unique record! 
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param note The xref or an excerpt of the Note record to be activated.
 #'
-#' @return The same tidygedcom object with "active_record" attribute set to the specific 
+#' @return The same tidyged object with "active_record" attribute set to the specific 
 #' Note record to allow easy editing.
 #' @export
 activate_note_record <- function(gedcom, note) {
@@ -174,10 +174,10 @@ activate_note_record <- function(gedcom, note) {
 #' or the xref can be provided explicitly. Providing the source title instead of the
 #' xref can make your code more readable, provided that the name returns a unique record! 
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param source The xref or title of the Source record to be activated.
 #'
-#' @return The same tidygedcom object with "active_record" attribute set to the specific 
+#' @return The same tidyged object with "active_record" attribute set to the specific 
 #' Source record to allow easy editing.
 #' @export
 activate_source_record <- function(gedcom, source) {
@@ -193,10 +193,10 @@ activate_source_record <- function(gedcom, source) {
 #' (can be a partial name) or the xref can be provided explicitly. Providing the name instead of the
 #' xref can make your code more readable, provided that the name returns a unique record! 
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param repository The xref or name of the Repository record to be activated.
 #'
-#' @return The same tidygedcom object with "active_record" attribute set to the specific 
+#' @return The same tidyged object with "active_record" attribute set to the specific 
 #' Repository record to allow easy editing.
 #' @export
 activate_repository_record <- function(gedcom, repository) {

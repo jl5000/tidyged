@@ -2,12 +2,12 @@
 % Please edit documentation in R/edit_family_group.R
 \name{remove_family_group}
 \alias{remove_family_group}
-\title{Remove a Family group record from a tidygedcom object}
+\title{Remove a Family group record from a tidyged object}
 \usage{
 remove_family_group(gedcom, xref = character(), remove_individuals = FALSE)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
@@ -15,7 +15,7 @@ remove_family_group(gedcom, xref = character(), remove_individuals = FALSE)
 in the family.}
 }
 \value{
-An updated tidygedcom object excluding the active Family group record (and potentially the
+An updated tidyged object excluding the active Family group record (and potentially the
 individuals within it).
 }
 \description{

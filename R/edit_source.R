@@ -1,6 +1,6 @@
 
 
-#' Add a Source record to a tidygedcom object
+#' Add a Source record to a tidyged object
 #'
 #' @details This function will automatically assign a unique xref for this record. Most users
 #' will only need to use the originator, title, publication_detail, data_notes,
@@ -10,7 +10,7 @@
 #' data_notes and source_notes onto separate lines if the character limit in the Gedcom 
 #' standard is exceeded.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param events_recorded An enumeration of the different kinds of events that were recorded 
 #' in this source. Each enumeration is separated by a comma. See the Gedcom 5.5.5 Specification for 
 #' more details. 
@@ -42,7 +42,7 @@
 #' @param multimedia_links A character vector of multimedia file references accompanying this
 #' source. These could be xrefs to existing Multimedia records.
 #'
-#' @return An updated tidygedcom object including the Source record.
+#' @return An updated tidyged object including the Source record.
 #' @export
 add_source <- function(gedcom,
                        events_recorded = character(),
@@ -63,15 +63,15 @@ add_source <- function(gedcom,
   
   xref <- assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
   
-  dat_notes <- purrr::map(data_notes, tidygedcom.internals::NOTE_STRUCTURE)
+  dat_notes <- purrr::map(data_notes, tidyged.internals::NOTE_STRUCTURE)
   
-  sour_notes <- purrr::map(source_notes, tidygedcom.internals::NOTE_STRUCTURE)
+  sour_notes <- purrr::map(source_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
-    purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
+    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
   
-  sour_record <- tidygedcom.internals::SOURCE_RECORD(xref_sour = xref,
+  sour_record <- tidyged.internals::SOURCE_RECORD(xref_sour = xref,
                                                      events_recorded = events_recorded,
                                                      date_period_covered = date_period_covered,
                                                      source_jurisdiction_place = jurisdiction,
@@ -99,7 +99,7 @@ add_source <- function(gedcom,
 #' This structure is used within a source record to point to a name and 
 #' address record of the holder of the source document.
 #' 
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param repository A character string identifying the repository. This can either 
 #' be an xref or a regular expression to match to a repository name.
 #' @param call_number An identification or reference description used to file 
@@ -107,7 +107,7 @@ add_source <- function(gedcom,
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param update_date_changed Whether to add/update the change date for the record.
 #'
-#' @return An updated tidygedcom object with an expanded Source record including
+#' @return An updated tidyged object with an expanded Source record including
 #' this repository citation.
 #' @export
 #' @tests
@@ -127,21 +127,21 @@ add_source_repository_citation <- function(gedcom,
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
-  citation <- tidygedcom.internals::SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,
+  citation <- tidyged.internals::SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,
                                                                source_call_number = call_number) %>% 
-    tidygedcom.internals::add_levels(1)
+    tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
     gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    citation <- dplyr::bind_rows(citation, tidygedcom.internals::CHANGE_DATE() %>% 
-                                   tidygedcom.internals::add_levels(1))
+    citation <- dplyr::bind_rows(citation, tidyged.internals::CHANGE_DATE() %>% 
+                                   tidyged.internals::add_levels(1))
   }
   
   next_row <- find_insertion_point(gedcom, xref, 0, "SOUR")
   
   gedcom %>%
     tibble::add_row(citation, .before = next_row) %>% 
-    tidygedcom.internals::finalise()
+    tidyged.internals::finalise()
   
 }
 
@@ -169,12 +169,12 @@ remove_source_repository_citation <- function(gedcom,
   
 }
 
-#' Remove a Source record from a tidygedcom object
+#' Remove a Source record from a tidyged object
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
-#' @return An updated tidygedcom object excluding the active Source record.
+#' @return An updated tidyged object excluding the active Source record.
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),

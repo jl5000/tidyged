@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_write_create.R
 \name{gedcom}
 \alias{gedcom}
-\title{Create a base tidygedcom object}
+\title{Create a base tidyged object}
 \usage{
 gedcom(
   submitter_details = subm(),
@@ -11,7 +11,7 @@ gedcom(
   source_data_name = character(),
   source_data_date = date_exact(),
   source_data_copyright = character(),
-  receiving_system = "tidygedcom",
+  receiving_system = "tidyged",
   language = "English"
 )
 }
@@ -37,8 +37,8 @@ obtained.}
 \item{language}{The human language in which the data in the file is normally read or written.}
 }
 \value{
-A minimal tidygedcom object.
+A minimal tidyged object.
 }
 \description{
-This function creates a minimal tidygedcom object with header and footer sections and a single submitter record.
+This function creates a minimal tidyged object with header and footer sections and a single submitter record.
 }

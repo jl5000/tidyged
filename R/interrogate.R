@@ -2,11 +2,11 @@
 
 unique_record_count <- function(gedcom, tag) {sum(gedcom$level == 0 & gedcom$tag == tag)}
 
-#' Get the number of records in a tidygedcom object
+#' Get the number of records in a tidyged object
 #'
-#' These functions return the number of records of a particular type in a tidygedcom object.
+#' These functions return the number of records of a particular type in a tidyged object.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #'
 #' @return The number of records of the relevant type.
 #' @export
@@ -43,7 +43,7 @@ is_record_type <- function(gedcom, xref, tag) {
 
 #' Check whether a given record is a particular type
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param xref The xref of the record.
 #'
 #' @return A logical indicating whether the record is of a particular type.
@@ -77,7 +77,7 @@ is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$r
 
 #' Get a description of a family
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param xref An xref of a Family group record.
 #'
 #' @return A character string describing the members of the family group.
@@ -111,22 +111,22 @@ get_family_group_description <- function(gedcom, xref) {
 }
 
 
-#' Get a summary of a tidygedcom object
+#' Get a summary of a tidyged object
 #'
-#' This function shows key information from the header of a tidygedcom object, including submitter
+#' This function shows key information from the header of a tidyged object, including submitter
 #' and description.
 #'
-#' @param object A tidygedcom object.
+#' @param object A tidyged object.
 #' @param ... Not used.
 #'
-#' @return A printed summary of the tidygedcom object.
+#' @return A printed summary of the tidyged object.
 #' @export
 #' @tests
 #' expect_snapshot_value(
 #'                gedcom(subm("Me"), gedcom_description = "descrip", language = "English",
 #'                       gedcom_copyright = "copyright statement") %>% 
 #'                 summary(), "json2")
-summary.tidygedcom <- function(object, ...) {
+summary.tidyged <- function(object, ...) {
   eol <- "\n"
   subm_name <- gedcom_value(object, "HD", "SUBM", 1)
   # this is the longest string
@@ -148,14 +148,14 @@ summary.tidygedcom <- function(object, ...) {
 }
 
 
-#' Get the structure of a tidygedcom object
+#' Get the structure of a tidyged object
 #'
 #' This function gives a breakdown of record counts in the GEDCOM file.
 #'
-#' @param object A tidygedcom object.
+#' @param object A tidyged object.
 #' @param ... Not used.
 #'
-#' @return A printed summary of records in the tidygedcom object.
+#' @return A printed summary of records in the tidyged object.
 #' @export
 #' @tests
 #' expect_snapshot_value(
@@ -172,7 +172,7 @@ summary.tidygedcom <- function(object, ...) {
 #'   add_note("note1") %>% 
 #'   add_note("note2") %>% 
 #'   str(), "json2")
-str.tidygedcom <- function(object, ...) {
+str.tidyged <- function(object, ...) {
   eol <- "\n"
   gedc_row <- which(object$tag == "GEDC")
   title_width <- nchar("Multimedia objects:") + 2
@@ -193,7 +193,7 @@ str.tidygedcom <- function(object, ...) {
 #' These functions give a summary of key information of individuals/families/notes etc. 
 #' in the GEDCOM file.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #'
 #' @return A tibble summarising records where every row is a record.
 #' @export

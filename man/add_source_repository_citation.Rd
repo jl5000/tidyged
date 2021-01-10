@@ -13,7 +13,7 @@ add_source_repository_citation(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{repository}{A character string identifying the repository. This can either
 be an xref or a regular expression to match to a repository name.}
@@ -26,7 +26,7 @@ and retrieve items from the holdings of a repository.}
 \item{update_date_changed}{Whether to add/update the change date for the record.}
 }
 \value{
-An updated tidygedcom object with an expanded Source record including
+An updated tidyged object with an expanded Source record including
 this repository citation.
 }
 \description{

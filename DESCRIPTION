@@ -1,4 +1,4 @@
-Package: tidygedcom
+Package: tidyged
 Title: Handle GEDCOM Files Using Tidyverse Principles
 Version: 0.0.0.9000
 Authors@R: 
@@ -7,8 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jalendrum@gmail.com")
 Description: Import/export, create, and summarise family tree GEDCOM files using tidy dataframes.
-URL: https://jl5000.github.io/tidygedcom/,
-    https://github.com/jl5000/tidygedcom
+URL: https://jl5000.github.io/tidyged/,
+    https://github.com/jl5000/tidyged
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -23,13 +23,13 @@ Imports:
     purrr,
     lubridate,
     tibble,
-    tidygedcom.internals
+    tidyged.internals
 Suggests: 
     testthat,
     roxytest,
     rmarkdown,
     knitr,
     waldo
-Remotes: jl5000/tidygedcom.internals
+Remotes: jl5000/tidyged.internals
 Config/testthat/edition: 3
 VignetteBuilder: knitr

@@ -7,12 +7,12 @@
 update_header_with_filename(gedcom, filename)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{filename}{The name of the file (with extension).}
 }
 \value{
-An updated tidygedcom object with the updated filename.
+An updated tidyged object with the updated filename.
 }
 \description{
 Update GEDCOM header with filename

@@ -14,7 +14,7 @@ add_individual_association(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{associated_with}{A character string identifying the associated individual. This can either
 be an xref or a regular expression to match to an individual name.}
@@ -29,7 +29,7 @@ These could be xrefs to existing Note records.}
 \item{update_date_changed}{Whether to add/update the change date for the record.}
 }
 \value{
-An updated tidygedcom object with an expanded Individual record including
+An updated tidyged object with an expanded Individual record including
 this association.
 }
 \description{

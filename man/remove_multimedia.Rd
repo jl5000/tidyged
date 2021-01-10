@@ -2,18 +2,18 @@
 % Please edit documentation in R/edit_multimedia.R
 \name{remove_multimedia}
 \alias{remove_multimedia}
-\title{Remove a Multimedia record from a tidygedcom object}
+\title{Remove a Multimedia record from a tidyged object}
 \usage{
 remove_multimedia(gedcom, xref = character())
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 }
 \value{
-An updated tidygedcom object excluding the active Multimedia record.
+An updated tidyged object excluding the active Multimedia record.
 }
 \description{
-Remove a Multimedia record from a tidygedcom object
+Remove a Multimedia record from a tidyged object
 }

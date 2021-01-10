@@ -2,18 +2,18 @@
 % Please edit documentation in R/edit_repository.R
 \name{remove_repository}
 \alias{remove_repository}
-\title{Remove a Repository record from a tidygedcom object}
+\title{Remove a Repository record from a tidyged object}
 \usage{
 remove_repository(gedcom, xref = character())
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 }
 \value{
-An updated tidygedcom object excluding the active Repository record.
+An updated tidyged object excluding the active Repository record.
 }
 \description{
-Remove a Repository record from a tidygedcom object
+Remove a Repository record from a tidyged object
 }

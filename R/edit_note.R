@@ -1,10 +1,10 @@
 
-#' Add a Note record to a tidygedcom object
+#' Add a Note record to a tidyged object
 #'
 #' @details This function will automatically assign a unique xref for this record. Most users
 #' will only need to use the text parameter (and of course gedcom).
 #' 
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param text A character string containing the text of the note.
 #' @param user_reference_number A user-defined number or text that the submitter uses to identify 
 #' this record. See the Gedcom 5.5.5 Specification for more details.
@@ -12,7 +12,7 @@
 #' @param automated_record_id A unique record identification number assigned to the record by 
 #' the source system.
 #'
-#' @return An updated tidygedcom object including the Note record.
+#' @return An updated tidyged object including the Note record.
 #' @export
 add_note <- function(gedcom,
                      text,
@@ -22,7 +22,7 @@ add_note <- function(gedcom,
   
   xref <- assign_xref(.pkgenv$xref_prefix_note, gedcom = gedcom)
   
-  note_record <- tidygedcom.internals::NOTE_RECORD(xref_note = xref,
+  note_record <- tidyged.internals::NOTE_RECORD(xref_note = xref,
                                                    user_text = text,
                                                    user_reference_number = user_reference_number,
                                                    user_reference_type = user_reference_type,
@@ -33,12 +33,12 @@ add_note <- function(gedcom,
     set_active_record(xref)
 }
 
-#' Remove a Note record from a tidygedcom object
+#' Remove a Note record from a tidyged object
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
-#' @return An updated tidygedcom object excluding the active Note record.
+#' @return An updated tidyged object excluding the active Note record.
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
@@ -56,10 +56,10 @@ remove_note <- function(gedcom,
 
 #' Consolidate duplicated notes
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param min_occurences How many duplicates to prompt creating a new Note record.
 #'
-#' @return A tidygedcom object with all notes consolidated.
+#' @return A tidyged object with all notes consolidated.
 #' @export
 consolidate_notes <- function(gedcom, min_occurences = 2) {
   

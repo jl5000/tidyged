@@ -7,12 +7,12 @@
 activate_family_group_record(gedcom, family)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{family}{The xref of the Family Group record to be activated.}
 }
 \value{
-The same tidygedcom object with "active_record" attribute set to the specific
+The same tidyged object with "active_record" attribute set to the specific
 Family group record to allow easy editing.
 }
 \description{

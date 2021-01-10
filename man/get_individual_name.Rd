@@ -2,19 +2,19 @@
 % Please edit documentation in R/helpers.R
 \name{get_individual_name}
 \alias{get_individual_name}
-\title{Retrieve an individual name}
+\title{Retrieve a name of an Individual}
 \usage{
 get_individual_name(gedcom, xref)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
-\item{xref}{A xref of an Individual record.}
+\item{xref}{An xref of an Individual record.}
 }
 \value{
 The first name found in the Individual record (with no forward slashes).
 If no name is found, the xref is returned.
 }
 \description{
-Retrieve an individual name
+Retrieve a name of an Individual
 }

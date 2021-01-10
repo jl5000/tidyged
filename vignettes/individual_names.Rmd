@@ -24,14 +24,14 @@ Within a GEDCOM file, individuals can be given more than one name. These can be 
 The main function for providing names for an individual is `add_individual_names()`:
 
 ```{r}
-library(tidygedcom)
+library(tidyged)
 
 gedcom(subm("Me")) %>% 
   add_individual() %>% 
   add_individual_names("Leia /Skywalker/") %>% 
   dplyr::filter(record == "@I1@")
 ```
-In the GEDCOM specification, all names should also be accompanied by a set of name pieces, specifying the given name, surname, nickname, etc. In addition, full names should always surround surnames with forward slashes. In **tidygedcom** this allows us to automatically generate a name piece if none are given. If we provide a name with no name pieces and no forward slashes, it will cause an error:
+In the GEDCOM specification, all names should also be accompanied by a set of name pieces, specifying the given name, surname, nickname, etc. In addition, full names should always surround surnames with forward slashes. In **tidyged** this allows us to automatically generate a name piece if none are given. If we provide a name with no name pieces and no forward slashes, it will cause an error:
 
 ```{r, error=TRUE}
 gedcom(subm("Me")) %>% 

@@ -1,4 +1,4 @@
 library(testthat)
-library(tidygedcom)
+library(tidyged)
 
-test_check("tidygedcom")
+test_check("tidyged")

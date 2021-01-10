@@ -7,12 +7,12 @@
 consolidate_notes(gedcom, min_occurences = 2)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{min_occurences}{How many duplicates to prompt creating a new Note record.}
 }
 \value{
-A tidygedcom object with all notes consolidated.
+A tidyged object with all notes consolidated.
 }
 \description{
 Consolidate duplicated notes

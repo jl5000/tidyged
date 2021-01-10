@@ -7,12 +7,12 @@
 activate_note_record(gedcom, note)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{note}{The xref or an excerpt of the Note record to be activated.}
 }
 \value{
-The same tidygedcom object with "active_record" attribute set to the specific
+The same tidyged object with "active_record" attribute set to the specific
 Note record to allow easy editing.
 }
 \description{

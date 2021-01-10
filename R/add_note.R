@@ -28,30 +28,46 @@ add_note_to_record <- function(gedcom, note) {
     if(response2 == 0) return(gedcom)
     
     if (response2 == 1) {
-      # add the note  
+      # the individual
+      next_row <- find_insertion_point(gedcom, xref, 0, "INDI") 
+      note_str <- tidyged.internals::NOTE_STRUCTURE(note) %>%
+        tidyged.internals::add_levels(1)
+        
     } else if(response2 == 2) {
       # get associations
-      associations <- dplyr::filter(gedcom, record == xref, tag == "ASSO") %>% 
-        dplyr::pull(value) %>% 
-        purrr::map_chr(get_individual_name, gedcom = gedcom)
+      asso_xrefs <- dplyr::filter(gedcom, record == xref, tag == "ASSO") %>% 
+        dplyr::pull(value)
       
-      if(length(associations) == 0) stop("Error: No associations found")
+      if(length(asso_xrefs) == 0) stop("Error: No associations found")
       
-      response3 <- utils::menu(associations, title = "Which association should the note be attached to? (Select 0 to cancel)")
+      asso_names <- purrr::map_chr(asso_xrefs, get_individual_name, gedcom = gedcom)
       
-      # add note
+      response3 <- utils::menu(asso_names, title = "Which association should the note be attached to? (Select 0 to cancel)")
+      
+      if(response3 == 0) return(gedcom)
+      
+      next_row <- find_insertion_point(gedcom, xref, 1, "ASSO", asso_xrefs[response3]) 
+      note_str <- tidyged.internals::NOTE_STRUCTURE(note) %>%
+        tidyged.internals::add_levels(2)
       
     } else if(response2 == 3) {
       # get family links
-      links <- dplyr::filter(gedcom, record == xref, tag %in% c("FAMS", "FAMC")) %>% 
-        dplyr::pull(value)
+      fams <- dplyr::filter(gedcom, record == xref, tag %in% c("FAMS", "FAMC")) 
+      fam_xrefs <- dplyr::pull(fams, value)
+      link_types <- dplyr::pull(fams, tag)
       
-      if(length(links) == 0) stop("Error: No family links found")
+      if(length(fam_xrefs) == 0) stop("Error: No family links found")
       
-      response3 <- utils::menu(purrr::map_chr(links, get_family_group_description, gedcom=gedcom), 
-                        title = "Which family link should the note be attached to?")
+      fam_desc <- purrr::map_chr(fam_xrefs, get_family_group_description, gedcom=gedcom) %>% 
+        paste0(" (link as a ", ifelse(link_types == "FAMS", "spouse", "child"), ")")
       
+      response3 <- utils::menu(fam_desc, title = "Which family link should the note be attached to?")
       
+      if(response3 == 0) return(gedcom)
+      
+      next_row <- find_insertion_point(gedcom, xref, 1, link_types[response3], fam_xrefs[response3]) 
+      note_str <- tidyged.internals::NOTE_STRUCTURE(note) %>%
+        tidyged.internals::add_levels(2)
       
     } else if(response2 == 4) {
       # get events
@@ -76,14 +92,20 @@ add_note_to_record <- function(gedcom, note) {
       
     } else if(response2 == 7) {
       # get source citations
-      sources <- dplyr::filter(gedcom, record == xref, tag == "SOUR") %>% 
+      sour_xrefs <- dplyr::filter(gedcom, record == xref, tag == "SOUR") %>% 
         dplyr::pull(value)
       
-      if(length(sources) == 0) stop("Error: No source citations found")
-        
-      response3 <- utils::menu(sources, title = "Which source citation should the note be attached to?")
-     
+      if(length(sour_xrefs) == 0) stop("Error: No source citations found")
       
+      sour_titles <- purrr::map_chr(sour_xrefs, get_source_title, gedcom = gedcom)
+        
+      response3 <- utils::menu(sour_titles, title = "Which source citation should the note be attached to?")
+     
+      if(response3 == 0) return(gedcom)
+      
+      next_row <- find_insertion_point(gedcom, xref, 1, "SOUR", sour_xrefs[response3]) 
+      note_str <- tidyged.internals::NOTE_STRUCTURE(note) %>%
+        tidyged.internals::add_levels(2)
            
     }
     
@@ -108,26 +130,13 @@ add_note_to_record <- function(gedcom, note) {
   #name_pieces
   #place_structure
   #source_citation
-
-    
-}
-
-
-
-# only indi, fam, multi, note
-# asso, event detail, pers name pieces, 
-add_source_citation_to_record <- function(gedcom) {
-  
-  xref <- get_active_record(gedcom)
-  
-  if(is.null(xref))
-    stop("No record is activated. A record must be activated to add a source citation to it")
-  
-  if(is_repository(gedcom, xref) |
-     is_source(gedcom, xref) |
-     is_submitter(gedcom, xref))
-    stop("Source citations cannot be added to the active record")
-  
+  gedcom %>% 
+    tibble::add_row(note_str, .before = next_row) %>% 
+    tidyged.internals::finalise() %>% 
+    activate_individual_record(xref)
   
 }
+
+
+
 

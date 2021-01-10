@@ -2,18 +2,18 @@
 % Please edit documentation in R/edit_source.R
 \name{remove_source}
 \alias{remove_source}
-\title{Remove a Source record from a tidygedcom object}
+\title{Remove a Source record from a tidyged object}
 \usage{
 remove_source(gedcom, xref = character())
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 }
 \value{
-An updated tidygedcom object excluding the active Source record.
+An updated tidyged object excluding the active Source record.
 }
 \description{
-Remove a Source record from a tidygedcom object
+Remove a Source record from a tidyged object
 }

@@ -7,10 +7,10 @@
 temporarily_remove_name_slashes(gedcom)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 }
 \value{
-A tidygedcom object with all forward slashes removed from surnames.
+A tidyged object with all forward slashes removed from surnames.
 }
 \description{
 Temporarily remove forward slashes from surnames

@@ -1,4 +1,4 @@
-# Function add_source_repository_citation() @ L128
+# Function add_source_repository_citation() @ L120
 
     {
       "type": "list",
@@ -11,7 +11,7 @@
         "class": {
           "type": "character",
           "attributes": {},
-          "value": ["tidygedcom", "tbl_df", "tbl", "data.frame"]
+          "value": ["tidyged", "tbl_df", "tbl", "data.frame"]
         },
         "row.names": {
           "type": "integer",
@@ -43,7 +43,7 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidygedcom", "tidygedcom", "0.0.0", "tidygedcom", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidygedcom/", "English", "@U1@", "", "Me", "", "The library", "", "@R1@", ""]
+          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidyged", "tidyged", "0.0.0", "tidyged", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "The library", "", "@R1@", ""]
         }
       ]
     }

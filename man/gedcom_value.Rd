@@ -2,12 +2,12 @@
 % Please edit documentation in R/helpers.R
 \name{gedcom_value}
 \alias{gedcom_value}
-\title{Extract a particular value from a tidygedcom object}
+\title{Extract a particular value from a tidyged object}
 \usage{
 gedcom_value(gedcom, record_xref, tag, level, after_tag = NULL)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{record_xref}{The xref of the record in which the value may exist.}
 
@@ -22,5 +22,5 @@ The particular value fitting the criteria of the input arguments. If no value is
 an empty string is returned.
 }
 \description{
-Extract a particular value from a tidygedcom object
+Extract a particular value from a tidyged object
 }

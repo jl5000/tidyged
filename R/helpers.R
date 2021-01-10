@@ -26,7 +26,7 @@ xrefs_multimedia <-   function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$reco
 #' GEDCOM files traditionally use a single letter to denote the type of record, e.g.
 #' I for Individual, F for Family group, etc.
 #' @param ref An explicit reference number after the type if one is to be chosen manually.
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #'
 #' @return An xref to use for a new record.
 #' @export
@@ -58,9 +58,9 @@ assign_xref <- function(type = "", ref = 0, gedcom = tibble::tibble()) {
 
 
 
-#' Extract a particular value from a tidygedcom object
+#' Extract a particular value from a tidyged object
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param record_xref The xref of the record in which the value may exist.
 #' @param tag The tag associated with the value.
 #' @param level The level number of the value.
@@ -117,10 +117,10 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
 }
 
 
-#' Retrieve an individual name
+#' Retrieve a name of an Individual
 #'
-#' @param gedcom A tidygedcom object.
-#' @param xref A xref of an Individual record.
+#' @param gedcom A tidyged object.
+#' @param xref An xref of an Individual record.
 #'
 #' @return The first name found in the Individual record (with no forward slashes). 
 #' If no name is found, the xref is returned.
@@ -136,14 +136,28 @@ get_individual_name <- function(gedcom, xref) {
 }
 
 
-
+#' Retrieve the title of a Source
+#'
+#' @param gedcom A tidyged object.
+#' @param xref An xref of a Source record.
+#'
+#' @return The title found in the Source record. If no title is found, the xref is returned.
+get_source_title <- function(gedcom, xref) { 
+  # this value isn't actually used
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_source)
+  
+  title <- gedcom_value(gedcom, xref, "TITL", 1)
+  
+  if (title == "") title <- xref
+  title
+}
 
 
 #' Temporarily remove forward slashes from surnames
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #'
-#' @return A tidygedcom object with all forward slashes removed from surnames.
+#' @return A tidyged object with all forward slashes removed from surnames.
 temporarily_remove_name_slashes <- function(gedcom) {
   
   gedcom %>% 
@@ -163,14 +177,14 @@ temporarily_remove_name_slashes <- function(gedcom) {
 #' 
 #' @details This helper function is designed to derive and run validation checks on an xref
 #' provided explicitly or implicitly. An xref is provided implicitly either through the active
-#' record of the tidygedcom object, or through a descriptor identifying a unique record.
+#' record of the tidyged object, or through a descriptor identifying a unique record.
 #' 
 #' The descriptors used for each record are: name (individual, repository, and submitter), 
 #' title (source), file reference (multimedia), excerpt (note). 
 #' 
 #' Once found, the xref is checked to ensure it is of the appropriate type.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param xref_or_descriptor An xref or descriptor uniquely identifying the record.
 #' @param record_type A character string describing the record type. Generally one of
 #' the global record_string_* values.
@@ -232,15 +246,15 @@ get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_
 
 
 
-#' Find a particular row position in a tidygedcom object.
+#' Find a particular row position in a tidyged object.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param xref The xref of the record where the insertion point will be.
 #' @param parent_level The level of the row where the insertion point will be.
 #' @param parent_tag The tag of the row where the insertion point will be.
 #' @param parent_value The value of the row where the insertion point will be.
 #'
-#' @return The row after the insertion point in the tidygedcom object.
+#' @return The row after the insertion point in the tidyged object.
 find_insertion_point <- function(gedcom,
                                  xref,
                                  parent_level,
@@ -265,15 +279,15 @@ find_insertion_point <- function(gedcom,
 
 
 
-#' Identify the rows of a subrecord in a tidygedcom object
+#' Identify the rows of a subrecord in a tidyged object
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param containing_level The level of the first line of the subrecord.
 #' @param containing_tag The tag of the first line of the subrecord.
 #' @param containing_value The value of the first line of the subrecord.
 #' @param xrefs The xrefs of records containing the subrecord (default is all records).
 #'
-#' @return A vector of rows in the tidygedcom object of the subrecord(s).
+#' @return A vector of rows in the tidyged object of the subrecord(s).
 identify_section <- function(gedcom,
                            containing_level,
                            containing_tag,
@@ -311,15 +325,15 @@ identify_section <- function(gedcom,
 }
 
 
-#' Remove a subrecord in a tidygedcom object
+#' Remove a subrecord in a tidyged object
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param containing_level The level of the first line of the subrecord.
 #' @param containing_tag The tag of the first line of the subrecord.
 #' @param containing_value The value of the first line of the subrecord.
 #' @param xrefs The xrefs of records containing the subrecord (default is all records).
 #'
-#' @return The tidygedcom object with the subrecord(s) removed.
+#' @return The tidyged object with the subrecord(s) removed.
 remove_section <- function(gedcom,
                            containing_level,
                            containing_tag,
@@ -341,14 +355,14 @@ remove_section <- function(gedcom,
 }
 
 
-#' Remove all creation dates from a tidygedcom object
+#' Remove all creation dates from a tidyged object
 #' 
 #' @details This is a function used in tests so that the objects created do not
 #' change every time.
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #'
-#' @return The tidygedcom object with creation dates removed.
+#' @return The tidyged object with creation dates removed.
 remove_dates_for_tests <- function(gedcom) {
   
   gedcom %>% 
@@ -376,11 +390,11 @@ remove_context_from_tests <- function() {
   
 }
 
-#' Remove all CHANge dates from a tidygedcom object
+#' Remove all CHANge dates from a tidyged object
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #'
-#' @return A tidygedcom object with all CHAN structures removed.
+#' @return A tidyged object with all CHAN structures removed.
 #' @export
 remove_change_dates <- function(gedcom) {
   

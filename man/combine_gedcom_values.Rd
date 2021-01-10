@@ -7,10 +7,10 @@
 combine_gedcom_values(gedcom)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 }
 \value{
-A tidygedcom object in the GEDCOM form.
+A tidyged object in the GEDCOM form.
 }
 \description{
 This function applies concatenation indicated by CONC/CONT lines.

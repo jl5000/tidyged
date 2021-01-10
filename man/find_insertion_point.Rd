@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{find_insertion_point}
 \alias{find_insertion_point}
-\title{Find a particular row position in a tidygedcom object.}
+\title{Find a particular row position in a tidyged object.}
 \usage{
 find_insertion_point(
   gedcom,
@@ -13,7 +13,7 @@ find_insertion_point(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{xref}{The xref of the record where the insertion point will be.}
 
@@ -24,8 +24,8 @@ find_insertion_point(
 \item{parent_value}{The value of the row where the insertion point will be.}
 }
 \value{
-The row after the insertion point in the tidygedcom object.
+The row after the insertion point in the tidyged object.
 }
 \description{
-Find a particular row position in a tidygedcom object.
+Find a particular row position in a tidyged object.
 }

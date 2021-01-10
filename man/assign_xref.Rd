@@ -13,7 +13,7 @@ I for Individual, F for Family group, etc.}
 
 \item{ref}{An explicit reference number after the type if one is to be chosen manually.}
 
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 }
 \value{
 An xref to use for a new record.

@@ -2,12 +2,12 @@
 % Please edit documentation in R/edit_individual.R
 \name{remove_individual}
 \alias{remove_individual}
-\title{Remove an Individual record from a tidygedcom object}
+\title{Remove an Individual record from a tidyged object}
 \usage{
 remove_individual(gedcom, xref = character(), remove_associations = TRUE)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
@@ -15,10 +15,10 @@ remove_individual(gedcom, xref = character(), remove_associations = TRUE)
 other individual records. Defaults to TRUE.}
 }
 \value{
-An updated tidygedcom object excluding the active Individual record.
+An updated tidyged object excluding the active Individual record.
 }
 \description{
-This function removes an active Individual record from the tidygedcom object.
+This function removes an active Individual record from the tidyged object.
 }
 \details{
 At a minimum it will also remove references to this individual in Family group records.

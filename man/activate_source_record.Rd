@@ -7,12 +7,12 @@
 activate_source_record(gedcom, source)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{source}{The xref or title of the Source record to be activated.}
 }
 \value{
-The same tidygedcom object with "active_record" attribute set to the specific
+The same tidyged object with "active_record" attribute set to the specific
 Source record to allow easy editing.
 }
 \description{

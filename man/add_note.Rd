@@ -2,7 +2,7 @@
 % Please edit documentation in R/edit_note.R
 \name{add_note}
 \alias{add_note}
-\title{Add a Note record to a tidygedcom object}
+\title{Add a Note record to a tidyged object}
 \usage{
 add_note(
   gedcom,
@@ -13,7 +13,7 @@ add_note(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{text}{A character string containing the text of the note.}
 
@@ -26,10 +26,10 @@ this record. See the Gedcom 5.5.5 Specification for more details.}
 the source system.}
 }
 \value{
-An updated tidygedcom object including the Note record.
+An updated tidyged object including the Note record.
 }
 \description{
-Add a Note record to a tidygedcom object
+Add a Note record to a tidyged object
 }
 \details{
 This function will automatically assign a unique xref for this record. Most users

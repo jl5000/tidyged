@@ -10,10 +10,10 @@ read_gedcom(filepath)
 \item{filepath}{The full filepath of the GEDCOM file.}
 }
 \value{
-A tidygedcom object
+A tidyged object
 }
 \description{
-Imports a *.ged file and creates a tidygedcom object.
+Imports a *.ged file and creates a tidyged object.
 }
 \examples{
 \dontrun{

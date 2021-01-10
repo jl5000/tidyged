@@ -2,16 +2,16 @@
 % Please edit documentation in R/activate.R
 \name{get_active_record}
 \alias{get_active_record}
-\title{Get the active record in a tidygedcom object}
+\title{Get the active record in a tidyged object}
 \usage{
 get_active_record(gedcom)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 }
 \value{
 The xref of the active record.
 }
 \description{
-Get the active record in a tidygedcom object
+Get the active record in a tidyged object
 }

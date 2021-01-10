@@ -7,7 +7,7 @@
 get_family_group_description(gedcom, xref)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{xref}{An xref of a Family group record.}
 }

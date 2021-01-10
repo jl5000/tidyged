@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save a tidygedcom object to disk as a GEDCOM file — write_gedcom • tidygedcom</title>
+<title>Save a tidyged object to disk as a GEDCOM file — write_gedcom • tidyged</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Save a tidygedcom object to disk as a GEDCOM file — write_gedcom" />
-<meta property="og:description" content="Save a tidygedcom object to disk as a GEDCOM file" />
+<meta property="og:title" content="Save a tidyged object to disk as a GEDCOM file — write_gedcom" />
+<meta property="og:description" content="Save a tidyged object to disk as a GEDCOM file" />
 
 
 
@@ -71,7 +71,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidygedcom</a>
+        <a class="navbar-link" href="../index.html">tidyged</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -93,7 +93,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jl5000/tidygedcom/">
+  <a href="https://github.com/jl5000/tidyged/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -111,13 +111,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save a tidygedcom object to disk as a GEDCOM file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/read_write_create.R'><code>R/read_write_create.R</code></a></small>
+    <h1>Save a tidyged object to disk as a GEDCOM file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/read_write_create.R'><code>R/read_write_create.R</code></a></small>
     <div class="hidden name"><code>write_gedcom.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Save a tidygedcom object to disk as a GEDCOM file</p>
+    <p>Save a tidyged object to disk as a GEDCOM file</p>
     </div>
 
     <pre class="usage"><span class='fu'>write_gedcom</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>filepath</span><span class='op'>)</span></pre>
@@ -127,7 +127,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>gedcom</th>
-      <td><p>A tidygedcom object.</p></td>
+      <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
       <th>filepath</th>
@@ -140,7 +140,7 @@
     <p>Nothing</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function prepares the tidygedcom object and then writes it to the filepath.
+    <p>This function prepares the tidyged object and then writes it to the filepath.
 Steps taken include escaping "@" signs (with another "@") and splitting long lines onto
 separate lines.</p>
 

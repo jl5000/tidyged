@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maintenance functions • tidygedcom</title>
+<title>Maintenance functions • tidyged</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Maintenance functions">
-<meta property="og:description" content="tidygedcom">
+<meta property="og:description" content="tidyged">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidygedcom</a>
+        <a class="navbar-link" href="../index.html">tidyged</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -52,7 +52,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jl5000/tidygedcom/">
+  <a href="https://github.com/jl5000/tidyged/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -73,7 +73,7 @@
       <h1 data-toc-skip>Maintenance functions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidygedcom/blob/master/vignettes/maintenance_functions.Rmd"><code>vignettes/maintenance_functions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/master/vignettes/maintenance_functions.Rmd"><code>vignettes/maintenance_functions.Rmd</code></a></small>
       <div class="hidden name"><code>maintenance_functions.Rmd</code></div>
 
     </div>
@@ -83,14 +83,14 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>GEDCOM files can get very large and unwieldy, resulting in inefficiencies and file bloat. The <strong>tidygedcom</strong> package offers functions to automate the cleaning of GEDCOM files.</p>
+<p>GEDCOM files can get very large and unwieldy, resulting in inefficiencies and file bloat. The <strong>tidyged</strong> package offers functions to automate the cleaning of GEDCOM files.</p>
 </div>
 <div id="change-dates" class="section level2">
 <h2 class="hasAnchor">
 <a href="#change-dates" class="anchor"></a>Change dates</h2>
-<p>All top level records in a GEDCOM file can record the date and time they were last modified. The <strong>tidygedcom</strong> package includes change dates (today’s date) by default every time a record is created or modified. Since the time is very unlikely to be useful in such a context, the package ignores this by default:</p>
+<p>All top level records in a GEDCOM file can record the date and time they were last modified. The <strong>tidyged</strong> package includes change dates (today’s date) by default every time a record is created or modified. Since the time is very unlikely to be useful in such a context, the package ignores this by default:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidygedcom/">tidygedcom</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
 <span class="co">#&gt; If importing existing GEDCOM files, you should ensure that they are error free.</span>
 <span class="co">#&gt; This package assumes imported GEDCOM files are valid and very few validation checks are carried out.</span>
 <span class="co">#&gt; Several GEDCOM validators are available, including an online validator at http://ged-inline.elasticbeanstalk.com/</span>
@@ -98,29 +98,29 @@
 <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 22 x 4</span>
-<span class="co">#&gt;    level record tag   value                                 </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                 </span>
-<span class="co">#&gt;  1     0 HD     HEAD  ""                                    </span>
-<span class="co">#&gt;  2     1 HD     GEDC  ""                                    </span>
-<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                               </span>
-<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                      </span>
-<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                               </span>
-<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                               </span>
-<span class="co">#&gt;  7     1 HD     DEST  "tidygedcom"                          </span>
-<span class="co">#&gt;  8     1 HD     SOUR  "tidygedcom"                          </span>
-<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                               </span>
-<span class="co">#&gt; 10     2 HD     NAME  "tidygedcom"                          </span>
-<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                       </span>
-<span class="co">#&gt; 12     3 HD     ADDR  ""                                    </span>
-<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                 </span>
-<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"</span>
-<span class="co">#&gt; 15     1 HD     DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 16     1 HD     LANG  "English"                             </span>
-<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                </span>
-<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                    </span>
-<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                  </span>
-<span class="co">#&gt; 20     1 @U1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "10 JAN 2021"                         </span>
+<span class="co">#&gt;    level record tag   value                              </span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                              </span>
+<span class="co">#&gt;  1     0 HD     HEAD  ""                                 </span>
+<span class="co">#&gt;  2     1 HD     GEDC  ""                                 </span>
+<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                            </span>
+<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                   </span>
+<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                            </span>
+<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                            </span>
+<span class="co">#&gt;  7     1 HD     DEST  "tidyged"                          </span>
+<span class="co">#&gt;  8     1 HD     SOUR  "tidyged"                          </span>
+<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                            </span>
+<span class="co">#&gt; 10     2 HD     NAME  "tidyged.internals"                </span>
+<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                    </span>
+<span class="co">#&gt; 12     3 HD     ADDR  ""                                 </span>
+<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"              </span>
+<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"</span>
+<span class="co">#&gt; 15     1 HD     DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 16     1 HD     LANG  "English"                          </span>
+<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                             </span>
+<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                 </span>
+<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                               </span>
+<span class="co">#&gt; 20     1 @U1@   CHAN  ""                                 </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "10 JAN 2021"                      </span>
 <span class="co">#&gt; 22     0 TR     TRLR  ""</span></code></pre></div>
 <p>See row 20 and the row after for the change date for the submitter record.</p>
 <p>By default this behaviour also applies when modifying existing records. If you would like to leave the change date alone when modifying a record, you can set <code>update_date_changed = FALSE</code> (it is TRUE by default).</p>
@@ -130,27 +130,27 @@
   <span class="fu"><a href="../reference/remove_change_dates.html">remove_change_dates</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 20 x 4</span>
-<span class="co">#&gt;    level record tag   value                                 </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                 </span>
-<span class="co">#&gt;  1     0 HD     HEAD  ""                                    </span>
-<span class="co">#&gt;  2     1 HD     GEDC  ""                                    </span>
-<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                               </span>
-<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                      </span>
-<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                               </span>
-<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                               </span>
-<span class="co">#&gt;  7     1 HD     DEST  "tidygedcom"                          </span>
-<span class="co">#&gt;  8     1 HD     SOUR  "tidygedcom"                          </span>
-<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                               </span>
-<span class="co">#&gt; 10     2 HD     NAME  "tidygedcom"                          </span>
-<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                       </span>
-<span class="co">#&gt; 12     3 HD     ADDR  ""                                    </span>
-<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                 </span>
-<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"</span>
-<span class="co">#&gt; 15     1 HD     DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 16     1 HD     LANG  "English"                             </span>
-<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                </span>
-<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                    </span>
-<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                  </span>
+<span class="co">#&gt;    level record tag   value                              </span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                              </span>
+<span class="co">#&gt;  1     0 HD     HEAD  ""                                 </span>
+<span class="co">#&gt;  2     1 HD     GEDC  ""                                 </span>
+<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                            </span>
+<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                   </span>
+<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                            </span>
+<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                            </span>
+<span class="co">#&gt;  7     1 HD     DEST  "tidyged"                          </span>
+<span class="co">#&gt;  8     1 HD     SOUR  "tidyged"                          </span>
+<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                            </span>
+<span class="co">#&gt; 10     2 HD     NAME  "tidyged.internals"                </span>
+<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                    </span>
+<span class="co">#&gt; 12     3 HD     ADDR  ""                                 </span>
+<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"              </span>
+<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"</span>
+<span class="co">#&gt; 15     1 HD     DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 16     1 HD     LANG  "English"                          </span>
+<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                             </span>
+<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                 </span>
+<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                               </span>
 <span class="co">#&gt; 20     0 TR     TRLR  ""</span></code></pre></div>
 </div>
 <div id="duplicate-notes" class="section level2">
@@ -165,91 +165,91 @@
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">notes</span>, n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 37 x 4</span>
-<span class="co">#&gt;    level record tag   value                                 </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                 </span>
-<span class="co">#&gt;  1     0 HD     HEAD  ""                                    </span>
-<span class="co">#&gt;  2     1 HD     GEDC  ""                                    </span>
-<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                               </span>
-<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                      </span>
-<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                               </span>
-<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                               </span>
-<span class="co">#&gt;  7     1 HD     DEST  "tidygedcom"                          </span>
-<span class="co">#&gt;  8     1 HD     SOUR  "tidygedcom"                          </span>
-<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                               </span>
-<span class="co">#&gt; 10     2 HD     NAME  "tidygedcom"                          </span>
-<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                       </span>
-<span class="co">#&gt; 12     3 HD     ADDR  ""                                    </span>
-<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                 </span>
-<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"</span>
-<span class="co">#&gt; 15     1 HD     DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 16     1 HD     LANG  "English"                             </span>
-<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                </span>
-<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                    </span>
-<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                  </span>
-<span class="co">#&gt; 20     1 @U1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."             </span>
-<span class="co">#&gt; 23     1 @N1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 24     2 @N1@   DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 25     0 @I1@   INDI  ""                                    </span>
-<span class="co">#&gt; 26     1 @I1@   SEX   "U"                                   </span>
-<span class="co">#&gt; 27     1 @I1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 28     2 @I1@   DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 29     1 @I1@   NOTE  "This is a bespoke note."             </span>
-<span class="co">#&gt; 30     1 @I1@   NOTE  "This is a generic note."             </span>
-<span class="co">#&gt; 31     0 @R1@   REPO  ""                                    </span>
-<span class="co">#&gt; 32     1 @R1@   NAME  "My repository"                       </span>
-<span class="co">#&gt; 33     1 @R1@   NOTE  "This is a bespoke note."             </span>
-<span class="co">#&gt; 34     1 @R1@   NOTE  "This is a generic note."             </span>
-<span class="co">#&gt; 35     1 @R1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 36     2 @R1@   DATE  "10 JAN 2021"                         </span>
+<span class="co">#&gt;    level record tag   value                              </span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                              </span>
+<span class="co">#&gt;  1     0 HD     HEAD  ""                                 </span>
+<span class="co">#&gt;  2     1 HD     GEDC  ""                                 </span>
+<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                            </span>
+<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                   </span>
+<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                            </span>
+<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                            </span>
+<span class="co">#&gt;  7     1 HD     DEST  "tidyged"                          </span>
+<span class="co">#&gt;  8     1 HD     SOUR  "tidyged"                          </span>
+<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                            </span>
+<span class="co">#&gt; 10     2 HD     NAME  "tidyged.internals"                </span>
+<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                    </span>
+<span class="co">#&gt; 12     3 HD     ADDR  ""                                 </span>
+<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"              </span>
+<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"</span>
+<span class="co">#&gt; 15     1 HD     DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 16     1 HD     LANG  "English"                          </span>
+<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                             </span>
+<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                 </span>
+<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                               </span>
+<span class="co">#&gt; 20     1 @U1@   CHAN  ""                                 </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."          </span>
+<span class="co">#&gt; 23     1 @N1@   CHAN  ""                                 </span>
+<span class="co">#&gt; 24     2 @N1@   DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 25     0 @I1@   INDI  ""                                 </span>
+<span class="co">#&gt; 26     1 @I1@   SEX   "U"                                </span>
+<span class="co">#&gt; 27     1 @I1@   CHAN  ""                                 </span>
+<span class="co">#&gt; 28     2 @I1@   DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 29     1 @I1@   NOTE  "This is a bespoke note."          </span>
+<span class="co">#&gt; 30     1 @I1@   NOTE  "This is a generic note."          </span>
+<span class="co">#&gt; 31     0 @R1@   REPO  ""                                 </span>
+<span class="co">#&gt; 32     1 @R1@   NAME  "My repository"                    </span>
+<span class="co">#&gt; 33     1 @R1@   NOTE  "This is a bespoke note."          </span>
+<span class="co">#&gt; 34     1 @R1@   NOTE  "This is a generic note."          </span>
+<span class="co">#&gt; 35     1 @R1@   CHAN  ""                                 </span>
+<span class="co">#&gt; 36     2 @R1@   DATE  "10 JAN 2021"                      </span>
 <span class="co">#&gt; 37     0 TR     TRLR  ""</span></code></pre></div>
 <p>In the above example, there is a generic note recorded in a top level Note record. This same note message has been used for the individual and repository defined, but they have been repeated rather than pointing to the Note record. There is also a repeated bespoke note given in the Individual and Repository records.</p>
 <p>The <code><a href="../reference/consolidate_notes.html">consolidate_notes()</a></code> function will simplify the file, replacing note values with pointers to top level Note records (creating them if necessary) if they are repeated:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/consolidate_notes.html">consolidate_notes</a></span><span class="op">(</span><span class="va">notes</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 40 x 4</span>
-<span class="co">#&gt;    level record tag   value                                 </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                 </span>
-<span class="co">#&gt;  1     0 HD     HEAD  ""                                    </span>
-<span class="co">#&gt;  2     1 HD     GEDC  ""                                    </span>
-<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                               </span>
-<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                      </span>
-<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                               </span>
-<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                               </span>
-<span class="co">#&gt;  7     1 HD     DEST  "tidygedcom"                          </span>
-<span class="co">#&gt;  8     1 HD     SOUR  "tidygedcom"                          </span>
-<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                               </span>
-<span class="co">#&gt; 10     2 HD     NAME  "tidygedcom"                          </span>
-<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                       </span>
-<span class="co">#&gt; 12     3 HD     ADDR  ""                                    </span>
-<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                 </span>
-<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"</span>
-<span class="co">#&gt; 15     1 HD     DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 16     1 HD     LANG  "English"                             </span>
-<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                </span>
-<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                    </span>
-<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                  </span>
-<span class="co">#&gt; 20     1 @U1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."             </span>
-<span class="co">#&gt; 23     1 @N1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 24     2 @N1@   DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 25     0 @I1@   INDI  ""                                    </span>
-<span class="co">#&gt; 26     1 @I1@   SEX   "U"                                   </span>
-<span class="co">#&gt; 27     1 @I1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 28     2 @I1@   DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 29     1 @I1@   NOTE  "@N2@"                                </span>
-<span class="co">#&gt; 30     1 @I1@   NOTE  "@N1@"                                </span>
-<span class="co">#&gt; 31     0 @R1@   REPO  ""                                    </span>
-<span class="co">#&gt; 32     1 @R1@   NAME  "My repository"                       </span>
-<span class="co">#&gt; 33     1 @R1@   NOTE  "@N2@"                                </span>
-<span class="co">#&gt; 34     1 @R1@   NOTE  "@N1@"                                </span>
-<span class="co">#&gt; 35     1 @R1@   CHAN  ""                                    </span>
-<span class="co">#&gt; 36     2 @R1@   DATE  "10 JAN 2021"                         </span>
-<span class="co">#&gt; 37     0 @N2@   NOTE  "This is a bespoke note."             </span>
-<span class="co">#&gt; 38     1 @N2@   CHAN  ""                                    </span>
-<span class="co">#&gt; 39     2 @N2@   DATE  "10 JAN 2021"                         </span>
+<span class="co">#&gt;    level record tag   value                              </span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                              </span>
+<span class="co">#&gt;  1     0 HD     HEAD  ""                                 </span>
+<span class="co">#&gt;  2     1 HD     GEDC  ""                                 </span>
+<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                            </span>
+<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                   </span>
+<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                            </span>
+<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                            </span>
+<span class="co">#&gt;  7     1 HD     DEST  "tidyged"                          </span>
+<span class="co">#&gt;  8     1 HD     SOUR  "tidyged"                          </span>
+<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                            </span>
+<span class="co">#&gt; 10     2 HD     NAME  "tidyged.internals"                </span>
+<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                    </span>
+<span class="co">#&gt; 12     3 HD     ADDR  ""                                 </span>
+<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"              </span>
+<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"</span>
+<span class="co">#&gt; 15     1 HD     DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 16     1 HD     LANG  "English"                          </span>
+<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                             </span>
+<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                 </span>
+<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                               </span>
+<span class="co">#&gt; 20     1 @U1@   CHAN  ""                                 </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."          </span>
+<span class="co">#&gt; 23     1 @N1@   CHAN  ""                                 </span>
+<span class="co">#&gt; 24     2 @N1@   DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 25     0 @I1@   INDI  ""                                 </span>
+<span class="co">#&gt; 26     1 @I1@   SEX   "U"                                </span>
+<span class="co">#&gt; 27     1 @I1@   CHAN  ""                                 </span>
+<span class="co">#&gt; 28     2 @I1@   DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 29     1 @I1@   NOTE  "@N2@"                             </span>
+<span class="co">#&gt; 30     1 @I1@   NOTE  "@N1@"                             </span>
+<span class="co">#&gt; 31     0 @R1@   REPO  ""                                 </span>
+<span class="co">#&gt; 32     1 @R1@   NAME  "My repository"                    </span>
+<span class="co">#&gt; 33     1 @R1@   NOTE  "@N2@"                             </span>
+<span class="co">#&gt; 34     1 @R1@   NOTE  "@N1@"                             </span>
+<span class="co">#&gt; 35     1 @R1@   CHAN  ""                                 </span>
+<span class="co">#&gt; 36     2 @R1@   DATE  "10 JAN 2021"                      </span>
+<span class="co">#&gt; 37     0 @N2@   NOTE  "This is a bespoke note."          </span>
+<span class="co">#&gt; 38     1 @N2@   CHAN  ""                                 </span>
+<span class="co">#&gt; 39     2 @N2@   DATE  "10 JAN 2021"                      </span>
 <span class="co">#&gt; 40     0 TR     TRLR  ""</span></code></pre></div>
 </div>
 <div id="empty-family-groups" class="section level2">

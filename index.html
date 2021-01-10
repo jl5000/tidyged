@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>An R package for handling GEDCOM files • tidygedcom</title>
+<title>An R package for handling GEDCOM files • tidyged</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">tidygedcom</a>
+        <a class="navbar-link" href="index.html">tidyged</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -52,7 +52,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jl5000/tidygedcom/">
+  <a href="https://github.com/jl5000/tidyged/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -69,9 +69,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="tidygedcom" class="section level1">
+<div id="tidyged" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#tidygedcom" class="anchor"></a>tidygedcom</h1></div>
+<a href="#tidyged" class="anchor"></a>tidyged</h1></div>
 <!-- badges: start -->
 
 <blockquote>
@@ -84,7 +84,7 @@
 <p>You can install development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jl5000/tidygedcom"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jl5000/tidyged"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -92,7 +92,7 @@
 <p>The intent is to allow the user to import GEDCOM files or create them from scratch using a <code>ggplot2</code> type interface; starting with a base GEDCOM object (with only a header and trailer section) and adding records as you would add layers to a ggplot object (but instead using the pipe operator, %&gt;%).</p>
 <p>An example is below:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidygedcom/">tidygedcom</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
 <span class="co">#&gt; If importing existing GEDCOM files, you should ensure that they are error free.</span>
 <span class="co">#&gt; This package assumes imported GEDCOM files are valid and very few validation checks are carried out.</span>
 <span class="co">#&gt; Several GEDCOM validators are available, including an online validator at http://ged-inline.elasticbeanstalk.com/</span>
@@ -138,14 +138,14 @@
 <span class="co">#&gt;   4     2 HD     FORM  "LINEAGE-LINKED"                                       </span>
 <span class="co">#&gt;   5     3 HD     VERS  "5.5.5"                                                </span>
 <span class="co">#&gt;   6     1 HD     CHAR  "UTF-8"                                                </span>
-<span class="co">#&gt;   7     1 HD     DEST  "tidygedcom"                                           </span>
-<span class="co">#&gt;   8     1 HD     SOUR  "tidygedcom"                                           </span>
+<span class="co">#&gt;   7     1 HD     DEST  "tidyged"                                              </span>
+<span class="co">#&gt;   8     1 HD     SOUR  "tidyged"                                              </span>
 <span class="co">#&gt;   9     2 HD     VERS  "0.0.0"                                                </span>
-<span class="co">#&gt;  10     2 HD     NAME  "tidygedcom"                                           </span>
+<span class="co">#&gt;  10     2 HD     NAME  "tidyged"                                              </span>
 <span class="co">#&gt;  11     2 HD     CORP  "Jamie Lendrum"                                        </span>
 <span class="co">#&gt;  12     3 HD     ADDR  ""                                                     </span>
 <span class="co">#&gt;  13     3 HD     EMAIL "jalendrum@gmail.com"                                  </span>
-<span class="co">#&gt;  14     3 HD     WWW   "https://jl5000.github.io/tidygedcom/"                 </span>
+<span class="co">#&gt;  14     3 HD     WWW   "https://jl5000.github.io/tidyged/"                    </span>
 <span class="co">#&gt;  15     1 HD     DATE  "10 JAN 2021"                                          </span>
 <span class="co">#&gt;  16     1 HD     LANG  "English"                                              </span>
 <span class="co">#&gt;  17     1 HD     SUBM  "@U1@"                                                 </span>
@@ -246,8 +246,8 @@
 <span class="co">#&gt; 112     2 @O1@   DATE  "10 JAN 2021"                                          </span>
 <span class="co">#&gt; 113     0 TR     TRLR  ""</span></code></pre></div>
 <p>Just like a ggplot object requires aesthetics, a GEDCOM file requires details of a submitter. If no submitter details are given, the username is used.</p>
-<p>Within the package, GEDCOM files are represented as a sub-class of tibble known as <code>tidygedcom</code> objects, allowing easy manipulation and exploitation of existing <code>tidyverse</code> infrastructure.</p>
-<p>A number of functions are available to provide summaries of <code>tidygedcom</code> objects:</p>
+<p>Within the package, GEDCOM files are represented as a sub-class of tibble known as <code>tidyged</code> objects, allowing easy manipulation and exploitation of existing <code>tidyverse</code> infrastructure.</p>
+<p>A number of functions are available to provide summaries of <code>tidyged</code> objects:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/num_indi.html">num_indi</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span>
 <span class="co">#&gt; [1] 5</span>
@@ -274,9 +274,9 @@
 <span class="co">#&gt;  </span>
 <span class="co">#&gt;  Copyright:               None </span>
 <span class="co">#&gt;  </span>
-<span class="co">#&gt;  Source system:           tidygedcom </span>
+<span class="co">#&gt;  Source system:           tidyged </span>
 <span class="co">#&gt;  Source system version:   0.0.0 </span>
-<span class="co">#&gt;  Product name:            tidygedcom </span>
+<span class="co">#&gt;  Product name:            tidyged </span>
 <span class="co">#&gt;  Product source:          Jamie Lendrum</span>
 
 <span class="fu"><a href="reference/df_individuals.html">df_individuals</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span>, width <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
@@ -310,20 +310,22 @@
 <span class="co">#&gt;   last_modified</span>
 <span class="co">#&gt;   &lt;chr&gt;        </span>
 <span class="co">#&gt; 1 10 JAN 2021</span></code></pre></div>
-<p>This package allows limited editing of <code>tidygedcom</code> objects (adding/removing records, as well as the addition of some record substructures). Editing of existing records is made possible through ‘activation’ (much like the <code>tidygraph</code> package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of <code>activate_*_record()</code> functions.</p>
+<p>This package allows limited editing of <code>tidyged</code> objects (adding/removing records, as well as the addition of some record substructures). Editing of existing records is made possible through ‘activation’ (much like the <code>tidygraph</code> package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of <code>activate_*_record()</code> functions.</p>
 </div>
 <div id="current-status" class="section level2">
 <h2 class="hasAnchor">
 <a href="#current-status" class="anchor"></a>Current status</h2>
-<p>The package and its internal data structures (contained in a separate <code>tidygedcom.internals</code> package) are almost complete and will soon be submitted to CRAN.</p>
-<p>Three further packages are also planned, to provide an ecosystem called the <code>gedcompendium</code>:</p>
+<p>The package and its internal data structures (contained in a separate <code>tidyged.internals</code> package) are almost complete and will soon be submitted to CRAN.</p>
+<p>Four further packages are also planned, to provide an ecosystem called the <code>gedcompendium</code>:</p>
 <ul>
 <li>
-<code>shinygedcom</code> will provide a shiny app to edit <code>tidygedcom</code> objects;</li>
+<code>shinyged</code> will provide a shiny app to edit <code>tidyged</code> objects;</li>
 <li>
-<code>visgedcom</code> will allow visualisation of <code>tidygedcom</code> objects;</li>
+<code>visged</code> will allow visualisation of <code>tidyged</code> objects;</li>
 <li>
-<code>tidygedcom.sources</code> will provide functions to automate the representation of facts from various source documents (e.g. birth certificates, censuses).</li>
+<code>autoged</code> will provide functions to automate the representation of facts from various source documents (e.g. birth certificates, censuses);</li>
+<li>
+<code>safeged</code> will provide functions to help with the removal of sensitive data (e.g. on living individuals).</li>
 </ul>
 </div>
 <div id="references" class="section level2">
@@ -340,7 +342,7 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/jl5000/tidygedcom/">https://​github.com/​jl5000/​tidygedcom/​</a>
+<li>Browse source code at <br><a href="https://github.com/jl5000/tidyged/">https://​github.com/​jl5000/​tidyged/​</a>
 </li>
 </ul>
 </div>
@@ -361,9 +363,9 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/jl5000/tidygedcom/actions"><img src="https://github.com/jl5000/tidygedcom/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/jl5000/tidygedcom"><img src="https://codecov.io/gh/jl5000/tidygedcom/branch/master/graph/badge.svg"></a></li>
-<li><a href="https://www.codefactor.io/repository/github/jl5000/tidygedcom"><img src="https://www.codefactor.io/repository/github/jl5000/tidygedcom/badge" alt="CodeFactor"></a></li>
+<li><a href="https://github.com/jl5000/tidyged/actions"><img src="https://github.com/jl5000/tidyged/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/jl5000/tidyged"><img src="https://codecov.io/gh/jl5000/tidyged/branch/master/graph/badge.svg"></a></li>
+<li><a href="https://www.codefactor.io/repository/github/jl5000/tidyged"><img src="https://www.codefactor.io/repository/github/jl5000/tidyged/badge" alt="CodeFactor"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg"></a></li>
 </ul>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Activate a Source record — activate_source_record • tidyged</title>
+<title>Get the structure of a tidyged object — str.tidyged • tidyged</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Activate a Source record — activate_source_record" />
-<meta property="og:description" content="This allows a mechanism to easily edit particular records. Either the source title can be provided
-or the xref can be provided explicitly. Providing the source title instead of the
-xref can make your code more readable, provided that the name returns a unique record!" />
+<meta property="og:title" content="Get the structure of a tidyged object — str.tidyged" />
+<meta property="og:description" content="This function gives a breakdown of record counts in the GEDCOM file." />
 
 
 
@@ -113,36 +111,34 @@ xref can make your code more readable, provided that the name returns a unique r
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Activate a Source record</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/activate.R'><code>R/activate.R</code></a></small>
-    <div class="hidden name"><code>activate_source_record.Rd</code></div>
+    <h1>Get the structure of a tidyged object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/interrogate.R'><code>R/interrogate.R</code></a></small>
+    <div class="hidden name"><code>str.tidyged.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This allows a mechanism to easily edit particular records. Either the source title can be provided
-or the xref can be provided explicitly. Providing the source title instead of the
-xref can make your code more readable, provided that the name returns a unique record!</p>
+    <p>This function gives a breakdown of record counts in the GEDCOM file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>activate_source_record</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>source</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='co'># S3 method for tidyged</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>gedcom</th>
+      <th>object</th>
       <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>source</th>
-      <td><p>The xref or title of the Source record to be activated.</p></td>
+      <th>...</th>
+      <td><p>Not used.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The same tidyged object with "active_record" attribute set to the specific
-Source record to allow easy editing.</p>
+    <p>A printed summary of records in the tidyged object.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

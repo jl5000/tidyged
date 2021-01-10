@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidyged
+# tidyged <img src='man/figures/logo.png' align="right" height="138" />
 
 <!-- badges: start -->
 
@@ -88,7 +88,7 @@ print(tg, n = Inf)
 #>   7     1 HD     DEST  "tidyged"                                              
 #>   8     1 HD     SOUR  "tidyged"                                              
 #>   9     2 HD     VERS  "0.0.0"                                                
-#>  10     2 HD     NAME  "tidyged"                                              
+#>  10     2 HD     NAME  "tidyged.internals"                                    
 #>  11     2 HD     CORP  "Jamie Lendrum"                                        
 #>  12     3 HD     ADDR  ""                                                     
 #>  13     3 HD     EMAIL "jalendrum@gmail.com"                                  
@@ -233,7 +233,7 @@ summary(tg)
 #>  
 #>  Source system:           tidyged 
 #>  Source system version:   0.0.0 
-#>  Product name:            tidyged 
+#>  Product name:            tidyged.internals 
 #>  Product source:          Jamie Lendrum
 
 df_individuals(tg) %>% print(n = Inf, width = Inf)

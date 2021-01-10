@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidyged
+# tidyged <img src='man/figures/logo.png' align="right" height="138" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/jl5000/tidyged/workflows/R-CMD-check/badge.svg)](https://github.com/jl5000/tidyged/actions)

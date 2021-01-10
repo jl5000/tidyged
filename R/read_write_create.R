@@ -352,11 +352,7 @@ subm <- function(name = unname(Sys.info()["user"]),
                                                      address_fax = fax,
                                                      address_web_page = web_page)
   
-  subm_notes <- purrr::map(submitter_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  subm_notes <- purrr::map(submitter_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 

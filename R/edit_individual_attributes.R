@@ -72,11 +72,7 @@ add_individual_attribute <- function(gedcom,
                                                            address_fax = fax,
                                                            address_web_page = web_page)
   
-  plac_notes <- purrr::map(place_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  plac_notes <- purrr::map(place_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
@@ -99,11 +95,7 @@ add_individual_attribute <- function(gedcom,
                                                          notes = plac_notes)
   }
   
-  even_notes <- purrr::map(event_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  even_notes <- purrr::map(event_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
   details1 <- tidygedcom.internals::EVENT_DETAIL(event_or_fact_classification = fact_classification,
                                                  date = event_date,

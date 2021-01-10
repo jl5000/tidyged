@@ -59,11 +59,7 @@ add_repository <- function(gedcom,
                                address_fax = fax,
                                address_web_page = web_page)
   
-  repo_notes <- purrr::map(repository_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  repo_notes <- purrr::map(repository_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
   repo_record <- tidygedcom.internals::REPOSITORY_RECORD(xref_repo = xref,
                                                          name_of_repository = name,

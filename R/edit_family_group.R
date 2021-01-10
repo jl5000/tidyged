@@ -63,11 +63,7 @@ add_family_group <- function(gedcom,
                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
     purrr::map(tidygedcom.internals::MULTIMEDIA_LINK)
   
-  fam_notes <- purrr::map(family_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  fam_notes <- purrr::map(family_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
   fam_record <- tidygedcom.internals::FAMILY_GROUP_RECORD(xref_fam = xref,
                                                           xref_husb = xref_husb,

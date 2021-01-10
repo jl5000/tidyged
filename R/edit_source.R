@@ -63,17 +63,9 @@ add_source <- function(gedcom,
   
   xref <- assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
   
-  dat_notes <- purrr::map(data_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  dat_notes <- purrr::map(data_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
-  sour_notes <- purrr::map(source_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  sour_notes <- purrr::map(source_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 

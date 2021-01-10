@@ -45,11 +45,7 @@ add_individual_names <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
-  nam_notes <- purrr::map(name_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  nam_notes <- purrr::map(name_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
   name_pieces <- tidygedcom.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                                             name_piece_given = given, 
@@ -132,11 +128,7 @@ add_individual_names_var <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
   
-  name_notes <- purrr::map(variation_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  name_notes <- purrr::map(variation_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
   if(phonetic_variation) {
     

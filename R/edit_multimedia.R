@@ -38,11 +38,7 @@ add_multimedia <- function(gedcom,
   
   xref <- assign_xref(.pkgenv$xref_prefix_obje, gedcom = gedcom)
   
-  media_notes <- purrr::map(multimedia_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  media_notes <- purrr::map(multimedia_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
   media_record <- tidygedcom.internals::MULTIMEDIA_RECORD(xref_obje = xref,
                                                           multimedia_file_reference = file_reference,

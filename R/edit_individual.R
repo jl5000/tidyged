@@ -43,11 +43,7 @@ add_individual <- function(gedcom,
   
   xref <- assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
   
-  indi_notes <- purrr::map(individual_notes, ~ if(grepl(xref_pattern(), .x)) {
-    tidygedcom.internals::NOTE_STRUCTURE(xref_note = .x) 
-  } else { 
-    tidygedcom.internals::NOTE_STRUCTURE(user_text = .x) 
-  }  )
+  indi_notes <- purrr::map(individual_notes, tidygedcom.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 

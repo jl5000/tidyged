@@ -3,7 +3,7 @@ home:
   description: Describe your family tree using the tidyverse
 
 articles:
-- title: Overviews
+- title: Getting started
   contents:
   - intro_to_gedcom
   - implementation

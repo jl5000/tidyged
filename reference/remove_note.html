@@ -128,7 +128,7 @@
     <p>Remove a Note record from a tidyged object</p>
     </div>
 
-    <pre class="usage"><span class='fu'>remove_note</span><span class='op'>(</span><span class='va'>gedcom</span>, xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>remove_note</span><span class='op'>(</span><span class='va'>gedcom</span>, note <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,14 +138,15 @@
       <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>xref</th>
-      <td><p>The xref of a record to act on if one is not activated (will override active record).</p></td>
+      <th>note</th>
+      <td><p>The xref or excerpt of a Note record to act on if one is
+not activated (will override active record).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An updated tidyged object excluding the active Note record.</p>
+    <p>An updated tidyged object excluding the selected Note record.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

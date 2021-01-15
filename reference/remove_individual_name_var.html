@@ -128,12 +128,7 @@
     <p>Remove a variation of a personal name from an Individual record</p>
     </div>
 
-    <pre class="usage"><span class='fu'>remove_individual_name_var</span><span class='op'>(</span>
-  <span class='va'>gedcom</span>,
-  <span class='va'>variation_name</span>,
-  phonetic_variation <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>remove_individual_name_var</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>variation_name</span>, phonetic_variation <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,10 +145,6 @@
       <th>phonetic_variation</th>
       <td><p>Whether the name variation is a phonetic variation
 (TRUE, default) or a romanised variation (FALSE).</p></td>
-    </tr>
-    <tr>
-      <th>xref</th>
-      <td><p>The xref of a record to act on if one is not activated (will override active record).</p></td>
     </tr>
     </table>
 

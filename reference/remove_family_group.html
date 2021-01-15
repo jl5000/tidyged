@@ -128,7 +128,11 @@
     <p>This function removes a record containing details of a family group.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>remove_family_group</span><span class='op'>(</span><span class='va'>gedcom</span>, xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>, remove_individuals <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>remove_family_group</span><span class='op'>(</span>
+  <span class='va'>gedcom</span>,
+  family_xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  remove_individuals <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,20 +142,21 @@
       <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>xref</th>
-      <td><p>The xref of a record to act on if one is not activated (will override active record).</p></td>
+      <th>family_xref</th>
+      <td><p>The xref of a Family Group record to act on if one is not
+activated (will override active record).</p></td>
     </tr>
     <tr>
       <th>remove_individuals</th>
-      <td><p>Whether to also remove the individual records for all individuals
+      <td><p>Whether to also remove the records for all Individuals
 in the family.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An updated tidyged object excluding the active Family group record (and potentially the
-individuals within it).</p>
+    <p>An updated tidyged object excluding the selected Family group record
+(and potentially the individuals within it).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function will also automatically remove references to this record in other

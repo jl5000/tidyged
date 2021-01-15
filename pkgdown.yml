@@ -4,9 +4,19 @@ pkgdown_sha: ~
 articles:
   automation: automation.html
   cross_references: cross_references.html
+  family_events: family_events.html
+  family_group_records: family_group_records.html
   implementation: implementation.html
+  individual_attributes: individual_attributes.html
+  individual_events: individual_events.html
   individual_names: individual_names.html
+  individual_records: individual_records.html
   intro_to_gedcom: intro_to_gedcom.html
   maintenance_functions: maintenance_functions.html
-last_built: 2021-01-13T22:38Z
+  multimedia_records: multimedia_records.html
+  note_records: note_records.html
+  repository_records: repository_records.html
+  source_records: source_records.html
+  tidyged_creation: tidyged_creation.html
+last_built: 2021-01-15T22:45Z
 

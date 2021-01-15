@@ -58,18 +58,19 @@ add_multimedia <- function(gedcom,
 #' Remove a Multimedia record from a tidyged object
 #'
 #' @param gedcom A tidyged object.
-#' @param xref The xref of a record to act on if one is not activated (will override active record).
+#' @param multimedia The xref or file reference of a Multimedia record to act 
+#' on if one is not activated (will override active record).
 #'
-#' @return An updated tidyged object excluding the active Multimedia record.
+#' @return An updated tidyged object excluding the selected Multimedia record.
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
 #'              gedcom(subm()) %>% 
 #'              add_multimedia("test", "BMP") %>% 
 #'              remove_multimedia())
-remove_multimedia <- function(gedcom, xref = character()) {
+remove_multimedia <- function(gedcom, multimedia = character()) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_obje, is_multimedia)
+  xref <- get_valid_xref(gedcom, multimedia, .pkgenv$record_string_obje, is_multimedia)
   
   gedcom %>% 
     dplyr::filter(record != xref, value != xref) %>% 

@@ -284,7 +284,7 @@ gedcom <- function(submitter_details = subm(),
   tidyged.internals::GEDCOM_HEADER(
     header_extension = tidyged.internals::LINEAGE_LINKED_HEADER_EXTENSION(system_id = "tidyged",
                                                                           product_version_number = utils::packageVersion("tidyged"),
-                                                                          name_of_product = "tidyged",
+                                                                          name_of_product = "The 'tidyged' package for the R language",
                                                                           name_of_business = "Jamie Lendrum",
                                                                           business_address = tidyged.internals::ADDRESS_STRUCTURE(address_email = "jalendrum@gmail.com",
                                                                                                                address_web_page = "https://jl5000.github.io/tidyged/"),

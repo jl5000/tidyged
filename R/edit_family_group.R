@@ -122,12 +122,13 @@ add_family_group <- function(gedcom,
 #' all records for individuals in this family (including associations).
 #'
 #' @param gedcom A tidyged object.
-#' @param xref The xref of a record to act on if one is not activated (will override active record).
-#' @param remove_individuals Whether to also remove the individual records for all individuals
+#' @param family_xref The xref of a Family Group record to act on if one is not 
+#' activated (will override active record).
+#' @param remove_individuals Whether to also remove the records for all Individuals
 #' in the family.
 #'
-#' @return An updated tidyged object excluding the active Family group record (and potentially the 
-#' individuals within it).
+#' @return An updated tidyged object excluding the selected Family group record 
+#' (and potentially the individuals within it).
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()) %>% 
@@ -146,10 +147,10 @@ add_family_group <- function(gedcom,
 #'                add_family_group(husband = "@I1@", wife = "@I2@") %>% 
 #'                remove_family_group(remove_individuals = TRUE))
 remove_family_group <- function(gedcom, 
-                                xref = character(),
+                                family_xref = character(),
                                 remove_individuals = FALSE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_fam, is_family)
+  xref <- get_valid_xref(gedcom, family_xref, .pkgenv$record_string_fam, is_family)
   
   if(remove_individuals) {
     
@@ -192,8 +193,7 @@ remove_empty_family_groups <- function(gedcom) {
     
     if(nrow(members) == 0) {
       gedcom <- gedcom %>% 
-        activate_family_group_record(xref) %>% 
-        remove_family_group()
+        remove_family_group(xref)
       
       num_removed <- num_removed + 1
     }

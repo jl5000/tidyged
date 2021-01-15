@@ -7,10 +7,31 @@ articles:
   contents:
   - intro_to_gedcom
   - implementation
-- title: Features
+  - tidyged_creation
+- title: Individuals
+  contents:
+  - individual_records
+  - individual_names
+  - individual_events
+  - individual_attributes
+- title: Family groups
+  contents:
+  - family_group_records
+  - family_events
+- title: Repositories
+  contents:
+  - repository_records
+- title: Sources
+  contents:
+  - source_records
+- title: Multimedia
+  contents:
+  - multimedia_records
+- title: Notes
+  contents:
+  - note_records
+- title: Other features
   contents:
   - cross_references
   - automation
-  - individual_names
   - maintenance_functions
-

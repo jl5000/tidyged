@@ -157,10 +157,9 @@ add_source_repository_citation <- function(gedcom,
 #'                  remove_source_repository_citation("library") %>% 
 #'                  remove_dates_for_tests())
 remove_source_repository_citation <- function(gedcom,
-                                              repository,
-                                              xref = character()) {
+                                              repository) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_sour, is_source)
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
@@ -172,17 +171,18 @@ remove_source_repository_citation <- function(gedcom,
 #' Remove a Source record from a tidyged object
 #'
 #' @param gedcom A tidyged object.
-#' @param xref The xref of a record to act on if one is not activated (will override active record).
+#' @param source The xref or title of a Source record to act on if one is not 
+#' activated (will override active record).
 #'
-#' @return An updated tidyged object excluding the active Source record.
+#' @return An updated tidyged object excluding the selected Source record.
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
 #'              gedcom(subm()) %>% add_source(title = "text") %>% remove_source())
 remove_source <- function(gedcom,
-                          xref = character()) {
+                          source = character()) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_source)
   
   gedcom %>% 
     remove_section(1, "SOUR", xref) %>% 

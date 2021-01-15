@@ -36,17 +36,18 @@ add_note <- function(gedcom,
 #' Remove a Note record from a tidyged object
 #'
 #' @param gedcom A tidyged object.
-#' @param xref The xref of a record to act on if one is not activated (will override active record).
+#' @param note The xref or excerpt of a Note record to act on if one is 
+#' not activated (will override active record).
 #'
-#' @return An updated tidyged object excluding the active Note record.
+#' @return An updated tidyged object excluding the selected Note record.
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
 #'              gedcom(subm()) %>% add_note("text") %>% remove_note())
 remove_note <- function(gedcom,
-                        xref = character()) {
+                        note = character()) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_note, is_note)
+  xref <- get_valid_xref(gedcom, note, .pkgenv$record_string_note, is_note)
   
   gedcom %>% 
     dplyr::filter(record != xref, value != xref) %>% 

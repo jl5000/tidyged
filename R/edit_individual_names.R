@@ -201,7 +201,6 @@ add_individual_names_var <- function(gedcom,
 #'
 #' @param gedcom A tidyged object.
 #' @param name The personal name to remove.
-#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
 #' @return An updated tidyged object with an Individual record excluding
 #' this personal name (and components).
@@ -214,10 +213,9 @@ add_individual_names_var <- function(gedcom,
 #'                add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
 #'                remove_individual_name("Joe Bloggs"))  
 remove_individual_name <- function(gedcom,
-                                   name,
-                                   xref = character()) {
+                                   name) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_individual)
   
   remove_section(gedcom, 1, "NAME", name, xrefs = xref) %>% 
     activate_individual_record(xref)
@@ -231,7 +229,6 @@ remove_individual_name <- function(gedcom,
 #' @param variation_name The personal name variation to remove.
 #' @param phonetic_variation Whether the name variation is a phonetic variation
 #' (TRUE, default) or a romanised variation (FALSE).
-#' @param xref The xref of a record to act on if one is not activated (will override active record).
 #'
 #' @return An updated tidyged object with an Individual record excluding
 #' this personal name variation (and components).
@@ -247,10 +244,9 @@ remove_individual_name <- function(gedcom,
 #'                remove_individual_name_var("Jo /Blogs/"))
 remove_individual_name_var <- function(gedcom,
                                        variation_name,
-                                       phonetic_variation = TRUE,
-                                       xref = character()) {
+                                       phonetic_variation = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_individual)
   
   remove_section(gedcom, 2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
                  variation_name, xrefs = xref) %>% 

@@ -72,21 +72,22 @@ add_individual <- function(gedcom,
 #' individual in other Individual records.
 #' 
 #' @param gedcom A tidyged object.
-#' @param xref The xref of a record to act on if one is not activated (will override active record).
+#' @param individual The xref or name of an Individual record to act on if one 
+#' is not activated (will override active record).
 #' @param remove_associations Whether to also remove associations with this individual in 
 #' other individual records. Defaults to TRUE.
 #'
-#' @return An updated tidyged object excluding the active Individual record.
+#' @return An updated tidyged object excluding the selected Individual record.
 #' 
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
 #'              gedcom(subm()) %>% add_individual() %>% remove_individual())
 remove_individual <- function(gedcom, 
-                              xref = character(),
+                              individual = character(),
                               remove_associations = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
   
   if(remove_associations) {
     gedcom <- remove_section(gedcom, 1, "ASSO", xref)

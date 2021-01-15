@@ -92,11 +92,21 @@
 <span class="co">#&gt; If importing existing GEDCOM files, you should ensure that they are error free.</span>
 <span class="co">#&gt; This package assumes imported GEDCOM files are valid and very few validation checks are carried out.</span>
 <span class="co">#&gt; Several GEDCOM validators are available, including an online validator at http://ged-inline.elasticbeanstalk.com/</span></code></pre></div>
+<div id="shared-events" class="section level2">
+<h2 class="hasAnchor">
+<a href="#shared-events" class="anchor"></a>Shared events</h2>
+<p>Genealogy is often about extracting as much useful information from sources as possible. For example, census information can be enormously useful in finding information on both families and individuals, such as names, ages, occupations, etc.</p>
+<p>These sources of information are usually produced as a result of important events, and there are specific data structures in the GEDCOM specification for individual events and family events. For the most part this makes sense, however family events can be problematic at times to properly represent and cite as evidence.</p>
+<p>An example of this is marriage events. These are classified as family events and are stored within relevant family group records. However, when taking an individual-centric view of GEDCOM files (i.e. looking at individual records), these marriages will not be recorded, missing vital information in an individual’s life. This is problematic if using the</p>
+<p>Functionality to come…</p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

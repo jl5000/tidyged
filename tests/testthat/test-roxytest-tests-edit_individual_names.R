@@ -12,7 +12,7 @@ test_that("Function add_individual_names_var() @ L114", {
 })
 
 
-test_that("Function remove_individual_name() @ L216", {
+test_that("Function remove_individual_name() @ L215", {
   expect_equal(gedcom(subm()) %>% 
                  add_individual(),
                gedcom(subm()) %>% 
@@ -22,7 +22,7 @@ test_that("Function remove_individual_name() @ L216", {
 })
 
 
-test_that("Function remove_individual_name_var() @ L248", {
+test_that("Function remove_individual_name_var() @ L245", {
   expect_equal(gedcom(subm()) %>% 
                  add_individual() %>% 
                  add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs"),

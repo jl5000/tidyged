@@ -4,15 +4,16 @@
 \alias{remove_repository}
 \title{Remove a Repository record from a tidyged object}
 \usage{
-remove_repository(gedcom, xref = character())
+remove_repository(gedcom, repository = character())
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
+\item{repository}{The xref or name of a Repository record to act on if one is
+not activated (will override active record).}
 }
 \value{
-An updated tidyged object excluding the active Repository record.
+An updated tidyged object excluding the selected Repository record.
 }
 \description{
 Remove a Repository record from a tidyged object

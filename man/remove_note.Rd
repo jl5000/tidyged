@@ -4,15 +4,16 @@
 \alias{remove_note}
 \title{Remove a Note record from a tidyged object}
 \usage{
-remove_note(gedcom, xref = character())
+remove_note(gedcom, note = character())
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
+\item{note}{The xref or excerpt of a Note record to act on if one is
+not activated (will override active record).}
 }
 \value{
-An updated tidyged object excluding the active Note record.
+An updated tidyged object excluding the selected Note record.
 }
 \description{
 Remove a Note record from a tidyged object

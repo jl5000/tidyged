@@ -4,15 +4,16 @@
 \alias{remove_source}
 \title{Remove a Source record from a tidyged object}
 \usage{
-remove_source(gedcom, xref = character())
+remove_source(gedcom, source = character())
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
+\item{source}{The xref or title of a Source record to act on if one is not
+activated (will override active record).}
 }
 \value{
-An updated tidyged object excluding the active Source record.
+An updated tidyged object excluding the selected Source record.
 }
 \description{
 Remove a Source record from a tidyged object

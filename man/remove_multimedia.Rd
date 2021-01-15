@@ -4,15 +4,16 @@
 \alias{remove_multimedia}
 \title{Remove a Multimedia record from a tidyged object}
 \usage{
-remove_multimedia(gedcom, xref = character())
+remove_multimedia(gedcom, multimedia = character())
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
+\item{multimedia}{The xref or file reference of a Multimedia record to act
+on if one is not activated (will override active record).}
 }
 \value{
-An updated tidyged object excluding the active Multimedia record.
+An updated tidyged object excluding the selected Multimedia record.
 }
 \description{
 Remove a Multimedia record from a tidyged object

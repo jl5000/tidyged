@@ -4,19 +4,24 @@
 \alias{remove_family_group}
 \title{Remove a Family group record from a tidyged object}
 \usage{
-remove_family_group(gedcom, xref = character(), remove_individuals = FALSE)
+remove_family_group(
+  gedcom,
+  family_xref = character(),
+  remove_individuals = FALSE
+)
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
+\item{family_xref}{The xref of a Family Group record to act on if one is not
+activated (will override active record).}
 
-\item{remove_individuals}{Whether to also remove the individual records for all individuals
+\item{remove_individuals}{Whether to also remove the records for all Individuals
 in the family.}
 }
 \value{
-An updated tidyged object excluding the active Family group record (and potentially the
-individuals within it).
+An updated tidyged object excluding the selected Family group record
+(and potentially the individuals within it).
 }
 \description{
 This function removes a record containing details of a family group.

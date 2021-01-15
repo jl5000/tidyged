@@ -4,12 +4,7 @@
 \alias{remove_individual_name_var}
 \title{Remove a variation of a personal name from an Individual record}
 \usage{
-remove_individual_name_var(
-  gedcom,
-  variation_name,
-  phonetic_variation = TRUE,
-  xref = character()
-)
+remove_individual_name_var(gedcom, variation_name, phonetic_variation = TRUE)
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
@@ -18,8 +13,6 @@ remove_individual_name_var(
 
 \item{phonetic_variation}{Whether the name variation is a phonetic variation
 (TRUE, default) or a romanised variation (FALSE).}
-
-\item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 }
 \value{
 An updated tidyged object with an Individual record excluding

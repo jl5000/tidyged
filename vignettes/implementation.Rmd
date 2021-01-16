@@ -59,11 +59,11 @@ If you want to modify single values in a GEDCOM or do a simple Find/Replace, the
 
 ## High-level architecture
 
-The **tidyged** package has a dependency on the **tidyged.internals** package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the `edit_*.R` files and summary functions found in `interrogate.R`.
+The **tidyged** package has a dependency on the **tidyged.internals** package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the **tidyged** package.
 
 The **tidyged** package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to have a sister package to provide a **shiny** interface (**shinyged**). However, before work on **shinyged** begins, I would like to start a tidyged visualisation package, **visged**, which will allow various views of genealogical data.
 
-There is also potential to generate another package to handle different types of source documents. With all these package ideas it's turning into a small ecosystem - the **gedcompendium**.
+The long term aim is to create a small package ecosystem surrounding **tidyged** - the **gedcompendium**.
 
 
 

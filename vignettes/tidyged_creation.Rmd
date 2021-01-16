@@ -84,7 +84,7 @@ gedcom(submitter_details = subm(),
   print(n = Inf)
 ```
 
-Generally:
+Note that:
 
 * The `gedcom_description` parameter should describe the type of genealogical data contained in the file;
 * The date associated with the source data must be given as a `date_exact()` object to ensure it is formatted correctly;

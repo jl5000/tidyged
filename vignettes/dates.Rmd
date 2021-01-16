@@ -1,0 +1,135 @@
+---
+title: "Date types"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Date types}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+As you would expect with a genealogical data format, dates form a major part of information contained within it. Within `tidyged` there are a number of different date types that can be defined, and there is a helper function for each type to ensure it is formatted correctly.
+
+## Exact dates
+
+Dates that occur on a specific defined date are defined using the `date_exact()` function:
+
+```{r}
+library(tidyged)
+
+date_exact(5, 7, 1999)
+date_exact(8, 12, 1956)
+date_exact(1, 4, 2008)
+```
+
+## Date periods
+
+Date periods can take a number of forms. The most intuitive form is when two dates are provided:
+
+```{r}
+date_period(start_year = 1999, 
+            start_month = 4, 
+            start_day = 5, 
+            end_year = 2002, 
+            end_month = 7, 
+            end_day = 12)
+```
+
+Not all date components are required. For example:
+
+```{r}
+date_period(start_year = 1999, 
+            end_year = 2002, 
+            end_month = 7)
+```
+
+If only the start date is provided, then the return value changes accordingly:
+
+```{r}
+date_period(start_year = 1999, 
+            start_month = 4, 
+            start_day = 5)
+```
+
+Alternatively, if you want the date provided to be the end of the period, you can set `to = TRUE`:
+
+```{r}
+date_period(start_year = 1999, 
+            start_month = 4, 
+            start_day = 5,
+            to = TRUE)
+```
+
+For time periods a very long time ago (where only the year is given), both the `start_year` and/or `end_year` can be interpreted as years before the Common Era:
+
+```{r}
+date_period(start_year = 5, 
+            end_year = 6,
+            start_year_is_bce = TRUE)
+```
+
+English dates before 1752 were often given in dual format. This can be achieved using `start_year_is_dual` and `end_year_is_dual`:
+
+```{r}
+date_period(start_year = 1746, 
+            start_month = 4, 
+            start_day = 5, 
+            end_year = 1755, 
+            end_month = 7, 
+            end_day = 12,
+            start_year_is_dual = TRUE)
+```
+
+## General dates
+
+Sometimes an even more general form of dates are required, and these can be created with the `date_value()` function. This can express both the exact form and date period form described above, as well as:
+
+* Approximate dates
+* Date ranges
+
+Approximate dates (i.e. those expressing uncertainty) use the qualifiers 'about', 'calculated', or 'estimated':
+
+```{r}
+date_value(start_year = 1999, 
+           start_month = 4, 
+           start_day = 5, 
+           about = TRUE)
+date_value(start_year = 1999, 
+           start_month = 4, 
+           start_day = 5, 
+           calc = TRUE)
+date_value(start_year = 1999, 
+           start_month = 4, 
+           start_day = 5, 
+           est = TRUE)
+```
+
+Date ranges can be controlled using the `before`, `after`, and `between` parameters:
+
+```{r}
+date_value(start_year = 1999, 
+           start_month = 4, 
+           start_day = 5, 
+           before = TRUE)
+date_value(start_year = 1999, 
+           start_month = 4, 
+           start_day = 5, 
+           after = TRUE)
+date_value(start_year = 1999, 
+           start_month = 4, 
+           start_day = 5, 
+           end_year = 2002, 
+           end_month = 12, 
+           end_day = 25, 
+           between = TRUE)
+```
+
+

@@ -1,8 +1,8 @@
 ---
-title: "Naming individuals"
+title: "Individual names"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Naming individuals}
+  %\VignetteIndexEntry{Individual names}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -90,7 +90,7 @@ gedcom(subm("Me")) %>%
 
 ## Conflicting names
 
-GEDCOM files can also record different names *of the same type*, due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:
+GEDCOM files can also record different names *of the same type*, perhaps due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:
 
 ```{r}
 gedcom(subm("Me")) %>% 

@@ -4,6 +4,7 @@ pkgdown_sha: ~
 articles:
   automation: automation.html
   cross_references: cross_references.html
+  dates: dates.html
   family_events: family_events.html
   family_group_records: family_group_records.html
   implementation: implementation.html
@@ -18,5 +19,5 @@ articles:
   repository_records: repository_records.html
   source_records: source_records.html
   tidyged_creation: tidyged_creation.html
-last_built: 2021-01-15T23:43Z
+last_built: 2021-01-16T19:43Z
 

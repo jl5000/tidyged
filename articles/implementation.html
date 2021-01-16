@@ -333,9 +333,9 @@
 <div id="high-level-architecture" class="section level2">
 <h2 class="hasAnchor">
 <a href="#high-level-architecture" class="anchor"></a>High-level architecture</h2>
-<p>The <strong>tidyged</strong> package has a dependency on the <strong>tidyged.internals</strong> package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the <code>edit_*.R</code> files and summary functions found in <code>interrogate.R</code>.</p>
+<p>The <strong>tidyged</strong> package has a dependency on the <strong>tidyged.internals</strong> package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the <strong>tidyged</strong> package.</p>
 <p>The <strong>tidyged</strong> package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to have a sister package to provide a <strong>shiny</strong> interface (<strong>shinyged</strong>). However, before work on <strong>shinyged</strong> begins, I would like to start a tidyged visualisation package, <strong>visged</strong>, which will allow various views of genealogical data.</p>
-<p>There is also potential to generate another package to handle different types of source documents. With all these package ideas it’s turning into a small ecosystem - the <strong>gedcompendium</strong>.</p>
+<p>The long term aim is to create a small package ecosystem surrounding <strong>tidyged</strong> - the <strong>gedcompendium</strong>.</p>
 </div>
   </div>
 

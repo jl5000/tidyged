@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naming individuals • tidyged</title>
+<title>Individual names • tidyged</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Naming individuals">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Individual names">
 <meta property="og:description" content="tidyged">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -77,7 +77,7 @@
       </header><script src="individual_names_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Naming individuals</h1>
+      <h1 data-toc-skip>Individual names</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/master/vignettes/individual_names.Rmd"><code>vignettes/individual_names.Rmd</code></a></small>
@@ -114,7 +114,7 @@
 <span class="co">#&gt; 3     1 @I1@   NAME  "Leia /Skywalker/"</span>
 <span class="co">#&gt; 4     2 @I1@   SURN  "Skywalker"       </span>
 <span class="co">#&gt; 5     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 6     2 @I1@   DATE  "15 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 6     2 @I1@   DATE  "16 JAN 2021"</span></code></pre></div>
 <p>In the GEDCOM specification, all names should also be accompanied by a set of name pieces, specifying the given name, surname, nickname, etc. In addition, full names should always surround surnames with forward slashes. In <strong>tidyged</strong> this allows us to automatically generate a name piece if none are given. If we provide a name with no name pieces and no forward slashes, it will cause an error:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -137,7 +137,7 @@
 <span class="co">#&gt; 5     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 6     2 @I1@   SURN  "Skywalker"       </span>
 <span class="co">#&gt; 7     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 8     2 @I1@   DATE  "15 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 8     2 @I1@   DATE  "16 JAN 2021"</span></code></pre></div>
 </div>
 <div id="phonetic-and-romanised-names" class="section level2">
 <h2 class="hasAnchor">
@@ -163,7 +163,7 @@
 <span class="co">#&gt;  8     3 @I1@   TYPE  "As spoken"       </span>
 <span class="co">#&gt;  9     3 @I1@   SURN  "Skywalker"       </span>
 <span class="co">#&gt; 10     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 11     2 @I1@   DATE  "15 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 11     2 @I1@   DATE  "16 JAN 2021"</span></code></pre></div>
 <p>As with the original name, if there are no name pieces or forward slashes, it will result in an error. Ideally we provide as much information as possible:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -186,7 +186,7 @@
 <span class="co">#&gt;  9     3 @I1@   GIVN  "Laya"            </span>
 <span class="co">#&gt; 10     3 @I1@   SURN  "Skywalker"       </span>
 <span class="co">#&gt; 11     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 12     2 @I1@   DATE  "15 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 12     2 @I1@   DATE  "16 JAN 2021"</span></code></pre></div>
 </div>
 <div id="name-types" class="section level2">
 <h2 class="hasAnchor">
@@ -218,12 +218,12 @@
 <span class="co">#&gt; 13     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 14     2 @I1@   SURN  "Organa"          </span>
 <span class="co">#&gt; 15     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 16     2 @I1@   DATE  "15 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 16     2 @I1@   DATE  "16 JAN 2021"</span></code></pre></div>
 </div>
 <div id="conflicting-names" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conflicting-names" class="anchor"></a>Conflicting names</h2>
-<p>GEDCOM files can also record different names <em>of the same type</em>, due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:</p>
+<p>GEDCOM files can also record different names <em>of the same type</em>, perhaps due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -255,7 +255,7 @@
 <span class="co">#&gt; 17     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 18     2 @I1@   SURN  "Skywaker"        </span>
 <span class="co">#&gt; 19     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 20     2 @I1@   DATE  "15 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 20     2 @I1@   DATE  "16 JAN 2021"</span></code></pre></div>
 <p>Generally conflicting names are arranged in order of confidence; the first name is more likely to be correct. If you want to promote a name to occur first in the record, you can use the <code><a href="../reference/primary_individual_name.html">primary_individual_name()</a></code> function:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -289,7 +289,7 @@
 <span class="co">#&gt; 17     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 18     2 @I1@   SURN  "Organa"          </span>
 <span class="co">#&gt; 19     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 20     2 @I1@   DATE  "15 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 20     2 @I1@   DATE  "16 JAN 2021"</span></code></pre></div>
 <p>Note that the subrecords of the Individual record (those at level 1) can appear in any order.</p>
 </div>
   </div>

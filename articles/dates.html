@@ -109,99 +109,67 @@
 <span class="fu"><a href="../reference/date_exact.html">date_exact</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">2008</span><span class="op">)</span>
 <span class="co">#&gt; [1] "1 APR 2008"</span></code></pre></div>
 </div>
+<div id="calendar-dates" class="section level2">
+<h2 class="hasAnchor">
+<a href="#calendar-dates" class="anchor"></a>Calendar dates</h2>
+<p>Calendar dates are the most common type of date used. They can not only be used to create specific dates like <code><a href="../reference/date_exact.html">date_exact()</a></code>, they underpin the other date types described below. They can be created using the <code><a href="../reference/date_calendar.html">date_calendar()</a></code> function:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
+<span class="co">#&gt; [1] "5 APR 1999"</span>
+<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
+<span class="co">#&gt; [1] "APR 1999"</span>
+<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span><span class="op">)</span>
+<span class="co">#&gt; [1] "1999"</span>
+<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
+<span class="co">#&gt; [1] "5 APR"</span></code></pre></div>
+<p>English dates before 1752 were often given in dual format. This can be achieved using the <code>year_is_dual</code> parameter:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1745</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span>, year_is_dual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; [1] "5 APR 1745/46"</span></code></pre></div>
+<p>Years before the Common Era can be defined using the <code>year_is_bce</code> parameter:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">105</span>, year_is_bce <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; [1] "105 BCE"</span></code></pre></div>
+<p>Note that only the Gregorian calendar is currently implemented.</p>
+</div>
+<div id="approximate-dates" class="section level2">
+<h2 class="hasAnchor">
+<a href="#approximate-dates" class="anchor"></a>Approximate dates</h2>
+<p>Approximate dates (i.e. those expressing uncertainty) use the qualifiers ‘about’, ‘calculated’, or ‘estimated’ in conjunction with a <code><a href="../reference/date_calendar.html">date_calendar()</a></code> object:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>about <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; [1] "ABT 5 APR 1999"</span>
+<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>calc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; [1] "CAL 5 APR 1999"</span>
+<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>est <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; [1] "EST 5 APR 1999"</span></code></pre></div>
+</div>
 <div id="date-periods" class="section level2">
 <h2 class="hasAnchor">
 <a href="#date-periods" class="anchor"></a>Date periods</h2>
-<p>Date periods can take a number of forms. The most intuitive form is when two dates are provided:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1999</span>, 
-            start_month <span class="op">=</span> <span class="fl">4</span>, 
-            start_day <span class="op">=</span> <span class="fl">5</span>, 
-            end_year <span class="op">=</span> <span class="fl">2002</span>, 
-            end_month <span class="op">=</span> <span class="fl">7</span>, 
-            end_day <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>
-<span class="co">#&gt; [1] "FROM 5 APR 1999 TO 12 JUL 2002"</span></code></pre></div>
-<p>Not all date components are required. For example:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1999</span>, 
-            end_year <span class="op">=</span> <span class="fl">2002</span>, 
-            end_month <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
-<span class="co">#&gt; [1] "FROM 1999 TO JUL 2002"</span></code></pre></div>
-<p>If only the start date is provided, then the return value changes accordingly:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1999</span>, 
-            start_month <span class="op">=</span> <span class="fl">4</span>, 
-            start_day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-<span class="co">#&gt; [1] "FROM 5 APR 1999"</span></code></pre></div>
-<p>Alternatively, if you want the date provided to be the end of the period, you can set <code>to = TRUE</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1999</span>, 
-            start_month <span class="op">=</span> <span class="fl">4</span>, 
-            start_day <span class="op">=</span> <span class="fl">5</span>,
-            to <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] "TO 5 APR 1999"</span></code></pre></div>
-<p>For time periods a very long time ago (where only the year is given), both the <code>start_year</code> and/or <code>end_year</code> can be interpreted as years before the Common Era:</p>
+<p>Date periods can take one or two <code><a href="../reference/date_calendar.html">date_calendar()</a></code> objects:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">5</span>, 
-            end_year <span class="op">=</span> <span class="fl">6</span>,
-            start_year_is_bce <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] "FROM 5 BCE TO 6"</span></code></pre></div>
-<p>English dates before 1752 were often given in dual format. This can be achieved using <code>start_year_is_dual</code> and <code>end_year_is_dual</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1746</span>, 
-            start_month <span class="op">=</span> <span class="fl">4</span>, 
-            start_day <span class="op">=</span> <span class="fl">5</span>, 
-            end_year <span class="op">=</span> <span class="fl">1755</span>, 
-            end_month <span class="op">=</span> <span class="fl">7</span>, 
-            end_day <span class="op">=</span> <span class="fl">12</span>,
-            start_year_is_dual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] "FROM 5 APR 1746/47 TO 12 JUL 1755"</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">7</span>, <span class="fl">26</span><span class="op">)</span>,
+            end_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">9</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "FROM 26 JUL 1956 TO 15 SEP 1956"</span>
+<span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">7</span>, <span class="fl">26</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "FROM 26 JUL 1956"</span>
+<span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>end_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">9</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "TO 15 SEP 1956"</span></code></pre></div>
+<p>Providing only one date gives a semi-infinite period.</p>
 </div>
-<div id="general-dates" class="section level2">
+<div id="date-ranges" class="section level2">
 <h2 class="hasAnchor">
-<a href="#general-dates" class="anchor"></a>General dates</h2>
-<p>Sometimes an even more general form of dates are required, and these can be created with the <code><a href="../reference/date_value.html">date_value()</a></code> function. This can express both the exact form and date period form described above, as well as:</p>
-<ul>
-<li>Approximate dates</li>
-<li>Date ranges</li>
-</ul>
-<p>Approximate dates (i.e. those expressing uncertainty) use the qualifiers ‘about’, ‘calculated’, or ‘estimated’:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/date_value.html">date_value</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1999</span>, 
-           start_month <span class="op">=</span> <span class="fl">4</span>, 
-           start_day <span class="op">=</span> <span class="fl">5</span>, 
-           about <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] "ABT 5 APR 1999"</span>
-<span class="fu"><a href="../reference/date_value.html">date_value</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1999</span>, 
-           start_month <span class="op">=</span> <span class="fl">4</span>, 
-           start_day <span class="op">=</span> <span class="fl">5</span>, 
-           calc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] "CAL 5 APR 1999"</span>
-<span class="fu"><a href="../reference/date_value.html">date_value</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1999</span>, 
-           start_month <span class="op">=</span> <span class="fl">4</span>, 
-           start_day <span class="op">=</span> <span class="fl">5</span>, 
-           est <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] "EST 5 APR 1999"</span></code></pre></div>
-<p>Date ranges can be controlled using the <code>before</code>, <code>after</code>, and <code>between</code> parameters:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/date_value.html">date_value</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1999</span>, 
-           start_month <span class="op">=</span> <span class="fl">4</span>, 
-           start_day <span class="op">=</span> <span class="fl">5</span>, 
-           before <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] "BEF 5 APR 1999"</span>
-<span class="fu"><a href="../reference/date_value.html">date_value</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1999</span>, 
-           start_month <span class="op">=</span> <span class="fl">4</span>, 
-           start_day <span class="op">=</span> <span class="fl">5</span>, 
-           after <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] "AFT 5 APR 1999"</span>
-<span class="fu"><a href="../reference/date_value.html">date_value</a></span><span class="op">(</span>start_year <span class="op">=</span> <span class="fl">1999</span>, 
-           start_month <span class="op">=</span> <span class="fl">4</span>, 
-           start_day <span class="op">=</span> <span class="fl">5</span>, 
-           end_year <span class="op">=</span> <span class="fl">2002</span>, 
-           end_month <span class="op">=</span> <span class="fl">12</span>, 
-           end_day <span class="op">=</span> <span class="fl">25</span>, 
-           between <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] "BET 5 APR 1999 AND 25 DEC 2002"</span></code></pre></div>
+<a href="#date-ranges" class="anchor"></a>Date ranges</h2>
+<p>Date ranges can be defined using <code><a href="../reference/date_range.html">date_range()</a></code>. Unlike <code><a href="../reference/date_period.html">date_period()</a></code>, they describe when an event occurred rather than a duration.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/date_range.html">date_range</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">7</span>, <span class="fl">26</span><span class="op">)</span>,
+           end_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">9</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "BET 26 JUL 1956 AND 15 SEP 1956"</span>
+<span class="fu"><a href="../reference/date_range.html">date_range</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">7</span>, <span class="fl">26</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "AFT 26 JUL 1956"</span>
+<span class="fu"><a href="../reference/date_range.html">date_range</a></span><span class="op">(</span>end_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">9</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "BEF 15 SEP 1956"</span></code></pre></div>
 </div>
   </div>
 

@@ -3,7 +3,6 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^\.github$
-^family\.R$
 ^pkgdown$
 ^vignettes/articles$
 ^vignettes/intro_to_gedcom\.Rmd$

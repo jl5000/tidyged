@@ -4,5 +4,5 @@
 \alias{date_exact}
 \title{Construct a DATE_EXACT string}
 \description{
-Construct a DATE_EXACT string
+See \code{tidyged.internals::\link[tidyged.internals:date_exact]{date_exact}} for details.
 }

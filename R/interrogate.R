@@ -201,20 +201,20 @@ str.tidyged <- function(object, ...) {
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'  add_individual(sex = "M") %>% 
 #'  add_individual_names("Joe /Bloggs/") %>% 
-#'  add_individual_event_birth(event_date = date_value(start_year = 1950, start_month = 5, start_day = 7),
+#'  add_individual_event_birth(event_date = date_calendar(year = 1950, month = 5, day = 7),
 #'                             place_name = "Somewhere") %>% 
-#'  add_individual_event_death(event_date = date_value(start_year = 2000, start_month = 12, start_day = 1),
+#'  add_individual_event_death(event_date = date_calendar(year = 2000, month = 12, day = 1),
 #'                             place_name = "Somewhere else") %>% 
 #'  add_individual(sex = "F") %>% 
 #'  add_individual_names("Jess /Bloggs/") %>% 
-#'  add_individual_event_birth(event_date = date_value(start_year = 1948, start_month = 1, start_day = 15),
+#'  add_individual_event_birth(event_date = date_calendar(year = 1948, month = 1, day = 15),
 #'                             place_name = "Somewhere") %>% 
 #'  add_individual(sex = "F") %>% 
 #'  add_individual_names("Jessie /Bloggs/") %>% 
-#'  add_individual_event_birth(event_date = date_value(start_year = 1970, about = TRUE),
+#'  add_individual_event_birth(event_date = date_approximated(date_calendar(year = 1970), about = TRUE),
 #'                             place_name = "Elsewhere") %>%
 #'  add_family_group(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
-#'  add_family_event_relationship(event_date = date_value(start_year = 1969, start_month = 1, start_day = 30),
+#'  add_family_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                                place_name = "Another place") %>% 
 #'  remove_dates_for_tests() %>% 
 #'  df_individuals(), "json2")
@@ -272,7 +272,7 @@ df_individuals <- function(gedcom) {
 #'  add_individual(sex = "F") %>% 
 #'  add_individual_names("Jessie /Bloggs/") %>%
 #'  add_family_group(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
-#'  add_family_event_relationship(event_date = date_value(start_year = 1969, start_month = 1, start_day = 30),
+#'  add_family_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                                place_name = "Another place") %>% 
 #'  remove_dates_for_tests() %>% 
 #'  df_families(), "json2")

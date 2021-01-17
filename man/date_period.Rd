@@ -4,5 +4,5 @@
 \alias{date_period}
 \title{Construct a DATE_PERIOD string}
 \description{
-Construct a DATE_PERIOD string
+See \code{tidyged.internals::\link[tidyged.internals:date_period]{date_period}} for details.
 }

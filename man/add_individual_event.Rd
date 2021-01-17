@@ -30,7 +30,7 @@ add_individual_event(
   event_type,
   event_descriptor = "",
   event_classification = character(),
-  event_date = date_value(),
+  event_date = character(),
   event_cause = character(),
   age_at_event = character(),
   event_notes = character(),
@@ -114,7 +114,8 @@ event function.}
 event. This should be used whenever the 'other' event is used (but can also be used
 with others).}
 
-\item{event_date}{A date_value() object giving the date of the event.}
+\item{event_date}{A date_calendar(), date_approximated(), date_period(), or date_range()
+object giving the timing of the event.}
 
 \item{event_cause}{Used in special cases to record the reasons which precipitated an event.
 Normally this will be used for a death event to show cause of death, such as might be listed

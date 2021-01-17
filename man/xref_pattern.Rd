@@ -4,5 +4,5 @@
 \alias{xref_pattern}
 \title{Construct a regular expression for an xref}
 \description{
-Construct a regular expression for an xref
+See \code{tidyged.internals::\link[tidyged.internals:xref_pattern]{xref_pattern}} for details.
 }

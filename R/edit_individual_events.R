@@ -19,7 +19,8 @@
 #' @param event_classification A descriptive word or phrase used to further classify this 
 #' event. This should be used whenever the 'other' event is used (but can also be used
 #' with others).
-#' @param event_date A date_value() object giving the date of the event.
+#' @param event_date A date_calendar(), date_approximated(), date_period(), or date_range() 
+#' object giving the timing of the event.
 #' @param place_name The jurisdictional name of the place where the event took place. 
 #' Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."
 #' @param place_phonetic A character vector of phonetic variations of the place name.
@@ -69,7 +70,7 @@
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'                        add_individual(sex = "M") %>% 
 #'                        add_individual_event(event_type = "CHR",
-#'                                             event_date = date_value(start_year = 1956),
+#'                                             event_date = date_calendar(year = 1956),
 #'                                             age_at_event = "1y",
 #'                                              local_address_lines = c("line1","line2","line3","line4"),
 #'                                              place_name = "There",
@@ -79,7 +80,7 @@ add_individual_event <- function(gedcom,
                                  event_type,
                                  event_descriptor = "",
                                  event_classification = character(),
-                                 event_date = date_value(),
+                                 event_date = character(),
                                  event_cause = character(),
                                  age_at_event = character(),
                                  event_notes = character(),

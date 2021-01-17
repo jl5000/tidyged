@@ -4,5 +4,5 @@
 \alias{date_current}
 \title{Return the current date in DATE_EXACT format}
 \description{
-Return the current date in DATE_EXACT format
+See \code{tidyged.internals::\link[tidyged.internals:date_current]{date_current}} for details.
 }

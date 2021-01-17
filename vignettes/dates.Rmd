@@ -30,106 +30,65 @@ date_exact(8, 12, 1956)
 date_exact(1, 4, 2008)
 ```
 
+## Calendar dates
+
+Calendar dates are the most common type of date used. They can not only be used to create specific dates like `date_exact()`, they underpin the other date types described below. They can be created using the `date_calendar()` function:
+
+```{r}
+date_calendar(year = 1999, month = 4, day = 5)
+date_calendar(year = 1999, month = 4)
+date_calendar(year = 1999)
+date_calendar(month = 4, day = 5)
+```
+
+English dates before 1752 were often given in dual format. This can be achieved using the `year_is_dual` parameter:
+
+```{r}
+date_calendar(year = 1745, month = 4, day = 5, year_is_dual = TRUE)
+```
+
+Years before the Common Era can be defined using the `year_is_bce` parameter:
+
+```{r}
+date_calendar(year = 105, year_is_bce = TRUE)
+```
+
+Note that only the Gregorian calendar is currently implemented.
+
+## Approximate dates
+
+Approximate dates (i.e. those expressing uncertainty) use the qualifiers 'about', 'calculated', or 'estimated' in conjunction with a `date_calendar()` object:
+
+```{r}
+date_calendar(year = 1999, month = 4, day = 5) %>% date_approximated(about = TRUE)
+date_calendar(year = 1999, month = 4, day = 5) %>% date_approximated(calc = TRUE)
+date_calendar(year = 1999, month = 4, day = 5) %>% date_approximated(est = TRUE)
+```
+
+
 ## Date periods
 
-Date periods can take a number of forms. The most intuitive form is when two dates are provided:
+Date periods can take one or two `date_calendar()` objects:
 
 ```{r}
-date_period(start_year = 1999, 
-            start_month = 4, 
-            start_day = 5, 
-            end_year = 2002, 
-            end_month = 7, 
-            end_day = 12)
+date_period(start_date = date_calendar(1956, 7, 26),
+            end_date = date_calendar(1956, 9, 15))
+date_period(start_date = date_calendar(1956, 7, 26))
+date_period(end_date = date_calendar(1956, 9, 15))
 ```
 
-Not all date components are required. For example:
+Providing only one date gives a semi-infinite period.
+
+
+## Date ranges
+
+Date ranges can be defined using `date_range()`. Unlike `date_period()`, they describe when an event occurred rather than a duration.
 
 ```{r}
-date_period(start_year = 1999, 
-            end_year = 2002, 
-            end_month = 7)
-```
-
-If only the start date is provided, then the return value changes accordingly:
-
-```{r}
-date_period(start_year = 1999, 
-            start_month = 4, 
-            start_day = 5)
-```
-
-Alternatively, if you want the date provided to be the end of the period, you can set `to = TRUE`:
-
-```{r}
-date_period(start_year = 1999, 
-            start_month = 4, 
-            start_day = 5,
-            to = TRUE)
-```
-
-For time periods a very long time ago (where only the year is given), both the `start_year` and/or `end_year` can be interpreted as years before the Common Era:
-
-```{r}
-date_period(start_year = 5, 
-            end_year = 6,
-            start_year_is_bce = TRUE)
-```
-
-English dates before 1752 were often given in dual format. This can be achieved using `start_year_is_dual` and `end_year_is_dual`:
-
-```{r}
-date_period(start_year = 1746, 
-            start_month = 4, 
-            start_day = 5, 
-            end_year = 1755, 
-            end_month = 7, 
-            end_day = 12,
-            start_year_is_dual = TRUE)
-```
-
-## General dates
-
-Sometimes an even more general form of dates are required, and these can be created with the `date_value()` function. This can express both the exact form and date period form described above, as well as:
-
-* Approximate dates
-* Date ranges
-
-Approximate dates (i.e. those expressing uncertainty) use the qualifiers 'about', 'calculated', or 'estimated':
-
-```{r}
-date_value(start_year = 1999, 
-           start_month = 4, 
-           start_day = 5, 
-           about = TRUE)
-date_value(start_year = 1999, 
-           start_month = 4, 
-           start_day = 5, 
-           calc = TRUE)
-date_value(start_year = 1999, 
-           start_month = 4, 
-           start_day = 5, 
-           est = TRUE)
-```
-
-Date ranges can be controlled using the `before`, `after`, and `between` parameters:
-
-```{r}
-date_value(start_year = 1999, 
-           start_month = 4, 
-           start_day = 5, 
-           before = TRUE)
-date_value(start_year = 1999, 
-           start_month = 4, 
-           start_day = 5, 
-           after = TRUE)
-date_value(start_year = 1999, 
-           start_month = 4, 
-           start_day = 5, 
-           end_year = 2002, 
-           end_month = 12, 
-           end_day = 25, 
-           between = TRUE)
+date_range(start_date = date_calendar(1956, 7, 26),
+           end_date = date_calendar(1956, 9, 15))
+date_range(start_date = date_calendar(1956, 7, 26))
+date_range(end_date = date_calendar(1956, 9, 15))
 ```
 
 

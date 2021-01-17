@@ -26,7 +26,7 @@
 #'  add_individual_names("Jessie /Bloggs/") %>%
 #'  add_family_group(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
 #'  add_family_event(event_type = "MARR", 
-#'                   event_date = date_value(start_year = 1969, start_month = 1, start_day = 30),
+#'                   event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                   place_name = "Another place") %>% 
 #'  remove_dates_for_tests(), "json2")
 add_family_event <- function(gedcom,
@@ -36,7 +36,7 @@ add_family_event <- function(gedcom,
                              husband_age_at_event = character(),
                              wife_age_at_event = character(),
                              event_notes = character(),
-                             event_date = date_value(),
+                             event_date = character(),
                              event_cause = character(),
                              place_name = character(),
                              place_phonetic = character(),

@@ -324,8 +324,6 @@ gedcom <- function(submitter_details = subm(),
 #' @param email A character vector containing up to three email addresses of the submitter.
 #' @param fax A character vector containing up to three fax numbers of the submitter.
 #' @param web_page A character vector containing up to three web pages of the submitter.
-#' @param automated_record_id A unique record identification number assigned to the record by 
-#' the source system. 
 #' @param submitter_notes A character vector of notes accompanying this Submitter record.
 #' These could be xrefs to existing Note records.
 #' @param multimedia_links TODO
@@ -342,7 +340,6 @@ subm <- function(name = unname(Sys.info()["user"]),
                  email = character(),
                  fax = character(),
                  web_page = character(),
-                 automated_record_id = character(),
                  submitter_notes = character(),
                  multimedia_links = character()) {
   
@@ -367,7 +364,6 @@ subm <- function(name = unname(Sys.info()["user"]),
   tidyged.internals::SUBMITTER_RECORD(xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
                                          submitter_name = name,
                                          address = address,
-                                         automated_record_id = automated_record_id,
                                          notes = subm_notes,
                                          multimedia_links = media_links)
   

@@ -9,7 +9,6 @@ add_individual(
   sex = "U",
   user_reference_number = character(),
   user_reference_type = character(),
-  automated_record_id = character(),
   individual_notes = character(),
   multimedia_links = character()
 )
@@ -20,13 +19,11 @@ add_individual(
 \item{sex}{The sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
 "X" (intersex), or "N" (not recorded).}
 
-\item{user_reference_number}{A user-defined number or text that the submitter uses to identify
-this record. See the Gedcom 5.5.5 Specification for more details.}
+\item{user_reference_number}{A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector.}
 
-\item{user_reference_type}{A user-defined definition of the user_reference_number.}
-
-\item{automated_record_id}{A unique record identification number assigned to the record by
-the source system.}
+\item{user_reference_type}{A user-defined definition of the user_reference_number(s). If this
+parameter is used, there must be a reference type for every reference number defined.}
 
 \item{individual_notes}{A character vector of notes accompanying this Individual record.
 These could be xrefs to existing Note records.}
@@ -38,12 +35,9 @@ Individual record. These could be xrefs to existing Multimedia records.}
 An updated tidyged object including the Individual record.
 }
 \description{
-This function adds a new record for an individual.
+Add an Individual record to a tidyged object
 }
 \details{
-This function will automatically assign a unique xref for this record. Most users
-will only need to use the sex and individual_notes parameters (and of course gedcom).
-
 If you need to add further information about this individual (e.g. names), use the
 add_individual_* functions.
 }

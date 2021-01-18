@@ -1,13 +1,8 @@
 
 
 #' Add a Family Group record to a tidyged object
-#'
-#' This function adds a record containing details of a family group.
 #' 
-#' This function will automatically assign a unique xref for this record. Most users
-#' will only need to use the husband, wife, children, and family_notes parameters (and of course gedcom).
-#' 
-#' If you need to add further information about this family (e.g. events), use the 
+#' @details If you need to add further information about this family (e.g. events), use the 
 #' add_family_event_*() functions.
 #' 
 #' The function will automatically add links to this family to the respective Individual 
@@ -26,11 +21,10 @@
 #' "birth" (default), "adopted", or "foster".
 #' @param number_of_children The reported number of children known to belong to this family, 
 #' regardless of whether the associated children are represented here.
-#' @param user_reference_number A user-defined number or text that the submitter uses to identify 
-#' this record. See the Gedcom 5.5.5 Specification for more details.
-#' @param user_reference_type A user-defined definition of the user_reference_number.
-#' @param automated_record_id A unique record identification number assigned to the record by 
-#' the source system. 
+#' @param user_reference_number A unique user-defined number or text that the submitter 
+#' uses to identify this record. You can supply more than one in a vector.
+#' @param user_reference_type A user-defined definition of the user_reference_number(s). If this
+#' parameter is used, there must be a reference type for every reference number defined.
 #' @param family_notes A character vector of notes accompanying this Family group record. These could be
 #' xrefs to existing Note records.
 #' @param multimedia_links A character vector of multimedia file references accompanying this 
@@ -47,7 +41,6 @@ add_family_group <- function(gedcom,
                              number_of_children = character(),
                              user_reference_number = character(),
                              user_reference_type = character(),
-                             automated_record_id = character(),
                              family_notes = character(),
                              multimedia_links = character()) {
   
@@ -72,7 +65,6 @@ add_family_group <- function(gedcom,
                                                           count_of_children = number_of_children,
                                                           user_reference_number = user_reference_number,
                                                           user_reference_type = user_reference_type,
-                                                          automated_record_id = automated_record_id,
                                                           notes = fam_notes,
                                                           multimedia_links = media_links) 
   

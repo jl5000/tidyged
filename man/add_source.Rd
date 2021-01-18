@@ -17,7 +17,6 @@ add_source(
   source_text = character(),
   user_reference_number = character(),
   user_reference_type = character(),
-  automated_record_id = character(),
   data_notes = character(),
   source_notes = character(),
   multimedia_links = character()
@@ -54,13 +53,11 @@ publication.}
 This indicates notes or text that are actually contained in the source document,
 not the submitter's opinion about the source.}
 
-\item{user_reference_number}{A user-defined number or text that the submitter uses to identify
-this record. See the Gedcom 5.5.5 Specification for more details.}
+\item{user_reference_number}{A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector.}
 
-\item{user_reference_type}{A user-defined definition of the user_reference_number.}
-
-\item{automated_record_id}{A unique record identification number assigned to the record by
-the source system.}
+\item{user_reference_type}{A user-defined definition of the user_reference_number(s). If this
+parameter is used, there must be a reference type for every reference number defined.}
 
 \item{data_notes}{A character vector of notes associated with the data in this Source record.
 These could be xrefs to existing Note records.}
@@ -76,13 +73,4 @@ An updated tidyged object including the Source record.
 }
 \description{
 Add a Source record to a tidyged object
-}
-\details{
-This function will automatically assign a unique xref for this record. Most users
-will only need to use the originator, title, publication_detail, data_notes,
-and source_notes parameters (and of course gedcom).
-
-The function will automatically split the originator, title, publication_detail, source_text,
-data_notes and source_notes onto separate lines if the character limit in the Gedcom
-standard is exceeded.
 }

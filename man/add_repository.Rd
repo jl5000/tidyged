@@ -18,7 +18,6 @@ add_repository(
   web_page = character(),
   user_reference_number = character(),
   user_reference_type = character(),
-  automated_record_id = character(),
   repository_notes = character()
 )
 }
@@ -45,13 +44,11 @@ add_repository(
 
 \item{web_page}{A character vector containing up to three web pages of the repository.}
 
-\item{user_reference_number}{A user-defined number or text that the submitter uses to identify
-this record. See the Gedcom 5.5.5 Specification for more details.}
+\item{user_reference_number}{A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector.}
 
-\item{user_reference_type}{A user-defined definition of the user_reference_number.}
-
-\item{automated_record_id}{A unique record identification number assigned to the record by
-the source system.}
+\item{user_reference_type}{A user-defined definition of the user_reference_number(s). If this
+parameter is used, there must be a reference type for every reference number defined.}
 
 \item{repository_notes}{A character vector of notes accompanying this Repository record.
 These could be xrefs to existing Note records.}
@@ -61,11 +58,4 @@ An updated tidyged object including the Repository record.
 }
 \description{
 Add a Repository record to a tidyged object
-}
-\details{
-This function will automatically assign a unique xref for this record. Most users
-will only need to use the sex, submitters, and individual_notes parameters (and of course gedcom).
-
-If you need to add further information about this individual (e.g. names), use the
-add_individual_* functions.
 }

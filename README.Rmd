@@ -28,7 +28,7 @@ Import, create, and summarise family tree GEDCOM files using tidy dataframes. Th
 
 ## Installation
 
-You can install development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -98,7 +98,7 @@ This package allows limited editing of `tidyged` objects (adding/removing record
 
 The package and its internal data structures (contained in a separate `tidyged.internals` package) are almost complete and will soon be submitted to CRAN.
 
-Four further packages are also planned, to provide an ecosystem called the `gedcompendium`:
+Further packages are also planned, to provide an ecosystem called the `gedcompendium`, including:
 
 * `shinyged` will provide a shiny app to edit `tidyged` objects;
 * `visged` will allow visualisation of `tidyged` objects;

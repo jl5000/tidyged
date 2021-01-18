@@ -3,10 +3,6 @@
 
 #' Add a Multimedia record to a tidyged object
 #'
-#' @details This function will automatically assign a unique xref for this record. Most users
-#' will only need to use the file_reference, format, source_media, title, and 
-#' multimedia_notes parameters (and of course gedcom).
-#' 
 #' @param gedcom A tidyged object.
 #' @param file_reference A reference for the file, typically a filepath or URL.
 #' @param format A string indicating the format of the multimedia file. 
@@ -16,11 +12,10 @@
 #' source is stored. Must be one of: audio, book, card, electronic, fiche, film, magazine,
 #' manuscript, map, newspaper, photo, tombstone, video.
 #' @param title The title of the multimedia file.
-#' @param user_reference_number A user-defined number or text that the submitter uses to identify 
-#' this record. See the Gedcom 5.5.5 Specification for more details.
-#' @param user_reference_type A user-defined definition of the user_reference_number.
-#' @param automated_record_id A unique record identification number assigned to the record by 
-#' the source system. 
+#' @param user_reference_number A unique user-defined number or text that the submitter 
+#' uses to identify this record. You can supply more than one in a vector.
+#' @param user_reference_type A user-defined definition of the user_reference_number(s). If this
+#' parameter is used, there must be a reference type for every reference number defined.
 #' @param multimedia_notes A character vector of notes accompanying this Multimedia record. These could be
 #' xrefs to existing Note records.
 #'
@@ -33,7 +28,6 @@ add_multimedia <- function(gedcom,
                            title = character(),
                            user_reference_number = character(),
                            user_reference_type = character(),
-                           automated_record_id = character(),
                            multimedia_notes = character()) {
   
   xref <- assign_xref(.pkgenv$xref_prefix_obje, gedcom = gedcom)
@@ -47,7 +41,6 @@ add_multimedia <- function(gedcom,
                                                           descriptive_title = title,
                                                           user_reference_number = user_reference_number,
                                                           user_reference_type = user_reference_type,
-                                                          automated_record_id = automated_record_id,
                                                           notes = media_notes)
   
   gedcom %>% 

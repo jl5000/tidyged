@@ -15,7 +15,6 @@ subm(
   email = character(),
   fax = character(),
   web_page = character(),
-  automated_record_id = character(),
   submitter_notes = character(),
   multimedia_links = character()
 )
@@ -40,9 +39,6 @@ subm(
 \item{fax}{A character vector containing up to three fax numbers of the submitter.}
 
 \item{web_page}{A character vector containing up to three web pages of the submitter.}
-
-\item{automated_record_id}{A unique record identification number assigned to the record by
-the source system.}
 
 \item{submitter_notes}{A character vector of notes accompanying this Submitter record.
 These could be xrefs to existing Note records.}

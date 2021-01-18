@@ -13,7 +13,6 @@ add_family_group(
   number_of_children = character(),
   user_reference_number = character(),
   user_reference_type = character(),
-  automated_record_id = character(),
   family_notes = character(),
   multimedia_links = character()
 )
@@ -38,13 +37,11 @@ this must be a character vector the same size as children. Values must be one of
 \item{number_of_children}{The reported number of children known to belong to this family,
 regardless of whether the associated children are represented here.}
 
-\item{user_reference_number}{A user-defined number or text that the submitter uses to identify
-this record. See the Gedcom 5.5.5 Specification for more details.}
+\item{user_reference_number}{A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector.}
 
-\item{user_reference_type}{A user-defined definition of the user_reference_number.}
-
-\item{automated_record_id}{A unique record identification number assigned to the record by
-the source system.}
+\item{user_reference_type}{A user-defined definition of the user_reference_number(s). If this
+parameter is used, there must be a reference type for every reference number defined.}
 
 \item{family_notes}{A character vector of notes accompanying this Family group record. These could be
 xrefs to existing Note records.}
@@ -56,12 +53,9 @@ Family group record. These could be xrefs to existing Multimedia records.}
 An updated tidyged object including the Family group record.
 }
 \description{
-This function adds a record containing details of a family group.
+Add a Family Group record to a tidyged object
 }
 \details{
-This function will automatically assign a unique xref for this record. Most users
-will only need to use the husband, wife, children, and family_notes parameters (and of course gedcom).
-
 If you need to add further information about this family (e.g. events), use the
 add_family_event_*() functions.
 

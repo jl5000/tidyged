@@ -8,8 +8,7 @@ add_note(
   gedcom,
   text,
   user_reference_number = character(),
-  user_reference_type = character(),
-  automated_record_id = character()
+  user_reference_type = character()
 )
 }
 \arguments{
@@ -17,21 +16,15 @@ add_note(
 
 \item{text}{A character string containing the text of the note.}
 
-\item{user_reference_number}{A user-defined number or text that the submitter uses to identify
-this record. See the Gedcom 5.5.5 Specification for more details.}
+\item{user_reference_number}{A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector.}
 
-\item{user_reference_type}{A user-defined definition of the user_reference_number.}
-
-\item{automated_record_id}{A unique record identification number assigned to the record by
-the source system.}
+\item{user_reference_type}{A user-defined definition of the user_reference_number(s). If this
+parameter is used, there must be a reference type for every reference number defined.}
 }
 \value{
 An updated tidyged object including the Note record.
 }
 \description{
 Add a Note record to a tidyged object
-}
-\details{
-This function will automatically assign a unique xref for this record. Most users
-will only need to use the text parameter (and of course gedcom).
 }

@@ -232,13 +232,13 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "17 JAN 2021"                             </span>
+<span class="co">#&gt; 15     1 HD     DATE  "18 JAN 2021"                             </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "runner"                                  </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "17 JAN 2021"                             </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "18 JAN 2021"                             </span>
 <span class="co">#&gt; 22     0 TR     TRLR  ""</span></code></pre></div>
 <p>A <code>tidyged</code> object actually comes pre-populated with quite a lot of information (more so than a minimal GEDCOM file). Information about the <code>tidyged</code> package (as the system/product creating the file) is given in the appropriate places, as well as a default language (English), and submitter details taken from your computer username.</p>
 <div id="submitter" class="section level3">
@@ -256,12 +256,11 @@
                   email <span class="op">=</span> <span class="st">"email@domain.com"</span>,
                   fax <span class="op">=</span> <span class="st">"00000"</span>,
                   web_page <span class="op">=</span> <span class="st">"http://www.whousesfaxanymore.com"</span>,
-                  automated_record_id <span class="op">=</span> <span class="st">"A reference"</span>,
                   submitter_notes <span class="op">=</span> <span class="st">"The information given above is dummy data"</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="va">submitter</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 34 x 4</span>
+<span class="co">#&gt; # A tibble: 33 x 4</span>
 <span class="co">#&gt;    level record tag   value                                      </span>
 <span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                      </span>
 <span class="co">#&gt;  1     0 HD     HEAD  ""                                         </span>
@@ -278,7 +277,7 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                         </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                      </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"        </span>
-<span class="co">#&gt; 15     1 HD     DATE  "17 JAN 2021"                              </span>
+<span class="co">#&gt; 15     1 HD     DATE  "18 JAN 2021"                              </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                  </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                     </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                         </span>
@@ -293,11 +292,10 @@
 <span class="co">#&gt; 27     1 @U1@   EMAIL "email@domain.com"                         </span>
 <span class="co">#&gt; 28     1 @U1@   FAX   "00000"                                    </span>
 <span class="co">#&gt; 29     1 @U1@   WWW   "http://www.whousesfaxanymore.com"         </span>
-<span class="co">#&gt; 30     1 @U1@   RIN   "A reference"                              </span>
-<span class="co">#&gt; 31     1 @U1@   NOTE  "The information given above is dummy data"</span>
-<span class="co">#&gt; 32     1 @U1@   CHAN  ""                                         </span>
-<span class="co">#&gt; 33     2 @U1@   DATE  "17 JAN 2021"                              </span>
-<span class="co">#&gt; 34     0 TR     TRLR  ""</span></code></pre></div>
+<span class="co">#&gt; 30     1 @U1@   NOTE  "The information given above is dummy data"</span>
+<span class="co">#&gt; 31     1 @U1@   CHAN  ""                                         </span>
+<span class="co">#&gt; 32     2 @U1@   DATE  "18 JAN 2021"                              </span>
+<span class="co">#&gt; 33     0 TR     TRLR  ""</span></code></pre></div>
 </div>
 <div id="other-header-parameters" class="section level3">
 <h3 class="hasAnchor">
@@ -333,7 +331,7 @@
 <span class="co">#&gt; 15     2 HD     DATA  "Some CD I found in the basement"         </span>
 <span class="co">#&gt; 16     3 HD     DATE  "12 MAY 2009"                             </span>
 <span class="co">#&gt; 17     3 HD     COPR  "No data copyright"                       </span>
-<span class="co">#&gt; 18     1 HD     DATE  "17 JAN 2021"                             </span>
+<span class="co">#&gt; 18     1 HD     DATE  "18 JAN 2021"                             </span>
 <span class="co">#&gt; 19     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 20     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 21     1 HD     COPR  "No copyright"                            </span>
@@ -341,7 +339,7 @@
 <span class="co">#&gt; 23     0 @U1@   SUBM  ""                                        </span>
 <span class="co">#&gt; 24     1 @U1@   NAME  "runner"                                  </span>
 <span class="co">#&gt; 25     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 26     2 @U1@   DATE  "17 JAN 2021"                             </span>
+<span class="co">#&gt; 26     2 @U1@   DATE  "18 JAN 2021"                             </span>
 <span class="co">#&gt; 27     0 TR     TRLR  ""</span></code></pre></div>
 <p>Note that:</p>
 <ul>

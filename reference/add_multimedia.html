@@ -136,7 +136,6 @@
   title <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   user_reference_number <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   user_reference_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  automated_record_id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   multimedia_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
@@ -169,17 +168,13 @@ manuscript, map, newspaper, photo, tombstone, video.</p></td>
     </tr>
     <tr>
       <th>user_reference_number</th>
-      <td><p>A user-defined number or text that the submitter uses to identify
-this record. See the Gedcom 5.5.5 Specification for more details.</p></td>
+      <td><p>A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector.</p></td>
     </tr>
     <tr>
       <th>user_reference_type</th>
-      <td><p>A user-defined definition of the user_reference_number.</p></td>
-    </tr>
-    <tr>
-      <th>automated_record_id</th>
-      <td><p>A unique record identification number assigned to the record by
-the source system.</p></td>
+      <td><p>A user-defined definition of the user_reference_number(s). If this
+parameter is used, there must be a reference type for every reference number defined.</p></td>
     </tr>
     <tr>
       <th>multimedia_notes</th>
@@ -191,11 +186,6 @@ xrefs to existing Note records.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An updated tidyged object including the Multimedia record.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function will automatically assign a unique xref for this record. Most users
-will only need to use the file_reference, format, source_media, title, and
-multimedia_notes parameters (and of course gedcom).</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

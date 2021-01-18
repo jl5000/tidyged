@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cross references and activation • tidyged</title>
+<title>Referencing records • tidyged</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Cross references and activation">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Referencing records">
 <meta property="og:description" content="tidyged">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -77,7 +77,7 @@
       </header><script src="cross_references_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Cross references and activation</h1>
+      <h1 data-toc-skip>Referencing records</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/master/vignettes/cross_references.Rmd"><code>vignettes/cross_references.Rmd</code></a></small>
@@ -156,6 +156,33 @@
 <li>Source: Title (TITL);</li>
 <li>Repository: Name (NAME).</li>
 </ul>
+</div>
+<div id="removing-records" class="section level2">
+<h2 class="hasAnchor">
+<a href="#removing-records" class="anchor"></a>Removing records</h2>
+<p>When removing entire records, you don’t have to necessarily rely on activating them first. The same referencing techniques above can be used to remove records immediately:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/remove_individual.html">remove_individual</a></span><span class="op">(</span><span class="st">"Homer"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">value</span>, <span class="st">"/Simpson/"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Associations with Homer Simpson also removed</span>
+<span class="co">#&gt; # A tibble: 3 x 4</span>
+<span class="co">#&gt;   level record tag   value          </span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;          </span>
+<span class="co">#&gt; 1     1 @I2@   NAME  Marge /Simpson/</span>
+<span class="co">#&gt; 2     1 @I3@   NAME  Lisa /Simpson/ </span>
+<span class="co">#&gt; 3     1 @I4@   NAME  Bart /Simpson/</span></code></pre></div>
+</div>
+<div id="a-note-about-unique-record-identifiers" class="section level2">
+<h2 class="hasAnchor">
+<a href="#a-note-about-unique-record-identifiers" class="anchor"></a>A note about unique record identifiers</h2>
+<p>Record identifiers have been a topic of much discussion in the GEDCOM user community. Even though xref identifiers will be imported unchanged in the <code>tidyged</code> package, some systems do create their own xref identifiers on import. So you cannot assume they will survive between systems. However, they should always be internally consistent.</p>
+<p>A couple of other mechanisms exist for providing unique identifiers to records:</p>
+<ul>
+<li>An automated record identifier (RIN) can be used by a system to automatically assign a unique identifier. Since the most obvious way of generating this would be to base it on the xref, it would introduce unnecessary duplication and file bloat and so the <code>tidyged</code> package does not use this, nor expose it to a user;</li>
+<li>A user-defined reference number (REFN) and type can be defined by a user to uniquely identify a record. These are entirely optional, do not necessarily have to be unique, and a single record could have several defined. They are however a possible way of creating an enduring identifier between systems.</li>
+</ul>
+<p>For these reasons, neither of these mechanisms are considered to be a better alternative way of selecting records.</p>
 </div>
   </div>
 

@@ -1,8 +1,8 @@
 ---
-title: "Cross references and activation"
+title: "Referencing records"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Cross references and activation}
+  %\VignetteIndexEntry{Referencing records}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -82,5 +82,26 @@ This functionality can be found when referencing all records, except the Family 
 * Note: User text (NOTE);
 * Source: Title (TITL);
 * Repository: Name (NAME).
+
+## Removing records
+
+When removing entire records, you don't have to necessarily rely on activating them first. The same referencing techniques above can be used to remove records immediately:
+
+```{r}
+simpsons %>% 
+  remove_individual("Homer") %>% 
+  dplyr::filter(stringr::str_detect(value, "/Simpson/"))
+```
+
+## A note about unique record identifiers
+
+Record identifiers have been a topic of much discussion in the GEDCOM user community. Even though xref identifiers will be imported unchanged in the `tidyged` package, some systems do create their own xref identifiers on import. So you cannot assume they will survive between systems. However, they should always be internally consistent.
+
+A couple of other mechanisms exist for providing unique identifiers to records:
+
+* An automated record identifier (RIN) can be used by a system to automatically assign a unique identifier. Since the most obvious way of generating this would be to base it on the xref, it would introduce unnecessary duplication and file bloat and so the `tidyged` package does not use this, nor expose it to a user;
+* A user-defined reference number (REFN) and type can be defined by a user to uniquely identify a record. These are entirely optional, do not necessarily have to be unique, and a single record could have several defined. They are however a possible way of creating an enduring identifier between systems.
+
+For these reasons, neither of these mechanisms are considered to be a better alternative way of selecting records.
 
 

@@ -90,12 +90,12 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>GEDCOM files can get very large and unwieldy, resulting in inefficiencies and file bloat. The <strong>tidyged</strong> package offers functions to automate the cleaning of GEDCOM files.</p>
+<p>GEDCOM files can get very large and unwieldy, resulting in inefficiencies and file bloat. The <code>tidyged</code> package offers functions to automate the cleaning of GEDCOM files.</p>
 </div>
 <div id="change-dates" class="section level2">
 <h2 class="hasAnchor">
 <a href="#change-dates" class="anchor"></a>Change dates</h2>
-<p>All top level records in a GEDCOM file can record the date and time they were last modified. The <strong>tidyged</strong> package includes change dates (today’s date) by default every time a record is created or modified. Since the time is very unlikely to be useful in such a context, the package ignores this by default:</p>
+<p>All top level records in a GEDCOM file can record the date and time they were last modified. The <code>tidyged</code> package includes change dates (today’s date) by default every time a record is created or modified. Since the time is very unlikely to be useful in such a context, the package ignores this by default:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
 <span class="co">#&gt; If importing existing GEDCOM files, you should ensure that they are error free.</span>

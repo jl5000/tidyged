@@ -90,19 +90,19 @@
 <div id="what-is-gedcom" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-gedcom" class="anchor"></a>What is GEDCOM?</h2>
-<p>Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by <strong>tidyged</strong>.</p>
+<p>Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by <code>tidyged</code>.</p>
 </div>
 <div id="what-does-a-gedcom-file-look-like" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-a-gedcom-file-look-like" class="anchor"></a>What does a GEDCOM file look like?</h2>
 <p>A GEDCOM file is a plain text file (with extension .ged or .GED), which contains <em>records</em>. These records contain information on:</p>
 <ul>
-<li>Family groups (i.e. nuclear families)</li>
-<li>Individuals</li>
-<li>Multimedia</li>
-<li>Sources</li>
-<li>Repositories (which contain sources)</li>
-<li>Notes</li>
+<li>Family groups (see <code><a href="../articles/family_group_records.html">vignette("family_group_records")</a></code>)</li>
+<li>Individuals (see <code><a href="../articles/individual_records.html">vignette("individual_records")</a></code>)</li>
+<li>Multimedia (see <code><a href="../articles/multimedia_records.html">vignette("multimedia_records")</a></code>)</li>
+<li>Sources (see <code><a href="../articles/source_records.html">vignette("source_records")</a></code>)</li>
+<li>Repositories (which contain sources) (see <code><a href="../articles/repository_records.html">vignette("repository_records")</a></code>)</li>
+<li>Notes (see <code><a href="../articles/note_records.html">vignette("note_records")</a></code>)</li>
 </ul>
 <p>There are also special records that appear once and only once in a file; a header (at the beginning), trailer (at the end), and submitter record (directly after the header).</p>
 <p>A sample file looks like this:</p>
@@ -206,14 +206,14 @@
 <span class="co">#&gt; [96] "2 CTRY United States of America"                                                        </span>
 <span class="co">#&gt; [97] "0 TRLR"</span></code></pre></div>
 <p>Each record is a nested structure containing one or more lines where the number at the beginning of the line indicates the level in the hierarchy. New records begin at level 0. In the above file, the submitter record begins at line 19.</p>
-<p>You can learn more about the structure of GEDCOM files and <strong>tidyged</strong> representations of them in <code><a href="../articles/implementation.html">vignette("implementation")</a></code>.</p>
-<p>The <a href="https://www.gedcom.org/gedcom.html">GEDCOM 5.5.5 specification</a> is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structures allowed for each record type, and this is what the <strong>tidyged</strong> package is designed to automate.</p>
+<p>You can learn more about the structure of GEDCOM files and <code>tidyged</code> representations of them in <code><a href="../articles/implementation.html">vignette("implementation")</a></code>.</p>
+<p>The <a href="https://www.gedcom.org/gedcom.html">GEDCOM 5.5.5 specification</a> is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structures allowed for each record type, and this is what the <code>tidyged</code> package is designed to automate.</p>
 </div>
 <div id="gedcom-5-5-5" class="section level2">
 <h2 class="hasAnchor">
 <a href="#gedcom-5-5-5" class="anchor"></a>GEDCOM 5.5.5</h2>
 <p>GEDCOM 5.5.5 is a relatively recent update, considering the previous release, 5.5.1, was first released in 1999. Version 5.5.5 is a maintenance release which simplifies and clarifies the standard considerably, but has not yet been embraced widely in the genealogical community. Notwithstanding, it is the best version of GEDCOM available which doesn’t stray from the standards put in place over the last decades. A good proportion of genealogists use products like Family Tree Maker, RootsMagic, and Gramps, all of which extend the GEDCOM grammar in different ways.</p>
-<p>GEDCOM 5.5.5 files produced by <strong>tidyged</strong> should be compatible with other readers of GEDCOM 5.5.1 files (the most commonly supported version). In the event that a reader does not accept the file, all that should be required is the manual changing of the third line value to ‘5.5.1’. Version 5.5.1 files are not compatible with <code>tidyged</code>.</p>
+<p>GEDCOM 5.5.5 files produced by <code>tidyged</code> should be compatible with other readers of GEDCOM 5.5.1 files (the most commonly supported version). In the event that a reader does not accept the file, all that should be required is the manual changing of the third line value to ‘5.5.1’. Version 5.5.1 files are not compatible with <code>tidyged</code>.</p>
 </div>
   </div>
 

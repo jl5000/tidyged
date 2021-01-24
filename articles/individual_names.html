@@ -115,7 +115,7 @@
 <span class="co">#&gt; 4     2 @I1@   SURN  "Skywalker"       </span>
 <span class="co">#&gt; 5     1 @I1@   CHAN  ""                </span>
 <span class="co">#&gt; 6     2 @I1@   DATE  "24 JAN 2021"</span></code></pre></div>
-<p>In the GEDCOM specification, all names should also be accompanied by a set of name pieces, specifying the given name, surname, nickname, etc. In addition, full names should always surround surnames with forward slashes. In <strong>tidyged</strong> this allows us to automatically generate a name piece if none are given. If we provide a name with no name pieces and no forward slashes, it will cause an error:</p>
+<p>In the GEDCOM specification, all names should also be accompanied by a set of name pieces, specifying the given name, surname, nickname, etc. In addition, full names should always surround surnames with forward slashes. In <code>tidyged</code> this allows us to automatically generate a name piece if none are given. If we provide a name with no name pieces and no forward slashes, it will cause an error:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 

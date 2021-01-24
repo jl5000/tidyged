@@ -90,20 +90,20 @@
 <div id="why-tidyged" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-tidyged" class="anchor"></a>Why tidyged?</h2>
-<p>One of the main characteristics I wanted for this package was to hide the complexity of the GEDCOM specification. I began with what I wanted the user interface to look like and worked backwards from there. I felt that adopting a <strong>tidyverse</strong> feel to the package would enhance readability and would significantly flatten the learning curve for those who are familiar with <strong>ggplot2</strong>.</p>
+<p>One of the main characteristics I wanted for this package was to hide the complexity of the GEDCOM specification. I began with what I wanted the user interface to look like and worked backwards from there. I felt that adopting a <code>tidyverse</code> feel to the package would enhance readability and would significantly flatten the learning curve for those who are familiar with <code>ggplot2</code>.</p>
 </div>
 <div id="data-structures" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-structures" class="anchor"></a>Data structures</h2>
 <p>I spent a significant amount of time before writing any code considering my options for how the data would be stored under the hood. In <a href="https://r-house.netlify.com/2019/12/30/can-genealogical-data-be-tidy/">one blog post</a> I considered storing genealogical data in a relational table format as it is easier to deal with, but discounted it very quickly as it is not well suited to nested data (list columns are not ideal for this application).</p>
 <p>I toyed with the idea of using an off-the-shelf open source product like <a href="https://gramps-project.org/blog/">GRAMPS</a> but I found it awkward to use and wanted something where I was in complete control, taking full advantage of the strengths of R.</p>
-<p>I also considered using data structures more suited to this type of data, such as JSON or graphs (using the <strong>igraph</strong> package). However, I discovered it would be quite difficult representing some of the structures in the GEDCOM specification to my satisfaction.</p>
-<p>It was some time before a better solution occurred to me, and that was to store the GEDCOM file almost as is, and just to split out the components of each line into their own columns, creating a tidy version of a GEDCOM file (hence the name <strong>tidyged</strong>). This would allow easy manipulation using existing <strong>tidyverse</strong> infrastructure, and some additional processing would be needed to deal with the ordered and nested nature of the file. Ironically, I had returned to the idea of a tidy dataframe that I had dismissed early on.</p>
+<p>I also considered using data structures more suited to this type of data, such as JSON or graphs (using the <code>igraph</code> or <code>data.tree</code> package). However, I discovered it would be quite difficult representing some of the structures in the GEDCOM specification to my satisfaction.</p>
+<p>It was some time before a better solution occurred to me, and that was to store the GEDCOM file almost as is, and just to split out the components of each line into their own columns, creating a tidy version of a GEDCOM file (hence the name <code>tidyged</code>). This would allow easy manipulation using existing <code>tidyverse</code> infrastructure, and some additional processing would be needed to deal with the ordered and nested nature of the file. Ironically, I had returned to the idea of a tidy dataframe that I had dismissed early on.</p>
 </div>
 <div id="the-tidyged-object" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-tidyged-object" class="anchor"></a>The tidyged object</h2>
-<p>The <strong>tidyged</strong> object is a tibble representation of a GEDCOM file. Before we see how this is structured, let’s see an example of a GEDCOM file:</p>
+<p>The <code>tidyged</code> object is a tibble representation of a GEDCOM file. Before we see how this is structured, let’s see an example of a GEDCOM file:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"555SAMPLE.GED"</span>, package <span class="op">=</span> <span class="st">"tidyged"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "0 HEAD"                                                                                 </span>
@@ -216,8 +216,8 @@
 <li>
 <strong>Line value</strong>: The value associated with the tag. For example, on line 6, the CHARacter encoding for the file is given as UTF-8.</li>
 </ul>
-<p>There will not be any lines that have all of these components. For example, the first line of records do not contain a line value. Also, a line will never have a cross-reference pointer and a line value defined. For this reason, the <strong>tidyged</strong> object treats cross-reference pointers as just another line value.</p>
-<p>The <strong>tidyged</strong> representation of the above GEDCOM file is given below:</p>
+<p>There will not be any lines that have all of these components. For example, the first line of records do not contain a line value. Also, a line will never have a cross-reference pointer and a line value defined. For this reason, the <code>tidyged</code> object treats cross-reference pointers as just another line value.</p>
+<p>The <code>tidyged</code> representation of the above GEDCOM file is given below:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
 <span class="co">#&gt; If importing existing GEDCOM files, you should ensure that they are error free.</span>
@@ -326,16 +326,16 @@
 <span class="co">#&gt; 95     2 @R1@   POST  "84150"                                                   </span>
 <span class="co">#&gt; 96     2 @R1@   CTRY  "United States of America"                                </span>
 <span class="co">#&gt; 97     0 TR     TRLR  ""</span></code></pre></div>
-<p>The cross-reference identifier is given in the record column. Event though these aren’t given for the header and trailer records they are assigned as “HD” and “TR” respectively in the <strong>tidyged</strong> object.</p>
+<p>The cross-reference identifier is given in the record column. Event though these aren’t given for the header and trailer records they are assigned as “HD” and “TR” respectively in the <code>tidyged</code> object.</p>
 <p>Many GEDCOM processors modify the data on import, perhaps ignoring custom tags. This package reads the file as-is, and the only modification of the file is in line with that recommended in the GEDCOM 5.5.5 specification, specifically; replacing double ‘@’ symbols with single ones, and merging CONC/CONT lines.</p>
 <p>If you want to modify single values in a GEDCOM or do a simple Find/Replace, then this is straightforward to achieve with a simple text editor.</p>
 </div>
 <div id="high-level-architecture" class="section level2">
 <h2 class="hasAnchor">
 <a href="#high-level-architecture" class="anchor"></a>High-level architecture</h2>
-<p>The <strong>tidyged</strong> package has a dependency on the <strong>tidyged.internals</strong> package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the <strong>tidyged</strong> package.</p>
-<p>The <strong>tidyged</strong> package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to have a sister package to provide a <strong>shiny</strong> interface (<strong>shinyged</strong>). However, before work on <strong>shinyged</strong> begins, I would like to start a tidyged visualisation package, <strong>visged</strong>, which will allow various views of genealogical data.</p>
-<p>The long term aim is to create a small package ecosystem surrounding <strong>tidyged</strong> - the <strong>gedcompendium</strong>.</p>
+<p>The <code>tidyged</code> package has a dependency on the <code>tidyged.internals</code> package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the <code>tidyged</code> package.</p>
+<p>The <code>tidyged</code> package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to have a sister package to provide a <code>shiny</code> interface (<code>shinyged</code>). However, before work on <code>shinyged</code> begins, I would like to start a tidyged visualisation package, <code>visged</code>, which will allow various views of genealogical data.</p>
+<p>The long term aim is to create a small package ecosystem surrounding <code>tidyged</code> - the <code>gedcompendium</code>.</p>
 </div>
   </div>
 

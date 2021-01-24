@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • tidyged</title>
+<title>Get a description of an individual — describe_individual • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,8 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Get a description of an individual — describe_individual" />
+<meta property="og:description" content="Get a description of an individual" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +67,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -118,101 +119,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Get a description of an individual</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/interrogate.R'><code>R/interrogate.R</code></a></small>
+    <div class="hidden name"><code>describe_individual.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>Getting started</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="intro_to_gedcom.html">Introduction to GEDCOM</a></dt>
-        <dd></dt>
-        <dt><a href="implementation.html">Implementation of tidyged</a></dt>
-        <dd></dt>
-        <dt><a href="tidyged_creation.html">Creation of tidyged objects</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>Get a description of an individual</p>
     </div>
-    <div class="section ">
-      <h3>Individuals</h3>
-      <p class="section-desc"></p>
 
-      <dl>
-        <dt><a href="individual_records.html">Individual records</a></dt>
-        <dd></dt>
-        <dt><a href="individual_names.html">Individual names</a></dt>
-        <dd></dt>
-        <dt><a href="individual_events.html">Individual events</a></dt>
-        <dd></dt>
-        <dt><a href="individual_attributes.html">Individual attributes</a></dt>
-        <dd></dt>
-      </dl>
-    </div>
-    <div class="section ">
-      <h3>Family groups</h3>
-      <p class="section-desc"></p>
+    <pre class="usage"><span class='fu'>describe_individual</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, abb <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
-      <dl>
-        <dt><a href="family_group_records.html">Family group records</a></dt>
-        <dd></dt>
-        <dt><a href="family_events.html">Family events</a></dt>
-        <dd></dt>
-      </dl>
-    </div>
-    <div class="section ">
-      <h3>Repositories</h3>
-      <p class="section-desc"></p>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>gedcom</th>
+      <td><p>A tidyged object.</p></td>
+    </tr>
+    <tr>
+      <th>xref</th>
+      <td><p>An xref of an Individual record.</p></td>
+    </tr>
+    <tr>
+      <th>abb</th>
+      <td><p>Whether to abbreviate the output.</p></td>
+    </tr>
+    </table>
 
-      <dl>
-        <dt><a href="repository_records.html">Repository records</a></dt>
-        <dd></dt>
-      </dl>
-    </div>
-    <div class="section ">
-      <h3>Sources</h3>
-      <p class="section-desc"></p>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-      <dl>
-        <dt><a href="source_records.html">Source records</a></dt>
-        <dd></dt>
-      </dl>
-    </div>
-    <div class="section ">
-      <h3>Multimedia</h3>
-      <p class="section-desc"></p>
+    <p>A character string describing the individual.</p>
 
-      <dl>
-        <dt><a href="multimedia_records.html">Multimedia records</a></dt>
-        <dd></dt>
-      </dl>
-    </div>
-    <div class="section ">
-      <h3>Notes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="note_records.html">Note records</a></dt>
-        <dd></dt>
-      </dl>
-    </div>
-    <div class="section ">
-      <h3>Other features</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="cross_references.html">Referencing records</a></dt>
-        <dd></dt>
-        <dt><a href="dates.html">Date types</a></dt>
-        <dd></dt>
-        <dt><a href="summarising.html">Summarising tidyged objects</a></dt>
-        <dd></dt>
-        <dt><a href="automation.html">Automation and shared events</a></dt>
-        <dd></dt>
-        <dt><a href="maintenance_functions.html">Maintenance functions</a></dt>
-        <dd></dt>
-      </dl>
-    </div>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

@@ -86,7 +86,7 @@ gedcom(submitter_details = subm(),
 Note that:
 
 * The `gedcom_description` parameter should describe the type of genealogical data contained in the file;
-* The date associated with the source data must be given as a `date_exact()` object to ensure it is formatted correctly;
+* The date associated with the source data must be given as a `date_exact()` object to ensure it is formatted correctly (see `vignette("dates")` for more information on dates);
 * The `receiving_system` should be left to its default value, unless you are specifically intending on passing it to a different system.
 
 If you want to export your file as a valid GEDCOM file, you can use the `write_gedcom()` function.

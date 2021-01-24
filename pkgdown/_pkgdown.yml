@@ -33,6 +33,7 @@ articles:
 - title: Other features
   contents:
   - cross_references
-  - automation
   - dates
+  - summarising
+  - automation
   - maintenance_functions

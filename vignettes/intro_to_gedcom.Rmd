@@ -11,18 +11,18 @@ knitr::opts_chunk$set(
 
 ## What is GEDCOM?
 
-Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by **tidyged**.
+Genealogical Data Communication (GEDCOM) is a specification for storing and exchanging genealogical data. It was created by The Church of Jesus Christ of Latter-day Saints in 1984, and has become the de-facto standard used worldwide. The current version is 5.5.5 and is the version supported by `tidyged`.
 
 ## What does a GEDCOM file look like?
 
 A GEDCOM file is a plain text file (with extension .ged or .GED), which contains *records*. These records contain information on:
 
-* Family groups (i.e. nuclear families)
-* Individuals
-* Multimedia
-* Sources
-* Repositories (which contain sources)
-* Notes
+* Family groups (see `vignette("family_group_records")`)
+* Individuals (see `vignette("individual_records")`)
+* Multimedia (see `vignette("multimedia_records")`)
+* Sources (see `vignette("source_records")`)
+* Repositories (which contain sources) (see `vignette("repository_records")`)
+* Notes (see `vignette("note_records")`)
 
 There are also special records that appear once and only once in a file; a header (at the beginning), trailer (at the end), and submitter record (directly after the header).
 
@@ -34,12 +34,12 @@ readLines(system.file("extdata", "555SAMPLE.GED", package = "tidyged"))
 
 Each record is a nested structure containing one or more lines where the number at the beginning of the line indicates the level in the hierarchy. New records begin at level 0. In the above file, the submitter record begins at line `r which(readLines(system.file("extdata", "555SAMPLE.GED", package = "tidyged")) == "0 @U1@ SUBM")`.
 
-You can learn more about the structure of GEDCOM files and **tidyged** representations of them in `vignette("implementation")`.
+You can learn more about the structure of GEDCOM files and `tidyged` representations of them in `vignette("implementation")`.
 
-The [GEDCOM 5.5.5 specification](https://www.gedcom.org/gedcom.html) is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structures allowed for each record type, and this is what the **tidyged** package is designed to automate.
+The [GEDCOM 5.5.5 specification](https://www.gedcom.org/gedcom.html) is substantial (at 166 pages in length), describing the strict rules around the specific set of tags and hierarchical structures allowed for each record type, and this is what the `tidyged` package is designed to automate.
 
 ## GEDCOM 5.5.5
 
 GEDCOM 5.5.5 is a relatively recent update, considering the previous release, 5.5.1, was first released in 1999. Version 5.5.5 is a maintenance release which simplifies and clarifies the standard considerably, but has not yet been embraced widely in the genealogical community. Notwithstanding, it is the best version of GEDCOM available which doesn't stray from the standards put in place over the last decades. A good proportion of genealogists use products like Family Tree Maker, RootsMagic, and Gramps, all of which extend the GEDCOM grammar in different ways.
 
-GEDCOM 5.5.5 files produced by **tidyged** should be compatible with other readers of GEDCOM 5.5.1 files (the most commonly supported version). In the event that a reader does not accept the file, all that should be required is the manual changing of the third line value to '5.5.1'. Version 5.5.1 files are not compatible with `tidyged`.
+GEDCOM 5.5.5 files produced by `tidyged` should be compatible with other readers of GEDCOM 5.5.1 files (the most commonly supported version). In the event that a reader does not accept the file, all that should be required is the manual changing of the third line value to '5.5.1'. Version 5.5.1 files are not compatible with `tidyged`.

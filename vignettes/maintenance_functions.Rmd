@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-GEDCOM files can get very large and unwieldy, resulting in inefficiencies and file bloat. The **tidyged** package offers functions to automate the cleaning of GEDCOM files.
+GEDCOM files can get very large and unwieldy, resulting in inefficiencies and file bloat. The `tidyged` package offers functions to automate the cleaning of GEDCOM files.
 
 ## Change dates
 
-All top level records in a GEDCOM file can record the date and time they were last modified. The **tidyged** package includes change dates (today's date) by default every time a record is created or modified. Since the time is very unlikely to be useful in such a context, the package ignores this by default:
+All top level records in a GEDCOM file can record the date and time they were last modified. The `tidyged` package includes change dates (today's date) by default every time a record is created or modified. Since the time is very unlikely to be useful in such a context, the package ignores this by default:
 
 ```{r}
 library(tidyged)

@@ -1,0 +1,102 @@
+---
+title: "Summarising tidyged objects"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Summarising tidyged objects}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+The `tidyged` package comes with several functions for summarising and querying tidyged objects. The following object is used to illustrate the functionality:
+
+```{r}
+library(tidyged)
+
+simpsons <- gedcom(subm("Me"), gedcom_description = "Some of the Simpsons",
+                   gedcom_copyright = "No copyright") %>% 
+  add_individual(sex = "M") %>% 
+  add_individual_names("Homer /Simpson/") %>% 
+  add_individual_event_birth(event_date = date_calendar(1960, 5, 14),
+                             place_name = "Springfield, USA") %>% 
+  add_individual(sex = "F") %>% 
+  add_individual_names("Marge /Simpson/") %>%  
+  add_individual_event_birth(event_date = date_calendar(1960, 8, 24),
+                             place_name = "Springfield, USA") %>% 
+  add_individual(sex = "F") %>% 
+  add_individual_names("Lisa /Simpson/") %>% 
+  add_individual_event_birth(event_date = date_calendar(1984, 12, 3),
+                             place_name = "Springfield, USA") %>% 
+  add_individual(sex = "M") %>% 
+  add_individual_names("Bart /Simpson/") %>%  
+  add_individual_event_birth(event_date = date_calendar(1982, 3, 16),
+                             place_name = "Springfield, USA") %>% 
+  add_family_group(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa"), 
+                   number_of_children = 3) %>% 
+  add_note("This is a note") %>% 
+  add_note("This is another note") %>% 
+  add_multimedia("123", "PDF") %>% 
+  add_multimedia("456", "PDF") %>%
+  add_repository("A library") %>% 
+  add_source(originator = "J.R. Hartley", title = "A History of the Simpsons") %>%
+  add_source(originator = "Prof. J Frink", title = "The screaming and the pain and the hoyvenglaven")
+```
+
+## Global summaries
+
+The `str()` and `summary()` functions give a high level overview of tidyged objects:
+
+```{r}
+summary(simpsons)
+str(simpsons)
+```
+
+## Record type summaries
+
+The `num_*()` family of functions count the number of records of a particular type:
+
+```{r}
+num_indi(simpsons)
+num_fam(simpsons)
+num_media(simpsons)
+```
+
+These functions are the workhorse of the `str()` function.
+
+The `df_*()` family of functions provide a tabular summary of all records of a particular type:
+
+```{r}
+df_individuals(simpsons) %>% knitr::kable()
+df_families(simpsons) %>% knitr::kable()
+df_multimedia(simpsons) %>% knitr::kable()
+```
+
+
+## Individual record summaries
+
+The `is_*()` family of functions determine whether an xref is a record of a particular type:
+
+```{r}
+is_individual(simpsons, "@I1@")
+is_family(simpsons, "@F1@")
+is_repository(simpsons, "@N1@")
+```
+
+The `describe_*()` family of functions give a description of certain records:
+
+```{r}
+describe_individual(simpsons, "@I1@")
+describe_individual(simpsons, "@I3@")
+describe_individual(simpsons, "@I3@", abb = TRUE)
+describe_family_group(simpsons, "@F1@")
+```
+
+

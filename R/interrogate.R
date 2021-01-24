@@ -75,7 +75,7 @@ is_note <- function(gedcom, xref)       { is_record_type(gedcom, xref, .pkgenv$r
 is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_sour) }
 
 
-#' Get a description of a family
+#' Get a description of a family group
 #'
 #' @param gedcom A tidyged object.
 #' @param xref An xref of a Family group record.
@@ -83,9 +83,9 @@ is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$r
 #' @return A character string describing the members of the family group.
 #' @export
 #' @tests
-#' expect_equal(gedcom() %>% add_family_group() %>% get_family_group_description("@F1@"),
+#' expect_equal(gedcom() %>% add_family_group() %>% describe_family_group("@F1@"),
 #'              "Family @F1@ with no husband, no wife, and no children")
-get_family_group_description <- function(gedcom, xref) {
+describe_family_group <- function(gedcom, xref) {
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_fam, is_family)
   
@@ -110,6 +110,55 @@ get_family_group_description <- function(gedcom, xref) {
   
 }
 
+
+describe_individual <- function(gedcom, xref, abb = FALSE) {
+  
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  
+  name <- gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
+    stringr::str_remove_all("/")
+  
+  name_str <- ifelse(name == "", "Unnamed individual", name)
+  
+  #sex <- gedcom_value(gedcom, xref, "SEX", 1, "INDI")
+  
+  famc <- gedcom_value(gedcom, xref, "FAMC", 1, "INDI")
+  
+  if (famc != "") {
+    
+    moth_xref <- gedcom_value(gedcom, famc, "WIFE", 1)
+    fath_xref <- gedcom_value(gedcom, famc, "HUSB", 1)
+    
+    moth_name <- gedcom_value(gedcom, moth_xref, "NAME", 1) %>% 
+      stringr::str_remove_all("/")
+    fath_name <- gedcom_value(gedcom, fath_xref, "NAME", 1)%>% 
+      stringr::str_remove_all("/")
+    
+    par_str <- dplyr::case_when(fath_name != "" & moth_name != "" ~ paste(fath_name,"and",moth_name),
+                                fath_name != "" & moth_name == "" ~ fath_name,
+                                fath_name == "" & moth_name != "" ~ moth_name,
+                                TRUE ~ "")
+  
+  } else {
+    par_str <- ""
+  }
+  
+  dob <- gedcom_value(gedcom, xref, "DATE", level = 2, after_tag = "BIRT")
+  
+  dod <- gedcom_value(gedcom, xref, "DATE", level = 2, after_tag = "DEAT")
+  
+  if(abb) {
+    paste0(ifelse(name == "", "Unnamed individual", name), 
+           ifelse(dob == "", "", paste(", b:", dob)),
+           ifelse(dod == "", "", paste(", d:", dod)))
+     
+  } else {
+    paste0(ifelse(name == "", "Unnamed individual", name), 
+           ifelse(dob == "", "", paste(", born", dob)),
+           ifelse(dod == "", "", paste(", died", dod)),
+           ifelse(par_str == "", "", paste(", child of", par_str)))
+  }
+}
 
 #' Get a summary of a tidyged object
 #'

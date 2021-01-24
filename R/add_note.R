@@ -58,7 +58,7 @@ add_note_to_record <- function(gedcom, note) {
       
       if(length(fam_xrefs) == 0) stop("Error: No family links found")
       
-      fam_desc <- purrr::map_chr(fam_xrefs, get_family_group_description, gedcom=gedcom) %>% 
+      fam_desc <- purrr::map_chr(fam_xrefs, describe_family_group, gedcom=gedcom) %>% 
         paste0(" (link as a ", ifelse(link_types == "FAMS", "spouse", "child"), ")")
       
       response3 <- utils::menu(fam_desc, title = "Which family link should the note be attached to?")

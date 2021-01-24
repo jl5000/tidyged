@@ -101,7 +101,8 @@ read_gedcom_encoding <- function(filepath) {
 check_line_lengths <- function(lines, limit) {
   
   if(any(nchar(lines) > limit)) 
-    stop("This is not a GEDCOM 5.5.5 file. The following lines are too long: ", which(lines > limit))
+    stop("This is not a GEDCOM 5.5.5 file. The following lines are too long: ", 
+         paste(which(nchar(lines) > limit), collapse=","))
   
   lines
 }

@@ -110,7 +110,14 @@ describe_family_group <- function(gedcom, xref) {
   
 }
 
-
+#' Get a description of an individual
+#'
+#' @param gedcom A tidyged object.
+#' @param xref An xref of an Individual record.
+#' @param abb Whether to abbreviate the output.
+#'
+#' @return A character string describing the individual.
+#' @export
 describe_individual <- function(gedcom, xref, abb = FALSE) {
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)

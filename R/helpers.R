@@ -169,6 +169,60 @@ temporarily_remove_name_slashes <- function(gedcom) {
 }
 
 
+get_spouses <- function(gedcom,
+                       individual = character(),
+                       return_name = FALSE) {
+  
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  
+  fams_xref <- get_families_as_spouse(gedcom, xref)
+  
+  spou_xref <- purrr::map_chr(fams_xref,
+                               ~ dplyr::if_else(gedcom_value(gedcom, .x, "HUSB", 1) == xref,
+                                                gedcom_value(gedcom, .x, "WIFE", 1),
+                                                gedcom_value(gedcom, .x, "HUSB", 1))
+  )
+  
+  if (return_name) {
+    purrr::map_chr(spou_xref, get_individual_name, gedcom=gedcom)
+  } else {
+    spou_xref
+  }
+}
+
+get_children <- function(gedcom,
+                         individual = character(),
+                         return_name = FALSE) {
+  
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  
+  fams_xref <- get_families_as_spouse(gedcom, xref)
+  
+  chil_xref <- gedcom %>% 
+    dplyr::filter(level == 1, record %in% fams_xref, tag == "CHIL") %>% 
+    dplyr::pull(value) %>% 
+    unique()
+  
+  if (return_name) {
+    purrr::map_chr(chil_xref, get_individual_name, gedcom=gedcom)
+  } else {
+    chil_xref
+  }
+  
+}
+
+get_families_as_spouse <- function(gedcom, individual = character()) {
+  
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  
+  gedcom %>% 
+    dplyr::filter(level == 1, tag %in% c("HUSB", "WIFE"), value == xref) %>% 
+    dplyr::pull(record) %>% 
+    unique()
+  
+}
+
+
 
 #' Derive a valid cross-reference identifier
 #' 

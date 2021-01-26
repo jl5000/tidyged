@@ -52,9 +52,7 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
   
   possibilities <- gedcom %>% 
     temporarily_remove_name_slashes() %>% 
-    dplyr::filter(record %in% record_xrefs) %>% 
-    dplyr::filter(tag %in% tags) %>% 
-    dplyr::filter(stringr::str_detect(value, search_pattern))
+    dplyr::filter(record %in% record_xrefs, tag %in% tags, stringr::str_detect(value, search_pattern))
   
   if(length(unique(possibilities$record)) == 0) {
     

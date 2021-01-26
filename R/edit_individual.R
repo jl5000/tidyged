@@ -92,3 +92,44 @@ remove_individual <- function(gedcom,
 }
 
 
+
+remove_descendents <- function(gedcom,
+                               individual = character(),
+                               remove_individual = FALSE,
+                               remove_spouse = FALSE) {
+  
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  
+  #recursively call the function
+  spou_xref <- get_spouses(gedcom, xref)
+  chil_xref <- get_children(gedcom, xref)
+  
+  # if spouse is to be removed, add their children to be removed
+  if (remove_spouse) {
+    spou_chil <- c()
+    for(i in seq_along(spou_xref)) {
+      spou_chil <- c(spou_chil, get_children(gedcom, spou_xref[i]))
+    }
+    chil_xref <- unique(c(chil_xref, spou_chil))
+  }
+  
+  #deal with children first
+  for(i in seq_along(chil_xref)) {
+    gedcom <- remove_descendents(gedcom, chil_xref[i], TRUE, TRUE)
+  }
+  
+  if (remove_spouse) {
+    for(i in seq_along(spou_xref)) {
+      message(get_individual_name(gedcom, spou_xref[i]), " removed")
+      gedcom <- remove_individual(gedcom, spou_xref[i])
+    }
+  }
+  
+  if (remove_individual) {
+    message(get_individual_name(gedcom, xref), " removed")
+    gedcom <- remove_individual(gedcom, xref)
+  }
+  
+  
+  gedcom
+}

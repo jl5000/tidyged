@@ -35,12 +35,12 @@ test_that("Function check_line_lengths() @ L101", {
 })
 
 
-test_that("Function write_gedcom() @ L157", {
+test_that("Function write_gedcom() @ L158", {
   expect_warning(write_gedcom(gedcom(), "my_family.txt") %>% file.remove("my_family.txt"))
 })
 
 
-test_that("Function update_header_with_filename() @ L198", {
+test_that("Function update_header_with_filename() @ L199", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
                           update_header_with_filename("my_file.ged") %>% 
                           remove_dates_for_tests(), "json2")
@@ -50,7 +50,7 @@ test_that("Function update_header_with_filename() @ L198", {
 })
 
 
-test_that("Function split_gedcom_values() @ L230", {
+test_that("Function split_gedcom_values() @ L231", {
   expect_snapshot_value(
                   gedcom(subm("Me")) %>% 
                     add_source(title = paste(rep("a", 4095), collapse = "")) %>%

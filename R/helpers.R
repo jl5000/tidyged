@@ -169,6 +169,15 @@ temporarily_remove_name_slashes <- function(gedcom) {
 }
 
 
+#' Get all spouses for an individual
+#'
+#' @param gedcom A tidygedcom object.
+#' @param individual The xref or name of an Individual record to act on if one 
+#' is not activated (will override active record).
+#' @param return_name Whether to return the spouse's name(s) instead of the xref(s).
+#'
+#' @return A character vector of spouse xrefs or names.
+#' @export
 get_spouses <- function(gedcom,
                        individual = character(),
                        return_name = FALSE) {
@@ -177,12 +186,16 @@ get_spouses <- function(gedcom,
   
   fams_xref <- get_families_as_spouse(gedcom, xref)
   
-  spou_xref <- purrr::map_chr(fams_xref,
-                               ~ dplyr::if_else(gedcom_value(gedcom, .x, "HUSB", 1) == xref,
-                                                gedcom_value(gedcom, .x, "WIFE", 1),
-                                                gedcom_value(gedcom, .x, "HUSB", 1))
-  )
-  
+  # we don't use purrr::map here because the return values could vary in length
+  spou_xref <- c()
+  for(i in seq_along(fams_xref)){
+    spou_xref <- gedcom %>% 
+      dplyr::filter(record == fams_xref[i], tag %in% c("HUSB","WIFE"),
+                    value != xref) %>% 
+      dplyr::pull(value) %>% 
+      c(spou_xref)
+  }
+
   if (return_name) {
     purrr::map_chr(spou_xref, get_individual_name, gedcom=gedcom)
   } else {
@@ -190,6 +203,16 @@ get_spouses <- function(gedcom,
   }
 }
 
+
+#' Get all children for an individual
+#'
+#' @param gedcom A tidygedcom object.
+#' @param individual The xref or name of an Individual record to act on if one 
+#' is not activated (will override active record).
+#' @param return_name Whether to return the childrens name(s) instead of the xref(s).
+#'
+#' @return A character vector of children xrefs or names.
+#' @export
 get_children <- function(gedcom,
                          individual = character(),
                          return_name = FALSE) {
@@ -211,6 +234,14 @@ get_children <- function(gedcom,
   
 }
 
+#' Get all families for an individual where they are a spouse
+#'
+#' @param gedcom A tidygedcom object.
+#' @param individual The xref or name of an Individual record to act on if one 
+#' is not activated (will override active record).
+#'
+#' @return A character vector of family xrefs.
+#' @export
 get_families_as_spouse <- function(gedcom, individual = character()) {
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
@@ -248,7 +279,7 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
 #' @return A valid xref identifier.
 get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_fn) {
   
-  if (length(xref_or_descriptor) == 0) {
+  if (length(xref_or_descriptor) == 0 || xref_or_descriptor == "") {
     # xref not given explicitly, get it from active record
     xref <- get_active_record(gedcom)
     

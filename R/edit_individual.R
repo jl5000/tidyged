@@ -80,12 +80,8 @@ remove_individual <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
   
-  if(remove_associations) {
-    gedcom <- remove_section(gedcom, 1, "ASSO", xref)
-    message("Associations with ", get_individual_name(gedcom, xref),
-            " also removed")
-  }
-  
+  if(remove_associations) gedcom <- remove_section(gedcom, 1, "ASSO", xref)
+
   gedcom %>% 
     dplyr::filter(record != xref, value != xref) %>% 
     null_active_record()
@@ -93,19 +89,50 @@ remove_individual <- function(gedcom,
 
 
 
-remove_descendents <- function(gedcom,
+#' Remove all descendants for an individual
+#' 
+#' This function removes an entire branch of the family tree below a certain individual.
+#' 
+#' @details WARNING: This function can result in the removal of a vast amount of data. It will
+#' tell the user precisely what it is removing. Be sure the function has done what you expect before
+#' accepting the results.
+#' 
+#' If you set remove_spouses = TRUE, the function will also remove all spouses of the individual
+#' given (at the top level) and their descendants. 
+#' 
+#' If you wanted to just remove all descendants and associated family group records, you would
+#' use the function with the default inputs. If you wanted to keep the (memberless) family group
+#' records, you would set remove_families = FALSE.
+#' 
+#' If remove_families, remove_individual, and remove_spouses are all TRUE, then the individual's
+#' (memberless) family group record will also be deleted.
+#' 
+#' The function operates recursively for each generation of individuals.
+#'
+#' @param gedcom A tidygedcom object.
+#' @param individual The xref or name of an Individual record to act on if one 
+#' is not activated (will override active record).
+#' @param remove_individual Whether to also remove the individual themselves.
+#' @param remove_spouses Whether to also remove all spouses of this individual (and their descendants).
+#' @param remove_families Whether to also remove all of the descendant Family Group records.
+#'
+#' @return A shorter tidygedcom object without the descendants of the individual.
+#' @export
+remove_descendants <- function(gedcom,
                                individual = character(),
                                remove_individual = FALSE,
-                               remove_spouse = FALSE) {
+                               remove_spouses = FALSE,
+                               remove_families = TRUE) {
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
   
-  #recursively call the function
   spou_xref <- get_spouses(gedcom, xref)
   chil_xref <- get_children(gedcom, xref)
+  fams_xref <- get_families_as_spouse(gedcom, xref)
   
   # if spouse is to be removed, add their children to be removed
-  if (remove_spouse) {
+  if (remove_spouses) {
+    # we don't use purrr::map here because the return values could vary in length
     spou_chil <- c()
     for(i in seq_along(spou_xref)) {
       spou_chil <- c(spou_chil, get_children(gedcom, spou_xref[i]))
@@ -113,12 +140,15 @@ remove_descendents <- function(gedcom,
     chil_xref <- unique(c(chil_xref, spou_chil))
   }
   
-  #deal with children first
-  for(i in seq_along(chil_xref)) {
-    gedcom <- remove_descendents(gedcom, chil_xref[i], TRUE, TRUE)
+  #deal with family groups first (while the individuals are still in them)
+  if (remove_spouses & remove_individual & remove_families) {
+    for(i in seq_along(fams_xref)) {
+      message(describe_family_group(gedcom, fams_xref[i]), " removed")
+      gedcom <- remove_family_group(gedcom, fams_xref[i])
+    }
   }
-  
-  if (remove_spouse) {
+ 
+  if (remove_spouses) {
     for(i in seq_along(spou_xref)) {
       message(get_individual_name(gedcom, spou_xref[i]), " removed")
       gedcom <- remove_individual(gedcom, spou_xref[i])
@@ -130,6 +160,10 @@ remove_descendents <- function(gedcom,
     gedcom <- remove_individual(gedcom, xref)
   }
   
+  # remove children
+  for(i in seq_along(chil_xref)) {
+    gedcom <- remove_descendants(gedcom, chil_xref[i], TRUE, TRUE, remove_families)
+  }
   
   gedcom
 }

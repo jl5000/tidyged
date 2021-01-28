@@ -9,7 +9,7 @@ remove_descendants(
   individual = character(),
   remove_individual = FALSE,
   remove_spouses = FALSE,
-  remove_families = TRUE
+  remove_empty_families = TRUE
 )
 }
 \arguments{
@@ -22,7 +22,7 @@ is not activated (will override active record).}
 
 \item{remove_spouses}{Whether to also remove all spouses of this individual (and their descendants).}
 
-\item{remove_families}{Whether to also remove all of the descendant Family Group records.}
+\item{remove_empty_families}{Whether to also remove all of the descendant Family Group records.}
 }
 \value{
 A shorter tidygedcom object without the descendants of the individual.
@@ -31,19 +31,20 @@ A shorter tidygedcom object without the descendants of the individual.
 This function removes an entire branch of the family tree below a certain individual.
 }
 \details{
-WARNING: This function can result in the removal of a vast amount of data. It will
-tell the user precisely what it is removing. Be sure the function has done what you expect before
-accepting the results.
+WARNING: This function can result in the removal of a vast amount of data as it relies on
+recursive deletion. It will tell the user precisely what it is removing. Be sure the function has done
+what you expect before accepting the results. It is recommended that you use this function with extreme
+caution if you think a descendant (or their spouse) may be connected to an individual on another
+branch of your tree.
 
 If you set remove_spouses = TRUE, the function will also remove all spouses of the individual
-given (at the top level) and their descendants.
+given (at the top level) and their descendants. It does not go as far as removing other spouses of
+spouses.
 
 If you wanted to just remove all descendants and associated family group records, you would
 use the function with the default inputs. If you wanted to keep the (memberless) family group
-records, you would set remove_families = FALSE.
+records, you would set remove_empty_families = FALSE.
 
 If remove_families, remove_individual, and remove_spouses are all TRUE, then the individual's
 (memberless) family group record will also be deleted.
-
-The function operates recursively for each generation of individuals.
 }

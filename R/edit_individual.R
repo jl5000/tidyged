@@ -93,28 +93,29 @@ remove_individual <- function(gedcom,
 #' 
 #' This function removes an entire branch of the family tree below a certain individual.
 #' 
-#' @details WARNING: This function can result in the removal of a vast amount of data. It will
-#' tell the user precisely what it is removing. Be sure the function has done what you expect before
-#' accepting the results.
+#' @details WARNING: This function can result in the removal of a vast amount of data as it relies on
+#' recursive deletion. It will tell the user precisely what it is removing. Be sure the function has done 
+#' what you expect before accepting the results. It is recommended that you use this function with extreme 
+#' caution if you think a descendant (or their spouse) may be connected to an individual on another 
+#' branch of your tree.
 #' 
 #' If you set remove_spouses = TRUE, the function will also remove all spouses of the individual
-#' given (at the top level) and their descendants. 
+#' given (at the top level) and their descendants. It does not go as far as removing other spouses of
+#' spouses.
 #' 
 #' If you wanted to just remove all descendants and associated family group records, you would
 #' use the function with the default inputs. If you wanted to keep the (memberless) family group
-#' records, you would set remove_families = FALSE.
+#' records, you would set remove_empty_families = FALSE.
 #' 
 #' If remove_families, remove_individual, and remove_spouses are all TRUE, then the individual's
 #' (memberless) family group record will also be deleted.
 #' 
-#' The function operates recursively for each generation of individuals.
-#'
 #' @param gedcom A tidygedcom object.
 #' @param individual The xref or name of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param remove_individual Whether to also remove the individual themselves.
 #' @param remove_spouses Whether to also remove all spouses of this individual (and their descendants).
-#' @param remove_families Whether to also remove all of the descendant Family Group records.
+#' @param remove_empty_families Whether to also remove all of the descendant Family Group records.
 #'
 #' @return A shorter tidygedcom object without the descendants of the individual.
 #' @export
@@ -122,7 +123,7 @@ remove_descendants <- function(gedcom,
                                individual = character(),
                                remove_individual = FALSE,
                                remove_spouses = FALSE,
-                               remove_families = TRUE) {
+                               remove_empty_families = TRUE) {
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
   
@@ -141,7 +142,7 @@ remove_descendants <- function(gedcom,
   }
   
   #deal with family groups first (while the individuals are still in them)
-  if (remove_spouses & remove_individual & remove_families) {
+  if (remove_spouses & remove_individual & remove_empty_families) {
     for(i in seq_along(fams_xref)) {
       message(describe_family_group(gedcom, fams_xref[i]), " removed")
       gedcom <- remove_family_group(gedcom, fams_xref[i])
@@ -162,7 +163,7 @@ remove_descendants <- function(gedcom,
   
   # remove children
   for(i in seq_along(chil_xref)) {
-    gedcom <- remove_descendants(gedcom, chil_xref[i], TRUE, TRUE, remove_families)
+    gedcom <- remove_descendants(gedcom, chil_xref[i], TRUE, TRUE, remove_empty_families)
   }
   
   gedcom

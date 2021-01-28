@@ -110,7 +110,7 @@ three_gen <- gedcom(subm("Me")) %>%
   add_individual_names("Child /4/") %>% 
   add_family_group("Grandparent 1", "Grandparent 2", children = "Parent") %>% 
   add_family_group("Parent", "Spouse 1", children = c("Child 1", "Child 2")) %>%
-  add_family_group("Parent", "Spouse 2", children = c("Child 1", "Child 2"))
+  add_family_group("Parent", "Spouse 2", children = c("Child 3", "Child 4"))
 
 df_families(three_gen) %>% knitr::kable()
 ```

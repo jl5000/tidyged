@@ -32,17 +32,17 @@ null_active_record <- function(gedcom) {
 
 
 
-#' Find an xref of a record given a particular regex pattern.
+#' Find an xref of a record given a particular regex pattern
 #'
 #' This is a helper function to identify the xref of a record given a piece of information such
 #' as a name or reference number.
 #' 
 #' Sometimes an xref may be provided directly, in which case it's returned straight back.
 #'
-#' @param gedcom A tidyged object
-#' @param record_xrefs A list of potential xrefs to consider
-#' @param tags The tags to look at when comparing values
-#' @param search_pattern A regex pattern to search for
+#' @param gedcom A tidyged object.
+#' @param record_xrefs A list of potential xrefs to consider.
+#' @param tags The tags to look at when comparing values.
+#' @param search_pattern A regex pattern to search for.
 #'
 #' @return A single xref for the given record
 find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {

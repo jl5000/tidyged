@@ -311,7 +311,7 @@
   <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Child /4/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="st">"Grandparent 1"</span>, <span class="st">"Grandparent 2"</span>, children <span class="op">=</span> <span class="st">"Parent"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="st">"Parent"</span>, <span class="st">"Spouse 1"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 1"</span>, <span class="st">"Child 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="st">"Parent"</span>, <span class="st">"Spouse 2"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 1"</span>, <span class="st">"Child 2"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="st">"Parent"</span>, <span class="st">"Spouse 2"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 3"</span>, <span class="st">"Child 4"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Family link also added to the Individual record for husband: Grandparent 1</span>
 <span class="co">#&gt; Family link also added to the Individual record for wife: Grandparent 2</span>
 <span class="co">#&gt; Family link also added to the Individual record for child: Parent</span>
@@ -321,8 +321,8 @@
 <span class="co">#&gt; Family link also added to the Individual record for child: Child 2</span>
 <span class="co">#&gt; Family link also added to the Individual record for husband: Parent</span>
 <span class="co">#&gt; Family link also added to the Individual record for wife: Spouse 2</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Child 1</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Child 2</span>
+<span class="co">#&gt; Family link also added to the Individual record for child: Child 3</span>
+<span class="co">#&gt; Family link also added to the Individual record for child: Child 4</span>
 
 <span class="fu"><a href="../reference/df_individuals.html">df_families</a></span><span class="op">(</span><span class="va">three_gen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -374,7 +374,9 @@
   <span class="fu"><a href="../reference/df_individuals.html">df_families</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Child 1 removed</span>
-<span class="co">#&gt; Child 2 removed</span></code></pre></div>
+<span class="co">#&gt; Child 2 removed</span>
+<span class="co">#&gt; Child 3 removed</span>
+<span class="co">#&gt; Child 4 removed</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -426,7 +428,9 @@
 <span class="co">#&gt; Spouse 2 removed</span>
 <span class="co">#&gt; Spouse 1 removed</span>
 <span class="co">#&gt; Child 1 removed</span>
-<span class="co">#&gt; Child 2 removed</span></code></pre></div>
+<span class="co">#&gt; Child 2 removed</span>
+<span class="co">#&gt; Child 3 removed</span>
+<span class="co">#&gt; Child 4 removed</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -477,7 +481,9 @@
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Parent removed</span>
 <span class="co">#&gt; Child 1 removed</span>
-<span class="co">#&gt; Child 2 removed</span></code></pre></div>
+<span class="co">#&gt; Child 2 removed</span>
+<span class="co">#&gt; Child 3 removed</span>
+<span class="co">#&gt; Child 4 removed</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -527,12 +533,14 @@
   <span class="fu"><a href="../reference/df_individuals.html">df_families</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Family @F2@ with husband: Parent, wife: Spouse 1, and children: Child 1, Child 2 removed</span>
-<span class="co">#&gt; Family @F3@ with husband: Parent, wife: Spouse 2, and children: Child 1, Child 2 removed</span>
+<span class="co">#&gt; Family @F3@ with husband: Parent, wife: Spouse 2, and children: Child 3, Child 4 removed</span>
 <span class="co">#&gt; Spouse 2 removed</span>
 <span class="co">#&gt; Spouse 1 removed</span>
 <span class="co">#&gt; Parent removed</span>
 <span class="co">#&gt; Child 1 removed</span>
-<span class="co">#&gt; Child 2 removed</span></code></pre></div>
+<span class="co">#&gt; Child 2 removed</span>
+<span class="co">#&gt; Child 3 removed</span>
+<span class="co">#&gt; Child 4 removed</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -564,7 +572,9 @@
 <span class="co">#&gt; Spouse 1 removed</span>
 <span class="co">#&gt; Parent removed</span>
 <span class="co">#&gt; Child 1 removed</span>
-<span class="co">#&gt; Child 2 removed</span></code></pre></div>
+<span class="co">#&gt; Child 2 removed</span>
+<span class="co">#&gt; Child 3 removed</span>
+<span class="co">#&gt; Child 4 removed</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>

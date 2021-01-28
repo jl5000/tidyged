@@ -22,7 +22,7 @@ is not activated (will override active record).}
 
 \item{remove_spouses}{Whether to also remove all spouses of this individual (and their descendants).}
 
-\item{remove_empty_families}{Whether to also remove all of the descendant Family Group records.}
+\item{remove_empty_families}{Whether to also remove all of the empty descendant Family Group records.}
 }
 \value{
 A shorter tidygedcom object without the descendants of the individual.

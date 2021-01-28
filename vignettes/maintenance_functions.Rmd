@@ -86,16 +86,16 @@ gedcom(subm("Me")) %>%
 
 One of the more sophisticated features of `tidyged` is the ability to delete entire branches of your tree. 
 
-We illustrate its functionality using the family below consisting of three generations: A pair of grandparents who has a single child (named 'Parent'). This person forms two separate family groups with two spouses, each resulting in two children.
+We illustrate its functionality using the family below consisting of three generations: A pair of parents who has a single child (named 'Person'). This person forms two separate family groups with two spouses, each resulting in two children.
 
 ```{r}
 three_gen <- gedcom(subm("Me")) %>% 
   add_individual() %>% 
-  add_individual_names("Grandparent /1/") %>% 
+  add_individual_names("Parent /1/") %>% 
   add_individual() %>% 
-  add_individual_names("Grandparent /2/") %>% 
+  add_individual_names("Parent /2/") %>% 
   add_individual() %>% 
-  add_individual_names("Parent", given = "1") %>% 
+  add_individual_names("Person", given = "1") %>% 
   add_individual() %>% 
   add_individual_names("Spouse /1/") %>% 
   add_individual() %>% 
@@ -108,9 +108,9 @@ three_gen <- gedcom(subm("Me")) %>%
   add_individual_names("Child /3/") %>% 
   add_individual() %>% 
   add_individual_names("Child /4/") %>% 
-  add_family_group("Grandparent 1", "Grandparent 2", children = "Parent") %>% 
-  add_family_group("Parent", "Spouse 1", children = c("Child 1", "Child 2")) %>%
-  add_family_group("Parent", "Spouse 2", children = c("Child 3", "Child 4"))
+  add_family_group("Parent 1", "Parent 2", children = "Person") %>% 
+  add_family_group("Person", "Spouse 1", children = c("Child 1", "Child 2")) %>%
+  add_family_group("Person", "Spouse 2", children = c("Child 3", "Child 4"))
 
 df_families(three_gen) %>% knitr::kable()
 ```
@@ -118,7 +118,7 @@ df_families(three_gen) %>% knitr::kable()
 We use the `remove_descendants()` function to specify whose descendants to remove. By default it will keep the individual and their spouses, and will remove all empty family groups:
 
 ```{r}
-remove_descendants(three_gen, "Parent") %>% 
+remove_descendants(three_gen, "Person") %>% 
   df_families() %>% 
   knitr::kable()
 ```
@@ -126,7 +126,7 @@ remove_descendants(three_gen, "Parent") %>%
 Setting `remove_spouses = TRUE` will remove all spouses and their descendants:
 
 ```{r}
-remove_descendants(three_gen, "Parent", remove_spouses = TRUE) %>% 
+remove_descendants(three_gen, "Person", remove_spouses = TRUE) %>% 
   df_families() %>% 
   knitr::kable()
 ```
@@ -134,7 +134,7 @@ remove_descendants(three_gen, "Parent", remove_spouses = TRUE) %>%
 Setting `remove_individual = TRUE` will remove the individual:
 
 ```{r}
-remove_descendants(three_gen, "Parent", remove_individual = TRUE) %>% 
+remove_descendants(three_gen, "Person", remove_individual = TRUE) %>% 
   df_families() %>% 
   knitr::kable()
 ```
@@ -142,7 +142,7 @@ remove_descendants(three_gen, "Parent", remove_individual = TRUE) %>%
 Setting both parameters to TRUE will remove both individuals. Since this will result in more empty families they will be removed:
 
 ```{r}
-remove_descendants(three_gen, "Parent", remove_individual = TRUE, remove_spouses = TRUE) %>% 
+remove_descendants(three_gen, "Person", remove_individual = TRUE, remove_spouses = TRUE) %>% 
   df_families() %>% 
   knitr::kable()
 ```
@@ -150,7 +150,7 @@ remove_descendants(three_gen, "Parent", remove_individual = TRUE, remove_spouses
 Empty family groups can be retained by setting `remove_empty_families = FALSE`:
 
 ```{r}
-remove_descendants(three_gen, "Parent", remove_individual = TRUE, remove_spouses = TRUE,
+remove_descendants(three_gen, "Person", remove_individual = TRUE, remove_spouses = TRUE,
                    remove_empty_families = FALSE) %>% 
   df_families() %>% 
   knitr::kable()

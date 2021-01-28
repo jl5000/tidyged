@@ -115,7 +115,7 @@ remove_individual <- function(gedcom,
 #' is not activated (will override active record).
 #' @param remove_individual Whether to also remove the individual themselves.
 #' @param remove_spouses Whether to also remove all spouses of this individual (and their descendants).
-#' @param remove_empty_families Whether to also remove all of the descendant Family Group records.
+#' @param remove_empty_families Whether to also remove all of the empty descendant Family Group records.
 #'
 #' @return A shorter tidygedcom object without the descendants of the individual.
 #' @export

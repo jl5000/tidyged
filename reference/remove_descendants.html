@@ -133,7 +133,7 @@
   individual <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   remove_individual <span class='op'>=</span> <span class='cn'>FALSE</span>,
   remove_spouses <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  remove_families <span class='op'>=</span> <span class='cn'>TRUE</span>
+  remove_empty_families <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,7 +157,7 @@ is not activated (will override active record).</p></td>
       <td><p>Whether to also remove all spouses of this individual (and their descendants).</p></td>
     </tr>
     <tr>
-      <th>remove_families</th>
+      <th>remove_empty_families</th>
       <td><p>Whether to also remove all of the descendant Family Group records.</p></td>
     </tr>
     </table>
@@ -167,17 +167,19 @@ is not activated (will override active record).</p></td>
     <p>A shorter tidygedcom object without the descendants of the individual.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>WARNING: This function can result in the removal of a vast amount of data. It will
-tell the user precisely what it is removing. Be sure the function has done what you expect before
-accepting the results.</p>
+    <p>WARNING: This function can result in the removal of a vast amount of data as it relies on
+recursive deletion. It will tell the user precisely what it is removing. Be sure the function has done
+what you expect before accepting the results. It is recommended that you use this function with extreme
+caution if you think a descendant (or their spouse) may be connected to an individual on another
+branch of your tree.</p>
 <p>If you set remove_spouses = TRUE, the function will also remove all spouses of the individual
-given (at the top level) and their descendants.</p>
+given (at the top level) and their descendants. It does not go as far as removing other spouses of
+spouses.</p>
 <p>If you wanted to just remove all descendants and associated family group records, you would
 use the function with the default inputs. If you wanted to keep the (memberless) family group
-records, you would set remove_families = FALSE.</p>
+records, you would set remove_empty_families = FALSE.</p>
 <p>If remove_families, remove_individual, and remove_spouses are all TRUE, then the individual's
 (memberless) family group record will also be deleted.</p>
-<p>The function operates recursively for each generation of individuals.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

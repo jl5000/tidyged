@@ -49,6 +49,14 @@ gedcom(subm("Me")) %>%
   dplyr::filter(record == "@I1@")
 ```
 
+A shortcut way of defining a name is to use the `quick_name` parameter. It's not ideal, and should really only be reserved for demonstrations (like this one)! The parameter is the first one (after the tidyged object) which makes the code readable when using pipes:
+
+```{r}
+gedcom(subm("Me")) %>% 
+  add_individual("Leia /Skywalker/") %>% 
+  dplyr::filter(record == "@I1@")
+```
+
 ## Phonetic and romanised names
 
 Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the `add_individual_names_var()` function. As a minimum, the original name, variant name, derivation method, and whether it is a phonetic or romanised variation should be given:

@@ -18,12 +18,9 @@
 #' this event.
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_individual(sex = "M") %>% 
-#'  add_individual_names("Joe /Bloggs/") %>% 
-#'  add_individual(sex = "F") %>% 
-#'  add_individual_names("Jess /Bloggs/") %>% 
-#'  add_individual(sex = "F") %>% 
-#'  add_individual_names("Jessie /Bloggs/") %>%
+#'  add_individual("Joe /Bloggs/", sex = "M") %>% 
+#'  add_individual("Jess /Bloggs/", sex = "F") %>% 
+#'  add_individual("Jessie /Bloggs/", sex = "F") %>% 
 #'  add_family_group(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
 #'  add_family_event(event_type = "MARR", 
 #'                   event_date = date_calendar(year = 1969, month = 1, day = 30),

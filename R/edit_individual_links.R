@@ -16,10 +16,8 @@
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'                         add_individual() %>% 
-#'                         add_individual_names("Joe /Bloggs/") %>% 
-#'                         add_individual() %>% 
-#'                         add_individual_names("Jimmy /Bloggs/") %>%
+#'                         add_individual("Joe /Bloggs/") %>% 
+#'                         add_individual("Jimmy /Bloggs/") %>% 
 #'                         add_individual_association(associated_with = "Joe", association = "Friend") %>% 
 #'                         remove_dates_for_tests(), "json2")
 add_individual_association <- function(gedcom,

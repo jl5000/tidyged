@@ -7,6 +7,9 @@
 #' add_individual_* functions.
 #' 
 #' @param gedcom A tidyged object.
+#' @param quick_name A shortcut to quickly define a name for this individual. This is a shortcut for
+#' the add_individual_names() function (which you should really use instead), but this is useful
+#' for quick demonstrations.
 #' @param sex The sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
 #' "X" (intersex), or "N" (not recorded).
 #' @param user_reference_number A unique user-defined number or text that the submitter 
@@ -27,6 +30,7 @@
 #'                                      individual_notes = c("Note1", "Note 2")) %>% 
 #'                        remove_dates_for_tests(), "json2")
 add_individual <- function(gedcom,
+                           quick_name = character(),
                            sex = "U",
                            user_reference_number = character(),
                            user_reference_type = character(),
@@ -48,9 +52,14 @@ add_individual <- function(gedcom,
                                                         notes = indi_notes,
                                                         multimedia_links = media_links) 
   
-  gedcom %>%
+  temp <- gedcom %>%
     tibble::add_row(ind_record, .before = nrow(.)) %>% 
     set_active_record(xref)
+  
+  if (length(quick_name) > 0) 
+    temp <- add_individual_names(temp, quick_name)
+  
+  temp
 }
 
 

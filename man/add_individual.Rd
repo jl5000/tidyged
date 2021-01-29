@@ -6,6 +6,7 @@
 \usage{
 add_individual(
   gedcom,
+  quick_name = character(),
   sex = "U",
   user_reference_number = character(),
   user_reference_type = character(),
@@ -15,6 +16,10 @@ add_individual(
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
+
+\item{quick_name}{A shortcut to quickly define a name for this individual. This is a shortcut for
+the add_individual_names() function (which you should really use instead), but this is useful
+for quick demonstrations.}
 
 \item{sex}{The sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
 "X" (intersex), or "N" (not recorded).}

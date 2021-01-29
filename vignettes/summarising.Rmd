@@ -23,20 +23,16 @@ library(tidyged)
 
 simpsons <- gedcom(subm("Me"), gedcom_description = "Some of the Simpsons",
                    gedcom_copyright = "No copyright") %>% 
-  add_individual(sex = "M") %>% 
-  add_individual_names("Homer /Simpson/") %>% 
+  add_individual("Homer /Simpson/", sex = "M") %>% 
   add_individual_event_birth(event_date = date_calendar(1960, 5, 14),
                              place_name = "Springfield, USA") %>% 
-  add_individual(sex = "F") %>% 
-  add_individual_names("Marge /Simpson/") %>%  
+  add_individual("Marge /Simpson/", sex = "F") %>% 
   add_individual_event_birth(event_date = date_calendar(1960, 8, 24),
                              place_name = "Springfield, USA") %>% 
-  add_individual(sex = "F") %>% 
-  add_individual_names("Lisa /Simpson/") %>% 
+  add_individual("Lisa /Simpson/", sex = "F") %>% 
   add_individual_event_birth(event_date = date_calendar(1984, 12, 3),
                              place_name = "Springfield, USA") %>% 
-  add_individual(sex = "M") %>% 
-  add_individual_names("Bart /Simpson/") %>%  
+  add_individual("Bart /Simpson/", sex = "M") %>% 
   add_individual_event_birth(event_date = date_calendar(1982, 3, 16),
                              place_name = "Springfield, USA") %>% 
   add_family_group(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa"), 

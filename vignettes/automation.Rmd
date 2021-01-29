@@ -22,14 +22,10 @@ In `vignette("cross_references")`, the concept of record activation was introduc
 library(tidyged)
 
 simpsons <- gedcom(subm("Me")) %>% 
-  add_individual(sex = "M") %>% 
-  add_individual_names("Homer /Simpson/") %>% 
-  add_individual(sex = "F") %>% 
-  add_individual_names("Marge /Simpson/") %>%  
-  add_individual(sex = "F") %>% 
-  add_individual_names("Lisa /Simpson/") %>% 
-  add_individual(sex = "M") %>% 
-  add_individual_names("Bart /Simpson/") %>%  
+  add_individual("Homer /Simpson/", sex = "M") %>% 
+  add_individual("Marge /Simpson/", sex = "F") %>% 
+  add_individual("Lisa /Simpson/", sex = "F") %>% 
+  add_individual("Bart /Simpson/", sex = "M") %>% 
   add_note("These records have not yet been joined in a family group record")
 ```
 

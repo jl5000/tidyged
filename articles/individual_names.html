@@ -114,7 +114,7 @@
 <span class="co">#&gt; 3     1 @I1@   NAME  "Leia /Skywalker/"</span>
 <span class="co">#&gt; 4     2 @I1@   SURN  "Skywalker"       </span>
 <span class="co">#&gt; 5     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 6     2 @I1@   DATE  "28 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 6     2 @I1@   DATE  "29 JAN 2021"</span></code></pre></div>
 <p>In the GEDCOM specification, all names should also be accompanied by a set of name pieces, specifying the given name, surname, nickname, etc. In addition, full names should always surround surnames with forward slashes. In <code>tidyged</code> this allows us to automatically generate a name piece if none are given. If we provide a name with no name pieces and no forward slashes, it will cause an error:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -137,13 +137,27 @@
 <span class="co">#&gt; 5     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 6     2 @I1@   SURN  "Skywalker"       </span>
 <span class="co">#&gt; 7     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 8     2 @I1@   DATE  "28 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 8     2 @I1@   DATE  "29 JAN 2021"</span></code></pre></div>
+<p>A shortcut way of defining a name is to use the <code>quick_name</code> parameter. It’s not ideal, and should really only be reserved for demonstrations (like this one)! The parameter is the first one (after the tidyged object) which makes the code readable when using pipes:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 6 x 4</span>
+<span class="co">#&gt;   level record tag   value             </span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             </span>
+<span class="co">#&gt; 1     0 @I1@   INDI  ""                </span>
+<span class="co">#&gt; 2     1 @I1@   SEX   "U"               </span>
+<span class="co">#&gt; 3     1 @I1@   NAME  "Leia /Skywalker/"</span>
+<span class="co">#&gt; 4     2 @I1@   SURN  "Skywalker"       </span>
+<span class="co">#&gt; 5     1 @I1@   CHAN  ""                </span>
+<span class="co">#&gt; 6     2 @I1@   DATE  "29 JAN 2021"</span></code></pre></div>
 </div>
 <div id="phonetic-and-romanised-names" class="section level2">
 <h2 class="hasAnchor">
 <a href="#phonetic-and-romanised-names" class="anchor"></a>Phonetic and romanised names</h2>
 <p>Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the <code><a href="../reference/add_individual_names_var.html">add_individual_names_var()</a></code> function. As a minimum, the original name, variant name, derivation method, and whether it is a phonetic or romanised variation should be given:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -163,9 +177,9 @@
 <span class="co">#&gt;  8     3 @I1@   TYPE  "As spoken"       </span>
 <span class="co">#&gt;  9     3 @I1@   SURN  "Skywalker"       </span>
 <span class="co">#&gt; 10     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 11     2 @I1@   DATE  "28 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 11     2 @I1@   DATE  "29 JAN 2021"</span></code></pre></div>
 <p>As with the original name, if there are no name pieces or forward slashes, it will result in an error. Ideally we provide as much information as possible:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -186,13 +200,13 @@
 <span class="co">#&gt;  9     3 @I1@   GIVN  "Laya"            </span>
 <span class="co">#&gt; 10     3 @I1@   SURN  "Skywalker"       </span>
 <span class="co">#&gt; 11     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 12     2 @I1@   DATE  "28 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 12     2 @I1@   DATE  "29 JAN 2021"</span></code></pre></div>
 </div>
 <div id="name-types" class="section level2">
 <h2 class="hasAnchor">
 <a href="#name-types" class="anchor"></a>Name types</h2>
 <p>All of the above define the variants for a single birth name. The <code>type</code> parameter can also define different names for the individual. Below we add a line to define an adoptive name:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -218,13 +232,13 @@
 <span class="co">#&gt; 13     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 14     2 @I1@   SURN  "Organa"          </span>
 <span class="co">#&gt; 15     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 16     2 @I1@   DATE  "28 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 16     2 @I1@   DATE  "29 JAN 2021"</span></code></pre></div>
 </div>
 <div id="conflicting-names" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conflicting-names" class="anchor"></a>Conflicting names</h2>
 <p>GEDCOM files can also record different names <em>of the same type</em>, perhaps due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -255,9 +269,9 @@
 <span class="co">#&gt; 17     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 18     2 @I1@   SURN  "Skywaker"        </span>
 <span class="co">#&gt; 19     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 20     2 @I1@   DATE  "28 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 20     2 @I1@   DATE  "29 JAN 2021"</span></code></pre></div>
 <p>Generally conflicting names are arranged in order of confidence; the first name is more likely to be correct. If you want to promote a name to occur first in the record, you can use the <code><a href="../reference/primary_individual_name.html">primary_individual_name()</a></code> function:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -289,7 +303,7 @@
 <span class="co">#&gt; 17     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 18     2 @I1@   SURN  "Organa"          </span>
 <span class="co">#&gt; 19     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 20     2 @I1@   DATE  "28 JAN 2021"</span></code></pre></div>
+<span class="co">#&gt; 20     2 @I1@   DATE  "29 JAN 2021"</span></code></pre></div>
 <p>Note that the subrecords of the Individual record (those at level 1) can appear in any order.</p>
 </div>
   </div>

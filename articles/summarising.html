@@ -99,20 +99,16 @@
 
 <span class="va">simpsons</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span>, gedcom_description <span class="op">=</span> <span class="st">"Some of the Simpsons"</span>,
                    gedcom_copyright <span class="op">=</span> <span class="st">"No copyright"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Homer /Simpson/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Homer /Simpson/"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual_event.html">add_individual_event_birth</a></span><span class="op">(</span>event_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1960</span>, <span class="fl">5</span>, <span class="fl">14</span><span class="op">)</span>,
                              place_name <span class="op">=</span> <span class="st">"Springfield, USA"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Marge /Simpson/"</span><span class="op">)</span> <span class="op">%&gt;%</span>  
+  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Marge /Simpson/"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual_event.html">add_individual_event_birth</a></span><span class="op">(</span>event_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1960</span>, <span class="fl">8</span>, <span class="fl">24</span><span class="op">)</span>,
                              place_name <span class="op">=</span> <span class="st">"Springfield, USA"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Lisa /Simpson/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Lisa /Simpson/"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual_event.html">add_individual_event_birth</a></span><span class="op">(</span>event_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1984</span>, <span class="fl">12</span>, <span class="fl">3</span><span class="op">)</span>,
                              place_name <span class="op">=</span> <span class="st">"Springfield, USA"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual_names.html">add_individual_names</a></span><span class="op">(</span><span class="st">"Bart /Simpson/"</span><span class="op">)</span> <span class="op">%&gt;%</span>  
+  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Bart /Simpson/"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual_event.html">add_individual_event_birth</a></span><span class="op">(</span>event_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1982</span>, <span class="fl">3</span>, <span class="fl">16</span><span class="op">)</span>,
                              place_name <span class="op">=</span> <span class="st">"Springfield, USA"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Homer"</span>, wife <span class="op">=</span> <span class="st">"Marge"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bart"</span>, <span class="st">"Lisa"</span><span class="op">)</span>, 
@@ -217,7 +213,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">2</td>
-<td align="left">28 JAN 2021</td>
+<td align="left">29 JAN 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -232,7 +228,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">2</td>
-<td align="left">28 JAN 2021</td>
+<td align="left">29 JAN 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -247,7 +243,7 @@
 <td align="left">Homer Simpson</td>
 <td align="left">2</td>
 <td align="right">0</td>
-<td align="left">28 JAN 2021</td>
+<td align="left">29 JAN 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -262,7 +258,7 @@
 <td align="left">Homer Simpson</td>
 <td align="left">2</td>
 <td align="right">0</td>
-<td align="left">28 JAN 2021</td>
+<td align="left">29 JAN 2021</td>
 </tr>
 </tbody>
 </table>
@@ -286,7 +282,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">3</td>
-<td align="left">28 JAN 2021</td>
+<td align="left">29 JAN 2021</td>
 </tr></tbody>
 </table>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -308,7 +304,7 @@
 <td align="left"></td>
 <td align="left">PDF</td>
 <td align="left"></td>
-<td align="left">28 JAN 2021</td>
+<td align="left">29 JAN 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -317,7 +313,7 @@
 <td align="left"></td>
 <td align="left">PDF</td>
 <td align="left"></td>
-<td align="left">28 JAN 2021</td>
+<td align="left">29 JAN 2021</td>
 </tr>
 </tbody>
 </table>

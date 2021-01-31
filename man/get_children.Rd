@@ -7,7 +7,7 @@
 get_children(gedcom, individual = character(), return_name = FALSE)
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{individual}{The xref or name of an Individual record to act on if one
 is not activated (will override active record).}

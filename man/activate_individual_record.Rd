@@ -2,21 +2,51 @@
 % Please edit documentation in R/activate.R
 \name{activate_individual_record}
 \alias{activate_individual_record}
-\title{Activate an Individual record}
+\alias{activate_family_group_record}
+\alias{activate_submitter_record}
+\alias{activate_multimedia_record}
+\alias{activate_note_record}
+\alias{activate_source_record}
+\alias{activate_repository_record}
+\title{Activate a record}
 \usage{
-activate_individual_record(gedcom, individual)
+activate_individual_record(gedcom, record)
+
+activate_family_group_record(gedcom, record)
+
+activate_submitter_record(gedcom, record)
+
+activate_multimedia_record(gedcom, record)
+
+activate_note_record(gedcom, record)
+
+activate_source_record(gedcom, record)
+
+activate_repository_record(gedcom, record)
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{individual}{The xref or name of the Individual record to be activated.}
+\item{record}{The xref or attribute of the record to be activated.}
 }
 \value{
 The same tidyged object with "active_record" attribute set to the specific
-Individual record to allow easy editing.
+record to allow easy editing.
 }
 \description{
-This allows a mechanism to easily edit particular records. Either the individual name can be provided
-(can be a regex pattern) or the xref can be provided explicitly. Providing the name instead of the
-xref can make your code more readable, provided that the name returns a unique record!
+Set a specific record to be the active record.
+}
+\details{
+This allows a mechanism to easily edit particular records. Either a specific record attribute can be provided
+(can be a regex pattern) or the xref can be provided explicitly. Providing an attribute instead of the
+xref can make your code more readable, provided that it returns a unique record!
+
+The attributes that can be provided for each type of record are:
+\itemize{
+\item Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);
+\item Multimedia: File reference (FILE);
+\item Note: User text (NOTE);
+\item Source: Title (TITL);
+\item Repository: Name (NAME).
+}
 }

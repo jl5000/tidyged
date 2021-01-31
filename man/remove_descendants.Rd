@@ -13,7 +13,7 @@ remove_descendants(
 )
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{individual}{The xref or name of an Individual record to act on if one
 is not activated (will override active record).}
@@ -25,7 +25,7 @@ is not activated (will override active record).}
 \item{remove_empty_families}{Whether to also remove all of the empty descendant Family Group records.}
 }
 \value{
-A shorter tidygedcom object without the descendants of the individual.
+A shorter tidyged object without the descendants of the individual.
 }
 \description{
 This function removes an entire branch of the family tree below a certain individual.

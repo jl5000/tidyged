@@ -72,134 +72,85 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
 }
 
 
-#' Activate an Individual record
+#' Activate a record
 #' 
-#' This allows a mechanism to easily edit particular records. Either the individual name can be provided
-#' (can be a regex pattern) or the xref can be provided explicitly. Providing the name instead of the
-#' xref can make your code more readable, provided that the name returns a unique record! 
-#'
-#' @param gedcom A tidyged object. 
-#' @param individual The xref or name of the Individual record to be activated.
-#'
-#' @return The same tidyged object with "active_record" attribute set to the specific 
-#' Individual record to allow easy editing.
-#' @export
-activate_individual_record <- function(gedcom, individual) {
-  
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
-  set_active_record(gedcom, xref)
-}
-
-
-#' Activate a Family Group record
+#' Set a specific record to be the active record.
 #' 
-#' This allows a mechanism to easily edit particular records. For Family group records, 
-#' the explicit xref is required. 
-#'
-#' @param gedcom A tidyged object. 
-#' @param family The xref of the Family Group record to be activated.
-#'
-#' @return The same tidyged object with "active_record" attribute set to the specific 
-#' Family group record to allow easy editing.
-#' @export
-activate_family_group_record <- function(gedcom, family) {
-  
-  xref <- get_valid_xref(gedcom, family, .pkgenv$record_string_fam, is_family)
-  set_active_record(gedcom, xref)
-}
-
-
-#' Activate a Submitter record
-#' 
-#' This allows a mechanism to easily edit particular records. Either the submitter name can be provided
-#' (can be a partial name) or the xref can be provided explicitly. Providing the name instead of the
-#' xref can make your code more readable, provided that the name returns a unique record! 
-#'
-#' @param gedcom A tidyged object. 
-#' @param submitter The xref or name of the Submitter record to be activated.
-#'
-#' @return The same tidyged object with "active_record" attribute set to the specific 
-#' Submitter record to allow easy editing.
-#' @export
-activate_submitter_record <- function(gedcom, submitter) {
-  
-  xref <- get_valid_xref(gedcom, submitter, .pkgenv$record_string_subm, is_submitter)
-  set_active_record(gedcom, xref)
-}
-
-
-#' Activate a Multimedia record
-#' 
-#' This allows a mechanism to easily edit particular records. Either the file reference can be provided
-#' or the xref can be provided explicitly. Providing the file reference instead of the
+#' @details This allows a mechanism to easily edit particular records. Either a specific record attribute can be provided
+#' (can be a regex pattern) or the xref can be provided explicitly. Providing an attribute instead of the
 #' xref can make your code more readable, provided that it returns a unique record! 
+#' 
+#' The attributes that can be provided for each type of record are:
+#' 
+#' - Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);
+#' - Multimedia: File reference (FILE);
+#' - Note: User text (NOTE);
+#' - Source: Title (TITL);
+#' - Repository: Name (NAME).
 #'
 #' @param gedcom A tidyged object. 
-#' @param multimedia The xref or file reference of the Multimedia record to be activated.
+#' @param record The xref or attribute of the record to be activated.
 #'
 #' @return The same tidyged object with "active_record" attribute set to the specific 
-#' Multimedia record to allow easy editing.
+#' record to allow easy editing.
 #' @export
-activate_multimedia_record <- function(gedcom, multimedia) {
+activate_individual_record <- function(gedcom, record) {
   
-  xref <- get_valid_xref(gedcom, multimedia, .pkgenv$record_string_obje, is_multimedia)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_indi, is_individual)
   set_active_record(gedcom, xref)
 }
 
 
-#' Activate a Note record
-#' 
-#' This allows a mechanism to easily edit particular records. Either a note excerpt can be provided, 
-#' or the xref can be provided explicitly. Providing a note excerpt instead of the
-#' xref can make your code more readable, provided that the excerpt returns a unique record! 
-#'
-#' @param gedcom A tidyged object.
-#' @param note The xref or an excerpt of the Note record to be activated.
-#'
-#' @return The same tidyged object with "active_record" attribute set to the specific 
-#' Note record to allow easy editing.
+#' @rdname activate_individual_record
 #' @export
-activate_note_record <- function(gedcom, note) {
+activate_family_group_record <- function(gedcom, record) {
   
-  xref <- get_valid_xref(gedcom, note, .pkgenv$record_string_note, is_note)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_fam, is_family)
   set_active_record(gedcom, xref)
 }
 
 
-#' Activate a Source record
-#' 
-#' This allows a mechanism to easily edit particular records. Either the source title can be provided
-#' or the xref can be provided explicitly. Providing the source title instead of the
-#' xref can make your code more readable, provided that the name returns a unique record! 
-#'
-#' @param gedcom A tidyged object.
-#' @param source The xref or title of the Source record to be activated.
-#'
-#' @return The same tidyged object with "active_record" attribute set to the specific 
-#' Source record to allow easy editing.
+#' @rdname activate_individual_record
 #' @export
-activate_source_record <- function(gedcom, source) {
+activate_submitter_record <- function(gedcom, record) {
   
-  xref <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_subm, is_submitter)
   set_active_record(gedcom, xref)
 }
 
 
-#' Activate a Repository record
-#' 
-#' This allows a mechanism to easily edit particular records. Either the repository name can be provided
-#' (can be a partial name) or the xref can be provided explicitly. Providing the name instead of the
-#' xref can make your code more readable, provided that the name returns a unique record! 
-#'
-#' @param gedcom A tidyged object.
-#' @param repository The xref or name of the Repository record to be activated.
-#'
-#' @return The same tidyged object with "active_record" attribute set to the specific 
-#' Repository record to allow easy editing.
+#' @rdname activate_individual_record
 #' @export
-activate_repository_record <- function(gedcom, repository) {
+activate_multimedia_record <- function(gedcom, record) {
   
-  xref <- get_valid_xref(gedcom, repository, .pkgenv$record_string_repo, is_repository)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_obje, is_multimedia)
+  set_active_record(gedcom, xref)
+}
+
+
+#' @rdname activate_individual_record
+#' @export
+activate_note_record <- function(gedcom, record) {
+  
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_note, is_note)
+  set_active_record(gedcom, xref)
+}
+
+
+#' @rdname activate_individual_record
+#' @export
+activate_source_record <- function(gedcom, record) {
+  
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_sour, is_source)
+  set_active_record(gedcom, xref)
+}
+
+
+#' @rdname activate_individual_record
+#' @export
+activate_repository_record <- function(gedcom, record) {
+  
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_repo, is_repository)
   set_active_record(gedcom, xref)
   
 }

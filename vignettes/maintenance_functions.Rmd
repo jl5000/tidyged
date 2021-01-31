@@ -106,7 +106,7 @@ three_gen <- gedcom(subm("Me")) %>%
 df_families(three_gen) %>% knitr::kable()
 ```
 
-We use the `remove_descendants()` function to specify whose descendants to remove. By default it will keep the individual and their spouses, and will remove all empty family groups:
+We use the `remove_descendants()` function below to remove the descendants of Main Person. By default it will keep the individual and their spouses, and will remove all empty family groups:
 
 ```{r}
 remove_descendants(three_gen, "Main Person") %>% 

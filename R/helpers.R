@@ -171,7 +171,7 @@ temporarily_remove_name_slashes <- function(gedcom) {
 
 #' Get all spouses for an individual
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param return_name Whether to return the spouse's name(s) instead of the xref(s).
@@ -206,7 +206,7 @@ get_spouses <- function(gedcom,
 
 #' Get all children for an individual
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param return_name Whether to return the childrens name(s) instead of the xref(s).

@@ -119,14 +119,14 @@ remove_individual <- function(gedcom,
 #' If remove_families, remove_individual, and remove_spouses are all TRUE, then the individual's
 #' (memberless) family group record will also be deleted.
 #' 
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param remove_individual Whether to also remove the individual themselves.
 #' @param remove_spouses Whether to also remove all spouses of this individual (and their descendants).
 #' @param remove_empty_families Whether to also remove all of the empty descendant Family Group records.
 #'
-#' @return A shorter tidygedcom object without the descendants of the individual.
+#' @return A shorter tidyged object without the descendants of the individual.
 #' @export
 remove_descendants <- function(gedcom,
                                individual = character(),

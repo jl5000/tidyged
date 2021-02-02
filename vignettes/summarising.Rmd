@@ -89,10 +89,25 @@ is_repository(simpsons, "@N1@")
 The `describe_*()` family of functions give a description of certain records:
 
 ```{r}
-describe_individual(simpsons, "@I1@")
-describe_individual(simpsons, "@I3@")
-describe_individual(simpsons, "@I3@", abb = TRUE)
+describe_individual(simpsons, "Bart")
+describe_individual(simpsons, "Lisa", name_only = TRUE)
+describe_individual(simpsons, "Homer", short_desc = TRUE)
 describe_family_group(simpsons, "@F1@")
 ```
 
+Whilst this family of functions can only operate on one record at a time, the `describe_records()` function can take a whole vector of xrefs, potentially of different types:
 
+```{r}
+all_xrefs <- simpsons %>% 
+  dplyr::filter(!record %in% c("HD", "TR")) %>% 
+  dplyr::pull(record) %>% 
+  unique()
+
+describe_records(simpsons, all_xrefs)
+```
+
+As with the record-specific functions, setting `short_desc = TRUE` gives a shorter description.
+
+```{r}
+describe_records(simpsons, all_xrefs, short_desc = TRUE)
+```

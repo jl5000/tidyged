@@ -143,7 +143,7 @@ remove_descendants <- function(gedcom,
   # if spouse is to be removed, add their children to be removed
   if (remove_spouses) {
     # we don't use purrr::map here because the return values could vary in length
-    spou_chil <- c()
+    spou_chil <- NULL
     for(i in seq_along(spou_xref)) {
       spou_chil <- c(spou_chil, get_children(gedcom, spou_xref[i]))
     }
@@ -153,20 +153,20 @@ remove_descendants <- function(gedcom,
   #deal with family groups first (while the individuals are still in them)
   if (remove_spouses & remove_individual & remove_empty_families) {
     for(i in seq_along(fams_xref)) {
-      message(describe_family_group(gedcom, fams_xref[i]), " removed")
+      message(describe_family_group(gedcom, fams_xref[i], short_desc = TRUE), " removed")
       gedcom <- remove_family_group(gedcom, fams_xref[i])
     }
   }
  
   if (remove_spouses) {
     for(i in seq_along(spou_xref)) {
-      message(get_individual_name(gedcom, spou_xref[i]), " removed")
+      message(describe_individual(gedcom, spou_xref[i], short_desc = TRUE), " removed")
       gedcom <- remove_individual(gedcom, spou_xref[i])
     }
   }
   
   if (remove_individual) {
-    message(get_individual_name(gedcom, xref), " removed")
+    message(describe_individual(gedcom, xref, short_desc = TRUE), " removed")
     gedcom <- remove_individual(gedcom, xref)
   }
   

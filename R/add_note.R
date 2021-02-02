@@ -40,7 +40,7 @@ add_note_to_record <- function(gedcom, note) {
       
       if(length(asso_xrefs) == 0) stop("Error: No associations found")
       
-      asso_names <- purrr::map_chr(asso_xrefs, get_individual_name, gedcom = gedcom)
+      asso_names <- purrr::map_chr(asso_xrefs, describe_individual, gedcom = gedcom, name = TRUE)
       
       response3 <- utils::menu(asso_names, title = "Which association should the note be attached to? (Select 0 to cancel)")
       
@@ -97,7 +97,7 @@ add_note_to_record <- function(gedcom, note) {
       
       if(length(sour_xrefs) == 0) stop("Error: No source citations found")
       
-      sour_titles <- purrr::map_chr(sour_xrefs, get_source_title, gedcom = gedcom)
+      sour_titles <- purrr::map_chr(sour_xrefs, describe_source, gedcom = gedcom)
         
       response3 <- utils::menu(sour_titles, title = "Which source citation should the note be attached to?")
      

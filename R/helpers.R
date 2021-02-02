@@ -117,42 +117,6 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
 }
 
 
-#' Retrieve a name of an Individual
-#'
-#' @param gedcom A tidyged object.
-#' @param xref An xref of an Individual record.
-#'
-#' @return The first name found in the Individual record (with no forward slashes). 
-#' If no name is found, the xref is returned.
-get_individual_name <- function(gedcom, xref) { 
-  # this value isn't actually used
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
-  
-  name <- gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
-    stringr::str_remove_all("/")
-  
-  if (name == "") name <- xref
-  name
-}
-
-
-#' Retrieve the title of a Source
-#'
-#' @param gedcom A tidyged object.
-#' @param xref An xref of a Source record.
-#'
-#' @return The title found in the Source record. If no title is found, the xref is returned.
-get_source_title <- function(gedcom, xref) { 
-  # this value isn't actually used
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_source)
-  
-  title <- gedcom_value(gedcom, xref, "TITL", 1)
-  
-  if (title == "") title <- xref
-  title
-}
-
-
 #' Temporarily remove forward slashes from surnames
 #'
 #' @param gedcom A tidyged object.
@@ -187,7 +151,7 @@ get_spouses <- function(gedcom,
   fams_xref <- get_families_as_spouse(gedcom, xref)
   
   # we don't use purrr::map here because the return values could vary in length
-  spou_xref <- c()
+  spou_xref <- NULL
   for(i in seq_along(fams_xref)){
     spou_xref <- gedcom %>% 
       dplyr::filter(record == fams_xref[i], tag %in% c("HUSB","WIFE"),
@@ -197,7 +161,7 @@ get_spouses <- function(gedcom,
   }
 
   if (return_name) {
-    purrr::map_chr(spou_xref, get_individual_name, gedcom=gedcom)
+    purrr::map_chr(spou_xref, describe_individual, gedcom=gedcom, name_only = TRUE)
   } else {
     spou_xref
   }
@@ -227,9 +191,39 @@ get_children <- function(gedcom,
     unique()
   
   if (return_name) {
-    purrr::map_chr(chil_xref, get_individual_name, gedcom=gedcom)
+    purrr::map_chr(chil_xref, describe_individual, gedcom=gedcom, name_only=TRUE)
   } else {
     chil_xref
+  }
+  
+}
+
+#' Get all parents for an individual
+#'
+#' @param gedcom A tidyged object.
+#' @param individual The xref or name of an Individual record to act on if one 
+#' is not activated (will override active record).
+#' @param return_name Whether to return the parents name(s) instead of the xref(s).
+#'
+#' @return A character vector of parent xrefs or names.
+#' @export
+get_parents <- function(gedcom,
+                         individual = character(),
+                         return_name = FALSE) {
+  
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  
+  famc_xref <- get_families_as_child(gedcom, xref)
+  
+  par_xref <- gedcom %>% 
+    dplyr::filter(level == 1, record %in% famc_xref, tag %in% c("HUSB","WIFE")) %>% 
+    dplyr::pull(value) %>% 
+    unique()
+  
+  if (return_name) {
+    purrr::map_chr(par_xref, describe_individual, gedcom=gedcom, name_only=TRUE)
+  } else {
+    par_xref
   }
   
 }
@@ -253,7 +247,24 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
   
 }
 
-
+#' Get all families for an individual where they are a child
+#'
+#' @param gedcom A tidygedcom object.
+#' @param individual The xref or name of an Individual record to act on if one 
+#' is not activated (will override active record).
+#'
+#' @return A character vector of family xrefs.
+#' @export
+get_families_as_child <- function(gedcom, individual = character()) {
+  
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  
+  gedcom %>% 
+    dplyr::filter(level == 1, tag %in% c("CHIL"), value == xref) %>% 
+    dplyr::pull(record) %>% 
+    unique()
+  
+}
 
 #' Derive a valid cross-reference identifier
 #' 
@@ -362,6 +373,95 @@ find_insertion_point <- function(gedcom,
 }
 
 
+
+#' Identify unreferenced records
+#' 
+#' This function identifies records that are not referenced in any other records.
+#' 
+#' @details You would expect every record to be referenced by another in some way. For example, Individual
+#' records should reference Family Group records (and vice-versa), Repository records should be referenced
+#' by Source records, and Source records should be cited by other records.
+#' 
+#' You can use the output of this function with remove_records() to remove them, or describe_records() to
+#' find out more about them.
+#'
+#' @param gedcom A tidyged object.
+#'
+#' @return A vector of xrefs that are not referenced anywhere else in the tidyged object.
+#' @export
+identify_unused_records <- function(gedcom) {
+  
+  xrefs_indi <- xrefs_individuals(gedcom)
+  xrefs_fam <- xrefs_families(gedcom)
+  xrefs_media <- xrefs_multimedia(gedcom)
+  xrefs_sour <- xrefs_sources(gedcom)
+  xrefs_repo <- xrefs_repositories(gedcom)
+  xrefs_note <- xrefs_notes(gedcom)
+  
+  # get unattached individuals
+  attached <- unique(dplyr::filter(gedcom, record %in% xrefs_fam, tag %in% c("HUSB","WIFE","CHIL"))$value)
+  unattached <- dplyr::setdiff(xrefs_indi, attached)
+  
+  #also look at family links perspective to check consistency
+  attached2 <- unique(dplyr::filter(gedcom, record %in% xrefs_indi, tag %in% c("FAMC","FAMS"))$record)
+  unattached2 <- dplyr::setdiff(xrefs_indi, attached2)
+  
+  if (!identical(sort(attached), sort(attached2)))
+    warning("Family group membership and individual family links are inconsistent")
+  
+  # get empty families
+  nonempty <- unique(dplyr::filter(gedcom, record %in% xrefs_fam, tag %in% c("HUSB","WIFE","CHIL"))$record)
+  empty <- dplyr::setdiff(xrefs_fam, nonempty) 
+  
+  #get unused media
+  used_media <- unique(dplyr::filter(gedcom, !record %in% xrefs_repo, tag == "OBJE")$value)
+  unused_media <- dplyr::setdiff(xrefs_media, used_media) 
+  
+  #get unused sources
+  used_sour <- unique(dplyr::filter(gedcom, !record %in% xrefs_sour, tag == "SOUR")$value)
+  unused_sour <- dplyr::setdiff(xrefs_sour, used_sour)
+  
+  #get unused repos
+  used_repo <- unique(dplyr::filter(gedcom, !record %in% xrefs_repo, tag == "REPO")$value)
+  unused_repo <- dplyr::setdiff(xrefs_repo, used_repo)
+  
+  #get unused notes
+  used_notes <- unique(dplyr::filter(gedcom, !record %in% xrefs_note, tag == "NOTE")$value)
+  unused_notes <- dplyr::setdiff(xrefs_note, used_notes)
+  
+  c(unattached, empty, unused_media, unused_sour, unused_repo, unused_notes)
+  
+}
+
+
+#' Remove multiple records at once
+#'
+#' @param gedcom A tidyged object.
+#' @param xrefs A vector of xrefs to remove.
+#'
+#' @return An updated tidyged object with the records removed.
+#' @export
+remove_records <- function(gedcom, xrefs) {
+  
+  for (xref in xrefs) {
+    if (is_individual(gedcom, xref)) {
+      gedcom <- remove_individual(gedcom, xref)
+    } else if(is_family(gedcom, xref)) {
+      gedcom <- remove_family_group(gedcom, xref)
+    } else if(is_multimedia(gedcom, xref)) {
+      gedcom <- remove_multimedia(gedcom, xref)
+    } else if(is_source(gedcom, xref)) {
+      gedcom <- remove_source(gedcom, xref)
+    } else if(is_repository(gedcom, xref)) {
+      gedcom <- remove_repository(gedcom, xref)
+    } else if(is_note(gedcom, xref)) {
+      gedcom <- remove_note(gedcom, xref)
+    } else {
+      stop("Record ", xref, " is not recognised")
+    }
+  }
+  gedcom
+}
 
 
 #' Identify the rows of a subrecord in a tidyged object

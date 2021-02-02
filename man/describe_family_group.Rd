@@ -2,18 +2,54 @@
 % Please edit documentation in R/interrogate.R
 \name{describe_family_group}
 \alias{describe_family_group}
-\title{Get a description of a family group}
+\alias{describe_individual}
+\alias{describe_multimedia}
+\alias{describe_source}
+\alias{describe_repository}
+\alias{describe_note}
+\alias{describe_submitter}
+\title{Get a description of a record}
 \usage{
-describe_family_group(gedcom, xref)
+describe_family_group(gedcom, xref, short_desc = FALSE)
+
+describe_individual(gedcom, xref, name_only = FALSE, short_desc = FALSE)
+
+describe_multimedia(gedcom, xref, file_ref_only = FALSE, short_desc = FALSE)
+
+describe_source(gedcom, xref, title_only = FALSE, short_desc = FALSE)
+
+describe_repository(gedcom, xref, name_only = FALSE, short_desc = FALSE)
+
+describe_note(gedcom, xref, short_desc = FALSE)
+
+describe_submitter(gedcom, xref, name_only = FALSE, short_desc = FALSE)
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{xref}{An xref of a Family group record.}
+\item{xref}{An xref of a record.}
+
+\item{short_desc}{Whether to return a shorter description.}
+
+\item{name_only}{Whether to return the individual/repository name only. If none is found, the xref
+is returned.}
+
+\item{file_ref_only}{Whether to return the multimedia file reference only. If none is found, the xref
+is returned.}
+
+\item{title_only}{Whether to return the source title only. If none is found, the xref
+is returned.}
 }
 \value{
-A character string describing the members of the family group.
+A character string describing the record.
 }
 \description{
-Get a description of a family group
+Get descriptions of a record at various degrees of detail.
+}
+\details{
+This function offers three levels of detail. For example, individual records can be:
+
+"Joe Bloggs" (name_only = TRUE)
+"Individual @I1@, Joe Bloggs" (short_desc = TRUE)
+"Individual @I1@, Joe Bloggs, child of X and Y, born on x/x/x in place, died on x/x/x in place" (short_desc = FALSE)
 }

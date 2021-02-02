@@ -77,7 +77,7 @@ add_family_group <- function(gedcom,
       add_individual_family_link_as_spouse(xref)
     
     message("Family link also added to the Individual record for husband: ", 
-            get_individual_name(temp, xref_husb))
+            describe_individual(temp, xref_husb, short_desc = TRUE))
   }
   if(length(xref_wife) == 1) {
     temp <- temp %>%
@@ -85,7 +85,7 @@ add_family_group <- function(gedcom,
       add_individual_family_link_as_spouse(xref)
     
     message("Family link also added to the Individual record for wife: ",
-            get_individual_name(temp, xref_wife))
+            describe_individual(temp, xref_wife, short_desc = TRUE))
   }
   
   for(i in seq_along(xrefs_chil)) {
@@ -95,7 +95,7 @@ add_family_group <- function(gedcom,
       add_individual_family_link_as_child(xref, linkage_type = child_linkage_types[i]) 
     
     message("Family link also added to the Individual record for child: ",
-            get_individual_name(temp, xrefs_chil[i]))
+            describe_individual(temp, xrefs_chil[i], short_desc = TRUE))
   }
   
   set_active_record(temp, xref)
@@ -165,34 +165,3 @@ remove_family_group <- function(gedcom,
     null_active_record()  
 }
 
-
-
-#' Remove Family Group records with no members
-#'
-#' @param gedcom A tidyged object.
-#'
-#' @return A new tidyged object with empty Family Group records removed.
-#' @export
-remove_empty_family_groups <- function(gedcom) {
-  
-  tags <- c("HUSB", "WIFE", "CHIL")
-  fam_xrefs <- xrefs_families(gedcom)
-  num_removed <- 0
-  
-  for(xref in fam_xrefs) {
-    
-    members <- dplyr::filter(gedcom, record == xref, tag %in% tags)
-    
-    if(nrow(members) == 0) {
-      gedcom <- gedcom %>% 
-        remove_family_group(xref)
-      
-      num_removed <- num_removed + 1
-    }
-    
-  }
- 
-  message(num_removed, " empty family groups removed.")
-  gedcom
-  
-}

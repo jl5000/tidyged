@@ -87,7 +87,7 @@ We can find out more about these xrefs by using the `describe_records()` functio
 
 ```{r}
 identify_unused_records(some_unref) %>% 
-  describe_records()
+  describe_records(gedcom = some_unref)
 ```
 
 We can remove multiple records at once using the `remove_records()` function:

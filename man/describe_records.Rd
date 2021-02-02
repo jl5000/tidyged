@@ -4,14 +4,14 @@
 \alias{describe_records}
 \title{Get descriptions for records}
 \usage{
-describe_records(gedcom, xrefs, short = FALSE)
+describe_records(gedcom, xrefs, short_desc = FALSE)
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
 \item{xrefs}{A vector of record xrefs.}
 
-\item{short}{Whether to return a shorter description.}
+\item{short_desc}{Whether to return a shorter description.}
 }
 \value{
 A vector of record descriptions.

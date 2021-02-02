@@ -78,12 +78,15 @@ is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$r
 #' Get descriptions for records
 #'
 #' @param gedcom A tidyged object.
-#' @param xrefs A vector of record xrefs.
-#' @param short Whether to return a shorter description.
+#' @param xrefs A vector of record xrefs. Only unique records are used. Header and trailer records
+#' are ignored.
+#' @param short_desc Whether to return a shorter description.
 #'
 #' @return A vector of record descriptions.
 #' @export
 describe_records <- function(gedcom, xrefs, short_desc = FALSE) {
+  
+  xrefs <- unique(xrefs[!xrefs %in% c("HD","TR")])
   
   descriptions <- NULL
   for (xref in xrefs) {
@@ -130,6 +133,7 @@ describe_records <- function(gedcom, xrefs, short_desc = FALSE) {
 #' is returned.
 #'
 #' @return A character string describing the record.
+#' @export
 #' @tests
 #' expect_equal(gedcom() %>% add_family_group() %>% describe_family_group("@F1@"),
 #'              "Family @F1@, headed by no individuals, and no children")
@@ -278,7 +282,7 @@ describe_repository <- function(gedcom, xref, name_only = FALSE, short_desc = FA
   
   name <- gedcom_value(gedcom, xref, "NAME", 1)
   
-  if(name_only) return(ifelse(name = "", xref, name))
+  if(name_only) return(ifelse(name == "", xref, name))
   
   paste0("Repository ", xref, ", ", name)
   

@@ -121,13 +121,13 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 15     1 HD     DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                      </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 22     0 TR     TRLR  ""</span></code></pre></div>
 <p>See row 20 and the row after for the change date for the submitter record.</p>
 <p>By default this behaviour also applies when modifying existing records. If you would like to leave the change date alone when modifying a record, you can set <code>update_date_changed = FALSE</code> (it is TRUE by default).</p>
@@ -153,7 +153,7 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 15     1 HD     DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
@@ -188,20 +188,20 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 15     1 HD     DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                      </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."                 </span>
 <span class="co">#&gt; 23     1 @N1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 24     2 @N1@   DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 24     2 @N1@   DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 25     0 @I1@   INDI  ""                                        </span>
 <span class="co">#&gt; 26     1 @I1@   SEX   "U"                                       </span>
 <span class="co">#&gt; 27     1 @I1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 28     2 @I1@   DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 28     2 @I1@   DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 29     1 @I1@   NOTE  "This is a bespoke note."                 </span>
 <span class="co">#&gt; 30     1 @I1@   NOTE  "This is a generic note."                 </span>
 <span class="co">#&gt; 31     0 @R1@   REPO  ""                                        </span>
@@ -209,7 +209,7 @@
 <span class="co">#&gt; 33     1 @R1@   NOTE  "This is a bespoke note."                 </span>
 <span class="co">#&gt; 34     1 @R1@   NOTE  "This is a generic note."                 </span>
 <span class="co">#&gt; 35     1 @R1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 36     2 @R1@   DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 36     2 @R1@   DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 37     0 TR     TRLR  ""</span></code></pre></div>
 <p>In the above example, there is a generic note recorded in a top level Note record. This same note message has been used for the individual and repository defined, but they have been repeated rather than pointing to the Note record. There is also a repeated bespoke note given in the Individual and Repository records.</p>
 <p>The <code><a href="../reference/consolidate_notes.html">consolidate_notes()</a></code> function will simplify the file, replacing note values with pointers to top level Note records (creating them if necessary) if they are repeated:</p>
@@ -232,20 +232,20 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 15     1 HD     DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                      </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."                 </span>
 <span class="co">#&gt; 23     1 @N1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 24     2 @N1@   DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 24     2 @N1@   DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 25     0 @I1@   INDI  ""                                        </span>
 <span class="co">#&gt; 26     1 @I1@   SEX   "U"                                       </span>
 <span class="co">#&gt; 27     1 @I1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 28     2 @I1@   DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 28     2 @I1@   DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 29     1 @I1@   NOTE  "@N2@"                                    </span>
 <span class="co">#&gt; 30     1 @I1@   NOTE  "@N1@"                                    </span>
 <span class="co">#&gt; 31     0 @R1@   REPO  ""                                        </span>
@@ -253,43 +253,64 @@
 <span class="co">#&gt; 33     1 @R1@   NOTE  "@N2@"                                    </span>
 <span class="co">#&gt; 34     1 @R1@   NOTE  "@N1@"                                    </span>
 <span class="co">#&gt; 35     1 @R1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 36     2 @R1@   DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 36     2 @R1@   DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 37     0 @N2@   NOTE  "This is a bespoke note."                 </span>
 <span class="co">#&gt; 38     1 @N2@   CHAN  ""                                        </span>
-<span class="co">#&gt; 39     2 @N2@   DATE  "31 JAN 2021"                             </span>
+<span class="co">#&gt; 39     2 @N2@   DATE  "2 FEB 2021"                              </span>
 <span class="co">#&gt; 40     0 TR     TRLR  ""</span></code></pre></div>
 </div>
-<div id="empty-family-groups" class="section level2">
+<div id="unreferenced-records" class="section level2">
 <h2 class="hasAnchor">
-<a href="#empty-family-groups" class="anchor"></a>Empty family groups</h2>
-<p>If there are any Family Group records with no references to Individual records, they can be removed automatically with the <code><a href="../reference/remove_empty_family_groups.html">remove_empty_family_groups()</a></code> function. In the function below we create 6 family group records, half with members, half without:</p>
+<a href="#unreferenced-records" class="anchor"></a>Unreferenced records</h2>
+<p>If there are any records that are not referenced anywhere else, they can be found with the <code><a href="../reference/identify_unused_records.html">identify_unused_records()</a></code> function. In the function below we create 6 family group records, half with members, half without, and also an unreferenced Repository record:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"@I1@"</span>, wife <span class="op">=</span> <span class="st">"@I2@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">some_unref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Tom /Smith/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Tammy /Smith/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Alice /White/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Phil /Brown/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Tom"</span>, wife <span class="op">=</span> <span class="st">"Tammy"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"@I4@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Phil"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span>children <span class="op">=</span> <span class="st">"@I3@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span>children <span class="op">=</span> <span class="st">"Alice"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/remove_empty_family_groups.html">remove_empty_family_groups</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/num_indi.html">num_fam</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Family link also added to the Individual record for husband: @I1@</span>
-<span class="co">#&gt; Family link also added to the Individual record for wife: @I2@</span>
-<span class="co">#&gt; Family link also added to the Individual record for husband: @I4@</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: @I3@</span>
-<span class="co">#&gt; 3 empty family groups removed.</span>
-<span class="co">#&gt; [1] 3</span></code></pre></div>
+  <span class="fu"><a href="../reference/add_repository.html">add_repository</a></span><span class="op">(</span><span class="st">"Test repo"</span><span class="op">)</span> 
+<span class="co">#&gt; Family link also added to the Individual record for husband: Individual @I1@, Tom Smith</span>
+<span class="co">#&gt; Family link also added to the Individual record for wife: Individual @I2@, Tammy Smith</span>
+<span class="co">#&gt; Family link also added to the Individual record for husband: Individual @I4@, Phil Brown</span>
+<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I3@, Alice White</span>
+  
+<span class="fu"><a href="../reference/identify_unused_records.html">identify_unused_records</a></span><span class="op">(</span><span class="va">some_unref</span><span class="op">)</span>
+<span class="co">#&gt; [1] "@F2@" "@F4@" "@F6@" "@R1@"</span></code></pre></div>
+<p>We can find out more about these xrefs by using the <code><a href="../reference/describe_records.html">describe_records()</a></code> function:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/identify_unused_records.html">identify_unused_records</a></span><span class="op">(</span><span class="va">some_unref</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">some_unref</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Family @F2@, headed by no individuals, and no children"</span>
+<span class="co">#&gt; [2] "Family @F4@, headed by no individuals, and no children"</span>
+<span class="co">#&gt; [3] "Family @F6@, headed by no individuals, and no children"</span>
+<span class="co">#&gt; [4] "Repository @R1@, Test repo"</span></code></pre></div>
+<p>We can remove multiple records at once using the <code><a href="../reference/remove_records.html">remove_records()</a></code> function:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/remove_records.html">remove_records</a></span><span class="op">(</span><span class="va">some_unref</span>, <span class="fu"><a href="../reference/identify_unused_records.html">identify_unused_records</a></span><span class="op">(</span><span class="va">some_unref</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; GEDCOM version 5.5.5 (LINEAGE-LINKED)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Individuals:         4</span>
+<span class="co">#&gt; Families:            3</span>
+<span class="co">#&gt; Submitters:          1</span>
+<span class="co">#&gt; Multimedia objects:  0</span>
+<span class="co">#&gt; Notes:               0</span>
+<span class="co">#&gt; Sources:             0</span>
+<span class="co">#&gt; Repositories:        0</span></code></pre></div>
 </div>
 <div id="removing-entire-branches" class="section level2">
 <h2 class="hasAnchor">
 <a href="#removing-entire-branches" class="anchor"></a>Removing entire branches</h2>
 <p>One of the more sophisticated features of <code>tidyged</code> is the ability to delete entire branches of your tree.</p>
 <p>We illustrate its functionality using the family below consisting of three generations: A pair of parents who has a single child (named ‘Main Person’). This person forms two separate family groups with two spouses, each resulting in two children.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Parent /1/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_individual.html">add_individual</a></span><span class="op">(</span><span class="st">"Parent /2/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -303,17 +324,17 @@
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="st">"Parent 1"</span>, <span class="st">"Parent 2"</span>, children <span class="op">=</span> <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="st">"Main Person"</span>, <span class="st">"Spouse 1"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 1"</span>, <span class="st">"Child 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="st">"Main Person"</span>, <span class="st">"Spouse 2"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 3"</span>, <span class="st">"Child 4"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Family link also added to the Individual record for husband: Parent 1</span>
-<span class="co">#&gt; Family link also added to the Individual record for wife: Parent 2</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Main Person</span>
-<span class="co">#&gt; Family link also added to the Individual record for husband: Main Person</span>
-<span class="co">#&gt; Family link also added to the Individual record for wife: Spouse 1</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Child 1</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Child 2</span>
-<span class="co">#&gt; Family link also added to the Individual record for husband: Main Person</span>
-<span class="co">#&gt; Family link also added to the Individual record for wife: Spouse 2</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Child 3</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Child 4</span>
+<span class="co">#&gt; Family link also added to the Individual record for husband: Individual @I1@, Parent 1</span>
+<span class="co">#&gt; Family link also added to the Individual record for wife: Individual @I2@, Parent 2</span>
+<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I3@, Main Person</span>
+<span class="co">#&gt; Family link also added to the Individual record for husband: Individual @I3@, Main Person</span>
+<span class="co">#&gt; Family link also added to the Individual record for wife: Individual @I4@, Spouse 1</span>
+<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I6@, Child 1</span>
+<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I7@, Child 2</span>
+<span class="co">#&gt; Family link also added to the Individual record for husband: Individual @I3@, Main Person</span>
+<span class="co">#&gt; Family link also added to the Individual record for wife: Individual @I5@, Spouse 2</span>
+<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I8@, Child 3</span>
+<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I9@, Child 4</span>
 
 <span class="fu"><a href="../reference/df_individuals.html">df_families</a></span><span class="op">(</span><span class="va">three_gen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -335,7 +356,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -345,7 +366,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -355,19 +376,19 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 </tbody>
 </table>
 <p>We use the <code><a href="../reference/remove_descendants.html">remove_descendants()</a></code> function below to remove the descendants of Main Person. By default it will keep the individual and their spouses, and will remove all empty family groups:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/remove_descendants.html">remove_descendants</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/df_individuals.html">df_families</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Child 1 removed</span>
-<span class="co">#&gt; Child 2 removed</span>
-<span class="co">#&gt; Child 3 removed</span>
-<span class="co">#&gt; Child 4 removed</span></code></pre></div>
+<span class="co">#&gt; Individual @I6@, Child 1 removed</span>
+<span class="co">#&gt; Individual @I7@, Child 2 removed</span>
+<span class="co">#&gt; Individual @I8@, Child 3 removed</span>
+<span class="co">#&gt; Individual @I9@, Child 4 removed</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -387,7 +408,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -397,7 +418,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -407,21 +428,21 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 </tbody>
 </table>
 <p>Setting <code>remove_spouses = TRUE</code> will remove all spouses and their descendants:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/remove_descendants.html">remove_descendants</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span>, remove_spouses <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/df_individuals.html">df_families</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Spouse 2 removed</span>
-<span class="co">#&gt; Spouse 1 removed</span>
-<span class="co">#&gt; Child 1 removed</span>
-<span class="co">#&gt; Child 2 removed</span>
-<span class="co">#&gt; Child 3 removed</span>
-<span class="co">#&gt; Child 4 removed</span></code></pre></div>
+<span class="co">#&gt; Individual @I5@, Spouse 2 removed</span>
+<span class="co">#&gt; Individual @I4@, Spouse 1 removed</span>
+<span class="co">#&gt; Individual @I6@, Child 1 removed</span>
+<span class="co">#&gt; Individual @I7@, Child 2 removed</span>
+<span class="co">#&gt; Individual @I8@, Child 3 removed</span>
+<span class="co">#&gt; Individual @I9@, Child 4 removed</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -441,7 +462,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -451,7 +472,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -461,20 +482,20 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 </tbody>
 </table>
 <p>Setting <code>remove_individual = TRUE</code> will remove the individual:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/remove_descendants.html">remove_descendants</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span>, remove_individual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/df_individuals.html">df_families</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Main Person removed</span>
-<span class="co">#&gt; Child 1 removed</span>
-<span class="co">#&gt; Child 2 removed</span>
-<span class="co">#&gt; Child 3 removed</span>
-<span class="co">#&gt; Child 4 removed</span></code></pre></div>
+<span class="co">#&gt; Individual @I3@, Main Person removed</span>
+<span class="co">#&gt; Individual @I6@, Child 1 removed</span>
+<span class="co">#&gt; Individual @I7@, Child 2 removed</span>
+<span class="co">#&gt; Individual @I8@, Child 3 removed</span>
+<span class="co">#&gt; Individual @I9@, Child 4 removed</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -494,7 +515,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -504,7 +525,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -514,24 +535,24 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 </tbody>
 </table>
 <p>Setting both parameters to TRUE will remove both individuals. Since this will result in more empty families they will be removed:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/remove_descendants.html">remove_descendants</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span>, remove_individual <span class="op">=</span> <span class="cn">TRUE</span>, remove_spouses <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/df_individuals.html">df_families</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Family @F2@ with husband: Main Person, wife: Spouse 1, and children: Child 1, Child 2 removed</span>
-<span class="co">#&gt; Family @F3@ with husband: Main Person, wife: Spouse 2, and children: Child 3, Child 4 removed</span>
-<span class="co">#&gt; Spouse 2 removed</span>
-<span class="co">#&gt; Spouse 1 removed</span>
-<span class="co">#&gt; Main Person removed</span>
-<span class="co">#&gt; Child 1 removed</span>
-<span class="co">#&gt; Child 2 removed</span>
-<span class="co">#&gt; Child 3 removed</span>
-<span class="co">#&gt; Child 4 removed</span></code></pre></div>
+<span class="co">#&gt; Family @F2@, headed by Main Person and Spouse 1 removed</span>
+<span class="co">#&gt; Family @F3@, headed by Main Person and Spouse 2 removed</span>
+<span class="co">#&gt; Individual @I5@, Spouse 2 removed</span>
+<span class="co">#&gt; Individual @I4@, Spouse 1 removed</span>
+<span class="co">#&gt; Individual @I3@, Main Person removed</span>
+<span class="co">#&gt; Individual @I6@, Child 1 removed</span>
+<span class="co">#&gt; Individual @I7@, Child 2 removed</span>
+<span class="co">#&gt; Individual @I8@, Child 3 removed</span>
+<span class="co">#&gt; Individual @I9@, Child 4 removed</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -550,22 +571,22 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr></tbody>
 </table>
 <p>Empty family groups can be retained by setting <code>remove_empty_families = FALSE</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/remove_descendants.html">remove_descendants</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span>, remove_individual <span class="op">=</span> <span class="cn">TRUE</span>, remove_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
                    remove_empty_families <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/df_individuals.html">df_families</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Spouse 2 removed</span>
-<span class="co">#&gt; Spouse 1 removed</span>
-<span class="co">#&gt; Main Person removed</span>
-<span class="co">#&gt; Child 1 removed</span>
-<span class="co">#&gt; Child 2 removed</span>
-<span class="co">#&gt; Child 3 removed</span>
-<span class="co">#&gt; Child 4 removed</span></code></pre></div>
+<span class="co">#&gt; Individual @I5@, Spouse 2 removed</span>
+<span class="co">#&gt; Individual @I4@, Spouse 1 removed</span>
+<span class="co">#&gt; Individual @I3@, Main Person removed</span>
+<span class="co">#&gt; Individual @I6@, Child 1 removed</span>
+<span class="co">#&gt; Individual @I7@, Child 2 removed</span>
+<span class="co">#&gt; Individual @I8@, Child 3 removed</span>
+<span class="co">#&gt; Individual @I9@, Child 4 removed</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -585,7 +606,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -595,7 +616,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -605,7 +626,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">31 JAN 2021</td>
+<td align="left">2 FEB 2021</td>
 </tr>
 </tbody>
 </table>

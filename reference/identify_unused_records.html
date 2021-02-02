@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a description of a record — describe_family_group • tidyged</title>
+<title>Identify unreferenced records — identify_unused_records • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get a description of a record — describe_family_group" />
-<meta property="og:description" content="Get descriptions of a record at various degrees of detail." />
+<meta property="og:title" content="Identify unreferenced records — identify_unused_records" />
+<meta property="og:description" content="This function identifies records that are not referenced in any other records." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,28 +119,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a description of a record</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/interrogate.R'><code>R/interrogate.R</code></a></small>
-    <div class="hidden name"><code>describe_family_group.Rd</code></div>
+    <h1>Identify unreferenced records</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>identify_unused_records.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get descriptions of a record at various degrees of detail.</p>
+    <p>This function identifies records that are not referenced in any other records.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>describe_family_group</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_individual</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, name_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_multimedia</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, file_ref_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_source</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, title_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_repository</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, name_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_note</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_submitter</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, name_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>identify_unused_records</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,40 +137,18 @@
       <th>gedcom</th>
       <td><p>A tidyged object.</p></td>
     </tr>
-    <tr>
-      <th>xref</th>
-      <td><p>An xref of a record.</p></td>
-    </tr>
-    <tr>
-      <th>short_desc</th>
-      <td><p>Whether to return a shorter description.</p></td>
-    </tr>
-    <tr>
-      <th>name_only</th>
-      <td><p>Whether to return the individual/repository name only. If none is found, the xref
-is returned.</p></td>
-    </tr>
-    <tr>
-      <th>file_ref_only</th>
-      <td><p>Whether to return the multimedia file reference only. If none is found, the xref
-is returned.</p></td>
-    </tr>
-    <tr>
-      <th>title_only</th>
-      <td><p>Whether to return the source title only. If none is found, the xref
-is returned.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character string describing the record.</p>
+    <p>A vector of xrefs that are not referenced anywhere else in the tidyged object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function offers three levels of detail. For example, individual records can be:</p>
-<p>"Joe Bloggs" (name_only = TRUE)
-"Individual @I1@, Joe Bloggs" (short_desc = TRUE)
-"Individual @I1@, Joe Bloggs, child of X and Y, born on x/x/x in place, died on x/x/x in place" (short_desc = FALSE)</p>
+    <p>You would expect every record to be referenced by another in some way. For example, Individual
+records should reference Family Group records (and vice-versa), Repository records should be referenced
+by Source records, and Source records should be cited by other records.</p>
+<p>You can use the output of this function with remove_records() to remove them, or describe_records() to
+find out more about them.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

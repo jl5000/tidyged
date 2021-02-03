@@ -6,7 +6,7 @@ Authors@R:
            family = "Lendrum",
            role = c("aut", "cre"),
            email = "jalendrum@gmail.com")
-Description: Import/export, create, and summarise family tree GEDCOM files using tidy dataframes.
+Description: Create and summarise family tree GEDCOM files using tidy dataframes.
 URL: https://jl5000.github.io/tidyged/,
     https://github.com/jl5000/tidyged
 License: MIT + file LICENSE
@@ -17,19 +17,19 @@ RoxygenNote: 7.1.1
 Imports: 
     dplyr,
     magrittr,
-    readr,
     tidyr,
     stringr,
     purrr,
     lubridate,
     tibble,
-    tidyged.internals
+    tidyged.internals,
+    tidyged.io
 Suggests: 
     testthat,
     roxytest,
     rmarkdown,
     knitr,
     waldo
-Remotes: jl5000/tidyged.internals
+Remotes: jl5000/tidyged.internals, jl5000/tidyged.io
 Config/testthat/edition: 3
 VignetteBuilder: knitr

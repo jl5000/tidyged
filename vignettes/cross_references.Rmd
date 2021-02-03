@@ -22,10 +22,14 @@ GEDCOM records are given unique identifiers known as xrefs (cross-references) to
 library(tidyged)
 
 simpsons <- gedcom(subm("Me")) %>% 
-  add_individual("Homer /Simpson/", sex = "M") %>% 
-  add_individual("Marge /Simpson/", sex = "F") %>% 
-  add_individual("Lisa /Simpson/", sex = "F") %>% 
-  add_individual("Bart /Simpson/", sex = "M") %>%  
+  add_individual(sex = "M") %>% 
+  add_individual_names("Homer /Simpson/") %>% 
+  add_individual(sex = "F") %>% 
+  add_individual_names("Marge /Simpson/") %>% 
+  add_individual(sex = "F") %>% 
+  add_individual_names("Lisa /Simpson/") %>% 
+  add_individual(sex = "M") %>%  
+  add_individual_names("Bart /Simpson/") %>% 
   add_note("This is a note")
 
 dplyr::filter(simpsons, tag %in% c("INDI", "NOTE"))

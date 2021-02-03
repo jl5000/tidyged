@@ -75,17 +75,11 @@ add_family_group <- function(gedcom,
     temp <- temp %>%
       set_active_record(xref_husb) %>% 
       add_individual_family_link_as_spouse(xref)
-    
-    message("Family link also added to the Individual record for husband: ", 
-            describe_individual(temp, xref_husb, short_desc = TRUE))
   }
   if(length(xref_wife) == 1) {
     temp <- temp %>%
       set_active_record(xref_wife) %>% 
       add_individual_family_link_as_spouse(xref)
-    
-    message("Family link also added to the Individual record for wife: ",
-            describe_individual(temp, xref_wife, short_desc = TRUE))
   }
   
   for(i in seq_along(xrefs_chil)) {
@@ -93,9 +87,7 @@ add_family_group <- function(gedcom,
     temp <- temp %>% 
       set_active_record(xrefs_chil[i]) %>% 
       add_individual_family_link_as_child(xref, linkage_type = child_linkage_types[i]) 
-    
-    message("Family link also added to the Individual record for child: ",
-            describe_individual(temp, xrefs_chil[i], short_desc = TRUE))
+  
   }
   
   set_active_record(temp, xref)

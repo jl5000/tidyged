@@ -260,7 +260,7 @@ get_families_as_child <- function(gedcom, individual = character()) {
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
   
   gedcom %>% 
-    dplyr::filter(level == 1, tag %in% c("CHIL"), value == xref) %>% 
+    dplyr::filter(level == 1, tag == "CHIL", value == xref) %>% 
     dplyr::pull(record) %>% 
     unique()
   

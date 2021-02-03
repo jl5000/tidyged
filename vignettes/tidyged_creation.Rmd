@@ -16,15 +16,16 @@ knitr::opts_chunk$set(
 
 ## Importing existing files
 
-The easiest way to create a `tidyged` object is to import an existing GEDCOM file. The package comes with some sample GEDCOM files, which can be imported using the `read_gedcom()` function:
+The easiest way to create a `tidyged` object is to import an existing GEDCOM file. The `tidyged.io` package (imported with `tidyged`) comes with some sample GEDCOM files, which can be imported using the `read_gedcom()` function:
 
 ```{r}
 library(tidyged)
 
-read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged")) %>% 
+tidyged.io::read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged.io")) %>% 
   print(n = Inf)
 ```
 
+If you want to export your file as a valid GEDCOM file, you can use the `write_gedcom()` function.
 
 Many other GEDCOM readers will carry out extensive checks on every line of a GEDCOM file ensuring all tags and values are legal, and the grammar is used correctly. The `tidyged` package carries out very few checks, relying on the user to check their files beforehand (as described when loading the package). The few checks that are carried out include:
 
@@ -89,4 +90,3 @@ Note that:
 * The date associated with the source data must be given as a `date_exact()` object to ensure it is formatted correctly (see `vignette("dates")` for more information on dates);
 * The `receiving_system` should be left to its default value, unless you are specifically intending on passing it to a different system.
 
-If you want to export your file as a valid GEDCOM file, you can use the `write_gedcom()` function.

@@ -6,9 +6,6 @@ if(getRversion() >= "2.15.1")
 
 .pkgenv <- new.env(parent=emptyenv())
 
-.pkgenv$gedcom_phys_value_limit <- 248
-.pkgenv$gedcom_line_length_limit <- 255
-
 .pkgenv$xref_prefix_indi <- "I"
 .pkgenv$xref_prefix_fam <- "F"
 .pkgenv$xref_prefix_subm <- "U"
@@ -33,7 +30,4 @@ if(getRversion() >= "2.15.1")
 .pkgenv$record_string_note <- "Note"
 .pkgenv$record_string_sour <- "Source"
 
-.pkgenv$BOM_UTF8 <- c("ef", "bb", "bf")
-.pkgenv$BOM_UTF16_LE <- c("ff", "fe")
-.pkgenv$BOM_UTF16_BE <- c("fe", "ff")
 

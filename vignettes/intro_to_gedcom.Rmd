@@ -29,10 +29,10 @@ There are also special records that appear once and only once in a file; a heade
 A sample file looks like this:
 
 ```{r}
-readLines(system.file("extdata", "555SAMPLE.GED", package = "tidyged"))
+readLines(system.file("extdata", "555SAMPLE.GED", package = "tidyged.io"))
 ```
 
-Each record is a nested structure containing one or more lines where the number at the beginning of the line indicates the level in the hierarchy. New records begin at level 0. In the above file, the submitter record begins at line `r which(readLines(system.file("extdata", "555SAMPLE.GED", package = "tidyged")) == "0 @U1@ SUBM")`.
+Each record is a nested structure containing one or more lines where the number at the beginning of the line indicates the level in the hierarchy. New records begin at level 0. In the above file, the submitter record begins at line `r which(readLines(system.file("extdata", "555SAMPLE.GED", package = "tidyged.io")) == "0 @U1@ SUBM")`.
 
 You can learn more about the structure of GEDCOM files and `tidyged` representations of them in `vignette("implementation")`.
 

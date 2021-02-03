@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 
 > Families can be difficult - but the data describing them doesn't need to be
 
-Import, create, and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version likely around March 2021.
+Create and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version likely around March 2021.
 
 ## Installation
 
@@ -96,7 +96,7 @@ This package allows limited editing of `tidyged` objects (adding/removing record
 
 ## Current status
 
-The package and its internal data structures (contained in a separate `tidyged.internals` package) are almost complete and will soon be submitted to CRAN.
+The package and its internal data structures (contained in a separate `tidyged.internals` package) are almost complete and will soon be submitted to CRAN. As is a separarate `tidyged.io` package to allow import/export of `tidyged` objects.
 
 Further packages are also planned, to provide an ecosystem called the `gedcompendium`, including:
 

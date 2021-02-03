@@ -9,7 +9,8 @@ describe_records(gedcom, xrefs, short_desc = FALSE)
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{xrefs}{A vector of record xrefs.}
+\item{xrefs}{A vector of record xrefs. Only unique records are used. Header and trailer records
+are ignored.}
 
 \item{short_desc}{Whether to return a shorter description.}
 }

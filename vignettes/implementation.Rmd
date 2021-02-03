@@ -45,8 +45,8 @@ There will not be any lines that have all of these components. For example, the 
 The `tidyged` representation of the above GEDCOM file is given below:
 
 ```{r}
-tidyged.io::read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged.io")) %>% 
-  print(n = Inf)
+print(tidyged.io::read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged.io")),
+      n = Inf)
 ```
 
 The cross-reference identifier is given in the record column. Event though these aren't given for the header and trailer records they are assigned as "HD" and "TR" respectively in the `tidyged` object.

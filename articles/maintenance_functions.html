@@ -98,9 +98,6 @@
 <p>All top level records in a GEDCOM file can record the date and time they were last modified. The <code>tidyged</code> package includes change dates (today’s date) by default every time a record is created or modified. Since the time is very unlikely to be useful in such a context, the package ignores this by default:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
-<span class="co">#&gt; If importing existing GEDCOM files, you should ensure that they are error free.</span>
-<span class="co">#&gt; This package assumes imported GEDCOM files are valid and very few validation checks are carried out.</span>
-<span class="co">#&gt; Several GEDCOM validators are available, including an online validator at http://ged-inline.elasticbeanstalk.com/</span>
 
 <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
@@ -121,13 +118,13 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 15     1 HD     DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                      </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 22     0 TR     TRLR  ""</span></code></pre></div>
 <p>See row 20 and the row after for the change date for the submitter record.</p>
 <p>By default this behaviour also applies when modifying existing records. If you would like to leave the change date alone when modifying a record, you can set <code>update_date_changed = FALSE</code> (it is TRUE by default).</p>
@@ -153,7 +150,7 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 15     1 HD     DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
@@ -188,20 +185,20 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 15     1 HD     DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                      </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."                 </span>
 <span class="co">#&gt; 23     1 @N1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 24     2 @N1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 24     2 @N1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 25     0 @I1@   INDI  ""                                        </span>
 <span class="co">#&gt; 26     1 @I1@   SEX   "U"                                       </span>
 <span class="co">#&gt; 27     1 @I1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 28     2 @I1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 28     2 @I1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 29     1 @I1@   NOTE  "This is a bespoke note."                 </span>
 <span class="co">#&gt; 30     1 @I1@   NOTE  "This is a generic note."                 </span>
 <span class="co">#&gt; 31     0 @R1@   REPO  ""                                        </span>
@@ -209,7 +206,7 @@
 <span class="co">#&gt; 33     1 @R1@   NOTE  "This is a bespoke note."                 </span>
 <span class="co">#&gt; 34     1 @R1@   NOTE  "This is a generic note."                 </span>
 <span class="co">#&gt; 35     1 @R1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 36     2 @R1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 36     2 @R1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 37     0 TR     TRLR  ""</span></code></pre></div>
 <p>In the above example, there is a generic note recorded in a top level Note record. This same note message has been used for the individual and repository defined, but they have been repeated rather than pointing to the Note record. There is also a repeated bespoke note given in the Individual and Repository records.</p>
 <p>The <code><a href="../reference/consolidate_notes.html">consolidate_notes()</a></code> function will simplify the file, replacing note values with pointers to top level Note records (creating them if necessary) if they are repeated:</p>
@@ -232,20 +229,20 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 15     1 HD     DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                      </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."                 </span>
 <span class="co">#&gt; 23     1 @N1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 24     2 @N1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 24     2 @N1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 25     0 @I1@   INDI  ""                                        </span>
 <span class="co">#&gt; 26     1 @I1@   SEX   "U"                                       </span>
 <span class="co">#&gt; 27     1 @I1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 28     2 @I1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 28     2 @I1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 29     1 @I1@   NOTE  "@N2@"                                    </span>
 <span class="co">#&gt; 30     1 @I1@   NOTE  "@N1@"                                    </span>
 <span class="co">#&gt; 31     0 @R1@   REPO  ""                                        </span>
@@ -253,10 +250,10 @@
 <span class="co">#&gt; 33     1 @R1@   NOTE  "@N2@"                                    </span>
 <span class="co">#&gt; 34     1 @R1@   NOTE  "@N1@"                                    </span>
 <span class="co">#&gt; 35     1 @R1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 36     2 @R1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 36     2 @R1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 37     0 @N2@   NOTE  "This is a bespoke note."                 </span>
 <span class="co">#&gt; 38     1 @N2@   CHAN  ""                                        </span>
-<span class="co">#&gt; 39     2 @N2@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 39     2 @N2@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 40     0 TR     TRLR  ""</span></code></pre></div>
 </div>
 <div id="unreferenced-records" class="section level2">
@@ -276,10 +273,6 @@
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span>children <span class="op">=</span> <span class="st">"Alice"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_repository.html">add_repository</a></span><span class="op">(</span><span class="st">"Test repo"</span><span class="op">)</span> 
-<span class="co">#&gt; Family link also added to the Individual record for husband: Individual @I1@, Tom Smith</span>
-<span class="co">#&gt; Family link also added to the Individual record for wife: Individual @I2@, Tammy Smith</span>
-<span class="co">#&gt; Family link also added to the Individual record for husband: Individual @I4@, Phil Brown</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I3@, Alice White</span>
   
 <span class="fu"><a href="../reference/identify_unused_records.html">identify_unused_records</a></span><span class="op">(</span><span class="va">some_unref</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@F2@" "@F4@" "@F6@" "@R1@"</span></code></pre></div>
@@ -324,17 +317,6 @@
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="st">"Parent 1"</span>, <span class="st">"Parent 2"</span>, children <span class="op">=</span> <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="st">"Main Person"</span>, <span class="st">"Spouse 1"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 1"</span>, <span class="st">"Child 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/add_family_group.html">add_family_group</a></span><span class="op">(</span><span class="st">"Main Person"</span>, <span class="st">"Spouse 2"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 3"</span>, <span class="st">"Child 4"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Family link also added to the Individual record for husband: Individual @I1@, Parent 1</span>
-<span class="co">#&gt; Family link also added to the Individual record for wife: Individual @I2@, Parent 2</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I3@, Main Person</span>
-<span class="co">#&gt; Family link also added to the Individual record for husband: Individual @I3@, Main Person</span>
-<span class="co">#&gt; Family link also added to the Individual record for wife: Individual @I4@, Spouse 1</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I6@, Child 1</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I7@, Child 2</span>
-<span class="co">#&gt; Family link also added to the Individual record for husband: Individual @I3@, Main Person</span>
-<span class="co">#&gt; Family link also added to the Individual record for wife: Individual @I5@, Spouse 2</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I8@, Child 3</span>
-<span class="co">#&gt; Family link also added to the Individual record for child: Individual @I9@, Child 4</span>
 
 <span class="fu"><a href="../reference/df_individuals.html">df_families</a></span><span class="op">(</span><span class="va">three_gen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -356,7 +338,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -366,7 +348,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -376,7 +358,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 </tbody>
 </table>
@@ -408,7 +390,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -418,7 +400,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -428,7 +410,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 </tbody>
 </table>
@@ -462,7 +444,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -472,7 +454,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -482,7 +464,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 </tbody>
 </table>
@@ -515,7 +497,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -525,7 +507,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -535,7 +517,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 </tbody>
 </table>
@@ -571,7 +553,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr></tbody>
 </table>
 <p>Empty family groups can be retained by setting <code>remove_empty_families = FALSE</code>:</p>
@@ -606,7 +588,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -616,7 +598,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -626,7 +608,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 FEB 2021</td>
+<td align="left">3 FEB 2021</td>
 </tr>
 </tbody>
 </table>

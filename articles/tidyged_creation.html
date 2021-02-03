@@ -90,14 +90,11 @@
 <div id="importing-existing-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#importing-existing-files" class="anchor"></a>Importing existing files</h2>
-<p>The easiest way to create a <code>tidyged</code> object is to import an existing GEDCOM file. The package comes with some sample GEDCOM files, which can be imported using the <code><a href="../reference/read_gedcom.html">read_gedcom()</a></code> function:</p>
+<p>The easiest way to create a <code>tidyged</code> object is to import an existing GEDCOM file. The <code>tidyged.io</code> package (imported with <code>tidyged</code>) comes with some sample GEDCOM files, which can be imported using the <code>read_gedcom()</code> function:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
-<span class="co">#&gt; If importing existing GEDCOM files, you should ensure that they are error free.</span>
-<span class="co">#&gt; This package assumes imported GEDCOM files are valid and very few validation checks are carried out.</span>
-<span class="co">#&gt; Several GEDCOM validators are available, including an online validator at http://ged-inline.elasticbeanstalk.com/</span>
 
-<span class="fu"><a href="../reference/read_gedcom.html">read_gedcom</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"555SAMPLE.GED"</span>, package <span class="op">=</span> <span class="st">"tidyged"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="fu">tidyged.io</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.io/man/read_gedcom.html">read_gedcom</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"555SAMPLE.GED"</span>, package <span class="op">=</span> <span class="st">"tidyged.io"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 97 x 4</span>
 <span class="co">#&gt;    level record tag   value                                                     </span>
@@ -199,6 +196,7 @@
 <span class="co">#&gt; 95     2 @R1@   POST  "84150"                                                   </span>
 <span class="co">#&gt; 96     2 @R1@   CTRY  "United States of America"                                </span>
 <span class="co">#&gt; 97     0 TR     TRLR  ""</span></code></pre></div>
+<p>If you want to export your file as a valid GEDCOM file, you can use the <code>write_gedcom()</code> function.</p>
 <p>Many other GEDCOM readers will carry out extensive checks on every line of a GEDCOM file ensuring all tags and values are legal, and the grammar is used correctly. The <code>tidyged</code> package carries out very few checks, relying on the user to check their files beforehand (as described when loading the package). The few checks that are carried out include:</p>
 <ul>
 <li>Ensuring the file has a valid Byte Order Mark which is consistent with that described in the file;</li>
@@ -232,13 +230,13 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 15     1 HD     DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
 <span class="co">#&gt; 19     1 @U1@   NAME  "runner"                                  </span>
 <span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 21     2 @U1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 22     0 TR     TRLR  ""</span></code></pre></div>
 <p>A <code>tidyged</code> object actually comes pre-populated with quite a lot of information (more so than a minimal GEDCOM file). Information about the <code>tidyged</code> package (as the system/product creating the file) is given in the appropriate places, as well as a default language (English), and submitter details taken from your computer username.</p>
 <div id="submitter" class="section level3">
@@ -277,7 +275,7 @@
 <span class="co">#&gt; 12     3 HD     ADDR  ""                                         </span>
 <span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                      </span>
 <span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"        </span>
-<span class="co">#&gt; 15     1 HD     DATE  "2 FEB 2021"                               </span>
+<span class="co">#&gt; 15     1 HD     DATE  "3 FEB 2021"                               </span>
 <span class="co">#&gt; 16     1 HD     LANG  "English"                                  </span>
 <span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                     </span>
 <span class="co">#&gt; 18     0 @U1@   SUBM  ""                                         </span>
@@ -294,7 +292,7 @@
 <span class="co">#&gt; 29     1 @U1@   WWW   "http://www.whousesfaxanymore.com"         </span>
 <span class="co">#&gt; 30     1 @U1@   NOTE  "The information given above is dummy data"</span>
 <span class="co">#&gt; 31     1 @U1@   CHAN  ""                                         </span>
-<span class="co">#&gt; 32     2 @U1@   DATE  "2 FEB 2021"                               </span>
+<span class="co">#&gt; 32     2 @U1@   DATE  "3 FEB 2021"                               </span>
 <span class="co">#&gt; 33     0 TR     TRLR  ""</span></code></pre></div>
 </div>
 <div id="other-header-parameters" class="section level3">
@@ -331,7 +329,7 @@
 <span class="co">#&gt; 15     2 HD     DATA  "Some CD I found in the basement"         </span>
 <span class="co">#&gt; 16     3 HD     DATE  "12 MAY 2009"                             </span>
 <span class="co">#&gt; 17     3 HD     COPR  "No data copyright"                       </span>
-<span class="co">#&gt; 18     1 HD     DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 18     1 HD     DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 19     1 HD     LANG  "English"                                 </span>
 <span class="co">#&gt; 20     1 HD     SUBM  "@U1@"                                    </span>
 <span class="co">#&gt; 21     1 HD     COPR  "No copyright"                            </span>
@@ -339,7 +337,7 @@
 <span class="co">#&gt; 23     0 @U1@   SUBM  ""                                        </span>
 <span class="co">#&gt; 24     1 @U1@   NAME  "runner"                                  </span>
 <span class="co">#&gt; 25     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 26     2 @U1@   DATE  "2 FEB 2021"                              </span>
+<span class="co">#&gt; 26     2 @U1@   DATE  "3 FEB 2021"                              </span>
 <span class="co">#&gt; 27     0 TR     TRLR  ""</span></code></pre></div>
 <p>Note that:</p>
 <ul>
@@ -347,7 +345,6 @@
 <li>The date associated with the source data must be given as a <code><a href="../reference/date_exact.html">date_exact()</a></code> object to ensure it is formatted correctly (see <code><a href="../articles/dates.html">vignette("dates")</a></code> for more information on dates);</li>
 <li>The <code>receiving_system</code> should be left to its default value, unless you are specifically intending on passing it to a different system.</li>
 </ul>
-<p>If you want to export your file as a valid GEDCOM file, you can use the <code><a href="../reference/write_gedcom.html">write_gedcom()</a></code> function.</p>
 </div>
 </div>
   </div>

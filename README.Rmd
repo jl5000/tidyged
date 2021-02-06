@@ -26,6 +26,8 @@ knitr::opts_chunk$set(
 
 Create and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version likely around March 2021.
 
+This package is the main package of the [`gedcompendium`](https://github.com/jl5000/gedcompendium) ecosystem.
+
 ## Installation
 
 You can install the development version from [GitHub](https://github.com/) with:
@@ -93,17 +95,6 @@ df_families(tg) %>% knitr::kable()
 ```
 
 This package allows limited editing of `tidyged` objects (adding/removing records, as well as the addition of some record substructures). Editing of existing records is made possible through 'activation' (much like the `tidygraph` package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of `activate_*_record()` functions.
-
-## Current status
-
-The package and its internal data structures (contained in a separate `tidyged.internals` package) are almost complete and will soon be submitted to CRAN. As is a separarate `tidyged.io` package to allow import/export of `tidyged` objects.
-
-Further packages are also planned, to provide an ecosystem called the `gedcompendium`, including:
-
-* `shinyged` will provide a shiny app to edit `tidyged` objects;
-* `visged` will allow visualisation of `tidyged` objects;
-* `autoged` will provide functions to automate the representation of facts from various source documents (e.g. birth certificates, censuses);
-* `safeged` will provide functions to help with the removal of sensitive data (e.g. on living individuals).
 
 ## References
 

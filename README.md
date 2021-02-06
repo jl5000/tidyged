@@ -46,31 +46,31 @@ An example is below:
 library(tidyged)
 
 tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family", gedcom_copyright = "None") %>%
-  add_individual(sex = "M", individual_notes = "The central character in the Star Wars Skywalker Saga") %>%
-  add_individual_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>%
-  add_individual_names("Darth Vader", type = "given", given = "Darth Vader") %>%
-  add_individual(sex = "F", individual_notes = "Queen of Naboo") %>%
-  add_individual_names("Padme Amidala", given = "Padme", surname = "Amidala") %>% 
-  add_individual(sex = "F") %>% 
-  add_individual_names("Leia Skywalker", type = "birth", given = "Leia", surname = "Skywalker") %>%
-  add_individual_names("Princess Leia Organa", type = "adoptive", 
-                       prefix = "Princess", given = "Leia", surname = "Organa") %>% 
-  add_individual(sex = "M") %>%
-  add_individual_names("Luke Skywalker", type = "birth", given = "Luke", surname = "Skywalker") %>% 
-  add_individual(sex = "M") %>% 
-  add_individual_names("Obi-Wan Kenobi", type = "birth", given = "Obi-Wan", 
-                       nickname = "Ben", surname = "Kenobi") %>% 
-  add_family_group(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
-  activate_individual_record("Anakin") %>% 
-  add_individual_association("Obi-Wan", association = "Master") %>% 
-  add_individual_event_death(age_at_event = "45y", event_cause = "Killed by son Luke",
-                             place_name = "Second Death Star", place_notes = "Orbiting Endor System") %>% 
-  add_individual_attribute_religion(attribute_descriptor = "Jedi") %>% 
-  add_individual_attribute_possessions(attribute_descriptor = "Lightsaber") %>%
+  add_indi(sex = "M", indi_notes = "The central character in the Star Wars Skywalker Saga") %>%
+  add_indi_names("Anakin Skywalker", type = "birth", given = "Anakin", surname = "Skywalker") %>%
+  add_indi_names("Darth Vader", type = "given", given = "Darth Vader") %>%
+  add_indi(sex = "F", indi_notes = "Queen of Naboo") %>%
+  add_indi_names("Padme Amidala", given = "Padme", surname = "Amidala") %>% 
+  add_indi(sex = "F") %>% 
+  add_indi_names("Leia Skywalker", type = "birth", given = "Leia", surname = "Skywalker") %>%
+  add_indi_names("Princess Leia Organa", type = "adoptive", 
+                 prefix = "Princess", given = "Leia", surname = "Organa") %>% 
+  add_indi(sex = "M") %>%
+  add_indi_names("Luke Skywalker", type = "birth", given = "Luke", surname = "Skywalker") %>% 
+  add_indi(sex = "M") %>% 
+  add_indi_names("Obi-Wan Kenobi", type = "birth", given = "Obi-Wan", 
+                 nickname = "Ben", surname = "Kenobi") %>% 
+  add_famg(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
+  activate_indi("Anakin") %>% 
+  add_indi_association("Obi-Wan", association = "Master") %>% 
+  add_indi_event_death(age_at_event = "45y", event_cause = "Killed by son Luke",
+                       place_name = "Second Death Star", place_notes = "Orbiting Endor System") %>% 
+  add_indi_attr_religion(attribute_descriptor = "Jedi") %>% 
+  add_indi_attr_possessions(attribute_descriptor = "Lightsaber") %>%
   add_note("Based on Star Wars") %>% 
-  add_source(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
-  add_repository("The Skywalker Saga") %>% 
-  add_multimedia(file_reference = "XYZ", format = "JPG")
+  add_sour(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
+  add_repo("The Skywalker Saga") %>% 
+  add_media(file_reference = "XYZ", format = "JPG")
 
 print(tg, n = Inf)
 #> # A tibble: 113 x 4
@@ -205,7 +205,7 @@ objects:
 ``` r
 num_indi(tg)
 #> [1] 5
-num_fam(tg)
+num_famg(tg)
 #> [1] 1
 
 str(tg)
@@ -233,7 +233,7 @@ summary(tg)
 #>  Product name:            The 'tidyged' package for the R language 
 #>  Product source:          Jamie Lendrum
 
-df_individuals(tg) %>% knitr::kable()
+df_indi(tg) %>% knitr::kable()
 ```
 
 | xref | name             | sex | date\_of\_birth | place\_of\_birth | date\_of\_death | place\_of\_death  | mother        | father           | num\_siblings | num\_children | last\_modified |
@@ -245,7 +245,7 @@ df_individuals(tg) %>% knitr::kable()
 | @I5@ | Obi-Wan Kenobi   | M   |                 |                  |                 |                   |               |                  |               |             0 | 6 FEB 2021     |
 
 ``` r
-df_families(tg) %>% knitr::kable()
+df_famg(tg) %>% knitr::kable()
 ```
 
 | xref | husband          | wife          | marriage\_date | marriage\_place | num\_children | last\_modified |
@@ -258,8 +258,7 @@ substructures). Editing of existing records is made possible through
 ‘activation’ (much like the `tidygraph` package). When a record is
 created, it automatically becomes the active record, through an object
 attribute. Record editing functions then act on this record. Other
-records can be activated through a series of `activate_*_record()`
-functions.
+records can be activated through a series of `activate_*()` functions.
 
 ## References
 

@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 Create and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version likely around March 2021.
 
-This package is the main package of the [`gedcompendium`](https://github.com/jl5000/gedcompendium) ecosystem.
+This package is the main package of the [`gedcompendium`](https://github.com/jl5000/gedcompendium) ecosystem of packages.
 
 ## Installation
 

@@ -9,7 +9,7 @@ xrefs_record_type <- function(gedcom, record_tag) {
 }
 
 xrefs_individuals <-  function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_indi) }
-xrefs_families <-     function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_fam)  }
+xrefs_families <-     function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_famg) }
 xrefs_submitters <-   function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_subm) }
 xrefs_sources <-      function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_sour) }
 xrefs_repositories <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_repo) }
@@ -125,7 +125,7 @@ gedcom_value <- function(gedcom, record_xref, tag, level, after_tag = NULL) {
 temporarily_remove_name_slashes <- function(gedcom) {
   
   gedcom %>% 
-    dplyr::mutate(value = dplyr::if_else(purrr::map_lgl(record, is_individual, gedcom=gedcom) &
+    dplyr::mutate(value = dplyr::if_else(purrr::map_lgl(record, is_indi, gedcom=gedcom) &
                                            tag %in% c("NAME", "FONE", "ROMN"),
                                          stringr::str_remove_all(value, "/"),
                                          value))
@@ -146,7 +146,7 @@ get_spouses <- function(gedcom,
                        individual = character(),
                        return_name = FALSE) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
   fams_xref <- get_families_as_spouse(gedcom, xref)
   
@@ -161,7 +161,7 @@ get_spouses <- function(gedcom,
   }
 
   if (return_name) {
-    purrr::map_chr(spou_xref, describe_individual, gedcom=gedcom, name_only = TRUE)
+    purrr::map_chr(spou_xref, describe_indi, gedcom=gedcom, name_only = TRUE)
   } else {
     spou_xref
   }
@@ -181,7 +181,7 @@ get_children <- function(gedcom,
                          individual = character(),
                          return_name = FALSE) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
   fams_xref <- get_families_as_spouse(gedcom, xref)
   
@@ -191,7 +191,7 @@ get_children <- function(gedcom,
     unique()
   
   if (return_name) {
-    purrr::map_chr(chil_xref, describe_individual, gedcom=gedcom, name_only=TRUE)
+    purrr::map_chr(chil_xref, describe_indi, gedcom=gedcom, name_only=TRUE)
   } else {
     chil_xref
   }
@@ -211,7 +211,7 @@ get_parents <- function(gedcom,
                          individual = character(),
                          return_name = FALSE) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
   famc_xref <- get_families_as_child(gedcom, xref)
   
@@ -221,7 +221,7 @@ get_parents <- function(gedcom,
     unique()
   
   if (return_name) {
-    purrr::map_chr(par_xref, describe_individual, gedcom=gedcom, name_only=TRUE)
+    purrr::map_chr(par_xref, describe_indi, gedcom=gedcom, name_only=TRUE)
   } else {
     par_xref
   }
@@ -238,7 +238,7 @@ get_parents <- function(gedcom,
 #' @export
 get_families_as_spouse <- function(gedcom, individual = character()) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
   gedcom %>% 
     dplyr::filter(level == 1, tag %in% c("HUSB", "WIFE"), value == xref) %>% 
@@ -257,7 +257,7 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
 #' @export
 get_families_as_child <- function(gedcom, individual = character()) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
   gedcom %>% 
     dplyr::filter(level == 1, tag == "CHIL", value == xref) %>% 
@@ -304,7 +304,7 @@ get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_
       
       xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), xref_or_descriptor)
       
-    } else if(record_type == .pkgenv$record_string_fam) {
+    } else if(record_type == .pkgenv$record_string_famg) {
       
       stop("The selected family record is not valid")
       
@@ -444,16 +444,16 @@ identify_unused_records <- function(gedcom) {
 remove_records <- function(gedcom, xrefs) {
   
   for (xref in xrefs) {
-    if (is_individual(gedcom, xref)) {
-      gedcom <- remove_individual(gedcom, xref)
-    } else if(is_family(gedcom, xref)) {
-      gedcom <- remove_family_group(gedcom, xref)
-    } else if(is_multimedia(gedcom, xref)) {
-      gedcom <- remove_multimedia(gedcom, xref)
-    } else if(is_source(gedcom, xref)) {
-      gedcom <- remove_source(gedcom, xref)
-    } else if(is_repository(gedcom, xref)) {
-      gedcom <- remove_repository(gedcom, xref)
+    if (is_indi(gedcom, xref)) {
+      gedcom <- remove_indi(gedcom, xref)
+    } else if(is_famg(gedcom, xref)) {
+      gedcom <- remove_famg(gedcom, xref)
+    } else if(is_media(gedcom, xref)) {
+      gedcom <- remove_media(gedcom, xref)
+    } else if(is_sour(gedcom, xref)) {
+      gedcom <- remove_sour(gedcom, xref)
+    } else if(is_repo(gedcom, xref)) {
+      gedcom <- remove_repo(gedcom, xref)
     } else if(is_note(gedcom, xref)) {
       gedcom <- remove_note(gedcom, xref)
     } else {

@@ -1,4 +1,4 @@
-# Function add_individual_event() @ L79
+# Function add_indi_event() @ L79
 
     {
       "type": "list",

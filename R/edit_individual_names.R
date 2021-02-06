@@ -30,34 +30,34 @@
 #' @return An updated tidyged object with an expanded Individual record including
 #' these names.
 #' @export
-add_individual_names <- function(gedcom,
-                                 name,
-                                 type = character(),
-                                 prefix = character(),
-                                 given = character(),
-                                 nickname = character(),
-                                 surname_prefix = character(),
-                                 surname = character(),
-                                 suffix = character(),
-                                 name_notes = character(),
-                                 xref = character(),
-                                 update_date_changed = TRUE) {
+add_indi_names <- function(gedcom,
+                           name,
+                           type = character(),
+                           prefix = character(),
+                           given = character(),
+                           nickname = character(),
+                           surname_prefix = character(),
+                           surname = character(),
+                           suffix = character(),
+                           name_notes = character(),
+                           xref = character(),
+                           update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   nam_notes <- purrr::map(name_notes, tidyged.internals::NOTE_STRUCTURE)
   
   name_pieces <- tidyged.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
-                                                            name_piece_given = given, 
-                                                            name_piece_nickname = nickname, 
-                                                            name_piece_surname_prefix = surname_prefix,
-                                                            name_piece_surname = surname,
-                                                            name_piece_suffix = suffix,
-                                                            notes = nam_notes)
+                                                         name_piece_given = given, 
+                                                         name_piece_nickname = nickname, 
+                                                         name_piece_surname_prefix = surname_prefix,
+                                                         name_piece_surname = surname,
+                                                         name_piece_suffix = suffix,
+                                                         notes = nam_notes)
   
   name_str <- tidyged.internals::PERSONAL_NAME_STRUCTURE(name_personal = name,
-                                                            name_type = type,
-                                                            name_pieces = name_pieces) %>% 
+                                                         name_type = type,
+                                                         name_pieces = name_pieces) %>% 
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
@@ -71,7 +71,7 @@ add_individual_names <- function(gedcom,
   gedcom %>%
     tibble::add_row(name_str, .before = next_row) %>% 
     tidyged.internals::finalise() %>% 
-    activate_individual_record(xref)
+    activate_indi(xref)
 }
 
 #' Add a variation of a personal name to an Individual record
@@ -106,27 +106,27 @@ add_individual_names <- function(gedcom,
 #' @tests
 #' expect_snapshot_value(
 #'                gedcom(subm("Me")) %>% 
-#'                add_individual() %>% 
-#'                add_individual_names("Joe /Bloggs/") %>% 
-#'                add_individual_names_var("Joe Bloggs", "JB", nickname = "JB", type = "tests", 
+#'                add_indi() %>% 
+#'                add_indi_names("Joe /Bloggs/") %>% 
+#'                add_indi_names_var("Joe Bloggs", "JB", nickname = "JB", type = "tests", 
 #'                                          phonetic_variation = FALSE) %>% 
 #'                remove_dates_for_tests(), "json2")
-add_individual_names_var <- function(gedcom,
-                                     primary_name,
-                                     variation_name,
-                                     type,
-                                     phonetic_variation = TRUE,
-                                     prefix = character(),
-                                     given = character(),
-                                     nickname = character(),
-                                     surname_prefix = character(),
-                                     surname = character(),
-                                     suffix = character(),
-                                     variation_notes = character(),
-                                     xref = character(),
-                                     update_date_changed = TRUE) {
+add_indi_names_var <- function(gedcom,
+                               primary_name,
+                               variation_name,
+                               type,
+                               phonetic_variation = TRUE,
+                               prefix = character(),
+                               given = character(),
+                               nickname = character(),
+                               surname_prefix = character(),
+                               surname = character(),
+                               suffix = character(),
+                               variation_notes = character(),
+                               xref = character(),
+                               update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   name_notes <- purrr::map(variation_notes, tidyged.internals::NOTE_STRUCTURE)
   
@@ -135,12 +135,12 @@ add_individual_names_var <- function(gedcom,
     name_phonetic_var <- variation_name
     phonetisation_method <- type
     phon_name_pieces <- list(tidyged.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
-                                                                        name_piece_given = given, 
-                                                                        name_piece_nickname = nickname, 
-                                                                        name_piece_surname_prefix = surname_prefix,
-                                                                        name_piece_surname = surname,
-                                                                        name_piece_suffix = suffix,
-                                                                        notes = name_notes))
+                                                                     name_piece_given = given, 
+                                                                     name_piece_nickname = nickname, 
+                                                                     name_piece_surname_prefix = surname_prefix,
+                                                                     name_piece_surname = surname,
+                                                                     name_piece_suffix = suffix,
+                                                                     notes = name_notes))
     name_romanised_var <- character()
     romanisation_method <- character()
     rom_name_pieces <- list()
@@ -150,12 +150,12 @@ add_individual_names_var <- function(gedcom,
     name_romanised_var <- variation_name
     romanisation_method <- type
     rom_name_pieces <- list(tidyged.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
-                                                                       name_piece_given = given, 
-                                                                       name_piece_nickname = nickname, 
-                                                                       name_piece_surname_prefix = surname_prefix,
-                                                                       name_piece_surname = surname,
-                                                                       name_piece_suffix = suffix,
-                                                                       notes = name_notes))
+                                                                    name_piece_given = given, 
+                                                                    name_piece_nickname = nickname, 
+                                                                    name_piece_surname_prefix = surname_prefix,
+                                                                    name_piece_surname = surname,
+                                                                    name_piece_suffix = suffix,
+                                                                    notes = name_notes))
     name_phonetic_var <- character()
     phonetisation_method <- character()
     phon_name_pieces <- list()
@@ -193,7 +193,7 @@ add_individual_names_var <- function(gedcom,
   gedcom %>%
     tibble::add_row(name_str, .before = next_row) %>% 
     tidyged.internals::finalise() %>% 
-    activate_individual_record(xref)
+    activate_indi(xref)
 }
 
 
@@ -207,18 +207,18 @@ add_individual_names_var <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()) %>% 
-#'                add_individual(),
+#'                add_indi(),
 #'              gedcom(subm()) %>% 
-#'                add_individual() %>% 
-#'                add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
-#'                remove_individual_name("Joe Bloggs"))  
-remove_individual_name <- function(gedcom,
+#'                add_indi() %>% 
+#'                add_indi_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
+#'                remove_indi_name("Joe Bloggs"))  
+remove_indi_name <- function(gedcom,
                                    name) {
   
-  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
   remove_section(gedcom, 1, "NAME", name, xrefs = xref) %>% 
-    activate_individual_record(xref)
+    activate_indi(xref)
   
 }
 
@@ -235,22 +235,22 @@ remove_individual_name <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()) %>% 
-#'                add_individual() %>% 
-#'                add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs"),
+#'                add_indi() %>% 
+#'                add_indi_names("Joe Bloggs", given = "Joe", surname = "Bloggs"),
 #'              gedcom(subm()) %>% 
-#'                add_individual() %>% 
-#'                add_individual_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
-#'                add_individual_names_var("Joe Bloggs", "Jo /Blogs/", "spelling error") %>% 
-#'                remove_individual_name_var("Jo /Blogs/"))
-remove_individual_name_var <- function(gedcom,
+#'                add_indi() %>% 
+#'                add_indi_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
+#'                add_indi_names_var("Joe Bloggs", "Jo /Blogs/", "spelling error") %>% 
+#'                remove_indi_name_var("Jo /Blogs/"))
+remove_indi_name_var <- function(gedcom,
                                        variation_name,
                                        phonetic_variation = TRUE) {
   
-  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
   remove_section(gedcom, 2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
                  variation_name, xrefs = xref) %>% 
-    activate_individual_record(xref)
+    activate_indi(xref)
   
 }
 
@@ -263,9 +263,9 @@ remove_individual_name_var <- function(gedcom,
 #'
 #' @return An updated tidyged object with the promoted name in the Individual record
 #' @export
-primary_individual_name <- function(gedcom, name, xref = character()) {
+primary_indi_name <- function(gedcom, name, xref = character()) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   rows_to_move <- identify_section(gedcom, 1, "NAME", name)
   
@@ -276,5 +276,5 @@ primary_individual_name <- function(gedcom, name, xref = character()) {
 
   gedcom %>%
     tibble::add_row(section, .before = next_row) %>% 
-    activate_individual_record(xref)
+    activate_indi(xref)
 }

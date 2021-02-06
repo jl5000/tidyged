@@ -22,14 +22,14 @@ GEDCOM records are given unique identifiers known as xrefs (cross-references) to
 library(tidyged)
 
 simpsons <- gedcom(subm("Me")) %>% 
-  add_individual(sex = "M") %>% 
-  add_individual_names("Homer /Simpson/") %>% 
-  add_individual(sex = "F") %>% 
-  add_individual_names("Marge /Simpson/") %>% 
-  add_individual(sex = "F") %>% 
-  add_individual_names("Lisa /Simpson/") %>% 
-  add_individual(sex = "M") %>%  
-  add_individual_names("Bart /Simpson/") %>% 
+  add_indi(sex = "M") %>% 
+  add_indi_names("Homer /Simpson/") %>% 
+  add_indi(sex = "F") %>% 
+  add_indi_names("Marge /Simpson/") %>% 
+  add_indi(sex = "F") %>% 
+  add_indi_names("Lisa /Simpson/") %>% 
+  add_indi(sex = "M") %>%  
+  add_indi_names("Bart /Simpson/") %>% 
   add_note("This is a note")
 
 dplyr::filter(simpsons, tag %in% c("INDI", "NOTE"))
@@ -49,11 +49,11 @@ get_active_record(simpsons)
 
 Since the last record to be created was the Note record, it is the active record. The active record is stored as an attribute of the tibble.
 
-We can use activation to add to existing records. If we want to activate another record, we can activate it using the `activate_*_record()` family of functions together with its xref:
+We can use activation to add to existing records. If we want to activate another record, we can activate it using the `activate_*()` family of functions together with its xref:
 
 ```{r}
 simpsons %>% 
-  activate_individual_record("@I2@") %>% 
+  activate_indi("@I2@") %>% 
   get_active_record()
 ```
 
@@ -61,7 +61,7 @@ It can be tedious to have to manually look up these xrefs, and so `tidyged` allo
 
 ```{r}
 simpsons %>% 
-  activate_individual_record("Marge") %>% 
+  activate_indi("Marge") %>% 
   get_active_record()
 ```
 
@@ -71,7 +71,7 @@ If no match or more than one match is found, it will result in an error:
 
 ```{r, error = TRUE}
 simpsons %>% 
-  activate_individual_record("Simpson") %>% 
+  activate_indi("Simpson") %>% 
   get_active_record()
 ```
 
@@ -89,7 +89,7 @@ When removing entire records, you don't have to necessarily rely on activating t
 
 ```{r}
 simpsons %>% 
-  remove_individual("Homer") %>% 
+  remove_indi("Homer") %>% 
   dplyr::filter(stringr::str_detect(value, "/Simpson/"))
 ```
 

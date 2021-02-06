@@ -17,48 +17,48 @@
 #' uses to identify this record. You can supply more than one in a vector.
 #' @param user_reference_type A user-defined definition of the user_reference_number(s). If this
 #' parameter is used, there must be a reference type for every reference number defined.
-#' @param repository_notes A character vector of notes accompanying this Repository record.
+#' @param repo_notes A character vector of notes accompanying this Repository record.
 #' These could be xrefs to existing Note records.
 #'
 #' @return An updated tidyged object including the Repository record.
 #' @export
-add_repository <- function(gedcom,
-                           name,
-                           local_address_lines = character(),
-                           city = character(),
-                           state = character(),
-                           postal_code = character(),
-                           country = character(),
-                           phone_number = character(),
-                           email = character(),
-                           fax = character(),
-                           web_page = character(),
-                           user_reference_number = character(),
-                           user_reference_type = character(),
-                           repository_notes = character()) {
+add_repo <- function(gedcom,
+                     name,
+                     local_address_lines = character(),
+                     city = character(),
+                     state = character(),
+                     postal_code = character(),
+                     country = character(),
+                     phone_number = character(),
+                     email = character(),
+                     fax = character(),
+                     web_page = character(),
+                     user_reference_number = character(),
+                     user_reference_type = character(),
+                     repo_notes = character()) {
   
   xref <- assign_xref(.pkgenv$xref_prefix_repo, gedcom = gedcom)
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
   address <- tidyged.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
-                               address_city = city,
-                               address_state = state,
-                               address_postal_code = postal_code,
-                               address_country = country,
-                               phone_number = phone_number,
-                               address_email = email,
-                               address_fax = fax,
-                               address_web_page = web_page)
+                                                  address_city = city,
+                                                  address_state = state,
+                                                  address_postal_code = postal_code,
+                                                  address_country = country,
+                                                  phone_number = phone_number,
+                                                  address_email = email,
+                                                  address_fax = fax,
+                                                  address_web_page = web_page)
   
-  repo_notes <- purrr::map(repository_notes, tidyged.internals::NOTE_STRUCTURE)
+  repos_notes <- purrr::map(repo_notes, tidyged.internals::NOTE_STRUCTURE)
   
   repo_record <- tidyged.internals::REPOSITORY_RECORD(xref_repo = xref,
-                                                         name_of_repository = name,
-                                                         address = address,
-                                                         user_reference_number = user_reference_number,
-                                                         user_reference_type = user_reference_type,
-                                                         notes = repo_notes)
+                                                      name_of_repository = name,
+                                                      address = address,
+                                                      user_reference_number = user_reference_number,
+                                                      user_reference_type = user_reference_type,
+                                                      notes = repos_notes)
   
   gedcom %>% 
     tibble::add_row(repo_record, .before = nrow(.)) %>% 
@@ -75,10 +75,10 @@ add_repository <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
-#'              gedcom(subm()) %>% add_repository("text") %>% remove_repository())
-remove_repository <- function(gedcom, repository = character()) {
+#'              gedcom(subm()) %>% add_repo("text") %>% remove_repo())
+remove_repo <- function(gedcom, repository = character()) {
   
-  xref <- get_valid_xref(gedcom, repository, .pkgenv$record_string_repo, is_repository)
+  xref <- get_valid_xref(gedcom, repository, .pkgenv$record_string_repo, is_repo)
   
   gedcom %>% 
     remove_section(1, "REPO", xref) %>% 

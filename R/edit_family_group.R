@@ -33,18 +33,18 @@
 #' @return An updated tidyged object including the Family group record.
 #' 
 #' @export
-add_family_group <- function(gedcom,
-                             husband = character(),
-                             wife = character(),
-                             children = character(),
-                             child_linkage_types = rep("birth", length(children)),
-                             number_of_children = character(),
-                             user_reference_number = character(),
-                             user_reference_type = character(),
-                             family_notes = character(),
-                             multimedia_links = character()) {
+add_famg <- function(gedcom,
+                     husband = character(),
+                     wife = character(),
+                     children = character(),
+                     child_linkage_types = rep("birth", length(children)),
+                     number_of_children = character(),
+                     user_reference_number = character(),
+                     user_reference_type = character(),
+                     family_notes = character(),
+                     multimedia_links = character()) {
   
-  xref <- assign_xref(.pkgenv$xref_prefix_fam, gedcom = gedcom)
+  xref <- assign_xref(.pkgenv$xref_prefix_famg, gedcom = gedcom)
   
   xref_husb <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), husband)
   xref_wife <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), wife)
@@ -59,14 +59,14 @@ add_family_group <- function(gedcom,
   fam_notes <- purrr::map(family_notes, tidyged.internals::NOTE_STRUCTURE)
   
   fam_record <- tidyged.internals::FAMILY_GROUP_RECORD(xref_fam = xref,
-                                                          xref_husb = xref_husb,
-                                                          xref_wife = xref_wife,
-                                                          xrefs_chil = xrefs_chil,
-                                                          count_of_children = number_of_children,
-                                                          user_reference_number = user_reference_number,
-                                                          user_reference_type = user_reference_type,
-                                                          notes = fam_notes,
-                                                          multimedia_links = media_links) 
+                                                       xref_husb = xref_husb,
+                                                       xref_wife = xref_wife,
+                                                       xrefs_chil = xrefs_chil,
+                                                       count_of_children = number_of_children,
+                                                       user_reference_number = user_reference_number,
+                                                       user_reference_type = user_reference_type,
+                                                       notes = fam_notes,
+                                                       multimedia_links = media_links) 
   
   temp <- gedcom %>%
     tibble::add_row(fam_record, .before = nrow(.))
@@ -74,19 +74,19 @@ add_family_group <- function(gedcom,
   if(length(xref_husb) == 1) {
     temp <- temp %>%
       set_active_record(xref_husb) %>% 
-      add_individual_family_link_as_spouse(xref)
+      add_indi_family_link_as_spouse(xref)
   }
   if(length(xref_wife) == 1) {
     temp <- temp %>%
       set_active_record(xref_wife) %>% 
-      add_individual_family_link_as_spouse(xref)
+      add_indi_family_link_as_spouse(xref)
   }
   
   for(i in seq_along(xrefs_chil)) {
   
     temp <- temp %>% 
       set_active_record(xrefs_chil[i]) %>% 
-      add_individual_family_link_as_child(xref, linkage_type = child_linkage_types[i]) 
+      add_indi_family_link_as_child(xref, linkage_type = child_linkage_types[i]) 
   
   }
   
@@ -116,25 +116,25 @@ add_family_group <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()) %>% 
-#'                add_individual() %>% 
-#'                add_individual() %>% 
+#'                add_indi() %>% 
+#'                add_indi() %>% 
 #'                null_active_record(),
 #'              gedcom(subm()) %>% 
-#'                add_individual() %>% 
-#'                add_individual() %>% 
-#'                add_family_group(husband = "@I1@", wife = "@I2@") %>% 
-#'                remove_family_group())
+#'                add_indi() %>% 
+#'                add_indi() %>% 
+#'                add_famg(husband = "@I1@", wife = "@I2@") %>% 
+#'                remove_famg())
 #' expect_equal(gedcom(subm()),
 #'              gedcom(subm()) %>% 
-#'                add_individual() %>% 
-#'                add_individual() %>% 
-#'                add_family_group(husband = "@I1@", wife = "@I2@") %>% 
-#'                remove_family_group(remove_individuals = TRUE))
-remove_family_group <- function(gedcom, 
-                                family_xref = character(),
-                                remove_individuals = FALSE) {
+#'                add_indi() %>% 
+#'                add_indi() %>% 
+#'                add_famg(husband = "@I1@", wife = "@I2@") %>% 
+#'                remove_famg(remove_individuals = TRUE))
+remove_famg <- function(gedcom, 
+                        family_xref = character(),
+                        remove_individuals = FALSE) {
   
-  xref <- get_valid_xref(gedcom, family_xref, .pkgenv$record_string_fam, is_family)
+  xref <- get_valid_xref(gedcom, family_xref, .pkgenv$record_string_famg, is_famg)
   
   if(remove_individuals) {
     
@@ -143,7 +143,7 @@ remove_family_group <- function(gedcom,
     
     for(ind_xref in ind_xrefs) {
       
-      gedcom <- remove_individual(gedcom, ind_xref)
+      gedcom <- remove_indi(gedcom, ind_xref)
       
     }
   }

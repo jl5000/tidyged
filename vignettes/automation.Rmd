@@ -22,10 +22,10 @@ In `vignette("cross_references")`, the concept of record activation was introduc
 library(tidyged)
 
 simpsons <- gedcom(subm("Me")) %>% 
-  add_individual("Homer /Simpson/", sex = "M") %>% 
-  add_individual("Marge /Simpson/", sex = "F") %>% 
-  add_individual("Lisa /Simpson/", sex = "F") %>% 
-  add_individual("Bart /Simpson/", sex = "M") %>% 
+  add_indi("Homer /Simpson/", sex = "M") %>% 
+  add_indi("Marge /Simpson/", sex = "F") %>% 
+  add_indi("Lisa /Simpson/", sex = "F") %>% 
+  add_indi("Bart /Simpson/", sex = "M") %>% 
   add_note("These records have not yet been joined in a family group record")
 ```
 
@@ -33,7 +33,7 @@ In some records it is necessary to provide xrefs to link to other records, for e
 
 ```{r}
 simpsons %>% 
-  add_family_group(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa")) %>% 
+  add_famg(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa")) %>% 
   dplyr::filter(record == "@F1@")
 ```
 
@@ -43,7 +43,7 @@ If no match or more than one match is found, it will result in an error:
 
 ```{r, error = TRUE}
 simpsons %>% 
-  add_family_group(husband = "Simpson", wife = "Marge", children = c("Bart", "Lisa")) 
+  add_famg(husband = "Simpson", wife = "Marge", children = c("Bart", "Lisa")) 
 ```
 
 ## Family links
@@ -52,7 +52,7 @@ The `tidyged` package seeks to make cross-referencing as painless and automated 
 
 ```{r}
 simpsons_fam <- simpsons %>% 
-  add_family_group(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa")) 
+  add_famg(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa")) 
 
 dplyr::filter(simpsons_fam, tag %in% c("FAMS", "FAMC"))
 ```
@@ -63,7 +63,7 @@ If the Family Group record is subsequently removed, then these links will also b
 
 ```{r}
 simpsons_no_fam <- simpsons_fam %>% 
-  remove_family_group() 
+  remove_famg() 
 
 dplyr::filter(simpsons_no_fam, tag %in% c("FAMS", "FAMC"))
 
@@ -77,7 +77,7 @@ When removing a Family Group record, the user also has the option of removing al
 
 ```{r}
 simpsons_no_fam_purge <- simpsons_fam %>% 
-  remove_family_group(remove_individuals = TRUE) 
+  remove_famg(remove_individuals = TRUE) 
 
 str(simpsons_no_fam_purge)
 ```

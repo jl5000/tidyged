@@ -70,7 +70,7 @@ gedcom <- function(submitter_details = subm(),
 #' @param email A character vector containing up to three email addresses of the submitter.
 #' @param fax A character vector containing up to three fax numbers of the submitter.
 #' @param web_page A character vector containing up to three web pages of the submitter.
-#' @param submitter_notes A character vector of notes accompanying this Submitter record.
+#' @param subm_notes A character vector of notes accompanying this Submitter record.
 #' These could be xrefs to existing Note records.
 #' @param multimedia_links TODO
 #'
@@ -86,7 +86,7 @@ subm <- function(name = unname(Sys.info()["user"]),
                  email = character(),
                  fax = character(),
                  web_page = character(),
-                 submitter_notes = character(),
+                 subm_notes = character(),
                  multimedia_links = character()) {
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
@@ -101,7 +101,7 @@ subm <- function(name = unname(Sys.info()["user"]),
                                                      address_fax = fax,
                                                      address_web_page = web_page)
   
-  subm_notes <- purrr::map(submitter_notes, tidyged.internals::NOTE_STRUCTURE)
+  sub_notes <- purrr::map(subm_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
@@ -110,7 +110,7 @@ subm <- function(name = unname(Sys.info()["user"]),
   tidyged.internals::SUBMITTER_RECORD(xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
                                          submitter_name = name,
                                          address = address,
-                                         notes = subm_notes,
+                                         notes = sub_notes,
                                          multimedia_links = media_links)
   
 }

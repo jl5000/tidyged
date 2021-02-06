@@ -62,7 +62,7 @@ submitter <- subm(name = "The name of the submitter",
                   email = "email@domain.com",
                   fax = "00000",
                   web_page = "http://www.whousesfaxanymore.com",
-                  submitter_notes = "The information given above is dummy data")
+                  subm_notes = "The information given above is dummy data")
 
 gedcom(submitter) %>% 
   print(n = Inf)

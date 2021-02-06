@@ -1,4 +1,4 @@
-# Function add_individual() @ L32
+# Function add_indi() @ L32
 
     {
       "type": "list",

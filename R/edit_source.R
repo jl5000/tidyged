@@ -28,58 +28,58 @@
 #' parameter is used, there must be a reference type for every reference number defined.
 #' @param data_notes A character vector of notes associated with the data in this Source record.
 #' These could be xrefs to existing Note records.
-#' @param source_notes A character vector of notes accompanying this Source record.
+#' @param sour_notes A character vector of notes accompanying this Source record.
 #' These could be xrefs to existing Note records.
 #' @param multimedia_links A character vector of multimedia file references accompanying this
 #' source. These could be xrefs to existing Multimedia records.
 #'
 #' @return An updated tidyged object including the Source record.
 #' @export
-add_source <- function(gedcom,
-                       events_recorded = character(),
-                       date_period_covered = date_period(),
-                       jurisdiction = character(),
-                       responsible_agency = character(),
-                       originator = character(),
-                       title = character(),
-                       short_title = character(),
-                       publication_detail = character(),
-                       source_text = character(),
-                       user_reference_number = character(),
-                       user_reference_type = character(),
-                       data_notes = character(),
-                       source_notes = character(),
-                       multimedia_links = character()) {
+add_sour <- function(gedcom,
+                     events_recorded = character(),
+                     date_period_covered = date_period(),
+                     jurisdiction = character(),
+                     responsible_agency = character(),
+                     originator = character(),
+                     title = character(),
+                     short_title = character(),
+                     publication_detail = character(),
+                     source_text = character(),
+                     user_reference_number = character(),
+                     user_reference_type = character(),
+                     data_notes = character(),
+                     sour_notes = character(),
+                     multimedia_links = character()) {
   
   xref <- assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
   
   dat_notes <- purrr::map(data_notes, tidyged.internals::NOTE_STRUCTURE)
   
-  sour_notes <- purrr::map(source_notes, tidyged.internals::NOTE_STRUCTURE)
+  source_notes <- purrr::map(sour_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
                                 gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
     purrr::map(tidyged.internals::MULTIMEDIA_LINK)
   
   sour_record <- tidyged.internals::SOURCE_RECORD(xref_sour = xref,
-                                                     events_recorded = events_recorded,
-                                                     date_period_covered = date_period_covered,
-                                                     source_jurisdiction_place = jurisdiction,
-                                                     responsible_agency = responsible_agency,
-                                                     data_notes = dat_notes,
-                                                     source_originator = originator,
-                                                     source_descriptive_title = title,
-                                                     source_filed_by_entry = short_title,
-                                                     source_publication_facts = publication_detail,
-                                                     text_from_source = source_text,
-                                                     user_reference_number = user_reference_number,
-                                                     user_reference_type = user_reference_type,
-                                                     notes = sour_notes,
-                                                     multimedia_links = media_links)
+                                                  events_recorded = events_recorded,
+                                                  date_period_covered = date_period_covered,
+                                                  source_jurisdiction_place = jurisdiction,
+                                                  responsible_agency = responsible_agency,
+                                                  data_notes = dat_notes,
+                                                  source_originator = originator,
+                                                  source_descriptive_title = title,
+                                                  source_filed_by_entry = short_title,
+                                                  source_publication_facts = publication_detail,
+                                                  text_from_source = source_text,
+                                                  user_reference_number = user_reference_number,
+                                                  user_reference_type = user_reference_type,
+                                                  notes = source_notes,
+                                                  multimedia_links = media_links)
   
-    gedcom %>% 
-      tibble::add_row(sour_record, .before = nrow(.)) %>% 
-      set_active_record(xref)
+  gedcom %>% 
+    tibble::add_row(sour_record, .before = nrow(.)) %>% 
+    set_active_record(xref)
 }
 
 
@@ -102,17 +102,17 @@ add_source <- function(gedcom,
 #' @tests
 #' expect_snapshot_value(
 #'                  gedcom(subm("Me")) %>% 
-#'                  add_repository(name = "The library") %>% 
-#'                  add_source() %>% 
-#'                  add_source_repository_citation("library") %>%
+#'                  add_repo(name = "The library") %>% 
+#'                  add_sour() %>% 
+#'                  add_sour_repo_citation("library") %>%
 #'                  remove_dates_for_tests(), "json2")
-add_source_repository_citation <- function(gedcom,
-                                           repository,
-                                           call_number = character(),
-                                           xref = character(),
-                                           update_date_changed = TRUE) {
+add_sour_repo_citation <- function(gedcom,
+                                   repository,
+                                   call_number = character(),
+                                   xref = character(),
+                                   update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_sour)
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
@@ -136,24 +136,24 @@ add_source_repository_citation <- function(gedcom,
 
 #' @tests
 #' expect_equal(gedcom(subm("Me")) %>% 
-#'                  add_repository(name = "The library") %>% 
-#'                  add_source() %>%
+#'                  add_repo(name = "The library") %>% 
+#'                  add_sour() %>%
 #'                  remove_dates_for_tests(),
 #'              gedcom(subm("Me")) %>% 
-#'                  add_repository(name = "The library") %>% 
-#'                  add_source() %>% 
-#'                  add_source_repository_citation("library") %>%
-#'                  remove_source_repository_citation("library") %>% 
+#'                  add_repo(name = "The library") %>% 
+#'                  add_sour() %>% 
+#'                  add_sour_repo_citation("library") %>%
+#'                  remove_sour_repo_citation("library") %>% 
 #'                  remove_dates_for_tests())
-remove_source_repository_citation <- function(gedcom,
-                                              repository) {
+remove_sour_repo_citation <- function(gedcom,
+                                      repository) {
   
-  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_sour, is_sour)
   
   repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
   
   remove_section(gedcom, 1, "REPO", repo_xref, xrefs = xref) %>% 
-    activate_source_record(xref)
+    activate_sour(xref)
   
 }
 
@@ -167,11 +167,11 @@ remove_source_repository_citation <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
-#'              gedcom(subm()) %>% add_source(title = "text") %>% remove_source())
-remove_source <- function(gedcom,
+#'              gedcom(subm()) %>% add_sour(title = "text") %>% remove_sour())
+remove_sour <- function(gedcom,
                           source = character()) {
   
-  xref <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_sour)
   
   gedcom %>% 
     remove_section(1, "SOUR", xref) %>% 

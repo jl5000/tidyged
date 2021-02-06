@@ -1,4 +1,4 @@
-# Function add_source_repository_citation() @ L109
+# Function add_sour_repo_citation() @ L109
 
     {
       "type": "list",

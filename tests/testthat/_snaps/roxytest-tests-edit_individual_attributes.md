@@ -1,4 +1,4 @@
-# Function add_individual_attribute() @ L29
+# Function add_indi_attr() @ L29
 
     {
       "type": "list",

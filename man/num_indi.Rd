@@ -2,7 +2,7 @@
 % Please edit documentation in R/interrogate.R
 \name{num_indi}
 \alias{num_indi}
-\alias{num_fam}
+\alias{num_famg}
 \alias{num_subm}
 \alias{num_media}
 \alias{num_note}
@@ -12,7 +12,7 @@
 \usage{
 num_indi(gedcom)
 
-num_fam(gedcom)
+num_famg(gedcom)
 
 num_subm(gedcom)
 

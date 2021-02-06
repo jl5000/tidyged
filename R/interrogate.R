@@ -14,7 +14,7 @@ num_indi <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_in
 
 #' @export
 #' @rdname num_indi
-num_fam <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_fam) }
+num_famg <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_famg) }
 
 #' @export
 #' @rdname num_indi
@@ -48,31 +48,31 @@ is_record_type <- function(gedcom, xref, tag) {
 #'
 #' @return A logical indicating whether the record is of a particular type.
 #' @export
-is_individual <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_indi) }
+is_indi <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_indi) }
 
 #' @export
-#' @rdname is_individual
-is_family <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_fam) }
+#' @rdname is_indi
+is_famg <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_famg) }
 
 #' @export
-#' @rdname is_individual
-is_submitter <- function(gedcom, xref)  { is_record_type(gedcom, xref, .pkgenv$record_tag_subm) }
+#' @rdname is_indi
+is_subm <- function(gedcom, xref)  { is_record_type(gedcom, xref, .pkgenv$record_tag_subm) }
 
 #' @export
-#' @rdname is_individual
-is_repository <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_repo) }
+#' @rdname is_indi
+is_repo <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_repo) }
 
 #' @export
-#' @rdname is_individual
-is_multimedia <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_obje) }
+#' @rdname is_indi
+is_media <- function(gedcom, xref) { is_record_type(gedcom, xref, .pkgenv$record_tag_obje) }
 
 #' @export
-#' @rdname is_individual
+#' @rdname is_indi
 is_note <- function(gedcom, xref)       { is_record_type(gedcom, xref, .pkgenv$record_tag_note) }
 
 #' @export
-#' @rdname is_individual
-is_source <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_sour) }
+#' @rdname is_indi
+is_sour <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_sour) }
 
 
 #' Get descriptions for records
@@ -90,20 +90,20 @@ describe_records <- function(gedcom, xrefs, short_desc = FALSE) {
   
   descriptions <- NULL
   for (xref in xrefs) {
-    if (is_individual(gedcom, xref)) {
-      descriptions <- c(descriptions, describe_individual(gedcom, xref, FALSE, short_desc))
-    } else if(is_family(gedcom, xref)) {
-      descriptions <- c(descriptions, describe_family_group(gedcom, xref, short_desc))
-    } else if(is_source(gedcom, xref)) {
-      descriptions <- c(descriptions, describe_source(gedcom, xref, FALSE, short_desc))
-    } else if(is_repository(gedcom, xref)) {
-      descriptions <- c(descriptions, describe_repository(gedcom, xref, FALSE, short_desc))
-    } else if(is_multimedia(gedcom, xref)) {
-      descriptions <- c(descriptions, describe_multimedia(gedcom, xref, FALSE, short_desc))
+    if (is_indi(gedcom, xref)) {
+      descriptions <- c(descriptions, describe_indi(gedcom, xref, FALSE, short_desc))
+    } else if(is_famg(gedcom, xref)) {
+      descriptions <- c(descriptions, describe_famg(gedcom, xref, short_desc))
+    } else if(is_sour(gedcom, xref)) {
+      descriptions <- c(descriptions, describe_sour(gedcom, xref, FALSE, short_desc))
+    } else if(is_repo(gedcom, xref)) {
+      descriptions <- c(descriptions, describe_repo(gedcom, xref, FALSE, short_desc))
+    } else if(is_media(gedcom, xref)) {
+      descriptions <- c(descriptions, describe_media(gedcom, xref, FALSE, short_desc))
     } else if(is_note(gedcom, xref)) {
       descriptions <- c(descriptions, describe_note(gedcom, xref, short_desc))
-    } else if(is_submitter(gedcom, xref)) {
-      descriptions <- c(descriptions, describe_submitter(gedcom, xref, FALSE, short_desc))
+    } else if(is_subm(gedcom, xref)) {
+      descriptions <- c(descriptions, describe_subm(gedcom, xref, FALSE, short_desc))
     } else {
       stop("Record ", xref, " is not recognised")
     }
@@ -135,11 +135,11 @@ describe_records <- function(gedcom, xrefs, short_desc = FALSE) {
 #' @return A character string describing the record.
 #' @export
 #' @tests
-#' expect_equal(gedcom() %>% add_family_group() %>% describe_family_group("@F1@"),
+#' expect_equal(gedcom() %>% add_famg() %>% describe_famg("@F1@"),
 #'              "Family @F1@, headed by no individuals, and no children")
-describe_family_group <- function(gedcom, xref, short_desc = FALSE) {
+describe_famg <- function(gedcom, xref, short_desc = FALSE) {
   # Family @F1@, headed by x and y, [and (no) children x, y, z]
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_fam, is_family)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
   
   husb <- dplyr::filter(gedcom, record == xref, tag == "HUSB")$value
   wife <- dplyr::filter(gedcom, record == xref, tag == "WIFE")$value
@@ -147,19 +147,19 @@ describe_family_group <- function(gedcom, xref, short_desc = FALSE) {
   
   fam_str <- paste0("Family ", xref, ", headed by ")
   if(length(husb) + length(wife) == 2) {
-    fam_str <- paste0(fam_str, describe_individual(gedcom, husb, name_only = TRUE),
-                      " and ", describe_individual(gedcom, wife, name_only = TRUE))
+    fam_str <- paste0(fam_str, describe_indi(gedcom, husb, name_only = TRUE),
+                      " and ", describe_indi(gedcom, wife, name_only = TRUE))
   } else if(length(husb) == 1) {
-    fam_str <- paste0(fam_str, describe_individual(gedcom, husb, name_only = TRUE))
+    fam_str <- paste0(fam_str, describe_indi(gedcom, husb, name_only = TRUE))
   } else if(length(wife) == 1) {
-    fam_str <- paste0(fam_str, describe_individual(gedcom, wife, name_only = TRUE))
+    fam_str <- paste0(fam_str, describe_indi(gedcom, wife, name_only = TRUE))
   } else {
     fam_str <- paste0(fam_str, "no individuals")
   }
   
   if(short_desc) return(fam_str)
   
-  chil_names <- purrr::map_chr(chil, describe_individual, gedcom=gedcom, name_only = TRUE)
+  chil_names <- purrr::map_chr(chil, describe_indi, gedcom=gedcom, name_only = TRUE)
   
   chil_str <- ifelse(length(chil) == 0, ", and no children", 
                      paste0(", and children: ", paste(chil_names, collapse = ", ")))
@@ -168,11 +168,11 @@ describe_family_group <- function(gedcom, xref, short_desc = FALSE) {
   
 }
 
-#' @rdname describe_family_group
+#' @rdname describe_famg
 #' @export
-describe_individual <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
+describe_indi <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   # Individual @I1@, Name/Unnamed, [child of x and y, born on x/x/x in place, died on x/x/x in place]
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   name <- gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
     stringr::str_remove_all("/")
@@ -192,8 +192,8 @@ describe_individual <- function(gedcom, xref, name_only = FALSE, short_desc = FA
     moth_xref <- gedcom_value(gedcom, famc, "WIFE", 1)
     fath_xref <- gedcom_value(gedcom, famc, "HUSB", 1)
     
-    moth_name <- ifelse(moth_xref == "", "", describe_individual(gedcom, moth_xref, name_only = TRUE))
-    fath_name <- ifelse(fath_xref == "", "", describe_individual(gedcom, fath_xref, name_only = TRUE))
+    moth_name <- ifelse(moth_xref == "", "", describe_indi(gedcom, moth_xref, name_only = TRUE))
+    fath_name <- ifelse(fath_xref == "", "", describe_indi(gedcom, fath_xref, name_only = TRUE))
     
     par_str <- dplyr::case_when(fath_name != "" & moth_name != "" ~ paste(fath_name,"and",moth_name),
                                 fath_name != "" & moth_name == "" ~ fath_name,
@@ -228,11 +228,11 @@ describe_individual <- function(gedcom, xref, name_only = FALSE, short_desc = FA
   ind_str
 }
 
-#' @rdname describe_family_group
+#' @rdname describe_famg
 #' @export
-describe_multimedia <- function(gedcom, xref, file_ref_only = FALSE, short_desc = FALSE) {
+describe_media <- function(gedcom, xref, file_ref_only = FALSE, short_desc = FALSE) {
   # Multimedia @M1@, [titled abc, format jpeg], with file reference xyz
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_obje, is_multimedia)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_obje, is_media)
   
   file_ref <- gedcom_value(gedcom, xref, "FILE", 1)
   
@@ -254,11 +254,11 @@ describe_multimedia <- function(gedcom, xref, file_ref_only = FALSE, short_desc 
   
 }
 
-#' @rdname describe_family_group
+#' @rdname describe_famg
 #' @export
-describe_source <- function(gedcom, xref, title_only = FALSE, short_desc = FALSE) {
+describe_sour <- function(gedcom, xref, title_only = FALSE, short_desc = FALSE) {
   # Source @S1@, titled abc, [by x]
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_sour)
   
   titl <- gedcom_value(gedcom, xref, "TITL", 1)
   
@@ -274,11 +274,11 @@ describe_source <- function(gedcom, xref, title_only = FALSE, short_desc = FALSE
   ifelse(orig == "", sour_str, paste0(sour_str, ", by ", orig))
 }
 
-#' @rdname describe_family_group
+#' @rdname describe_famg
 #' @export
-describe_repository <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
+describe_repo <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   # Repository @R1@, name
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_repo, is_repository)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_repo, is_repo)
   
   name <- gedcom_value(gedcom, xref, "NAME", 1)
   
@@ -288,7 +288,7 @@ describe_repository <- function(gedcom, xref, name_only = FALSE, short_desc = FA
   
 }
 
-#' @rdname describe_family_group
+#' @rdname describe_famg
 #' @export
 describe_note <- function(gedcom, xref, short_desc = FALSE) {
   # Note @N1@ with the following text: xyz [excerpt or not]
@@ -303,11 +303,11 @@ describe_note <- function(gedcom, xref, short_desc = FALSE) {
   
 }
 
-#' @rdname describe_family_group
+#' @rdname describe_famg
 #' @export
-describe_submitter <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
+describe_subm <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_subm, is_submitter)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_subm, is_subm)
   
   name <- gedcom_value(gedcom, xref, "NAME", 1)
   
@@ -368,15 +368,15 @@ summary.tidyged <- function(object, ...) {
 #' @tests
 #' expect_snapshot_value(
 #'  gedcom(subm("Me")) %>% 
-#'   add_individual() %>% 
-#'   add_individual() %>% 
-#'   add_individual() %>% 
-#'   add_family_group() %>% 
-#'   add_family_group() %>% 
-#'   add_multimedia("ref1", "AAC") %>% 
-#'   add_multimedia("ref1", "AAC") %>% 
-#'   add_source() %>% 
-#'   add_repository("repo") %>% 
+#'   add_indi() %>% 
+#'   add_indi() %>% 
+#'   add_indi() %>% 
+#'   add_famg() %>% 
+#'   add_famg() %>% 
+#'   add_media("ref1", "AAC") %>% 
+#'   add_media("ref1", "AAC") %>% 
+#'   add_sour() %>% 
+#'   add_repo("repo") %>% 
 #'   add_note("note1") %>% 
 #'   add_note("note2") %>% 
 #'   str(), "json2")
@@ -387,7 +387,7 @@ str.tidyged <- function(object, ...) {
   
   paste0("GEDCOM version ", object$value[gedc_row + 1], " (", object$value[gedc_row + 2], ")", eol, eol,
          stringr::str_pad("Individuals:", title_width, "right"), num_indi(object), eol,
-         stringr::str_pad("Families:", title_width, "right"), num_fam(object), eol,
+         stringr::str_pad("Families:", title_width, "right"), num_famg(object), eol,
          stringr::str_pad("Submitters:", title_width, "right"), num_subm(object), eol,
          stringr::str_pad("Multimedia objects:", title_width, "right"), num_media(object), eol, 
          stringr::str_pad("Notes:", title_width, "right"), num_note(object), eol,
@@ -407,26 +407,26 @@ str.tidyged <- function(object, ...) {
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_individual(sex = "M") %>% 
-#'  add_individual_names("Joe /Bloggs/") %>% 
-#'  add_individual_event_birth(event_date = date_calendar(year = 1950, month = 5, day = 7),
+#'  add_indi(sex = "M") %>% 
+#'  add_indi_names("Joe /Bloggs/") %>% 
+#'  add_indi_event_birth(event_date = date_calendar(year = 1950, month = 5, day = 7),
 #'                             place_name = "Somewhere") %>% 
-#'  add_individual_event_death(event_date = date_calendar(year = 2000, month = 12, day = 1),
+#'  add_indi_event_death(event_date = date_calendar(year = 2000, month = 12, day = 1),
 #'                             place_name = "Somewhere else") %>% 
-#'  add_individual(sex = "F") %>% 
-#'  add_individual_names("Jess /Bloggs/") %>% 
-#'  add_individual_event_birth(event_date = date_calendar(year = 1948, month = 1, day = 15),
+#'  add_indi(sex = "F") %>% 
+#'  add_indi_names("Jess /Bloggs/") %>% 
+#'  add_indi_event_birth(event_date = date_calendar(year = 1948, month = 1, day = 15),
 #'                             place_name = "Somewhere") %>% 
-#'  add_individual(sex = "F") %>% 
-#'  add_individual_names("Jessie /Bloggs/") %>% 
-#'  add_individual_event_birth(event_date = date_approximated(date_calendar(year = 1970), about = TRUE),
+#'  add_indi(sex = "F") %>% 
+#'  add_indi_names("Jessie /Bloggs/") %>% 
+#'  add_indi_event_birth(event_date = date_approximated(date_calendar(year = 1970), about = TRUE),
 #'                             place_name = "Elsewhere") %>%
-#'  add_family_group(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
-#'  add_family_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
+#'  add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
+#'  add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                                place_name = "Another place") %>% 
 #'  remove_dates_for_tests() %>% 
-#'  df_individuals(), "json2")
-df_individuals <- function(gedcom) {
+#'  df_indi(), "json2")
+df_indi <- function(gedcom) {
   
   ind_xrefs <- xrefs_individuals(gedcom)
   ind_names <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
@@ -469,22 +469,22 @@ df_individuals <- function(gedcom) {
 }
 
 
-#' @rdname df_individuals
+#' @rdname df_indi
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_individual(sex = "M") %>% 
-#'  add_individual_names("Joe /Bloggs/") %>% 
-#'  add_individual(sex = "F") %>% 
-#'  add_individual_names("Jess /Bloggs/") %>% 
-#'  add_individual(sex = "F") %>% 
-#'  add_individual_names("Jessie /Bloggs/") %>%
-#'  add_family_group(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
-#'  add_family_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
+#'  add_indi(sex = "M") %>% 
+#'  add_indi_names("Joe /Bloggs/") %>% 
+#'  add_indi(sex = "F") %>% 
+#'  add_indi_names("Jess /Bloggs/") %>% 
+#'  add_indi(sex = "F") %>% 
+#'  add_indi_names("Jessie /Bloggs/") %>%
+#'  add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
+#'  add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                                place_name = "Another place") %>% 
 #'  remove_dates_for_tests() %>% 
-#'  df_families(), "json2")
-df_families <- function(gedcom) {
+#'  df_famg(), "json2")
+df_famg <- function(gedcom) {
   
   fam_xrefs <- xrefs_families(gedcom)
   husb_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1)
@@ -509,16 +509,16 @@ df_families <- function(gedcom) {
   
 }
 
-#' @rdname df_individuals
+#' @rdname df_indi
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_multimedia(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") %>% 
-#'  add_multimedia(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") %>% 
-#'  add_multimedia(file_reference = "ref3", format = "PNG", source_media = "photo", title = "photo2") %>% 
+#'  add_media(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") %>% 
+#'  add_media(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") %>% 
+#'  add_media(file_reference = "ref3", format = "PNG", source_media = "photo", title = "photo2") %>% 
 #'  remove_dates_for_tests() %>% 
-#'  df_multimedia(), "json2")
-df_multimedia <- function(gedcom) {
+#'  df_media(), "json2")
+df_media <- function(gedcom) {
   
   obje_xrefs <- xrefs_multimedia(gedcom)
   file_refs <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FILE", level = 1)
@@ -536,16 +536,16 @@ df_multimedia <- function(gedcom) {
   
 }
 
-#' @rdname df_individuals
+#' @rdname df_indi
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_source(originator = "author1", title = "book1") %>% 
-#'  add_source(originator = "author2", title = "book2") %>% 
-#'  add_source(originator = "author3", title = "book3") %>% 
+#'  add_sour(originator = "author1", title = "book1") %>% 
+#'  add_sour(originator = "author2", title = "book2") %>% 
+#'  add_sour(originator = "author3", title = "book3") %>% 
 #'  remove_dates_for_tests() %>% 
-#'  df_sources(), "json2")
-df_sources <- function(gedcom) {
+#'  df_sour(), "json2")
+df_sour <- function(gedcom) {
   
   sour_xrefs <- xrefs_sources(gedcom)
   origs <- purrr::map_chr(sour_xrefs, gedcom_value, gedcom = gedcom, tag = "AUTH", level = 1)
@@ -559,16 +559,16 @@ df_sources <- function(gedcom) {
   
 }
 
-#' @rdname df_individuals
+#' @rdname df_indi
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_repository(name = "repo1", city = "Brighton", state = "E. Sussex", country = "UK") %>% 
-#'  add_repository(name = "repo2", city = "Orlando", state = "Florida", country = "USA") %>% 
-#'  add_repository(name = "repo3", city = "Yokohama", country = "Japan") %>% 
+#'  add_repo(name = "repo1", city = "Brighton", state = "E. Sussex", country = "UK") %>% 
+#'  add_repo(name = "repo2", city = "Orlando", state = "Florida", country = "USA") %>% 
+#'  add_repo(name = "repo3", city = "Yokohama", country = "Japan") %>% 
 #'  remove_dates_for_tests() %>% 
-#'  df_repositories(), "json2")
-df_repositories <- function(gedcom) {
+#'  df_repo(), "json2")
+df_repo <- function(gedcom) {
   
   repo_xrefs <- xrefs_repositories(gedcom)
   repo_names <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
@@ -586,7 +586,7 @@ df_repositories <- function(gedcom) {
   
 }
 
-#' @rdname df_individuals
+#' @rdname df_indi
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
@@ -594,8 +594,8 @@ df_repositories <- function(gedcom) {
 #'  add_note(text = "This is also a note", user_reference_number = 5678) %>% 
 #'  add_note(text = "This may be a note too", user_reference_number = 987643) %>% 
 #'  remove_dates_for_tests() %>% 
-#'  df_notes(), "json2")
-df_notes <- function(gedcom) {
+#'  df_note(), "json2")
+df_note <- function(gedcom) {
   
   note_xrefs <- xrefs_notes(gedcom)
   ref_nos <- purrr::map_chr(note_xrefs, gedcom_value, gedcom = gedcom, tag = "REFN", level = 1)

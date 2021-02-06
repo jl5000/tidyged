@@ -94,63 +94,63 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
 #' @return The same tidyged object with "active_record" attribute set to the specific 
 #' record to allow easy editing.
 #' @export
-activate_individual_record <- function(gedcom, record) {
+activate_indi <- function(gedcom, record) {
   
-  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_indi, is_indi)
   set_active_record(gedcom, xref)
 }
 
 
-#' @rdname activate_individual_record
+#' @rdname activate_indi
 #' @export
-activate_family_group_record <- function(gedcom, record) {
+activate_famg <- function(gedcom, record) {
   
-  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_fam, is_family)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_famg, is_famg)
   set_active_record(gedcom, xref)
 }
 
 
-#' @rdname activate_individual_record
+#' @rdname activate_indi
 #' @export
-activate_submitter_record <- function(gedcom, record) {
+activate_subm <- function(gedcom, record) {
   
-  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_subm, is_submitter)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_subm, is_subm)
   set_active_record(gedcom, xref)
 }
 
 
-#' @rdname activate_individual_record
+#' @rdname activate_indi
 #' @export
-activate_multimedia_record <- function(gedcom, record) {
+activate_media <- function(gedcom, record) {
   
-  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_obje, is_multimedia)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_obje, is_media)
   set_active_record(gedcom, xref)
 }
 
 
-#' @rdname activate_individual_record
+#' @rdname activate_indi
 #' @export
-activate_note_record <- function(gedcom, record) {
+activate_note <- function(gedcom, record) {
   
   xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_note, is_note)
   set_active_record(gedcom, xref)
 }
 
 
-#' @rdname activate_individual_record
+#' @rdname activate_indi
 #' @export
-activate_source_record <- function(gedcom, record) {
+activate_sour <- function(gedcom, record) {
   
-  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_sour, is_source)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_sour, is_sour)
   set_active_record(gedcom, xref)
 }
 
 
-#' @rdname activate_individual_record
+#' @rdname activate_indi
 #' @export
-activate_repository_record <- function(gedcom, record) {
+activate_repo <- function(gedcom, record) {
   
-  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_repo, is_repository)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_repo, is_repo)
   set_active_record(gedcom, xref)
   
 }

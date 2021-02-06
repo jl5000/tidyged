@@ -2,7 +2,7 @@
 
 #' Add a family event to a Family Group record
 #'
-#' @inheritParams add_individual_event
+#' @inheritParams add_indi_event
 #' @param event_descriptor A short description of the event.
 #' 
 #' @param husband_age_at_event A character string that indicates the age in years, months, and days 
@@ -18,47 +18,47 @@
 #' this event.
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_individual("Joe /Bloggs/", sex = "M") %>% 
-#'  add_individual("Jess /Bloggs/", sex = "F") %>% 
-#'  add_individual("Jessie /Bloggs/", sex = "F") %>% 
-#'  add_family_group(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
-#'  add_family_event(event_type = "MARR", 
+#'  add_indi("Joe /Bloggs/", sex = "M") %>% 
+#'  add_indi("Jess /Bloggs/", sex = "F") %>% 
+#'  add_indi("Jessie /Bloggs/", sex = "F") %>% 
+#'  add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
+#'  add_famg_event(event_type = "MARR", 
 #'                   event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                   place_name = "Another place") %>% 
 #'  remove_dates_for_tests(), "json2")
-add_family_event <- function(gedcom,
-                             event_type = character(),
-                             event_descriptor = character(),
-                             event_classification = character(),
-                             husband_age_at_event = character(),
-                             wife_age_at_event = character(),
-                             event_notes = character(),
-                             event_date = character(),
-                             event_cause = character(),
-                             place_name = character(),
-                             place_phonetic = character(),
-                             phonetisation_method = character(),
-                             place_romanised = character(),
-                             romanisation_method = character(),
-                             place_latitude = character(),
-                             place_longitude = character(),
-                             place_notes = character(),
-                             local_address_lines = character(),
-                             city = character(),
-                             state = character(),
-                             postal_code = character(),
-                             country = character(),
-                             phone_number = character(),
-                             email = character(),
-                             fax = character(),
-                             web_page = character(),
-                             responsible_agency = character(),
-                             religious_affiliation = character(),
-                             multimedia_links = character(),
-                             xref = character(),
-                             update_date_changed = TRUE) {
+add_famg_event <- function(gedcom,
+                           event_type = character(),
+                           event_descriptor = character(),
+                           event_classification = character(),
+                           husband_age_at_event = character(),
+                           wife_age_at_event = character(),
+                           event_notes = character(),
+                           event_date = character(),
+                           event_cause = character(),
+                           place_name = character(),
+                           place_phonetic = character(),
+                           phonetisation_method = character(),
+                           place_romanised = character(),
+                           romanisation_method = character(),
+                           place_latitude = character(),
+                           place_longitude = character(),
+                           place_notes = character(),
+                           local_address_lines = character(),
+                           city = character(),
+                           state = character(),
+                           postal_code = character(),
+                           country = character(),
+                           phone_number = character(),
+                           email = character(),
+                           fax = character(),
+                           web_page = character(),
+                           responsible_agency = character(),
+                           religious_affiliation = character(),
+                           multimedia_links = character(),
+                           xref = character(),
+                           update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_fam, is_family)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
@@ -129,69 +129,69 @@ add_family_event <- function(gedcom,
   gedcom %>%
     tibble::add_row(event_str, .before = next_row) %>% 
     tidyged.internals::finalise() %>% 
-    activate_family_group_record(xref)
+    activate_famg(xref)
   
 }
 
 
-#' @rdname add_family_event
+#' @rdname add_famg_event
 #' @export
-add_family_event_annulment <- purrr::partial(add_family_event, event_type = "ANUL", event_descriptor = "")
-# formals(add_family_event_annulment) <- purrr::list_modify(formals(add_family_event), 
+add_famg_event_annulment <- purrr::partial(add_famg_event, event_type = "ANUL", event_descriptor = "")
+# formals(add_famg_event_annulment) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "ANUL", event_descriptor = "")
-#' @rdname add_family_event
+#' @rdname add_famg_event
 #' @export
-add_family_event_census <- purrr::partial(add_family_event, event_type = "CENS", event_descriptor = "")
-# formals(add_family_event_census) <- purrr::list_modify(formals(add_family_event), 
+add_famg_event_census <- purrr::partial(add_famg_event, event_type = "CENS", event_descriptor = "")
+# formals(add_famg_event_census) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "CENS", event_descriptor = "")
 #' @export
-#' @rdname add_family_event
-add_family_event_divorce <- purrr::partial(add_family_event, event_type = "DIV", event_descriptor = "")
-# formals(add_family_event_divorce) <- purrr::list_modify(formals(add_family_event), 
+#' @rdname add_famg_event
+add_famg_event_divorce <- purrr::partial(add_famg_event, event_type = "DIV", event_descriptor = "")
+# formals(add_famg_event_divorce) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "DIV", event_descriptor = "")
 #' @export
-#' @rdname add_family_event
-add_family_event_divorce_filed <- purrr::partial(add_family_event, event_type = "DIVF", event_descriptor = "")
-# formals(add_family_event_divorce_filed) <- purrr::list_modify(formals(add_family_event), 
+#' @rdname add_famg_event
+add_famg_event_divorce_filed <- purrr::partial(add_famg_event, event_type = "DIVF", event_descriptor = "")
+# formals(add_famg_event_divorce_filed) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "DIVF", event_descriptor = "")
 #' @export
-#' @rdname add_family_event
-add_family_event_engagement <- purrr::partial(add_family_event, event_type = "ENGA", event_descriptor = "")
-# formals(add_family_event_engagement) <- purrr::list_modify(formals(add_family_event), 
+#' @rdname add_famg_event
+add_famg_event_engagement <- purrr::partial(add_famg_event, event_type = "ENGA", event_descriptor = "")
+# formals(add_famg_event_engagement) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "ENGA", event_descriptor = "")
 #' @export
-#' @rdname add_family_event
-add_family_event_marriage_banns <- purrr::partial(add_family_event, event_type = "MARB", event_descriptor = "")
-# formals(add_family_event_marriage_banns) <- purrr::list_modify(formals(add_family_event), 
+#' @rdname add_famg_event
+add_famg_event_marriage_banns <- purrr::partial(add_famg_event, event_type = "MARB", event_descriptor = "")
+# formals(add_famg_event_marriage_banns) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "MARB", event_descriptor = "")
 #' @export
-#' @rdname add_family_event
-add_family_event_marriage_contract <- purrr::partial(add_family_event, event_type = "MARC", event_descriptor = "")
-# formals(add_family_event_marriage_contract) <- purrr::list_modify(formals(add_family_event), 
+#' @rdname add_famg_event
+add_famg_event_marriage_contract <- purrr::partial(add_famg_event, event_type = "MARC", event_descriptor = "")
+# formals(add_famg_event_marriage_contract) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "MARC", event_descriptor = "")
 #' @export
-#' @rdname add_family_event
-add_family_event_relationship <- purrr::partial(add_family_event, event_type = "MARR", event_descriptor = "")
-# formals(add_family_event_relationship) <- purrr::list_modify(formals(add_family_event), 
+#' @rdname add_famg_event
+add_famg_event_relationship <- purrr::partial(add_famg_event, event_type = "MARR", event_descriptor = "")
+# formals(add_famg_event_relationship) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "MARR", event_descriptor = "")
 #' @export
-#' @rdname add_family_event
-add_family_event_marriage_license <- purrr::partial(add_family_event, event_type = "MARL", event_descriptor = "")
-# formals(add_family_event_marriage_license) <- purrr::list_modify(formals(add_family_event), 
+#' @rdname add_famg_event
+add_famg_event_marriage_license <- purrr::partial(add_famg_event, event_type = "MARL", event_descriptor = "")
+# formals(add_famg_event_marriage_license) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "MARL", event_descriptor = "")
 #' @export
-#' @rdname add_family_event
-add_family_event_marriage_settlement <- purrr::partial(add_family_event, event_type = "MARS", event_descriptor = "")
-# formals(add_family_event_marriage_settlement) <- purrr::list_modify(formals(add_family_event), 
+#' @rdname add_famg_event
+add_famg_event_marriage_settlement <- purrr::partial(add_famg_event, event_type = "MARS", event_descriptor = "")
+# formals(add_famg_event_marriage_settlement) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "MARS", event_descriptor = "")
 #' @export
-#' @rdname add_family_event
-add_family_event_residence <- purrr::partial(add_family_event, event_type = "RESI", event_descriptor = "")
-# formals(add_family_event_residence) <- purrr::list_modify(formals(add_family_event), 
+#' @rdname add_famg_event
+add_famg_event_residence <- purrr::partial(add_famg_event, event_type = "RESI", event_descriptor = "")
+# formals(add_famg_event_residence) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "RESI", event_descriptor = "")
 #' @export
-#' @rdname add_family_event
-add_family_event_other <- purrr::partial(add_family_event, event_type = "EVEN")
-# formals(add_family_event_other) <- purrr::list_modify(formals(add_family_event), 
+#' @rdname add_famg_event
+add_famg_event_other <- purrr::partial(add_famg_event, event_type = "EVEN")
+# formals(add_famg_event_other) <- purrr::list_modify(formals(add_famg_event), 
 #                                                               event_type = "EVEN")
 

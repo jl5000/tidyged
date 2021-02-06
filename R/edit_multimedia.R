@@ -16,32 +16,32 @@
 #' uses to identify this record. You can supply more than one in a vector.
 #' @param user_reference_type A user-defined definition of the user_reference_number(s). If this
 #' parameter is used, there must be a reference type for every reference number defined.
-#' @param multimedia_notes A character vector of notes accompanying this Multimedia record. These could be
+#' @param media_notes A character vector of notes accompanying this Multimedia record. These could be
 #' xrefs to existing Note records.
 #'
 #' @return An updated tidyged object including the Multimedia record.
 #' @export
-add_multimedia <- function(gedcom,
-                           file_reference,
-                           format,
-                           source_media = character(),
-                           title = character(),
-                           user_reference_number = character(),
-                           user_reference_type = character(),
-                           multimedia_notes = character()) {
+add_media <- function(gedcom,
+                      file_reference,
+                      format,
+                      source_media = character(),
+                      title = character(),
+                      user_reference_number = character(),
+                      user_reference_type = character(),
+                      media_notes = character()) {
   
   xref <- assign_xref(.pkgenv$xref_prefix_obje, gedcom = gedcom)
   
-  media_notes <- purrr::map(multimedia_notes, tidyged.internals::NOTE_STRUCTURE)
+  mmedia_notes <- purrr::map(media_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_record <- tidyged.internals::MULTIMEDIA_RECORD(xref_obje = xref,
-                                                          multimedia_file_reference = file_reference,
-                                                          multimedia_format = format,
-                                                          source_media_type = source_media,
-                                                          descriptive_title = title,
-                                                          user_reference_number = user_reference_number,
-                                                          user_reference_type = user_reference_type,
-                                                          notes = media_notes)
+                                                       multimedia_file_reference = file_reference,
+                                                       multimedia_format = format,
+                                                       source_media_type = source_media,
+                                                       descriptive_title = title,
+                                                       user_reference_number = user_reference_number,
+                                                       user_reference_type = user_reference_type,
+                                                       notes = mmedia_notes)
   
   gedcom %>% 
     tibble::add_row(media_record, .before = nrow(.)) %>% 
@@ -59,11 +59,11 @@ add_multimedia <- function(gedcom,
 #' @tests
 #' expect_equal(gedcom(subm()),
 #'              gedcom(subm()) %>% 
-#'              add_multimedia("test", "BMP") %>% 
-#'              remove_multimedia())
-remove_multimedia <- function(gedcom, multimedia = character()) {
+#'              add_media("test", "BMP") %>% 
+#'              remove_media())
+remove_media <- function(gedcom, multimedia = character()) {
   
-  xref <- get_valid_xref(gedcom, multimedia, .pkgenv$record_string_obje, is_multimedia)
+  xref <- get_valid_xref(gedcom, multimedia, .pkgenv$record_string_obje, is_media)
   
   gedcom %>% 
     dplyr::filter(record != xref, value != xref) %>% 

@@ -15,7 +15,7 @@ subm(
   email = character(),
   fax = character(),
   web_page = character(),
-  submitter_notes = character(),
+  subm_notes = character(),
   multimedia_links = character()
 )
 }
@@ -40,7 +40,7 @@ subm(
 
 \item{web_page}{A character vector containing up to three web pages of the submitter.}
 
-\item{submitter_notes}{A character vector of notes accompanying this Submitter record.
+\item{subm_notes}{A character vector of notes accompanying this Submitter record.
 These could be xrefs to existing Note records.}
 
 \item{multimedia_links}{TODO}

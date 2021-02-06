@@ -1,4 +1,4 @@
-# Function add_individual_association() @ L23
+# Function add_indi_association() @ L23
 
     {
       "type": "list",

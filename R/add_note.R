@@ -18,7 +18,7 @@ add_note_to_record <- function(gedcom, note) {
                     
   if(response1 %in% 0:1) return(gedcom)
   
-  if(is_individual(gedcom, xref)) {
+  if(is_indi(gedcom, xref)) {
     
     #if indi
     response2 <- utils::menu(c("The individual", "An association with an individual", "A family link", 
@@ -40,7 +40,7 @@ add_note_to_record <- function(gedcom, note) {
       
       if(length(asso_xrefs) == 0) stop("Error: No associations found")
       
-      asso_names <- purrr::map_chr(asso_xrefs, describe_individual, gedcom = gedcom, name = TRUE)
+      asso_names <- purrr::map_chr(asso_xrefs, describe_indi, gedcom = gedcom, name = TRUE)
       
       response3 <- utils::menu(asso_names, title = "Which association should the note be attached to? (Select 0 to cancel)")
       
@@ -58,7 +58,7 @@ add_note_to_record <- function(gedcom, note) {
       
       if(length(fam_xrefs) == 0) stop("Error: No family links found")
       
-      fam_desc <- purrr::map_chr(fam_xrefs, describe_family_group, gedcom=gedcom) %>% 
+      fam_desc <- purrr::map_chr(fam_xrefs, describe_famg, gedcom=gedcom) %>% 
         paste0(" (link as a ", ifelse(link_types == "FAMS", "spouse", "child"), ")")
       
       response3 <- utils::menu(fam_desc, title = "Which family link should the note be attached to?")
@@ -112,15 +112,15 @@ add_note_to_record <- function(gedcom, note) {
     
     
     
-  } else if(is_family(gedcom, xref)) {
+  } else if(is_famg(gedcom, xref)) {
     
-  } else if(is_multimedia(gedcom, xref)) {
+  } else if(is_media(gedcom, xref)) {
     
-  } else if(is_source(gedcom, xref)) {
+  } else if(is_sour(gedcom, xref)) {
     #source DATA?  
-  } else if(is_repository(gedcom, xref)) {
+  } else if(is_repo(gedcom, xref)) {
     
-  } else if(is_submitter(gedcom, xref)) {
+  } else if(is_subm(gedcom, xref)) {
     
   }
       
@@ -133,7 +133,7 @@ add_note_to_record <- function(gedcom, note) {
   gedcom %>% 
     tibble::add_row(note_str, .before = next_row) %>% 
     tidyged.internals::finalise() %>% 
-    activate_individual_record(xref)
+    activate_indi(xref)
   
 }
 

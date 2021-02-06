@@ -1,4 +1,4 @@
-# Function add_individual_names_var() @ L114
+# Function add_indi_names_var() @ L114
 
     {
       "type": "list",

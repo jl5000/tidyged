@@ -16,18 +16,18 @@
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'                         add_individual("Joe /Bloggs/") %>% 
-#'                         add_individual("Jimmy /Bloggs/") %>% 
-#'                         add_individual_association(associated_with = "Joe", association = "Friend") %>% 
+#'                         add_indi("Joe /Bloggs/") %>% 
+#'                         add_indi("Jimmy /Bloggs/") %>% 
+#'                         add_indi_association(associated_with = "Joe", association = "Friend") %>% 
 #'                         remove_dates_for_tests(), "json2")
-add_individual_association <- function(gedcom,
-                                       associated_with,
-                                       association,
-                                       association_notes = character(),
-                                       xref = character(),
-                                       update_date_changed = TRUE) {
+add_indi_association <- function(gedcom,
+                                 associated_with,
+                                 association,
+                                 association_notes = character(),
+                                 xref = character(),
+                                 update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   indi_xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), associated_with)
   
@@ -49,7 +49,7 @@ add_individual_association <- function(gedcom,
   gedcom %>%
     tibble::add_row(asso_str, .before = next_row) %>% 
     tidyged.internals::finalise() %>% 
-    activate_individual_record(xref)
+    activate_indi(xref)
   
 }
 
@@ -65,13 +65,13 @@ add_individual_association <- function(gedcom,
 #' @return An updated tidyged object with an expanded Individual record including
 #' this family link.
 #' @export
-add_individual_family_link_as_spouse <- function(gedcom, 
-                                                 family_xref,
-                                                 linkage_notes = character(),
-                                                 xref = character(),
-                                                 update_date_changed = TRUE) {
+add_indi_family_link_as_spouse <- function(gedcom, 
+                                           family_xref,
+                                           linkage_notes = character(),
+                                           xref = character(),
+                                           update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   link_notes <- purrr::map(linkage_notes, tidyged.internals::NOTE_STRUCTURE)
   
@@ -89,7 +89,7 @@ add_individual_family_link_as_spouse <- function(gedcom,
   gedcom %>%
     tibble::add_row(link, .before = next_row) %>% 
     tidyged.internals::finalise() %>% 
-    activate_individual_record(xref)
+    activate_indi(xref)
 }
 
 #' Add a family link as a child
@@ -106,20 +106,20 @@ add_individual_family_link_as_spouse <- function(gedcom,
 #' @return An updated tidyged object with an expanded Individual record including
 #' this family link.
 #' @export
-add_individual_family_link_as_child <- function(gedcom, 
+add_indi_family_link_as_child <- function(gedcom, 
                                                 family_xref,
                                                 linkage_type = "birth",
                                                 linkage_notes = character(),
                                                 xref = character(),
                                                 update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   link_notes <- purrr::map(linkage_notes, tidyged.internals::NOTE_STRUCTURE)
   
   link <- tidyged.internals::CHILD_TO_FAMILY_LINK(xref_fam = family_xref,
-                                                     pedigree_linkage_type = linkage_type,
-                                                     notes = link_notes) %>% 
+                                                  pedigree_linkage_type = linkage_type,
+                                                  notes = link_notes) %>% 
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
@@ -133,5 +133,5 @@ add_individual_family_link_as_child <- function(gedcom,
   gedcom %>%
     tibble::add_row(link, .before = next_row) %>% 
     tidyged.internals::finalise() %>% 
-    activate_individual_record(xref)
+    activate_indi(xref)
 }

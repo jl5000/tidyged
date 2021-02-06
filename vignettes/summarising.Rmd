@@ -23,27 +23,27 @@ library(tidyged)
 
 simpsons <- gedcom(subm("Me"), gedcom_description = "Some of the Simpsons",
                    gedcom_copyright = "No copyright") %>% 
-  add_individual("Homer /Simpson/", sex = "M") %>% 
-  add_individual_event_birth(event_date = date_calendar(1960, 5, 14),
-                             place_name = "Springfield, USA") %>% 
-  add_individual("Marge /Simpson/", sex = "F") %>% 
-  add_individual_event_birth(event_date = date_calendar(1960, 8, 24),
-                             place_name = "Springfield, USA") %>% 
-  add_individual("Lisa /Simpson/", sex = "F") %>% 
-  add_individual_event_birth(event_date = date_calendar(1984, 12, 3),
-                             place_name = "Springfield, USA") %>% 
-  add_individual("Bart /Simpson/", sex = "M") %>% 
-  add_individual_event_birth(event_date = date_calendar(1982, 3, 16),
-                             place_name = "Springfield, USA") %>% 
-  add_family_group(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa"), 
+  add_indi("Homer /Simpson/", sex = "M") %>% 
+  add_indi_event_birth(event_date = date_calendar(1960, 5, 14),
+                       place_name = "Springfield, USA") %>% 
+  add_indi("Marge /Simpson/", sex = "F") %>% 
+  add_indi_event_birth(event_date = date_calendar(1960, 8, 24),
+                       place_name = "Springfield, USA") %>% 
+  add_indi("Lisa /Simpson/", sex = "F") %>% 
+  add_indi_event_birth(event_date = date_calendar(1984, 12, 3),
+                       place_name = "Springfield, USA") %>% 
+  add_indi("Bart /Simpson/", sex = "M") %>% 
+  add_indi_event_birth(event_date = date_calendar(1982, 3, 16),
+                       place_name = "Springfield, USA") %>% 
+  add_famg(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa"), 
                    number_of_children = 3) %>% 
   add_note("This is a note") %>% 
   add_note("This is another note") %>% 
-  add_multimedia("123", "PDF") %>% 
-  add_multimedia("456", "PDF") %>%
-  add_repository("A library") %>% 
-  add_source(originator = "J.R. Hartley", title = "A History of the Simpsons") %>%
-  add_source(originator = "Prof. J Frink", title = "The screaming and the pain and the hoyvenglaven")
+  add_media("123", "PDF") %>% 
+  add_media("456", "PDF") %>%
+  add_repo("A library") %>% 
+  add_sour(originator = "J.R. Hartley", title = "A History of the Simpsons") %>%
+  add_sour(originator = "Prof. J Frink", title = "The screaming and the pain and the hoyvenglaven")
 ```
 
 ## Global summaries
@@ -61,7 +61,7 @@ The `num_*()` family of functions count the number of records of a particular ty
 
 ```{r}
 num_indi(simpsons)
-num_fam(simpsons)
+num_famg(simpsons)
 num_media(simpsons)
 ```
 
@@ -70,9 +70,9 @@ These functions are the workhorse of the `str()` function.
 The `df_*()` family of functions provide a tabular summary of all records of a particular type:
 
 ```{r}
-df_individuals(simpsons) %>% knitr::kable()
-df_families(simpsons) %>% knitr::kable()
-df_multimedia(simpsons) %>% knitr::kable()
+df_indi(simpsons) %>% knitr::kable()
+df_famg(simpsons) %>% knitr::kable()
+df_media(simpsons) %>% knitr::kable()
 ```
 
 
@@ -81,18 +81,18 @@ df_multimedia(simpsons) %>% knitr::kable()
 The `is_*()` family of functions determine whether an xref is a record of a particular type:
 
 ```{r}
-is_individual(simpsons, "@I1@")
-is_family(simpsons, "@F1@")
-is_repository(simpsons, "@N1@")
+is_indi(simpsons, "@I1@")
+is_famg(simpsons, "@F1@")
+is_repo(simpsons, "@N1@")
 ```
 
 The `describe_*()` family of functions give a description of certain records:
 
 ```{r}
-describe_individual(simpsons, "Bart")
-describe_individual(simpsons, "Lisa", name_only = TRUE)
-describe_individual(simpsons, "Homer", short_desc = TRUE)
-describe_family_group(simpsons, "@F1@")
+describe_indi(simpsons, "Bart")
+describe_indi(simpsons, "Lisa", name_only = TRUE)
+describe_indi(simpsons, "Homer", short_desc = TRUE)
+describe_famg(simpsons, "@F1@")
 ```
 
 Whilst this family of functions can only operate on one record at a time, the `describe_records()` function can take a whole vector of xrefs, potentially of different types (header, trailer, and duplicate records are ignored by this function):

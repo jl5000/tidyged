@@ -68,60 +68,60 @@
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'                        add_individual(sex = "M") %>% 
-#'                        add_individual_event(event_type = "CHR",
-#'                                             event_date = date_calendar(year = 1956),
-#'                                             age_at_event = "1y",
-#'                                              local_address_lines = c("line1","line2","line3","line4"),
-#'                                              place_name = "There",
-#'                                              place_notes = "Place note") %>% 
+#'                        add_indi(sex = "M") %>% 
+#'                        add_indi_event(event_type = "CHR",
+#'                                       event_date = date_calendar(year = 1956),
+#'                                       age_at_event = "1y",
+#'                                       local_address_lines = c("line1","line2","line3","line4"),
+#'                                       place_name = "There",
+#'                                       place_notes = "Place note") %>% 
 #'                        remove_dates_for_tests(), "json2")
-add_individual_event <- function(gedcom,
-                                 event_type,
-                                 event_descriptor = "",
-                                 event_classification = character(),
-                                 event_date = character(),
-                                 event_cause = character(),
-                                 age_at_event = character(),
-                                 event_notes = character(),
-                                 place_name = character(),
-                                 place_phonetic = character(),
-                                 phonetisation_method = character(),
-                                 place_romanised = character(),
-                                 romanisation_method = character(),
-                                 place_latitude = character(),
-                                 place_longitude = character(),
-                                 place_notes = character(),
-                                 local_address_lines = character(),
-                                 city = character(),
-                                 state = character(),
-                                 postal_code = character(),
-                                 country = character(),
-                                 phone_number = character(),
-                                 email = character(),
-                                 fax = character(),
-                                 web_page = character(),
-                                 responsible_agency = character(),
-                                 religious_affiliation = character(),
-                                 family_xref = character(),
-                                 adopting_parent = character(),
-                                 multimedia_links = character(),
-                                 xref = character(),
-                                 update_date_changed = TRUE) {
+add_indi_event <- function(gedcom,
+                           event_type,
+                           event_descriptor = "",
+                           event_classification = character(),
+                           event_date = character(),
+                           event_cause = character(),
+                           age_at_event = character(),
+                           event_notes = character(),
+                           place_name = character(),
+                           place_phonetic = character(),
+                           phonetisation_method = character(),
+                           place_romanised = character(),
+                           romanisation_method = character(),
+                           place_latitude = character(),
+                           place_longitude = character(),
+                           place_notes = character(),
+                           local_address_lines = character(),
+                           city = character(),
+                           state = character(),
+                           postal_code = character(),
+                           country = character(),
+                           phone_number = character(),
+                           email = character(),
+                           fax = character(),
+                           web_page = character(),
+                           responsible_agency = character(),
+                           religious_affiliation = character(),
+                           family_xref = character(),
+                           adopting_parent = character(),
+                           multimedia_links = character(),
+                           xref = character(),
+                           update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_individual)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   
   event_address <- tidyged.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
-                                                           address_city = city,
-                                                           address_state = state,
-                                                           address_postal_code = postal_code,
-                                                           address_country = country,
-                                                           phone_number = phone_number,
-                                                           address_email = email,
-                                                           address_fax = fax,
-                                                           address_web_page = web_page)
+                                                        address_city = city,
+                                                        address_state = state,
+                                                        address_postal_code = postal_code,
+                                                        address_country = country,
+                                                        phone_number = phone_number,
+                                                        address_email = email,
+                                                        address_fax = fax,
+                                                        address_web_page = web_page)
   
   plac_notes <- purrr::map(place_notes, tidyged.internals::NOTE_STRUCTURE)
   
@@ -132,13 +132,13 @@ add_individual_event <- function(gedcom,
   } else {
     
     event_place <- tidyged.internals::PLACE_STRUCTURE(place_name = place_name,
-                                                         place_phonetic = place_phonetic,
-                                                         phonetisation_method = phonetisation_method,
-                                                         place_romanised = place_romanised,
-                                                         romanisation_method = romanisation_method,
-                                                         place_latitude = place_latitude,
-                                                         place_longitude = place_longitude,
-                                                         notes = plac_notes)
+                                                      place_phonetic = place_phonetic,
+                                                      phonetisation_method = phonetisation_method,
+                                                      place_romanised = place_romanised,
+                                                      romanisation_method = romanisation_method,
+                                                      place_latitude = place_latitude,
+                                                      place_longitude = place_longitude,
+                                                      notes = plac_notes)
   }
   
   even_notes <- purrr::map(event_notes, tidyged.internals::NOTE_STRUCTURE)
@@ -148,23 +148,23 @@ add_individual_event <- function(gedcom,
     purrr::map(tidyged.internals::MULTIMEDIA_LINK)
   
   details1 <- tidyged.internals::EVENT_DETAIL(event_or_fact_classification = event_classification,
-                                                 date = event_date,
-                                                 place = event_place,
-                                                 address = event_address,
-                                                 responsible_agency = responsible_agency,
-                                                 religious_affiliation = religious_affiliation,
-                                                 cause_of_event = event_cause,
-                                                 notes = even_notes,
-                                                 multimedia_links = media_links)
+                                              date = event_date,
+                                              place = event_place,
+                                              address = event_address,
+                                              responsible_agency = responsible_agency,
+                                              religious_affiliation = religious_affiliation,
+                                              cause_of_event = event_cause,
+                                              notes = even_notes,
+                                              multimedia_links = media_links)
   
   details2 <- tidyged.internals::INDIVIDUAL_EVENT_DETAIL(event_details = details1,
-                                                            age_at_event = age_at_event)
+                                                         age_at_event = age_at_event)
   
   event_str <- tidyged.internals::INDIVIDUAL_EVENT_STRUCTURE(event_type_individual = event_type,
-                                                                event_descriptor = event_descriptor,
-                                                                individual_event_details = details2,
-                                                                xref_fam = family_xref,
-                                                                adopted_by_which_parent = adopting_parent) %>% 
+                                                             event_descriptor = event_descriptor,
+                                                             individual_event_details = details2,
+                                                             xref_fam = family_xref,
+                                                             adopted_by_which_parent = adopting_parent) %>% 
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
@@ -178,114 +178,114 @@ add_individual_event <- function(gedcom,
   gedcom %>%
     tibble::add_row(event_str, .before = next_row) %>% 
     tidyged.internals::finalise() %>% 
-    activate_individual_record(xref)
+    activate_indi(xref)
   
 }
 
 
 #' @export
-#' @rdname add_individual_event
-add_individual_event_birth <- purrr::partial(add_individual_event, event_type = "BIRT", event_descriptor = "")
-# formals(add_individual_event_birth) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_birth <- purrr::partial(add_indi_event, event_type = "BIRT", event_descriptor = "")
+# formals(add_indi_event_birth) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                   event_type = "BIRT", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_christening <- purrr::partial(add_individual_event, event_type = "CHR", event_descriptor = "")
-# formals(add_individual_event_christening) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_christening <- purrr::partial(add_indi_event, event_type = "CHR", event_descriptor = "")
+# formals(add_indi_event_christening) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "CHR", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_death <- purrr::partial(add_individual_event, event_type = "DEAT", event_descriptor = "")
-# formals(add_individual_event_death) <- purrr::list_modify(formals(add_individual_event),
+#' @rdname add_indi_event
+add_indi_event_death <- purrr::partial(add_indi_event, event_type = "DEAT", event_descriptor = "")
+# formals(add_indi_event_death) <- purrr::list_modify(formals(add_indi_event),
 #                                                                  event_type = "DEAT", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_burial <- purrr::partial(add_individual_event, event_type = "BURI", event_descriptor = "")
-# formals(add_individual_event_burial) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_burial <- purrr::partial(add_indi_event, event_type = "BURI", event_descriptor = "")
+# formals(add_indi_event_burial) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "BURI", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_cremation <- purrr::partial(add_individual_event, event_type = "CREM", event_descriptor = "")
-# formals(add_individual_event_cremation) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_cremation <- purrr::partial(add_indi_event, event_type = "CREM", event_descriptor = "")
+# formals(add_indi_event_cremation) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "CREM", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_adoption <- purrr::partial(add_individual_event, event_type = "ADOP", event_descriptor = "")
-# formals(add_individual_event_adoption) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_adoption <- purrr::partial(add_indi_event, event_type = "ADOP", event_descriptor = "")
+# formals(add_indi_event_adoption) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "ADOP", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_baptism <- purrr::partial(add_individual_event, event_type = "BAPM", event_descriptor = "")
-# formals(add_individual_event_baptism) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_baptism <- purrr::partial(add_indi_event, event_type = "BAPM", event_descriptor = "")
+# formals(add_indi_event_baptism) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "BAPM", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_bar_mitzvah <- purrr::partial(add_individual_event, event_type = "BARM", event_descriptor = "")
-# formals(add_individual_event_bar_mitzvah) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_bar_mitzvah <- purrr::partial(add_indi_event, event_type = "BARM", event_descriptor = "")
+# formals(add_indi_event_bar_mitzvah) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "BARM", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_bas_mitzvah <- purrr::partial(add_individual_event, event_type = "BASM", event_descriptor = "")
-# formals(add_individual_event_bas_mitzvah) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_bas_mitzvah <- purrr::partial(add_indi_event, event_type = "BASM", event_descriptor = "")
+# formals(add_indi_event_bas_mitzvah) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "BASM", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_adult_christening <- purrr::partial(add_individual_event, event_type = "CHRA", event_descriptor = "")
-# formals(add_individual_event_adult_christening) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_adult_christening <- purrr::partial(add_indi_event, event_type = "CHRA", event_descriptor = "")
+# formals(add_indi_event_adult_christening) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "CHRA", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_confirmation <- purrr::partial(add_individual_event, event_type = "CONF", event_descriptor = "")
-# formals(add_individual_event_confirmation) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_confirmation <- purrr::partial(add_indi_event, event_type = "CONF", event_descriptor = "")
+# formals(add_indi_event_confirmation) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "CONF", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_first_communion <- purrr::partial(add_individual_event, event_type = "FCOM", event_descriptor = "")
-# formals(add_individual_event_first_communion) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_first_communion <- purrr::partial(add_indi_event, event_type = "FCOM", event_descriptor = "")
+# formals(add_indi_event_first_communion) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "FCOM", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_naturalization <- purrr::partial(add_individual_event, event_type = "NATU", event_descriptor = "")
-# formals(add_individual_event_naturalization) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_naturalization <- purrr::partial(add_indi_event, event_type = "NATU", event_descriptor = "")
+# formals(add_indi_event_naturalization) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "NATU", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_emigration <- purrr::partial(add_individual_event, event_type = "EMIG", event_descriptor = "")
-# formals(add_individual_event_emigration) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_emigration <- purrr::partial(add_indi_event, event_type = "EMIG", event_descriptor = "")
+# formals(add_indi_event_emigration) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "EMIG", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_immigration <- purrr::partial(add_individual_event, event_type = "IMMI", event_descriptor = "")
-# formals(add_individual_event_immigration) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_immigration <- purrr::partial(add_indi_event, event_type = "IMMI", event_descriptor = "")
+# formals(add_indi_event_immigration) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "IMMI", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_census <- purrr::partial(add_individual_event, event_type = "CENS", event_descriptor = "")
-# formals(add_individual_event_census) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_census <- purrr::partial(add_indi_event, event_type = "CENS", event_descriptor = "")
+# formals(add_indi_event_census) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "CENS", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_probate <- purrr::partial(add_individual_event, event_type = "PROB", event_descriptor = "")
-# formals(add_individual_event_probate) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_probate <- purrr::partial(add_indi_event, event_type = "PROB", event_descriptor = "")
+# formals(add_indi_event_probate) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "PROB", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_will <- purrr::partial(add_individual_event, event_type = "WILL", event_descriptor = "")
-# formals(add_individual_event_will) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_will <- purrr::partial(add_indi_event, event_type = "WILL", event_descriptor = "")
+# formals(add_indi_event_will) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "WILL", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_graduation <- purrr::partial(add_individual_event, event_type = "GRAD", event_descriptor = "")
-# formals(add_individual_event_graduation) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_graduation <- purrr::partial(add_indi_event, event_type = "GRAD", event_descriptor = "")
+# formals(add_indi_event_graduation) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "GRAD", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_retirement <- purrr::partial(add_individual_event, event_type = "RETI", event_descriptor = "")
-# formals(add_individual_event_retirement) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_retirement <- purrr::partial(add_indi_event, event_type = "RETI", event_descriptor = "")
+# formals(add_indi_event_retirement) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "RETI", event_descriptor = "")
 #' @export
-#' @rdname add_individual_event
-add_individual_event_other <- purrr::partial(add_individual_event, event_type = "EVEN")
-# formals(add_individual_event_other) <- purrr::list_modify(formals(add_individual_event), 
+#' @rdname add_indi_event
+add_indi_event_other <- purrr::partial(add_indi_event, event_type = "EVEN")
+# formals(add_indi_event_other) <- purrr::list_modify(formals(add_indi_event), 
 #                                                                  event_type = "EVEN")
 

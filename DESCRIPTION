@@ -29,7 +29,15 @@ Suggests:
     roxytest,
     rmarkdown,
     knitr,
-    waldo
-Remotes: jl5000/tidyged.internals, jl5000/tidyged.io
+    waldo,
+    visged,
+    autoged,
+    geddown
+Remotes: 
+    jl5000/tidyged.internals, 
+    jl5000/tidyged.io, 
+    jl5000/visged,
+    jl5000/autoged,
+    jl5000/geddown
 Config/testthat/edition: 3
 VignetteBuilder: knitr

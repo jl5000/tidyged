@@ -104,31 +104,31 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
 
 <span class="va">tg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Jamie Lendrum"</span><span class="op">)</span>, gedcom_description <span class="op">=</span> <span class="st">"The Skywalker family"</span>, gedcom_copyright <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add_individual</span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span>, individual_notes <span class="op">=</span> <span class="st">"The central character in the Star Wars Skywalker Saga"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add_individual_names</span><span class="op">(</span><span class="st">"Anakin Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Anakin"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add_individual_names</span><span class="op">(</span><span class="st">"Darth Vader"</span>, type <span class="op">=</span> <span class="st">"given"</span>, given <span class="op">=</span> <span class="st">"Darth Vader"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add_individual</span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span>, individual_notes <span class="op">=</span> <span class="st">"Queen of Naboo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add_individual_names</span><span class="op">(</span><span class="st">"Padme Amidala"</span>, given <span class="op">=</span> <span class="st">"Padme"</span>, surname <span class="op">=</span> <span class="st">"Amidala"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_individual</span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_individual_names</span><span class="op">(</span><span class="st">"Leia Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add_individual_names</span><span class="op">(</span><span class="st">"Princess Leia Organa"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span>, 
-                       prefix <span class="op">=</span> <span class="st">"Princess"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_individual</span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add_individual_names</span><span class="op">(</span><span class="st">"Luke Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Luke"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_individual</span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_individual_names</span><span class="op">(</span><span class="st">"Obi-Wan Kenobi"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Obi-Wan"</span>, 
-                       nickname <span class="op">=</span> <span class="st">"Ben"</span>, surname <span class="op">=</span> <span class="st">"Kenobi"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_family_group</span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Anakin"</span>, wife <span class="op">=</span> <span class="st">"Padme"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Luke"</span>, <span class="st">"Leia"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">activate_individual_record</span><span class="op">(</span><span class="st">"Anakin"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_individual_association</span><span class="op">(</span><span class="st">"Obi-Wan"</span>, association <span class="op">=</span> <span class="st">"Master"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_individual_event_death</span><span class="op">(</span>age_at_event <span class="op">=</span> <span class="st">"45y"</span>, event_cause <span class="op">=</span> <span class="st">"Killed by son Luke"</span>,
-                             place_name <span class="op">=</span> <span class="st">"Second Death Star"</span>, place_notes <span class="op">=</span> <span class="st">"Orbiting Endor System"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_individual_attribute_religion</span><span class="op">(</span>attribute_descriptor <span class="op">=</span> <span class="st">"Jedi"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_individual_attribute_possessions</span><span class="op">(</span>attribute_descriptor <span class="op">=</span> <span class="st">"Lightsaber"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span>, indi_notes <span class="op">=</span> <span class="st">"The central character in the Star Wars Skywalker Saga"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Anakin Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Anakin"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Darth Vader"</span>, type <span class="op">=</span> <span class="st">"given"</span>, given <span class="op">=</span> <span class="st">"Darth Vader"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span>, indi_notes <span class="op">=</span> <span class="st">"Queen of Naboo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Padme Amidala"</span>, given <span class="op">=</span> <span class="st">"Padme"</span>, surname <span class="op">=</span> <span class="st">"Amidala"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Princess Leia Organa"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span>, 
+                 prefix <span class="op">=</span> <span class="st">"Princess"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Luke Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Luke"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Obi-Wan Kenobi"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Obi-Wan"</span>, 
+                 nickname <span class="op">=</span> <span class="st">"Ben"</span>, surname <span class="op">=</span> <span class="st">"Kenobi"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Anakin"</span>, wife <span class="op">=</span> <span class="st">"Padme"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Luke"</span>, <span class="st">"Leia"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="st">"Anakin"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_association.html">add_indi_association</a></span><span class="op">(</span><span class="st">"Obi-Wan"</span>, association <span class="op">=</span> <span class="st">"Master"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_event.html">add_indi_event_death</a></span><span class="op">(</span>age_at_event <span class="op">=</span> <span class="st">"45y"</span>, event_cause <span class="op">=</span> <span class="st">"Killed by son Luke"</span>,
+                       place_name <span class="op">=</span> <span class="st">"Second Death Star"</span>, place_notes <span class="op">=</span> <span class="st">"Orbiting Endor System"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_attr.html">add_indi_attr_religion</a></span><span class="op">(</span>attribute_descriptor <span class="op">=</span> <span class="st">"Jedi"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_attr.html">add_indi_attr_possessions</a></span><span class="op">(</span>attribute_descriptor <span class="op">=</span> <span class="st">"Lightsaber"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"Based on Star Wars"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_source</span><span class="op">(</span>short_title <span class="op">=</span> <span class="st">"Star Wars"</span>, title <span class="op">=</span> <span class="st">"Star Wars Episode IV: A New Hope"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_repository</span><span class="op">(</span><span class="st">"The Skywalker Saga"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_multimedia</span><span class="op">(</span>file_reference <span class="op">=</span> <span class="st">"XYZ"</span>, format <span class="op">=</span> <span class="st">"JPG"</span><span class="op">)</span>
+  <span class="fu"><a href="reference/add_sour.html">add_sour</a></span><span class="op">(</span>short_title <span class="op">=</span> <span class="st">"Star Wars"</span>, title <span class="op">=</span> <span class="st">"Star Wars Episode IV: A New Hope"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_repo.html">add_repo</a></span><span class="op">(</span><span class="st">"The Skywalker Saga"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_media.html">add_media</a></span><span class="op">(</span>file_reference <span class="op">=</span> <span class="st">"XYZ"</span>, format <span class="op">=</span> <span class="st">"JPG"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tg</span>, n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 113 x 4</span>
@@ -253,7 +253,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/num_indi.html">num_indi</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span>
 <span class="co">#&gt; [1] 5</span>
-<span class="fu">num_fam</span><span class="op">(</span><span class="va">tg</span><span class="op">)</span>
+<span class="fu"><a href="reference/num_indi.html">num_famg</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span>
 <span class="co">#&gt; [1] 1</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span>
@@ -281,7 +281,7 @@
 <span class="co">#&gt;  Product name:            The 'tidyged' package for the R language </span>
 <span class="co">#&gt;  Product source:          Jamie Lendrum</span>
 
-<span class="fu">df_individuals</span><span class="op">(</span><span class="va">tg</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="reference/df_indi.html">df_indi</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="2%">
@@ -385,7 +385,7 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">df_families</span><span class="op">(</span><span class="va">tg</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -406,7 +406,7 @@
 <td align="left">6 FEB 2021</td>
 </tr></tbody>
 </table>
-<p>This package allows limited editing of <code>tidyged</code> objects (adding/removing records, as well as the addition of some record substructures). Editing of existing records is made possible through ‘activation’ (much like the <code>tidygraph</code> package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of <code>activate_*_record()</code> functions.</p>
+<p>This package allows limited editing of <code>tidyged</code> objects (adding/removing records, as well as the addition of some record substructures). Editing of existing records is made possible through ‘activation’ (much like the <code>tidygraph</code> package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of <code>activate_*()</code> functions.</p>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">

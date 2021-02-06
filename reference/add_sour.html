@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define a Submitter record for a new tidyged object — subm • tidyged</title>
+<title>Add a Source record to a tidyged object — add_sour • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Define a Submitter record for a new tidyged object — subm" />
-<meta property="og:description" content="Define a Submitter record for a new tidyged object" />
+<meta property="og:title" content="Add a Source record to a tidyged object — add_sour" />
+<meta property="og:description" content="Add a Source record to a tidyged object" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,27 +119,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define a Submitter record for a new tidyged object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/create.R'><code>R/create.R</code></a></small>
-    <div class="hidden name"><code>subm.Rd</code></div>
+    <h1>Add a Source record to a tidyged object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/edit_source.R'><code>R/edit_source.R</code></a></small>
+    <div class="hidden name"><code>add_sour.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Define a Submitter record for a new tidyged object</p>
+    <p>Add a Source record to a tidyged object</p>
     </div>
 
-    <pre class="usage"><span class='fu'>subm</span><span class='op'>(</span>
-  name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/unname.html'>unname</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.info.html'>Sys.info</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='st'>"user"</span><span class='op'>]</span><span class='op'>)</span>,
-  local_address_lines <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  city <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  state <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  postal_code <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  country <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  phone_number <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  email <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  fax <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  web_page <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  subm_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+    <pre class="usage"><span class='fu'>add_sour</span><span class='op'>(</span>
+  <span class='va'>gedcom</span>,
+  events_recorded <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  date_period_covered <span class='op'>=</span> <span class='fu'><a href='date_period.html'>date_period</a></span><span class='op'>(</span><span class='op'>)</span>,
+  jurisdiction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  responsible_agency <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  originator <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  title <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  short_title <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  publication_detail <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  source_text <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  user_reference_number <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  user_reference_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  data_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  sour_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   multimedia_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
@@ -147,65 +150,85 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>The name of the submitter.</p></td>
+      <th>gedcom</th>
+      <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>local_address_lines</th>
-      <td><p>The first lines of the submitter address.</p></td>
+      <th>events_recorded</th>
+      <td><p>An enumeration of the different kinds of events that were recorded
+in this source. Each enumeration is separated by a comma. See the Gedcom 5.5.5 Specification for
+more details.</p></td>
     </tr>
     <tr>
-      <th>city</th>
-      <td><p>The city of the submitter.</p></td>
+      <th>date_period_covered</th>
+      <td><p>A date_period() object indicating the time period of events
+covered by this source.</p></td>
     </tr>
     <tr>
-      <th>state</th>
-      <td><p>The state/county of the submitter.</p></td>
+      <th>jurisdiction</th>
+      <td><p>A character string indicating the lowest level jurisdiction encompassing
+all places named in this source. See the Gedcom 5.5.5 Specification for more details.</p></td>
     </tr>
     <tr>
-      <th>postal_code</th>
-      <td><p>The postal code of the submitter.</p></td>
+      <th>responsible_agency</th>
+      <td><p>The organisation, institution, corporation, person, or other
+entity that has responsibility for the source data.</p></td>
     </tr>
     <tr>
-      <th>country</th>
-      <td><p>The country of the submitter.</p></td>
+      <th>originator</th>
+      <td><p>The person, agency, or entity who created the record.</p></td>
     </tr>
     <tr>
-      <th>phone_number</th>
-      <td><p>A character vector containing up to three phone numbers of the submitter.</p></td>
+      <th>title</th>
+      <td><p>The title of the source work, record, or item and, when appropriate, the title of the
+larger work or series of which it is a part.</p></td>
     </tr>
     <tr>
-      <th>email</th>
-      <td><p>A character vector containing up to three email addresses of the submitter.</p></td>
+      <th>short_title</th>
+      <td><p>An abbreviated or shortened version of the title (if required).</p></td>
     </tr>
     <tr>
-      <th>fax</th>
-      <td><p>A character vector containing up to three fax numbers of the submitter.</p></td>
+      <th>publication_detail</th>
+      <td><p>When and where the source record was created. For published works,
+this includes information such as the city of publication, name of the publisher, and year of
+publication.</p></td>
     </tr>
     <tr>
-      <th>web_page</th>
-      <td><p>A character vector containing up to three web pages of the submitter.</p></td>
+      <th>source_text</th>
+      <td><p>A verbatim copy of relevant text contained within the source.
+This indicates notes or text that are actually contained in the source document,
+not the submitter's opinion about the source.</p></td>
     </tr>
     <tr>
-      <th>subm_notes</th>
-      <td><p>A character vector of notes accompanying this Submitter record.
+      <th>user_reference_number</th>
+      <td><p>A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector.</p></td>
+    </tr>
+    <tr>
+      <th>user_reference_type</th>
+      <td><p>A user-defined definition of the user_reference_number(s). If this
+parameter is used, there must be a reference type for every reference number defined.</p></td>
+    </tr>
+    <tr>
+      <th>data_notes</th>
+      <td><p>A character vector of notes associated with the data in this Source record.
+These could be xrefs to existing Note records.</p></td>
+    </tr>
+    <tr>
+      <th>sour_notes</th>
+      <td><p>A character vector of notes accompanying this Source record.
 These could be xrefs to existing Note records.</p></td>
     </tr>
     <tr>
       <th>multimedia_links</th>
-      <td><p>TODO</p></td>
+      <td><p>A character vector of multimedia file references accompanying this
+source. These could be xrefs to existing Multimedia records.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Submitter record to be incorporated into a new tidyged object.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function is supposed to be used in the gedcom() function to define a
-new tidyged object.</p>
-<p>This submitter record identifies the individual or organization that contributed
-information contained in the GEDCOM file.</p>
+    <p>An updated tidyged object including the Source record.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

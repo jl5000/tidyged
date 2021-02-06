@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the number of records in a tidyged object — num_indi • tidyged</title>
+<title>Activate a record — activate_indi • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get the number of records in a tidyged object — num_indi" />
-<meta property="og:description" content="These functions return the number of records of a particular type in a tidyged object." />
+<meta property="og:title" content="Activate a record — activate_indi" />
+<meta property="og:description" content="Set a specific record to be the active record." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,28 +119,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the number of records in a tidyged object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/interrogate.R'><code>R/interrogate.R</code></a></small>
-    <div class="hidden name"><code>num_indi.Rd</code></div>
+    <h1>Activate a record</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/activate.R'><code>R/activate.R</code></a></small>
+    <div class="hidden name"><code>activate_indi.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These functions return the number of records of a particular type in a tidyged object.</p>
+    <p>Set a specific record to be the active record.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>num_indi</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>activate_indi</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>record</span><span class='op'>)</span>
 
-<span class='fu'>num_famg</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+<span class='fu'>activate_famg</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>record</span><span class='op'>)</span>
 
-<span class='fu'>num_subm</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+<span class='fu'>activate_subm</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>record</span><span class='op'>)</span>
 
-<span class='fu'>num_media</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+<span class='fu'>activate_media</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>record</span><span class='op'>)</span>
 
-<span class='fu'>num_note</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+<span class='fu'>activate_note</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>record</span><span class='op'>)</span>
 
-<span class='fu'>num_repo</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+<span class='fu'>activate_sour</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>record</span><span class='op'>)</span>
 
-<span class='fu'>num_sour</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span></pre>
+<span class='fu'>activate_repo</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>record</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,11 +149,29 @@
       <th>gedcom</th>
       <td><p>A tidyged object.</p></td>
     </tr>
+    <tr>
+      <th>record</th>
+      <td><p>The xref or attribute of the record to be activated.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The number of records of the relevant type.</p>
+    <p>The same tidyged object with "active_record" attribute set to the specific
+record to allow easy editing.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This allows a mechanism to easily edit particular records. Either a specific record attribute can be provided
+(can be a regex pattern) or the xref can be provided explicitly. Providing an attribute instead of the
+xref can make your code more readable, provided that it returns a unique record!</p>
+<p>The attributes that can be provided for each type of record are:</p><ul>
+<li><p>Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);</p></li>
+<li><p>Multimedia: File reference (FILE);</p></li>
+<li><p>Note: User text (NOTE);</p></li>
+<li><p>Source: Title (TITL);</p></li>
+<li><p>Repository: Name (NAME).</p></li>
+</ul>
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

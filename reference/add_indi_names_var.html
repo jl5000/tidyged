@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the number of records in a tidyged object — num_indi • tidyged</title>
+<title>Add a variation of a personal name to an Individual record — add_indi_names_var • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get the number of records in a tidyged object — num_indi" />
-<meta property="og:description" content="These functions return the number of records of a particular type in a tidyged object." />
+<meta property="og:title" content="Add a variation of a personal name to an Individual record — add_indi_names_var" />
+<meta property="og:description" content="Add a variation of a personal name to an Individual record" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,28 +119,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the number of records in a tidyged object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/interrogate.R'><code>R/interrogate.R</code></a></small>
-    <div class="hidden name"><code>num_indi.Rd</code></div>
+    <h1>Add a variation of a personal name to an Individual record</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/edit_individual_names.R'><code>R/edit_individual_names.R</code></a></small>
+    <div class="hidden name"><code>add_indi_names_var.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These functions return the number of records of a particular type in a tidyged object.</p>
+    <p>Add a variation of a personal name to an Individual record</p>
     </div>
 
-    <pre class="usage"><span class='fu'>num_indi</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_famg</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_subm</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_media</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_note</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_repo</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_sour</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>add_indi_names_var</span><span class='op'>(</span>
+  <span class='va'>gedcom</span>,
+  <span class='va'>primary_name</span>,
+  <span class='va'>variation_name</span>,
+  <span class='va'>type</span>,
+  phonetic_variation <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  given <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  nickname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  surname_prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  surname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  suffix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  variation_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  update_date_changed <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,11 +152,73 @@
       <th>gedcom</th>
       <td><p>A tidyged object.</p></td>
     </tr>
+    <tr>
+      <th>primary_name</th>
+      <td><p>The name for which this is a variation. This is treated as a
+regex pattern to match to existing names.</p></td>
+    </tr>
+    <tr>
+      <th>variation_name</th>
+      <td><p>The full name variation. The surname, if known, should be enclosed between two
+forward slash (/) characters.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Indicates the method used in transforming the text to the variation.</p></td>
+    </tr>
+    <tr>
+      <th>phonetic_variation</th>
+      <td><p>Whether the name variation is a phonetic variation
+(TRUE, default) or a romanised variation (FALSE).</p></td>
+    </tr>
+    <tr>
+      <th>prefix</th>
+      <td><p>The name prefix, e.g. Cmdr.</p></td>
+    </tr>
+    <tr>
+      <th>given</th>
+      <td><p>The given name or earned name. Different given names are separated
+by a comma.</p></td>
+    </tr>
+    <tr>
+      <th>nickname</th>
+      <td><p>A descriptive or familiar name used in connection with one's
+proper name.</p></td>
+    </tr>
+    <tr>
+      <th>surname_prefix</th>
+      <td><p>Surname prefix or article used in a family name.
+Different surname articles are separated by a comma, for example in the name
+"de la Cruz", this value would be "de, la".</p></td>
+    </tr>
+    <tr>
+      <th>surname</th>
+      <td><p>Surname or family name. Different surnames are separated by a comma.</p></td>
+    </tr>
+    <tr>
+      <th>suffix</th>
+      <td><p>Non-indexing name piece that appears after the given name and surname
+parts, e.g. Jr. Different name suffix parts are separated by a comma.</p></td>
+    </tr>
+    <tr>
+      <th>variation_notes</th>
+      <td><p>A character vector of notes accompanying this name variation.
+These could be xrefs to existing Note records.</p></td>
+    </tr>
+    <tr>
+      <th>xref</th>
+      <td><p>The xref of a record to act on if one is not activated (will override active record).</p></td>
+    </tr>
+    <tr>
+      <th>update_date_changed</th>
+      <td><p>Whether to add/update the change date for the record.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The number of records of the relevant type.</p>
+    <p>An updated tidyged object with an expanded Individual record including
+these name variants.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

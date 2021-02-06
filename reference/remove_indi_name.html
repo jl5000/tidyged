@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the number of records in a tidyged object — num_indi • tidyged</title>
+<title>Remove a personal name (and components) from an Individual record — remove_indi_name • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get the number of records in a tidyged object — num_indi" />
-<meta property="og:description" content="These functions return the number of records of a particular type in a tidyged object." />
+<meta property="og:title" content="Remove a personal name (and components) from an Individual record — remove_indi_name" />
+<meta property="og:description" content="Remove a personal name (and components) from an Individual record" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,28 +119,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the number of records in a tidyged object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/interrogate.R'><code>R/interrogate.R</code></a></small>
-    <div class="hidden name"><code>num_indi.Rd</code></div>
+    <h1>Remove a personal name (and components) from an Individual record</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/edit_individual_names.R'><code>R/edit_individual_names.R</code></a></small>
+    <div class="hidden name"><code>remove_indi_name.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These functions return the number of records of a particular type in a tidyged object.</p>
+    <p>Remove a personal name (and components) from an Individual record</p>
     </div>
 
-    <pre class="usage"><span class='fu'>num_indi</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_famg</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_subm</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_media</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_note</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_repo</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_sour</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>remove_indi_name</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>name</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,11 +137,16 @@
       <th>gedcom</th>
       <td><p>A tidyged object.</p></td>
     </tr>
+    <tr>
+      <th>name</th>
+      <td><p>The personal name to remove.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The number of records of the relevant type.</p>
+    <p>An updated tidyged object with an Individual record excluding
+this personal name (and components).</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

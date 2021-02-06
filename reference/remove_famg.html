@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the number of records in a tidyged object — num_indi • tidyged</title>
+<title>Remove a Family group record from a tidyged object — remove_famg • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get the number of records in a tidyged object — num_indi" />
-<meta property="og:description" content="These functions return the number of records of a particular type in a tidyged object." />
+<meta property="og:title" content="Remove a Family group record from a tidyged object — remove_famg" />
+<meta property="og:description" content="This function removes a record containing details of a family group." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,28 +119,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the number of records in a tidyged object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/interrogate.R'><code>R/interrogate.R</code></a></small>
-    <div class="hidden name"><code>num_indi.Rd</code></div>
+    <h1>Remove a Family group record from a tidyged object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/edit_family_group.R'><code>R/edit_family_group.R</code></a></small>
+    <div class="hidden name"><code>remove_famg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These functions return the number of records of a particular type in a tidyged object.</p>
+    <p>This function removes a record containing details of a family group.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>num_indi</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_famg</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_subm</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_media</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_note</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_repo</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
-
-<span class='fu'>num_sour</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>remove_famg</span><span class='op'>(</span><span class='va'>gedcom</span>, family_xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>, remove_individuals <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,11 +137,27 @@
       <th>gedcom</th>
       <td><p>A tidyged object.</p></td>
     </tr>
+    <tr>
+      <th>family_xref</th>
+      <td><p>The xref of a Family Group record to act on if one is not
+activated (will override active record).</p></td>
+    </tr>
+    <tr>
+      <th>remove_individuals</th>
+      <td><p>Whether to also remove the records for all Individuals
+in the family.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The number of records of the relevant type.</p>
+    <p>An updated tidyged object excluding the selected Family group record
+(and potentially the individuals within it).</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function will also automatically remove references to this record in other
+individual records. If remove_individuals is set to TRUE, it will also remove
+all records for individuals in this family (including associations).</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

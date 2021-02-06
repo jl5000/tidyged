@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the number of records in a tidyged object — num_indi • tidyged</title>
+<title>Get a description of a record — describe_famg • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get the number of records in a tidyged object — num_indi" />
-<meta property="og:description" content="These functions return the number of records of a particular type in a tidyged object." />
+<meta property="og:title" content="Get a description of a record — describe_famg" />
+<meta property="og:description" content="Get descriptions of a record at various degrees of detail." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,28 +119,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the number of records in a tidyged object</h1>
+    <h1>Get a description of a record</h1>
     <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/interrogate.R'><code>R/interrogate.R</code></a></small>
-    <div class="hidden name"><code>num_indi.Rd</code></div>
+    <div class="hidden name"><code>describe_famg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These functions return the number of records of a particular type in a tidyged object.</p>
+    <p>Get descriptions of a record at various degrees of detail.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>num_indi</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>describe_famg</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>num_famg</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+<span class='fu'>describe_indi</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, name_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>num_subm</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+<span class='fu'>describe_media</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, file_ref_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>num_media</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+<span class='fu'>describe_sour</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, title_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>num_note</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+<span class='fu'>describe_repo</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, name_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>num_repo</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+<span class='fu'>describe_note</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>num_sour</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span></pre>
+<span class='fu'>describe_subm</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, name_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,11 +149,40 @@
       <th>gedcom</th>
       <td><p>A tidyged object.</p></td>
     </tr>
+    <tr>
+      <th>xref</th>
+      <td><p>An xref of a record.</p></td>
+    </tr>
+    <tr>
+      <th>short_desc</th>
+      <td><p>Whether to return a shorter description.</p></td>
+    </tr>
+    <tr>
+      <th>name_only</th>
+      <td><p>Whether to return the individual/repository name only. If none is found, the xref
+is returned.</p></td>
+    </tr>
+    <tr>
+      <th>file_ref_only</th>
+      <td><p>Whether to return the multimedia file reference only. If none is found, the xref
+is returned.</p></td>
+    </tr>
+    <tr>
+      <th>title_only</th>
+      <td><p>Whether to return the source title only. If none is found, the xref
+is returned.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The number of records of the relevant type.</p>
+    <p>A character string describing the record.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function offers three levels of detail. For example, individual records can be:</p>
+<p>"Joe Bloggs" (name_only = TRUE)
+"Individual @I1@, Joe Bloggs" (short_desc = TRUE)
+"Individual @I1@, Joe Bloggs, child of X and Y, born on x/x/x in place, died on x/x/x in place" (short_desc = FALSE)</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

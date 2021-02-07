@@ -38,7 +38,7 @@ num_sour <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_so
 
 
 is_record_type <- function(gedcom, xref, tag) {
-  dplyr::filter(gedcom, record == xref)$tag[1] == tag
+  gedcom[gedcom$record == xref,]$tag[1] == tag
 }
 
 #' Check whether a given record is a particular type

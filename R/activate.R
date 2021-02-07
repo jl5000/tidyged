@@ -50,9 +50,10 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
   if(length(search_pattern) == 0) return(character())
   if(grepl(xref_pattern(), search_pattern)) return(search_pattern)
   
-  possibilities <- gedcom %>% 
-    temporarily_remove_name_slashes() %>% 
-    dplyr::filter(record %in% record_xrefs, tag %in% tags, stringr::str_detect(value, search_pattern))
+  gedcom <-  temporarily_remove_name_slashes(gedcom)
+  possibilities <- gedcom[gedcom$record %in% record_xrefs &
+                            gedcom$tag %in% tags & 
+                            grepl(search_pattern, gedcom$value),]
   
   if(length(unique(possibilities$record)) == 0) {
     

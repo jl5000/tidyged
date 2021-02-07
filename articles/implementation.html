@@ -325,13 +325,6 @@
 <p>Many GEDCOM processors modify the data on import, perhaps ignoring custom tags. This package reads the file as-is, and the only modification of the file is in line with that recommended in the GEDCOM 5.5.5 specification, specifically; replacing double ‘@’ symbols with single ones, and merging CONC/CONT lines.</p>
 <p>If you want to modify single values in a GEDCOM or do a simple Find/Replace, then this is straightforward to achieve with a simple text editor.</p>
 </div>
-<div id="high-level-architecture" class="section level2">
-<h2 class="hasAnchor">
-<a href="#high-level-architecture" class="anchor"></a>High-level architecture</h2>
-<p>The <code>tidyged</code> package has a dependency on the <code>tidyged.internals</code> package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the <code>tidyged</code> package. There is also a dependency on the <code>tidyged.io</code> package which is used for importing GEDCOM files and exporting <code>tidyged</code> objects.</p>
-<p>The <code>tidyged</code> package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to have a sister package to provide a <code>shiny</code> interface (<code>shinyged</code>). However, before work on <code>shinyged</code> begins, I would like to start a tidyged visualisation package, <code>visged</code>, which will allow various views of genealogical data.</p>
-<p>The long term aim is to create a small package ecosystem surrounding <code>tidyged</code> - the <code>gedcompendium</code>.</p>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

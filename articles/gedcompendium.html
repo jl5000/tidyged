@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Family events • tidyged</title>
+<title>The gedcompendium • tidyged</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Family events">
+<script src="../pkgdown.js"></script><meta property="og:title" content="The gedcompendium">
 <meta property="og:description" content="tidyged">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -74,26 +74,47 @@
 
       
 
-      </header><script src="family_events_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="gedcompendium_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Family events</h1>
+      <h1 data-toc-skip>The gedcompendium</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/master/vignettes/family_events.Rmd"><code>vignettes/family_events.Rmd</code></a></small>
-      <div class="hidden name"><code>family_events.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/master/vignettes/gedcompendium.Rmd"><code>vignettes/gedcompendium.Rmd</code></a></small>
+      <div class="hidden name"><code>gedcompendium.Rmd</code></div>
 
     </div>
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span></code></pre></div>
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p>The <code>tidyged</code> package is the core package of the <code>gedcompendium</code> ecosystem of packages.</p>
+<p><a href="https://github.com/jl5000/tidyged.internals"><img src="https://raw.githubusercontent.com/jl5000/tidyged.internals/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/tidyged"><img src="https://raw.githubusercontent.com/jl5000/tidyged/master/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/tidyged.io"><img src="https://raw.githubusercontent.com/jl5000/tidyged.io/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/gedcompendium"><img src="https://raw.githubusercontent.com/jl5000/gedcompendium/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/visged"><img src="https://raw.githubusercontent.com/jl5000/visged/master/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/autoged"><img src="https://raw.githubusercontent.com/jl5000/autoged/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/geddown"><img src="https://raw.githubusercontent.com/jl5000/geddown/main/man/figures/logo.png" align="center" height="125"></a></p>
+</div>
+<div id="packages" class="section level2">
+<h2 class="hasAnchor">
+<a href="#packages" class="anchor"></a>Packages</h2>
+<p>The <code>tidyged</code> package has a dependency on the <code>tidyged.internals</code> package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the <code>tidyged</code> package. There is also a dependency on the <code>tidyged.io</code> package which is used for importing GEDCOM files and exporting <code>tidyged</code> objects.</p>
+<p>There are numerous spin-off packages planned:</p>
+<ul>
+<li>
+<strong>visged:</strong> Create visualisations of tidyged objects;</li>
+<li>
+<strong>autoged:</strong> Automate the recording of facts from source documents;</li>
+<li>
+<strong>geddown:</strong> Create RMarkdown-based reports of tidyged objects.</li>
+</ul>
+<p>The <code>tidyged</code> package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to also have a sister package to provide a <code>shiny</code> interface (<code>shinyged</code>). There are also plans for a <code>safeged</code> package to remove sensitive data from living individuals from tidyged objects.</p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

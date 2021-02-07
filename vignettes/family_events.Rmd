@@ -18,12 +18,3 @@ knitr::opts_chunk$set(
 library(tidyged)
 ```
 
-## Shared events
-
-Genealogy is often about extracting as much useful information from sources as possible. For example, census information can be enormously useful in finding information on both families and individuals, such as names, ages, occupations, etc.
-
-These sources of information are usually produced as a result of important events, and there are specific data structures in the GEDCOM specification for individual events and family events. For the most part this makes sense, however family events can be problematic at times to properly represent and cite as evidence.
-
-An example of this is marriage events. These are classified as family events and are stored within relevant family group records. However, when taking an individual-centric view of GEDCOM files (i.e. looking at individual records), these marriages will not be recorded, missing vital information in an individual's life. This is problematic if using the 
-
-Functionality to come...

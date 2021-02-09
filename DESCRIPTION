@@ -9,7 +9,7 @@ Authors@R:
 Description: Create and summarise family tree GEDCOM files using tidy dataframes.
 URL: https://jl5000.github.io/tidyged/,
     https://github.com/jl5000/tidyged
-License: MIT + file LICENSE
+License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("namespace", "rd", "roxytest::testthat_roclet"))

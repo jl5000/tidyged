@@ -42,11 +42,10 @@ Lines in a GEDCOM file can have a number of components:
 
 There will not be any lines that have all of these components. For example, the first line of records do not contain a line value. Also, a line will never have a cross-reference pointer and a line value defined. For this reason, the `tidyged` object treats cross-reference pointers as just another line value.
 
-The `tidyged` representation of the above GEDCOM file is given below:
+The `tidyged` representation of the above GEDCOM file is given below, using a sample dataset built into the package:
 
 ```{r}
-print(tidyged.io::read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged.io")),
-      n = Inf)
+print(sample555,  n = Inf)
 ```
 
 The cross-reference identifier is given in the record column. Event though these aren't given for the header and trailer records they are assigned as "HD" and "TR" respectively in the `tidyged` object.

@@ -161,14 +161,15 @@ three_gen %>%
   describe_records(three_gen, .)
 ```
 
-Instead of describing the records, we can remove them instead with `remove_records()`:
+Instead of describing the records, we can remove them with `remove_records()`:
 
 ```{r}
 three_gen %>% 
   identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
                        include_families = TRUE) %>% 
   remove_records(three_gen, .) %>% 
-  df_famg()
+  df_famg() %>% 
+  knitr::kable()
 ```
 
 This combination can result in the removal of a vast amount of data. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.
@@ -180,7 +181,8 @@ three_gen %>%
   identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
                        include_families = TRUE) %>% 
   split_gedcom(three_gen, .) %>% 
-  df_famg()
+  df_famg() %>% 
+  knitr::kable()
 ```
 
 This function will, by default, remove any dead references to records that have not been included in the subsetting.

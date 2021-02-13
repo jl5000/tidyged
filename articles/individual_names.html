@@ -114,7 +114,7 @@
 <span class="co">#&gt; 6     1 @I1@   CHAN  ""                </span>
 <span class="co">#&gt; 7     2 @I1@   DATE  "13 FEB 2021"</span></code></pre></div>
 <p>In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes).</p>
-<p>A shortcut way of defining a name is to use the <code>quick_name</code> parameter. It’s not ideal, and should really only be reserved for demonstrations (like this one)! The parameter is the first one (after the tidyged object) which makes the code readable when using pipes, and the function will crudely place the entire string as the given name of the individual:</p>
+<p>A shortcut way of defining a name is to use the <code>quick_name</code> parameter when defining an individual. It’s not ideal, and should really only be reserved for demonstrations (like this one)! The parameter is the first one (after the tidyged object) which makes the code readable when using pipes, and the function will crudely place the entire string as the given name of the individual:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -159,7 +159,7 @@
 <div id="name-types" class="section level2">
 <h2 class="hasAnchor">
 <a href="#name-types" class="anchor"></a>Name types</h2>
-<p>All of the above define the variants for a single birth name. The <code>type</code> parameter can also define different names for the individual. Below we add a line to define an adoptive name (the parameter can take any value):</p>
+<p>The <code>type</code> parameter can also define different names for the individual. Below we add a line to define an adoptive name (the parameter can take any value):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 

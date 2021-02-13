@@ -98,23 +98,23 @@ remove_records(some_unref, identify_unused_records(some_unref)) %>%
 ```
 
 
-## Removing entire branches
+## Dealing with entire branches
 
-One of the more sophisticated features of `tidyged` is the ability to delete entire branches of your tree. 
+One of the more sophisticated features of `tidyged` is the ability to manipulate entire branches of your tree. 
 
 We illustrate its functionality using the family below consisting of three generations: A pair of parents who has a single child (named 'Main Person'). This person forms two separate family groups with two spouses, each resulting in two children.
 
 ```{r}
 three_gen <- gedcom(subm("Me")) %>% 
-  add_indi("Parent /1/") %>% 
-  add_indi("Parent /2/") %>% 
-  add_indi("Main /Person/") %>% 
-  add_indi("Spouse /1/") %>% 
-  add_indi("Spouse /2/") %>%
-  add_indi("Child /1/") %>% 
-  add_indi("Child /2/") %>% 
-  add_indi("Child /3/") %>% 
-  add_indi("Child /4/") %>% 
+  add_indi("Parent 1") %>% 
+  add_indi("Parent 2") %>% 
+  add_indi("Main Person") %>% 
+  add_indi("Spouse 1") %>% 
+  add_indi("Spouse 2") %>%
+  add_indi("Child 1") %>% 
+  add_indi("Child 2") %>% 
+  add_indi("Child 3") %>% 
+  add_indi("Child 4") %>% 
   add_famg("Parent 1", "Parent 2", children = "Main Person") %>% 
   add_famg("Main Person", "Spouse 1", children = c("Child 1", "Child 2")) %>%
   add_famg("Main Person", "Spouse 2", children = c("Child 3", "Child 4"))
@@ -122,45 +122,65 @@ three_gen <- gedcom(subm("Me")) %>%
 df_famg(three_gen) %>% knitr::kable()
 ```
 
-We use the `remove_descendants()` function below to remove the descendants of Main Person. By default it will keep the individual and their spouses, and will remove all empty family groups:
+We use the `identify_descendants()` function below to identify the descendants of Main Person. By default it will exclude the individual and their spouses, and associated family groups:
 
 ```{r}
-remove_descendants(three_gen, "Main Person") %>% 
-  df_famg() %>% 
-  knitr::kable()
+identify_descendants(three_gen, "Main Person")
 ```
 
-Setting `remove_spouses = TRUE` will remove all spouses and their descendants:
+We can use the `describe_records()` function to see descriptions:
 
 ```{r}
-remove_descendants(three_gen, "Main Person", remove_spouses = TRUE) %>% 
-  df_famg() %>% 
-  knitr::kable()
+three_gen %>% 
+  identify_descendants("Main Person") %>% 
+  describe_records(three_gen, .)
 ```
 
-Setting `remove_individual = TRUE` will remove the individual:
+Setting `include_spouses = TRUE` will include all spouses and their descendants:
 
 ```{r}
-remove_descendants(three_gen, "Main Person", remove_individual = TRUE) %>% 
-  df_famg() %>% 
-  knitr::kable()
+three_gen %>% 
+  identify_descendants("Main Person", include_spouses = TRUE) %>% 
+  describe_records(three_gen, .)
 ```
 
-Setting both parameters to TRUE will remove both individuals. Since this will result in more empty families they will be removed:
+Setting `include_individual = TRUE` will include the individual:
 
 ```{r}
-remove_descendants(three_gen, "Main Person", remove_individual = TRUE, remove_spouses = TRUE) %>% 
-  df_famg() %>% 
-  knitr::kable()
+three_gen %>% 
+  identify_descendants("Main Person", include_individual = TRUE) %>% 
+  describe_records(three_gen, .)
 ```
 
-Empty family groups can be retained by setting `remove_empty_families = FALSE`:
+Setting `include_families = TRUE` will include the individual's families where they are a spouse:
 
 ```{r}
-remove_descendants(three_gen, "Main Person", remove_individual = TRUE, remove_spouses = TRUE,
-                   remove_empty_families = FALSE) %>% 
-  df_famg() %>% 
-  knitr::kable()
+three_gen %>% 
+  identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
+                       include_families = TRUE) %>% 
+  describe_records(three_gen, .)
 ```
 
-This function can result in the removal of a vast amount of data as it relies on recursive deletion. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.
+Instead of describing the records, we can remove them instead with `remove_records()`:
+
+```{r}
+three_gen %>% 
+  identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
+                       include_families = TRUE) %>% 
+  remove_records(three_gen, .) %>% 
+  df_famg()
+```
+
+This combination can result in the removal of a vast amount of data. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.
+
+Instead of deleting the records, you can instead opt to create a new tidyged object with these records using the `split_gedcom()` function:
+
+```{r}
+three_gen %>% 
+  identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
+                       include_families = TRUE) %>% 
+  split_gedcom(three_gen, .) %>% 
+  df_famg()
+```
+
+This function will, by default, remove any dead references to records that have not been included in the subsetting.

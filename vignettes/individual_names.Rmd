@@ -34,7 +34,7 @@ gedcom(subm("Me")) %>%
 
 In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes). 
 
-A shortcut way of defining a name is to use the `quick_name` parameter. It's not ideal, and should really only be reserved for demonstrations (like this one)! The parameter is the first one (after the tidyged object) which makes the code readable when using pipes, and the function will crudely place the entire string as the given name of the individual:
+A shortcut way of defining a name is to use the `quick_name` parameter when defining an individual. It's not ideal, and should really only be reserved for demonstrations (like this one)! The parameter is the first one (after the tidyged object) which makes the code readable when using pipes, and the function will crudely place the entire string as the given name of the individual:
 
 ```{r}
 gedcom(subm("Me")) %>% 
@@ -58,7 +58,7 @@ gedcom(subm("Me")) %>%
 
 ## Name types
 
-All of the above define the variants for a single birth name. The `type` parameter can also define different names for the individual. Below we add a line to define an adoptive name (the parameter can take any value):
+The `type` parameter can also define different names for the individual. Below we add a line to define an adoptive name (the parameter can take any value):
 
 ```{r}
 gedcom(subm("Me")) %>% 

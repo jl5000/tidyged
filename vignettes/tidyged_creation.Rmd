@@ -90,3 +90,14 @@ Note that:
 * The date associated with the source data must be given as a `date_exact()` object to ensure it is formatted correctly (see `vignette("dates")` for more information on dates);
 * The `receiving_system` should be left to its default value, unless you are specifically intending on passing it to a different system.
 
+## Subsetting an existing object
+
+You can also create a new `tidyged` object by subsetting an existing object. The `split_gedcom()` function subsets a tidyged object. This will retain the header and submitter information from the original object. 
+
+```{r}
+unique(sample555$record)
+
+unique(split_gedcom(sample555, c("@I1@", "@I2@"))$record)
+```
+
+This is especially powerful when paired with the `identify_descendants()` function (see `vignette("maintenance_functions")`), where you can create a separate object for an entire branch.

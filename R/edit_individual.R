@@ -98,50 +98,35 @@ remove_indi <- function(gedcom,
 
 
 
-#' Remove all descendants for an individual
+#' Identify all descendants for an individual
 #' 
-#' This function removes an entire branch of the family tree below a certain individual.
-#' 
-#' @details WARNING: This function can result in the removal of a vast amount of data as it relies on
-#' recursive deletion. It will tell the user precisely what it is removing. Be sure the function has done 
-#' what you expect before accepting the results. It is recommended that you use this function with extreme 
-#' caution if you think a descendant (or their spouse) may be connected to an individual on another 
-#' branch of your tree.
-#' 
-#' If you set remove_spouses = TRUE, the function will also remove all spouses of the individual
-#' given (at the top level) and their descendants. It does not go as far as removing other spouses of
-#' spouses.
-#' 
-#' If you wanted to just remove all descendants and associated family group records, you would
-#' use the function with the default inputs. If you wanted to keep the (memberless) family group
-#' records, you would set remove_empty_families = FALSE.
-#' 
-#' If remove_families, remove_individual, and remove_spouses are all TRUE, then the individual's
-#' (memberless) family group record will also be deleted.
+#' This function identifies records in an entire branch of the family tree below a certain individual.
 #' 
 #' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
 #' is not activated (will override active record).
-#' @param remove_individual Whether to also remove the individual themselves.
-#' @param remove_spouses Whether to also remove all spouses of this individual (and their descendants).
-#' @param remove_empty_families Whether to also remove all of the empty descendant Family Group records.
+#' @param include_individual Whether to also include the individual themselves.
+#' @param include_spouses Whether to also include all spouses of this individual (and their descendants).
+#' @param include_families Whether to also include all Family Group records where this individual is a spouse.
 #'
-#' @return A shorter tidyged object without the descendants of the individual.
+#' @return A vector of xrefs of descendants.
 #' @export
-remove_descendants <- function(gedcom,
-                               individual = character(),
-                               remove_individual = FALSE,
-                               remove_spouses = FALSE,
-                               remove_empty_families = TRUE) {
+identify_descendants <- function(gedcom,
+                                 individual = character(),
+                                 include_individual = FALSE,
+                                 include_spouses = FALSE,
+                                 include_families = FALSE) {
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  
+  return_xrefs <- NULL
   
   spou_xref <- get_spouses(gedcom, xref)
   chil_xref <- get_children(gedcom, xref)
   fams_xref <- get_families_as_spouse(gedcom, xref)
   
-  # if spouse is to be removed, add their children to be removed
-  if (remove_spouses) {
+  # if spouse is to be included, add their children to be included
+  if (include_spouses) {
     # we don't use purrr::map here because the return values could vary in length
     spou_chil <- NULL
     for(i in seq_along(spou_xref)) {
@@ -151,29 +136,15 @@ remove_descendants <- function(gedcom,
   }
   
   #deal with family groups first (while the individuals are still in them)
-  if (remove_spouses & remove_individual & remove_empty_families) {
-    for(i in seq_along(fams_xref)) {
-      message(describe_famg(gedcom, fams_xref[i], short_desc = TRUE), " removed")
-      gedcom <- remove_famg(gedcom, fams_xref[i])
-    }
-  }
- 
-  if (remove_spouses) {
-    for(i in seq_along(spou_xref)) {
-      message(describe_indi(gedcom, spou_xref[i], short_desc = TRUE), " removed")
-      gedcom <- remove_indi(gedcom, spou_xref[i])
-    }
-  }
+  if (include_families) return_xrefs <- c(return_xrefs, fams_xref)
+  if (include_spouses) return_xrefs <- c(return_xrefs, spou_xref)
+  if (include_individual) return_xrefs <- c(return_xrefs, xref)
   
-  if (remove_individual) {
-    message(describe_indi(gedcom, xref, short_desc = TRUE), " removed")
-    gedcom <- remove_indi(gedcom, xref)
-  }
-  
-  # remove children
+  # identify children
   for(i in seq_along(chil_xref)) {
-    gedcom <- remove_descendants(gedcom, chil_xref[i], TRUE, TRUE, remove_empty_families)
+    return_xrefs <- c(return_xrefs,
+                      identify_descendants(gedcom, chil_xref[i], TRUE, TRUE,TRUE))
   }
   
-  gedcom
+  return_xrefs
 }

@@ -493,6 +493,8 @@ identify_unused_records <- function(gedcom) {
 remove_records <- function(gedcom, xrefs) {
   
   for (xref in xrefs) {
+    message(describe_records(gedcom, xref, short_desc = TRUE), " removed")
+    
     if (is_indi(gedcom, xref)) {
       gedcom <- remove_indi(gedcom, xref)
     } else if(is_famg(gedcom, xref)) {

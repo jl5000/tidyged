@@ -415,13 +415,14 @@
 <span class="co">#&gt; [7] "Individual @I7@, Child 2, child of Main Person and Spouse 1"                    </span>
 <span class="co">#&gt; [8] "Individual @I8@, Child 3, child of Main Person and Spouse 2"                    </span>
 <span class="co">#&gt; [9] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span></code></pre></div>
-<p>Instead of describing the records, we can remove them instead with <code><a href="../reference/remove_records.html">remove_records()</a></code>:</p>
+<p>Instead of describing the records, we can remove them with <code><a href="../reference/remove_records.html">remove_records()</a></code>:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/identify_descendants.html">identify_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
                        include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/remove_records.html">remove_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Family @F2@, headed by Main Person and Spouse 1 removed</span>
 <span class="co">#&gt; Family @F3@, headed by Main Person and Spouse 2 removed</span>
 <span class="co">#&gt; Individual @I5@, Spouse 2 removed</span>
@@ -430,11 +431,28 @@
 <span class="co">#&gt; Individual @I6@, Child 1 removed</span>
 <span class="co">#&gt; Individual @I7@, Child 2 removed</span>
 <span class="co">#&gt; Individual @I8@, Child 3 removed</span>
-<span class="co">#&gt; Individual @I9@, Child 4 removed</span>
-<span class="co">#&gt; # A tibble: 1 x 7</span>
-<span class="co">#&gt;   xref  husband  wife    marriage_date marriage_place num_children last_modified</span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;        </span>
-<span class="co">#&gt; 1 @F1@  Parent 1 Parent… ""            ""             0            13 FEB 2021</span></code></pre></div>
+<span class="co">#&gt; Individual @I9@, Child 4 removed</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">xref</th>
+<th align="left">husband</th>
+<th align="left">wife</th>
+<th align="left">marriage_date</th>
+<th align="left">marriage_place</th>
+<th align="left">num_children</th>
+<th align="left">last_modified</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">Parent 1</td>
+<td align="left">Parent 2</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">0</td>
+<td align="left">13 FEB 2021</td>
+</tr></tbody>
+</table>
 <p>This combination can result in the removal of a vast amount of data. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.</p>
 <p>Instead of deleting the records, you can instead opt to create a new tidyged object with these records using the <code><a href="../reference/split_gedcom.html">split_gedcom()</a></code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -442,12 +460,41 @@
   <span class="fu"><a href="../reference/identify_descendants.html">identify_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
                        include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/split_gedcom.html">split_gedcom</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 2 x 7</span>
-<span class="co">#&gt;   xref  husband   wife   marriage_date marriage_place num_children last_modified</span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;        </span>
-<span class="co">#&gt; 1 @F2@  Main Per… Spous… ""            ""             2            13 FEB 2021  </span>
-<span class="co">#&gt; 2 @F3@  Main Per… Spous… ""            ""             2            13 FEB 2021</span></code></pre></div>
+  <span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">xref</th>
+<th align="left">husband</th>
+<th align="left">wife</th>
+<th align="left">marriage_date</th>
+<th align="left">marriage_place</th>
+<th align="left">num_children</th>
+<th align="left">last_modified</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">
+<span class="citation">@F2</span>@</td>
+<td align="left">Main Person</td>
+<td align="left">Spouse 1</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">2</td>
+<td align="left">13 FEB 2021</td>
+</tr>
+<tr class="even">
+<td align="left">
+<span class="citation">@F3</span>@</td>
+<td align="left">Main Person</td>
+<td align="left">Spouse 2</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">2</td>
+<td align="left">13 FEB 2021</td>
+</tr>
+</tbody>
+</table>
 <p>This function will, by default, remove any dead references to records that have not been included in the subsetting.</p>
 </div>
   </div>

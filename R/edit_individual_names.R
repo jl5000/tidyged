@@ -203,13 +203,17 @@ add_indi_names_var <- function(gedcom,
 #'              gedcom(subm()) %>% 
 #'                add_indi() %>% 
 #'                add_indi_names(given = "Joe", surname = "Bloggs") %>% 
-#'                remove_indi_name("Joe /Bloggs/"))  
+#'                remove_indi_name("Joe Bloggs"))  
 remove_indi_name <- function(gedcom,
                               name) {
   
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
-  remove_section(gedcom, 1, "NAME", name, xrefs = xref) %>% 
+  rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
+    identify_section(1, "NAME", name, xrefs = xref)
+  
+  gedcom %>%
+    dplyr::slice(-rows_to_remove) %>% 
     activate_indi(xref)
   
 }
@@ -233,15 +237,19 @@ remove_indi_name <- function(gedcom,
 #'                add_indi() %>% 
 #'                add_indi_names(given = "Joe", surname = "Bloggs") %>% 
 #'                add_indi_names_var("Joe Bloggs", given = "Jo", surname = "Blogs", "spelling error") %>% 
-#'                remove_indi_name_var("Jo /Blogs/"))
+#'                remove_indi_name_var("Jo Blogs"))
 remove_indi_name_var <- function(gedcom,
                                        variation_name,
                                        phonetic_variation = TRUE) {
   
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
-  remove_section(gedcom, 2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
-                 variation_name, xrefs = xref) %>% 
+  rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
+    identify_section(2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
+                     variation_name, xrefs = xref)
+  
+  gedcom %>%
+    dplyr::slice(-rows_to_remove) %>% 
     activate_indi(xref)
   
 }

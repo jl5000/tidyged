@@ -18,11 +18,11 @@ test_that("Function remove_indi_name() @ L207", {
                gedcom(subm()) %>% 
                  add_indi() %>% 
                  add_indi_names(given = "Joe", surname = "Bloggs") %>% 
-                 remove_indi_name("Joe /Bloggs/"))
+                 remove_indi_name("Joe Bloggs"))
 })
 
 
-test_that("Function remove_indi_name_var() @ L237", {
+test_that("Function remove_indi_name_var() @ L241", {
   expect_equal(gedcom(subm()) %>% 
                  add_indi() %>% 
                  add_indi_names(given = "Joe", surname = "Bloggs"),
@@ -30,6 +30,6 @@ test_that("Function remove_indi_name_var() @ L237", {
                  add_indi() %>% 
                  add_indi_names(given = "Joe", surname = "Bloggs") %>% 
                  add_indi_names_var("Joe Bloggs", given = "Jo", surname = "Blogs", "spelling error") %>% 
-                 remove_indi_name_var("Jo /Blogs/"))
+                 remove_indi_name_var("Jo Blogs"))
 })
 

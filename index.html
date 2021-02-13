@@ -105,19 +105,17 @@
 
 <span class="va">tg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Jamie Lendrum"</span><span class="op">)</span>, gedcom_description <span class="op">=</span> <span class="st">"The Skywalker family"</span>, gedcom_copyright <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span>, indi_notes <span class="op">=</span> <span class="st">"The central character in the Star Wars Skywalker Saga"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Anakin Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Anakin"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Darth Vader"</span>, type <span class="op">=</span> <span class="st">"given"</span>, given <span class="op">=</span> <span class="st">"Darth Vader"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Anakin"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"Darth"</span>, given <span class="op">=</span> <span class="st">"Vader"</span>, type <span class="op">=</span> <span class="st">"given"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span>, indi_notes <span class="op">=</span> <span class="st">"Queen of Naboo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Padme Amidala"</span>, given <span class="op">=</span> <span class="st">"Padme"</span>, surname <span class="op">=</span> <span class="st">"Amidala"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Padme"</span>, surname <span class="op">=</span> <span class="st">"Amidala"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Princess Leia Organa"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span>, 
-                 prefix <span class="op">=</span> <span class="st">"Princess"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"Princess"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Luke Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Luke"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Luke"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Obi-Wan Kenobi"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Obi-Wan"</span>, 
-                 nickname <span class="op">=</span> <span class="st">"Ben"</span>, surname <span class="op">=</span> <span class="st">"Kenobi"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Obi-Wan"</span>, nickname <span class="op">=</span> <span class="st">"Ben"</span>, surname <span class="op">=</span> <span class="st">"Kenobi"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Anakin"</span>, wife <span class="op">=</span> <span class="st">"Padme"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Luke"</span>, <span class="st">"Leia"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="st">"Anakin"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/add_indi_association.html">add_indi_association</a></span><span class="op">(</span><span class="st">"Obi-Wan"</span>, association <span class="op">=</span> <span class="st">"Master"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -131,7 +129,7 @@
   <span class="fu"><a href="reference/add_media.html">add_media</a></span><span class="op">(</span>file_reference <span class="op">=</span> <span class="st">"XYZ"</span>, format <span class="op">=</span> <span class="st">"JPG"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tg</span>, n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 113 x 4</span>
+<span class="co">#&gt; # A tibble: 115 x 4</span>
 <span class="co">#&gt;     level record tag   value                                                  </span>
 <span class="co">#&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                                  </span>
 <span class="co">#&gt;   1     0 HD     HEAD  ""                                                     </span>
@@ -148,7 +146,7 @@
 <span class="co">#&gt;  12     3 HD     ADDR  ""                                                     </span>
 <span class="co">#&gt;  13     3 HD     EMAIL "jalendrum@gmail.com"                                  </span>
 <span class="co">#&gt;  14     3 HD     WWW   "https://jl5000.github.io/tidyged/"                    </span>
-<span class="co">#&gt;  15     1 HD     DATE  "6 FEB 2021"                                           </span>
+<span class="co">#&gt;  15     1 HD     DATE  "13 FEB 2021"                                          </span>
 <span class="co">#&gt;  16     1 HD     LANG  "English"                                              </span>
 <span class="co">#&gt;  17     1 HD     SUBM  "@U1@"                                                 </span>
 <span class="co">#&gt;  18     1 HD     COPR  "None"                                                 </span>
@@ -156,97 +154,99 @@
 <span class="co">#&gt;  20     0 @U1@   SUBM  ""                                                     </span>
 <span class="co">#&gt;  21     1 @U1@   NAME  "Jamie Lendrum"                                        </span>
 <span class="co">#&gt;  22     1 @U1@   CHAN  ""                                                     </span>
-<span class="co">#&gt;  23     2 @U1@   DATE  "6 FEB 2021"                                           </span>
+<span class="co">#&gt;  23     2 @U1@   DATE  "13 FEB 2021"                                          </span>
 <span class="co">#&gt;  24     0 @I1@   INDI  ""                                                     </span>
 <span class="co">#&gt;  25     1 @I1@   SEX   "M"                                                    </span>
 <span class="co">#&gt;  26     1 @I1@   NOTE  "The central character in the Star Wars Skywalker Saga"</span>
-<span class="co">#&gt;  27     1 @I1@   NAME  "Anakin Skywalker"                                     </span>
+<span class="co">#&gt;  27     1 @I1@   NAME  "Anakin /Skywalker/"                                   </span>
 <span class="co">#&gt;  28     2 @I1@   TYPE  "birth"                                                </span>
 <span class="co">#&gt;  29     2 @I1@   GIVN  "Anakin"                                               </span>
 <span class="co">#&gt;  30     2 @I1@   SURN  "Skywalker"                                            </span>
 <span class="co">#&gt;  31     1 @I1@   NAME  "Darth Vader"                                          </span>
 <span class="co">#&gt;  32     2 @I1@   TYPE  "given"                                                </span>
-<span class="co">#&gt;  33     2 @I1@   GIVN  "Darth Vader"                                          </span>
-<span class="co">#&gt;  34     1 @I1@   FAMS  "@F1@"                                                 </span>
-<span class="co">#&gt;  35     1 @I1@   ASSO  "@I5@"                                                 </span>
-<span class="co">#&gt;  36     2 @I1@   RELA  "Master"                                               </span>
-<span class="co">#&gt;  37     1 @I1@   DEAT  "Y"                                                    </span>
-<span class="co">#&gt;  38     2 @I1@   PLAC  "Second Death Star"                                    </span>
-<span class="co">#&gt;  39     3 @I1@   NOTE  "Orbiting Endor System"                                </span>
-<span class="co">#&gt;  40     2 @I1@   CAUS  "Killed by son Luke"                                   </span>
-<span class="co">#&gt;  41     2 @I1@   AGE   "45y"                                                  </span>
-<span class="co">#&gt;  42     1 @I1@   RELI  "Jedi"                                                 </span>
-<span class="co">#&gt;  43     1 @I1@   PROP  "Lightsaber"                                           </span>
-<span class="co">#&gt;  44     1 @I1@   CHAN  ""                                                     </span>
-<span class="co">#&gt;  45     2 @I1@   DATE  "6 FEB 2021"                                           </span>
-<span class="co">#&gt;  46     0 @I2@   INDI  ""                                                     </span>
-<span class="co">#&gt;  47     1 @I2@   SEX   "F"                                                    </span>
-<span class="co">#&gt;  48     1 @I2@   NOTE  "Queen of Naboo"                                       </span>
-<span class="co">#&gt;  49     1 @I2@   NAME  "Padme Amidala"                                        </span>
-<span class="co">#&gt;  50     2 @I2@   GIVN  "Padme"                                                </span>
-<span class="co">#&gt;  51     2 @I2@   SURN  "Amidala"                                              </span>
-<span class="co">#&gt;  52     1 @I2@   FAMS  "@F1@"                                                 </span>
-<span class="co">#&gt;  53     1 @I2@   CHAN  ""                                                     </span>
-<span class="co">#&gt;  54     2 @I2@   DATE  "6 FEB 2021"                                           </span>
-<span class="co">#&gt;  55     0 @I3@   INDI  ""                                                     </span>
-<span class="co">#&gt;  56     1 @I3@   SEX   "F"                                                    </span>
-<span class="co">#&gt;  57     1 @I3@   NAME  "Leia Skywalker"                                       </span>
-<span class="co">#&gt;  58     2 @I3@   TYPE  "birth"                                                </span>
-<span class="co">#&gt;  59     2 @I3@   GIVN  "Leia"                                                 </span>
-<span class="co">#&gt;  60     2 @I3@   SURN  "Skywalker"                                            </span>
-<span class="co">#&gt;  61     1 @I3@   NAME  "Princess Leia Organa"                                 </span>
-<span class="co">#&gt;  62     2 @I3@   TYPE  "adoptive"                                             </span>
-<span class="co">#&gt;  63     2 @I3@   NPFX  "Princess"                                             </span>
-<span class="co">#&gt;  64     2 @I3@   GIVN  "Leia"                                                 </span>
-<span class="co">#&gt;  65     2 @I3@   SURN  "Organa"                                               </span>
-<span class="co">#&gt;  66     1 @I3@   FAMC  "@F1@"                                                 </span>
-<span class="co">#&gt;  67     2 @I3@   PEDI  "birth"                                                </span>
-<span class="co">#&gt;  68     1 @I3@   CHAN  ""                                                     </span>
-<span class="co">#&gt;  69     2 @I3@   DATE  "6 FEB 2021"                                           </span>
-<span class="co">#&gt;  70     0 @I4@   INDI  ""                                                     </span>
-<span class="co">#&gt;  71     1 @I4@   SEX   "M"                                                    </span>
-<span class="co">#&gt;  72     1 @I4@   NAME  "Luke Skywalker"                                       </span>
-<span class="co">#&gt;  73     2 @I4@   TYPE  "birth"                                                </span>
-<span class="co">#&gt;  74     2 @I4@   GIVN  "Luke"                                                 </span>
-<span class="co">#&gt;  75     2 @I4@   SURN  "Skywalker"                                            </span>
-<span class="co">#&gt;  76     1 @I4@   FAMC  "@F1@"                                                 </span>
-<span class="co">#&gt;  77     2 @I4@   PEDI  "birth"                                                </span>
-<span class="co">#&gt;  78     1 @I4@   CHAN  ""                                                     </span>
-<span class="co">#&gt;  79     2 @I4@   DATE  "6 FEB 2021"                                           </span>
-<span class="co">#&gt;  80     0 @I5@   INDI  ""                                                     </span>
-<span class="co">#&gt;  81     1 @I5@   SEX   "M"                                                    </span>
-<span class="co">#&gt;  82     1 @I5@   NAME  "Obi-Wan Kenobi"                                       </span>
-<span class="co">#&gt;  83     2 @I5@   TYPE  "birth"                                                </span>
-<span class="co">#&gt;  84     2 @I5@   GIVN  "Obi-Wan"                                              </span>
-<span class="co">#&gt;  85     2 @I5@   NICK  "Ben"                                                  </span>
-<span class="co">#&gt;  86     2 @I5@   SURN  "Kenobi"                                               </span>
-<span class="co">#&gt;  87     1 @I5@   CHAN  ""                                                     </span>
-<span class="co">#&gt;  88     2 @I5@   DATE  "6 FEB 2021"                                           </span>
-<span class="co">#&gt;  89     0 @F1@   FAM   ""                                                     </span>
-<span class="co">#&gt;  90     1 @F1@   HUSB  "@I1@"                                                 </span>
-<span class="co">#&gt;  91     1 @F1@   WIFE  "@I2@"                                                 </span>
-<span class="co">#&gt;  92     1 @F1@   CHIL  "@I4@"                                                 </span>
-<span class="co">#&gt;  93     1 @F1@   CHIL  "@I3@"                                                 </span>
-<span class="co">#&gt;  94     1 @F1@   CHAN  ""                                                     </span>
-<span class="co">#&gt;  95     2 @F1@   DATE  "6 FEB 2021"                                           </span>
-<span class="co">#&gt;  96     0 @N1@   NOTE  "Based on Star Wars"                                   </span>
-<span class="co">#&gt;  97     1 @N1@   CHAN  ""                                                     </span>
-<span class="co">#&gt;  98     2 @N1@   DATE  "6 FEB 2021"                                           </span>
-<span class="co">#&gt;  99     0 @S1@   SOUR  ""                                                     </span>
-<span class="co">#&gt; 100     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                     </span>
-<span class="co">#&gt; 101     1 @S1@   ABBR  "Star Wars"                                            </span>
-<span class="co">#&gt; 102     1 @S1@   CHAN  ""                                                     </span>
-<span class="co">#&gt; 103     2 @S1@   DATE  "6 FEB 2021"                                           </span>
-<span class="co">#&gt; 104     0 @R1@   REPO  ""                                                     </span>
-<span class="co">#&gt; 105     1 @R1@   NAME  "The Skywalker Saga"                                   </span>
-<span class="co">#&gt; 106     1 @R1@   CHAN  ""                                                     </span>
-<span class="co">#&gt; 107     2 @R1@   DATE  "6 FEB 2021"                                           </span>
-<span class="co">#&gt; 108     0 @O1@   OBJE  ""                                                     </span>
-<span class="co">#&gt; 109     1 @O1@   FILE  "XYZ"                                                  </span>
-<span class="co">#&gt; 110     2 @O1@   FORM  "JPG"                                                  </span>
-<span class="co">#&gt; 111     1 @O1@   CHAN  ""                                                     </span>
-<span class="co">#&gt; 112     2 @O1@   DATE  "6 FEB 2021"                                           </span>
-<span class="co">#&gt; 113     0 TR     TRLR  ""</span></code></pre></div>
+<span class="co">#&gt;  33     2 @I1@   NPFX  "Darth"                                                </span>
+<span class="co">#&gt;  34     2 @I1@   GIVN  "Vader"                                                </span>
+<span class="co">#&gt;  35     1 @I1@   FAMS  "@F1@"                                                 </span>
+<span class="co">#&gt;  36     1 @I1@   ASSO  "@I5@"                                                 </span>
+<span class="co">#&gt;  37     2 @I1@   RELA  "Master"                                               </span>
+<span class="co">#&gt;  38     1 @I1@   DEAT  "Y"                                                    </span>
+<span class="co">#&gt;  39     2 @I1@   PLAC  "Second Death Star"                                    </span>
+<span class="co">#&gt;  40     3 @I1@   NOTE  "Orbiting Endor System"                                </span>
+<span class="co">#&gt;  41     2 @I1@   CAUS  "Killed by son Luke"                                   </span>
+<span class="co">#&gt;  42     2 @I1@   AGE   "45y"                                                  </span>
+<span class="co">#&gt;  43     1 @I1@   RELI  "Jedi"                                                 </span>
+<span class="co">#&gt;  44     1 @I1@   PROP  "Lightsaber"                                           </span>
+<span class="co">#&gt;  45     1 @I1@   CHAN  ""                                                     </span>
+<span class="co">#&gt;  46     2 @I1@   DATE  "13 FEB 2021"                                          </span>
+<span class="co">#&gt;  47     0 @I2@   INDI  ""                                                     </span>
+<span class="co">#&gt;  48     1 @I2@   SEX   "F"                                                    </span>
+<span class="co">#&gt;  49     1 @I2@   NOTE  "Queen of Naboo"                                       </span>
+<span class="co">#&gt;  50     1 @I2@   NAME  "Padme /Amidala/"                                      </span>
+<span class="co">#&gt;  51     2 @I2@   TYPE  "birth"                                                </span>
+<span class="co">#&gt;  52     2 @I2@   GIVN  "Padme"                                                </span>
+<span class="co">#&gt;  53     2 @I2@   SURN  "Amidala"                                              </span>
+<span class="co">#&gt;  54     1 @I2@   FAMS  "@F1@"                                                 </span>
+<span class="co">#&gt;  55     1 @I2@   CHAN  ""                                                     </span>
+<span class="co">#&gt;  56     2 @I2@   DATE  "13 FEB 2021"                                          </span>
+<span class="co">#&gt;  57     0 @I3@   INDI  ""                                                     </span>
+<span class="co">#&gt;  58     1 @I3@   SEX   "F"                                                    </span>
+<span class="co">#&gt;  59     1 @I3@   NAME  "Leia /Skywalker/"                                     </span>
+<span class="co">#&gt;  60     2 @I3@   TYPE  "birth"                                                </span>
+<span class="co">#&gt;  61     2 @I3@   GIVN  "Leia"                                                 </span>
+<span class="co">#&gt;  62     2 @I3@   SURN  "Skywalker"                                            </span>
+<span class="co">#&gt;  63     1 @I3@   NAME  "Princess Leia /Organa/"                               </span>
+<span class="co">#&gt;  64     2 @I3@   TYPE  "adoptive"                                             </span>
+<span class="co">#&gt;  65     2 @I3@   NPFX  "Princess"                                             </span>
+<span class="co">#&gt;  66     2 @I3@   GIVN  "Leia"                                                 </span>
+<span class="co">#&gt;  67     2 @I3@   SURN  "Organa"                                               </span>
+<span class="co">#&gt;  68     1 @I3@   FAMC  "@F1@"                                                 </span>
+<span class="co">#&gt;  69     2 @I3@   PEDI  "birth"                                                </span>
+<span class="co">#&gt;  70     1 @I3@   CHAN  ""                                                     </span>
+<span class="co">#&gt;  71     2 @I3@   DATE  "13 FEB 2021"                                          </span>
+<span class="co">#&gt;  72     0 @I4@   INDI  ""                                                     </span>
+<span class="co">#&gt;  73     1 @I4@   SEX   "M"                                                    </span>
+<span class="co">#&gt;  74     1 @I4@   NAME  "Luke /Skywalker/"                                     </span>
+<span class="co">#&gt;  75     2 @I4@   TYPE  "birth"                                                </span>
+<span class="co">#&gt;  76     2 @I4@   GIVN  "Luke"                                                 </span>
+<span class="co">#&gt;  77     2 @I4@   SURN  "Skywalker"                                            </span>
+<span class="co">#&gt;  78     1 @I4@   FAMC  "@F1@"                                                 </span>
+<span class="co">#&gt;  79     2 @I4@   PEDI  "birth"                                                </span>
+<span class="co">#&gt;  80     1 @I4@   CHAN  ""                                                     </span>
+<span class="co">#&gt;  81     2 @I4@   DATE  "13 FEB 2021"                                          </span>
+<span class="co">#&gt;  82     0 @I5@   INDI  ""                                                     </span>
+<span class="co">#&gt;  83     1 @I5@   SEX   "M"                                                    </span>
+<span class="co">#&gt;  84     1 @I5@   NAME  "Obi-Wan 'Ben' /Kenobi/"                               </span>
+<span class="co">#&gt;  85     2 @I5@   TYPE  "birth"                                                </span>
+<span class="co">#&gt;  86     2 @I5@   GIVN  "Obi-Wan"                                              </span>
+<span class="co">#&gt;  87     2 @I5@   NICK  "Ben"                                                  </span>
+<span class="co">#&gt;  88     2 @I5@   SURN  "Kenobi"                                               </span>
+<span class="co">#&gt;  89     1 @I5@   CHAN  ""                                                     </span>
+<span class="co">#&gt;  90     2 @I5@   DATE  "13 FEB 2021"                                          </span>
+<span class="co">#&gt;  91     0 @F1@   FAM   ""                                                     </span>
+<span class="co">#&gt;  92     1 @F1@   HUSB  "@I1@"                                                 </span>
+<span class="co">#&gt;  93     1 @F1@   WIFE  "@I2@"                                                 </span>
+<span class="co">#&gt;  94     1 @F1@   CHIL  "@I4@"                                                 </span>
+<span class="co">#&gt;  95     1 @F1@   CHIL  "@I3@"                                                 </span>
+<span class="co">#&gt;  96     1 @F1@   CHAN  ""                                                     </span>
+<span class="co">#&gt;  97     2 @F1@   DATE  "13 FEB 2021"                                          </span>
+<span class="co">#&gt;  98     0 @N1@   NOTE  "Based on Star Wars"                                   </span>
+<span class="co">#&gt;  99     1 @N1@   CHAN  ""                                                     </span>
+<span class="co">#&gt; 100     2 @N1@   DATE  "13 FEB 2021"                                          </span>
+<span class="co">#&gt; 101     0 @S1@   SOUR  ""                                                     </span>
+<span class="co">#&gt; 102     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                     </span>
+<span class="co">#&gt; 103     1 @S1@   ABBR  "Star Wars"                                            </span>
+<span class="co">#&gt; 104     1 @S1@   CHAN  ""                                                     </span>
+<span class="co">#&gt; 105     2 @S1@   DATE  "13 FEB 2021"                                          </span>
+<span class="co">#&gt; 106     0 @R1@   REPO  ""                                                     </span>
+<span class="co">#&gt; 107     1 @R1@   NAME  "The Skywalker Saga"                                   </span>
+<span class="co">#&gt; 108     1 @R1@   CHAN  ""                                                     </span>
+<span class="co">#&gt; 109     2 @R1@   DATE  "13 FEB 2021"                                          </span>
+<span class="co">#&gt; 110     0 @O1@   OBJE  ""                                                     </span>
+<span class="co">#&gt; 111     1 @O1@   FILE  "XYZ"                                                  </span>
+<span class="co">#&gt; 112     2 @O1@   FORM  "JPG"                                                  </span>
+<span class="co">#&gt; 113     1 @O1@   CHAN  ""                                                     </span>
+<span class="co">#&gt; 114     2 @O1@   DATE  "13 FEB 2021"                                          </span>
+<span class="co">#&gt; 115     0 TR     TRLR  ""</span></code></pre></div>
 <p>Just like a ggplot object requires aesthetics, a GEDCOM file requires details of a submitter. If no submitter details are given, the username is used.</p>
 <p>Within the package, GEDCOM files are represented as a sub-class of tibble known as <code>tidyged</code> objects, allowing easy manipulation and exploitation of existing <code>tidyverse</code> infrastructure.</p>
 <p>A number of functions are available to provide summaries of <code>tidyged</code> objects:</p>
@@ -285,7 +285,7 @@
 <table class="table">
 <colgroup>
 <col width="2%">
-<col width="10%">
+<col width="12%">
 <col width="1%">
 <col width="9%">
 <col width="10%">
@@ -295,7 +295,7 @@
 <col width="10%">
 <col width="8%">
 <col width="8%">
-<col width="9%">
+<col width="8%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -324,7 +324,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">2</td>
-<td align="left">6 FEB 2021</td>
+<td align="left">13 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">@I2@</td>
@@ -338,7 +338,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">2</td>
-<td align="left">6 FEB 2021</td>
+<td align="left">13 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">@I3@</td>
@@ -352,7 +352,7 @@
 <td align="left">Anakin Skywalker</td>
 <td align="left">1</td>
 <td align="right">0</td>
-<td align="left">6 FEB 2021</td>
+<td align="left">13 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">@I4@</td>
@@ -366,11 +366,11 @@
 <td align="left">Anakin Skywalker</td>
 <td align="left">1</td>
 <td align="right">0</td>
-<td align="left">6 FEB 2021</td>
+<td align="left">13 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">@I5@</td>
-<td align="left">Obi-Wan Kenobi</td>
+<td align="left">Obi-Wan ‘Ben’ Kenobi</td>
 <td align="left">M</td>
 <td align="left"></td>
 <td align="left"></td>
@@ -380,7 +380,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">0</td>
-<td align="left">6 FEB 2021</td>
+<td align="left">13 FEB 2021</td>
 </tr>
 </tbody>
 </table>
@@ -403,7 +403,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">6 FEB 2021</td>
+<td align="left">13 FEB 2021</td>
 </tr></tbody>
 </table>
 <p>This package allows limited editing of <code>tidyged</code> objects (adding/removing records, as well as the addition of some record substructures). Editing of existing records is made possible through ‘activation’ (much like the <code>tidygraph</code> package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of <code>activate_*()</code> functions.</p>

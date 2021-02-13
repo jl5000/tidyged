@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a personal name (and components) to an Individual record — add_indi_names • tidyged</title>
+<title>A sample GEDCOM file in tidyged format — sample555 • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Add a personal name (and components) to an Individual record — add_indi_names" />
-<meta property="og:description" content="This function can be applied to an Individual record several times to record
-personal names." />
+<meta property="og:title" content="A sample GEDCOM file in tidyged format — sample555" />
+<meta property="og:description" content="This is the official GEDCOM 5.5.5 sample file." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -120,88 +119,31 @@ personal names." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add a personal name (and components) to an Individual record</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/edit_individual_names.R'><code>R/edit_individual_names.R</code></a></small>
-    <div class="hidden name"><code>add_indi_names.Rd</code></div>
+    <h1>A sample GEDCOM file in tidyged format</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>sample555.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function can be applied to an Individual record several times to record
-personal names.</p>
+    <p>This is the official GEDCOM 5.5.5 sample file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_indi_names</span><span class='op'>(</span>
-  <span class='va'>gedcom</span>,
-  prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  given <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  nickname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  surname_prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  surname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  suffix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  name_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  update_date_changed <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='va'>sample555</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>gedcom</th>
-      <td><p>A tidyged object.</p></td>
-    </tr>
-    <tr>
-      <th>prefix</th>
-      <td><p>The name prefix, e.g. Cmdr.</p></td>
-    </tr>
-    <tr>
-      <th>given</th>
-      <td><p>The given name or earned name. Different given names are separated
-by a comma.</p></td>
-    </tr>
-    <tr>
-      <th>nickname</th>
-      <td><p>A descriptive or familiar name used in connection with one's
-proper name.</p></td>
-    </tr>
-    <tr>
-      <th>surname_prefix</th>
-      <td><p>Surname prefix or article used in a family name.
-For example in the name "de la Cruz", this value would be "de la".</p></td>
-    </tr>
-    <tr>
-      <th>surname</th>
-      <td><p>Surname or family name. Different surnames are separated by a comma.</p></td>
-    </tr>
-    <tr>
-      <th>suffix</th>
-      <td><p>Non-indexing name piece that appears after the given name and surname
-parts, e.g. Jr. Different name suffix parts are separated by a comma.</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>The name type, e.g. "birth", "aka", "maiden".</p></td>
-    </tr>
-    <tr>
-      <th>name_notes</th>
-      <td><p>A character vector of notes accompanying this name.
-These could be xrefs to existing Note records.</p></td>
-    </tr>
-    <tr>
-      <th>xref</th>
-      <td><p>The xref of a record to act on if one is not activated (will override active record).</p></td>
-    </tr>
-    <tr>
-      <th>update_date_changed</th>
-      <td><p>Whether to add/update the change date for the record.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>An updated tidyged object with an expanded Individual record including
-these names.</p>
+    <p>A tibble with 97 rows and 4 variables:</p><dl>
+<dt>level</dt><dd><p>The level in the GEDCOM structural hierarchy</p></dd>
+<dt>record</dt><dd><p>The unique cross reference for the record</p></dd>
+<dt>tag</dt><dd><p>The tag describing the nature of the line value given</p></dd>
+<dt>value</dt><dd><p>The GEDCOM line value</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='https://www.gedcom.org/samples.html'>https://www.gedcom.org/samples.html</a></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

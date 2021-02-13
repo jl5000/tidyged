@@ -90,7 +90,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>Within a GEDCOM file, individuals can be given more than one name. These can be different kinds of name such as birth name or adoptive name, or if there is uncertainty, variants of these based on conflicting evidence sources. There is also the ability to provide phonetic and romanised variants of names. Given this complexity, the name is not immediately defined when creating an Individual record.</p>
+<p>Within a GEDCOM file, individuals can be given more than one name. These can be different kinds of name such as birth name or adoptive name, or if there is uncertainty, variants of these based on conflicting evidence sources. There is also the ability to provide phonetic and romanised variants of names. Given this complexity, the name is usually not immediately defined when creating an Individual record.</p>
 </div>
 <div id="adding-individual-names" class="section level2">
 <h2 class="hasAnchor">
@@ -101,87 +101,44 @@
 
 <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 4</span>
+<span class="co">#&gt; # A tibble: 7 x 4</span>
 <span class="co">#&gt;   level record tag   value             </span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             </span>
 <span class="co">#&gt; 1     0 @I1@   INDI  ""                </span>
 <span class="co">#&gt; 2     1 @I1@   SEX   "U"               </span>
 <span class="co">#&gt; 3     1 @I1@   NAME  "Leia /Skywalker/"</span>
-<span class="co">#&gt; 4     2 @I1@   SURN  "Skywalker"       </span>
-<span class="co">#&gt; 5     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 6     2 @I1@   DATE  "9 FEB 2021"</span></code></pre></div>
-<p>In the GEDCOM specification, all names should also be accompanied by a set of name pieces, specifying the given name, surname, nickname, etc. In addition, full names should always surround surnames with forward slashes. In <code>tidyged</code> this allows us to automatically generate a name piece if none are given. If we provide a name with no name pieces and no forward slashes, it will cause an error:</p>
+<span class="co">#&gt; 4     2 @I1@   GIVN  "Leia"            </span>
+<span class="co">#&gt; 5     2 @I1@   SURN  "Skywalker"       </span>
+<span class="co">#&gt; 6     1 @I1@   CHAN  ""                </span>
+<span class="co">#&gt; 7     2 @I1@   DATE  "13 FEB 2021"</span></code></pre></div>
+<p>In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes).</p>
+<p>A shortcut way of defining a name is to use the <code>quick_name</code> parameter. It’s not ideal, and should really only be reserved for demonstrations (like this one)! The parameter is the first one (after the tidyged object) which makes the code readable when using pipes, and the function will crudely place the entire string as the given name of the individual:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span><span class="op">)</span>
-<span class="co">#&gt; Error in salvage_name_pieces(name_personal, name_pieces): The name Leia Skywalker is given without any name pieces</span></code></pre></div>
-<p>Ideally, as much information as possible should be given:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 8 x 4</span>
-<span class="co">#&gt;   level record tag   value             </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             </span>
-<span class="co">#&gt; 1     0 @I1@   INDI  ""                </span>
-<span class="co">#&gt; 2     1 @I1@   SEX   "U"               </span>
-<span class="co">#&gt; 3     1 @I1@   NAME  "Leia /Skywalker/"</span>
-<span class="co">#&gt; 4     2 @I1@   TYPE  "birth"           </span>
-<span class="co">#&gt; 5     2 @I1@   GIVN  "Leia"            </span>
-<span class="co">#&gt; 6     2 @I1@   SURN  "Skywalker"       </span>
-<span class="co">#&gt; 7     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 8     2 @I1@   DATE  "9 FEB 2021"</span></code></pre></div>
-<p>A shortcut way of defining a name is to use the <code>quick_name</code> parameter. It’s not ideal, and should really only be reserved for demonstrations (like this one)! The parameter is the first one (after the tidyged object) which makes the code readable when using pipes:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 4</span>
-<span class="co">#&gt;   level record tag   value             </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             </span>
-<span class="co">#&gt; 1     0 @I1@   INDI  ""                </span>
-<span class="co">#&gt; 2     1 @I1@   SEX   "U"               </span>
-<span class="co">#&gt; 3     1 @I1@   NAME  "Leia /Skywalker/"</span>
-<span class="co">#&gt; 4     2 @I1@   SURN  "Skywalker"       </span>
-<span class="co">#&gt; 5     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 6     2 @I1@   DATE  "9 FEB 2021"</span></code></pre></div>
+<span class="co">#&gt;   level record tag   value           </span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;           </span>
+<span class="co">#&gt; 1     0 @I1@   INDI  ""              </span>
+<span class="co">#&gt; 2     1 @I1@   SEX   "U"             </span>
+<span class="co">#&gt; 3     1 @I1@   NAME  "Leia Skywalker"</span>
+<span class="co">#&gt; 4     2 @I1@   GIVN  "Leia Skywalker"</span>
+<span class="co">#&gt; 5     1 @I1@   CHAN  ""              </span>
+<span class="co">#&gt; 6     2 @I1@   DATE  "13 FEB 2021"</span></code></pre></div>
 </div>
 <div id="phonetic-and-romanised-names" class="section level2">
 <h2 class="hasAnchor">
 <a href="#phonetic-and-romanised-names" class="anchor"></a>Phonetic and romanised names</h2>
-<p>Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the <code><a href="../reference/add_indi_names_var.html">add_indi_names_var()</a></code> function. As a minimum, the original name, variant name, derivation method, and whether it is a phonetic or romanised variation should be given:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the <code><a href="../reference/add_indi_names_var.html">add_indi_names_var()</a></code> function. As a minimum, the original name, variant name pieces, derivation method, and whether it is a phonetic or romanised variation should be given:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, <span class="st">"Laya /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"As spoken"</span>,
-                     phonetic_variation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 11 x 4</span>
-<span class="co">#&gt;    level record tag   value             </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             </span>
-<span class="co">#&gt;  1     0 @I1@   INDI  ""                </span>
-<span class="co">#&gt;  2     1 @I1@   SEX   "U"               </span>
-<span class="co">#&gt;  3     1 @I1@   NAME  "Leia /Skywalker/"</span>
-<span class="co">#&gt;  4     2 @I1@   TYPE  "birth"           </span>
-<span class="co">#&gt;  5     2 @I1@   GIVN  "Leia"            </span>
-<span class="co">#&gt;  6     2 @I1@   SURN  "Skywalker"       </span>
-<span class="co">#&gt;  7     2 @I1@   FONE  "Laya /Skywalker/"</span>
-<span class="co">#&gt;  8     3 @I1@   TYPE  "As spoken"       </span>
-<span class="co">#&gt;  9     3 @I1@   SURN  "Skywalker"       </span>
-<span class="co">#&gt; 10     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 11     2 @I1@   DATE  "9 FEB 2021"</span></code></pre></div>
-<p>As with the original name, if there are no name pieces or forward slashes, it will result in an error. Ideally we provide as much information as possible:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, <span class="st">"Laya /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"As spoken"</span>, 
-                     phonetic_variation <span class="op">=</span> <span class="cn">TRUE</span>, given <span class="op">=</span> <span class="st">"Laya"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span>, method <span class="op">=</span> <span class="st">"As spoken"</span>,
+                     given <span class="op">=</span> <span class="st">"Laya"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, phonetic_variation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 12 x 4</span>
 <span class="co">#&gt;    level record tag   value             </span>
@@ -197,19 +154,19 @@
 <span class="co">#&gt;  9     3 @I1@   GIVN  "Laya"            </span>
 <span class="co">#&gt; 10     3 @I1@   SURN  "Skywalker"       </span>
 <span class="co">#&gt; 11     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 12     2 @I1@   DATE  "9 FEB 2021"</span></code></pre></div>
+<span class="co">#&gt; 12     2 @I1@   DATE  "13 FEB 2021"</span></code></pre></div>
 </div>
 <div id="name-types" class="section level2">
 <h2 class="hasAnchor">
 <a href="#name-types" class="anchor"></a>Name types</h2>
-<p>All of the above define the variants for a single birth name. The <code>type</code> parameter can also define different names for the individual. Below we add a line to define an adoptive name:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>All of the above define the variants for a single birth name. The <code>type</code> parameter can also define different names for the individual. Below we add a line to define an adoptive name (the parameter can take any value):</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, <span class="st">"Laya /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"As spoken"</span>, 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span>, method <span class="op">=</span> <span class="st">"As spoken"</span>, 
                      phonetic_variation <span class="op">=</span> <span class="cn">TRUE</span>, given <span class="op">=</span> <span class="st">"Laya"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Organa/"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 16 x 4</span>
 <span class="co">#&gt;    level record tag   value             </span>
@@ -229,20 +186,20 @@
 <span class="co">#&gt; 13     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 14     2 @I1@   SURN  "Organa"          </span>
 <span class="co">#&gt; 15     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 16     2 @I1@   DATE  "9 FEB 2021"</span></code></pre></div>
+<span class="co">#&gt; 16     2 @I1@   DATE  "13 FEB 2021"</span></code></pre></div>
 </div>
 <div id="conflicting-names" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conflicting-names" class="anchor"></a>Conflicting names</h2>
 <p>GEDCOM files can also record different names <em>of the same type</em>, perhaps due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, <span class="st">"Laya /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"As spoken"</span>, 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span>, method <span class="op">=</span> <span class="st">"As spoken"</span>, 
                      phonetic_variation <span class="op">=</span> <span class="cn">TRUE</span>, given <span class="op">=</span> <span class="st">"Laya"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Organa/"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Skywaker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywaker"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywaker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 20 x 4</span>
 <span class="co">#&gt;    level record tag   value             </span>
@@ -266,17 +223,17 @@
 <span class="co">#&gt; 17     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 18     2 @I1@   SURN  "Skywaker"        </span>
 <span class="co">#&gt; 19     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 20     2 @I1@   DATE  "9 FEB 2021"</span></code></pre></div>
+<span class="co">#&gt; 20     2 @I1@   DATE  "13 FEB 2021"</span></code></pre></div>
 <p>Generally conflicting names are arranged in order of confidence; the first name is more likely to be correct. If you want to promote a name to occur first in the record, you can use the <code><a href="../reference/primary_indi_name.html">primary_indi_name()</a></code> function:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia /Skywalker/"</span>, <span class="st">"Laya /Skywalker/"</span>, type <span class="op">=</span> <span class="st">"As spoken"</span>, 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span>, method <span class="op">=</span> <span class="st">"As spoken"</span>, 
                      phonetic_variation <span class="op">=</span> <span class="cn">TRUE</span>, given <span class="op">=</span> <span class="st">"Laya"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Organa/"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="st">"Leia /Skywaker/"</span>, type <span class="op">=</span> <span class="st">"birth"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywaker"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/primary_indi_name.html">primary_indi_name</a></span><span class="op">(</span><span class="st">"Leia /Skywaker/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywaker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/primary_indi_name.html">primary_indi_name</a></span><span class="op">(</span><span class="st">"Leia Skywaker"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 20 x 4</span>
 <span class="co">#&gt;    level record tag   value             </span>
@@ -300,7 +257,7 @@
 <span class="co">#&gt; 17     2 @I1@   GIVN  "Leia"            </span>
 <span class="co">#&gt; 18     2 @I1@   SURN  "Organa"          </span>
 <span class="co">#&gt; 19     1 @I1@   CHAN  ""                </span>
-<span class="co">#&gt; 20     2 @I1@   DATE  "9 FEB 2021"</span></code></pre></div>
+<span class="co">#&gt; 20     2 @I1@   DATE  "13 FEB 2021"</span></code></pre></div>
 <p>Note that the subrecords of the Individual record (those at level 1) can appear in any order.</p>
 </div>
   </div>

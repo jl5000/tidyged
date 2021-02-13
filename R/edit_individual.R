@@ -30,12 +30,12 @@
 #'                                      indi_notes = c("Note1", "Note 2")) %>% 
 #'                        remove_dates_for_tests(), "json2")
 add_indi <- function(gedcom,
-                           quick_name = character(),
-                           sex = "U",
-                           user_reference_number = character(),
-                           user_reference_type = character(),
-                           indi_notes = character(),
-                           multimedia_links = character()) {
+                     quick_name = character(),
+                     sex = "U",
+                     user_reference_number = character(),
+                     user_reference_type = character(),
+                     indi_notes = character(),
+                     multimedia_links = character()) {
   
   xref <- assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
   
@@ -57,7 +57,7 @@ add_indi <- function(gedcom,
     set_active_record(xref)
   
   if (length(quick_name) > 0) 
-    temp <- add_indi_names(temp, quick_name)
+    temp <- add_indi_names(temp, given = quick_name)
   
   temp
 }

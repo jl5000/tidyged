@@ -38,12 +38,12 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["HEAD", "GEDC", "VERS", "FORM", "VERS", "CHAR", "DEST", "SOUR", "VERS", "NAME", "CORP", "ADDR", "EMAIL", "WWW", "LANG", "SUBM", "SUBM", "NAME", "INDI", "SEX", "NAME", "SURN", "INDI", "SEX", "NAME", "SURN", "ASSO", "RELA", "TRLR"]
+          "value": ["HEAD", "GEDC", "VERS", "FORM", "VERS", "CHAR", "DEST", "SOUR", "VERS", "NAME", "CORP", "ADDR", "EMAIL", "WWW", "LANG", "SUBM", "SUBM", "NAME", "INDI", "SEX", "NAME", "GIVN", "INDI", "SEX", "NAME", "GIVN", "ASSO", "RELA", "TRLR"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidyged", "tidyged", "0.0.0", "The 'tidyged' package for the R language", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "U", "Joe /Bloggs/", "Bloggs", "", "U", "Jimmy /Bloggs/", "Bloggs", "@I1@", "Friend", ""]
+          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidyged", "tidyged", "0.0.0", "The 'tidyged' package for the R language", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "U", "Joe Bloggs", "Joe Bloggs", "", "U", "Jimmy Bloggs", "Jimmy Bloggs", "@I1@", "Friend", ""]
         }
       ]
     }

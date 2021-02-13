@@ -7,15 +7,14 @@
 add_indi_names_var(
   gedcom,
   primary_name,
-  variation_name,
-  type,
-  phonetic_variation = TRUE,
+  method,
   prefix = character(),
   given = character(),
   nickname = character(),
   surname_prefix = character(),
   surname = character(),
   suffix = character(),
+  phonetic_variation = TRUE,
   variation_notes = character(),
   xref = character(),
   update_date_changed = TRUE
@@ -27,13 +26,7 @@ add_indi_names_var(
 \item{primary_name}{The name for which this is a variation. This is treated as a
 regex pattern to match to existing names.}
 
-\item{variation_name}{The full name variation. The surname, if known, should be enclosed between two
-forward slash (/) characters.}
-
-\item{type}{Indicates the method used in transforming the text to the variation.}
-
-\item{phonetic_variation}{Whether the name variation is a phonetic variation
-(TRUE, default) or a romanised variation (FALSE).}
+\item{method}{Indicates the method used in transforming the text to the variation.}
 
 \item{prefix}{The name prefix, e.g. Cmdr.}
 
@@ -44,13 +37,15 @@ by a comma.}
 proper name.}
 
 \item{surname_prefix}{Surname prefix or article used in a family name.
-Different surname articles are separated by a comma, for example in the name
-"de la Cruz", this value would be "de, la".}
+For example in the name "de la Cruz", this value would be "de la".}
 
 \item{surname}{Surname or family name. Different surnames are separated by a comma.}
 
 \item{suffix}{Non-indexing name piece that appears after the given name and surname
 parts, e.g. Jr. Different name suffix parts are separated by a comma.}
+
+\item{phonetic_variation}{Whether the name variation is a phonetic variation
+(TRUE, default) or a romanised variation (FALSE).}
 
 \item{variation_notes}{A character vector of notes accompanying this name variation.
 These could be xrefs to existing Note records.}

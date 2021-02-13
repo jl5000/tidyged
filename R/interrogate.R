@@ -408,17 +408,17 @@ str.tidyged <- function(object, ...) {
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'  add_indi(sex = "M") %>% 
-#'  add_indi_names("Joe /Bloggs/") %>% 
+#'  add_indi_names(given = "Joe", surname = "Bloggs") %>% 
 #'  add_indi_event_birth(event_date = date_calendar(year = 1950, month = 5, day = 7),
 #'                             place_name = "Somewhere") %>% 
 #'  add_indi_event_death(event_date = date_calendar(year = 2000, month = 12, day = 1),
 #'                             place_name = "Somewhere else") %>% 
 #'  add_indi(sex = "F") %>% 
-#'  add_indi_names("Jess /Bloggs/") %>% 
+#'  add_indi_names(given = "Jess", surname = "Bloggs") %>% 
 #'  add_indi_event_birth(event_date = date_calendar(year = 1948, month = 1, day = 15),
 #'                             place_name = "Somewhere") %>% 
 #'  add_indi(sex = "F") %>% 
-#'  add_indi_names("Jessie /Bloggs/") %>% 
+#'  add_indi_names(given = "Jessie", surname = "Bloggs") %>% 
 #'  add_indi_event_birth(event_date = date_approximated(date_calendar(year = 1970), about = TRUE),
 #'                             place_name = "Elsewhere") %>%
 #'  add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
@@ -474,11 +474,11 @@ df_indi <- function(gedcom) {
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'  add_indi(sex = "M") %>% 
-#'  add_indi_names("Joe /Bloggs/") %>% 
+#'  add_indi_names(given = "Joe", surname = "Bloggs") %>% 
 #'  add_indi(sex = "F") %>% 
-#'  add_indi_names("Jess /Bloggs/") %>% 
+#'  add_indi_names(given = "Jess", surname = "Bloggs") %>% 
 #'  add_indi(sex = "F") %>% 
-#'  add_indi_names("Jessie /Bloggs/") %>%
+#'  add_indi_names(given = "Jessie", surname = "Bloggs") %>%
 #'  add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
 #'  add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                                place_name = "Another place") %>% 

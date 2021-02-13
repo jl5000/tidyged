@@ -38,12 +38,12 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["HEAD", "GEDC", "VERS", "FORM", "VERS", "CHAR", "DEST", "SOUR", "VERS", "NAME", "CORP", "ADDR", "EMAIL", "WWW", "LANG", "SUBM", "SUBM", "NAME", "INDI", "SEX", "NAME", "SURN", "FAMS", "INDI", "SEX", "NAME", "SURN", "FAMS", "INDI", "SEX", "NAME", "SURN", "FAMC", "PEDI", "FAM", "HUSB", "WIFE", "CHIL", "MARR", "TYPE", "DATE", "PLAC", "TRLR"]
+          "value": ["HEAD", "GEDC", "VERS", "FORM", "VERS", "CHAR", "DEST", "SOUR", "VERS", "NAME", "CORP", "ADDR", "EMAIL", "WWW", "LANG", "SUBM", "SUBM", "NAME", "INDI", "SEX", "NAME", "GIVN", "FAMS", "INDI", "SEX", "NAME", "GIVN", "FAMS", "INDI", "SEX", "NAME", "GIVN", "FAMC", "PEDI", "FAM", "HUSB", "WIFE", "CHIL", "MARR", "TYPE", "DATE", "PLAC", "TRLR"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidyged", "tidyged", "0.0.0", "The 'tidyged' package for the R language", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "M", "Joe /Bloggs/", "Bloggs", "@F1@", "", "F", "Jess /Bloggs/", "Bloggs", "@F1@", "", "F", "Jessie /Bloggs/", "Bloggs", "@F1@", "birth", "", "@I1@", "@I2@", "@I3@", "Y", "marriage", "30 JAN 1969", "Another place", ""]
+          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidyged", "tidyged", "0.0.0", "The 'tidyged' package for the R language", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "M", "Joe Bloggs", "Joe Bloggs", "@F1@", "", "F", "Jess Bloggs", "Jess Bloggs", "@F1@", "", "F", "Jessie Bloggs", "Jessie Bloggs", "@F1@", "birth", "", "@I1@", "@I2@", "@I3@", "Y", "marriage", "30 JAN 1969", "Another place", ""]
         }
       ]
     }

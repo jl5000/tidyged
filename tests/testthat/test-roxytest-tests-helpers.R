@@ -8,3 +8,20 @@ test_that("Function gedcom_value() @ L76", {
   expect_equal(gedcom_value(gedcom(), "HD", "VERS", 3), "5.5.5")
 })
 
+
+test_that("Function construct_full_name() @ L146", {
+  expect_error(construct_full_name(surname_prefix = "de la"))
+  expect_equal(construct_full_name(prefix = "Lt. Cdr."), "Lt. Cdr.")
+  expect_equal(construct_full_name(given = "Joe"), "Joe")
+  expect_equal(construct_full_name(given = "Joe,Adam"), "Joe Adam")
+  expect_equal(construct_full_name(given = "Joey,Joe, Joe"), "Joey Joe Joe")
+  expect_equal(construct_full_name(nickname = "Nobby"), "'Nobby'")
+  expect_equal(construct_full_name(surname = "Bloggs"), "/Bloggs/")
+  expect_equal(construct_full_name(suffix = "Jr."), "Jr.")
+  expect_equal(construct_full_name(suffix = "Jr.,Esq."), "Jr. Esq.")
+  expect_equal(construct_full_name(prefix = "Lt. Cdr.", given = "Joe,Adam", nickname = "Nobby", 
+                                   surname_prefix = "de la", surname = "Bloggs",
+                                   suffix = "Jr., Esq."),
+               "Lt. Cdr. Joe Adam 'Nobby' de la /Bloggs/ Jr. Esq.")
+})
+

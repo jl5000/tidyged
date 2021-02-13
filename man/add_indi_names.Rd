@@ -6,14 +6,13 @@
 \usage{
 add_indi_names(
   gedcom,
-  name,
-  type = character(),
   prefix = character(),
   given = character(),
   nickname = character(),
   surname_prefix = character(),
   surname = character(),
   suffix = character(),
+  type = character(),
   name_notes = character(),
   xref = character(),
   update_date_changed = TRUE
@@ -21,13 +20,6 @@ add_indi_names(
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
-
-\item{name}{The full name of the individual. The order of the name parts should
-be the order that the person would, by custom of their culture, have used when
-giving it to a recorder. The surname, if known, should be enclosed between two
-forward slash (/) characters.}
-
-\item{type}{The name type, e.g. "birth", "aka", "maiden".}
 
 \item{prefix}{The name prefix, e.g. Cmdr.}
 
@@ -38,13 +30,14 @@ by a comma.}
 proper name.}
 
 \item{surname_prefix}{Surname prefix or article used in a family name.
-Different surname articles are separated by a comma, for example in the name
-"de la Cruz", this value would be "de, la".}
+For example in the name "de la Cruz", this value would be "de la".}
 
 \item{surname}{Surname or family name. Different surnames are separated by a comma.}
 
 \item{suffix}{Non-indexing name piece that appears after the given name and surname
 parts, e.g. Jr. Different name suffix parts are separated by a comma.}
+
+\item{type}{The name type, e.g. "birth", "aka", "maiden".}
 
 \item{name_notes}{A character vector of notes accompanying this name.
 These could be xrefs to existing Note records.}

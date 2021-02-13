@@ -6,22 +6,17 @@
 #' personal names.
 #'
 #' @param gedcom A tidyged object.
-#' @param name The full name of the individual. The order of the name parts should 
-#' be the order that the person would, by custom of their culture, have used when
-#' giving it to a recorder. The surname, if known, should be enclosed between two 
-#' forward slash (/) characters. 
-#' @param type The name type, e.g. "birth", "aka", "maiden".
 #' @param prefix The name prefix, e.g. Cmdr.
 #' @param given The given name or earned name. Different given names are separated 
 #' by a comma.
 #' @param nickname A descriptive or familiar name used in connection with one's 
 #' proper name.
 #' @param surname_prefix Surname prefix or article used in a family name. 
-#' Different surname articles are separated by a comma, for example in the name 
-#' "de la Cruz", this value would be "de, la".
+#' For example in the name "de la Cruz", this value would be "de la".
 #' @param surname Surname or family name. Different surnames are separated by a comma.
 #' @param suffix Non-indexing name piece that appears after the given name and surname 
 #' parts, e.g. Jr. Different name suffix parts are separated by a comma.
+#' @param type The name type, e.g. "birth", "aka", "maiden".
 #' @param name_notes A character vector of notes accompanying this name.
 #' These could be xrefs to existing Note records.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
@@ -31,14 +26,13 @@
 #' these names.
 #' @export
 add_indi_names <- function(gedcom,
-                           name,
-                           type = character(),
                            prefix = character(),
                            given = character(),
                            nickname = character(),
                            surname_prefix = character(),
                            surname = character(),
                            suffix = character(),
+                           type = character(),
                            name_notes = character(),
                            xref = character(),
                            update_date_changed = TRUE) {
@@ -54,6 +48,8 @@ add_indi_names <- function(gedcom,
                                                          name_piece_surname = surname,
                                                          name_piece_suffix = suffix,
                                                          notes = nam_notes)
+  
+  name <- construct_full_name(prefix, given, nickname, surname_prefix, surname, suffix)
   
   name_str <- tidyged.internals::PERSONAL_NAME_STRUCTURE(name_personal = name,
                                                          name_type = type,
@@ -79,22 +75,19 @@ add_indi_names <- function(gedcom,
 #' @param gedcom A tidyged object.
 #' @param primary_name The name for which this is a variation. This is treated as a
 #' regex pattern to match to existing names. 
-#' @param variation_name The full name variation. The surname, if known, should be enclosed between two 
-#' forward slash (/) characters. 
-#' @param type Indicates the method used in transforming the text to the variation.
-#' @param phonetic_variation Whether the name variation is a phonetic variation
-#' (TRUE, default) or a romanised variation (FALSE).
+#' @param method Indicates the method used in transforming the text to the variation.
 #' @param prefix The name prefix, e.g. Cmdr.
 #' @param given The given name or earned name. Different given names are separated 
 #' by a comma.
 #' @param nickname A descriptive or familiar name used in connection with one's 
 #' proper name.
 #' @param surname_prefix Surname prefix or article used in a family name. 
-#' Different surname articles are separated by a comma, for example in the name 
-#' "de la Cruz", this value would be "de, la".
+#' For example in the name "de la Cruz", this value would be "de la".
 #' @param surname Surname or family name. Different surnames are separated by a comma.
 #' @param suffix Non-indexing name piece that appears after the given name and surname 
 #' parts, e.g. Jr. Different name suffix parts are separated by a comma.
+#' @param phonetic_variation Whether the name variation is a phonetic variation
+#' (TRUE, default) or a romanised variation (FALSE).
 #' @param variation_notes A character vector of notes accompanying this name variation.
 #' These could be xrefs to existing Note records.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
@@ -107,21 +100,20 @@ add_indi_names <- function(gedcom,
 #' expect_snapshot_value(
 #'                gedcom(subm("Me")) %>% 
 #'                add_indi() %>% 
-#'                add_indi_names("Joe /Bloggs/") %>% 
-#'                add_indi_names_var("Joe Bloggs", "JB", nickname = "JB", type = "tests", 
+#'                add_indi_names(given = "Joe", surname = "Bloggs") %>% 
+#'                add_indi_names_var("Joe Bloggs", nickname = "JB", method = "tests", 
 #'                                          phonetic_variation = FALSE) %>% 
 #'                remove_dates_for_tests(), "json2")
 add_indi_names_var <- function(gedcom,
                                primary_name,
-                               variation_name,
-                               type,
-                               phonetic_variation = TRUE,
+                               method,
                                prefix = character(),
                                given = character(),
                                nickname = character(),
                                surname_prefix = character(),
                                surname = character(),
                                suffix = character(),
+                               phonetic_variation = TRUE,
                                variation_notes = character(),
                                xref = character(),
                                update_date_changed = TRUE) {
@@ -132,8 +124,8 @@ add_indi_names_var <- function(gedcom,
   
   if(phonetic_variation) {
     
-    name_phonetic_var <- variation_name
-    phonetisation_method <- type
+    name_phonetic_var <- construct_full_name(prefix, given, nickname, surname_prefix, surname, suffix)
+    phonetisation_method <- method
     phon_name_pieces <- list(tidyged.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                                                      name_piece_given = given, 
                                                                      name_piece_nickname = nickname, 
@@ -147,8 +139,8 @@ add_indi_names_var <- function(gedcom,
     
   } else {
     
-    name_romanised_var <- variation_name
-    romanisation_method <- type
+    name_romanised_var <- construct_full_name(prefix, given, nickname, surname_prefix, surname, suffix)
+    romanisation_method <- method
     rom_name_pieces <- list(tidyged.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
                                                                     name_piece_given = given, 
                                                                     name_piece_nickname = nickname, 
@@ -210,10 +202,10 @@ add_indi_names_var <- function(gedcom,
 #'                add_indi(),
 #'              gedcom(subm()) %>% 
 #'                add_indi() %>% 
-#'                add_indi_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
-#'                remove_indi_name("Joe Bloggs"))  
+#'                add_indi_names(given = "Joe", surname = "Bloggs") %>% 
+#'                remove_indi_name("Joe /Bloggs/"))  
 remove_indi_name <- function(gedcom,
-                                   name) {
+                              name) {
   
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
@@ -236,11 +228,11 @@ remove_indi_name <- function(gedcom,
 #' @tests
 #' expect_equal(gedcom(subm()) %>% 
 #'                add_indi() %>% 
-#'                add_indi_names("Joe Bloggs", given = "Joe", surname = "Bloggs"),
+#'                add_indi_names(given = "Joe", surname = "Bloggs"),
 #'              gedcom(subm()) %>% 
 #'                add_indi() %>% 
-#'                add_indi_names("Joe Bloggs", given = "Joe", surname = "Bloggs") %>% 
-#'                add_indi_names_var("Joe Bloggs", "Jo /Blogs/", "spelling error") %>% 
+#'                add_indi_names(given = "Joe", surname = "Bloggs") %>% 
+#'                add_indi_names_var("Joe Bloggs", given = "Jo", surname = "Blogs", "spelling error") %>% 
 #'                remove_indi_name_var("Jo /Blogs/"))
 remove_indi_name_var <- function(gedcom,
                                        variation_name,
@@ -267,7 +259,8 @@ primary_indi_name <- function(gedcom, name, xref = character()) {
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
-  rows_to_move <- identify_section(gedcom, 1, "NAME", name)
+  rows_to_move <- temporarily_remove_name_slashes(gedcom) %>% 
+    identify_section(1, "NAME", name)
   
   section <- gedcom[rows_to_move,]
   gedcom <- gedcom[-rows_to_move,]

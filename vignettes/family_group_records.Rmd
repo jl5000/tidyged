@@ -40,3 +40,4 @@ As with other records, various types of user-defined references can be defined (
 
 ## Family events
 
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/repository_records.html">Next article: Repository records ></a></p>

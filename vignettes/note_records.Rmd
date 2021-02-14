@@ -17,3 +17,5 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(tidyged)
 ```
+
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/cross_references.html">Next article: Referencing records ></a></p>

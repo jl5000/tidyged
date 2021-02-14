@@ -106,4 +106,4 @@ A couple of other mechanisms exist for providing unique identifiers to records:
 
 For these reasons, neither of these mechanisms are considered to be a better alternative way of selecting records.
 
-
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/dates.html">Next article: Date types ></a></p>

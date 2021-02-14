@@ -28,4 +28,4 @@ There are numerous spin-off packages planned:
 
 The `tidyged` package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to also have a sister package to provide a `shiny` interface (`shinyged`). There are also plans for a `safeged` package to remove sensitive data from living individuals from tidyged objects.
 
-
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/tidyged_creation.html">Next article: Creating tidyged objects ></a></p>

@@ -148,3 +148,14 @@ identify_descendants <- function(gedcom,
   
   return_xrefs
 }
+
+
+identify_ancestors <- function(gedcom,
+                               individual = character(),
+                               include_individual = FALSE,
+                               include_spouses = FALSE,
+                               include_families = FALSE) {
+  
+  
+  
+}

@@ -106,3 +106,5 @@ As with the record-specific functions, setting `short_desc = TRUE` gives a short
 ```{r}
 describe_records(simpsons, simpsons$record, short_desc = TRUE)
 ```
+
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/automation.html">Next article: Automation ></a></p>

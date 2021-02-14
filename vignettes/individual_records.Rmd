@@ -119,3 +119,4 @@ Note that the subrecords of the Individual record (those at level 1) can appear 
 
 ## Individual attributes
 
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/family_group_records.html">Next article: Family Group records ></a></p>

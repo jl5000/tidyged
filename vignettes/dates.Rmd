@@ -91,4 +91,4 @@ date_range(start_date = date_calendar(1956, 7, 26))
 date_range(end_date = date_calendar(1956, 9, 15))
 ```
 
-
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/summarising.html">Next article: Summarising tidyged objects ></a></p>

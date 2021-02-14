@@ -54,6 +54,8 @@ Many GEDCOM processors modify the data on import, perhaps ignoring custom tags. 
 
 If you want to modify single values in a GEDCOM or do a simple Find/Replace, then this is straightforward to achieve with a simple text editor.
 
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/gedcompendium.html">Next article: The gedcompendium ></a></p>
+
 
 
 

@@ -101,3 +101,5 @@ unique(split_gedcom(sample555, c("@I1@", "@I2@"))$record)
 ```
 
 This is especially powerful when paired with the `identify_descendants()` function (see `vignette("maintenance_functions")`), where you can create a separate object for an entire branch.
+
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/individual_records.html">Next article: Individual records ></a></p>

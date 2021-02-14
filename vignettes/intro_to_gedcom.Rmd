@@ -43,3 +43,5 @@ The [GEDCOM 5.5.5 specification](https://www.gedcom.org/gedcom.html) is substant
 GEDCOM 5.5.5 is a relatively recent update, considering the previous release, 5.5.1, was first released in 1999. Version 5.5.5 is a maintenance release which simplifies and clarifies the standard considerably, but has not yet been embraced widely in the genealogical community. Notwithstanding, it is the best version of GEDCOM available which doesn't stray from the standards put in place over the last decades. A good proportion of genealogists use products like Family Tree Maker, RootsMagic, and Gramps, all of which extend the GEDCOM grammar in different ways.
 
 GEDCOM 5.5.5 files produced by `tidyged` should be compatible with other readers of GEDCOM 5.5.1 files (the most commonly supported version). In the event that a reader does not accept the file, all that should be required is the manual changing of the third line value to '5.5.1'. Version 5.5.1 files are not compatible with `tidyged`.
+
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/implementation.html">Next article: Implementation ></a></p>

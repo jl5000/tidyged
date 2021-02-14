@@ -42,7 +42,7 @@ add_indi <- function(gedcom,
   indiv_notes <- purrr::map(indi_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
     purrr::map(tidyged.internals::MULTIMEDIA_LINK)
 
   ind_record <- tidyged.internals::INDIVIDUAL_RECORD(xref_indi = xref,
@@ -96,66 +96,3 @@ remove_indi <- function(gedcom,
     null_active_record()
 }
 
-
-
-#' Identify all descendants for an individual
-#' 
-#' This function identifies records in an entire branch of the family tree below a certain individual.
-#' 
-#' @param gedcom A tidyged object.
-#' @param individual The xref or name of an Individual record to act on if one 
-#' is not activated (will override active record).
-#' @param include_individual Whether to also include the individual themselves.
-#' @param include_spouses Whether to also include all spouses of this individual (and their descendants).
-#' @param include_families Whether to also include all Family Group records where this individual is a spouse.
-#'
-#' @return A vector of xrefs of descendants.
-#' @export
-identify_descendants <- function(gedcom,
-                                 individual = character(),
-                                 include_individual = FALSE,
-                                 include_spouses = FALSE,
-                                 include_families = FALSE) {
-  
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
-  
-  return_xrefs <- NULL
-  
-  spou_xref <- get_spouses(gedcom, xref)
-  chil_xref <- get_children(gedcom, xref)
-  fams_xref <- get_families_as_spouse(gedcom, xref)
-  
-  # if spouse is to be included, add their children to be included
-  if (include_spouses) {
-    # we don't use purrr::map here because the return values could vary in length
-    spou_chil <- NULL
-    for(i in seq_along(spou_xref)) {
-      spou_chil <- c(spou_chil, get_children(gedcom, spou_xref[i]))
-    }
-    chil_xref <- unique(c(chil_xref, spou_chil))
-  }
-  
-  #deal with family groups first (while the individuals are still in them)
-  if (include_families) return_xrefs <- c(return_xrefs, fams_xref)
-  if (include_spouses) return_xrefs <- c(return_xrefs, spou_xref)
-  if (include_individual) return_xrefs <- c(return_xrefs, xref)
-  
-  # identify children
-  for(i in seq_along(chil_xref)) {
-    return_xrefs <- c(return_xrefs,
-                      identify_descendants(gedcom, chil_xref[i], TRUE, TRUE,TRUE))
-  }
-  
-  return_xrefs
-}
-
-
-identify_ancestors <- function(gedcom,
-                               individual = character(),
-                               include_individual = FALSE,
-                               include_spouses = FALSE,
-                               include_families = FALSE) {
-  
-  
-  
-}

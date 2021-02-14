@@ -25,7 +25,8 @@ Imports:
     lubridate,
     tibble,
     tidyged.internals,
-    tidyged.io
+    tidyged.io,
+    tidyged.utils
 Suggests: 
     testthat,
     roxytest,
@@ -38,6 +39,7 @@ Suggests:
 Remotes: 
     jl5000/tidyged.internals, 
     jl5000/tidyged.io, 
+    jl5000/tidyged.utils, 
     jl5000/visged,
     jl5000/autoged,
     jl5000/geddown

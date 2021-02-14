@@ -37,6 +37,46 @@ num_repo <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_re
 num_sour <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_sour) }
 
 
+xrefs_record_type <- function(gedcom, record_tag) {
+  dplyr::filter(gedcom, level == 0 & tag == record_tag)$record
+}
+
+#' Get the xrefs of particular record types
+#'
+#' These functions return the xrefs of all records of a particular type in a tidyged object.
+#'
+#' @param gedcom A tidyged object.
+#'
+#' @return A vector of xrefs of records of the relevant type.
+#' @export
+xrefs_indi <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_indi) }
+
+#' @export
+#' @rdname xrefs_indi
+xrefs_famg <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_famg) }
+
+#' @export
+#' @rdname xrefs_indi
+xrefs_subm <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_subm) }
+
+#' @export
+#' @rdname xrefs_indi
+xrefs_sour <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_sour) }
+
+#' @export
+#' @rdname xrefs_indi
+xrefs_repo <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_repo) }
+
+#' @export
+#' @rdname xrefs_indi
+xrefs_note <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_note) }
+
+#' @export
+#' @rdname xrefs_indi
+xrefs_media <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_obje) }
+
+
+
 is_record_type <- function(gedcom, xref, tag) {
   gedcom[gedcom$record == xref,]$tag[1] == tag
 }
@@ -428,7 +468,7 @@ str.tidyged <- function(object, ...) {
 #'  df_indi(), "json2")
 df_indi <- function(gedcom) {
   
-  ind_xrefs <- xrefs_individuals(gedcom)
+  ind_xrefs <- xrefs_indi(gedcom)
   ind_names <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
   ind_sex <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "SEX", level = 1)
   ind_dobs <- purrr::map_chr(ind_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
@@ -486,7 +526,7 @@ df_indi <- function(gedcom) {
 #'  df_famg(), "json2")
 df_famg <- function(gedcom) {
   
-  fam_xrefs <- xrefs_families(gedcom)
+  fam_xrefs <- xrefs_famg(gedcom)
   husb_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1)
   wife_xrefs <- purrr::map_chr(fam_xrefs, gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1)
   husb_names <- purrr::map_chr(husb_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
@@ -520,7 +560,7 @@ df_famg <- function(gedcom) {
 #'  df_media(), "json2")
 df_media <- function(gedcom) {
   
-  obje_xrefs <- xrefs_multimedia(gedcom)
+  obje_xrefs <- xrefs_media(gedcom)
   file_refs <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FILE", level = 1)
   file_titles <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "TITL", level = 2)
   file_forms <- purrr::map_chr(obje_xrefs, gedcom_value, gedcom = gedcom, tag = "FORM", level = 2)
@@ -547,7 +587,7 @@ df_media <- function(gedcom) {
 #'  df_sour(), "json2")
 df_sour <- function(gedcom) {
   
-  sour_xrefs <- xrefs_sources(gedcom)
+  sour_xrefs <- xrefs_sour(gedcom)
   origs <- purrr::map_chr(sour_xrefs, gedcom_value, gedcom = gedcom, tag = "AUTH", level = 1)
   titles <- purrr::map_chr(sour_xrefs, gedcom_value, gedcom = gedcom, tag = "TITL", level = 1)
   date_chan <- purrr::map_chr(sour_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
@@ -570,7 +610,7 @@ df_sour <- function(gedcom) {
 #'  df_repo(), "json2")
 df_repo <- function(gedcom) {
   
-  repo_xrefs <- xrefs_repositories(gedcom)
+  repo_xrefs <- xrefs_repo(gedcom)
   repo_names <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
   repo_cits <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "CITY", level = 2)
   repo_stae <- purrr::map_chr(repo_xrefs, gedcom_value, gedcom = gedcom, tag = "STAE", level = 2)
@@ -597,7 +637,7 @@ df_repo <- function(gedcom) {
 #'  df_note(), "json2")
 df_note <- function(gedcom) {
   
-  note_xrefs <- xrefs_notes(gedcom)
+  note_xrefs <- xrefs_note(gedcom)
   ref_nos <- purrr::map_chr(note_xrefs, gedcom_value, gedcom = gedcom, tag = "REFN", level = 1)
   note_txts <- purrr::map_chr(note_xrefs, gedcom_value, gedcom = gedcom, tag = "NOTE", level = 0)
   date_chan <- purrr::map_chr(note_xrefs, gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")

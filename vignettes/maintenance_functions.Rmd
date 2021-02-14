@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-GEDCOM files can get very large and unwieldy, resulting in inefficiencies and file bloat. The `tidyged` package offers functions to automate the cleaning of GEDCOM files.
+GEDCOM files can get very large and unwieldy, resulting in inefficiencies and file bloat. The `tidyged.utils` package offers functions to automate the cleaning of GEDCOM files.
 
 ## Change dates
 
@@ -37,7 +37,7 @@ For GEDCOM files with thousands of records, including change dates can add consi
 
 ```{r}
 gedcom(subm("Me")) %>% 
-  remove_change_dates() %>% 
+  tidyged.utils::remove_change_dates() %>% 
   knitr::kable()
 ```
 
@@ -59,7 +59,7 @@ In the above example, there is a generic note recorded in a top level Note recor
 The `consolidate_notes()` function will simplify the file, replacing note values with pointers to top level Note records (creating them if necessary) if they are repeated:
 
 ```{r}
-consolidate_notes(notes) %>% 
+tidyged.utils::consolidate_notes(notes) %>% 
   knitr::kable()
 ```
 
@@ -81,20 +81,20 @@ some_unref <- gedcom(subm("Me")) %>%
   add_famg() %>% 
   add_repo("Test repo") 
   
-identify_unused_records(some_unref)
+tidyged.utils::identify_unused_records(some_unref)
 ```
 
 We can find out more about these xrefs by using the `describe_records()` function:
 
 ```{r}
-identify_unused_records(some_unref) %>% 
+tidyged.utils::identify_unused_records(some_unref) %>% 
   describe_records(gedcom = some_unref)
 ```
 
 We can remove multiple records at once using the `remove_records()` function:
 
 ```{r}
-remove_records(some_unref, identify_unused_records(some_unref)) %>% 
+remove_records(some_unref, tidyged.utils::identify_unused_records(some_unref)) %>% 
   str()
 ```
 
@@ -127,14 +127,14 @@ df_famg(three_gen) %>%
 We use the `identify_descendants()` function below to identify the descendants of Main Person. By default it will exclude the individual and their spouses, and associated family groups:
 
 ```{r}
-identify_descendants(three_gen, "Main Person")
+tidyged.utils::identify_descendants(three_gen, "Main Person")
 ```
 
 We can use the `describe_records()` function to see descriptions:
 
 ```{r}
 three_gen %>% 
-  identify_descendants("Main Person") %>% 
+  tidyged.utils::identify_descendants("Main Person") %>% 
   describe_records(three_gen, .)
 ```
 
@@ -142,7 +142,7 @@ Setting `include_spouses = TRUE` will include all spouses and their descendants:
 
 ```{r}
 three_gen %>% 
-  identify_descendants("Main Person", include_spouses = TRUE) %>% 
+  tidyged.utils::identify_descendants("Main Person", include_spouses = TRUE) %>% 
   describe_records(three_gen, .)
 ```
 
@@ -150,7 +150,7 @@ Setting `include_individual = TRUE` will include the individual:
 
 ```{r}
 three_gen %>% 
-  identify_descendants("Main Person", include_individual = TRUE) %>% 
+  tidyged.utils::identify_descendants("Main Person", include_individual = TRUE) %>% 
   describe_records(three_gen, .)
 ```
 
@@ -158,8 +158,8 @@ Setting `include_families = TRUE` will include the individual's families where t
 
 ```{r}
 three_gen %>% 
-  identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
-                       include_families = TRUE) %>% 
+  tidyged.utils::identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
+                                      include_families = TRUE) %>% 
   describe_records(three_gen, .)
 ```
 
@@ -167,8 +167,8 @@ Instead of describing the records, we can remove them with `remove_records()`:
 
 ```{r}
 three_gen %>% 
-  identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
-                       include_families = TRUE) %>% 
+  tidyged.utils::identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
+                                      include_families = TRUE) %>% 
   remove_records(three_gen, .) %>% 
   df_famg() %>% 
   knitr::kable()
@@ -180,9 +180,9 @@ Instead of deleting the records, you can instead opt to create a new tidyged obj
 
 ```{r}
 three_gen %>% 
-  identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
-                       include_families = TRUE) %>% 
-  split_gedcom(three_gen, .) %>% 
+  tidyged.utils::identify_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
+                                      include_families = TRUE) %>% 
+  tidyged.utils::split_gedcom(three_gen, .) %>% 
   df_famg() %>% 
   knitr::kable()
 ```

@@ -104,7 +104,7 @@ subm <- function(name = unname(Sys.info()["user"]),
   sub_notes <- purrr::map(subm_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
     purrr::map(tidyged.internals::MULTIMEDIA_LINK)
   
   tidyged.internals::SUBMITTER_RECORD(xref_subm = assign_xref(.pkgenv$xref_prefix_subm, 1),
@@ -117,54 +117,3 @@ subm <- function(name = unname(Sys.info()["user"]),
 
 
 
-
-#' Split a tidygedcom object into two
-#'
-#' @param gedcom A tidygedcom object to split.
-#' @param xrefs A vector of xrefs to put into the new tidyged object.
-#' @param remove_dead_refs Whether to remove references to records not in the new tidyged object.
-#'
-#' @return A new tidyged object containing the xrefs specified. It will also have the same
-#' header and submitter information as the input tidyged object.
-#' @export
-#' @tests
-#' expect_snapshot_value(split_gedcom(sample555, c("@I1@","@S1@")), "json2")
-#' expect_snapshot_value(split_gedcom(sample555, c("@I1@","@S1@"), FALSE), "json2")
-split_gedcom <- function(gedcom,
-                         xrefs,
-                         remove_dead_refs = TRUE) {
-  
-  xrefs <- c(xrefs, xrefs_submitters(gedcom))
-  
-  new <- gedcom %>% 
-    dplyr::filter(record %in% c("HD", "TR", xrefs))
-  
-  links <- dplyr::filter(new, stringr::str_detect(value, xref_pattern())) %>% 
-    dplyr::pull(value) %>% 
-    unique()
-  
-  #links to records not retained
-  absent <- dplyr::setdiff(c(xrefs, links), xrefs)
-  
-  if(length(absent) > 0) {
-    if(remove_dead_refs) {
-      absent_rows <- dplyr::filter(new, value %in% absent)
-      
-      for (i in 1:nrow(absent_rows)) {
-        new <- remove_section(new, absent_rows$level[i], absent_rows$tag[i], absent_rows$value[i])
-      }
-    } else {
-      message("Some record references are dead: ", paste(absent, collapse = ", "))
-    }
-  }  
-  
-  new
-}
-
-
-merge_gedcoms <- function(gedcoms) {
-  
-  
-  
-  
-}

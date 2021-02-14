@@ -75,7 +75,7 @@ add_indi_attr <- function(gedcom,
   plac_notes <- purrr::map(place_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
     purrr::map(tidyged.internals::MULTIMEDIA_LINK)
   
   

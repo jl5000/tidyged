@@ -58,7 +58,7 @@ add_sour <- function(gedcom,
   source_notes <- purrr::map(sour_notes, tidyged.internals::NOTE_STRUCTURE)
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                                gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
     purrr::map(tidyged.internals::MULTIMEDIA_LINK)
   
   sour_record <- tidyged.internals::SOURCE_RECORD(xref_sour = xref,
@@ -114,7 +114,7 @@ add_sour_repo_citation <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_sour)
   
-  repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
+  repo_xref <- find_xref(gedcom, xrefs_repo(gedcom), "NAME", repository)
   
   citation <- tidyged.internals::SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,
                                                                source_call_number = call_number) %>% 
@@ -150,7 +150,7 @@ remove_sour_repo_citation <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_sour, is_sour)
   
-  repo_xref <- find_xref(gedcom, xrefs_repositories(gedcom), "NAME", repository)
+  repo_xref <- find_xref(gedcom, xrefs_repo(gedcom), "NAME", repository)
   
   remove_section(gedcom, 1, "REPO", repo_xref, xrefs = xref) %>% 
     activate_sour(xref)

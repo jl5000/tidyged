@@ -10,7 +10,7 @@
 #' @usage lhs \%>\% rhs
 NULL
 
-
+remove_dates_for_tests <- utils::getFromNamespace("remove_dates_for_tests", "tidyged.utils")
 
 ##' Return the current date in DATE_EXACT format
 ##' 

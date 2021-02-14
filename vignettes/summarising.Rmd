@@ -65,6 +65,14 @@ num_famg(simpsons)
 num_media(simpsons)
 ```
 
+The `xrefs_*()` family of functions return the xrefs of records of a particular type:
+
+```{r}
+xrefs_indi(simpsons)
+xrefs_note(simpsons)
+xrefs_sour(simpsons)
+```
+
 These functions are the workhorse of the `str()` function.
 
 The `df_*()` family of functions provide a tabular summary of all records of a particular type:

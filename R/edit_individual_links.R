@@ -29,7 +29,7 @@ add_indi_association <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
-  indi_xref <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), associated_with)
+  indi_xref <- find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), associated_with)
   
   asso_notes <- purrr::map(association_notes, tidyged.internals::NOTE_STRUCTURE)
   

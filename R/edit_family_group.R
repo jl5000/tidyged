@@ -46,14 +46,14 @@ add_famg <- function(gedcom,
   
   xref <- assign_xref(.pkgenv$xref_prefix_famg, gedcom = gedcom)
   
-  xref_husb <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), husband)
-  xref_wife <- find_xref(gedcom, xrefs_individuals(gedcom), c("NAME", "ROMN", "FONE"), wife)
+  xref_husb <- find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), husband)
+  xref_wife <- find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), wife)
   xrefs_chil <- purrr::map_chr(children, find_xref,
-                               gedcom = gedcom, record_xrefs = xrefs_individuals(gedcom), 
+                               gedcom = gedcom, record_xrefs = xrefs_indi(gedcom), 
                                tags = c("NAME", "ROMN", "FONE"))
   
   media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                               gedcom = gedcom, record_xrefs = xrefs_multimedia(gedcom), tags = "FILE") %>% 
+                               gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
     purrr::map(tidyged.internals::MULTIMEDIA_LINK)
   
   fam_notes <- purrr::map(family_notes, tidyged.internals::NOTE_STRUCTURE)

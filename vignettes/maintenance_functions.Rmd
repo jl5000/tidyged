@@ -26,7 +26,7 @@ All top level records in a GEDCOM file can record the date and time they were la
 library(tidyged)
 
 gedcom(subm("Me")) %>% 
-  print(n = Inf)
+  knitr::kable()
 ```
 
 See row `r which(gedcom(subm("Me"))$tag == "CHAN")` and the row after for the change date for the submitter record.
@@ -38,7 +38,7 @@ For GEDCOM files with thousands of records, including change dates can add consi
 ```{r}
 gedcom(subm("Me")) %>% 
   remove_change_dates() %>% 
-  print(n = Inf)
+  knitr::kable()
 ```
 
 ## Duplicate notes
@@ -51,7 +51,7 @@ notes <- gedcom(subm("Me")) %>%
   add_indi(indi_notes = c("This is a bespoke note.", "This is a generic note.")) %>% 
   add_repo("My repository", repo_notes = c("This is a bespoke note.", "This is a generic note."))
 
-print(notes, n = Inf)
+knitr::kable(notes)
 ```
 
 In the above example, there is a generic note recorded in a top level Note record. This same note message has been used for the individual and repository defined, but they have been repeated rather than pointing to the Note record. There is also a repeated bespoke note given in the Individual and Repository records.
@@ -59,7 +59,8 @@ In the above example, there is a generic note recorded in a top level Note recor
 The `consolidate_notes()` function will simplify the file, replacing note values with pointers to top level Note records (creating them if necessary) if they are repeated:
 
 ```{r}
-consolidate_notes(notes) %>% print(n = Inf)
+consolidate_notes(notes) %>% 
+  knitr::kable()
 ```
 
 ## Unreferenced records
@@ -68,10 +69,10 @@ If there are any records that are not referenced anywhere else, they can be foun
 
 ```{r}
 some_unref <- gedcom(subm("Me")) %>% 
-  add_indi("Tom /Smith/") %>% 
-  add_indi("Tammy /Smith/") %>% 
-  add_indi("Alice /White/") %>% 
-  add_indi("Phil /Brown/") %>% 
+  add_indi(qn = "Tom Smith") %>% 
+  add_indi(qn = "Tammy Smith") %>% 
+  add_indi(qn = "Alice White") %>% 
+  add_indi(qn = "Phil Brown") %>% 
   add_famg(husband = "Tom", wife = "Tammy") %>% 
   add_famg() %>% 
   add_famg(husband = "Phil") %>% 
@@ -106,20 +107,21 @@ We illustrate its functionality using the family below consisting of three gener
 
 ```{r}
 three_gen <- gedcom(subm("Me")) %>% 
-  add_indi("Parent 1") %>% 
-  add_indi("Parent 2") %>% 
-  add_indi("Main Person") %>% 
-  add_indi("Spouse 1") %>% 
-  add_indi("Spouse 2") %>%
-  add_indi("Child 1") %>% 
-  add_indi("Child 2") %>% 
-  add_indi("Child 3") %>% 
-  add_indi("Child 4") %>% 
+  add_indi(qn = "Parent 1") %>% 
+  add_indi(qn = "Parent 2") %>% 
+  add_indi(qn = "Main Person") %>% 
+  add_indi(qn = "Spouse 1") %>% 
+  add_indi(qn = "Spouse 2") %>%
+  add_indi(qn = "Child 1") %>% 
+  add_indi(qn = "Child 2") %>% 
+  add_indi(qn = "Child 3") %>% 
+  add_indi(qn = "Child 4") %>% 
   add_famg("Parent 1", "Parent 2", children = "Main Person") %>% 
   add_famg("Main Person", "Spouse 1", children = c("Child 1", "Child 2")) %>%
   add_famg("Main Person", "Spouse 2", children = c("Child 3", "Child 4"))
 
-df_famg(three_gen) %>% knitr::kable()
+df_famg(three_gen) %>% 
+  knitr::kable()
 ```
 
 We use the `identify_descendants()` function below to identify the descendants of Main Person. By default it will exclude the individual and their spouses, and associated family groups:

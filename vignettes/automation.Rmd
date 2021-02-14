@@ -22,10 +22,10 @@ In `vignette("cross_references")`, the concept of record activation was introduc
 library(tidyged)
 
 simpsons <- gedcom(subm("Me")) %>% 
-  add_indi("Homer /Simpson/", sex = "M") %>% 
-  add_indi("Marge /Simpson/", sex = "F") %>% 
-  add_indi("Lisa /Simpson/", sex = "F") %>% 
-  add_indi("Bart /Simpson/", sex = "M") %>% 
+  add_indi(qn = "Homer Simpson", sex = "M") %>% 
+  add_indi(qn = "Marge Simpson", sex = "F") %>% 
+  add_indi(qn = "Lisa Simpson", sex = "F") %>% 
+  add_indi(qn = "Bart Simpson", sex = "M") %>% 
   add_note("These records have not yet been joined in a family group record")
 ```
 
@@ -34,7 +34,8 @@ In some records it is necessary to provide xrefs to link to other records, for e
 ```{r}
 simpsons %>% 
   add_famg(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa")) %>% 
-  dplyr::filter(record == "@F1@")
+  dplyr::filter(record == "@F1@") %>% 
+  knitr::kable()
 ```
 
 Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record). Note that if forward-slashes are in the name, they should not be used in any expressions.
@@ -54,7 +55,8 @@ The `tidyged` package seeks to make cross-referencing as painless and automated 
 simpsons_fam <- simpsons %>% 
   add_famg(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa")) 
 
-dplyr::filter(simpsons_fam, tag %in% c("FAMS", "FAMC"))
+dplyr::filter(simpsons_fam, tag %in% c("FAMS", "FAMC")) %>% 
+  knitr::kable()
 ```
 
 The lines above show particular lines in the Individual records where they are linked to the Family Group record either as a spouse (FAMS) or as a child (FAMC).

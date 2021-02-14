@@ -7,9 +7,6 @@
 #' add_indi_* functions.
 #' 
 #' @param gedcom A tidyged object.
-#' @param quick_name A shortcut to quickly define a name for this individual. This is a shortcut for
-#' the add_indi_names() function (which you should really use instead), but this is useful
-#' for quick demonstrations.
 #' @param sex The sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
 #' "X" (intersex), or "N" (not recorded).
 #' @param user_reference_number A unique user-defined number or text that the submitter 
@@ -20,6 +17,9 @@
 #' These could be xrefs to existing Note records.
 #' @param multimedia_links A character vector of multimedia file references accompanying this 
 #' Individual record. These could be xrefs to existing Multimedia records.
+#' @param qn A shortcut to quickly define a name for this individual. This is a shortcut for
+#' the add_indi_names() function (which you should really use instead), but this is useful
+#' for quick demonstrations.
 #'
 #' @return An updated tidyged object including the Individual record.
 #' @export
@@ -30,12 +30,12 @@
 #'                                      indi_notes = c("Note1", "Note 2")) %>% 
 #'                        remove_dates_for_tests(), "json2")
 add_indi <- function(gedcom,
-                     quick_name = character(),
                      sex = "U",
                      user_reference_number = character(),
                      user_reference_type = character(),
                      indi_notes = character(),
-                     multimedia_links = character()) {
+                     multimedia_links = character(),
+                     qn = character()) {
   
   xref <- assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
   
@@ -56,8 +56,8 @@ add_indi <- function(gedcom,
     tibble::add_row(ind_record, .before = nrow(.)) %>% 
     set_active_record(xref)
   
-  if (length(quick_name) > 0) 
-    temp <- add_indi_names(temp, given = quick_name)
+  if (length(qn) > 0) 
+    temp <- add_indi_names(temp, given = qn)
   
   temp
 }

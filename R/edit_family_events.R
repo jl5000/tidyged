@@ -18,9 +18,9 @@
 #' this event.
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_indi("Joe Bloggs", sex = "M") %>% 
-#'  add_indi("Jess Bloggs", sex = "F") %>% 
-#'  add_indi("Jessie Bloggs", sex = "F") %>% 
+#'  add_indi(qn = "Joe Bloggs", sex = "M") %>% 
+#'  add_indi(qn = "Jess Bloggs", sex = "F") %>% 
+#'  add_indi(qn = "Jessie Bloggs", sex = "F") %>% 
 #'  add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
 #'  add_famg_event(event_type = "MARR", 
 #'                   event_date = date_calendar(year = 1969, month = 1, day = 30),

@@ -6,20 +6,16 @@
 \usage{
 add_indi(
   gedcom,
-  quick_name = character(),
   sex = "U",
   user_reference_number = character(),
   user_reference_type = character(),
   indi_notes = character(),
-  multimedia_links = character()
+  multimedia_links = character(),
+  qn = character()
 )
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
-
-\item{quick_name}{A shortcut to quickly define a name for this individual. This is a shortcut for
-the add_indi_names() function (which you should really use instead), but this is useful
-for quick demonstrations.}
 
 \item{sex}{The sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
 "X" (intersex), or "N" (not recorded).}
@@ -35,6 +31,10 @@ These could be xrefs to existing Note records.}
 
 \item{multimedia_links}{A character vector of multimedia file references accompanying this
 Individual record. These could be xrefs to existing Multimedia records.}
+
+\item{qn}{A shortcut to quickly define a name for this individual. This is a shortcut for
+the add_indi_names() function (which you should really use instead), but this is useful
+for quick demonstrations.}
 }
 \value{
 An updated tidyged object including the Individual record.

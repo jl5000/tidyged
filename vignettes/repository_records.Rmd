@@ -14,6 +14,24 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+A repository is an archive (such as a library) containing source documents. Adding repositories to a tidyged object can be achieved with the `add_repo()` function. The main arguments are about defining the name and address of the repository. Up to 3 local address lines, phone numbers, emails, faxes, and web pages can be defined.
+
+```{r}
 library(tidyged)
+
+gedcom(subm("Me")) %>% 
+  add_repo(name = "A library",
+           local_address_lines = c("123 Library Road", "Turin Village"),
+           city = "Manchester",
+           state = "New Hampshire",
+           postal_code = "123456",
+           country = "United States of America",
+           phone_number = c("645-618-6578", "645-618-6570", "645-618-6577"),
+           email = c("enquiries@alibrary.com", "enquiries2@alibrary.com"),
+           fax = "0947393",
+           web_page = "www.alibrary.com") %>% 
+  dplyr::filter(record == "@R1@") %>% 
+  knitr::kable()
 ```
+
+As with other records, various types of user-defined references can be defined (`user_reference_number` and `user_reference_type`), as well as links to notes.

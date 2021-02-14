@@ -32,7 +32,8 @@ simpsons <- gedcom(subm("Me")) %>%
   add_indi_names(given = "Bart", surname = "Simpson") %>% 
   add_note("This is a note")
 
-dplyr::filter(simpsons, tag %in% c("INDI", "NOTE"))
+dplyr::filter(simpsons, tag %in% c("INDI", "NOTE")) %>% 
+  knitr::kable()
 ```
 
 Note the unique xrefs in the record column.
@@ -90,7 +91,8 @@ When removing entire records, you don't have to necessarily rely on activating t
 ```{r}
 simpsons %>% 
   remove_indi("Homer") %>% 
-  dplyr::filter(stringr::str_detect(value, "/Simpson/"))
+  df_indi() %>% 
+  knitr::kable()
 ```
 
 ## A note about unique record identifiers

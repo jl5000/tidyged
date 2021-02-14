@@ -14,6 +14,29 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+## Introduction
+
+Adding family groups to a tidyged object can be achieved with the `add_famg()` function. The main arguments are about defining the members of the family group. The `husband`, `wife`, and `children` parameters can be xrefs to other Individual records, or partial matches to their names (see `vignette("automation")`). The `number_of_children` parameter describes the total number of known children in this family, regardless of whether they are defined.
+
+The family group records do not need to describe traditional marriage unions - they can describe non-marital relationships and same-sex relationships. Children also do not have to be biological. The parameter names are a legacy from previous versions of the GEDCOM specification, which have not yet been updated.
+
+```{r}
 library(tidyged)
+
+simpson_indis <- gedcom(subm("Me")) %>% 
+  add_indi(qn = "Homer Simpson", sex = "M") %>% 
+  add_indi(qn = "Marge Simpson", sex = "F") %>% 
+  add_indi(qn = "Lisa Simpson", sex = "F") %>% 
+  add_indi(qn = "Bart Simpson", sex = "M") %>% 
+  add_note("These records have not yet been joined in a family group record")
+
+simpson_indis %>% 
+  add_famg(husband = "@I1@", wife = "Marge", children = c("Bart", "Lisa"), number_of_children = 3) %>% 
+  dplyr::filter(record == "@F1@") %>% 
+  knitr::kable()
 ```
+
+As with other records, various types of user-defined references can be defined (`user_reference_number` and `user_reference_type`), as well as links to multimedia and notes.
+
+## Family events
+

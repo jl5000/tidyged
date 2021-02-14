@@ -87,8 +87,160 @@
 
     
     
+<p>A repository is an archive (such as a library) containing source documents. Adding repositories to a tidyged object can be achieved with the <code><a href="../reference/add_repo.html">add_repo()</a></code> function. The main arguments are about defining the name and address of the repository. Up to 3 local address lines, phone numbers, emails, faxes, and web pages can be defined.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_repo.html">add_repo</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"A library"</span>,
+           local_address_lines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"123 Library Road"</span>, <span class="st">"Turin Village"</span><span class="op">)</span>,
+           city <span class="op">=</span> <span class="st">"Manchester"</span>,
+           state <span class="op">=</span> <span class="st">"New Hampshire"</span>,
+           postal_code <span class="op">=</span> <span class="st">"123456"</span>,
+           country <span class="op">=</span> <span class="st">"United States of America"</span>,
+           phone_number <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"645-618-6578"</span>, <span class="st">"645-618-6570"</span>, <span class="st">"645-618-6577"</span><span class="op">)</span>,
+           email <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"enquiries@alibrary.com"</span>, <span class="st">"enquiries2@alibrary.com"</span><span class="op">)</span>,
+           fax <span class="op">=</span> <span class="st">"0947393"</span>,
+           web_page <span class="op">=</span> <span class="st">"www.alibrary.com"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@R1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">level</th>
+<th align="left">record</th>
+<th align="left">tag</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">REPO</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">NAME</td>
+<td align="left">A library</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">ADDR</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">ADR1</td>
+<td align="left">123 Library Road</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">ADR2</td>
+<td align="left">Turin Village</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">CITY</td>
+<td align="left">Manchester</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">STAE</td>
+<td align="left">New Hampshire</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">POST</td>
+<td align="left">123456</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">CTRY</td>
+<td align="left">United States of America</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">PHON</td>
+<td align="left">645-618-6578</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">PHON</td>
+<td align="left">645-618-6570</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">PHON</td>
+<td align="left">645-618-6577</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">EMAIL</td>
+<td align="left"><a href="mailto:enquiries@alibrary.com" class="email">enquiries@alibrary.com</a></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">EMAIL</td>
+<td align="left"><a href="mailto:enquiries2@alibrary.com" class="email">enquiries2@alibrary.com</a></td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">FAX</td>
+<td align="left">0947393</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">WWW</td>
+<td align="left">www.alibrary.com</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+</tbody>
+</table>
+<p>As with other records, various types of user-defined references can be defined (<code>user_reference_number</code> and <code>user_reference_type</code>), as well as links to notes.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

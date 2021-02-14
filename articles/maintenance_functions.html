@@ -100,62 +100,294 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 22 x 4</span>
-<span class="co">#&gt;    level record tag   value                                     </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                     </span>
-<span class="co">#&gt;  1     0 HD     HEAD  ""                                        </span>
-<span class="co">#&gt;  2     1 HD     GEDC  ""                                        </span>
-<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                                   </span>
-<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                          </span>
-<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                                   </span>
-<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                                   </span>
-<span class="co">#&gt;  7     1 HD     DEST  "tidyged"                                 </span>
-<span class="co">#&gt;  8     1 HD     SOUR  "tidyged"                                 </span>
-<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                                   </span>
-<span class="co">#&gt; 10     2 HD     NAME  "The 'tidyged' package for the R language"</span>
-<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                           </span>
-<span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
-<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
-<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
-<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
-<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
-<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                      </span>
-<span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 22     0 TR     TRLR  ""</span></code></pre></div>
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">level</th>
+<th align="left">record</th>
+<th align="left">tag</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">HD</td>
+<td align="left">HEAD</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">GEDC</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">5.5.5</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">FORM</td>
+<td align="left">LINEAGE-LINKED</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">5.5.5</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">CHAR</td>
+<td align="left">UTF-8</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">DEST</td>
+<td align="left">tidyged</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">SOUR</td>
+<td align="left">tidyged</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">0.0.0</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">NAME</td>
+<td align="left">The ‘tidyged’ package for the R language</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">CORP</td>
+<td align="left">Jamie Lendrum</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">ADDR</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">EMAIL</td>
+<td align="left"><a href="mailto:jalendrum@gmail.com" class="email">jalendrum@gmail.com</a></td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">WWW</td>
+<td align="left"><a href="https://jl5000.github.io/tidyged/" class="uri">https://jl5000.github.io/tidyged/</a></td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">LANG</td>
+<td align="left">English</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">SUBM</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">SUBM</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">NAME</td>
+<td align="left">Me</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="left">TR</td>
+<td align="left">TRLR</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
 <p>See row 20 and the row after for the change date for the submitter record.</p>
 <p>By default this behaviour also applies when modifying existing records. If you would like to leave the change date alone when modifying a record, you can set <code>update_date_changed = FALSE</code> (it is TRUE by default).</p>
 <p>For GEDCOM files with thousands of records, including change dates can add considerable bloat. For this reason it is possible to remove all change date structures with the <code><a href="../reference/remove_change_dates.html">remove_change_dates()</a></code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/remove_change_dates.html">remove_change_dates</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 20 x 4</span>
-<span class="co">#&gt;    level record tag   value                                     </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                     </span>
-<span class="co">#&gt;  1     0 HD     HEAD  ""                                        </span>
-<span class="co">#&gt;  2     1 HD     GEDC  ""                                        </span>
-<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                                   </span>
-<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                          </span>
-<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                                   </span>
-<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                                   </span>
-<span class="co">#&gt;  7     1 HD     DEST  "tidyged"                                 </span>
-<span class="co">#&gt;  8     1 HD     SOUR  "tidyged"                                 </span>
-<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                                   </span>
-<span class="co">#&gt; 10     2 HD     NAME  "The 'tidyged' package for the R language"</span>
-<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                           </span>
-<span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
-<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
-<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
-<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
-<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
-<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                      </span>
-<span class="co">#&gt; 20     0 TR     TRLR  ""</span></code></pre></div>
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">level</th>
+<th align="left">record</th>
+<th align="left">tag</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">HD</td>
+<td align="left">HEAD</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">GEDC</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">5.5.5</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">FORM</td>
+<td align="left">LINEAGE-LINKED</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">5.5.5</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">CHAR</td>
+<td align="left">UTF-8</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">DEST</td>
+<td align="left">tidyged</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">SOUR</td>
+<td align="left">tidyged</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">0.0.0</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">NAME</td>
+<td align="left">The ‘tidyged’ package for the R language</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">CORP</td>
+<td align="left">Jamie Lendrum</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">ADDR</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">EMAIL</td>
+<td align="left"><a href="mailto:jalendrum@gmail.com" class="email">jalendrum@gmail.com</a></td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">WWW</td>
+<td align="left"><a href="https://jl5000.github.io/tidyged/" class="uri">https://jl5000.github.io/tidyged/</a></td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">LANG</td>
+<td align="left">English</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">SUBM</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">SUBM</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">NAME</td>
+<td align="left">Me</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="left">TR</td>
+<td align="left">TRLR</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="duplicate-notes" class="section level2">
 <h2 class="hasAnchor">
@@ -167,94 +399,541 @@
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>indi_notes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"This is a bespoke note."</span>, <span class="st">"This is a generic note."</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_repo.html">add_repo</a></span><span class="op">(</span><span class="st">"My repository"</span>, repo_notes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"This is a bespoke note."</span>, <span class="st">"This is a generic note."</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">notes</span>, n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 37 x 4</span>
-<span class="co">#&gt;    level record tag   value                                     </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                     </span>
-<span class="co">#&gt;  1     0 HD     HEAD  ""                                        </span>
-<span class="co">#&gt;  2     1 HD     GEDC  ""                                        </span>
-<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                                   </span>
-<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                          </span>
-<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                                   </span>
-<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                                   </span>
-<span class="co">#&gt;  7     1 HD     DEST  "tidyged"                                 </span>
-<span class="co">#&gt;  8     1 HD     SOUR  "tidyged"                                 </span>
-<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                                   </span>
-<span class="co">#&gt; 10     2 HD     NAME  "The 'tidyged' package for the R language"</span>
-<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                           </span>
-<span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
-<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
-<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
-<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
-<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
-<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                      </span>
-<span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."                 </span>
-<span class="co">#&gt; 23     1 @N1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 24     2 @N1@   DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 25     0 @I1@   INDI  ""                                        </span>
-<span class="co">#&gt; 26     1 @I1@   SEX   "U"                                       </span>
-<span class="co">#&gt; 27     1 @I1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 28     2 @I1@   DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 29     1 @I1@   NOTE  "This is a bespoke note."                 </span>
-<span class="co">#&gt; 30     1 @I1@   NOTE  "This is a generic note."                 </span>
-<span class="co">#&gt; 31     0 @R1@   REPO  ""                                        </span>
-<span class="co">#&gt; 32     1 @R1@   NAME  "My repository"                           </span>
-<span class="co">#&gt; 33     1 @R1@   NOTE  "This is a bespoke note."                 </span>
-<span class="co">#&gt; 34     1 @R1@   NOTE  "This is a generic note."                 </span>
-<span class="co">#&gt; 35     1 @R1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 36     2 @R1@   DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 37     0 TR     TRLR  ""</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">notes</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">level</th>
+<th align="left">record</th>
+<th align="left">tag</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">HD</td>
+<td align="left">HEAD</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">GEDC</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">5.5.5</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">FORM</td>
+<td align="left">LINEAGE-LINKED</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">5.5.5</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">CHAR</td>
+<td align="left">UTF-8</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">DEST</td>
+<td align="left">tidyged</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">SOUR</td>
+<td align="left">tidyged</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">0.0.0</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">NAME</td>
+<td align="left">The ‘tidyged’ package for the R language</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">CORP</td>
+<td align="left">Jamie Lendrum</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">ADDR</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">EMAIL</td>
+<td align="left"><a href="mailto:jalendrum@gmail.com" class="email">jalendrum@gmail.com</a></td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">WWW</td>
+<td align="left"><a href="https://jl5000.github.io/tidyged/" class="uri">https://jl5000.github.io/tidyged/</a></td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">LANG</td>
+<td align="left">English</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">SUBM</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">SUBM</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">NAME</td>
+<td align="left">Me</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@N1</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">This is a generic note.</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@N1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@N1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">INDI</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">SEX</td>
+<td align="left">U</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">This is a bespoke note.</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">This is a generic note.</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">REPO</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">NAME</td>
+<td align="left">My repository</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">This is a bespoke note.</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">This is a generic note.</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">TR</td>
+<td align="left">TRLR</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
 <p>In the above example, there is a generic note recorded in a top level Note record. This same note message has been used for the individual and repository defined, but they have been repeated rather than pointing to the Note record. There is also a repeated bespoke note given in the Individual and Repository records.</p>
 <p>The <code><a href="../reference/consolidate_notes.html">consolidate_notes()</a></code> function will simplify the file, replacing note values with pointers to top level Note records (creating them if necessary) if they are repeated:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/consolidate_notes.html">consolidate_notes</a></span><span class="op">(</span><span class="va">notes</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 40 x 4</span>
-<span class="co">#&gt;    level record tag   value                                     </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                     </span>
-<span class="co">#&gt;  1     0 HD     HEAD  ""                                        </span>
-<span class="co">#&gt;  2     1 HD     GEDC  ""                                        </span>
-<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                                   </span>
-<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                          </span>
-<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                                   </span>
-<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                                   </span>
-<span class="co">#&gt;  7     1 HD     DEST  "tidyged"                                 </span>
-<span class="co">#&gt;  8     1 HD     SOUR  "tidyged"                                 </span>
-<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                                   </span>
-<span class="co">#&gt; 10     2 HD     NAME  "The 'tidyged' package for the R language"</span>
-<span class="co">#&gt; 11     2 HD     CORP  "Jamie Lendrum"                           </span>
-<span class="co">#&gt; 12     3 HD     ADDR  ""                                        </span>
-<span class="co">#&gt; 13     3 HD     EMAIL "jalendrum@gmail.com"                     </span>
-<span class="co">#&gt; 14     3 HD     WWW   "https://jl5000.github.io/tidyged/"       </span>
-<span class="co">#&gt; 15     1 HD     DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 16     1 HD     LANG  "English"                                 </span>
-<span class="co">#&gt; 17     1 HD     SUBM  "@U1@"                                    </span>
-<span class="co">#&gt; 18     0 @U1@   SUBM  ""                                        </span>
-<span class="co">#&gt; 19     1 @U1@   NAME  "Me"                                      </span>
-<span class="co">#&gt; 20     1 @U1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 21     2 @U1@   DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 22     0 @N1@   NOTE  "This is a generic note."                 </span>
-<span class="co">#&gt; 23     1 @N1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 24     2 @N1@   DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 25     0 @I1@   INDI  ""                                        </span>
-<span class="co">#&gt; 26     1 @I1@   SEX   "U"                                       </span>
-<span class="co">#&gt; 27     1 @I1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 28     2 @I1@   DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 29     1 @I1@   NOTE  "@N2@"                                    </span>
-<span class="co">#&gt; 30     1 @I1@   NOTE  "@N1@"                                    </span>
-<span class="co">#&gt; 31     0 @R1@   REPO  ""                                        </span>
-<span class="co">#&gt; 32     1 @R1@   NAME  "My repository"                           </span>
-<span class="co">#&gt; 33     1 @R1@   NOTE  "@N2@"                                    </span>
-<span class="co">#&gt; 34     1 @R1@   NOTE  "@N1@"                                    </span>
-<span class="co">#&gt; 35     1 @R1@   CHAN  ""                                        </span>
-<span class="co">#&gt; 36     2 @R1@   DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 37     0 @N2@   NOTE  "This is a bespoke note."                 </span>
-<span class="co">#&gt; 38     1 @N2@   CHAN  ""                                        </span>
-<span class="co">#&gt; 39     2 @N2@   DATE  "13 FEB 2021"                             </span>
-<span class="co">#&gt; 40     0 TR     TRLR  ""</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/consolidate_notes.html">consolidate_notes</a></span><span class="op">(</span><span class="va">notes</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">level</th>
+<th align="left">record</th>
+<th align="left">tag</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">HD</td>
+<td align="left">HEAD</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">GEDC</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">5.5.5</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">FORM</td>
+<td align="left">LINEAGE-LINKED</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">5.5.5</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">CHAR</td>
+<td align="left">UTF-8</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">DEST</td>
+<td align="left">tidyged</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">SOUR</td>
+<td align="left">tidyged</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">VERS</td>
+<td align="left">0.0.0</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">NAME</td>
+<td align="left">The ‘tidyged’ package for the R language</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">HD</td>
+<td align="left">CORP</td>
+<td align="left">Jamie Lendrum</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">ADDR</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">EMAIL</td>
+<td align="left"><a href="mailto:jalendrum@gmail.com" class="email">jalendrum@gmail.com</a></td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">HD</td>
+<td align="left">WWW</td>
+<td align="left"><a href="https://jl5000.github.io/tidyged/" class="uri">https://jl5000.github.io/tidyged/</a></td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">LANG</td>
+<td align="left">English</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">HD</td>
+<td align="left">SUBM</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">SUBM</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">NAME</td>
+<td align="left">Me</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@U1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@N1</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">This is a generic note.</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@N1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@N1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">INDI</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">SEX</td>
+<td align="left">U</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">
+<span class="citation">@N2</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">
+<span class="citation">@N1</span>@</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">REPO</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">NAME</td>
+<td align="left">My repository</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">
+<span class="citation">@N2</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">
+<span class="citation">@N1</span>@</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@R1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@N2</span>@</td>
+<td align="left">NOTE</td>
+<td align="left">This is a bespoke note.</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@N2</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@N2</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="left">TR</td>
+<td align="left">TRLR</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="unreferenced-records" class="section level2">
 <h2 class="hasAnchor">
@@ -262,10 +941,10 @@
 <p>If there are any records that are not referenced anywhere else, they can be found with the <code><a href="../reference/identify_unused_records.html">identify_unused_records()</a></code> function. In the function below we create 6 family group records, half with members, half without, and also an unreferenced Repository record:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">some_unref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Tom /Smith/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Tammy /Smith/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Alice /White/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Phil /Brown/"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Tom Smith"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Tammy Smith"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Alice White"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Phil Brown"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Tom"</span>, wife <span class="op">=</span> <span class="st">"Tammy"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Phil"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -309,20 +988,21 @@
 <p>We illustrate its functionality using the family below consisting of three generations: A pair of parents who has a single child (named ‘Main Person’). This person forms two separate family groups with two spouses, each resulting in two children.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Parent 1"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Parent 2"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Spouse 1"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Spouse 2"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Child 1"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Child 2"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Child 3"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Child 4"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Parent 1"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Parent 2"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Spouse 1"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Spouse 2"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Child 1"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Child 2"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Child 3"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Child 4"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="st">"Parent 1"</span>, <span class="st">"Parent 2"</span>, children <span class="op">=</span> <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="st">"Main Person"</span>, <span class="st">"Spouse 1"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 1"</span>, <span class="st">"Child 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="st">"Main Person"</span>, <span class="st">"Spouse 2"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 3"</span>, <span class="st">"Child 4"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="va">three_gen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="va">three_gen</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -342,7 +1022,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">13 FEB 2021</td>
+<td align="left">14 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -352,7 +1032,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">13 FEB 2021</td>
+<td align="left">14 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -362,7 +1042,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">13 FEB 2021</td>
+<td align="left">14 FEB 2021</td>
 </tr>
 </tbody>
 </table>
@@ -450,7 +1130,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">13 FEB 2021</td>
+<td align="left">14 FEB 2021</td>
 </tr></tbody>
 </table>
 <p>This combination can result in the removal of a vast amount of data. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.</p>
@@ -481,7 +1161,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">13 FEB 2021</td>
+<td align="left">14 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -491,7 +1171,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">13 FEB 2021</td>
+<td align="left">14 FEB 2021</td>
 </tr>
 </tbody>
 </table>

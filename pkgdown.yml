@@ -5,13 +5,9 @@ articles:
   automation: automation.html
   cross_references: cross_references.html
   dates: dates.html
-  family_events: family_events.html
   family_group_records: family_group_records.html
   gedcompendium: gedcompendium.html
   implementation: implementation.html
-  individual_attributes: individual_attributes.html
-  individual_events: individual_events.html
-  individual_names: individual_names.html
   individual_records: individual_records.html
   intro_to_gedcom: intro_to_gedcom.html
   maintenance_functions: maintenance_functions.html
@@ -21,5 +17,5 @@ articles:
   source_records: source_records.html
   summarising: summarising.html
   tidyged_creation: tidyged_creation.html
-last_built: 2021-02-13T20:58Z
+last_built: 2021-02-14T13:52Z
 

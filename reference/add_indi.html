@@ -130,12 +130,12 @@
 
     <pre class="usage"><span class='fu'>add_indi</span><span class='op'>(</span>
   <span class='va'>gedcom</span>,
-  quick_name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   sex <span class='op'>=</span> <span class='st'>"U"</span>,
   user_reference_number <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   user_reference_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   indi_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  multimedia_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
+  multimedia_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  qn <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -144,12 +144,6 @@
     <tr>
       <th>gedcom</th>
       <td><p>A tidyged object.</p></td>
-    </tr>
-    <tr>
-      <th>quick_name</th>
-      <td><p>A shortcut to quickly define a name for this individual. This is a shortcut for
-the add_indi_names() function (which you should really use instead), but this is useful
-for quick demonstrations.</p></td>
     </tr>
     <tr>
       <th>sex</th>
@@ -175,6 +169,12 @@ These could be xrefs to existing Note records.</p></td>
       <th>multimedia_links</th>
       <td><p>A character vector of multimedia file references accompanying this
 Individual record. These could be xrefs to existing Multimedia records.</p></td>
+    </tr>
+    <tr>
+      <th>qn</th>
+      <td><p>A shortcut to quickly define a name for this individual. This is a shortcut for
+the add_indi_names() function (which you should really use instead), but this is useful
+for quick demonstrations.</p></td>
     </tr>
     </table>
 

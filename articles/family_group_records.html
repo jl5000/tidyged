@@ -87,13 +87,108 @@
 
     
     
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p>Adding family groups to a tidyged object can be achieved with the <code><a href="../reference/add_famg.html">add_famg()</a></code> function. The main arguments are about defining the members of the family group. The <code>husband</code>, <code>wife</code>, and <code>children</code> parameters can be xrefs to other Individual records, or partial matches to their names (see <code><a href="../articles/automation.html">vignette("automation")</a></code>). The <code>number_of_children</code> parameter describes the total number of known children in this family, regardless of whether they are defined.</p>
+<p>The family group records do not need to describe traditional marriage unions - they can describe non-marital relationships and same-sex relationships. Children also do not have to be biological. The parameter names are a legacy from previous versions of the GEDCOM specification, which have not yet been updated.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
+
+<span class="va">simpson_indis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Homer Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Marge Simpson"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Lisa Simpson"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Bart Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"These records have not yet been joined in a family group record"</span><span class="op">)</span>
+
+<span class="va">simpson_indis</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"@I1@"</span>, wife <span class="op">=</span> <span class="st">"Marge"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bart"</span>, <span class="st">"Lisa"</span><span class="op">)</span>, number_of_children <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">level</th>
+<th align="left">record</th>
+<th align="left">tag</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">FAM</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">HUSB</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">WIFE</td>
+<td align="left">
+<span class="citation">@I2</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">CHIL</td>
+<td align="left">
+<span class="citation">@I4</span>@</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">CHIL</td>
+<td align="left">
+<span class="citation">@I3</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">NCHI</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+</tbody>
+</table>
+<p>As with other records, various types of user-defined references can be defined (<code>user_reference_number</code> and <code>user_reference_type</code>), as well as links to multimedia and notes.</p>
+</div>
+<div id="family-events" class="section level2">
+<h2 class="hasAnchor">
+<a href="#family-events" class="anchor"></a>Family events</h2>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

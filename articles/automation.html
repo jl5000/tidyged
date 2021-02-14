@@ -95,26 +95,80 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
 
 <span class="va">simpsons</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Homer /Simpson/"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Marge /Simpson/"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Lisa /Simpson/"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"Bart /Simpson/"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Homer Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Marge Simpson"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Lisa Simpson"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Bart Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"These records have not yet been joined in a family group record"</span><span class="op">)</span></code></pre></div>
 <p>In some records it is necessary to provide xrefs to link to other records, for example the Family Group record requires xrefs of the husband, wife, and/or children. It can be tedious to have to manually look up these xrefs, and so <code>tidyged</code> allows the user to instead enter an expression uniquely identifying these records, just like activation:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Homer"</span>, wife <span class="op">=</span> <span class="st">"Marge"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bart"</span>, <span class="st">"Lisa"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 7 x 4</span>
-<span class="co">#&gt;   level record tag   value        </span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;        </span>
-<span class="co">#&gt; 1     0 @F1@   FAM   ""           </span>
-<span class="co">#&gt; 2     1 @F1@   HUSB  "@I1@"       </span>
-<span class="co">#&gt; 3     1 @F1@   WIFE  "@I2@"       </span>
-<span class="co">#&gt; 4     1 @F1@   CHIL  "@I4@"       </span>
-<span class="co">#&gt; 5     1 @F1@   CHIL  "@I3@"       </span>
-<span class="co">#&gt; 6     1 @F1@   CHAN  ""           </span>
-<span class="co">#&gt; 7     2 @F1@   DATE  "13 FEB 2021"</span></code></pre></div>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">level</th>
+<th align="left">record</th>
+<th align="left">tag</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">FAM</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">HUSB</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">WIFE</td>
+<td align="left">
+<span class="citation">@I2</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">CHIL</td>
+<td align="left">
+<span class="citation">@I4</span>@</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">CHIL</td>
+<td align="left">
+<span class="citation">@I3</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">14 FEB 2021</td>
+</tr>
+</tbody>
+</table>
 <p>Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record). Note that if forward-slashes are in the name, they should not be used in any expressions.</p>
 <p>If no match or more than one match is found, it will result in an error:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -131,14 +185,50 @@
 <code class="sourceCode R"><span class="va">simpsons_fam</span> <span class="op">&lt;-</span> <span class="va">simpsons</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Homer"</span>, wife <span class="op">=</span> <span class="st">"Marge"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bart"</span>, <span class="st">"Lisa"</span><span class="op">)</span><span class="op">)</span> 
 
-<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">simpsons_fam</span>, <span class="va">tag</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FAMS"</span>, <span class="st">"FAMC"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 x 4</span>
-<span class="co">#&gt;   level record tag   value</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;</span>
-<span class="co">#&gt; 1     1 @I1@   FAMS  @F1@ </span>
-<span class="co">#&gt; 2     1 @I2@   FAMS  @F1@ </span>
-<span class="co">#&gt; 3     1 @I3@   FAMC  @F1@ </span>
-<span class="co">#&gt; 4     1 @I4@   FAMC  @F1@</span></code></pre></div>
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">simpsons_fam</span>, <span class="va">tag</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FAMS"</span>, <span class="st">"FAMC"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">level</th>
+<th align="left">record</th>
+<th align="left">tag</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+<td align="left">FAMS</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I2</span>@</td>
+<td align="left">FAMS</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I3</span>@</td>
+<td align="left">FAMC</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@I4</span>@</td>
+<td align="left">FAMC</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+</tr>
+</tbody>
+</table>
 <p>The lines above show particular lines in the Individual records where they are linked to the Family Group record either as a spouse (FAMS) or as a child (FAMC).</p>
 <p>If the Family Group record is subsequently removed, then these links will also be removed:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">

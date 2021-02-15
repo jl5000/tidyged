@@ -464,7 +464,7 @@ str.tidyged <- function(object, ...) {
 #'  add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
 #'  add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                                place_name = "Another place") %>% 
-#'  remove_dates_for_tests() %>% 
+#'  tidyged.internals::remove_dates_for_tests() %>% 
 #'  df_indi(), "json2")
 df_indi <- function(gedcom) {
   
@@ -522,7 +522,7 @@ df_indi <- function(gedcom) {
 #'  add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
 #'  add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                                place_name = "Another place") %>% 
-#'  remove_dates_for_tests() %>% 
+#'  tidyged.internals::remove_dates_for_tests() %>% 
 #'  df_famg(), "json2")
 df_famg <- function(gedcom) {
   
@@ -556,7 +556,7 @@ df_famg <- function(gedcom) {
 #'  add_media(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") %>% 
 #'  add_media(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") %>% 
 #'  add_media(file_reference = "ref3", format = "PNG", source_media = "photo", title = "photo2") %>% 
-#'  remove_dates_for_tests() %>% 
+#'  tidyged.internals::remove_dates_for_tests() %>% 
 #'  df_media(), "json2")
 df_media <- function(gedcom) {
   
@@ -583,7 +583,7 @@ df_media <- function(gedcom) {
 #'  add_sour(originator = "author1", title = "book1") %>% 
 #'  add_sour(originator = "author2", title = "book2") %>% 
 #'  add_sour(originator = "author3", title = "book3") %>% 
-#'  remove_dates_for_tests() %>% 
+#'  tidyged.internals::remove_dates_for_tests() %>% 
 #'  df_sour(), "json2")
 df_sour <- function(gedcom) {
   
@@ -606,7 +606,7 @@ df_sour <- function(gedcom) {
 #'  add_repo(name = "repo1", city = "Brighton", state = "E. Sussex", country = "UK") %>% 
 #'  add_repo(name = "repo2", city = "Orlando", state = "Florida", country = "USA") %>% 
 #'  add_repo(name = "repo3", city = "Yokohama", country = "Japan") %>% 
-#'  remove_dates_for_tests() %>% 
+#'  tidyged.internals::remove_dates_for_tests() %>% 
 #'  df_repo(), "json2")
 df_repo <- function(gedcom) {
   
@@ -633,7 +633,7 @@ df_repo <- function(gedcom) {
 #'  add_note(text = "This is a note", user_reference_number = 1234) %>% 
 #'  add_note(text = "This is also a note", user_reference_number = 5678) %>% 
 #'  add_note(text = "This may be a note too", user_reference_number = 987643) %>% 
-#'  remove_dates_for_tests() %>% 
+#'  tidyged.internals::remove_dates_for_tests() %>% 
 #'  df_note(), "json2")
 df_note <- function(gedcom) {
   
@@ -649,3 +649,69 @@ df_note <- function(gedcom) {
   
   
 }
+
+
+#' Identify all descendants for an individual
+#' 
+#' This function identifies records in an entire branch of the family tree below a certain individual.
+#' 
+#' @param gedcom A tidyged object.
+#' @param individual The xref or name of an Individual record to act on if one 
+#' is not activated (will override active record).
+#' @param include_individual Whether to also include the individual themselves.
+#' @param include_spouses Whether to also include all spouses of this individual (and their descendants).
+#' @param include_families Whether to also include all Family Group records where this individual is a spouse.
+#'
+#' @return A vector of xrefs of descendants.
+#' @export
+identify_descendants <- function(gedcom,
+                                 individual = character(),
+                                 include_individual = FALSE,
+                                 include_spouses = FALSE,
+                                 include_families = FALSE) {
+  
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  
+  return_xrefs <- NULL
+  
+  spou_xref <- get_spouses(gedcom, xref)
+  chil_xref <- get_children(gedcom, xref)
+  fams_xref <- get_families_as_spouse(gedcom, xref)
+  
+  # if spouse is to be included, add their children to be included
+  if (include_spouses) {
+    # we don't use purrr::map here because the return values could vary in length
+    spou_chil <- NULL
+    for(i in seq_along(spou_xref)) {
+      spou_chil <- c(spou_chil, get_children(gedcom, spou_xref[i]))
+    }
+    chil_xref <- unique(c(chil_xref, spou_chil))
+  }
+  
+  #deal with family groups first (while the individuals are still in them)
+  if (include_families) return_xrefs <- c(return_xrefs, fams_xref)
+  if (include_spouses) return_xrefs <- c(return_xrefs, spou_xref)
+  if (include_individual) return_xrefs <- c(return_xrefs, xref)
+  
+  # identify children
+  for(i in seq_along(chil_xref)) {
+    return_xrefs <- c(return_xrefs,
+                      identify_descendants(gedcom, chil_xref[i], TRUE, TRUE,TRUE))
+  }
+  
+  return_xrefs
+}
+
+
+identify_ancestors <- function(gedcom,
+                               individual = character(),
+                               include_individual = TRUE,
+                               include_siblings = FALSE,
+                               include_families = FALSE) {
+  
+  
+  
+}
+
+
+

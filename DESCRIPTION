@@ -19,29 +19,21 @@ Depends:
 Imports: 
     dplyr,
     magrittr,
-    tidyr,
     stringr,
     purrr,
-    lubridate,
     tibble,
-    tidyged.internals,
-    tidyged.io,
-    tidyged.utils
+    tidyged.internals
 Suggests: 
     testthat,
     roxytest,
     rmarkdown,
     knitr,
     waldo,
-    visged,
-    autoged,
-    geddown
+    tidyged.utils,
+    tidyged.io
 Remotes: 
-    jl5000/tidyged.internals, 
-    jl5000/tidyged.io, 
-    jl5000/tidyged.utils, 
-    jl5000/visged,
-    jl5000/autoged,
-    jl5000/geddown
+    jl5000/tidyged.internals,
+    jl5000/tidyged.utils,
+    jl5000/tidyged.io
 Config/testthat/edition: 3
 VignetteBuilder: knitr

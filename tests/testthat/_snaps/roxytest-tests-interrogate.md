@@ -1,16 +1,16 @@
-# Function summary.tidyged() @ L337
+# Function summary.tidyged() @ L377
 
     {
       "type": "NULL"
     }
 
-# Function str.tidyged() @ L383
+# Function str.tidyged() @ L423
 
     {
       "type": "NULL"
     }
 
-# Function df_indi() @ L429
+# Function df_indi() @ L469
 
     {
       "type": "list",
@@ -95,7 +95,7 @@
       ]
     }
 
-# Function df_famg() @ L487
+# Function df_famg() @ L527
 
     {
       "type": "list",
@@ -155,7 +155,7 @@
       ]
     }
 
-# Function df_media() @ L521
+# Function df_media() @ L561
 
     {
       "type": "list",
@@ -210,7 +210,7 @@
       ]
     }
 
-# Function df_sour() @ L548
+# Function df_sour() @ L588
 
     {
       "type": "list",
@@ -255,7 +255,7 @@
       ]
     }
 
-# Function df_repo() @ L571
+# Function df_repo() @ L611
 
     {
       "type": "list",
@@ -310,7 +310,7 @@
       ]
     }
 
-# Function df_note() @ L598
+# Function df_note() @ L638
 
     {
       "type": "list",

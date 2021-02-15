@@ -10,6 +10,6 @@ test_that("Function add_indi_event() @ L79", {
                                         local_address_lines = c("line1","line2","line3","line4"),
                                         place_name = "There",
                                         place_notes = "Place note") %>% 
-                         remove_dates_for_tests(), "json2")
+                         tidyged.internals::remove_dates_for_tests(), "json2")
 })
 

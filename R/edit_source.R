@@ -105,7 +105,7 @@ add_sour <- function(gedcom,
 #'                  add_repo(name = "The library") %>% 
 #'                  add_sour() %>% 
 #'                  add_sour_repo_citation("library") %>%
-#'                  remove_dates_for_tests(), "json2")
+#'                  tidyged.internals::remove_dates_for_tests(), "json2")
 add_sour_repo_citation <- function(gedcom,
                                    repository,
                                    call_number = character(),
@@ -121,7 +121,7 @@ add_sour_repo_citation <- function(gedcom,
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
+    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     citation <- dplyr::bind_rows(citation, tidyged.internals::CHANGE_DATE() %>% 
                                    tidyged.internals::add_levels(1))
   }
@@ -138,13 +138,13 @@ add_sour_repo_citation <- function(gedcom,
 #' expect_equal(gedcom(subm("Me")) %>% 
 #'                  add_repo(name = "The library") %>% 
 #'                  add_sour() %>%
-#'                  remove_dates_for_tests(),
+#'                  tidyged.internals::remove_dates_for_tests(),
 #'              gedcom(subm("Me")) %>% 
 #'                  add_repo(name = "The library") %>% 
 #'                  add_sour() %>% 
 #'                  add_sour_repo_citation("library") %>%
 #'                  remove_sour_repo_citation("library") %>% 
-#'                  remove_dates_for_tests())
+#'                  tidyged.internals::remove_dates_for_tests())
 remove_sour_repo_citation <- function(gedcom,
                                       repository) {
   
@@ -152,7 +152,7 @@ remove_sour_repo_citation <- function(gedcom,
   
   repo_xref <- find_xref(gedcom, xrefs_repo(gedcom), "NAME", repository)
   
-  remove_section(gedcom, 1, "REPO", repo_xref, xrefs = xref) %>% 
+  tidyged.internals::remove_section(gedcom, 1, "REPO", repo_xref, xrefs = xref) %>% 
     activate_sour(xref)
   
 }
@@ -174,8 +174,8 @@ remove_sour <- function(gedcom,
   xref <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_sour)
   
   gedcom %>% 
-    remove_section(1, "SOUR", xref) %>% 
-    remove_section(2, "SOUR", xref) %>%
+    tidyged.internals::remove_section(1, "SOUR", xref) %>% 
+    tidyged.internals::remove_section(2, "SOUR", xref) %>%
     dplyr::filter(record != xref, value != xref) %>% 
     null_active_record()
 }

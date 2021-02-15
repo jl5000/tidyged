@@ -57,7 +57,7 @@ add_indi_names <- function(gedcom,
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
+    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     name_str <- dplyr::bind_rows(name_str, tidyged.internals::CHANGE_DATE() %>% 
                                    tidyged.internals::add_levels(1))
   }
@@ -103,7 +103,7 @@ add_indi_names <- function(gedcom,
 #'                add_indi_names(given = "Joe", surname = "Bloggs") %>% 
 #'                add_indi_names_var("Joe Bloggs", nickname = "JB", method = "tests", 
 #'                                          phonetic_variation = FALSE) %>% 
-#'                remove_dates_for_tests(), "json2")
+#'                tidyged.internals::remove_dates_for_tests(), "json2")
 add_indi_names_var <- function(gedcom,
                                primary_name,
                                method,
@@ -159,9 +159,9 @@ add_indi_names_var <- function(gedcom,
   # As we're entering an empty PERSONAL_NAME_PIECES object, it will derive a surname
   # piece from part between forward slashes in name_personal. This then allows us to
   # remove these lines explicitly.
-  name_str <- tidyged.internals::PERSONAL_NAME_STRUCTURE(name_personal = "line /filtered out/ below",
+  name_str <- tidyged.internals::PERSONAL_NAME_STRUCTURE(name_personal = "line filtered out below",
                                       name_type = character(),
-                                      name_pieces = tidyged.internals::PERSONAL_NAME_PIECES(), 
+                                      name_pieces = tidyged.internals::PERSONAL_NAME_PIECES(name_piece_surname = "filtered out"), 
                                       name_phonetic = name_phonetic_var,
                                       phonetisation_method = phonetisation_method,
                                       phonetic_name_pieces = phon_name_pieces,
@@ -173,7 +173,7 @@ add_indi_names_var <- function(gedcom,
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
+    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     name_str <- dplyr::bind_rows(name_str, tidyged.internals::CHANGE_DATE() %>% 
                                    tidyged.internals::add_levels(1))
   }
@@ -210,7 +210,7 @@ remove_indi_name <- function(gedcom,
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
   rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
-    identify_section(1, "NAME", name, xrefs = xref)
+    tidyged.internals::identify_section(1, "NAME", name, xrefs = xref)
   
   gedcom %>%
     dplyr::slice(-rows_to_remove) %>% 
@@ -245,7 +245,7 @@ remove_indi_name_var <- function(gedcom,
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
   rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
-    identify_section(2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
+    tidyged.internals::identify_section(2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
                      variation_name, xrefs = xref)
   
   gedcom %>%
@@ -268,12 +268,12 @@ primary_indi_name <- function(gedcom, name, xref = character()) {
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   rows_to_move <- temporarily_remove_name_slashes(gedcom) %>% 
-    identify_section(1, "NAME", name)
+    tidyged.internals::identify_section(1, "NAME", name)
   
   section <- gedcom[rows_to_move,]
   gedcom <- gedcom[-rows_to_move,]
   
-  next_row <- identify_section(gedcom, 0, "INDI", "", xrefs = xref)[2]
+  next_row <- tidyged.internals::identify_section(gedcom, 0, "INDI", "", xrefs = xref)[2]
 
   gedcom %>%
     tibble::add_row(section, .before = next_row) %>% 

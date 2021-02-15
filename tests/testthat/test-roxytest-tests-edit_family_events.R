@@ -10,6 +10,6 @@ test_that("Function add_famg_event() @ L29", {
    add_famg_event(event_type = "MARR", 
                     event_date = date_calendar(year = 1969, month = 1, day = 30),
                     place_name = "Another place") %>% 
-   remove_dates_for_tests(), "json2")
+   tidyged.internals::remove_dates_for_tests(), "json2")
 })
 

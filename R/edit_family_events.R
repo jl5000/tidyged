@@ -25,7 +25,7 @@
 #'  add_famg_event(event_type = "MARR", 
 #'                   event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                   place_name = "Another place") %>% 
-#'  remove_dates_for_tests(), "json2")
+#'  tidyged.internals::remove_dates_for_tests(), "json2")
 add_famg_event <- function(gedcom,
                            event_type = character(),
                            event_descriptor = character(),
@@ -119,7 +119,7 @@ add_famg_event <- function(gedcom,
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
+    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     event_str <- dplyr::bind_rows(event_str, tidyged.internals::CHANGE_DATE() %>% 
                                     tidyged.internals::add_levels(1))
   }

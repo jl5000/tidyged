@@ -8,7 +8,7 @@ test_that("Function add_indi_names_var() @ L107", {
                  add_indi_names(given = "Joe", surname = "Bloggs") %>% 
                  add_indi_names_var("Joe Bloggs", nickname = "JB", method = "tests", 
                                            phonetic_variation = FALSE) %>% 
-                 remove_dates_for_tests(), "json2")
+                 tidyged.internals::remove_dates_for_tests(), "json2")
 })
 
 

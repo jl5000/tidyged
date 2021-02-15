@@ -45,7 +45,7 @@ gedcom <- function(submitter_details = subm(),
                                                                           gedcom_content_description = gedcom_description)) %>% 
     dplyr::bind_rows(submitter_details, 
                      tidyged.internals::FOOTER_SECTION()) %>%
-    tidyged.io::set_class_to_tidyged()
+    tidyged.internals::set_class_to_tidyged()
   
 }
 

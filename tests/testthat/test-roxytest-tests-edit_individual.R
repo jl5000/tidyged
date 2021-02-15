@@ -6,7 +6,7 @@ test_that("Function add_indi() @ L32", {
                                        sex = "M", user_reference_number = 1234,
                                        user_reference_type = "something",
                                        indi_notes = c("Note1", "Note 2")) %>% 
-                         remove_dates_for_tests(), "json2")
+                         tidyged.internals::remove_dates_for_tests(), "json2")
 })
 
 

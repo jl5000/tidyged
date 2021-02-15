@@ -329,7 +329,7 @@ get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_
     # xref not given explicitly, get it from active record
     xref <- get_active_record(gedcom)
     
-  } else if (grepl(xref_pattern(), xref_or_descriptor)) {
+  } else if (grepl(tidyged.internals::xref_pattern(), xref_or_descriptor)) {
     # xref given explicitly
     xref <- xref_or_descriptor
     
@@ -440,81 +440,4 @@ remove_records <- function(gedcom, xrefs) {
   }
   gedcom
 }
-
-
-#' Identify the rows of a subrecord in a tidyged object
-#'
-#' @param gedcom A tidyged object.
-#' @param containing_level The level of the first line of the subrecord.
-#' @param containing_tag The tag of the first line of the subrecord.
-#' @param containing_value The value of the first line of the subrecord.
-#' @param xrefs The xrefs of records containing the subrecord (default is all records).
-#'
-#' @return A vector of rows in the tidyged object of the subrecord(s).
-identify_section <- function(gedcom,
-                           containing_level,
-                           containing_tag,
-                           containing_value,
-                           xrefs = character()) {
-  
-  no_xrefs_defined <- length(xrefs) == 0
-  
-  rows_to_remove <- integer()
-  
-  active <- FALSE
-  for(i in seq_len(nrow(gedcom))) {
-    
-    if(active) {
-      if(gedcom$level[i] <= containing_level) {
-        active <- FALSE
-      } else {
-        rows_to_remove <- c(rows_to_remove, i)
-      }
-      
-    }
-    
-    if(no_xrefs_defined || gedcom$record[i] %in% xrefs) {
-      if(gedcom$level[i] == containing_level & gedcom$tag[i] == containing_tag &
-         gedcom$value[i] == containing_value) {
-        
-        active <- TRUE
-        rows_to_remove <- c(rows_to_remove, i) 
-      } 
-      
-    }
-  }
-  rows_to_remove
-  
-}
-
-
-#' Remove a subrecord in a tidyged object
-#'
-#' @param gedcom A tidyged object.
-#' @param containing_level The level of the first line of the subrecord.
-#' @param containing_tag The tag of the first line of the subrecord.
-#' @param containing_value The value of the first line of the subrecord.
-#' @param xrefs The xrefs of records containing the subrecord (default is all records).
-#'
-#' @return The tidyged object with the subrecord(s) removed.
-remove_section <- function(gedcom,
-                           containing_level,
-                           containing_tag,
-                           containing_value,
-                           xrefs = character()) {
-  
-  rows_to_remove <- identify_section(gedcom,
-                                     containing_level,
-                                     containing_tag,
-                                     containing_value,
-                                     xrefs)
-  
-  if(length(rows_to_remove) == 0) {
-    gedcom
-  } else {
-    dplyr::slice(gedcom, -rows_to_remove)
-  }
-  
-}
-
 

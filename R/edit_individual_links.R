@@ -19,7 +19,7 @@
 #'                         add_indi(qn = "Joe Bloggs") %>% 
 #'                         add_indi(qn = "Jimmy Bloggs") %>% 
 #'                         add_indi_association(associated_with = "Joe", association = "Friend") %>% 
-#'                         remove_dates_for_tests(), "json2")
+#'                         tidyged.internals::remove_dates_for_tests(), "json2")
 add_indi_association <- function(gedcom,
                                  associated_with,
                                  association,
@@ -39,7 +39,7 @@ add_indi_association <- function(gedcom,
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
+    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     asso_str <- dplyr::bind_rows(asso_str, tidyged.internals::CHANGE_DATE() %>% 
                                    tidyged.internals::add_levels(1))
   }
@@ -79,7 +79,7 @@ add_indi_family_link_as_spouse <- function(gedcom,
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
+    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     link <- dplyr::bind_rows(link, tidyged.internals::CHANGE_DATE() %>% 
                                tidyged.internals::add_levels(1))
   }
@@ -123,7 +123,7 @@ add_indi_family_link_as_child <- function(gedcom,
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
+    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     link <- dplyr::bind_rows(link, tidyged.internals::CHANGE_DATE() %>% 
                                tidyged.internals::add_levels(1))
   }

@@ -7,7 +7,7 @@ test_that("Function add_sour_repo_citation() @ L109", {
                    add_repo(name = "The library") %>% 
                    add_sour() %>% 
                    add_sour_repo_citation("library") %>%
-                   remove_dates_for_tests(), "json2")
+                   tidyged.internals::remove_dates_for_tests(), "json2")
 })
 
 
@@ -15,13 +15,13 @@ test_that("Function remove_sour_repo_citation() @ L148", {
   expect_equal(gedcom(subm("Me")) %>% 
                    add_repo(name = "The library") %>% 
                    add_sour() %>%
-                   remove_dates_for_tests(),
+                   tidyged.internals::remove_dates_for_tests(),
                gedcom(subm("Me")) %>% 
                    add_repo(name = "The library") %>% 
                    add_sour() %>% 
                    add_sour_repo_citation("library") %>%
                    remove_sour_repo_citation("library") %>% 
-                   remove_dates_for_tests())
+                   tidyged.internals::remove_dates_for_tests())
 })
 
 

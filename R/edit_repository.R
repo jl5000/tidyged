@@ -81,7 +81,7 @@ remove_repo <- function(gedcom, repository = character()) {
   xref <- get_valid_xref(gedcom, repository, .pkgenv$record_string_repo, is_repo)
   
   gedcom %>% 
-    remove_section(1, "REPO", xref) %>% 
+    tidyged.internals::remove_section(1, "REPO", xref) %>% 
     dplyr::filter(record != xref, value != xref) %>% 
     null_active_record()
 }

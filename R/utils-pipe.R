@@ -10,7 +10,6 @@
 #' @usage lhs \%>\% rhs
 NULL
 
-remove_dates_for_tests <- utils::getFromNamespace("remove_dates_for_tests", "tidyged.utils")
 
 ##' Return the current date in DATE_EXACT format
 ##' 
@@ -66,10 +65,3 @@ NULL
 ##' @export
 NULL
 
-##' Construct a regular expression for an xref
-##' 
-##' See \code{tidyged.internals::\link[tidyged.internals:xref_pattern]{xref_pattern}} for details.
-##' 
-##' @importFrom tidyged.internals xref_pattern
-##' @name xref_pattern
-NULL

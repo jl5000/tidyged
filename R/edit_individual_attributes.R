@@ -25,7 +25,7 @@
 #'                                           local_address_lines = c("line1","line2","line3","line4"),
 #'                                           place_name = "There",
 #'                                           place_notes = "Place note") %>% 
-#'                        remove_dates_for_tests(), "json2")
+#'                        tidyged.internals::remove_dates_for_tests(), "json2")
 add_indi_attr <- function(gedcom,
                           attribute_type,
                           attribute_descriptor,
@@ -117,7 +117,7 @@ add_indi_attr <- function(gedcom,
     tidyged.internals::add_levels(1)
   
   if(update_date_changed) {
-    gedcom <-  remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
+    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
     attribute_str <- dplyr::bind_rows(attribute_str, tidyged.internals::CHANGE_DATE() %>% 
                                         tidyged.internals::add_levels(1))
   }

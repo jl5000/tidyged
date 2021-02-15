@@ -28,7 +28,7 @@
 #'                                      sex = "M", user_reference_number = 1234,
 #'                                      user_reference_type = "something",
 #'                                      indi_notes = c("Note1", "Note 2")) %>% 
-#'                        remove_dates_for_tests(), "json2")
+#'                        tidyged.internals::remove_dates_for_tests(), "json2")
 add_indi <- function(gedcom,
                      sex = "U",
                      user_reference_number = character(),
@@ -89,7 +89,7 @@ remove_indi <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
-  if(remove_associations) gedcom <- remove_section(gedcom, 1, "ASSO", xref)
+  if(remove_associations) gedcom <- tidyged.internals::remove_section(gedcom, 1, "ASSO", xref)
 
   gedcom %>% 
     dplyr::filter(record != xref, value != xref) %>% 

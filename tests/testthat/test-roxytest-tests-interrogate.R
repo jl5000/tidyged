@@ -52,7 +52,7 @@ test_that("Function df_indi() @ L469", {
    add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
    add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
                                  place_name = "Another place") %>% 
-   remove_dates_for_tests() %>% 
+   tidyged.internals::remove_dates_for_tests() %>% 
    df_indi(), "json2")
 })
 
@@ -68,7 +68,7 @@ test_that("Function df_famg() @ L527", {
    add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
    add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
                                  place_name = "Another place") %>% 
-   remove_dates_for_tests() %>% 
+   tidyged.internals::remove_dates_for_tests() %>% 
    df_famg(), "json2")
 })
 
@@ -78,7 +78,7 @@ test_that("Function df_media() @ L561", {
    add_media(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") %>% 
    add_media(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") %>% 
    add_media(file_reference = "ref3", format = "PNG", source_media = "photo", title = "photo2") %>% 
-   remove_dates_for_tests() %>% 
+   tidyged.internals::remove_dates_for_tests() %>% 
    df_media(), "json2")
 })
 
@@ -88,7 +88,7 @@ test_that("Function df_sour() @ L588", {
    add_sour(originator = "author1", title = "book1") %>% 
    add_sour(originator = "author2", title = "book2") %>% 
    add_sour(originator = "author3", title = "book3") %>% 
-   remove_dates_for_tests() %>% 
+   tidyged.internals::remove_dates_for_tests() %>% 
    df_sour(), "json2")
 })
 
@@ -98,7 +98,7 @@ test_that("Function df_repo() @ L611", {
    add_repo(name = "repo1", city = "Brighton", state = "E. Sussex", country = "UK") %>% 
    add_repo(name = "repo2", city = "Orlando", state = "Florida", country = "USA") %>% 
    add_repo(name = "repo3", city = "Yokohama", country = "Japan") %>% 
-   remove_dates_for_tests() %>% 
+   tidyged.internals::remove_dates_for_tests() %>% 
    df_repo(), "json2")
 })
 
@@ -108,7 +108,7 @@ test_that("Function df_note() @ L638", {
    add_note(text = "This is a note", user_reference_number = 1234) %>% 
    add_note(text = "This is also a note", user_reference_number = 5678) %>% 
    add_note(text = "This may be a note too", user_reference_number = 987643) %>% 
-   remove_dates_for_tests() %>% 
+   tidyged.internals::remove_dates_for_tests() %>% 
    df_note(), "json2")
 })
 

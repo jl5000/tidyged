@@ -10,11 +10,11 @@ add_note_to_record <- function(gedcom, note) {
   if(is_note(gedcom, xref))
     stop("Notes cannot be added to the active record")
   
-  if(grepl(xref_pattern(), note)) note_text <- gedcom_value(gedcom, note, "NOTE", 0)
+  if(grepl(tidyged.internals::xref_pattern(), note)) note_text <- gedcom_value(gedcom, note, "NOTE", 0)
   
   response1 <- utils::menu(c("No", "Yes", "Absolutely!"), 
                      title = paste("You are about the add the following note to the record:", note,
-                                   ifelse(grepl(xref_pattern(), note), paste0("(", note_text ,")"), "")))
+                                   ifelse(grepl(tidyged.internals::xref_pattern(), note), paste0("(", note_text ,")"), "")))
                     
   if(response1 %in% 0:1) return(gedcom)
   

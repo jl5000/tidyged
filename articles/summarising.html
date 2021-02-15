@@ -159,9 +159,17 @@
 <span class="co">#&gt; [1] 1</span>
 <span class="fu"><a href="../reference/num_indi.html">num_media</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span>
 <span class="co">#&gt; [1] 2</span></code></pre></div>
+<p>The <code>xrefs_*()</code> family of functions return the xrefs of records of a particular type:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/xrefs_indi.html">xrefs_indi</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span>
+<span class="co">#&gt; [1] "@I1@" "@I2@" "@I3@" "@I4@"</span>
+<span class="fu"><a href="../reference/xrefs_indi.html">xrefs_note</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span>
+<span class="co">#&gt; [1] "@N1@" "@N2@"</span>
+<span class="fu"><a href="../reference/xrefs_indi.html">xrefs_sour</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span>
+<span class="co">#&gt; [1] "@S1@" "@S2@"</span></code></pre></div>
 <p>These functions are the workhorse of the <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> function.</p>
 <p>The <code>df_*()</code> family of functions provide a tabular summary of all records of a particular type:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/df_indi.html">df_indi</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
@@ -206,7 +214,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">2</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -221,7 +229,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">2</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -236,7 +244,7 @@
 <td align="left">Homer Simpson</td>
 <td align="left">2</td>
 <td align="right">0</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -251,11 +259,11 @@
 <td align="left">Homer Simpson</td>
 <td align="left">2</td>
 <td align="right">0</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -275,10 +283,10 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">3</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr></tbody>
 </table>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/df_indi.html">df_media</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -297,7 +305,7 @@
 <td align="left"></td>
 <td align="left">PDF</td>
 <td align="left"></td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -306,7 +314,7 @@
 <td align="left"></td>
 <td align="left">PDF</td>
 <td align="left"></td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 </tbody>
 </table>
@@ -315,7 +323,7 @@
 <h2 class="hasAnchor">
 <a href="#individual-record-summaries" class="anchor"></a>Individual record summaries</h2>
 <p>The <code>is_*()</code> family of functions determine whether an xref is a record of a particular type:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/is_indi.html">is_indi</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"@I1@"</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span>
 <span class="fu"><a href="../reference/is_indi.html">is_famg</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"@F1@"</span><span class="op">)</span>
@@ -323,7 +331,7 @@
 <span class="fu"><a href="../reference/is_indi.html">is_repo</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"@N1@"</span><span class="op">)</span>
 <span class="co">#&gt; [1] FALSE</span></code></pre></div>
 <p>The <code>describe_*()</code> family of functions give a description of certain records:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/describe_famg.html">describe_indi</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"Bart"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I4@, Bart Simpson, child of Homer Simpson and Marge Simpson, born 16 MAR 1982 in Springfield, USA"</span>
 <span class="fu"><a href="../reference/describe_famg.html">describe_indi</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"Lisa"</span>, name_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -333,7 +341,7 @@
 <span class="fu"><a href="../reference/describe_famg.html">describe_famg</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"@F1@"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F1@, headed by Homer Simpson and Marge Simpson, and children: Bart Simpson, Lisa Simpson"</span></code></pre></div>
 <p>Whilst this family of functions can only operate on one record at a time, the <code><a href="../reference/describe_records.html">describe_records()</a></code> function can take a whole vector of xrefs, potentially of different types (header, trailer, and duplicate records are ignored by this function):</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="va">simpsons</span><span class="op">$</span><span class="va">record</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "Submitter @U1@, Me"                                                                                           </span>
 <span class="co">#&gt;  [2] "Individual @I1@, Homer Simpson, born 14 MAY 1960 in Springfield, USA"                                         </span>
@@ -349,7 +357,7 @@
 <span class="co">#&gt; [12] "Source @S1@, titled A History of the Simpsons, by J.R. Hartley"                                               </span>
 <span class="co">#&gt; [13] "Source @S2@, titled The screaming and the pain and the hoyvenglaven, by Prof. J Frink"</span></code></pre></div>
 <p>As with the record-specific functions, setting <code>short_desc = TRUE</code> gives a shorter description.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="va">simpsons</span><span class="op">$</span><span class="va">record</span>, short_desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "Submitter @U1@, Me"                                                 </span>
 <span class="co">#&gt;  [2] "Individual @I1@, Homer Simpson"                                     </span>

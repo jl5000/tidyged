@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Identify all descendants for an individual — identify_descendants • tidyged</title>
+<title>Get the xrefs of particular record types — xrefs_indi • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Identify all descendants for an individual — identify_descendants" />
-<meta property="og:description" content="This function identifies records in an entire branch of the family tree below a certain individual." />
+<meta property="og:title" content="Get the xrefs of particular record types — xrefs_indi" />
+<meta property="og:description" content="These functions return the xrefs of all records of a particular type in a tidyged object." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,22 +119,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Identify all descendants for an individual</h1>
+    <h1>Get the xrefs of particular record types</h1>
     <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/interrogate.R'><code>R/interrogate.R</code></a></small>
-    <div class="hidden name"><code>identify_descendants.Rd</code></div>
+    <div class="hidden name"><code>xrefs_indi.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function identifies records in an entire branch of the family tree below a certain individual.</p>
+    <p>These functions return the xrefs of all records of a particular type in a tidyged object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>identify_descendants</span><span class='op'>(</span>
-  <span class='va'>gedcom</span>,
-  individual <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  include_individual <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  include_spouses <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  include_families <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>xrefs_indi</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+
+<span class='fu'>xrefs_famg</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+
+<span class='fu'>xrefs_subm</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+
+<span class='fu'>xrefs_sour</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+
+<span class='fu'>xrefs_repo</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+
+<span class='fu'>xrefs_note</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
+
+<span class='fu'>xrefs_media</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,28 +149,11 @@
       <th>gedcom</th>
       <td><p>A tidyged object.</p></td>
     </tr>
-    <tr>
-      <th>individual</th>
-      <td><p>The xref or name of an Individual record to act on if one
-is not activated (will override active record).</p></td>
-    </tr>
-    <tr>
-      <th>include_individual</th>
-      <td><p>Whether to also include the individual themselves.</p></td>
-    </tr>
-    <tr>
-      <th>include_spouses</th>
-      <td><p>Whether to also include all spouses of this individual (and their descendants).</p></td>
-    </tr>
-    <tr>
-      <th>include_families</th>
-      <td><p>Whether to also include all Family Group records where this individual is a spouse.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vector of xrefs of descendants.</p>
+    <p>A vector of xrefs of records of the relevant type.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

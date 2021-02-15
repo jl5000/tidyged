@@ -898,7 +898,7 @@
 <td align="right">1</td>
 <td align="left">HD</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
@@ -939,7 +939,7 @@
 <td align="left">
 <span class="citation">@U1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
@@ -1065,7 +1065,7 @@
 <td align="right">1</td>
 <td align="left">HD</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
@@ -1183,7 +1183,7 @@
 <td align="left">
 <span class="citation">@U1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
@@ -1322,7 +1322,7 @@
 <td align="right">1</td>
 <td align="left">HD</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">1</td>
@@ -1375,7 +1375,7 @@
 <td align="left">
 <span class="citation">@U1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
@@ -1396,14 +1396,14 @@
 <div id="subsetting-an-existing-object" class="section level2">
 <h2 class="hasAnchor">
 <a href="#subsetting-an-existing-object" class="anchor"></a>Subsetting an existing object</h2>
-<p>You can also create a new <code>tidyged</code> object by subsetting an existing object. The <code><a href="../reference/split_gedcom.html">split_gedcom()</a></code> function subsets a tidyged object. This will retain the header and submitter information from the original object.</p>
+<p>You can also create a new <code>tidyged</code> object by subsetting an existing object. The <code>split_gedcom()</code> function from the <code>tidyged.utils</code> package subsets a tidyged object. This will retain the header and submitter information from the original object.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">sample555</span><span class="op">$</span><span class="va">record</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "HD"   "@U1@" "@I1@" "@I2@" "@I3@" "@F1@" "@F2@" "@S1@" "@R1@" "TR"</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="../reference/split_gedcom.html">split_gedcom</a></span><span class="op">(</span><span class="va">sample555</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"@I1@"</span>, <span class="st">"@I2@"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">record</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu">tidyged.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.utils/man/split_gedcom.html">split_gedcom</a></span><span class="op">(</span><span class="va">sample555</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"@I1@"</span>, <span class="st">"@I2@"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">record</span><span class="op">)</span>
 <span class="co">#&gt; [1] "HD"   "@U1@" "@I1@" "@I2@" "TR"</span></code></pre></div>
-<p>This is especially powerful when paired with the <code><a href="../reference/identify_descendants.html">identify_descendants()</a></code> function (see <code><a href="../articles/maintenance_functions.html">vignette("maintenance_functions")</a></code>), where you can create a separate object for an entire branch.</p>
+<p>This is especially powerful when paired with the <code>tidyged.utils::identify_descendants()</code> function (see <code><a href="../articles/maintenance_functions.html">vignette("maintenance_functions")</a></code>), where you can create a separate object for an entire branch.</p>
 <p style="text-align: right;">
 <a href="https://jl5000.github.io/tidyged/articles/individual_records.html">Next article: Individual records &gt;</a>
 </p>

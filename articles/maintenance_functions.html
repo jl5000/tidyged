@@ -90,7 +90,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>GEDCOM files can get very large and unwieldy, resulting in inefficiencies and file bloat. The <code>tidyged</code> package offers functions to automate the cleaning of GEDCOM files.</p>
+<p>GEDCOM files can get very large and unwieldy, resulting in inefficiencies and file bloat. The <code>tidyged.utils</code> package offers functions to automate the cleaning of GEDCOM files.</p>
 </div>
 <div id="change-dates" class="section level2">
 <h2 class="hasAnchor">
@@ -197,7 +197,7 @@
 <td align="right">1</td>
 <td align="left">HD</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
@@ -238,7 +238,7 @@
 <td align="left">
 <span class="citation">@U1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
@@ -250,10 +250,10 @@
 </table>
 <p>See row 20 and the row after for the change date for the submitter record.</p>
 <p>By default this behaviour also applies when modifying existing records. If you would like to leave the change date alone when modifying a record, you can set <code>update_date_changed = FALSE</code> (it is TRUE by default).</p>
-<p>For GEDCOM files with thousands of records, including change dates can add considerable bloat. For this reason it is possible to remove all change date structures with the <code><a href="../reference/remove_change_dates.html">remove_change_dates()</a></code> function:</p>
+<p>For GEDCOM files with thousands of records, including change dates can add considerable bloat. For this reason it is possible to remove all change date structures with the <code>remove_change_dates()</code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/remove_change_dates.html">remove_change_dates</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">tidyged.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.utils/man/remove_change_dates.html">remove_change_dates</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -351,7 +351,7 @@
 <td align="right">1</td>
 <td align="left">HD</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
@@ -496,7 +496,7 @@
 <td align="right">1</td>
 <td align="left">HD</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
@@ -537,7 +537,7 @@
 <td align="left">
 <span class="citation">@U1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
@@ -558,7 +558,7 @@
 <td align="left">
 <span class="citation">@N1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
@@ -586,7 +586,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">1</td>
@@ -642,7 +642,7 @@
 <td align="left">
 <span class="citation">@R1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
@@ -653,9 +653,9 @@
 </tbody>
 </table>
 <p>In the above example, there is a generic note recorded in a top level Note record. This same note message has been used for the individual and repository defined, but they have been repeated rather than pointing to the Note record. There is also a repeated bespoke note given in the Individual and Repository records.</p>
-<p>The <code><a href="../reference/consolidate_notes.html">consolidate_notes()</a></code> function will simplify the file, replacing note values with pointers to top level Note records (creating them if necessary) if they are repeated:</p>
+<p>The <code>consolidate_notes()</code> function will simplify the file, replacing note values with pointers to top level Note records (creating them if necessary) if they are repeated:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/consolidate_notes.html">consolidate_notes</a></span><span class="op">(</span><span class="va">notes</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu">tidyged.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.utils/man/consolidate_notes.html">consolidate_notes</a></span><span class="op">(</span><span class="va">notes</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -753,7 +753,7 @@
 <td align="right">1</td>
 <td align="left">HD</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
@@ -794,7 +794,7 @@
 <td align="left">
 <span class="citation">@U1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
@@ -815,7 +815,7 @@
 <td align="left">
 <span class="citation">@N1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
@@ -843,7 +843,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">1</td>
@@ -903,7 +903,7 @@
 <td align="left">
 <span class="citation">@R1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
@@ -924,7 +924,7 @@
 <td align="left">
 <span class="citation">@N2</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
@@ -938,7 +938,7 @@
 <div id="unreferenced-records" class="section level2">
 <h2 class="hasAnchor">
 <a href="#unreferenced-records" class="anchor"></a>Unreferenced records</h2>
-<p>If there are any records that are not referenced anywhere else, they can be found with the <code><a href="../reference/identify_unused_records.html">identify_unused_records()</a></code> function. In the function below we create 6 family group records, half with members, half without, and also an unreferenced Repository record:</p>
+<p>If there are any records that are not referenced anywhere else, they can be found with the <code>identify_unused_records()</code> function. In the function below we create 6 family group records, half with members, half without, and also an unreferenced Repository record:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">some_unref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Tom Smith"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -953,11 +953,11 @@
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_repo.html">add_repo</a></span><span class="op">(</span><span class="st">"Test repo"</span><span class="op">)</span> 
   
-<span class="fu"><a href="../reference/identify_unused_records.html">identify_unused_records</a></span><span class="op">(</span><span class="va">some_unref</span><span class="op">)</span>
+<span class="fu">tidyged.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.utils/man/identify_unused_records.html">identify_unused_records</a></span><span class="op">(</span><span class="va">some_unref</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@F2@" "@F4@" "@F6@" "@R1@"</span></code></pre></div>
 <p>We can find out more about these xrefs by using the <code><a href="../reference/describe_records.html">describe_records()</a></code> function:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/identify_unused_records.html">identify_unused_records</a></span><span class="op">(</span><span class="va">some_unref</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu">tidyged.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.utils/man/identify_unused_records.html">identify_unused_records</a></span><span class="op">(</span><span class="va">some_unref</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">some_unref</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F2@, headed by no individuals, and no children"</span>
 <span class="co">#&gt; [2] "Family @F4@, headed by no individuals, and no children"</span>
@@ -965,7 +965,7 @@
 <span class="co">#&gt; [4] "Repository @R1@, Test repo"</span></code></pre></div>
 <p>We can remove multiple records at once using the <code><a href="../reference/remove_records.html">remove_records()</a></code> function:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/remove_records.html">remove_records</a></span><span class="op">(</span><span class="va">some_unref</span>, <span class="fu"><a href="../reference/identify_unused_records.html">identify_unused_records</a></span><span class="op">(</span><span class="va">some_unref</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu"><a href="../reference/remove_records.html">remove_records</a></span><span class="op">(</span><span class="va">some_unref</span>, <span class="fu">tidyged.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.utils/man/identify_unused_records.html">identify_unused_records</a></span><span class="op">(</span><span class="va">some_unref</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Family @F2@, headed by no individuals removed</span>
 <span class="co">#&gt; Family @F4@, headed by no individuals removed</span>
@@ -1022,7 +1022,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -1032,7 +1032,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -1042,7 +1042,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 </tbody>
 </table>
@@ -1130,16 +1130,16 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr></tbody>
 </table>
 <p>This combination can result in the removal of a vast amount of data. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.</p>
-<p>Instead of deleting the records, you can instead opt to create a new tidyged object with these records using the <code><a href="../reference/split_gedcom.html">split_gedcom()</a></code> function:</p>
+<p>Instead of deleting the records, you can instead opt to create a new tidyged object with these records using the <code>split_gedcom()</code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/identify_descendants.html">identify_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
                        include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/split_gedcom.html">split_gedcom</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">tidyged.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.utils/man/split_gedcom.html">split_gedcom</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -1161,7 +1161,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -1171,7 +1171,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">14 FEB 2021</td>
+<td align="left">15 FEB 2021</td>
 </tr>
 </tbody>
 </table>

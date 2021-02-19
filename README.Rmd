@@ -24,9 +24,15 @@ knitr::opts_chunk$set(
 
 > Families can be difficult - but the data describing them doesn't need to be
 
-Create and summarise family tree GEDCOM files using tidy dataframes. This package is still in heavy development with the first operational version likely around March 2021.
+Create and summarise family tree GEDCOM files using tidy dataframes.
 
-This package is the main package of the [`gedcompendium`](https://github.com/jl5000/gedcompendium) ecosystem of packages.
+The package is part of the `gedcompendium` ecosystem of packages. This ecosystem enables the handling of `tidyged` objects (tibble representations of GEDCOM files), and the main package of this ecosystem is [`tidyged`](https://jl5000.github.io/tidyged/).
+
+
+```{r, echo=FALSE, out.width="65%", fig.align='center'}
+knitr::include_graphics("man/figures/allhex.png")
+```
+
 
 ## Installation
 

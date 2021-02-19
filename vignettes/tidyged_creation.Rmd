@@ -14,31 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Importing existing files
-
-The easiest way to create a `tidyged` object is to import an existing GEDCOM file. The `tidyged.io` package (imported with `tidyged`) comes with some sample GEDCOM files, which can be imported using the `read_gedcom()` function:
-
-```{r}
-library(tidyged)
-
-tidyged.io::read_gedcom(system.file("extdata", "555SAMPLE.GED", package = "tidyged.io")) %>% 
-  knitr::kable()
-```
-
-If you want to export your file as a valid GEDCOM file, you can use the `write_gedcom()` function.
-
-Many other GEDCOM readers will carry out extensive checks on every line of a GEDCOM file ensuring all tags and values are legal, and the grammar is used correctly. The `tidyged` package carries out very few checks, relying on the user to check their files beforehand (as described when loading the package). The few checks that are carried out include:
-
-* Ensuring the file has a valid Byte Order Mark which is consistent with that described in the file;
-* Ensuring no lines exceed the character limit;
-* Ensuring the header is correctly formed;
-* Ensuring there is only one header, trailer, and submitter record defined.
-
-In the future, the `gedcompendium` ecosystem may include a dedicated validation package, but this is currently a low priority.
-
 ## Creating new objects
 
-The other way of creating `tidyged` objects is to create them from scratch. A minimal object can be created using an empty `gedcom()` call:
+The easiest way to create a `tidyged` object is to import an existing GEDCOM file. This functionality is provided by the [`tidyged.io`](https://github.com/jl5000/tidyged.io) package.
+
+A minimal `tidyged` object can be created using an empty `gedcom()` call:
 
 ```{r}
 gedcom() %>% 

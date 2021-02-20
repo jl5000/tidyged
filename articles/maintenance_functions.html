@@ -1046,14 +1046,14 @@
 </tr>
 </tbody>
 </table>
-<p>We use the <code><a href="../reference/identify_descendants.html">identify_descendants()</a></code> function below to identify the descendants of Main Person. By default it will exclude the individual and their spouses, and associated family groups:</p>
+<p>We use the <code><a href="../reference/get_descendants.html">get_descendants()</a></code> function below to identify the descendants of Main Person. By default it will exclude the individual and their spouses, and associated family groups:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/identify_descendants.html">identify_descendants</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@I6@" "@I7@" "@I8@" "@I9@"</span></code></pre></div>
 <p>We can use the <code><a href="../reference/describe_records.html">describe_records()</a></code> function to see descriptions:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/identify_descendants.html">identify_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I6@, Child 1, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [2] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
@@ -1062,10 +1062,10 @@
 <p>Setting <code>include_spouses = TRUE</code> will include all spouses and their descendants:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/identify_descendants.html">identify_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Individual @I5@, Spouse 2"                                  </span>
-<span class="co">#&gt; [2] "Individual @I4@, Spouse 1"                                  </span>
+<span class="co">#&gt; [1] "Individual @I4@, Spouse 1"                                  </span>
+<span class="co">#&gt; [2] "Individual @I5@, Spouse 2"                                  </span>
 <span class="co">#&gt; [3] "Individual @I6@, Child 1, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [4] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [5] "Individual @I8@, Child 3, child of Main Person and Spouse 2"</span>
@@ -1073,7 +1073,7 @@
 <p>Setting <code>include_individual = TRUE</code> will include the individual:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/identify_descendants.html">identify_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I3@, Main Person, child of Parent 1 and Parent 2"</span>
 <span class="co">#&gt; [2] "Individual @I6@, Child 1, child of Main Person and Spouse 1" </span>
@@ -1083,13 +1083,13 @@
 <p>Setting <code>include_families = TRUE</code> will include the individual’s families where they are a spouse:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/identify_descendants.html">identify_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
                        include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F2@, headed by Main Person and Spouse 1, and children: Child 1, Child 2"</span>
 <span class="co">#&gt; [2] "Family @F3@, headed by Main Person and Spouse 2, and children: Child 3, Child 4"</span>
-<span class="co">#&gt; [3] "Individual @I5@, Spouse 2"                                                      </span>
-<span class="co">#&gt; [4] "Individual @I4@, Spouse 1"                                                      </span>
+<span class="co">#&gt; [3] "Individual @I4@, Spouse 1"                                                      </span>
+<span class="co">#&gt; [4] "Individual @I5@, Spouse 2"                                                      </span>
 <span class="co">#&gt; [5] "Individual @I3@, Main Person, child of Parent 1 and Parent 2"                   </span>
 <span class="co">#&gt; [6] "Individual @I6@, Child 1, child of Main Person and Spouse 1"                    </span>
 <span class="co">#&gt; [7] "Individual @I7@, Child 2, child of Main Person and Spouse 1"                    </span>
@@ -1098,15 +1098,15 @@
 <p>Instead of describing the records, we can remove them with <code><a href="../reference/remove_records.html">remove_records()</a></code>:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/identify_descendants.html">identify_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
                        include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/remove_records.html">remove_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Family @F2@, headed by Main Person and Spouse 1 removed</span>
 <span class="co">#&gt; Family @F3@, headed by Main Person and Spouse 2 removed</span>
-<span class="co">#&gt; Individual @I5@, Spouse 2 removed</span>
 <span class="co">#&gt; Individual @I4@, Spouse 1 removed</span>
+<span class="co">#&gt; Individual @I5@, Spouse 2 removed</span>
 <span class="co">#&gt; Individual @I3@, Main Person removed</span>
 <span class="co">#&gt; Individual @I6@, Child 1 removed</span>
 <span class="co">#&gt; Individual @I7@, Child 2 removed</span>
@@ -1137,7 +1137,7 @@
 <p>Instead of deleting the records, you can instead opt to create a new tidyged object with these records using the <code>split_gedcom()</code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/identify_descendants.html">identify_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
                        include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">tidyged.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.utils/man/split_gedcom.html">split_gedcom</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 

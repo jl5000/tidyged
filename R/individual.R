@@ -37,7 +37,7 @@ add_indi <- function(gedcom,
                      multimedia_links = character(),
                      qn = character()) {
   
-  xref <- assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
+  xref <- tidyged.internals::assign_xref(.pkgenv$xref_prefix_indi, gedcom = gedcom)
   
   indiv_notes <- purrr::map(indi_notes, tidyged.internals::NOTE_STRUCTURE)
   

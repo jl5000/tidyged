@@ -51,7 +51,7 @@ add_sour <- function(gedcom,
                      sour_notes = character(),
                      multimedia_links = character()) {
   
-  xref <- assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
+  xref <- tidyged.internals::assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
   
   dat_notes <- purrr::map(data_notes, tidyged.internals::NOTE_STRUCTURE)
   
@@ -126,7 +126,7 @@ add_sour_repo_citation <- function(gedcom,
                                    tidyged.internals::add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, xref, 0, "SOUR")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "SOUR")
   
   gedcom %>%
     tibble::add_row(citation, .before = next_row) %>% 

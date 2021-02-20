@@ -37,7 +37,7 @@ add_repo <- function(gedcom,
                      user_reference_type = character(),
                      repo_notes = character()) {
   
-  xref <- assign_xref(.pkgenv$xref_prefix_repo, gedcom = gedcom)
+  xref <- tidyged.internals::assign_xref(.pkgenv$xref_prefix_repo, gedcom = gedcom)
   
   if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
   

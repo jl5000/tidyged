@@ -124,7 +124,7 @@ add_famg_event <- function(gedcom,
                                     tidyged.internals::add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, xref, 0, "FAM")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "FAM")
 
   gedcom %>%
     tibble::add_row(event_str, .before = next_row) %>% 

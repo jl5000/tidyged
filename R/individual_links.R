@@ -44,7 +44,7 @@ add_indi_association <- function(gedcom,
                                    tidyged.internals::add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(asso_str, .before = next_row) %>% 
@@ -84,7 +84,7 @@ add_indi_family_link_as_spouse <- function(gedcom,
                                tidyged.internals::add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(link, .before = next_row) %>% 
@@ -128,7 +128,7 @@ add_indi_family_link_as_child <- function(gedcom,
                                tidyged.internals::add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(link, .before = next_row) %>% 

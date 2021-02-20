@@ -21,6 +21,8 @@ The easiest way to create a `tidyged` object is to import an existing GEDCOM fil
 A minimal `tidyged` object can be created using an empty `gedcom()` call:
 
 ```{r}
+library(tidyged)
+
 gedcom() %>% 
   knitr::kable()
 ```
@@ -72,7 +74,9 @@ Note that:
 
 ## Subsetting an existing object
 
-You can also create a new `tidyged` object by subsetting an existing object. The `split_gedcom()` function from the `tidyged.utils` package subsets a tidyged object. This will retain the header and submitter information from the original object. 
+You can also create a new `tidyged` object by subsetting an existing object. See the `tidyged.utils` package.
+
+The `split_gedcom()` function from the `tidyged.utils` package subsets a tidyged object. This will retain the header and submitter information from the original object. 
 
 ```{r}
 unique(sample555$record)

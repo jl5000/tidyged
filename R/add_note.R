@@ -10,7 +10,7 @@ add_note_to_record <- function(gedcom, note) {
   if(is_note(gedcom, xref))
     stop("Notes cannot be added to the active record")
   
-  if(grepl(tidyged.internals::xref_pattern(), note)) note_text <- gedcom_value(gedcom, note, "NOTE", 0)
+  if(grepl(tidyged.internals::xref_pattern(), note)) note_text <- tidyged.internals::gedcom_value(gedcom, note, "NOTE", 0)
   
   response1 <- utils::menu(c("No", "Yes", "Absolutely!"), 
                      title = paste("You are about the add the following note to the record:", note,
@@ -29,7 +29,7 @@ add_note_to_record <- function(gedcom, note) {
     
     if (response2 == 1) {
       # the individual
-      next_row <- find_insertion_point(gedcom, xref, 0, "INDI") 
+      next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI") 
       note_str <- tidyged.internals::NOTE_STRUCTURE(note) %>%
         tidyged.internals::add_levels(1)
         
@@ -46,7 +46,7 @@ add_note_to_record <- function(gedcom, note) {
       
       if(response3 == 0) return(gedcom)
       
-      next_row <- find_insertion_point(gedcom, xref, 1, "ASSO", asso_xrefs[response3]) 
+      next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 1, "ASSO", asso_xrefs[response3]) 
       note_str <- tidyged.internals::NOTE_STRUCTURE(note) %>%
         tidyged.internals::add_levels(2)
       
@@ -65,7 +65,7 @@ add_note_to_record <- function(gedcom, note) {
       
       if(response3 == 0) return(gedcom)
       
-      next_row <- find_insertion_point(gedcom, xref, 1, link_types[response3], fam_xrefs[response3]) 
+      next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 1, link_types[response3], fam_xrefs[response3]) 
       note_str <- tidyged.internals::NOTE_STRUCTURE(note) %>%
         tidyged.internals::add_levels(2)
       
@@ -103,7 +103,7 @@ add_note_to_record <- function(gedcom, note) {
      
       if(response3 == 0) return(gedcom)
       
-      next_row <- find_insertion_point(gedcom, xref, 1, "SOUR", sour_xrefs[response3]) 
+      next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 1, "SOUR", sour_xrefs[response3]) 
       note_str <- tidyged.internals::NOTE_STRUCTURE(note) %>%
         tidyged.internals::add_levels(2)
            

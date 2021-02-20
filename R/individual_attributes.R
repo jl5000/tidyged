@@ -122,7 +122,7 @@ add_indi_attr <- function(gedcom,
                                         tidyged.internals::add_levels(1))
   }
   
-  next_row <- find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom %>%
     tibble::add_row(attribute_str, .before = next_row) %>% 

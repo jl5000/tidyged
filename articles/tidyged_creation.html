@@ -87,720 +87,15 @@
 
     
     
-<div id="importing-existing-files" class="section level2">
-<h2 class="hasAnchor">
-<a href="#importing-existing-files" class="anchor"></a>Importing existing files</h2>
-<p>The easiest way to create a <code>tidyged</code> object is to import an existing GEDCOM file. The <code>tidyged.io</code> package (imported with <code>tidyged</code>) comes with some sample GEDCOM files, which can be imported using the <code>read_gedcom()</code> function:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
-
-<span class="fu">tidyged.io</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.io/man/read_gedcom.html">read_gedcom</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"555SAMPLE.GED"</span>, package <span class="op">=</span> <span class="st">"tidyged.io"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="6%">
-<col width="7%">
-<col width="5%">
-<col width="81%">
-</colgroup>
-<thead><tr class="header">
-<th align="right">level</th>
-<th align="left">record</th>
-<th align="left">tag</th>
-<th align="left">value</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="right">0</td>
-<td align="left">HD</td>
-<td align="left">HEAD</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">HD</td>
-<td align="left">GEDC</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">HD</td>
-<td align="left">VERS</td>
-<td align="left">5.5.5</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">HD</td>
-<td align="left">FORM</td>
-<td align="left">LINEAGE-LINKED</td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">HD</td>
-<td align="left">VERS</td>
-<td align="left">5.5.5</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">HD</td>
-<td align="left">CHAR</td>
-<td align="left">UTF-8</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">HD</td>
-<td align="left">SOUR</td>
-<td align="left">GS</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">HD</td>
-<td align="left">NAME</td>
-<td align="left">GEDCOM Specification</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">HD</td>
-<td align="left">VERS</td>
-<td align="left">5.5.5</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">HD</td>
-<td align="left">CORP</td>
-<td align="left">gedcom.org</td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">HD</td>
-<td align="left">ADDR</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="left">HD</td>
-<td align="left">CITY</td>
-<td align="left">LEIDEN</td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">HD</td>
-<td align="left">WWW</td>
-<td align="left">www.gedcom.org</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">HD</td>
-<td align="left">DATE</td>
-<td align="left">2 Oct 2019</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">HD</td>
-<td align="left">TIME</td>
-<td align="left">0:00:00</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">HD</td>
-<td align="left">FILE</td>
-<td align="left">555Sample.ged</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">HD</td>
-<td align="left">LANG</td>
-<td align="left">English</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">HD</td>
-<td align="left">SUBM</td>
-<td align="left">
-<span class="citation">@U1</span>@</td>
-</tr>
-<tr class="odd">
-<td align="right">0</td>
-<td align="left">
-<span class="citation">@U1</span>@</td>
-<td align="left">SUBM</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@U1</span>@</td>
-<td align="left">NAME</td>
-<td align="left">Reldon Poulson</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@U1</span>@</td>
-<td align="left">ADDR</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@U1</span>@</td>
-<td align="left">ADR1</td>
-<td align="left">1900 43rd Street West</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@U1</span>@</td>
-<td align="left">CITY</td>
-<td align="left">Billings</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@U1</span>@</td>
-<td align="left">STAE</td>
-<td align="left">Montana</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@U1</span>@</td>
-<td align="left">POST</td>
-<td align="left">68051</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@U1</span>@</td>
-<td align="left">CTRY</td>
-<td align="left">United States of America</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@U1</span>@</td>
-<td align="left">PHON</td>
-<td align="left">+1 (406) 555-1232</td>
-</tr>
-<tr class="even">
-<td align="right">0</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">INDI</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">NAME</td>
-<td align="left">Robert Eugene /Williams/</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">SURN</td>
-<td align="left">Williams</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">GIVN</td>
-<td align="left">Robert Eugene</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">SEX</td>
-<td align="left">M</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">BIRT</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">DATE</td>
-<td align="left">2 Oct 1822</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">PLAC</td>
-<td align="left">Weston, Madison, Connecticut, United States of America</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">SOUR</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">PAGE</td>
-<td align="left">Sec. 2, p. 45</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">DEAT</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">DATE</td>
-<td align="left">14 Apr 1905</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">PLAC</td>
-<td align="left">Stamford, Fairfield, Connecticut, United States of America</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">BURI</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">PLAC</td>
-<td align="left">Spring Hill Cemetery, Stamford, Fairfield, Connecticut, United States of America</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">FAMS</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">FAMS</td>
-<td align="left">
-<span class="citation">@F2</span>@</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">RESI</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-<td align="left">DATE</td>
-<td align="left">from 1900 to 1905</td>
-</tr>
-<tr class="odd">
-<td align="right">0</td>
-<td align="left">
-<span class="citation">@I2</span>@</td>
-<td align="left">INDI</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I2</span>@</td>
-<td align="left">NAME</td>
-<td align="left">Mary Ann /Wilson/</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I2</span>@</td>
-<td align="left">SURN</td>
-<td align="left">Wilson</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I2</span>@</td>
-<td align="left">GIVN</td>
-<td align="left">Mary Ann</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I2</span>@</td>
-<td align="left">SEX</td>
-<td align="left">F</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I2</span>@</td>
-<td align="left">BIRT</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I2</span>@</td>
-<td align="left">DATE</td>
-<td align="left">BEF 1828</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I2</span>@</td>
-<td align="left">PLAC</td>
-<td align="left">Connecticut, United States of America</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I2</span>@</td>
-<td align="left">FAMS</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-</tr>
-<tr class="even">
-<td align="right">0</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">INDI</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">NAME</td>
-<td align="left">Joe /Williams/</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">SURN</td>
-<td align="left">Williams</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">GIVN</td>
-<td align="left">Joe</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">SEX</td>
-<td align="left">M</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">BIRT</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">DATE</td>
-<td align="left">11 Jun 1861</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">PLAC</td>
-<td align="left">Idaho Falls, Bonneville, Idaho, United States of America</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">FAMC</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">FAMC</td>
-<td align="left">
-<span class="citation">@F2</span>@</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">PEDI</td>
-<td align="left">adopted</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">ADOP</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-<td align="left">DATE</td>
-<td align="left">16 Mar 1864</td>
-</tr>
-<tr class="odd">
-<td align="right">0</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-<td align="left">FAM</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-<td align="left">HUSB</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-<td align="left">WIFE</td>
-<td align="left">
-<span class="citation">@I2</span>@</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-<td align="left">CHIL</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-<td align="left">MARR</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-<td align="left">DATE</td>
-<td align="left">Dec 1859</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-<td align="left">PLAC</td>
-<td align="left">Rapid City, Pennington, South Dakota, United States of America</td>
-</tr>
-<tr class="even">
-<td align="right">0</td>
-<td align="left">
-<span class="citation">@F2</span>@</td>
-<td align="left">FAM</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@F2</span>@</td>
-<td align="left">HUSB</td>
-<td align="left">
-<span class="citation">@I1</span>@</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@F2</span>@</td>
-<td align="left">CHIL</td>
-<td align="left">
-<span class="citation">@I3</span>@</td>
-</tr>
-<tr class="odd">
-<td align="right">0</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-<td align="left">SOUR</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-<td align="left">DATA</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-<td align="left">EVEN</td>
-<td align="left">BIRT, DEAT, MARR</td>
-</tr>
-<tr class="even">
-<td align="right">3</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-<td align="left">DATE</td>
-<td align="left">FROM Jan 1820 TO DEC 1825</td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-<td align="left">PLAC</td>
-<td align="left">Madison, Connecticut, United States of America</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-<td align="left">AGNC</td>
-<td align="left">Madison County Court</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-<td align="left">TITL</td>
-<td align="left">Madison County Birth, Death, and Marriage Records</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-<td align="left">ABBR</td>
-<td align="left">Madison BMD Records</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-<td align="left">REPO</td>
-<td align="left">
-<span class="citation">@R1</span>@</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@S1</span>@</td>
-<td align="left">CALN</td>
-<td align="left">13B-1234.01</td>
-</tr>
-<tr class="odd">
-<td align="right">0</td>
-<td align="left">
-<span class="citation">@R1</span>@</td>
-<td align="left">REPO</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@R1</span>@</td>
-<td align="left">NAME</td>
-<td align="left">Family History Library</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">
-<span class="citation">@R1</span>@</td>
-<td align="left">ADDR</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@R1</span>@</td>
-<td align="left">ADR1</td>
-<td align="left">35 N West Temple Street</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@R1</span>@</td>
-<td align="left">CITY</td>
-<td align="left">Salt Lake City</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@R1</span>@</td>
-<td align="left">STAE</td>
-<td align="left">Utah</td>
-</tr>
-<tr class="odd">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@R1</span>@</td>
-<td align="left">POST</td>
-<td align="left">84150</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">
-<span class="citation">@R1</span>@</td>
-<td align="left">CTRY</td>
-<td align="left">United States of America</td>
-</tr>
-<tr class="odd">
-<td align="right">0</td>
-<td align="left">TR</td>
-<td align="left">TRLR</td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p>If you want to export your file as a valid GEDCOM file, you can use the <code>write_gedcom()</code> function.</p>
-<p>Many other GEDCOM readers will carry out extensive checks on every line of a GEDCOM file ensuring all tags and values are legal, and the grammar is used correctly. The <code>tidyged</code> package carries out very few checks, relying on the user to check their files beforehand (as described when loading the package). The few checks that are carried out include:</p>
-<ul>
-<li>Ensuring the file has a valid Byte Order Mark which is consistent with that described in the file;</li>
-<li>Ensuring no lines exceed the character limit;</li>
-<li>Ensuring the header is correctly formed;</li>
-<li>Ensuring there is only one header, trailer, and submitter record defined.</li>
-</ul>
-<p>In the future, the <code>gedcompendium</code> ecosystem may include a dedicated validation package, but this is currently a low priority.</p>
-</div>
 <div id="creating-new-objects" class="section level2">
 <h2 class="hasAnchor">
 <a href="#creating-new-objects" class="anchor"></a>Creating new objects</h2>
-<p>The other way of creating <code>tidyged</code> objects is to create them from scratch. A minimal object can be created using an empty <code><a href="../reference/gedcom.html">gedcom()</a></code> call:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<p>The easiest way to create a <code>tidyged</code> object is to import an existing GEDCOM file. This functionality is provided by the <a href="https://github.com/jl5000/tidyged.io"><code>tidyged.io</code></a> package.</p>
+<p>A minimal <code>tidyged</code> object can be created using an empty <code><a href="../reference/gedcom.html">gedcom()</a></code> call:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -898,7 +193,7 @@
 <td align="right">1</td>
 <td align="left">HD</td>
 <td align="left">DATE</td>
-<td align="left">15 FEB 2021</td>
+<td align="left">20 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
@@ -939,7 +234,7 @@
 <td align="left">
 <span class="citation">@U1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">15 FEB 2021</td>
+<td align="left">20 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
@@ -954,7 +249,7 @@
 <h3 class="hasAnchor">
 <a href="#submitter" class="anchor"></a>Submitter</h3>
 <p>You can use different information for many values using the parameters of the <code><a href="../reference/gedcom.html">gedcom()</a></code> function. The first argument of the function is a <code><a href="../reference/subm.html">subm()</a></code> object giving details of the submitter:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">submitter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"The name of the submitter"</span>,
                   local_address_lines <span class="op">=</span> <span class="st">"123 Penny Lane Drive"</span>,
                   city <span class="op">=</span> <span class="st">"Orlando"</span>,
@@ -1065,7 +360,7 @@
 <td align="right">1</td>
 <td align="left">HD</td>
 <td align="left">DATE</td>
-<td align="left">15 FEB 2021</td>
+<td align="left">20 FEB 2021</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
@@ -1183,7 +478,7 @@
 <td align="left">
 <span class="citation">@U1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">15 FEB 2021</td>
+<td align="left">20 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
@@ -1198,7 +493,7 @@
 <h3 class="hasAnchor">
 <a href="#other-header-parameters" class="anchor"></a>Other header parameters</h3>
 <p>The remaining arguments of the <code><a href="../reference/gedcom.html">gedcom()</a></code> function give further information about the file and the information held within it:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span>submitter_details <span class="op">=</span> <span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="op">)</span>,
        gedcom_description <span class="op">=</span> <span class="st">"Maternal ancestors of Jamie"</span>,
        gedcom_copyright <span class="op">=</span> <span class="st">"No copyright"</span>,
@@ -1322,7 +617,7 @@
 <td align="right">1</td>
 <td align="left">HD</td>
 <td align="left">DATE</td>
-<td align="left">15 FEB 2021</td>
+<td align="left">20 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">1</td>
@@ -1375,7 +670,7 @@
 <td align="left">
 <span class="citation">@U1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">15 FEB 2021</td>
+<td align="left">20 FEB 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
@@ -1396,8 +691,9 @@
 <div id="subsetting-an-existing-object" class="section level2">
 <h2 class="hasAnchor">
 <a href="#subsetting-an-existing-object" class="anchor"></a>Subsetting an existing object</h2>
-<p>You can also create a new <code>tidyged</code> object by subsetting an existing object. The <code>split_gedcom()</code> function from the <code>tidyged.utils</code> package subsets a tidyged object. This will retain the header and submitter information from the original object.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>You can also create a new <code>tidyged</code> object by subsetting an existing object. See the <code>tidyged.utils</code> package.</p>
+<p>The <code>split_gedcom()</code> function from the <code>tidyged.utils</code> package subsets a tidyged object. This will retain the header and submitter information from the original object.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">sample555</span><span class="op">$</span><span class="va">record</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "HD"   "@U1@" "@I1@" "@I2@" "@I3@" "@F1@" "@F2@" "@S1@" "@R1@" "TR"</span>
 

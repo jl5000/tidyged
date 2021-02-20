@@ -37,45 +37,6 @@ num_repo <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_re
 num_sour <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_sour) }
 
 
-xrefs_record_type <- function(gedcom, record_tag) {
-  dplyr::filter(gedcom, level == 0 & tag == record_tag)$record
-}
-
-#' Get the xrefs of particular record types
-#'
-#' These functions return the xrefs of all records of a particular type in a tidyged object.
-#'
-#' @param gedcom A tidyged object.
-#'
-#' @return A vector of xrefs of records of the relevant type.
-#' @export
-xrefs_indi <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_indi) }
-
-#' @export
-#' @rdname xrefs_indi
-xrefs_famg <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_famg) }
-
-#' @export
-#' @rdname xrefs_indi
-xrefs_subm <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_subm) }
-
-#' @export
-#' @rdname xrefs_indi
-xrefs_sour <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_sour) }
-
-#' @export
-#' @rdname xrefs_indi
-xrefs_repo <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_repo) }
-
-#' @export
-#' @rdname xrefs_indi
-xrefs_note <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_note) }
-
-#' @export
-#' @rdname xrefs_indi
-xrefs_media <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_obje) }
-
-
 
 is_record_type <- function(gedcom, xref, tag) {
   gedcom[gedcom$record == xref,]$tag[1] == tag

@@ -11,7 +11,7 @@
 #' @export
 #' @tests
 #' expect_equal(get_spouses(sample555, "@I1@"), "@I2@")
-#' expect_equal(get_spouses(sample555, "@I2@"), "@I1@")
+#' expect_equal(get_spouses(sample555, "@I2@", TRUE), "Robert Eugene Williams")
 #' expect_equal(get_spouses(sample555, "@I3@"), character(0))
 get_spouses <- function(gedcom,
                         individual = character(),
@@ -44,7 +44,7 @@ get_spouses <- function(gedcom,
 #' @tests
 #' expect_error(get_children(sample555, "@I4@"))
 #' expect_equal(get_children(sample555, "@I1@"), "@I3@")
-#' expect_equal(get_children(sample555, "@I2@"), "@I3@")
+#' expect_equal(get_children(sample555, "@I2@", TRUE), "Joe Williams")
 get_children <- function(gedcom,
                          individual = character(),
                          return_name = FALSE) {
@@ -74,6 +74,7 @@ get_children <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(get_parents(sample555, "@I3@"), c("@I1@", "@I2@"))
+#' expect_equal(get_parents(sample555, "@I3@", TRUE), c("Robert Eugene Williams", "Mary Ann Wilson"))
 get_parents <- function(gedcom,
                         individual = character(),
                         return_name = FALSE) {
@@ -143,6 +144,11 @@ get_families_as_child <- function(gedcom, individual = character()) {
 #'
 #' @return A vector of xrefs of descendants.
 #' @export
+#' @tests
+#' expect_equal(get_descendants(sample555, "Robert"), "@I3@")
+#' expect_equal(get_descendants(sample555, "Robert", TRUE), c("@I1@","@I3@"))
+#' expect_equal(get_descendants(sample555, "Robert", TRUE, TRUE), c("@I2@","@I1@","@I3@"))
+#' expect_equal(get_descendants(sample555, "Robert", TRUE, TRUE, TRUE), c("@F1@","@F2@","@I2@","@I1@","@I3@"))
 get_descendants <- function(gedcom,
                             individual = character(),
                             include_individual = FALSE,

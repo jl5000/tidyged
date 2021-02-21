@@ -9,6 +9,9 @@
 #'
 #' @return A vector of record descriptions.
 #' @export
+#' @tests
+#' expect_snapshot_value(describe_records(sample555, sample555$record, TRUE), "json2")
+#' expect_snapshot_value(describe_records(sample555, sample555$record), "json2")
 describe_records <- function(gedcom, xrefs, short_desc = FALSE) {
   
   xrefs <- unique(xrefs[!xrefs %in% c("HD","TR")])
@@ -59,9 +62,6 @@ describe_records <- function(gedcom, xrefs, short_desc = FALSE) {
 #'
 #' @return A character string describing the record.
 #' @export
-#' @tests
-#' expect_equal(gedcom() %>% add_famg() %>% describe_famg("@F1@"),
-#'              "Family @F1@, headed by no individuals, and no children")
 describe_famg <- function(gedcom, xref, short_desc = FALSE) {
   # Family @F1@, headed by x and y, [and (no) children x, y, z]
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)

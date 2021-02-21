@@ -160,7 +160,7 @@ remove_sour_repo_citation <- function(gedcom,
 #' Remove a Source record from a tidyged object
 #'
 #' @param gedcom A tidyged object.
-#' @param source The xref or title of a Source record to act on if one is not 
+#' @param sour The xref or title of a Source record to act on if one is not 
 #' activated (will override active record).
 #'
 #' @return An updated tidyged object excluding the selected Source record.
@@ -169,9 +169,9 @@ remove_sour_repo_citation <- function(gedcom,
 #' expect_equal(gedcom(subm()),
 #'              gedcom(subm()) %>% add_sour(title = "text") %>% remove_sour())
 remove_sour <- function(gedcom,
-                          source = character()) {
+                        sour = character()) {
   
-  xref <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_sour)
+  xref <- get_valid_xref(gedcom, sour, .pkgenv$record_string_sour, is_sour)
   
   gedcom %>% 
     tidyged.internals::remove_section(1, "SOUR", xref) %>% 

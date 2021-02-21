@@ -148,6 +148,10 @@ get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_
 #'
 #' @return An updated tidyged object with the records removed.
 #' @export
+#' @tests
+#' expect_snapshot_value(remove_records(sample555, c("@I1@","@I2@")), "json2")
+#' expect_snapshot_value(remove_records(sample555, c("@S1@","@R1@")), "json2")
+#' expect_snapshot_value(remove_records(sample555, c("@F1@","@I3@")), "json2")
 remove_records <- function(gedcom, xrefs) {
   
   for (xref in xrefs) {

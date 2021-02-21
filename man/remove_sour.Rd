@@ -4,12 +4,12 @@
 \alias{remove_sour}
 \title{Remove a Source record from a tidyged object}
 \usage{
-remove_sour(gedcom, source = character())
+remove_sour(gedcom, sour = character())
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{source}{The xref or title of a Source record to act on if one is not
+\item{sour}{The xref or title of a Source record to act on if one is not
 activated (will override active record).}
 }
 \value{

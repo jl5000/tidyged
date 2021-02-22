@@ -51,7 +51,7 @@ add_sour <- function(gedcom,
                      sour_notes = character(),
                      multimedia_links = character()) {
   
-  xref <- tidyged.internals::assign_xref(.pkgenv$xref_prefix_sour, gedcom = gedcom)
+  xref <- tidyged.internals::assign_xref_sour(gedcom)
   
   dat_notes <- purrr::map(data_notes, tidyged.internals::NOTE_STRUCTURE)
   

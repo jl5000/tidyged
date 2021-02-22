@@ -30,7 +30,7 @@ add_media <- function(gedcom,
                       user_reference_type = character(),
                       media_notes = character()) {
   
-  xref <- tidyged.internals::assign_xref(.pkgenv$xref_prefix_obje, gedcom = gedcom)
+  xref <- tidyged.internals::assign_xref_media(gedcom)
   
   mmedia_notes <- purrr::map(media_notes, tidyged.internals::NOTE_STRUCTURE)
   

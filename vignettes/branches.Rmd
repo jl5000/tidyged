@@ -1,0 +1,101 @@
+---
+title: "Dealing with branches"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Dealing with branches}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+One of the more sophisticated features of `tidyged` is the ability to manipulate entire branches of your tree. 
+
+We illustrate its functionality using the family below consisting of three generations: A pair of parents who has a single child (named 'Main Person'). This person forms two separate family groups with two spouses, each resulting in two children.
+
+```{r}
+library(tidyged)
+
+three_gen <- gedcom(subm("Me")) %>% 
+  add_indi(qn = "Parent 1") %>% 
+  add_indi(qn = "Parent 2") %>% 
+  add_indi(qn = "Main Person") %>% 
+  add_indi(qn = "Spouse 1") %>% 
+  add_indi(qn = "Spouse 2") %>%
+  add_indi(qn = "Child 1") %>% 
+  add_indi(qn = "Child 2") %>% 
+  add_indi(qn = "Child 3") %>% 
+  add_indi(qn = "Child 4") %>% 
+  add_famg("Parent 1", "Parent 2", children = "Main Person") %>% 
+  add_famg("Main Person", "Spouse 1", children = c("Child 1", "Child 2")) %>%
+  add_famg("Main Person", "Spouse 2", children = c("Child 3", "Child 4"))
+
+df_famg(three_gen) %>% 
+  knitr::kable()
+```
+
+## Descendants
+
+We use the `get_descendants()` function below to identify the descendants of Main Person. By default it will exclude the individual and their spouses, and associated family groups:
+
+```{r}
+get_descendants(three_gen, "Main Person")
+```
+
+We can use the `describe_records()` function to see descriptions:
+
+```{r}
+three_gen %>% 
+  get_descendants("Main Person") %>% 
+  describe_records(three_gen, .)
+```
+
+Setting `include_spouses = TRUE` will include all spouses and their descendants:
+
+```{r}
+three_gen %>% 
+  get_descendants("Main Person", include_spouses = TRUE) %>% 
+  describe_records(three_gen, .)
+```
+
+Setting `include_individual = TRUE` will include the individual:
+
+```{r}
+three_gen %>% 
+  get_descendants("Main Person", include_individual = TRUE) %>% 
+  describe_records(three_gen, .)
+```
+
+Setting `include_families = TRUE` will include the individual's families where they are a spouse:
+
+```{r}
+three_gen %>% 
+  get_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
+                       include_families = TRUE) %>% 
+  describe_records(three_gen, .)
+```
+
+Instead of describing the records, we can remove them with `remove_records()`:
+
+```{r}
+three_gen %>% 
+  get_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
+                       include_families = TRUE) %>% 
+  remove_records(three_gen, .) %>% 
+  df_famg() %>% 
+  knitr::kable()
+```
+
+This combination can result in the removal of a vast amount of data. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.
+
+This function will, by default, remove any dead references to records that have not been included in the subsetting.
+
+## Ancestors
+

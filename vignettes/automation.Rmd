@@ -86,5 +86,5 @@ str(simpsons_no_fam_purge)
 
 Note that as well as having no families defined, we also now have no individuals.
 
-<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/maintenance_functions.html">Next article: Maintenance functions ></a></p>
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/branches.html">Next article: Dealing with branches></a></p>
 

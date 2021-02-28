@@ -3,6 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   automation: automation.html
+  branches: branches.html
   cross_references: cross_references.html
   dates: dates.html
   family_group_records: family_group_records.html
@@ -10,12 +11,11 @@ articles:
   implementation: implementation.html
   individual_records: individual_records.html
   intro_to_gedcom: intro_to_gedcom.html
-  maintenance_functions: maintenance_functions.html
   multimedia_records: multimedia_records.html
   note_records: note_records.html
   repository_records: repository_records.html
   source_records: source_records.html
   summarising: summarising.html
   tidyged_creation: tidyged_creation.html
-last_built: 2021-02-25T15:25Z
+last_built: 2021-02-28T10:22Z
 

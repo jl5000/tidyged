@@ -1,8 +1,8 @@
 ---
-title: "Dealing with branches"
+title: "Identifying relations"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Dealing with branches}
+  %\VignetteIndexEntry{Identifying relations}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,9 +16,9 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-One of the more sophisticated features of `tidyged` is the ability to manipulate entire branches of your tree. 
+We identify relations to an individual using the family of `get_*()` functions.
 
-We illustrate its functionality using the family below consisting of three generations: A pair of parents who has a single child (named 'Main Person'). This person forms two separate family groups with two spouses, each resulting in two children.
+We illustrate their functionality using the family below consisting of three generations: A pair of parents who has a single child (named 'Main Person'). This person forms two separate family groups with two spouses, each resulting in two children.
 
 ```{r}
 library(tidyged)
@@ -41,7 +41,23 @@ df_famg(three_gen) %>%
   knitr::kable()
 ```
 
-## Descendants
+## Immediate relations
+
+The examples below illustrate the functions.
+
+```{r}
+get_spouses(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
+get_parents(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
+get_children(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
+get_families_as_spouse(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
+get_families_as_child(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
+```
+
+## Branches
+
+One of the more sophisticated features of `tidyged` is the ability to manipulate entire branches of your tree. 
+
+### Descendants
 
 We use the `get_descendants()` function below to identify the descendants of Main Person. By default it will exclude the individual and their spouses, and associated family groups:
 
@@ -97,5 +113,5 @@ This combination can result in the removal of a vast amount of data. It will tel
 
 This function will, by default, remove any dead references to records that have not been included in the subsetting.
 
-## Ancestors
+### Ancestors
 

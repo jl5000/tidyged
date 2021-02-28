@@ -698,6 +698,7 @@
 <span class="co">#&gt;  [1] "HD"   "@U1@" "@I1@" "@I2@" "@I3@" "@F1@" "@F2@" "@S1@" "@R1@" "TR"</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu">tidyged.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidyged.utils/man/split_gedcom.html">split_gedcom</a></span><span class="op">(</span><span class="va">sample555</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"@I1@"</span>, <span class="st">"@I2@"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">record</span><span class="op">)</span>
+<span class="co">#&gt; Some dead record references have been removed: @S1@, @F1@, @F2@</span>
 <span class="co">#&gt; [1] "HD"   "@U1@" "@I1@" "@I2@" "TR"</span></code></pre></div>
 <p>This is especially powerful when paired with the <code><a href="../reference/get_descendants.html">get_descendants()</a></code> function (see <code>vignette("maintenance_functions")</code>), where you can create a separate object for an entire branch.</p>
 <p style="text-align: right;">

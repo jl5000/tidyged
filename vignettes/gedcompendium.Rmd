@@ -13,19 +13,19 @@ knitr::opts_chunk$set(
 
 The `tidyged` package is the core package of the `gedcompendium` ecosystem of packages.
 
-<a href="https://github.com/jl5000/tidyged.internals"><img src="https://raw.githubusercontent.com/jl5000/tidyged.internals/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/tidyged"><img src="https://raw.githubusercontent.com/jl5000/tidyged/master/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/tidyged.io"><img src="https://raw.githubusercontent.com/jl5000/tidyged.io/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/gedcompendium"><img src="https://raw.githubusercontent.com/jl5000/gedcompendium/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/visged"><img src="https://raw.githubusercontent.com/jl5000/visged/master/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/autoged"><img src="https://raw.githubusercontent.com/jl5000/autoged/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/geddown"><img src="https://raw.githubusercontent.com/jl5000/geddown/main/man/figures/logo.png" align="center" height="125"></a> 
+```{r, echo=FALSE, out.width="65%", fig.align='center'}
+knitr::include_graphics("man/figures/allhex.png")
+```
 
 
 ## Packages
 
-The `tidyged` package has a dependency on the `tidyged.internals` package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the `tidyged` package. There is also a dependency on the `tidyged.io` package which is used for importing GEDCOM files and exporting `tidyged` objects.
+The `tidyged` package has a dependency on the `tidyged.internals` package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the `tidyged` package. There is also a dependency on the `tidyged.io` package which is used for importing GEDCOM files and exporting `tidyged` objects as GEDCOM files. The `tidyged.utils` package has a number of additional functions to help maintain and clean GEDCOM files.
 
-There are numerous spin-off packages planned:
+The `tidyged` package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The longer term plan is for the `shinyged` package to provide a `shiny` interface. This will also enable the `autoged` package to allow an evidence-driven approach to record facts from source documents.
 
-* **visged:** Create visualisations of tidyged objects;
-* **autoged:** Automate the recording of facts from source documents;
-* **geddown:** Create RMarkdown-based reports of tidyged objects.
+There are also packages used to generate visualisations and RMarkdown-based reports of the content of GEDCOM files; `visged` and `geddown`.
 
-The `tidyged` package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to also have a sister package to provide a `shiny` interface (`shinyged`). There are also plans for a `safeged` package to remove sensitive data from living individuals from tidyged objects.
+It will probably take until around 2023 for me to finish all this.
 
 <p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/tidyged_creation.html">Next article: Creating tidyged objects ></a></p>

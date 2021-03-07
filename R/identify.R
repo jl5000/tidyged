@@ -270,21 +270,51 @@ get_descendants <- function(gedcom,
 }
 
 
+#' Identify all ancestors for an individual
+#' 
+#' This function identifies records in an entire branch of the family tree above a certain individual.
+#' 
+#' @param gedcom A tidyged object.
+#' @param individual The xref or name of an Individual record to act on if one 
+#' is not activated (will override active record).
+#' @param include_individual Whether to also include the individual themselves.
+#' @param include_siblings Whether to also include all siblings of ancestors (siblings of this individual will only be
+#' included if the individual is included).
+#' @param include_families Whether to also include all Family Group records where this individual is a child 
+#' (and all ancestors' Family Group records).
+#'
+#' @return A vector of xrefs of ancestors.
+#' @export
 get_ancestors <- function(gedcom,
-                               individual = character(),
-                               include_individual = TRUE,
-                               include_siblings = FALSE,
-                               include_families = FALSE) {
+                          individual = character(),
+                          include_individual = FALSE,
+                          include_siblings = FALSE,
+                          include_families = FALSE) {
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
-  # return_xrefs <- NULL
-  # 
-  # spou_xref <- get_spouses(gedcom, xref)
-  # par_xref <- get_parents(gedcom, xref)
-  # fams_xref <- get_families_as_child(gedcom, xref)
+  return_xrefs <- NULL
+
+  sib_xref <- get_siblings(gedcom, xref)
+  par_xref <- get_parents(gedcom, xref)
+  famc_xref <- get_families_as_child(gedcom, xref)
   
+  if (include_individual & include_siblings) {
+    sib_par <- unlist(purrr::map(sib_xref, get_parents, gedcom=gedcom))
+    
+    par_xref <- unique(c(par_xref, sib_par))
+  }
   
+  if (include_families) return_xrefs <- c(return_xrefs, famc_xref)
+  if (include_individual & include_siblings) return_xrefs <- c(return_xrefs, sib_xref)
+  if (include_individual) return_xrefs <- c(return_xrefs, xref)
+  
+  for(i in seq_along(par_xref)) {
+    return_xrefs <- c(return_xrefs,
+                      get_ancestors(gedcom, par_xref[i], TRUE, include_siblings, include_families))
+  }
+  
+  return_xrefs
 }
 
 

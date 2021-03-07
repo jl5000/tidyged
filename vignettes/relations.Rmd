@@ -116,3 +116,6 @@ This function will, by default, remove any dead references to records that have 
 
 ### Ancestors
 
+We can deal with ancestors in a similar way using the `get_ancestors()` function.
+
+

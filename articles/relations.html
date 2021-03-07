@@ -169,11 +169,17 @@
 <span class="co">#&gt; [2] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [3] "Individual @I8@, Child 3, child of Main Person and Spouse 2"</span>
 <span class="co">#&gt; [4] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span>
+<span class="fu"><a href="../reference/get_siblings.html">get_siblings</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Child 1"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
+<span class="fu"><a href="../reference/get_siblings.html">get_siblings</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Child 1"</span>, include_half_siblings <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
+<span class="co">#&gt; [2] "Individual @I8@, Child 3, child of Main Person and Spouse 2"</span>
+<span class="co">#&gt; [3] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span>
+<span class="fu"><a href="../reference/get_families_as_child.html">get_families_as_child</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Family @F1@, headed by Parent 1 and Parent 2, and children: Main Person"</span>
 <span class="fu"><a href="../reference/get_families_as_spouse.html">get_families_as_spouse</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F2@, headed by Main Person and Spouse 1, and children: Child 1, Child 2"</span>
-<span class="co">#&gt; [2] "Family @F3@, headed by Main Person and Spouse 2, and children: Child 3, Child 4"</span>
-<span class="fu"><a href="../reference/get_families_as_child.html">get_families_as_child</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Family @F1@, headed by Parent 1 and Parent 2, and children: Main Person"</span></code></pre></div>
+<span class="co">#&gt; [2] "Family @F3@, headed by Main Person and Spouse 2, and children: Child 3, Child 4"</span></code></pre></div>
 </div>
 <div id="branches" class="section level2">
 <h2 class="hasAnchor">
@@ -182,7 +188,7 @@
 <div id="descendants" class="section level3">
 <h3 class="hasAnchor">
 <a href="#descendants" class="anchor"></a>Descendants</h3>
-<p>We use the <code><a href="../reference/get_descendants.html">get_descendants()</a></code> function below to identify the descendants of Main Person. By default it will exclude the individual and their spouses, and associated family groups:</p>
+<p>We use the <code><a href="../reference/get_descendants.html">get_descendants()</a></code> function below to identify the descendants of Main Person. By default it will exclude the individual, all spouses, and all associated family groups:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@I6@" "@I7@" "@I8@" "@I9@"</span></code></pre></div>
@@ -195,7 +201,7 @@
 <span class="co">#&gt; [2] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [3] "Individual @I8@, Child 3, child of Main Person and Spouse 2"</span>
 <span class="co">#&gt; [4] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span></code></pre></div>
-<p>Setting <code>include_spouses = TRUE</code> will include all spouses and their descendants:</p>
+<p>Setting <code>include_spouses = TRUE</code> will include all spouses and their descendants, and all descendants’ spouses:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -216,22 +222,18 @@
 <span class="co">#&gt; [3] "Individual @I7@, Child 2, child of Main Person and Spouse 1" </span>
 <span class="co">#&gt; [4] "Individual @I8@, Child 3, child of Main Person and Spouse 2" </span>
 <span class="co">#&gt; [5] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span></code></pre></div>
-<p>Setting <code>include_families = TRUE</code> will include the individual’s families where they are a spouse:</p>
+<p>Setting <code>include_families = TRUE</code> will include the individual’s families where they are a spouse, and all descendants’ families:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
-                       include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F2@, headed by Main Person and Spouse 1, and children: Child 1, Child 2"</span>
 <span class="co">#&gt; [2] "Family @F3@, headed by Main Person and Spouse 2, and children: Child 3, Child 4"</span>
-<span class="co">#&gt; [3] "Individual @I4@, Spouse 1"                                                      </span>
-<span class="co">#&gt; [4] "Individual @I5@, Spouse 2"                                                      </span>
-<span class="co">#&gt; [5] "Individual @I3@, Main Person, child of Parent 1 and Parent 2"                   </span>
-<span class="co">#&gt; [6] "Individual @I6@, Child 1, child of Main Person and Spouse 1"                    </span>
-<span class="co">#&gt; [7] "Individual @I7@, Child 2, child of Main Person and Spouse 1"                    </span>
-<span class="co">#&gt; [8] "Individual @I8@, Child 3, child of Main Person and Spouse 2"                    </span>
-<span class="co">#&gt; [9] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span></code></pre></div>
-<p>Instead of describing the records, we can remove them with <code><a href="../reference/remove_records.html">remove_records()</a></code>:</p>
+<span class="co">#&gt; [3] "Individual @I6@, Child 1, child of Main Person and Spouse 1"                    </span>
+<span class="co">#&gt; [4] "Individual @I7@, Child 2, child of Main Person and Spouse 1"                    </span>
+<span class="co">#&gt; [5] "Individual @I8@, Child 3, child of Main Person and Spouse 2"                    </span>
+<span class="co">#&gt; [6] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span></code></pre></div>
+<p>If we want to remove the individual and their spouses, all descendants and their spouses, and all families, we can remove them with <code><a href="../reference/remove_records.html">remove_records()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,

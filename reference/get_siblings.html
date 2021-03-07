@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Identify all descendants for an individual — get_descendants • tidyged</title>
+<title>Get all siblings for an individual — get_siblings • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Identify all descendants for an individual — get_descendants" />
-<meta property="og:description" content="This function identifies records in an entire branch of the family tree below a certain individual." />
+<meta property="og:title" content="Get all siblings for an individual — get_siblings" />
+<meta property="og:description" content="Get all siblings for an individual" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,21 +119,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Identify all descendants for an individual</h1>
+    <h1>Get all siblings for an individual</h1>
     <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/identify.R'><code>R/identify.R</code></a></small>
-    <div class="hidden name"><code>get_descendants.Rd</code></div>
+    <div class="hidden name"><code>get_siblings.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function identifies records in an entire branch of the family tree below a certain individual.</p>
+    <p>Get all siblings for an individual</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_descendants</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>get_siblings</span><span class='op'>(</span>
   <span class='va'>gedcom</span>,
   individual <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  include_individual <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  include_spouses <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  include_families <span class='op'>=</span> <span class='cn'>FALSE</span>
+  include_half_siblings <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  return_name <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -149,24 +148,18 @@
 is not activated (will override active record).</p></td>
     </tr>
     <tr>
-      <th>include_individual</th>
-      <td><p>Whether to also include the individual themselves.</p></td>
+      <th>include_half_siblings</th>
+      <td><p>Whether to include siblings that only share one parent.</p></td>
     </tr>
     <tr>
-      <th>include_spouses</th>
-      <td><p>Whether to also include all spouses of this individual (and their descendants and
-descendants' spouses).</p></td>
-    </tr>
-    <tr>
-      <th>include_families</th>
-      <td><p>Whether to also include all Family Group records where this individual is a spouse
-(and all descendants' Family Group records).</p></td>
+      <th>return_name</th>
+      <td><p>Whether to return the parents name(s) instead of the xref(s).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vector of xrefs of descendants.</p>
+    <p>A character vector of sibling xrefs or names.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

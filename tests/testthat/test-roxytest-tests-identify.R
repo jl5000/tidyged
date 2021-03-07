@@ -32,7 +32,12 @@ test_that("Function get_families_as_child() @ L125", {
 })
 
 
-test_that("Function get_descendants() @ L152", {
+test_that("Function get_supporting_records() @ L150", {
+  expect_equal(get_supporting_records(sample555, "@I1@"), c("@S1@", "@R1@"))
+})
+
+
+test_that("Function get_descendants() @ L196", {
   expect_equal(get_descendants(sample555, "Robert"), "@I3@")
   expect_equal(get_descendants(sample555, "Robert", TRUE), c("@I1@","@I3@"))
   expect_equal(get_descendants(sample555, "Robert", TRUE, TRUE), c("@I2@","@I1@","@I3@"))
@@ -40,22 +45,22 @@ test_that("Function get_descendants() @ L152", {
 })
 
 
-test_that("Function xrefs_indi() @ L214", {
+test_that("Function xrefs_indi() @ L261", {
   expect_equal(xrefs_indi(sample555), paste0("@I", 1:3, "@"))
 })
 
 
-test_that("Function xrefs_famg() @ L220", {
+test_that("Function xrefs_famg() @ L267", {
   expect_equal(xrefs_famg(sample555), paste0("@F", 1:2, "@"))
 })
 
 
-test_that("Function xrefs_subm() @ L226", {
+test_that("Function xrefs_subm() @ L273", {
   expect_equal(xrefs_subm(sample555), paste0("@U", 1, "@"))
 })
 
 
-test_that("Function xrefs_sour() @ L232", {
+test_that("Function xrefs_sour() @ L279", {
   expect_equal(xrefs_sour(sample555), paste0("@S", 1, "@"))
 })
 

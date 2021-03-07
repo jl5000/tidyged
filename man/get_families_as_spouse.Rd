@@ -7,7 +7,7 @@
 get_families_as_spouse(gedcom, individual = character())
 }
 \arguments{
-\item{gedcom}{A tidygedcom object.}
+\item{gedcom}{A tidyged object.}
 
 \item{individual}{The xref or name of an Individual record to act on if one
 is not activated (will override active record).}

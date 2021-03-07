@@ -95,7 +95,7 @@ get_parents <- function(gedcom,
 
 #' Get all families for an individual where they are a spouse
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
 #' is not activated (will override active record).
 #'
@@ -114,7 +114,7 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
 
 #' Get all families for an individual where they are a child
 #'
-#' @param gedcom A tidygedcom object.
+#' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
 #' is not activated (will override active record).
 #'
@@ -127,6 +127,50 @@ get_families_as_child <- function(gedcom, individual = character()) {
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
   unique(dplyr::filter(gedcom, level == 1, tag == "CHIL", value == xref)$record)
+  
+}
+
+
+#' Get all supporting records for a set of records
+#' 
+#' This function gets all supporting records (and onwards dependencies) for a set of records. Supporting records
+#' are note, multimedia, source, and repository records, i.e. those providing supporting evidence and comments.
+#'
+#' @param gedcom A tidyged object.
+#' @param xrefs The xrefs of records to get supporting records for.
+#' @param include_note Whether to include Note records.
+#' @param include_media Whether to include Multimedia records.
+#' @param include_sour Whether to include Source records.
+#' @param include_repo Whether to include Repository records.
+#'
+#' @return A character vector of supporting record xrefs.
+#' @export
+#' @tests
+#' expect_equal(get_supporting_records(sample555, "@I1@"), c("@S1@", "@R1@"))
+get_supporting_records <- function(gedcom,
+                                   xrefs,
+                                   include_note = TRUE,
+                                   include_media = TRUE,
+                                   include_sour = TRUE,
+                                   include_repo = TRUE) {
+  
+  if (length(xrefs) == 0) return(NULL)
+  
+  tags <- NULL
+  if (include_note) tags <- c(tags, "NOTE")
+  if (include_media) tags <- c(tags, "OBJE")
+  if (include_sour) tags <- c(tags, "SOUR")
+  if (include_repo) tags <- c(tags, "REPO")
+  
+  links <- unique(dplyr::filter(gedcom, 
+                                record %in% xrefs, 
+                                tag %in% tags, 
+                                stringr::str_detect(value, tidyged.internals::xref_pattern()))$value)
+  
+  unique(
+    c(links,
+    get_supporting_records(gedcom, links, include_note, include_media, include_sour, include_repo))
+  )
   
 }
 
@@ -190,6 +234,9 @@ get_ancestors <- function(gedcom,
                                include_individual = TRUE,
                                include_siblings = FALSE,
                                include_families = FALSE) {
+  
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  
   
   
   

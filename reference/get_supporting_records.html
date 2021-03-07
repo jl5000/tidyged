@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get all families for an individual where they are a spouse — get_families_as_spouse • tidyged</title>
+<title>Get all supporting records for a set of records — get_supporting_records • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Get all families for an individual where they are a spouse — get_families_as_spouse" />
-<meta property="og:description" content="Get all families for an individual where they are a spouse" />
+<meta property="og:title" content="Get all supporting records for a set of records — get_supporting_records" />
+<meta property="og:description" content="This function gets all supporting records (and onwards dependencies) for a set of records. Supporting records
+are note, multimedia, source, and repository records, i.e. those providing supporting evidence and comments." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,16 +120,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get all families for an individual where they are a spouse</h1>
+    <h1>Get all supporting records for a set of records</h1>
     <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/identify.R'><code>R/identify.R</code></a></small>
-    <div class="hidden name"><code>get_families_as_spouse.Rd</code></div>
+    <div class="hidden name"><code>get_supporting_records.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get all families for an individual where they are a spouse</p>
+    <p>This function gets all supporting records (and onwards dependencies) for a set of records. Supporting records
+are note, multimedia, source, and repository records, i.e. those providing supporting evidence and comments.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_families_as_spouse</span><span class='op'>(</span><span class='va'>gedcom</span>, individual <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_supporting_records</span><span class='op'>(</span>
+  <span class='va'>gedcom</span>,
+  <span class='va'>xrefs</span>,
+  include_note <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  include_media <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  include_sour <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  include_repo <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,15 +147,30 @@
       <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>individual</th>
-      <td><p>The xref or name of an Individual record to act on if one
-is not activated (will override active record).</p></td>
+      <th>xrefs</th>
+      <td><p>The xrefs of records to get supporting records for.</p></td>
+    </tr>
+    <tr>
+      <th>include_note</th>
+      <td><p>Whether to include Note records.</p></td>
+    </tr>
+    <tr>
+      <th>include_media</th>
+      <td><p>Whether to include Multimedia records.</p></td>
+    </tr>
+    <tr>
+      <th>include_sour</th>
+      <td><p>Whether to include Source records.</p></td>
+    </tr>
+    <tr>
+      <th>include_repo</th>
+      <td><p>Whether to include Repository records.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character vector of family xrefs.</p>
+    <p>A character vector of supporting record xrefs.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 The `tidyged` package is the core package of the `gedcompendium` ecosystem of packages.
 
 ```{r, echo=FALSE, out.width="65%", fig.align='center'}
-knitr::include_graphics("https://github.com/jl5000/tidyged/raw/main/man/figures/allhex.png")
+knitr::include_graphics("https://github.com/jl5000/tidyged/raw/master/man/figures/allhex.png")
 ```
 
 

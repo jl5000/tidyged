@@ -20,9 +20,11 @@ is not activated (will override active record).}
 
 \item{include_individual}{Whether to also include the individual themselves.}
 
-\item{include_spouses}{Whether to also include all spouses of this individual (and their descendants).}
+\item{include_spouses}{Whether to also include all spouses of this individual (and their descendants and
+descendants' spouses).}
 
-\item{include_families}{Whether to also include all Family Group records where this individual is a spouse.}
+\item{include_families}{Whether to also include all Family Group records where this individual is a spouse
+(and all descendants' Family Group records).}
 }
 \value{
 A vector of xrefs of descendants.

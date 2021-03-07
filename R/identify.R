@@ -93,6 +93,45 @@ get_parents <- function(gedcom,
   
 }
 
+
+#' Get all siblings for an individual
+#'
+#' @param gedcom A tidyged object.
+#' @param individual The xref or name of an Individual record to act on if one 
+#' is not activated (will override active record).
+#' @param include_half_siblings Whether to include siblings that only share one parent.
+#' @param return_name Whether to return the parents name(s) instead of the xref(s).
+#'
+#' @return A character vector of sibling xrefs or names.
+#' @export
+get_siblings <- function(gedcom,
+                        individual = character(),
+                        include_half_siblings = FALSE,
+                        return_name = FALSE) {
+  
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  
+  if (include_half_siblings) {
+    par_xref <- get_parents(gedcom, xref)
+    
+    sib_xref <- purrr::map(par_xref, get_children, gedcom = gedcom) %>% 
+      unlist() %>%
+      purrr::discard(. == xref) %>% 
+      unique()
+  } else {
+    famc_xref <- get_families_as_child(gedcom, xref)
+    
+    sib_xref <- unique(dplyr::filter(gedcom, level == 1, record %in% famc_xref, tag == "CHIL", value != xref)$value)
+  }
+  
+  if (return_name) {
+    purrr::map_chr(sib_xref, describe_indi, gedcom=gedcom, name_only = TRUE)
+  } else {
+    sib_xref
+  }
+  
+}
+
 #' Get all families for an individual where they are a spouse
 #'
 #' @param gedcom A tidyged object.
@@ -183,8 +222,10 @@ get_supporting_records <- function(gedcom,
 #' @param individual The xref or name of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param include_individual Whether to also include the individual themselves.
-#' @param include_spouses Whether to also include all spouses of this individual (and their descendants).
-#' @param include_families Whether to also include all Family Group records where this individual is a spouse.
+#' @param include_spouses Whether to also include all spouses of this individual (and their descendants and
+#' descendants' spouses).
+#' @param include_families Whether to also include all Family Group records where this individual is a spouse 
+#' (and all descendants' Family Group records).
 #'
 #' @return A vector of xrefs of descendants.
 #' @export
@@ -222,7 +263,7 @@ get_descendants <- function(gedcom,
   # identify children
   for(i in seq_along(chil_xref)) {
     return_xrefs <- c(return_xrefs,
-                      get_descendants(gedcom, chil_xref[i], TRUE, TRUE,TRUE))
+                      get_descendants(gedcom, chil_xref[i], TRUE, include_spouses, include_families))
   }
   
   return_xrefs
@@ -237,7 +278,11 @@ get_ancestors <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
-  
+  # return_xrefs <- NULL
+  # 
+  # spou_xref <- get_spouses(gedcom, xref)
+  # par_xref <- get_parents(gedcom, xref)
+  # fams_xref <- get_families_as_child(gedcom, xref)
   
   
 }

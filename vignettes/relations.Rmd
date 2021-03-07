@@ -49,8 +49,10 @@ The examples below illustrate the functions.
 get_spouses(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
 get_parents(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
 get_children(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
-get_families_as_spouse(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
+get_siblings(three_gen, "Child 1") %>% describe_records(gedcom = three_gen)
+get_siblings(three_gen, "Child 1", include_half_siblings = TRUE) %>% describe_records(gedcom = three_gen)
 get_families_as_child(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
+get_families_as_spouse(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
 ```
 
 ## Branches
@@ -59,7 +61,7 @@ One of the more sophisticated features of `tidyged` is the ability to manipulate
 
 ### Descendants
 
-We use the `get_descendants()` function below to identify the descendants of Main Person. By default it will exclude the individual and their spouses, and associated family groups:
+We use the `get_descendants()` function below to identify the descendants of Main Person. By default it will exclude the individual, all spouses, and all associated family groups:
 
 ```{r}
 get_descendants(three_gen, "Main Person")
@@ -73,7 +75,7 @@ three_gen %>%
   describe_records(three_gen, .)
 ```
 
-Setting `include_spouses = TRUE` will include all spouses and their descendants:
+Setting `include_spouses = TRUE` will include all spouses and their descendants, and all descendants' spouses:
 
 ```{r}
 three_gen %>% 
@@ -89,16 +91,15 @@ three_gen %>%
   describe_records(three_gen, .)
 ```
 
-Setting `include_families = TRUE` will include the individual's families where they are a spouse:
+Setting `include_families = TRUE` will include the individual's families where they are a spouse, and all descendants' families:
 
 ```{r}
 three_gen %>% 
-  get_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
-                       include_families = TRUE) %>% 
+  get_descendants("Main Person", include_families = TRUE) %>% 
   describe_records(three_gen, .)
 ```
 
-Instead of describing the records, we can remove them with `remove_records()`:
+If we want to remove the individual and their spouses, all descendants and their spouses, and all families, we can remove them with `remove_records()`:
 
 ```{r}
 three_gen %>% 

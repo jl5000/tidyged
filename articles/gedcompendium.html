@@ -91,22 +91,15 @@
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>The <code>tidyged</code> package is the core package of the <code>gedcompendium</code> ecosystem of packages.</p>
-<p><a href="https://github.com/jl5000/tidyged.internals"><img src="https://raw.githubusercontent.com/jl5000/tidyged.internals/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/tidyged"><img src="https://raw.githubusercontent.com/jl5000/tidyged/master/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/tidyged.io"><img src="https://raw.githubusercontent.com/jl5000/tidyged.io/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/gedcompendium"><img src="https://raw.githubusercontent.com/jl5000/gedcompendium/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/visged"><img src="https://raw.githubusercontent.com/jl5000/visged/master/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/autoged"><img src="https://raw.githubusercontent.com/jl5000/autoged/main/man/figures/logo.png" align="center" height="125"></a><a href="https://github.com/jl5000/geddown"><img src="https://raw.githubusercontent.com/jl5000/geddown/main/man/figures/logo.png" align="center" height="125"></a></p>
+<p><img src="https://github.com/jl5000/tidyged/raw/main/man/figures/allhex.png" width="65%" style="display: block; margin: auto;"></p>
 </div>
 <div id="packages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#packages" class="anchor"></a>Packages</h2>
-<p>The <code>tidyged</code> package has a dependency on the <code>tidyged.internals</code> package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the <code>tidyged</code> package. There is also a dependency on the <code>tidyged.io</code> package which is used for importing GEDCOM files and exporting <code>tidyged</code> objects.</p>
-<p>There are numerous spin-off packages planned:</p>
-<ul>
-<li>
-<strong>visged:</strong> Create visualisations of tidyged objects;</li>
-<li>
-<strong>autoged:</strong> Automate the recording of facts from source documents;</li>
-<li>
-<strong>geddown:</strong> Create RMarkdown-based reports of tidyged objects.</li>
-</ul>
-<p>The <code>tidyged</code> package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The long term plan is to also have a sister package to provide a <code>shiny</code> interface (<code>shinyged</code>). There are also plans for a <code>safeged</code> package to remove sensitive data from living individuals from tidyged objects.</p>
+<p>The <code>tidyged</code> package has a dependency on the <code>tidyged.internals</code> package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the <code>tidyged</code> package. There is also a dependency on the <code>tidyged.io</code> package which is used for importing GEDCOM files and exporting <code>tidyged</code> objects as GEDCOM files. The <code>tidyged.utils</code> package has a number of additional functions to help maintain and clean GEDCOM files.</p>
+<p>The <code>tidyged</code> package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The longer term plan is for the <code>shinyged</code> package to provide a <code>shiny</code> interface. This will also enable the <code>autoged</code> package to allow an evidence-driven approach to record facts from source documents.</p>
+<p>There are also packages used to generate visualisations and RMarkdown-based reports of the content of GEDCOM files; <code>visged</code> and <code>geddown</code>.</p>
+<p>It will probably take until around 2023 for me to finish all this.</p>
 <p style="text-align: right;">
 <a href="https://jl5000.github.io/tidyged/articles/tidyged_creation.html">Next article: Creating tidyged objects &gt;</a>
 </p>

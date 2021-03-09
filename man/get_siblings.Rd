@@ -2,7 +2,7 @@
 % Please edit documentation in R/identify.R
 \name{get_siblings}
 \alias{get_siblings}
-\title{Get all siblings for an individual}
+\title{Identify all siblings for an individual}
 \usage{
 get_siblings(
   gedcom,
@@ -25,5 +25,5 @@ is not activated (will override active record).}
 A character vector of sibling xrefs or names.
 }
 \description{
-Get all siblings for an individual
+Identify all siblings for an individual
 }

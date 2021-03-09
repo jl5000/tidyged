@@ -2,7 +2,7 @@
 % Please edit documentation in R/identify.R
 \name{get_families_as_child}
 \alias{get_families_as_child}
-\title{Get all families for an individual where they are a child}
+\title{Identify all families for an individual where they are a child}
 \usage{
 get_families_as_child(gedcom, individual = character())
 }
@@ -16,5 +16,5 @@ is not activated (will override active record).}
 A character vector of family xrefs.
 }
 \description{
-Get all families for an individual where they are a child
+Identify all families for an individual where they are a child
 }

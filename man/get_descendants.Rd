@@ -9,7 +9,8 @@ get_descendants(
   individual = character(),
   include_individual = FALSE,
   include_spouses = FALSE,
-  include_families = FALSE
+  include_families = FALSE,
+  include_supp_records = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ descendants' spouses).}
 
 \item{include_families}{Whether to also include all Family Group records where this individual is a spouse
 (and all descendants' Family Group records).}
+
+\item{include_supp_records}{Whether to also include all supporting records (Note, Source, Repository, Multimedia).}
 }
 \value{
 A vector of xrefs of descendants.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/identify.R
 \name{get_supporting_records}
 \alias{get_supporting_records}
-\title{Get all supporting records for a set of records}
+\title{Identify all supporting records for a set of records}
 \usage{
 get_supporting_records(
   gedcom,

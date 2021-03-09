@@ -20,12 +20,14 @@ knitr::include_graphics("https://github.com/jl5000/tidyged/raw/master/man/figure
 
 ## Packages
 
-The `tidyged` package has a dependency on the `tidyged.internals` package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the `tidyged` package. There is also a dependency on the `tidyged.io` package which is used for importing GEDCOM files and exporting `tidyged` objects as GEDCOM files. The `tidyged.utils` package has a number of additional functions to help maintain and clean GEDCOM files.
+The `gedcompendium` is being developed in three phases:
 
-The `tidyged` package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The longer term plan is for the `shinyged` package to provide a `shiny` interface. This will also enable the `autoged` package to allow an evidence-driven approach to record facts from source documents.
+1. The `tidyged` package has a dependency on the `tidyged.internals` package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the `tidyged` package. There is also a dependency on the `tidyged.io` package which is used for importing GEDCOM files and exporting `tidyged` objects as GEDCOM files. The `tidyged.utils` package has a number of additional functions to help maintain and clean GEDCOM files.
 
-There are also packages used to generate visualisations and RMarkdown-based reports of the content of GEDCOM files; `visged` and `geddown`.
+2. The `tidyged` package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The longer term plan is for the `shinyged` package to provide a `shiny` interface. This will also enable the `autoged` package to allow an evidence-driven approach to record facts from source documents.
 
-It will probably take until around 2023 for me to finish all this.
+3. There are also packages used to generate visualisations and RMarkdown-based reports of the content of GEDCOM files; `visged` and `geddown`.
+
+Phase 1 is almost complete. Phase 2 will begin in mid-2021. It will probably take until around 2023 for me to finish it all.
 
 <p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/tidyged_creation.html">Next article: Creating tidyged objects ></a></p>

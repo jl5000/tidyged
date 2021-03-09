@@ -2,7 +2,7 @@
 % Please edit documentation in R/identify.R
 \name{get_parents}
 \alias{get_parents}
-\title{Get all parents for an individual}
+\title{Identify all parents for an individual}
 \usage{
 get_parents(gedcom, individual = character(), return_name = FALSE)
 }
@@ -18,5 +18,5 @@ is not activated (will override active record).}
 A character vector of parent xrefs or names.
 }
 \description{
-Get all parents for an individual
+Identify all parents for an individual
 }

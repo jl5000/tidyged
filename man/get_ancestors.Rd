@@ -9,7 +9,8 @@ get_ancestors(
   individual = character(),
   include_individual = FALSE,
   include_siblings = FALSE,
-  include_families = FALSE
+  include_families = FALSE,
+  include_supp_records = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ included if the individual is included).}
 
 \item{include_families}{Whether to also include all Family Group records where this individual is a child
 (and all ancestors' Family Group records).}
+
+\item{include_supp_records}{Whether to also include all supporting records (Note, Source, Repository, Multimedia).}
 }
 \value{
 A vector of xrefs of ancestors.

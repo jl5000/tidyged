@@ -1,6 +1,6 @@
 
 
-#' Get all spouses for an individual
+#' Identify all spouses for an individual
 #'
 #' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
@@ -32,7 +32,7 @@ get_spouses <- function(gedcom,
 }
 
 
-#' Get all children for an individual
+#' Identify all children for an individual
 #'
 #' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
@@ -63,7 +63,7 @@ get_children <- function(gedcom,
   
 }
 
-#' Get all parents for an individual
+#' Identify all parents for an individual
 #'
 #' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
@@ -94,7 +94,7 @@ get_parents <- function(gedcom,
 }
 
 
-#' Get all siblings for an individual
+#' Identify all siblings for an individual
 #'
 #' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
@@ -132,7 +132,7 @@ get_siblings <- function(gedcom,
   
 }
 
-#' Get all families for an individual where they are a spouse
+#' Identify all families for an individual where they are a spouse
 #'
 #' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
@@ -151,7 +151,7 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
   
 }
 
-#' Get all families for an individual where they are a child
+#' Identify all families for an individual where they are a child
 #'
 #' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
@@ -170,7 +170,7 @@ get_families_as_child <- function(gedcom, individual = character()) {
 }
 
 
-#' Get all supporting records for a set of records
+#' Identify all supporting records for a set of records
 #' 
 #' This function gets all supporting records (and onwards dependencies) for a set of records. Supporting records
 #' are note, multimedia, source, and repository records, i.e. those providing supporting evidence and comments.
@@ -226,6 +226,7 @@ get_supporting_records <- function(gedcom,
 #' descendants' spouses).
 #' @param include_families Whether to also include all Family Group records where this individual is a spouse 
 #' (and all descendants' Family Group records).
+#' @param include_supp_records Whether to also include all supporting records (Note, Source, Repository, Multimedia).
 #'
 #' @return A vector of xrefs of descendants.
 #' @export
@@ -238,7 +239,8 @@ get_descendants <- function(gedcom,
                             individual = character(),
                             include_individual = FALSE,
                             include_spouses = FALSE,
-                            include_families = FALSE) {
+                            include_families = FALSE,
+                            include_supp_records = FALSE) {
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
@@ -263,10 +265,19 @@ get_descendants <- function(gedcom,
   # identify children
   for(i in seq_along(chil_xref)) {
     return_xrefs <- c(return_xrefs,
-                      get_descendants(gedcom, chil_xref[i], TRUE, include_spouses, include_families))
+                      get_descendants(gedcom, chil_xref[i], TRUE, include_spouses, include_families, FALSE))
   }
   
-  return_xrefs
+  if (include_supp_records && length(as.character(sys.call())) == 7 && 
+      any(as.character(sys.call()) != c("get_descendants","gedcom","chil_xref[i]",
+                                        "TRUE","include_spouses","include_families","FALSE"))){
+    
+    c(return_xrefs,
+      get_supporting_records(gedcom, return_xrefs))
+  } else {
+    return_xrefs
+  }
+  
 }
 
 
@@ -282,6 +293,7 @@ get_descendants <- function(gedcom,
 #' included if the individual is included).
 #' @param include_families Whether to also include all Family Group records where this individual is a child 
 #' (and all ancestors' Family Group records).
+#' @param include_supp_records Whether to also include all supporting records (Note, Source, Repository, Multimedia).
 #'
 #' @return A vector of xrefs of ancestors.
 #' @export
@@ -289,7 +301,8 @@ get_ancestors <- function(gedcom,
                           individual = character(),
                           include_individual = FALSE,
                           include_siblings = FALSE,
-                          include_families = FALSE) {
+                          include_families = FALSE,
+                          include_supp_records = FALSE) {
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
@@ -311,10 +324,18 @@ get_ancestors <- function(gedcom,
   
   for(i in seq_along(par_xref)) {
     return_xrefs <- c(return_xrefs,
-                      get_ancestors(gedcom, par_xref[i], TRUE, include_siblings, include_families))
+                      get_ancestors(gedcom, par_xref[i], TRUE, include_siblings, include_families, FALSE))
   }
   
-  return_xrefs
+  if (include_supp_records && length(as.character(sys.call())) == 7 && 
+      any(as.character(sys.call()) != c("get_ancestors","gedcom","par_xref[i]",
+                                        "TRUE","include_siblings","include_families","FALSE"))) {
+    
+    c(return_xrefs,
+      get_supporting_records(gedcom, return_xrefs))
+  } else {
+    return_xrefs
+  }
 }
 
 

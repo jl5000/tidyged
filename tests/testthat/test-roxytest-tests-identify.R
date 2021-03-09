@@ -37,7 +37,7 @@ test_that("Function get_supporting_records() @ L189", {
 })
 
 
-test_that("Function get_descendants() @ L237", {
+test_that("Function get_descendants() @ L238", {
   expect_equal(get_descendants(sample555, "Robert"), "@I3@")
   expect_equal(get_descendants(sample555, "Robert", TRUE), c("@I1@","@I3@"))
   expect_equal(get_descendants(sample555, "Robert", TRUE, TRUE), c("@I2@","@I1@","@I3@"))
@@ -45,22 +45,22 @@ test_that("Function get_descendants() @ L237", {
 })
 
 
-test_that("Function xrefs_indi() @ L336", {
+test_that("Function xrefs_indi() @ L355", {
   expect_equal(xrefs_indi(sample555), paste0("@I", 1:3, "@"))
 })
 
 
-test_that("Function xrefs_famg() @ L342", {
+test_that("Function xrefs_famg() @ L361", {
   expect_equal(xrefs_famg(sample555), paste0("@F", 1:2, "@"))
 })
 
 
-test_that("Function xrefs_subm() @ L348", {
+test_that("Function xrefs_subm() @ L367", {
   expect_equal(xrefs_subm(sample555), paste0("@U", 1, "@"))
 })
 
 
-test_that("Function xrefs_sour() @ L354", {
+test_that("Function xrefs_sour() @ L373", {
   expect_equal(xrefs_sour(sample555), paste0("@S", 1, "@"))
 })
 

@@ -96,10 +96,13 @@
 <div id="packages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#packages" class="anchor"></a>Packages</h2>
-<p>The <code>tidyged</code> package has a dependency on the <code>tidyged.internals</code> package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the <code>tidyged</code> package. There is also a dependency on the <code>tidyged.io</code> package which is used for importing GEDCOM files and exporting <code>tidyged</code> objects as GEDCOM files. The <code>tidyged.utils</code> package has a number of additional functions to help maintain and clean GEDCOM files.</p>
-<p>The <code>tidyged</code> package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The longer term plan is for the <code>shinyged</code> package to provide a <code>shiny</code> interface. This will also enable the <code>autoged</code> package to allow an evidence-driven approach to record facts from source documents.</p>
-<p>There are also packages used to generate visualisations and RMarkdown-based reports of the content of GEDCOM files; <code>visged</code> and <code>geddown</code>.</p>
-<p>It will probably take until around 2023 for me to finish all this.</p>
+<p>The <code>gedcompendium</code> is being developed in three phases:</p>
+<ol style="list-style-type: decimal">
+<li><p>The <code>tidyged</code> package has a dependency on the <code>tidyged.internals</code> package, which contains the codification of the GEDCOM 5.5.5 specification. The user is kept away from the complexity of this infrastructure, and instead interacts with various wrapper functions found in the <code>tidyged</code> package. There is also a dependency on the <code>tidyged.io</code> package which is used for importing GEDCOM files and exporting <code>tidyged</code> objects as GEDCOM files. The <code>tidyged.utils</code> package has a number of additional functions to help maintain and clean GEDCOM files.</p></li>
+<li><p>The <code>tidyged</code> package is intended to be used interactively at the console or in scripts. However its utility is somewhat limited by the lack of an interactive interface. The longer term plan is for the <code>shinyged</code> package to provide a <code>shiny</code> interface. This will also enable the <code>autoged</code> package to allow an evidence-driven approach to record facts from source documents.</p></li>
+<li><p>There are also packages used to generate visualisations and RMarkdown-based reports of the content of GEDCOM files; <code>visged</code> and <code>geddown</code>.</p></li>
+</ol>
+<p>Phase 1 is almost complete. Phase 2 will begin in mid-2021. It will probably take until around 2023 for me to finish it all.</p>
 <p style="text-align: right;">
 <a href="https://jl5000.github.io/tidyged/articles/tidyged_creation.html">Next article: Creating tidyged objects &gt;</a>
 </p>

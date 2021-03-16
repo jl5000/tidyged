@@ -14,7 +14,6 @@
 #' @param age_at_event A character string that indicates the age in years, months, and days 
 #' that the individual was at the time of the event. Any combination of these is permitted. 
 #' Any labels must come after their corresponding number, for example; "4y 8m 10d".
-#' The string can also be "CHILD", "INFANT", or "STILLBORN".
 #' 
 #' @param event_classification A descriptive word or phrase used to further classify this 
 #' event. This should be used whenever the 'other' event is used (but can also be used

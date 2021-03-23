@@ -268,6 +268,7 @@ get_descendants <- function(gedcom,
                       get_descendants(gedcom, chil_xref[i], TRUE, include_spouses, include_families, FALSE))
   }
   
+  # only get supporting records if this is the top level call
   if (include_supp_records && length(as.character(sys.call())) == 7 && 
       any(as.character(sys.call()) != c("get_descendants","gedcom","chil_xref[i]",
                                         "TRUE","include_spouses","include_families","FALSE"))){
@@ -327,6 +328,7 @@ get_ancestors <- function(gedcom,
                       get_ancestors(gedcom, par_xref[i], TRUE, include_siblings, include_families, FALSE))
   }
   
+  # only get supporting records if this is the top level call
   if (include_supp_records && length(as.character(sys.call())) == 7 && 
       any(as.character(sys.call()) != c("get_ancestors","gedcom","par_xref[i]",
                                         "TRUE","include_siblings","include_families","FALSE"))) {

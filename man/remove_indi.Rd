@@ -13,7 +13,8 @@ remove_indi(gedcom, individual = character(), remove_associations = TRUE)
 is not activated (will override active record).}
 
 \item{remove_associations}{Whether to also remove associations with this individual in
-other individual records. Defaults to TRUE.}
+other individual records. Defaults to TRUE. You shouldn't really leave dead links to
+individual records that no longer exist.}
 }
 \value{
 An updated tidyged object excluding the selected Individual record.

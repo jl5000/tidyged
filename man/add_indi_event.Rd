@@ -105,7 +105,7 @@ add_indi_event_other(...)
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{event_type}{The type of event. This should be automatically populated with the appropriate
+\item{event_type}{The type of event. This should be automatically populated when using the appropriate
 event function.}
 
 \item{event_descriptor}{Text describing the type of event. This should only be used for "other" events.}

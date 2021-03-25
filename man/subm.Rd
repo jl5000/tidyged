@@ -43,7 +43,8 @@ subm(
 \item{subm_notes}{A character vector of notes accompanying this Submitter record.
 These could be xrefs to existing Note records.}
 
-\item{multimedia_links}{TODO}
+\item{multimedia_links}{A character vector of multimedia file references accompanying this
+Submitter record. These could be xrefs to existing Multimedia records.}
 }
 \value{
 A Submitter record to be incorporated into a new tidyged object.

@@ -96,7 +96,8 @@ object giving the timing of the event.}
 Normally this will be used for a death event to show cause of death, such as might be listed
 on a death certificate.}
 
-\item{user_reference_type}{TODO}
+\item{user_reference_type}{A user-defined type to associate with this attribute. It is unclear
+from the specification why this is required, so it is advised to avoid using this argument.}
 
 \item{age_at_event}{A character string that indicates the age in years, months, and days
 that the individual was at the time of the event. Any combination of these is permitted.

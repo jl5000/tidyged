@@ -77,7 +77,7 @@ add_famg_event_other(...)
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{event_type}{The type of event. This should be automatically populated with the appropriate
+\item{event_type}{The type of event. This should be automatically populated when using the appropriate
 event function.}
 
 \item{event_descriptor}{A short description of the event.}

@@ -72,7 +72,8 @@ gedcom <- function(submitter_details = subm(),
 #' @param web_page A character vector containing up to three web pages of the submitter.
 #' @param subm_notes A character vector of notes accompanying this Submitter record.
 #' These could be xrefs to existing Note records.
-#' @param multimedia_links TODO
+#' @param multimedia_links A character vector of multimedia file references accompanying this 
+#' Submitter record. These could be xrefs to existing Multimedia records.
 #'
 #' @return A Submitter record to be incorporated into a new tidyged object.
 #' @export

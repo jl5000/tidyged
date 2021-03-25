@@ -75,7 +75,8 @@ add_indi <- function(gedcom,
 #' @param individual The xref or name of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param remove_associations Whether to also remove associations with this individual in 
-#' other individual records. Defaults to TRUE.
+#' other individual records. Defaults to TRUE. You shouldn't really leave dead links to
+#' individual records that no longer exist.
 #'
 #' @return An updated tidyged object excluding the selected Individual record.
 #' 
@@ -92,7 +93,7 @@ remove_indi <- function(gedcom,
   if(remove_associations) gedcom <- tidyged.internals::remove_section(gedcom, 1, "ASSO", xref)
 
   gedcom %>% 
-    dplyr::filter(record != xref, value != xref) %>% 
+    dplyr::filter(record != xref, !(value == xref & tag != "ASSO")) %>%
     null_active_record()
 }
 

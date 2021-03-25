@@ -10,7 +10,8 @@
 #' @param fact_classification A descriptive word or phrase used to further classify this 
 #' attribute. This should be used whenever the 'other' attribute is used (but can also be used
 #' with others).
-#' @param user_reference_type TODO
+#' @param user_reference_type A user-defined type to associate with this attribute. It is unclear
+#' from the specification why this is required, so it is advised to avoid using this argument.
 #' @param multimedia_links A character vector of multimedia file references accompanying this
 #' attribute. These could be xrefs to existing Multimedia records.
 #' @param update_date_changed Whether to add/update the change date for the record.

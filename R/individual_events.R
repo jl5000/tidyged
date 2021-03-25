@@ -3,7 +3,7 @@
 #'
 #' @param gedcom A tidyged object.
 #' 
-#' @param event_type The type of event. This should be automatically populated with the appropriate
+#' @param event_type The type of event. This should be automatically populated when using the appropriate
 #' event function.
 #' @param event_descriptor Text describing the type of event. This should only be used for "other" events.
 #' @param family_xref The xref of the family associated of which this individual is a child.

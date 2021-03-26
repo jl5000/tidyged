@@ -44,7 +44,7 @@ null_active_record <- function(gedcom) {
 #' @param tags The tags to look at when comparing values.
 #' @param search_pattern A regex pattern to search for.
 #'
-#' @return A single xref for the given record
+#' @return A single xref for the given record.
 find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
   
   if(length(search_pattern) == 0) return(character())
@@ -61,9 +61,11 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
     
   } else if(length(unique(possibilities$record)) > 1) {
     
-    stop("More than one record found for the given regex: ",
-         paste(unique(possibilities$value), collapse = ", "),
-         ". \nTry being more specific or supplying the xref explicitly.")
+    choice <- utils::select.list(title = paste("More than one record found for the given regex:", search_pattern),
+                                         choices = describe_records(gedcom, unique(possibilities$record)),
+                                         multiple = FALSE)
+    
+    xref <- stringr::str_extract(choice, "@[a-zA-Z0-9]{1,20}@")
     
   } else if(length(unique(possibilities$record)) == 1) {
     

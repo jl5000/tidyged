@@ -16,7 +16,7 @@ find_xref(gedcom, record_xrefs, tags, search_pattern)
 \item{search_pattern}{A regex pattern to search for.}
 }
 \value{
-A single xref for the given record
+A single xref for the given record.
 }
 \description{
 This is a helper function to identify the xref of a record given a piece of information such

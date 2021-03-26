@@ -181,8 +181,7 @@
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="st">"Simpson"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Error in find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), : More than one record found for the given regex: Homer Simpson, Marge Simpson, Lisa Simpson, Bart Simpson. </span>
-<span class="co">#&gt; Try being more specific or supplying the xref explicitly.</span></code></pre></div>
+<span class="co">#&gt; Error in utils::select.list(title = paste("More than one record found for the given regex:", : select.list() cannot be used non-interactively</span></code></pre></div>
 <p>This functionality can be found when referencing all records, except the Family Group record (where an xref must be provided). The following attributes are used to uniquely identify these records:</p>
 <ul>
 <li>Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);</li>
@@ -244,7 +243,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">0</td>
-<td align="left">25 MAR 2021</td>
+<td align="left">26 MAR 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -259,7 +258,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">0</td>
-<td align="left">25 MAR 2021</td>
+<td align="left">26 MAR 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -274,7 +273,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">0</td>
-<td align="left">25 MAR 2021</td>
+<td align="left">26 MAR 2021</td>
 </tr>
 </tbody>
 </table>

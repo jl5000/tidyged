@@ -165,17 +165,17 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">25 MAR 2021</td>
+<td align="left">26 MAR 2021</td>
 </tr>
 </tbody>
 </table>
 <p>Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record). Note that if forward-slashes are in the name, they should not be used in any expressions.</p>
-<p>If no match or more than one match is found, it will result in an error:</p>
+<p>If no match is found, it will result in an error:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Simpson"</span>, wife <span class="op">=</span> <span class="st">"Marge"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bart"</span>, <span class="st">"Lisa"</span><span class="op">)</span><span class="op">)</span> 
-<span class="co">#&gt; Error in find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), : More than one record found for the given regex: Homer Simpson, Marge Simpson, Lisa Simpson, Bart Simpson. </span>
-<span class="co">#&gt; Try being more specific or supplying the xref explicitly.</span></code></pre></div>
+  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Horace"</span>, wife <span class="op">=</span> <span class="st">"Marge"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bart"</span>, <span class="st">"Lisa"</span><span class="op">)</span><span class="op">)</span> 
+<span class="co">#&gt; Error in find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), : No records found for the given regex (Horace). Try supplying the xref explicitly.</span></code></pre></div>
+<p>If more than one match is found, the user is presented with a choice to manually select which match to use.</p>
 </div>
 <div id="family-links" class="section level2">
 <h2 class="hasAnchor">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define a Submitter record for a new tidyged object — subm • tidyged</title>
+<title>Define a place associated with a fact — place • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Define a Submitter record for a new tidyged object — subm" />
-<meta property="og:description" content="Define a Submitter record for a new tidyged object" />
+<meta property="og:title" content="Define a place associated with a fact — place" />
+<meta property="og:description" content="Define a place associated with a fact" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,20 +119,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define a Submitter record for a new tidyged object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/create.R'><code>R/create.R</code></a></small>
-    <div class="hidden name"><code>subm.Rd</code></div>
+    <h1>Define a place associated with a fact</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/structures.R'><code>R/structures.R</code></a></small>
+    <div class="hidden name"><code>place.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Define a Submitter record for a new tidyged object</p>
+    <p>Define a place associated with a fact</p>
     </div>
 
-    <pre class="usage"><span class='fu'>subm</span><span class='op'>(</span>
-  name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/unname.html'>unname</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.info.html'>Sys.info</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='st'>"user"</span><span class='op'>]</span><span class='op'>)</span>,
-  subm_address <span class='op'>=</span> <span class='fu'><a href='address.html'>address</a></span><span class='op'>(</span><span class='op'>)</span>,
-  subm_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  multimedia_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>place</span><span class='op'>(</span>
+  name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  phonetic_var <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  phonetisation_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  romanised_var <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  romanisation_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  latitude <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  longitude <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -140,33 +144,53 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>The name of the submitter.</p></td>
+      <td><p>The jurisdictional name of the place.
+Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."</p></td>
     </tr>
     <tr>
-      <th>subm_notes</th>
-      <td><p>A character vector of notes accompanying this Submitter record.
+      <th>phonetic_var</th>
+      <td><p>A character vector of phonetic variations of the place name.</p></td>
+    </tr>
+    <tr>
+      <th>phonetisation_method</th>
+      <td><p>A character vector giving the method used in transforming the text to
+the corresponding phonetic variation. If this argument is used, it must be the same size
+as the phonetic_var argument.</p></td>
+    </tr>
+    <tr>
+      <th>romanised_var</th>
+      <td><p>A character vector of romanised variations of the place name.</p></td>
+    </tr>
+    <tr>
+      <th>romanisation_method</th>
+      <td><p>A character vector giving the method used in transforming the text to
+the corresponding romanised variation. If this argument is used, it must be the same size
+as the romanised_var argument.</p></td>
+    </tr>
+    <tr>
+      <th>latitude</th>
+      <td><p>The value specifying the latitudinal coordinate of the place.
+The latitude coordinate is the direction North or South from the equator in degrees and
+fraction of degrees carried out to give the desired accuracy.
+For example: 18 degrees, 9 minutes, and 3.4 seconds North would be formatted as "N18.150944"</p></td>
+    </tr>
+    <tr>
+      <th>longitude</th>
+      <td><p>The value specifying the longitudinal coordinate of the place.
+The longitude coordinate is Degrees and fraction of degrees east or west of the zero or
+base meridian coordinate. For example:
+168 degrees, 9 minutes, and 3.4 seconds East would be formatted as "E168.150944".</p></td>
+    </tr>
+    <tr>
+      <th>notes</th>
+      <td><p>A character vector of notes accompanying the place.
 These could be xrefs to existing Note records.</p></td>
-    </tr>
-    <tr>
-      <th>multimedia_links</th>
-      <td><p>A character vector of multimedia file references accompanying this
-Submitter record. These could be xrefs to existing Multimedia records.</p></td>
-    </tr>
-    <tr>
-      <th>address</th>
-      <td><p>An address() object containing the submitter address.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Submitter record to be incorporated into a new tidyged object.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function is supposed to be used in the gedcom() function to define a
-new tidyged object.</p>
-<p>This submitter record identifies the individual or organization that contributed
-information contained in the GEDCOM file.</p>
+    <p>A tibble describing a place.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

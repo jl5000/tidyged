@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a family event to a Family Group record — add_famg_event • tidyged</title>
+<title>Add a fact associated with an individual — add_indi_fact • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Add a family event to a Family Group record — add_famg_event" />
-<meta property="og:description" content="The three-letter codes used for the type parameter are:" />
+<meta property="og:title" content="Add a fact associated with an individual — add_indi_fact" />
+<meta property="og:description" content="Add a fact associated with an individual" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,29 +119,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add a family event to a Family Group record</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/family_events.R'><code>R/family_events.R</code></a></small>
-    <div class="hidden name"><code>add_famg_event.Rd</code></div>
+    <h1>Add a fact associated with an individual</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/individual_facts.R'><code>R/individual_facts.R</code></a></small>
+    <div class="hidden name"><code>add_indi_fact.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The three-letter codes used for the type parameter are:</p>
+    <p>Add a fact associated with an individual</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_famg_event</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>add_indi_fact</span><span class='op'>(</span>
   <span class='va'>gedcom</span>,
   <span class='va'>type</span>,
   descriptor <span class='op'>=</span> <span class='st'>""</span>,
   classification <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  husband_age <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  wife_age <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  age <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   cause <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  event_place <span class='op'>=</span> <span class='fu'><a href='place.html'>place</a></span><span class='op'>(</span><span class='op'>)</span>,
-  event_address <span class='op'>=</span> <span class='fu'><a href='address.html'>address</a></span><span class='op'>(</span><span class='op'>)</span>,
+  user_reference_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  fact_place <span class='op'>=</span> <span class='fu'><a href='place.html'>place</a></span><span class='op'>(</span><span class='op'>)</span>,
+  fact_address <span class='op'>=</span> <span class='fu'><a href='address.html'>address</a></span><span class='op'>(</span><span class='op'>)</span>,
   notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   responsible_agency <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   religious_affiliation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  family_xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  adopting_parent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   multimedia_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   update_date_changed <span class='op'>=</span> <span class='cn'>TRUE</span>
@@ -156,65 +158,76 @@
     </tr>
     <tr>
       <th>type</th>
-      <td><p>A (case-insensitive) three-letter code giving the type of event. See Details.</p></td>
+      <td><p>A (case-insensitive) three-letter code giving the type of event or attribute. See Details.</p></td>
     </tr>
     <tr>
       <th>descriptor</th>
-      <td><p>A short description of an 'other' event.</p></td>
+      <td><p>A short description of the attribute (which is not a residence) or 'other' event.</p></td>
     </tr>
     <tr>
       <th>classification</th>
       <td><p>A descriptive word or phrase used to further classify this
-event. This should be used whenever the 'other' event is used (but can also be used
+fact. This should be used whenever the 'other' event/attribute is used (but can also be used
 with others).</p></td>
     </tr>
     <tr>
       <th>date</th>
       <td><p>A date_calendar(), date_approximated(), date_period(), or date_range()
-object giving the timing of the event..</p></td>
+object giving the timing of the fact.</p></td>
     </tr>
     <tr>
-      <th>husband_age</th>
+      <th>age</th>
       <td><p>A character string that indicates the age in years, months, and days
-that the husband was at the time of the event. Any combination of these is permitted.
-Any labels must come after their corresponding number, for example; "4y 8m 10d".</p></td>
-    </tr>
-    <tr>
-      <th>wife_age</th>
-      <td><p>A character string that indicates the age in years, months, and days
-that the wife was at the time of the event. Any combination of these is permitted.
+that the individual was at the time of the fact. Any combination of these is permitted.
 Any labels must come after their corresponding number, for example; "4y 8m 10d".</p></td>
     </tr>
     <tr>
       <th>cause</th>
-      <td><p>Used in special cases to record the reasons which precipitated an event.</p></td>
+      <td><p>Used in special cases to record the reasons which precipitated an event.
+Normally this will be used for a death event to show cause of death, such as might be listed
+on a death certificate.</p></td>
     </tr>
     <tr>
-      <th>event_place</th>
-      <td><p>A place() object giving the place associated with this event.</p></td>
+      <th>user_reference_type</th>
+      <td><p>A user-defined type to associate with an attribute. This argument
+is mandatory for type = nid and type = att.</p></td>
     </tr>
     <tr>
-      <th>event_address</th>
-      <td><p>An address() object giving the address associated with this event.</p></td>
+      <th>fact_place</th>
+      <td><p>A place() object giving the place associated with this fact.</p></td>
+    </tr>
+    <tr>
+      <th>fact_address</th>
+      <td><p>An address() object giving the address associated with this fact.</p></td>
     </tr>
     <tr>
       <th>notes</th>
-      <td><p>A character vector of notes accompanying the event. These could be xrefs to
+      <td><p>A character vector of notes accompanying the fact. These could be xrefs to
 existing Note records.</p></td>
     </tr>
     <tr>
       <th>responsible_agency</th>
       <td><p>The organisation, institution, corporation, person, or other
-entity that has responsibility for the event.</p></td>
+entity that has responsibility for the fact.</p></td>
     </tr>
     <tr>
       <th>religious_affiliation</th>
-      <td><p>A name of the religion with which this event was affiliated.</p></td>
+      <td><p>A name of the religion with which this fact was affiliated.</p></td>
+    </tr>
+    <tr>
+      <th>family_xref</th>
+      <td><p>The xref of the family associated of which this individual is a child.
+Only used for birth, christening, or adoption events.</p></td>
+    </tr>
+    <tr>
+      <th>adopting_parent</th>
+      <td><p>A code which shows which parent in the associated family adopted this
+individual. Either "HUSB", "WIFE", or "BOTH".</p></td>
     </tr>
     <tr>
       <th>multimedia_links</th>
       <td><p>A character vector of multimedia file references accompanying this
-event. These could be xrefs to existing Multimedia records.</p></td>
+fact. These could be xrefs to existing Multimedia records.</p></td>
     </tr>
     <tr>
       <th>xref</th>
@@ -228,14 +241,23 @@ event. These could be xrefs to existing Multimedia records.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An updated tidyged object with an expanded Family group record including
-this event.</p>
+    <p>An updated tidyged object with an expanded Individual record including
+this fact.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>ann(ulment), cen(sus), div(orce), dif (divorce filed), eng(agement), mab (marriage banns),
-mac (marriage contract), mal (marriage license), rel(ationship), mas (marriage settlement),
-res(idence).</p>
-<p>Alternatively eve (for any other event).</p>
+    <p>The three-letter codes used for the type parameter are:</p>
+<p>Attributes:
+res(idence), occ(upation), edu(cation), pos(sessions), cas(te), phy(sical description),
+rel(igion), cit(izenship or nationality), nob(ility title), nid (national ID number),
+nur (number of relationships), nuc (number of children),</p>
+<p>Events:
+bir(th), dea(th), cen(sus), ado(ption), bap(tism), chr(istening), bur(ial),
+adu(lt christening), wil(l), gra(duation), pro(bate),
+ret(irement), cre(mation), bar(-mitvah), bas(-mitzvah),
+emi(gration), imm(igration), con(firmation), fir(st communion), nat(uralization).</p>
+<p>Alternatively eve or att (for any other event or attribute).</p>
+<p>If attributes (except residence) or 'other' events/attributes are used then the descriptor
+argument must be provided.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

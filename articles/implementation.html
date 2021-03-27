@@ -910,7 +910,7 @@
 </tbody>
 </table>
 <p>The cross-reference identifier is given in the record column. Event though these aren’t given for the header and trailer records they are assigned as “HD” and “TR” respectively in the <code>tidyged</code> object.</p>
-<p>Many GEDCOM processors modify the data on import, perhaps ignoring custom tags. This package reads the file as-is, and the only modification of the file is in line with that recommended in the GEDCOM 5.5.5 specification, specifically; replacing double ‘@’ symbols with single ones, and merging CONC/CONT lines.</p>
+<p>Many GEDCOM processors modify the data on import, perhaps ignoring custom tags. This package reads the file as-is, and the only modification of the file is in line with that recommended in the GEDCOM 5.5.5 specification, specifically; replacing double ‘@’ symbols with single ones, and merging CONC/CONT lines. In general, the package sticks rigidly to the GEDCOM specification and does not use custom tags. There is a real issue with other desktop applications creating their own flavours of file and diverging from the specification; <code>tidyged</code> does not and will never do this.</p>
 <p>If you want to modify single values in a GEDCOM or do a simple Find/Replace, then this is straightforward to achieve with a simple text editor.</p>
 <p style="text-align: right;">
 <a href="https://jl5000.github.io/tidyged/articles/gedcompendium.html">Next article: The gedcompendium &gt;</a>

@@ -131,15 +131,7 @@
     <pre class="usage"><span class='fu'>add_repo</span><span class='op'>(</span>
   <span class='va'>gedcom</span>,
   <span class='va'>name</span>,
-  local_address_lines <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  city <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  state <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  postal_code <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  country <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  phone_number <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  email <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  fax <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  web_page <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  repo_address <span class='op'>=</span> <span class='fu'><a href='address.html'>address</a></span><span class='op'>(</span><span class='op'>)</span>,
   user_reference_number <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   user_reference_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   repo_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
@@ -157,42 +149,6 @@
       <td><p>The name of the repository.</p></td>
     </tr>
     <tr>
-      <th>local_address_lines</th>
-      <td><p>The first lines of the repository address.</p></td>
-    </tr>
-    <tr>
-      <th>city</th>
-      <td><p>The city of the repository.</p></td>
-    </tr>
-    <tr>
-      <th>state</th>
-      <td><p>The state/county of the repository.</p></td>
-    </tr>
-    <tr>
-      <th>postal_code</th>
-      <td><p>The postal code of the repository.</p></td>
-    </tr>
-    <tr>
-      <th>country</th>
-      <td><p>The country of the repository.</p></td>
-    </tr>
-    <tr>
-      <th>phone_number</th>
-      <td><p>A character vector containing up to three phone numbers of the repository.</p></td>
-    </tr>
-    <tr>
-      <th>email</th>
-      <td><p>A character vector containing up to three email addresses of the repository.</p></td>
-    </tr>
-    <tr>
-      <th>fax</th>
-      <td><p>A character vector containing up to three fax numbers of the repository.</p></td>
-    </tr>
-    <tr>
-      <th>web_page</th>
-      <td><p>A character vector containing up to three web pages of the repository.</p></td>
-    </tr>
-    <tr>
       <th>user_reference_number</th>
       <td><p>A unique user-defined number or text that the submitter
 uses to identify this record. You can supply more than one in a vector.</p></td>
@@ -206,6 +162,10 @@ parameter is used, there must be a reference type for every reference number def
       <th>repo_notes</th>
       <td><p>A character vector of notes accompanying this Repository record.
 These could be xrefs to existing Note records.</p></td>
+    </tr>
+    <tr>
+      <th>address</th>
+      <td><p>An address() object giving the address of the repository.</p></td>
     </tr>
     </table>
 

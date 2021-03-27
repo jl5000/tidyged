@@ -18,6 +18,8 @@ add_repo(
 
 \item{name}{The name of the repository.}
 
+\item{repo_address}{An address() object giving the address of the repository.}
+
 \item{user_reference_number}{A unique user-defined number or text that the submitter
 uses to identify this record. You can supply more than one in a vector.}
 
@@ -26,8 +28,6 @@ parameter is used, there must be a reference type for every reference number def
 
 \item{repo_notes}{A character vector of notes accompanying this Repository record.
 These could be xrefs to existing Note records.}
-
-\item{address}{An address() object giving the address of the repository.}
 }
 \value{
 An updated tidyged object including the Repository record.

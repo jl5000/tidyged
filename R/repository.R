@@ -4,7 +4,7 @@
 #' 
 #' @param gedcom A tidyged object.
 #' @param name The name of the repository.
-#' @param address An address() object giving the address of the repository.
+#' @param repo_address An address() object giving the address of the repository.
 #' @param user_reference_number A unique user-defined number or text that the submitter 
 #' uses to identify this record. You can supply more than one in a vector.
 #' @param user_reference_type A user-defined definition of the user_reference_number(s). If this

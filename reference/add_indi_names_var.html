@@ -132,14 +132,8 @@
   <span class='va'>gedcom</span>,
   <span class='va'>primary_name</span>,
   <span class='va'>method</span>,
-  prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  given <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  nickname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  surname_prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  surname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  suffix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  names_var <span class='op'>=</span> <span class='fu'><a href='name_pieces.html'>name_pieces</a></span><span class='op'>(</span><span class='op'>)</span>,
   phonetic_variation <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  variation_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   update_date_changed <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
@@ -161,42 +155,13 @@
       <td><p>Indicates the method used in transforming the text to the variation.</p></td>
     </tr>
     <tr>
-      <th>prefix</th>
-      <td><p>The name prefix, e.g. Cmdr.</p></td>
-    </tr>
-    <tr>
-      <th>given</th>
-      <td><p>The given name or earned name. Different given names are separated
-by a comma.</p></td>
-    </tr>
-    <tr>
-      <th>nickname</th>
-      <td><p>A descriptive or familiar name used in connection with one's
-proper name.</p></td>
-    </tr>
-    <tr>
-      <th>surname_prefix</th>
-      <td><p>Surname prefix or article used in a family name.
-For example in the name "de la Cruz", this value would be "de la".</p></td>
-    </tr>
-    <tr>
-      <th>surname</th>
-      <td><p>Surname or family name. Different surnames are separated by a comma.</p></td>
-    </tr>
-    <tr>
-      <th>suffix</th>
-      <td><p>Non-indexing name piece that appears after the given name and surname
-parts, e.g. Jr. Different name suffix parts are separated by a comma.</p></td>
+      <th>names_var</th>
+      <td><p>A name_pieces() object defining the components of the name variation.</p></td>
     </tr>
     <tr>
       <th>phonetic_variation</th>
       <td><p>Whether the name variation is a phonetic variation
 (TRUE, default) or a romanised variation (FALSE).</p></td>
-    </tr>
-    <tr>
-      <th>variation_notes</th>
-      <td><p>A character vector of notes accompanying this name variation.
-These could be xrefs to existing Note records.</p></td>
     </tr>
     <tr>
       <th>xref</th>

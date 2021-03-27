@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Add a personal name (and components) to an Individual record — add_indi_names" />
 <meta property="og:description" content="This function can be applied to an Individual record several times to record
-personal names." />
+personal names. The personal name is constructed automatically from the components." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -127,19 +127,13 @@ personal names." />
 
     <div class="ref-description">
     <p>This function can be applied to an Individual record several times to record
-personal names.</p>
+personal names. The personal name is constructed automatically from the components.</p>
     </div>
 
     <pre class="usage"><span class='fu'>add_indi_names</span><span class='op'>(</span>
   <span class='va'>gedcom</span>,
-  prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  given <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  nickname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  surname_prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  surname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  suffix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  names <span class='op'>=</span> <span class='fu'><a href='name_pieces.html'>name_pieces</a></span><span class='op'>(</span><span class='op'>)</span>,
   type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  name_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   update_date_changed <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
@@ -152,41 +146,12 @@ personal names.</p>
       <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>prefix</th>
-      <td><p>The name prefix, e.g. Cmdr.</p></td>
-    </tr>
-    <tr>
-      <th>given</th>
-      <td><p>The given name or earned name. Different given names are separated
-by a comma.</p></td>
-    </tr>
-    <tr>
-      <th>nickname</th>
-      <td><p>A descriptive or familiar name used in connection with one's
-proper name.</p></td>
-    </tr>
-    <tr>
-      <th>surname_prefix</th>
-      <td><p>Surname prefix or article used in a family name.
-For example in the name "de la Cruz", this value would be "de la".</p></td>
-    </tr>
-    <tr>
-      <th>surname</th>
-      <td><p>Surname or family name. Different surnames are separated by a comma.</p></td>
-    </tr>
-    <tr>
-      <th>suffix</th>
-      <td><p>Non-indexing name piece that appears after the given name and surname
-parts, e.g. Jr. Different name suffix parts are separated by a comma.</p></td>
+      <th>names</th>
+      <td><p>A name_pieces() object defining the components of the personal name.</p></td>
     </tr>
     <tr>
       <th>type</th>
       <td><p>The name type, e.g. "birth", "aka", "maiden".</p></td>
-    </tr>
-    <tr>
-      <th>name_notes</th>
-      <td><p>A character vector of notes accompanying this name.
-These could be xrefs to existing Note records.</p></td>
     </tr>
     <tr>
       <th>xref</th>

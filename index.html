@@ -106,17 +106,23 @@
 
 <span class="va">tg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Jamie Lendrum"</span><span class="op">)</span>, gedcom_description <span class="op">=</span> <span class="st">"The Skywalker family"</span>, gedcom_copyright <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span>, indi_notes <span class="op">=</span> <span class="st">"The central character in the Star Wars Skywalker Saga"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Anakin"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"Darth"</span>, given <span class="op">=</span> <span class="st">"Vader"</span>, type <span class="op">=</span> <span class="st">"given"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Anakin"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"Darth"</span>, given <span class="op">=</span> <span class="st">"Vader"</span><span class="op">)</span>, 
+                 type <span class="op">=</span> <span class="st">"given"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span>, indi_notes <span class="op">=</span> <span class="st">"Queen of Naboo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Padme"</span>, surname <span class="op">=</span> <span class="st">"Amidala"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Padme"</span>, surname <span class="op">=</span> <span class="st">"Amidala"</span><span class="op">)</span>, 
+                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"Princess"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, 
+                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"Princess"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span><span class="op">)</span>, 
+                 type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Luke"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Luke"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, 
+                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Obi-Wan"</span>, nickname <span class="op">=</span> <span class="st">"Ben"</span>, surname <span class="op">=</span> <span class="st">"Kenobi"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Obi-Wan"</span>, nickname <span class="op">=</span> <span class="st">"Ben"</span>, surname <span class="op">=</span> <span class="st">"Kenobi"</span><span class="op">)</span>, 
+                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Anakin"</span>, wife <span class="op">=</span> <span class="st">"Padme"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Luke"</span>, <span class="st">"Leia"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="st">"Anakin"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/add_indi_association.html">add_indi_association</a></span><span class="op">(</span><span class="st">"Obi-Wan"</span>, association <span class="op">=</span> <span class="st">"Master"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -163,7 +169,7 @@
 <span class="co">#&gt;  28     2 @I1@   TYPE  "birth"                                                </span>
 <span class="co">#&gt;  29     2 @I1@   GIVN  "Anakin"                                               </span>
 <span class="co">#&gt;  30     2 @I1@   SURN  "Skywalker"                                            </span>
-<span class="co">#&gt;  31     1 @I1@   NAME  "Darth Vader"                                          </span>
+<span class="co">#&gt;  31     1 @I1@   NAME  "Vader"                                                </span>
 <span class="co">#&gt;  32     2 @I1@   TYPE  "given"                                                </span>
 <span class="co">#&gt;  33     2 @I1@   NPFX  "Darth"                                                </span>
 <span class="co">#&gt;  34     2 @I1@   GIVN  "Vader"                                                </span>
@@ -195,7 +201,7 @@
 <span class="co">#&gt;  60     2 @I3@   TYPE  "birth"                                                </span>
 <span class="co">#&gt;  61     2 @I3@   GIVN  "Leia"                                                 </span>
 <span class="co">#&gt;  62     2 @I3@   SURN  "Skywalker"                                            </span>
-<span class="co">#&gt;  63     1 @I3@   NAME  "Princess Leia /Organa/"                               </span>
+<span class="co">#&gt;  63     1 @I3@   NAME  "Leia /Organa/"                                        </span>
 <span class="co">#&gt;  64     2 @I3@   TYPE  "adoptive"                                             </span>
 <span class="co">#&gt;  65     2 @I3@   NPFX  "Princess"                                             </span>
 <span class="co">#&gt;  66     2 @I3@   GIVN  "Leia"                                                 </span>
@@ -216,7 +222,7 @@
 <span class="co">#&gt;  81     2 @I4@   DATE  "27 MAR 2021"                                          </span>
 <span class="co">#&gt;  82     0 @I5@   INDI  ""                                                     </span>
 <span class="co">#&gt;  83     1 @I5@   SEX   "M"                                                    </span>
-<span class="co">#&gt;  84     1 @I5@   NAME  "Obi-Wan 'Ben' /Kenobi/"                               </span>
+<span class="co">#&gt;  84     1 @I5@   NAME  "Obi-Wan /Kenobi/"                                     </span>
 <span class="co">#&gt;  85     2 @I5@   TYPE  "birth"                                                </span>
 <span class="co">#&gt;  86     2 @I5@   GIVN  "Obi-Wan"                                              </span>
 <span class="co">#&gt;  87     2 @I5@   NICK  "Ben"                                                  </span>
@@ -286,7 +292,7 @@
 <table class="table">
 <colgroup>
 <col width="2%">
-<col width="12%">
+<col width="10%">
 <col width="1%">
 <col width="9%">
 <col width="10%">
@@ -296,7 +302,7 @@
 <col width="10%">
 <col width="8%">
 <col width="8%">
-<col width="8%">
+<col width="9%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">xref</th>
@@ -371,7 +377,7 @@
 </tr>
 <tr class="odd">
 <td align="left">@I5@</td>
-<td align="left">Obi-Wan ‘Ben’ Kenobi</td>
+<td align="left">Obi-Wan Kenobi</td>
 <td align="left">M</td>
 <td align="left"></td>
 <td align="left"></td>

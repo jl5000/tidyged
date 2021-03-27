@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define a Submitter record for a new tidyged object — subm • tidyged</title>
+<title>Define a personal name's components — name_pieces • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Define a Submitter record for a new tidyged object — subm" />
-<meta property="og:description" content="Define a Submitter record for a new tidyged object" />
+<meta property="og:title" content="Define a personal name's components — name_pieces" />
+<meta property="og:description" content="Define a personal name's components" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,54 +119,66 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define a Submitter record for a new tidyged object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/create.R'><code>R/create.R</code></a></small>
-    <div class="hidden name"><code>subm.Rd</code></div>
+    <h1>Define a personal name's components</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/structures.R'><code>R/structures.R</code></a></small>
+    <div class="hidden name"><code>name_pieces.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Define a Submitter record for a new tidyged object</p>
+    <p>Define a personal name's components</p>
     </div>
 
-    <pre class="usage"><span class='fu'>subm</span><span class='op'>(</span>
-  name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/unname.html'>unname</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.info.html'>Sys.info</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='st'>"user"</span><span class='op'>]</span><span class='op'>)</span>,
-  subm_address <span class='op'>=</span> <span class='fu'><a href='address.html'>address</a></span><span class='op'>(</span><span class='op'>)</span>,
-  subm_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  multimedia_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>name_pieces</span><span class='op'>(</span>
+  prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  given <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  nickname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  surname_prefix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  surname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  suffix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>The name of the submitter.</p></td>
+      <th>prefix</th>
+      <td><p>The name prefix, e.g. Cmdr.</p></td>
     </tr>
     <tr>
-      <th>subm_address</th>
-      <td><p>An address() object containing the submitter address.</p></td>
+      <th>given</th>
+      <td><p>The given name or earned name. Different given names are separated
+by a comma.</p></td>
     </tr>
     <tr>
-      <th>subm_notes</th>
-      <td><p>A character vector of notes accompanying this Submitter record.
+      <th>nickname</th>
+      <td><p>A descriptive or familiar name used in connection with one's
+proper name.</p></td>
+    </tr>
+    <tr>
+      <th>surname_prefix</th>
+      <td><p>Surname prefix or article used in a family name.
+For example in the name "de la Cruz", this value would be "de la".</p></td>
+    </tr>
+    <tr>
+      <th>surname</th>
+      <td><p>Surname or family name. Different surnames are separated by a comma.</p></td>
+    </tr>
+    <tr>
+      <th>suffix</th>
+      <td><p>Non-indexing name piece that appears after the given name and surname
+parts, e.g. Jr. Different name suffix parts are separated by a comma.</p></td>
+    </tr>
+    <tr>
+      <th>notes</th>
+      <td><p>A character vector of notes accompanying this name.
 These could be xrefs to existing Note records.</p></td>
-    </tr>
-    <tr>
-      <th>multimedia_links</th>
-      <td><p>A character vector of multimedia file references accompanying this
-Submitter record. These could be xrefs to existing Multimedia records.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Submitter record to be incorporated into a new tidyged object.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function is supposed to be used in the gedcom() function to define a
-new tidyged object.</p>
-<p>This submitter record identifies the individual or organization that contributed
-information contained in the GEDCOM file.</p>
+    <p>A tibble describing a personal name's components.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -164,7 +164,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">leia</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">leia</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> <span class="op">)</span></code></pre></div>
 <table class="table">
@@ -233,7 +233,7 @@
 </tr>
 </tbody>
 </table>
-<p>In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes - as given in the specification). If any nicknames are defined, they will also be included within quotation marks, e.g. William ‘Billy’ /Bloggs/.</p>
+<p>In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes - as given in the specification). Nicknames are not included.</p>
 </div>
 <div id="phonetic-and-romanised-names" class="section level3">
 <h3 class="hasAnchor">
@@ -242,7 +242,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">leia_var</span> <span class="op">&lt;-</span> <span class="va">leia</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span>, method <span class="op">=</span> <span class="st">"As spoken"</span>,
-                     given <span class="op">=</span> <span class="st">"Laya"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span>, phonetic_variation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
+                     <span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Laya"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, phonetic_variation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">leia_var</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -346,7 +346,7 @@
 <p>The <code>type</code> parameter can also define different names for the individual. Below we add a line to define an adoptive name (the parameter can take any value):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">leia_adop</span> <span class="op">&lt;-</span> <span class="va">leia_var</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span>, type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> 
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">leia_adop</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -478,7 +478,7 @@
 <p>GEDCOM files can also record different names <em>of the same type</em>, perhaps due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">leia_conf</span> <span class="op">&lt;-</span> <span class="va">leia_adop</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywaker"</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywaker"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">leia_conf</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">

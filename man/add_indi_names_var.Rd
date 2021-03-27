@@ -23,8 +23,8 @@ add_indi_names_var(
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{primary_name}{The name for which this is a variation. This is treated as a
-regex pattern to match to existing names.}
+\item{primary_name}{The name for which this is a variation. This must be given exactly
+(without forward slashes).}
 
 \item{method}{Indicates the method used in transforming the text to the variation.}
 

@@ -38,7 +38,7 @@ simpsons %>%
   knitr::kable()
 ```
 
-Note that the full name does not need to be given, since the expression is treated as a regular expression. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record). Note that if forward-slashes are in the name, they should not be used in any expressions.
+Note that the full name does not need to be given, as long as the term (or terms separated by spaces) are detected in the names. Romanised and phonetic variants of the name are also searched, if they are provided in the record.
 
 If no match is found, it will result in an error:
 

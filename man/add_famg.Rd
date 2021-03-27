@@ -21,13 +21,13 @@ add_famg(
 \item{gedcom}{A tidyged object.}
 
 \item{husband}{A character string identifying the husband of this family. This can either
-be an xref or a regular expression to match to an individual name.}
+be an xref or term(s) to match to an individual name.}
 
 \item{wife}{A character string identifying the wife of this family. This can either
-be an xref or a regular expression to match to an individual name.}
+be an xref or term(s) to match to an individual name.}
 
 \item{children}{A character vector of other Individual records that are children of this
-family. Children can either be referenced by an xref or by a regular expression
+family. Children can either be referenced by an xref or term(s)
 to match to an individual name.}
 
 \item{child_linkage_types}{Codes used to indicate the child to family relationships. If defined,

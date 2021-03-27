@@ -73,8 +73,8 @@ add_indi_names <- function(gedcom,
 #' Add a variation of a personal name to an Individual record
 #' 
 #' @param gedcom A tidyged object.
-#' @param primary_name The name for which this is a variation. This is treated as a
-#' regex pattern to match to existing names. 
+#' @param primary_name The name for which this is a variation. This must be given exactly 
+#' (without forward slashes). 
 #' @param method Indicates the method used in transforming the text to the variation.
 #' @param prefix The name prefix, e.g. Cmdr.
 #' @param given The given name or earned name. Different given names are separated 

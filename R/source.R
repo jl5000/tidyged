@@ -90,7 +90,7 @@ add_sour <- function(gedcom,
 #' 
 #' @param gedcom A tidyged object.
 #' @param repository A character string identifying the repository. This can either 
-#' be an xref or a regular expression to match to a repository name.
+#' be an xref or term(s) to match to a repository name.
 #' @param call_number An identification or reference description used to file 
 #' and retrieve items from the holdings of a repository.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).

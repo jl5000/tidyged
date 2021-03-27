@@ -32,7 +32,7 @@ null_active_record <- function(gedcom) {
 
 
 
-#' Find an xref of a record given a particular regex pattern
+#' Find an xref of a record given a set of terms
 #'
 #' This is a helper function to identify the xref of a record given a piece of information such
 #' as a name or reference number.
@@ -42,7 +42,7 @@ null_active_record <- function(gedcom) {
 #' @param gedcom A tidyged object.
 #' @param record_xrefs A list of potential xrefs to consider.
 #' @param tags The tags to look at when comparing values.
-#' @param search_pattern A regex pattern to search for.
+#' @param search_pattern A set of terms to search for (separated by spaces).
 #'
 #' @return A single xref for the given record.
 find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
@@ -64,11 +64,11 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
   
   if(length(unique(possibilities$record)) == 0) {
     
-    stop("No records found for the given regex", " (", search_pattern, "). Try supplying the xref explicitly.")
+    stop("No records found for the given terms", " (", search_pattern, "). Try supplying the xref explicitly.")
     
   } else if(length(unique(possibilities$record)) > 1) {
     
-    choice <- utils::select.list(title = paste("More than one record found for the given regex:", search_pattern),
+    choice <- utils::select.list(title = paste("More than one record found for the given terms:", search_pattern),
                                          choices = describe_records(gedcom, unique(possibilities$record)),
                                          multiple = FALSE)
     
@@ -87,7 +87,7 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
 #' Set a specific record to be the active record.
 #' 
 #' @details This allows a mechanism to easily edit particular records. Either a specific record attribute can be provided
-#' (can be a regex pattern) or the xref can be provided explicitly. Providing an attribute instead of the
+#' (terms separated by spaces) or the xref can be provided explicitly. Providing an attribute instead of the
 #' xref can make your code more readable, provided that it returns a unique record! 
 #' 
 #' The attributes that can be provided for each type of record are:

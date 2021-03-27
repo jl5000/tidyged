@@ -17,7 +17,7 @@ add_indi_association(
 \item{gedcom}{A tidyged object.}
 
 \item{associated_with}{A character string identifying the associated individual. This can either
-be an xref or a regular expression to match to an individual name.}
+be an xref or term(s) to match to an individual name.}
 
 \item{association}{A word or phrase stating the nature of the association.}
 

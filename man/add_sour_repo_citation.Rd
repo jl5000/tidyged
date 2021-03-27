@@ -16,7 +16,7 @@ add_sour_repo_citation(
 \item{gedcom}{A tidyged object.}
 
 \item{repository}{A character string identifying the repository. This can either
-be an xref or a regular expression to match to a repository name.}
+be an xref or term(s) to match to a repository name.}
 
 \item{call_number}{An identification or reference description used to file
 and retrieve items from the holdings of a repository.}

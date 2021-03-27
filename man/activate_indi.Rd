@@ -38,7 +38,7 @@ Set a specific record to be the active record.
 }
 \details{
 This allows a mechanism to easily edit particular records. Either a specific record attribute can be provided
-(can be a regex pattern) or the xref can be provided explicitly. Providing an attribute instead of the
+(terms separated by spaces) or the xref can be provided explicitly. Providing an attribute instead of the
 xref can make your code more readable, provided that it returns a unique record!
 
 The attributes that can be provided for each type of record are:

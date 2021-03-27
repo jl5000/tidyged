@@ -2,7 +2,7 @@
 % Please edit documentation in R/activate.R
 \name{find_xref}
 \alias{find_xref}
-\title{Find an xref of a record given a particular regex pattern}
+\title{Find an xref of a record given a set of terms}
 \usage{
 find_xref(gedcom, record_xrefs, tags, search_pattern)
 }
@@ -13,7 +13,7 @@ find_xref(gedcom, record_xrefs, tags, search_pattern)
 
 \item{tags}{The tags to look at when comparing values.}
 
-\item{search_pattern}{A regex pattern to search for.}
+\item{search_pattern}{A set of terms to search for (separated by spaces).}
 }
 \value{
 A single xref for the given record.

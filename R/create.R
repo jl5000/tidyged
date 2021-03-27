@@ -32,8 +32,8 @@ gedcom <- function(submitter_details = subm(),
                                                                           product_version_number = utils::packageVersion("tidyged"),
                                                                           name_of_product = "The 'tidyged' package for the R language",
                                                                           name_of_business = "Jamie Lendrum",
-                                                                          business_address = tidyged.internals::ADDRESS_STRUCTURE(address_email = "jalendrum@gmail.com",
-                                                                                                               address_web_page = "https://jl5000.github.io/tidyged/"),
+                                                                          business_address = address(email = "jalendrum@gmail.com",
+                                                                                                     web_page = "https://jl5000.github.io/tidyged/"),
                                                                           name_of_source_data = source_data_name,
                                                                           publication_date = source_data_date,
                                                                           copyright_source_data = source_data_copyright,
@@ -61,15 +61,7 @@ gedcom <- function(submitter_details = subm(),
 #' information contained in the GEDCOM file.
 #' 
 #' @param name The name of the submitter.
-#' @param local_address_lines The first lines of the submitter address.
-#' @param city The city of the submitter.
-#' @param state The state/county of the submitter.
-#' @param postal_code The postal code of the submitter.
-#' @param country The country of the submitter.
-#' @param phone_number A character vector containing up to three phone numbers of the submitter.
-#' @param email A character vector containing up to three email addresses of the submitter.
-#' @param fax A character vector containing up to three fax numbers of the submitter.
-#' @param web_page A character vector containing up to three web pages of the submitter.
+#' @param address An address() object containing the submitter address.
 #' @param subm_notes A character vector of notes accompanying this Submitter record.
 #' These could be xrefs to existing Note records.
 #' @param multimedia_links A character vector of multimedia file references accompanying this 
@@ -78,29 +70,9 @@ gedcom <- function(submitter_details = subm(),
 #' @return A Submitter record to be incorporated into a new tidyged object.
 #' @export
 subm <- function(name = unname(Sys.info()["user"]),
-                 local_address_lines = character(),
-                 city = character(),
-                 state = character(),
-                 postal_code = character(),
-                 country = character(),
-                 phone_number = character(),
-                 email = character(),
-                 fax = character(),
-                 web_page = character(),
+                 subm_address = address(),
                  subm_notes = character(),
                  multimedia_links = character()) {
-  
-  if(length(local_address_lines) > 3) local_address_lines <- local_address_lines[1:3]
-  
-  address <- tidyged.internals::ADDRESS_STRUCTURE(local_address_lines = local_address_lines,
-                                                     address_city = city,
-                                                     address_state = state,
-                                                     address_postal_code = postal_code,
-                                                     address_country = country,
-                                                     phone_number = phone_number,
-                                                     address_email = email,
-                                                     address_fax = fax,
-                                                     address_web_page = web_page)
   
   sub_notes <- purrr::map(subm_notes, tidyged.internals::NOTE_STRUCTURE)
   
@@ -110,7 +82,7 @@ subm <- function(name = unname(Sys.info()["user"]),
   
   tidyged.internals::SUBMITTER_RECORD(xref_subm = tidyged.internals::assign_xref_subm(ref = 1),
                                          submitter_name = name,
-                                         address = address,
+                                         address = subm_address,
                                          notes = sub_notes,
                                          multimedia_links = media_links)
   

@@ -7,15 +7,7 @@
 add_repo(
   gedcom,
   name,
-  local_address_lines = character(),
-  city = character(),
-  state = character(),
-  postal_code = character(),
-  country = character(),
-  phone_number = character(),
-  email = character(),
-  fax = character(),
-  web_page = character(),
+  repo_address = address(),
   user_reference_number = character(),
   user_reference_type = character(),
   repo_notes = character()
@@ -26,24 +18,6 @@ add_repo(
 
 \item{name}{The name of the repository.}
 
-\item{local_address_lines}{The first lines of the repository address.}
-
-\item{city}{The city of the repository.}
-
-\item{state}{The state/county of the repository.}
-
-\item{postal_code}{The postal code of the repository.}
-
-\item{country}{The country of the repository.}
-
-\item{phone_number}{A character vector containing up to three phone numbers of the repository.}
-
-\item{email}{A character vector containing up to three email addresses of the repository.}
-
-\item{fax}{A character vector containing up to three fax numbers of the repository.}
-
-\item{web_page}{A character vector containing up to three web pages of the repository.}
-
 \item{user_reference_number}{A unique user-defined number or text that the submitter
 uses to identify this record. You can supply more than one in a vector.}
 
@@ -52,6 +26,8 @@ parameter is used, there must be a reference type for every reference number def
 
 \item{repo_notes}{A character vector of notes accompanying this Repository record.
 These could be xrefs to existing Note records.}
+
+\item{address}{An address() object giving the address of the repository.}
 }
 \value{
 An updated tidyged object including the Repository record.

@@ -2,156 +2,60 @@
 % Please edit documentation in R/family_events.R
 \name{add_famg_event}
 \alias{add_famg_event}
-\alias{add_famg_event_annulment}
-\alias{add_famg_event_census}
-\alias{add_famg_event_divorce}
-\alias{add_famg_event_divorce_filed}
-\alias{add_famg_event_engagement}
-\alias{add_famg_event_marriage_banns}
-\alias{add_famg_event_marriage_contract}
-\alias{add_famg_event_relationship}
-\alias{add_famg_event_marriage_license}
-\alias{add_famg_event_marriage_settlement}
-\alias{add_famg_event_residence}
-\alias{add_famg_event_other}
 \title{Add a family event to a Family Group record}
 \usage{
 add_famg_event(
   gedcom,
-  event_type = character(),
-  event_descriptor = character(),
-  event_classification = character(),
-  husband_age_at_event = character(),
-  wife_age_at_event = character(),
-  event_notes = character(),
-  event_date = character(),
-  event_cause = character(),
-  place_name = character(),
-  place_phonetic = character(),
-  phonetisation_method = character(),
-  place_romanised = character(),
-  romanisation_method = character(),
-  place_latitude = character(),
-  place_longitude = character(),
-  place_notes = character(),
-  local_address_lines = character(),
-  city = character(),
-  state = character(),
-  postal_code = character(),
-  country = character(),
-  phone_number = character(),
-  email = character(),
-  fax = character(),
-  web_page = character(),
+  type,
+  descriptor = "",
+  classification = character(),
+  date = character(),
+  husband_age = character(),
+  wife_age = character(),
+  cause = character(),
+  event_place = place(),
+  event_address = address(),
+  notes = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
   multimedia_links = character(),
   xref = character(),
   update_date_changed = TRUE
 )
-
-add_famg_event_annulment(...)
-
-add_famg_event_census(...)
-
-add_famg_event_divorce(...)
-
-add_famg_event_divorce_filed(...)
-
-add_famg_event_engagement(...)
-
-add_famg_event_marriage_banns(...)
-
-add_famg_event_marriage_contract(...)
-
-add_famg_event_relationship(...)
-
-add_famg_event_marriage_license(...)
-
-add_famg_event_marriage_settlement(...)
-
-add_famg_event_residence(...)
-
-add_famg_event_other(...)
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{event_type}{The type of event. This should be automatically populated when using the appropriate
-event function.}
+\item{type}{A (case-insensitive) three-letter code giving the type of event. See Details.}
 
-\item{event_descriptor}{A short description of the event.}
+\item{descriptor}{A short description of an 'other' event.}
 
-\item{event_classification}{A descriptive word or phrase used to further classify this
+\item{classification}{A descriptive word or phrase used to further classify this
 event. This should be used whenever the 'other' event is used (but can also be used
 with others).}
 
-\item{husband_age_at_event}{A character string that indicates the age in years, months, and days
+\item{date}{A date_calendar(), date_approximated(), date_period(), or date_range()
+object giving the timing of the event..}
+
+\item{husband_age}{A character string that indicates the age in years, months, and days
 that the husband was at the time of the event. Any combination of these is permitted.
 Any labels must come after their corresponding number, for example; "4y 8m 10d".}
 
-\item{wife_age_at_event}{A character string that indicates the age in years, months, and days
+\item{wife_age}{A character string that indicates the age in years, months, and days
 that the wife was at the time of the event. Any combination of these is permitted.
 Any labels must come after their corresponding number, for example; "4y 8m 10d".}
 
-\item{event_notes}{A character vector of notes accompanying the event.
-These could be xrefs to existing Note records.}
+\item{cause}{Used in special cases to record the reasons which precipitated an event.}
 
-\item{event_date}{A date_calendar(), date_approximated(), date_period(), or date_range()
-object giving the timing of the event.}
+\item{event_place}{A place() object giving the place associated with this event.}
 
-\item{event_cause}{Used in special cases to record the reasons which precipitated an event.
-Normally this will be used for a death event to show cause of death, such as might be listed
-on a death certificate.}
+\item{event_address}{An address() object giving the address associated with this event.}
 
-\item{place_name}{The jurisdictional name of the place where the event took place.
-Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."}
-
-\item{place_phonetic}{A character vector of phonetic variations of the place name.}
-
-\item{phonetisation_method}{A character vector giving the method used in transforming the text to
-the corresponding phonetic variation. If this argument is used, it must be the same size
-as the place_phonetic argument.}
-
-\item{place_romanised}{A character vector of romanised variations of the place name.}
-
-\item{romanisation_method}{A character vector giving the method used in transforming the text to
-the corresponding romanised variation. If this argument is used, it must be the same size
-as the place_romanised argument.}
-
-\item{place_latitude}{The value specifying the latitudinal coordinate of the event place.
-The latitude coordinate is the direction North or South from the equator in degrees and
-fraction of degrees carried out to give the desired accuracy.
-For example: 18 degrees, 9 minutes, and 3.4 seconds North would be formatted as "N18.150944"}
-
-\item{place_longitude}{The value specifying the longitudinal coordinate of the event place.
-The longitude coordinate is Degrees and fraction of degrees east or west of the zero or
-base meridian coordinate. For example:
-168 degrees, 9 minutes, and 3.4 seconds East would be formatted as "E168.150944".}
-
-\item{place_notes}{A character vector of notes accompanying the event place.
-These could be xrefs to existing Note records.}
-
-\item{local_address_lines}{The first line of the event address.}
-
-\item{city}{The city of the event address.}
-
-\item{state}{The state/county of the event address.}
-
-\item{postal_code}{The postal code of the event address.}
-
-\item{country}{The country of the event address.}
-
-\item{phone_number}{A character vector containing up to three phone numbers of the event address.}
-
-\item{email}{A character vector containing up to three email addresses of the event address.}
-
-\item{fax}{A character vector containing up to three fax numbers of the event address.}
-
-\item{web_page}{A character vector containing up to three web pages of the event address.}
+\item{notes}{A character vector of notes accompanying the event. These could be xrefs to
+existing Note records.}
 
 \item{responsible_agency}{The organisation, institution, corporation, person, or other
-entity that has responsibility for the event data.}
+entity that has responsibility for the event.}
 
 \item{religious_affiliation}{A name of the religion with which this event was affiliated.}
 
@@ -161,13 +65,18 @@ event. These could be xrefs to existing Multimedia records.}
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
 \item{update_date_changed}{Whether to add/update the change date for the record.}
-
-\item{...}{See arguments for main function. The attribute_type/event_type do not need to be populated.}
 }
 \value{
 An updated tidyged object with an expanded Family group record including
 this event.
 }
 \description{
-Add a family event to a Family Group record
+The three-letter codes used for the type parameter are:
+}
+\details{
+ann(ulment), cen(sus), div(orce), dif (divorce filed), eng(agement), mab (marriage banns),
+mac (marriage contract), mal (marriage license), rel(ationship), mas (marriage settlement),
+res(idence).
+
+Alternatively eve (for any other event).
 }

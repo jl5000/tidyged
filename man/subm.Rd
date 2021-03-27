@@ -6,15 +6,7 @@
 \usage{
 subm(
   name = unname(Sys.info()["user"]),
-  local_address_lines = character(),
-  city = character(),
-  state = character(),
-  postal_code = character(),
-  country = character(),
-  phone_number = character(),
-  email = character(),
-  fax = character(),
-  web_page = character(),
+  subm_address = address(),
   subm_notes = character(),
   multimedia_links = character()
 )
@@ -22,29 +14,13 @@ subm(
 \arguments{
 \item{name}{The name of the submitter.}
 
-\item{local_address_lines}{The first lines of the submitter address.}
-
-\item{city}{The city of the submitter.}
-
-\item{state}{The state/county of the submitter.}
-
-\item{postal_code}{The postal code of the submitter.}
-
-\item{country}{The country of the submitter.}
-
-\item{phone_number}{A character vector containing up to three phone numbers of the submitter.}
-
-\item{email}{A character vector containing up to three email addresses of the submitter.}
-
-\item{fax}{A character vector containing up to three fax numbers of the submitter.}
-
-\item{web_page}{A character vector containing up to three web pages of the submitter.}
-
 \item{subm_notes}{A character vector of notes accompanying this Submitter record.
 These could be xrefs to existing Note records.}
 
 \item{multimedia_links}{A character vector of multimedia file references accompanying this
 Submitter record. These could be xrefs to existing Multimedia records.}
+
+\item{address}{An address() object containing the submitter address.}
 }
 \value{
 A Submitter record to be incorporated into a new tidyged object.

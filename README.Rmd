@@ -68,10 +68,10 @@ tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family",
   add_famg(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
   activate_indi("Anakin") %>% 
   add_indi_association("Obi-Wan", association = "Master") %>% 
-  add_indi_event_death(age_at_event = "45y", event_cause = "Killed by son Luke",
-                       place_name = "Second Death Star", place_notes = "Orbiting Endor System") %>% 
-  add_indi_attr_religion(attribute_descriptor = "Jedi") %>% 
-  add_indi_attr_possessions(attribute_descriptor = "Lightsaber") %>%
+  add_indi_fact("death", age = "45y", cause = "Killed by son Luke",
+                fact_place = place(name = "Second Death Star", notes = "Orbiting Endor System")) %>% 
+  add_indi_fact("religion", descriptor = "Jedi") %>% 
+  add_indi_fact("possession", descriptor = "Lightsaber") %>%
   add_note("Based on Star Wars") %>% 
   add_sour(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
   add_repo("The Skywalker Saga") %>% 

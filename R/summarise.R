@@ -90,21 +90,21 @@ str.tidyged <- function(object, ...) {
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'  add_indi(sex = "M") %>% 
 #'  add_indi_names(given = "Joe", surname = "Bloggs") %>% 
-#'  add_indi_event_birth(event_date = date_calendar(year = 1950, month = 5, day = 7),
-#'                             place_name = "Somewhere") %>% 
-#'  add_indi_event_death(event_date = date_calendar(year = 2000, month = 12, day = 1),
-#'                             place_name = "Somewhere else") %>% 
+#'  add_indi_fact("bir", date = date_calendar(year = 1950, month = 5, day = 7),
+#'                             fact_place = place("Somewhere")) %>% 
+#'  add_indi_fact("dea", date = date_calendar(year = 2000, month = 12, day = 1),
+#'                             fact_place = place("Somewhere else")) %>% 
 #'  add_indi(sex = "F") %>% 
 #'  add_indi_names(given = "Jess", surname = "Bloggs") %>% 
-#'  add_indi_event_birth(event_date = date_calendar(year = 1948, month = 1, day = 15),
-#'                             place_name = "Somewhere") %>% 
+#'  add_indi_fact("bir", date = date_calendar(year = 1948, month = 1, day = 15),
+#'                             fact_place = place("Somewhere")) %>% 
 #'  add_indi(sex = "F") %>% 
 #'  add_indi_names(given = "Jessie", surname = "Bloggs") %>% 
-#'  add_indi_event_birth(event_date = date_approximated(date_calendar(year = 1970), about = TRUE),
-#'                             place_name = "Elsewhere") %>%
+#'  add_indi_fact("bir", date = date_approximated(date_calendar(year = 1970), about = TRUE),
+#'                             fact_place = place("Elsewhere")) %>%
 #'  add_famg(husband = "Joe", wife = "@I2@", children = "Jessie") %>% 
-#'  add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
-#'                                place_name = "Another place") %>% 
+#'  add_famg_event("rel", date = date_calendar(year = 1969, month = 1, day = 30),
+#'                        event_place = place(name = "Another place")) %>% 
 #'  tidyged.internals::remove_dates_for_tests() %>% 
 #'  df_indi(), "json2")
 df_indi <- function(gedcom) {
@@ -161,8 +161,8 @@ df_indi <- function(gedcom) {
 #'  add_indi(sex = "F") %>% 
 #'  add_indi_names(given = "Jessie", surname = "Bloggs") %>%
 #'  add_famg(husband = "Joe", wife = "@I2@", children = "Jessie") %>% 
-#'  add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
-#'                                place_name = "Another place") %>% 
+#'  add_famg_event("rel", date = date_calendar(year = 1969, month = 1, day = 30),
+#'                        event_place = place(name = "Another place")) %>% 
 #'  tidyged.internals::remove_dates_for_tests() %>% 
 #'  df_famg(), "json2")
 df_famg <- function(gedcom) {
@@ -244,9 +244,9 @@ df_sour <- function(gedcom) {
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_repo(name = "repo1", city = "Brighton", state = "E. Sussex", country = "UK") %>% 
-#'  add_repo(name = "repo2", city = "Orlando", state = "Florida", country = "USA") %>% 
-#'  add_repo(name = "repo3", city = "Yokohama", country = "Japan") %>% 
+#'  add_repo(name = "repo1", repo_address = address(city = "Brighton", state = "E. Sussex", country = "UK")) %>% 
+#'  add_repo(name = "repo2", repo_address = address(city = "Orlando", state = "Florida", country = "USA")) %>% 
+#'  add_repo(name = "repo3", repo_address = address(city = "Yokohama", country = "Japan")) %>% 
 #'  tidyged.internals::remove_dates_for_tests() %>% 
 #'  df_repo(), "json2")
 df_repo <- function(gedcom) {

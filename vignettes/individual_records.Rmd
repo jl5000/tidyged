@@ -28,21 +28,7 @@ As with other records, various types of user-defined references can be defined (
 
 Individuals can be given more than one name. These can be different kinds of name such as birth name or adoptive name, or if there is uncertainty, variants of these based on conflicting evidence sources. There is also the ability to provide phonetic and romanised variants of names. Given this complexity, the name is usually not immediately defined when creating an Individual record.
 
-### Adding individual names
-
-The main function for providing names for an individual is `add_indi_names()`:
-
-```{r}
-gedcom(subm("Me")) %>% 
-  add_indi() %>% 
-  add_indi_names(given = "Leia", surname = "Skywalker") %>% 
-  dplyr::filter(record == "@I1@") %>% 
-  knitr::kable()
-```
-
-In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes - as given in the specification). 
-
-A shortcut way of defining a name is to use the `qn` (quick name) parameter when defining an individual. It's not ideal, and should really only be reserved for demonstrations (like this one)! The function will crudely place the entire string as the given name of the individual:
+There is a quick and dirty way of adding a name with the `qn` parameter, but this is just for use in quick demonstrations and should not be used for serious genealogical recording. The function will crudely place the entire string as the given name of the individual:
 
 ```{r}
 gedcom(subm("Me")) %>% 
@@ -51,18 +37,30 @@ gedcom(subm("Me")) %>%
   knitr::kable()
 ```
 
-### Phonetic and romanised names
+### Adding individual names
 
-Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the `add_indi_names_var()` function. As a minimum, the original name, variant name pieces, derivation method, and whether it is a phonetic or romanised variation should be given:
+The main function for providing names for an individual is `add_indi_names()`:
 
 ```{r}
-gedcom(subm("Me")) %>% 
+leia <- gedcom(subm("Me")) %>% 
   add_indi() %>% 
-  add_indi_names(given = "Leia", surname = "Skywalker", type = "birth") %>% 
+  add_indi_names(given = "Leia", surname = "Skywalker", type = "birth")
+
+knitr::kable(dplyr::filter(leia, record == "@I1@") )
+```
+
+In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes - as given in the specification). If any nicknames are defined, they will also be included within quotation marks, e.g. William 'Billy' /Bloggs/.
+
+### Phonetic and romanised names
+
+Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the `add_indi_names_var()` function. As a minimum, the original name, variant name pieces, derivation method, and whether it is a phonetic or romanised variation should be given. The original name must be given exactly as it is represented in the file ("Leia Skywalker"):
+
+```{r}
+leia_var <- leia %>% 
   add_indi_names_var("Leia Skywalker", method = "As spoken",
-                     given = "Laya", surname = "Skywalker", phonetic_variation = TRUE) %>% 
-  dplyr::filter(record == "@I1@") %>% 
-  knitr::kable()
+                     given = "Laya", surname = "Skywalker", phonetic_variation = TRUE) 
+
+knitr::kable(dplyr::filter(leia_var, record == "@I1@"))
 ```
 
 
@@ -71,14 +69,10 @@ gedcom(subm("Me")) %>%
 The `type` parameter can also define different names for the individual. Below we add a line to define an adoptive name (the parameter can take any value):
 
 ```{r}
-gedcom(subm("Me")) %>% 
-  add_indi() %>% 
-  add_indi_names(given = "Leia", surname = "Skywalker", type = "birth") %>% 
-  add_indi_names_var("Leia Skywalker", method = "As spoken", 
-                     phonetic_variation = TRUE, given = "Laya", surname = "Skywalker") %>% 
-  add_indi_names(given = "Leia", surname = "Organa", type = "adoptive") %>% 
-  dplyr::filter(record == "@I1@") %>% 
-  knitr::kable()
+leia_adop <- leia_var %>% 
+  add_indi_names(given = "Leia", surname = "Organa", type = "adoptive") 
+
+knitr::kable(dplyr::filter(leia_adop, record == "@I1@"))
 ```
 
 ### Conflicting names
@@ -86,37 +80,31 @@ gedcom(subm("Me")) %>%
 GEDCOM files can also record different names *of the same type*, perhaps due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:
 
 ```{r}
-gedcom(subm("Me")) %>% 
-  add_indi() %>% 
-  add_indi_names(given = "Leia", surname = "Skywalker", type = "birth") %>% 
-  add_indi_names_var("Leia Skywalker", method = "As spoken", 
-                     phonetic_variation = TRUE, given = "Laya", surname = "Skywalker") %>% 
-  add_indi_names(given = "Leia", surname = "Organa", type = "adoptive") %>% 
-  add_indi_names(given = "Leia", surname = "Skywaker", type = "birth") %>%
-  dplyr::filter(record == "@I1@") %>% 
-  knitr::kable()
+leia_conf <- leia_adop %>% 
+  add_indi_names(given = "Leia", surname = "Skywaker", type = "birth")
+
+knitr::kable(dplyr::filter(leia_conf, record == "@I1@"))
 ```
 
 Generally conflicting names are arranged in order of confidence; the first name is more likely to be correct. If you want to promote a name to occur first in the record, you can use the `primary_indi_name()` function:
 
 ```{r}
-gedcom(subm("Me")) %>% 
-  add_indi() %>% 
-  add_indi_names(given = "Leia", surname = "Skywalker", type = "birth") %>% 
-  add_indi_names_var("Leia Skywalker", method = "As spoken", 
-                     phonetic_variation = TRUE, given = "Laya", surname = "Skywalker") %>% 
-  add_indi_names(given = "Leia", surname = "Organa", type = "adoptive") %>% 
-  add_indi_names(given = "Leia", surname = "Skywaker", type = "birth") %>%
-  primary_indi_name("Leia Skywaker") %>% 
-  dplyr::filter(record == "@I1@") %>% 
-  knitr::kable()
+leia_conf_first <- primary_indi_name(leia_conf, "Leia Skywaker")
+
+knitr::kable(dplyr::filter(leia_conf_first, record == "@I1@"))
 ```
 
 Note that the subrecords of the Individual record (those at level 1) can appear in any order.
 
-## Individual events
+## Individual attributes and events
+
+Attributes and events associated with an individual, such as birth and death, are created using the `add_indi_fact()` function. 
 
 
-## Individual attributes
+## Family links
+
+Typically when constructing a file, you would create all of the individuals in a family first, and then reference them when creating a Family Group record - this takes care all of the appropriate record links for you. However, sometimes you want to retrospectively add an individual to a Family Group record that already exists. In this case you use the `add_indi_links_to_families()` function.
+
+
 
 <p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/family_group_records.html">Next article: Family Group records ></a></p>

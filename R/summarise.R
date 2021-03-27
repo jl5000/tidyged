@@ -102,7 +102,7 @@ str.tidyged <- function(object, ...) {
 #'  add_indi_names(given = "Jessie", surname = "Bloggs") %>% 
 #'  add_indi_event_birth(event_date = date_approximated(date_calendar(year = 1970), about = TRUE),
 #'                             place_name = "Elsewhere") %>%
-#'  add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
+#'  add_famg(husband = "Joe", wife = "@I2@", children = "Jessie") %>% 
 #'  add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                                place_name = "Another place") %>% 
 #'  tidyged.internals::remove_dates_for_tests() %>% 
@@ -160,7 +160,7 @@ df_indi <- function(gedcom) {
 #'  add_indi_names(given = "Jess", surname = "Bloggs") %>% 
 #'  add_indi(sex = "F") %>% 
 #'  add_indi_names(given = "Jessie", surname = "Bloggs") %>%
-#'  add_famg(husband = "Joe", wife = "Jess Bloggs", children = "Jessie") %>% 
+#'  add_famg(husband = "Joe", wife = "@I2@", children = "Jessie") %>% 
 #'  add_famg_event_relationship(event_date = date_calendar(year = 1969, month = 1, day = 30),
 #'                                place_name = "Another place") %>% 
 #'  tidyged.internals::remove_dates_for_tests() %>% 

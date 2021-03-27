@@ -50,10 +50,17 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
   if(length(search_pattern) == 0) return(character())
   if(grepl(tidyged.internals::xref_pattern(), search_pattern)) return(search_pattern)
   
-  gedcom <-  temporarily_remove_name_slashes(gedcom)
+  #split up search pattern by spaces
+  search_pattern_terms <- unlist(stringr::str_split(search_pattern, " "))
+  
+  matches <- gedcom$value %>% 
+    purrr::map(stringr::str_detect, pattern = search_pattern_terms) %>% 
+    purrr::map(all) %>% 
+    unlist()
+  
   possibilities <- gedcom[gedcom$record %in% record_xrefs &
                             gedcom$tag %in% tags & 
-                            grepl(search_pattern, gedcom$value),]
+                            matches,]
   
   if(length(unique(possibilities$record)) == 0) {
     

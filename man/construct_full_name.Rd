@@ -5,20 +5,14 @@
 \title{Construct a full personal name}
 \usage{
 construct_full_name(
-  prefix = character(),
   given = character(),
-  nickname = character(),
   surname_prefix = character(),
   surname = character(),
   suffix = character()
 )
 }
 \arguments{
-\item{prefix}{The name prefix.}
-
 \item{given}{The given name(s).}
-
-\item{nickname}{The nickname.}
 
 \item{surname_prefix}{The surname prefix.}
 

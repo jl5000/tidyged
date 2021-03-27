@@ -57,7 +57,7 @@ add_indi <- function(gedcom,
     set_active_record(xref)
   
   if (length(qn) > 0) 
-    temp <- add_indi_names(temp, given = qn)
+    temp <- add_indi_names(temp, name_pieces(given = qn))
   
   temp
 }

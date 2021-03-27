@@ -48,17 +48,23 @@ library(tidyged)
 
 tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family", gedcom_copyright = "None") %>%
   add_indi(sex = "M", indi_notes = "The central character in the Star Wars Skywalker Saga") %>%
-  add_indi_names(given = "Anakin", surname = "Skywalker", type = "birth") %>%
-  add_indi_names(prefix = "Darth", given = "Vader", type = "given") %>%
+  add_indi_names(name_pieces(given = "Anakin", surname = "Skywalker"), type = "birth") %>%
+  add_indi_names(name_pieces(prefix = "Darth", given = "Vader"), 
+                 type = "given") %>%
   add_indi(sex = "F", indi_notes = "Queen of Naboo") %>%
-  add_indi_names(given = "Padme", surname = "Amidala", type = "birth") %>% 
+  add_indi_names(name_pieces(given = "Padme", surname = "Amidala"), 
+                 type = "birth") %>% 
   add_indi(sex = "F") %>% 
-  add_indi_names(given = "Leia", surname = "Skywalker", type = "birth") %>%
-  add_indi_names(prefix = "Princess", given = "Leia", surname = "Organa", type = "adoptive") %>% 
+  add_indi_names(name_pieces(given = "Leia", surname = "Skywalker"), 
+                 type = "birth") %>%
+  add_indi_names(name_pieces(prefix = "Princess", given = "Leia", surname = "Organa"), 
+                 type = "adoptive") %>% 
   add_indi(sex = "M") %>%
-  add_indi_names(given = "Luke", surname = "Skywalker", type = "birth") %>% 
+  add_indi_names(name_pieces(given = "Luke", surname = "Skywalker"), 
+                 type = "birth") %>% 
   add_indi(sex = "M") %>% 
-  add_indi_names(given = "Obi-Wan", nickname = "Ben", surname = "Kenobi", type = "birth") %>% 
+  add_indi_names(name_pieces(given = "Obi-Wan", nickname = "Ben", surname = "Kenobi"), 
+                 type = "birth") %>% 
   add_famg(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
   activate_indi("Anakin") %>% 
   add_indi_association("Obi-Wan", association = "Master") %>% 
@@ -105,7 +111,7 @@ print(tg, n = Inf)
 #>  28     2 @I1@   TYPE  "birth"                                                
 #>  29     2 @I1@   GIVN  "Anakin"                                               
 #>  30     2 @I1@   SURN  "Skywalker"                                            
-#>  31     1 @I1@   NAME  "Darth Vader"                                          
+#>  31     1 @I1@   NAME  "Vader"                                                
 #>  32     2 @I1@   TYPE  "given"                                                
 #>  33     2 @I1@   NPFX  "Darth"                                                
 #>  34     2 @I1@   GIVN  "Vader"                                                
@@ -137,7 +143,7 @@ print(tg, n = Inf)
 #>  60     2 @I3@   TYPE  "birth"                                                
 #>  61     2 @I3@   GIVN  "Leia"                                                 
 #>  62     2 @I3@   SURN  "Skywalker"                                            
-#>  63     1 @I3@   NAME  "Princess Leia /Organa/"                               
+#>  63     1 @I3@   NAME  "Leia /Organa/"                                        
 #>  64     2 @I3@   TYPE  "adoptive"                                             
 #>  65     2 @I3@   NPFX  "Princess"                                             
 #>  66     2 @I3@   GIVN  "Leia"                                                 
@@ -158,7 +164,7 @@ print(tg, n = Inf)
 #>  81     2 @I4@   DATE  "27 MAR 2021"                                          
 #>  82     0 @I5@   INDI  ""                                                     
 #>  83     1 @I5@   SEX   "M"                                                    
-#>  84     1 @I5@   NAME  "Obi-Wan 'Ben' /Kenobi/"                               
+#>  84     1 @I5@   NAME  "Obi-Wan /Kenobi/"                                     
 #>  85     2 @I5@   TYPE  "birth"                                                
 #>  86     2 @I5@   GIVN  "Obi-Wan"                                              
 #>  87     2 @I5@   NICK  "Ben"                                                  
@@ -237,13 +243,13 @@ summary(tg)
 df_indi(tg) %>% knitr::kable()
 ```
 
-| xref | name                 | sex | date\_of\_birth | place\_of\_birth | date\_of\_death | place\_of\_death  | mother        | father           | num\_siblings | num\_children | last\_modified |
-| :--- | :------------------- | :-- | :-------------- | :--------------- | :-------------- | :---------------- | :------------ | :--------------- | :------------ | ------------: | :------------- |
-| @I1@ | Anakin Skywalker     | M   |                 |                  |                 | Second Death Star |               |                  |               |             2 | 27 MAR 2021    |
-| @I2@ | Padme Amidala        | F   |                 |                  |                 |                   |               |                  |               |             2 | 27 MAR 2021    |
-| @I3@ | Leia Skywalker       | F   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 27 MAR 2021    |
-| @I4@ | Luke Skywalker       | M   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 27 MAR 2021    |
-| @I5@ | Obi-Wan ‘Ben’ Kenobi | M   |                 |                  |                 |                   |               |                  |               |             0 | 27 MAR 2021    |
+| xref | name             | sex | date\_of\_birth | place\_of\_birth | date\_of\_death | place\_of\_death  | mother        | father           | num\_siblings | num\_children | last\_modified |
+| :--- | :--------------- | :-- | :-------------- | :--------------- | :-------------- | :---------------- | :------------ | :--------------- | :------------ | ------------: | :------------- |
+| @I1@ | Anakin Skywalker | M   |                 |                  |                 | Second Death Star |               |                  |               |             2 | 27 MAR 2021    |
+| @I2@ | Padme Amidala    | F   |                 |                  |                 |                   |               |                  |               |             2 | 27 MAR 2021    |
+| @I3@ | Leia Skywalker   | F   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 27 MAR 2021    |
+| @I4@ | Luke Skywalker   | M   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 27 MAR 2021    |
+| @I5@ | Obi-Wan Kenobi   | M   |                 |                  |                 |                   |               |                  |               |             0 | 27 MAR 2021    |
 
 ``` r
 df_famg(tg) %>% knitr::kable()

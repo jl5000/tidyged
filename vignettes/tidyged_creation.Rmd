@@ -36,14 +36,14 @@ You can use different information for many values using the parameters of the `g
 ```{r}
 submitter <- subm(name = "The name of the submitter",
                   subm_address = address(local_address_lines = "123 Penny Lane Drive",
-                  city = "Orlando",
-                  state = "Florida",
-                  postal_code = "32836",
-                  country = "United States of America",
-                  phone_number = "123-456-789",
-                  email = "email@domain.com",
-                  fax = "00000",
-                  web_page = "http://www.whousesfaxanymore.com"),
+                                         city = "Orlando",
+                                         state = "Florida",
+                                         postal_code = "32836",
+                                         country = "United States of America",
+                                         phone_number = "123-456-789",
+                                         email = "email@domain.com",
+                                         fax = "00000",
+                                         web_page = "http://www.whousesfaxanymore.com"),
                   subm_notes = "The information given above is dummy data")
 
 gedcom(submitter) %>% 

@@ -54,17 +54,23 @@ library(tidyged)
 
 tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family", gedcom_copyright = "None") %>%
   add_indi(sex = "M", indi_notes = "The central character in the Star Wars Skywalker Saga") %>%
-  add_indi_names(given = "Anakin", surname = "Skywalker", type = "birth") %>%
-  add_indi_names(prefix = "Darth", given = "Vader", type = "given") %>%
+  add_indi_names(name_pieces(given = "Anakin", surname = "Skywalker"), type = "birth") %>%
+  add_indi_names(name_pieces(prefix = "Darth", given = "Vader"), 
+                 type = "given") %>%
   add_indi(sex = "F", indi_notes = "Queen of Naboo") %>%
-  add_indi_names(given = "Padme", surname = "Amidala", type = "birth") %>% 
+  add_indi_names(name_pieces(given = "Padme", surname = "Amidala"), 
+                 type = "birth") %>% 
   add_indi(sex = "F") %>% 
-  add_indi_names(given = "Leia", surname = "Skywalker", type = "birth") %>%
-  add_indi_names(prefix = "Princess", given = "Leia", surname = "Organa", type = "adoptive") %>% 
+  add_indi_names(name_pieces(given = "Leia", surname = "Skywalker"), 
+                 type = "birth") %>%
+  add_indi_names(name_pieces(prefix = "Princess", given = "Leia", surname = "Organa"), 
+                 type = "adoptive") %>% 
   add_indi(sex = "M") %>%
-  add_indi_names(given = "Luke", surname = "Skywalker", type = "birth") %>% 
+  add_indi_names(name_pieces(given = "Luke", surname = "Skywalker"), 
+                 type = "birth") %>% 
   add_indi(sex = "M") %>% 
-  add_indi_names(given = "Obi-Wan", nickname = "Ben", surname = "Kenobi", type = "birth") %>% 
+  add_indi_names(name_pieces(given = "Obi-Wan", nickname = "Ben", surname = "Kenobi"), 
+                 type = "birth") %>% 
   add_famg(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
   activate_indi("Anakin") %>% 
   add_indi_association("Obi-Wan", association = "Master") %>% 

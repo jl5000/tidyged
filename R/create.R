@@ -61,7 +61,7 @@ gedcom <- function(submitter_details = subm(),
 #' information contained in the GEDCOM file.
 #' 
 #' @param name The name of the submitter.
-#' @param address An address() object containing the submitter address.
+#' @param subm_address An address() object containing the submitter address.
 #' @param subm_notes A character vector of notes accompanying this Submitter record.
 #' These could be xrefs to existing Note records.
 #' @param multimedia_links A character vector of multimedia file references accompanying this 

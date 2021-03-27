@@ -23,13 +23,13 @@ library(tidyged)
 
 simpsons <- gedcom(subm("Me")) %>% 
   add_indi(sex = "M") %>% 
-  add_indi_names(given = "Homer", surname = "Simpson") %>% 
+  add_indi_names(name_pieces(given = "Homer", surname = "Simpson")) %>% 
   add_indi(sex = "F") %>% 
-  add_indi_names(given = "Marge", surname = "Simpson") %>% 
+  add_indi_names(name_pieces(given = "Marge", surname = "Simpson")) %>% 
   add_indi(sex = "F") %>% 
-  add_indi_names(given = "Lisa", surname = "Simpson") %>% 
+  add_indi_names(name_pieces(given = "Lisa", surname = "Simpson")) %>% 
   add_indi(sex = "M") %>%  
-  add_indi_names(given = "Bart", surname = "Simpson") %>% 
+  add_indi_names(name_pieces(given = "Bart", surname = "Simpson")) %>% 
   add_note("This is a note")
 
 dplyr::filter(simpsons, tag %in% c("INDI", "NOTE")) %>% 

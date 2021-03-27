@@ -1,4 +1,4 @@
-# Function add_indi_names_var() @ L107
+# Function add_indi_names_var() @ L76
 
     {
       "type": "list",
@@ -38,12 +38,12 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["HEAD", "GEDC", "VERS", "FORM", "VERS", "CHAR", "DEST", "SOUR", "VERS", "NAME", "CORP", "ADDR", "EMAIL", "WWW", "LANG", "SUBM", "SUBM", "NAME", "INDI", "SEX", "NAME", "GIVN", "SURN", "ROMN", "TYPE", "NICK", "TRLR"]
+          "value": ["HEAD", "GEDC", "VERS", "FORM", "VERS", "CHAR", "DEST", "SOUR", "VERS", "NAME", "CORP", "ADDR", "EMAIL", "WWW", "LANG", "SUBM", "SUBM", "NAME", "INDI", "SEX", "NAME", "GIVN", "SURN", "ROMN", "TYPE", "GIVN", "TRLR"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidyged", "tidyged", "0.0.0", "The 'tidyged' package for the R language", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "U", "Joe /Bloggs/", "Joe", "Bloggs", "'JB'", "tests", "JB", ""]
+          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "tidyged", "tidyged", "0.0.0", "The 'tidyged' package for the R language", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "U", "Joe /Bloggs/", "Joe", "Bloggs", "JB", "tests", "JB", ""]
         }
       ]
     }

@@ -44,12 +44,12 @@ The main function for providing names for an individual is `add_indi_names()`:
 ```{r}
 leia <- gedcom(subm("Me")) %>% 
   add_indi() %>% 
-  add_indi_names(given = "Leia", surname = "Skywalker", type = "birth")
+  add_indi_names(name_pieces(given = "Leia", surname = "Skywalker"), type = "birth")
 
 knitr::kable(dplyr::filter(leia, record == "@I1@") )
 ```
 
-In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes - as given in the specification). If any nicknames are defined, they will also be included within quotation marks, e.g. William 'Billy' /Bloggs/.
+In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes - as given in the specification). Nicknames are not included.
 
 ### Phonetic and romanised names
 
@@ -58,7 +58,7 @@ Once we have defined a name for an individual, we can also define phonetic and r
 ```{r}
 leia_var <- leia %>% 
   add_indi_names_var("Leia Skywalker", method = "As spoken",
-                     given = "Laya", surname = "Skywalker", phonetic_variation = TRUE) 
+                     name_pieces(given = "Laya", surname = "Skywalker"), phonetic_variation = TRUE) 
 
 knitr::kable(dplyr::filter(leia_var, record == "@I1@"))
 ```
@@ -70,7 +70,7 @@ The `type` parameter can also define different names for the individual. Below w
 
 ```{r}
 leia_adop <- leia_var %>% 
-  add_indi_names(given = "Leia", surname = "Organa", type = "adoptive") 
+  add_indi_names(name_pieces(given = "Leia", surname = "Organa"), type = "adoptive") 
 
 knitr::kable(dplyr::filter(leia_adop, record == "@I1@"))
 ```
@@ -81,7 +81,7 @@ GEDCOM files can also record different names *of the same type*, perhaps due to 
 
 ```{r}
 leia_conf <- leia_adop %>% 
-  add_indi_names(given = "Leia", surname = "Skywaker", type = "birth")
+  add_indi_names(name_pieces(given = "Leia", surname = "Skywaker"), type = "birth")
 
 knitr::kable(dplyr::filter(leia_conf, record == "@I1@"))
 ```

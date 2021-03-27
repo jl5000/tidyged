@@ -14,13 +14,13 @@ subm(
 \arguments{
 \item{name}{The name of the submitter.}
 
+\item{subm_address}{An address() object containing the submitter address.}
+
 \item{subm_notes}{A character vector of notes accompanying this Submitter record.
 These could be xrefs to existing Note records.}
 
 \item{multimedia_links}{A character vector of multimedia file references accompanying this
 Submitter record. These could be xrefs to existing Multimedia records.}
-
-\item{address}{An address() object containing the submitter address.}
 }
 \value{
 A Submitter record to be incorporated into a new tidyged object.

@@ -6,14 +6,8 @@
 \usage{
 add_indi_names(
   gedcom,
-  prefix = character(),
-  given = character(),
-  nickname = character(),
-  surname_prefix = character(),
-  surname = character(),
-  suffix = character(),
+  names = name_pieces(),
   type = character(),
-  name_notes = character(),
   xref = character(),
   update_date_changed = TRUE
 )
@@ -21,26 +15,9 @@ add_indi_names(
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{prefix}{The name prefix, e.g. Cmdr.}
-
-\item{given}{The given name or earned name. Different given names are separated
-by a comma.}
-
-\item{nickname}{A descriptive or familiar name used in connection with one's
-proper name.}
-
-\item{surname_prefix}{Surname prefix or article used in a family name.
-For example in the name "de la Cruz", this value would be "de la".}
-
-\item{surname}{Surname or family name. Different surnames are separated by a comma.}
-
-\item{suffix}{Non-indexing name piece that appears after the given name and surname
-parts, e.g. Jr. Different name suffix parts are separated by a comma.}
+\item{names}{A name_pieces() object defining the components of the personal name.}
 
 \item{type}{The name type, e.g. "birth", "aka", "maiden".}
-
-\item{name_notes}{A character vector of notes accompanying this name.
-These could be xrefs to existing Note records.}
 
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
@@ -52,5 +29,5 @@ these names.
 }
 \description{
 This function can be applied to an Individual record several times to record
-personal names.
+personal names. The personal name is constructed automatically from the components.
 }

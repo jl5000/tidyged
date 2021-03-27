@@ -104,3 +104,44 @@ address <- function(local_address_lines = character(),
   
 }
 
+#' Define a personal name's components
+#' 
+#' @param prefix The name prefix, e.g. Cmdr.
+#' @param given The given name or earned name. Different given names are separated 
+#' by a comma.
+#' @param nickname A descriptive or familiar name used in connection with one's 
+#' proper name.
+#' @param surname_prefix Surname prefix or article used in a family name. 
+#' For example in the name "de la Cruz", this value would be "de la".
+#' @param surname Surname or family name. Different surnames are separated by a comma.
+#' @param suffix Non-indexing name piece that appears after the given name and surname 
+#' parts, e.g. Jr. Different name suffix parts are separated by a comma.
+#' @param notes A character vector of notes accompanying this name.
+#' These could be xrefs to existing Note records.
+#'
+#' @return A tibble describing a personal name's components.
+#' @export
+name_pieces <- function(prefix = character(),
+                        given = character(), 
+                        nickname = character(), 
+                        surname_prefix = character(),
+                        surname = character(),
+                        suffix = character(),
+                        notes = character()) {
+  
+  nam_notes <- purrr::map(notes, tidyged.internals::NOTE_STRUCTURE)
+  
+  names <- tidyged.internals::PERSONAL_NAME_PIECES(name_piece_prefix = prefix,
+                                                   name_piece_given = given, 
+                                                   name_piece_nickname = nickname, 
+                                                   name_piece_surname_prefix = surname_prefix,
+                                                   name_piece_surname = surname,
+                                                   name_piece_suffix = suffix,
+                                                   notes = nam_notes)
+  
+  if(nrow(names) > 0 & #We need this check so an empty full name is not constructed
+     length(given) + length(surname_prefix) + length(surname) + length(suffix) == 0) 
+    stop("Try to define a given name or surname")
+  
+  names
+}

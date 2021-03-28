@@ -192,9 +192,9 @@ order_famg_children <- function(gedcom, xref) {
   if(all(dob == "")) return(gedcom)
     
   extract_min_year <- function(dob) {
-    if(dob == "") return(4000)
+    if(dob == "") return(4000L)
     years <- unlist(stringr::str_extract_all(dob, "\\d{3,4}")) 
-    if(length(years) == 1 && years == "") return(4000)
+    if(length(years) == 1 && years == "") return(4000L)
     min(as.integer(years))
   }
   

@@ -189,6 +189,8 @@ order_famg_children <- function(gedcom, xref) {
   dob <- purrr::map_chr(chil_lines$value, tidyged.internals::gedcom_value, 
                                     gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
 
+  if(all(dob == "")) return(gedcom)
+    
   extract_min_year <- function(dob) {
     if(dob == "") return(4000)
     years <- unlist(stringr::str_extract_all(dob, "\\d{3,4}")) 

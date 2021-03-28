@@ -168,3 +168,46 @@ remove_records <- function(gedcom, xrefs) {
   gedcom
 }
 
+
+#' Order children in a Family Group record by birth date
+#' 
+#' @details Any children without a date a birth are placed last.
+#'
+#' @param gedcom A tidyged object.
+#' @param xref The xref of a Family Group record.
+#'
+#' @return The same tidyged object with rearranged children rows in the Family Group record.
+#' @export
+order_famg_children <- function(gedcom, xref) {
+  
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
+  
+  chil_lines <- dplyr::filter(gedcom, record == xref, tag == "CHIL")
+  
+  if(nrow(chil_lines) <= 1) return(gedcom)
+  
+  dob <- purrr::map_chr(chil_lines$value, tidyged.internals::gedcom_value, 
+                                    gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
+
+  extract_min_year <- function(dob) {
+    if(dob == "") return(4000)
+    years <- unlist(stringr::str_extract_all(dob, "\\d{3,4}")) 
+    if(length(years) == 1 && years == "") return(4000)
+    min(as.integer(years))
+  }
+  
+  yob <- purrr::map_int(dob, extract_min_year)
+  
+  chil_lines_yob <- dplyr::mutate(chil_lines, yob = yob) %>% 
+    dplyr::arrange(yob) %>% 
+    dplyr::select(-yob)
+  
+  gedcom <- dplyr::anti_join(gedcom, chil_lines_yob,
+                             by = c("level", "record", "tag", "value"))
+  
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "FAM")
+  
+  gedcom %>%
+    tibble::add_row(chil_lines_yob, .before = next_row)
+    
+}

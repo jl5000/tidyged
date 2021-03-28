@@ -90,7 +90,9 @@ add_famg <- function(gedcom,
   
   }
   
-  set_active_record(temp, xref)
+  temp %>% 
+    order_famg_children(xref) %>% 
+    set_active_record(xref)
 }
 
 

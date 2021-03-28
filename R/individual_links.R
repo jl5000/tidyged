@@ -202,7 +202,8 @@ add_indi_links_to_families <- function(gedcom,
     next_row <- tidyged.internals::find_insertion_point(gedcom, xref_famc, 0, "FAM")
     gedcom <- tibble::add_row(gedcom,
                               tibble::tibble(record = xref_famc, level = 1, tag = "CHIL", value = xref), 
-                              .before = next_row)
+                              .before = next_row) %>% 
+      order_famg_children(xref_famc)
   }
   
   

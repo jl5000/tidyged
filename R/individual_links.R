@@ -260,7 +260,7 @@ add_indi_links_to_families <- function(gedcom,
     # determine whether to use HUSB or WIFE tag - look at sex first, then look at other tag
     sex <- tidyged.internals::gedcom_value(gedcom, xref, "SEX", 1)
     if(!sex %in% c("M", "F")) {
-      other_sex <- dplyr::filter(gedcom, record == xref_fams, level = 1, tag %in% c("HUSB","WIFE"))$tag
+      other_sex <- dplyr::filter(gedcom, record == xref_fams, level == 1, tag %in% c("HUSB","WIFE"))$tag
       sex <- ifelse(length(other_sex) == 0 | other_sex == "WIFE", "M", "F")
     }
     gedcom <- tibble::add_row(gedcom,

@@ -176,12 +176,13 @@
   <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@I2@"</span></code></pre></div>
 <p>Note that the full name does not need to be given, since the term is partially matched. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record).</p>
-<p>If no match or more than one match is found, it will result in an error:</p>
+<p>If no match is found, it will result in an error:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="st">"Simpson"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="st">"Simpon"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Error in utils::select.list(title = paste("More than one record found for the given terms:", : select.list() cannot be used non-interactively</span></code></pre></div>
+<span class="co">#&gt; Error in find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), : No records found for the given terms (Simpon). Try supplying the xref explicitly.</span></code></pre></div>
+<p>If more than one match is found, it will ask the user which match to use.</p>
 <p>This functionality can be found when referencing all records, except the Family Group record (where an xref must be provided). The following attributes are used to uniquely identify these records:</p>
 <ul>
 <li>Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);</li>
@@ -243,7 +244,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">0</td>
-<td align="left">28 MAR 2021</td>
+<td align="left">29 MAR 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -258,7 +259,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">0</td>
-<td align="left">28 MAR 2021</td>
+<td align="left">29 MAR 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -273,7 +274,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">0</td>
-<td align="left">28 MAR 2021</td>
+<td align="left">29 MAR 2021</td>
 </tr>
 </tbody>
 </table>

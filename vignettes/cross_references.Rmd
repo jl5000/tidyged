@@ -68,13 +68,15 @@ simpsons %>%
 
 Note that the full name does not need to be given, since the term is partially matched. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record).
 
-If no match or more than one match is found, it will result in an error:
+If no match is found, it will result in an error:
 
 ```{r, error = TRUE}
 simpsons %>% 
-  activate_indi("Simpson") %>% 
+  activate_indi("Simpon") %>% 
   get_active_record()
 ```
+
+If more than one match is found, it will ask the user which match to use.
 
 This functionality can be found when referencing all records, except the Family Group record (where an xref must be provided). The following attributes are used to uniquely identify these records:
 

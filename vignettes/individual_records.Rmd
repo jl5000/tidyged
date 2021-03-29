@@ -39,7 +39,7 @@ gedcom(subm("Me")) %>%
 
 ### Adding individual names
 
-The main function for providing names for an individual is `add_indi_names()`:
+The main function for providing names for an individual is `add_indi_names()`. The main argument is a `name_pieces()` object giving the components of the name. If you're going to add a name, at least provide a given name or surname:
 
 ```{r}
 leia <- gedcom(subm("Me")) %>% 
@@ -98,13 +98,61 @@ Note that the subrecords of the Individual record (those at level 1) can appear 
 
 ## Individual attributes and events
 
-Attributes and events associated with an individual, such as birth and death, are created using the `add_indi_fact()` function. 
+Attributes and events associated with an individual, such as birth and death, are created using the `add_indi_fact()` function. The full list of facts that can be created are given in the Details section of the function help page.
 
+This function allows you to define a fact, together with associated date, cause, place/address, and the age of the individual when the fact applied (among other aspects). In the example below, we add a residence for an individual. The first argument is given as "residence" for readability even though only the first 3 letters are used:
+
+```{r}
+res <- gedcom(subm("Me")) %>% 
+  add_indi(sex = "M") %>% 
+  add_indi_fact("residence", date = date_period(start_date = date_calendar(2000, 5, 7),
+                                                end_date = date_calendar(2004, 5, 6)),
+                fact_address = address(local_address_lines = "23 Penny Lane",
+                                       city = "Orlando",
+                                       state = "Florida",
+                                       country = "United States of America"),
+                notes = "Co-habited with brother Henry")
+
+knitr::kable(dplyr::filter(res, record == "@I1@"))
+```
+
+If the full address is not known, a more general `place` argument can be used which uses a `place()` object.
+
+The example below defines a death event (in 2006) and a religion attribute (from 1978):
+
+```{r}
+dea_rel <- gedcom(subm("Me")) %>% 
+  add_indi(sex = "M") %>% 
+  add_indi_fact("death", date = date_calendar(2006, 2, 17),
+                fact_place = place(name = "London, England"),
+                cause = "Pneumonia",
+                age = "68y") %>% 
+  add_indi_fact("religion", descriptor = "Christian", classification = "Catholic",
+                date = date_period(start_date = date_calendar(1978)))
+
+knitr::kable(dplyr::filter(dea_rel, record == "@I1@"))
+```
 
 ## Family links
 
 Typically when constructing a file, you would create all of the individuals in a family first, and then reference them when creating a Family Group record - this takes care all of the appropriate record links for you. However, sometimes you want to retrospectively add an individual to a Family Group record that already exists. In this case you use the `add_indi_links_to_families()` function.
 
+In the example below, we create Joe Bloggs and add him as a husband to a family. We then create Jess Bloggs and retrospectively add her as a wife to Joe. 
 
+```{r}
+retro <- gedcom(subm("Me")) %>% 
+  add_indi("M") %>% 
+  add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
+  add_famg(husband = "Joe") %>% 
+  add_indi("F") %>% 
+  add_indi_names(name_pieces(given = "Jess", surname = "Bloggs")) %>% 
+  add_indi_links_to_families(spouse = "Joe")
+
+knitr::kable(dplyr::filter(retro, record %in% c("@F1@", "@I2@")))
+```
+
+Notice that Jess (@I2@) has now been defined as a wife in the Family Group record, and her record is linked to the Family Group record as a spouse (FAMS).
+
+As well as defining the relationship as a spouse, you can also link individuals to Family Group records by providing the children or parents of the individual.
 
 <p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/family_group_records.html">Next article: Family Group records ></a></p>

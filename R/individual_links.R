@@ -182,6 +182,9 @@ add_indi_links_to_families <- function(gedcom,
       dplyr::filter(n == max(n)) %>% 
       dplyr::pull(record)
     
+    if(length(xref_famc) == 0) stop("An existing family could not be found with this parent.
+                                    This function is only to be used to add individuals to an existing Family Group record.")
+    
     if(length(xref_famc) == 1) {
       gedcom <- add_indi_family_link_as_child(gedcom, xref_famc, linkage_type,
                                               linkage_notes, update_date_changed = update_date_changed)
@@ -240,6 +243,9 @@ add_indi_links_to_families <- function(gedcom,
     }
     
     xref_fams <- unique(c(xref_fams1, xref_fams2))
+    
+    if(length(xref_fams) == 0) stop("An existing family could not be found with this spouse/children.
+                                    This function is only to be used to add individuals to an existing Family Group record.")
     
     if(length(xref_fams) == 1) {
       gedcom <- add_indi_family_link_as_spouse(gedcom, xref_fams, update_date_changed = update_date_changed)

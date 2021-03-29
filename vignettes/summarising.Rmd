@@ -25,18 +25,18 @@ simpsons <- gedcom(subm("Me"), gedcom_description = "Some of the Simpsons",
                    gedcom_copyright = "No copyright") %>% 
   add_indi(qn = "Homer Simpson", sex = "M") %>% 
   add_indi_fact("bir", date = date_calendar(1960, 5, 14),
-                       fact_place = place(name = "Springfield, USA")) %>% 
+                fact_place = place(name = "Springfield, USA")) %>% 
   add_indi(qn = "Marge Simpson", sex = "F") %>% 
   add_indi_fact("bir", date = date_calendar(1960, 8, 24),
-                       fact_place = place(name = "Springfield, USA")) %>% 
+                fact_place = place(name = "Springfield, USA")) %>% 
   add_indi(qn = "Lisa Simpson", sex = "F") %>% 
   add_indi_fact("bir", date = date_calendar(1984, 12, 3),
-                       fact_place = place(name = "Springfield, USA")) %>% 
+                fact_place = place(name = "Springfield, USA")) %>% 
   add_indi(qn = "Bart Simpson", sex = "M") %>% 
   add_indi_fact("bir", date = date_calendar(1982, 3, 16),
-                       fact_place = place(name = "Springfield, USA")) %>% 
+                fact_place = place(name = "Springfield, USA")) %>% 
   add_famg(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa"), 
-                   number_of_children = 3) %>% 
+           number_of_children = 3) %>% 
   add_note("This is a note") %>% 
   add_note("This is another note") %>% 
   add_media("123", "PDF") %>% 

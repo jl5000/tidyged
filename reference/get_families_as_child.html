@@ -128,7 +128,7 @@
     <p>Identify all families for an individual where they are a child</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_families_as_child</span><span class='op'>(</span><span class='va'>gedcom</span>, individual <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_families_as_child</span><span class='op'>(</span><span class='va'>gedcom</span>, individual <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>, birth_only <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,6 +141,10 @@
       <th>individual</th>
       <td><p>The xref or name of an Individual record to act on if one
 is not activated (will override active record).</p></td>
+    </tr>
+    <tr>
+      <th>birth_only</th>
+      <td><p>Whether to only return the family containing the biological parents.</p></td>
     </tr>
     </table>
 

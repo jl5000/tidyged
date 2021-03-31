@@ -43,8 +43,8 @@
 #' @param responsible_agency The organisation, institution, corporation, person, or other 
 #' entity that has responsibility for the fact.
 #' @param religious_affiliation A name of the religion with which this fact was affiliated.
-#' @param family_xref The xref of the family associated of which this individual is a child.
-#' Only used for birth, christening, or adoption events.
+#' @param adoptive_family_xref The xref of the family that adopted this individual.
+#' Only used for adoption events.
 #' @param adopting_parent A code which shows which parent in the associated family adopted this 
 #' individual. Either "HUSB", "WIFE", or "BOTH".
 #' @param multimedia_links A character vector of multimedia file references accompanying this
@@ -85,7 +85,7 @@ add_indi_fact <- function(gedcom,
                           notes = character(),
                           responsible_agency = character(),
                           religious_affiliation = character(),
-                          family_xref = character(),
+                          adoptive_family_xref = character(),
                           adopting_parent = character(),
                           multimedia_links = character(),
                           xref = character(),
@@ -177,7 +177,7 @@ add_indi_fact <- function(gedcom,
     fact_str <- tidyged.internals::INDIVIDUAL_EVENT_STRUCTURE(event_type_individual = type,
                                                               event_descriptor = descriptor,
                                                               individual_event_details = details2,
-                                                              xref_fam = family_xref,
+                                                              xref_fam = adoptive_family_xref,
                                                               adopted_by_which_parent = adopting_parent) %>% 
       tidyged.internals::add_levels(1)
     

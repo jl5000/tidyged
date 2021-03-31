@@ -18,7 +18,7 @@ add_indi_fact(
   notes = character(),
   responsible_agency = character(),
   religious_affiliation = character(),
-  family_xref = character(),
+  adoptive_family_xref = character(),
   adopting_parent = character(),
   multimedia_links = character(),
   xref = character(),
@@ -62,8 +62,8 @@ entity that has responsibility for the fact.}
 
 \item{religious_affiliation}{A name of the religion with which this fact was affiliated.}
 
-\item{family_xref}{The xref of the family associated of which this individual is a child.
-Only used for birth, christening, or adoption events.}
+\item{adoptive_family_xref}{The xref of the family that adopted this individual.
+Only used for adoption events.}
 
 \item{adopting_parent}{A code which shows which parent in the associated family adopted this
 individual. Either "HUSB", "WIFE", or "BOTH".}

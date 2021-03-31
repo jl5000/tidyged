@@ -110,7 +110,7 @@ describe_indi <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   
   if(short_desc) return(ind_str)
   
-  famc <- tidyged.internals::gedcom_value(gedcom, xref, "FAMC", 1, "INDI")
+  famc <- get_families_as_child(gedcom, xref, birth_only = TRUE)
   
   if (famc != "") {
     

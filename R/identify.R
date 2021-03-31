@@ -147,7 +147,7 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
-  unique(dplyr::filter(gedcom, level == 1, tag %in% c("HUSB", "WIFE"), value == xref)$record) 
+  unique(dplyr::filter(gedcom, record == xref, level == 1, tag == "FAMS")$value) 
   
 }
 
@@ -156,16 +156,41 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
 #' @param gedcom A tidyged object.
 #' @param individual The xref or name of an Individual record to act on if one 
 #' is not activated (will override active record).
+#' @param birth_only Whether to only return the family containing the biological parents.
 #'
 #' @return A character vector of family xrefs.
 #' @export
 #' @tests
 #' expect_equal(get_families_as_child(sample555, "@I3@"), c("@F1@", "@F2@"))
-get_families_as_child <- function(gedcom, individual = character()) {
+get_families_as_child <- function(gedcom,
+                                  individual = character(),
+                                  birth_only = FALSE) {
   
   xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
-  unique(dplyr::filter(gedcom, level == 1, tag == "CHIL", value == xref)$record)
+  # return all family links
+  famc <- unique(dplyr::filter(gedcom, record == xref, tag == "FAMC")$value)
+  
+  if(length(famc) == 0) return("")
+  if(!birth_only) return(famc)
+  
+  # Look in birth events first
+  famc_evt <- tidyged.internals::gedcom_value(gedcom, xref, "FAMC", 2, "BIRT")
+  if(famc_evt != "") return(famc_evt)
+  
+  # Look at pedigrees
+  if(length(famc) == 1) {
+    if(tolower(tidyged.internals::gedcom_value(gedcom, xref, "PEDI", 2, "FAMC")) == "birth") 
+      return(famc)
+  } else {
+    famcs <- dplyr::filter(gedcom, record == xref, tag %in% c("FAMC","PEDI"))
+    
+    row <- which(famcs$value == "birth")
+    if(length(row) == 1) return(famcs$value[row - 1])
+  }
+    
+  # assume first family is birth family
+  tidyged.internals::gedcom_value(gedcom, xref, "FAMC", 1, "INDI")
   
 }
 

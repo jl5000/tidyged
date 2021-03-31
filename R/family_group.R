@@ -154,7 +154,7 @@ remove_famg <- function(gedcom,
     tidyged.internals::remove_section(1, "FAMC", xref) %>% 
     tidyged.internals::remove_section(2, "FAMC", xref) %>% 
     tidyged.internals::remove_section(1, "FAMS", xref) %>% 
-    tidyged.internals::remove_section(2, "FAMS", xref) %>% 
+    #tidyged.internals::remove_section(2, "FAMS", xref) %>% 
     dplyr::filter(record != xref, value != xref) %>%
     null_active_record()  
 }

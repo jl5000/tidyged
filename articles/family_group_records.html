@@ -102,10 +102,11 @@
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Bart Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"These records have not yet been joined in a family group record"</span><span class="op">)</span>
 
-<span class="va">simpson_indis</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"@I1@"</span>, wife <span class="op">=</span> <span class="st">"Marge"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bart"</span>, <span class="st">"Lisa"</span><span class="op">)</span>, number_of_children <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">simpson_famg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="va">simpson_indis</span>,
+                         husband <span class="op">=</span> <span class="st">"@I1@"</span>, wife <span class="op">=</span> <span class="st">"Marge"</span>, 
+                         children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bart"</span>, <span class="st">"Lisa"</span><span class="op">)</span>, number_of_children <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">simpson_famg</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">level</th>
@@ -172,7 +173,7 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">31 MAR 2021</td>
+<td align="left">4 APR 2021</td>
 </tr>
 </tbody>
 </table>
@@ -181,6 +182,134 @@
 <div id="family-events" class="section level2">
 <h2 class="hasAnchor">
 <a href="#family-events" class="anchor"></a>Family events</h2>
+<p>Events associated with a family group, such as marriages and censuses, are created using the <code><a href="../reference/add_famg_event.html">add_famg_event()</a></code> function. The full list of events that can be created are given in the Details section of the function help page.</p>
+<p>There are some types of event; census and residence, that can apply for Individuals and Family Groups. It is highly recommended you do not use these events for family groups, only for individuals. It may intuitively be more efficient to define an event for an entire family group, but other GEDCOM parsers can have difficulty with this, and defining these events for each individual separately is recommended. Despite the name, Family Group records are actually more about the union of two people, rather than the family unit as a whole, and so the remaining events are related to marriages and divorces.</p>
+<p>In the example below, a relationship is added. The default type of relationship is a marriage, but this can be changed using the <code>classification</code> parameter. Ages of the couple when they got married can be defined used the <code>husband_age</code> and <code>wife_age</code> parameters.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">simpson_famg</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_famg_event.html">add_famg_event</a></span><span class="op">(</span><span class="st">"rel"</span>, date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1986</span>, <span class="fl">5</span>, <span class="fl">11</span><span class="op">)</span>,
+                 husband_age <span class="op">=</span> <span class="st">"20y"</span>, wife_age <span class="op">=</span> <span class="st">"19y"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">level</th>
+<th align="left">record</th>
+<th align="left">tag</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">FAM</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">HUSB</td>
+<td align="left">
+<span class="citation">@I1</span>@</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">WIFE</td>
+<td align="left">
+<span class="citation">@I2</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">CHIL</td>
+<td align="left">
+<span class="citation">@I4</span>@</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">CHIL</td>
+<td align="left">
+<span class="citation">@I3</span>@</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">NCHI</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">MARR</td>
+<td align="left">Y</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">HUSB</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">AGE</td>
+<td align="left">20y</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">WIFE</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">AGE</td>
+<td align="left">19y</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">TYPE</td>
+<td align="left">marriage</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">11 MAY 1986</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@F1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">4 APR 2021</td>
+</tr>
+</tbody>
+</table>
 <p style="text-align: right;">
 <a href="https://jl5000.github.io/tidyged/articles/repository_records.html">Next article: Repository records &gt;</a>
 </p>

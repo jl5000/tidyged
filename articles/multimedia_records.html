@@ -87,8 +87,76 @@
 
     
     
+<p>Multimedia records are used to define a single multimedia object such as a document or a photo.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_media.html">add_media</a></span><span class="op">(</span>file_reference <span class="op">=</span> <span class="st">"media/1909_joe_bloggs_birt_cert.jpg"</span>,
+            format <span class="op">=</span> <span class="st">"JPEG"</span>, source_media <span class="op">=</span> <span class="st">"electronic"</span>,
+            title <span class="op">=</span> <span class="st">"Joe Bloggs Birth Certificate (1909)"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@M1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">level</th>
+<th align="left">record</th>
+<th align="left">tag</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">
+<span class="citation">@M1</span>@</td>
+<td align="left">OBJE</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@M1</span>@</td>
+<td align="left">FILE</td>
+<td align="left">media/1909_joe_bloggs_birt_cert.jpg</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@M1</span>@</td>
+<td align="left">FORM</td>
+<td align="left">JPEG</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">
+<span class="citation">@M1</span>@</td>
+<td align="left">TYPE</td>
+<td align="left">electronic</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@M1</span>@</td>
+<td align="left">TITL</td>
+<td align="left">Joe Bloggs Birth Certificate (1909)</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">
+<span class="citation">@M1</span>@</td>
+<td align="left">CHAN</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">
+<span class="citation">@M1</span>@</td>
+<td align="left">DATE</td>
+<td align="left">4 APR 2021</td>
+</tr>
+</tbody>
+</table>
+<p>As with other records, various types of user-defined references can be defined (<code>user_reference_number</code> and <code>user_reference_type</code>), as well as links to notes.</p>
 <p style="text-align: right;">
 <a href="https://jl5000.github.io/tidyged/articles/note_records.html">Next article: Note records &gt;</a>
 </p>

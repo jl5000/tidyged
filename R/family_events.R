@@ -44,6 +44,7 @@
 #' 
 #' @return An updated tidyged object with an expanded Family group record including
 #' this event.
+#' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'  add_indi(qn = "Joe Bloggs", sex = "M") %>% 

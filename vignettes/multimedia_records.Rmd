@@ -23,7 +23,7 @@ gedcom() %>%
   add_media(file_reference = "media/1909_joe_bloggs_birt_cert.jpg",
             format = "JPEG", source_media = "electronic",
             title = "Joe Bloggs Birth Certificate (1909)") %>% 
-  dplyr::filter(record == "@O1@") %>% 
+  dplyr::filter(record == "@M1@") %>% 
   knitr::kable()
 ```
 

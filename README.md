@@ -75,7 +75,7 @@ tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family",
   add_note("Based on Star Wars") %>% 
   add_sour(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
   add_repo("The Skywalker Saga") %>% 
-  add_media(file_reference = "XYZ", format = "JPG")
+  add_media(file_reference = "XYZ", format = "JPEG")
 
 print(tg, n = Inf)
 #> # A tibble: 115 x 4
@@ -95,7 +95,7 @@ print(tg, n = Inf)
 #>  12     3 HD     ADDR  ""                                                     
 #>  13     3 HD     EMAIL "jalendrum@gmail.com"                                  
 #>  14     3 HD     WWW   "https://jl5000.github.io/tidyged/"                    
-#>  15     1 HD     DATE  "27 MAR 2021"                                          
+#>  15     1 HD     DATE  "4 APR 2021"                                           
 #>  16     1 HD     LANG  "English"                                              
 #>  17     1 HD     SUBM  "@U1@"                                                 
 #>  18     1 HD     COPR  "None"                                                 
@@ -103,7 +103,7 @@ print(tg, n = Inf)
 #>  20     0 @U1@   SUBM  ""                                                     
 #>  21     1 @U1@   NAME  "Jamie Lendrum"                                        
 #>  22     1 @U1@   CHAN  ""                                                     
-#>  23     2 @U1@   DATE  "27 MAR 2021"                                          
+#>  23     2 @U1@   DATE  "4 APR 2021"                                           
 #>  24     0 @I1@   INDI  ""                                                     
 #>  25     1 @I1@   SEX   "M"                                                    
 #>  26     1 @I1@   NOTE  "The central character in the Star Wars Skywalker Saga"
@@ -126,7 +126,7 @@ print(tg, n = Inf)
 #>  43     1 @I1@   RELI  "Jedi"                                                 
 #>  44     1 @I1@   PROP  "Lightsaber"                                           
 #>  45     1 @I1@   CHAN  ""                                                     
-#>  46     2 @I1@   DATE  "27 MAR 2021"                                          
+#>  46     2 @I1@   DATE  "4 APR 2021"                                           
 #>  47     0 @I2@   INDI  ""                                                     
 #>  48     1 @I2@   SEX   "F"                                                    
 #>  49     1 @I2@   NOTE  "Queen of Naboo"                                       
@@ -136,7 +136,7 @@ print(tg, n = Inf)
 #>  53     2 @I2@   SURN  "Amidala"                                              
 #>  54     1 @I2@   FAMS  "@F1@"                                                 
 #>  55     1 @I2@   CHAN  ""                                                     
-#>  56     2 @I2@   DATE  "27 MAR 2021"                                          
+#>  56     2 @I2@   DATE  "4 APR 2021"                                           
 #>  57     0 @I3@   INDI  ""                                                     
 #>  58     1 @I3@   SEX   "F"                                                    
 #>  59     1 @I3@   NAME  "Leia /Skywalker/"                                     
@@ -151,7 +151,7 @@ print(tg, n = Inf)
 #>  68     1 @I3@   FAMC  "@F1@"                                                 
 #>  69     2 @I3@   PEDI  "birth"                                                
 #>  70     1 @I3@   CHAN  ""                                                     
-#>  71     2 @I3@   DATE  "27 MAR 2021"                                          
+#>  71     2 @I3@   DATE  "4 APR 2021"                                           
 #>  72     0 @I4@   INDI  ""                                                     
 #>  73     1 @I4@   SEX   "M"                                                    
 #>  74     1 @I4@   NAME  "Luke /Skywalker/"                                     
@@ -161,7 +161,7 @@ print(tg, n = Inf)
 #>  78     1 @I4@   FAMC  "@F1@"                                                 
 #>  79     2 @I4@   PEDI  "birth"                                                
 #>  80     1 @I4@   CHAN  ""                                                     
-#>  81     2 @I4@   DATE  "27 MAR 2021"                                          
+#>  81     2 @I4@   DATE  "4 APR 2021"                                           
 #>  82     0 @I5@   INDI  ""                                                     
 #>  83     1 @I5@   SEX   "M"                                                    
 #>  84     1 @I5@   NAME  "Obi-Wan /Kenobi/"                                     
@@ -170,31 +170,31 @@ print(tg, n = Inf)
 #>  87     2 @I5@   NICK  "Ben"                                                  
 #>  88     2 @I5@   SURN  "Kenobi"                                               
 #>  89     1 @I5@   CHAN  ""                                                     
-#>  90     2 @I5@   DATE  "27 MAR 2021"                                          
+#>  90     2 @I5@   DATE  "4 APR 2021"                                           
 #>  91     0 @F1@   FAM   ""                                                     
 #>  92     1 @F1@   HUSB  "@I1@"                                                 
 #>  93     1 @F1@   WIFE  "@I2@"                                                 
 #>  94     1 @F1@   CHIL  "@I4@"                                                 
 #>  95     1 @F1@   CHIL  "@I3@"                                                 
 #>  96     1 @F1@   CHAN  ""                                                     
-#>  97     2 @F1@   DATE  "27 MAR 2021"                                          
+#>  97     2 @F1@   DATE  "4 APR 2021"                                           
 #>  98     0 @N1@   NOTE  "Based on Star Wars"                                   
 #>  99     1 @N1@   CHAN  ""                                                     
-#> 100     2 @N1@   DATE  "27 MAR 2021"                                          
+#> 100     2 @N1@   DATE  "4 APR 2021"                                           
 #> 101     0 @S1@   SOUR  ""                                                     
 #> 102     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                     
 #> 103     1 @S1@   ABBR  "Star Wars"                                            
 #> 104     1 @S1@   CHAN  ""                                                     
-#> 105     2 @S1@   DATE  "27 MAR 2021"                                          
+#> 105     2 @S1@   DATE  "4 APR 2021"                                           
 #> 106     0 @R1@   REPO  ""                                                     
 #> 107     1 @R1@   NAME  "The Skywalker Saga"                                   
 #> 108     1 @R1@   CHAN  ""                                                     
-#> 109     2 @R1@   DATE  "27 MAR 2021"                                          
-#> 110     0 @O1@   OBJE  ""                                                     
-#> 111     1 @O1@   FILE  "XYZ"                                                  
-#> 112     2 @O1@   FORM  "JPG"                                                  
-#> 113     1 @O1@   CHAN  ""                                                     
-#> 114     2 @O1@   DATE  "27 MAR 2021"                                          
+#> 109     2 @R1@   DATE  "4 APR 2021"                                           
+#> 110     0 @M1@   OBJE  ""                                                     
+#> 111     1 @M1@   FILE  "XYZ"                                                  
+#> 112     2 @M1@   FORM  "JPEG"                                                 
+#> 113     1 @M1@   CHAN  ""                                                     
+#> 114     2 @M1@   DATE  "4 APR 2021"                                           
 #> 115     0 TR     TRLR  ""
 ```
 
@@ -245,11 +245,11 @@ df_indi(tg) %>% knitr::kable()
 
 | xref | name             | sex | date\_of\_birth | place\_of\_birth | date\_of\_death | place\_of\_death  | mother        | father           | num\_siblings | num\_children | last\_modified |
 | :--- | :--------------- | :-- | :-------------- | :--------------- | :-------------- | :---------------- | :------------ | :--------------- | :------------ | ------------: | :------------- |
-| @I1@ | Anakin Skywalker | M   |                 |                  |                 | Second Death Star |               |                  |               |             2 | 27 MAR 2021    |
-| @I2@ | Padme Amidala    | F   |                 |                  |                 |                   |               |                  |               |             2 | 27 MAR 2021    |
-| @I3@ | Leia Skywalker   | F   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 27 MAR 2021    |
-| @I4@ | Luke Skywalker   | M   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 27 MAR 2021    |
-| @I5@ | Obi-Wan Kenobi   | M   |                 |                  |                 |                   |               |                  |               |             0 | 27 MAR 2021    |
+| @I1@ | Anakin Skywalker | M   |                 |                  |                 | Second Death Star |               |                  |               |             2 | 4 APR 2021     |
+| @I2@ | Padme Amidala    | F   |                 |                  |                 |                   |               |                  |               |             2 | 4 APR 2021     |
+| @I3@ | Leia Skywalker   | F   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 4 APR 2021     |
+| @I4@ | Luke Skywalker   | M   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 4 APR 2021     |
+| @I5@ | Obi-Wan Kenobi   | M   |                 |                  |                 |                   |               |                  |               |             0 | 4 APR 2021     |
 
 ``` r
 df_famg(tg) %>% knitr::kable()
@@ -257,7 +257,7 @@ df_famg(tg) %>% knitr::kable()
 
 | xref | husband          | wife          | marriage\_date | marriage\_place | num\_children | last\_modified |
 | :--- | :--------------- | :------------ | :------------- | :-------------- | :------------ | :------------- |
-| @F1@ | Anakin Skywalker | Padme Amidala |                |                 | 2             | 27 MAR 2021    |
+| @F1@ | Anakin Skywalker | Padme Amidala |                |                 | 2             | 4 APR 2021     |
 
 This package allows limited editing of `tidyged` objects
 (adding/removing records, as well as the addition of some record

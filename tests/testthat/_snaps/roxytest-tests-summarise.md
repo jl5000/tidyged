@@ -180,7 +180,7 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["@O1@", "@O2@", "@O3@"]
+          "value": ["@M1@", "@M2@", "@M3@"]
         },
         {
           "type": "character",

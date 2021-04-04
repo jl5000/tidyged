@@ -30,14 +30,29 @@ simpson_indis <- gedcom(subm("Me")) %>%
   add_indi(qn = "Bart Simpson", sex = "M") %>% 
   add_note("These records have not yet been joined in a family group record")
 
-simpson_indis %>% 
-  add_famg(husband = "@I1@", wife = "Marge", children = c("Bart", "Lisa"), number_of_children = 3) %>% 
-  dplyr::filter(record == "@F1@") %>% 
-  knitr::kable()
+simpson_famg <- add_famg(simpson_indis,
+                         husband = "@I1@", wife = "Marge", 
+                         children = c("Bart", "Lisa"), number_of_children = 3)
+
+knitr::kable(dplyr::filter(simpson_famg, record == "@F1@"))
 ```
 
 As with other records, various types of user-defined references can be defined (`user_reference_number` and `user_reference_type`), as well as links to multimedia and notes.
 
 ## Family events
+
+Events associated with a family group, such as marriages and censuses, are created using the `add_famg_event()` function. The full list of events that can be created are given in the Details section of the function help page.
+
+There are some types of event; census and residence, that can apply for Individuals and Family Groups. It is highly recommended you do not use these events for family groups, only for individuals. It may intuitively be more efficient to define an event for an entire family group, but other GEDCOM parsers can have difficulty with this, and defining these events for each individual separately is recommended. Despite the name, Family Group records are actually more about the union of two people, rather than the family unit as a whole, and so the remaining events are related to marriages and divorces.
+
+In the example below, a relationship is added. The default type of relationship is a marriage, but this can be changed using the `classification` parameter. Ages of the couple when they got married can be defined used the `husband_age` and `wife_age` parameters.
+
+```{r}
+simpson_famg %>% 
+  add_famg_event("rel", date = date_calendar(1986, 5, 11),
+                 husband_age = "20y", wife_age = "19y") %>% 
+  dplyr::filter(record == "@F1@") %>% 
+  knitr::kable()
+```
 
 <p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/repository_records.html">Next article: Repository records ></a></p>

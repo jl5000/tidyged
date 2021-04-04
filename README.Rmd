@@ -81,7 +81,7 @@ tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family",
   add_note("Based on Star Wars") %>% 
   add_sour(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
   add_repo("The Skywalker Saga") %>% 
-  add_media(file_reference = "XYZ", format = "JPG")
+  add_media(file_reference = "XYZ", format = "JPEG")
 
 print(tg, n = Inf)
 ```

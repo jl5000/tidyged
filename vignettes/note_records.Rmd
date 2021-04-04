@@ -14,8 +14,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+Note records allow you to make notes in your file and reference them in multiple places. This is achieved using the `add_note()` record. Multi-line notes can be achieved using "\n".
+
+```{r}
 library(tidyged)
+
+gedcom() %>% 
+  add_note("This is a random note used for demonstration purposes\nThis is a new line.") %>% 
+  dplyr::filter(record == "@N1@")
 ```
+
+As with other records, various types of user-defined references can be defined (`user_reference_number` and `user_reference_type`).
+
 
 <p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/cross_references.html">Next article: Referencing records ></a></p>

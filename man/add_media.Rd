@@ -20,13 +20,10 @@ add_media(
 
 \item{file_reference}{A reference for the file, typically a filepath or URL.}
 
-\item{format}{A string indicating the format of the multimedia file.
-Currently limited to one of: "AAC", "AVI", "BMP", "ePub", "FLAC", "GIF", "JPEG", "JPG",
-"MKV", "mobi", "MP3", "PCX", "PDF", "PNG", "TIFF", "TIF", "WAV".}
+\item{format}{A string indicating the format of the multimedia file. See Details.}
 
 \item{source_media}{A code that indicates the type of material in which the referenced
-source is stored. Must be one of: audio, book, card, electronic, fiche, film, magazine,
-manuscript, map, newspaper, photo, tombstone, video.}
+source is stored. See Details.}
 
 \item{title}{The title of the multimedia file.}
 
@@ -44,4 +41,15 @@ An updated tidyged object including the Multimedia record.
 }
 \description{
 Add a Multimedia record to a tidyged object
+}
+\details{
+The formats allowed are currently limited to:
+
+"AAC", "AVI", "BMP", "ePub", "FLAC", "GIF", "JPEG",
+"MKV", "mobi", "MP3", "PCX", "PDF", "PNG", "TIFF", "WAV".
+
+The source media must be one of:
+
+audio, book, card, electronic, fiche, film, magazine,
+manuscript, map, newspaper, photo, tombstone, video.
 }

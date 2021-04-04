@@ -10,12 +10,17 @@
 #' 
 #' Alternatively eve (for any other event).
 #' 
+#' Example classifications of non-marriage relationships are:
+#' 
+#' not married, civil, living together, living apart together. See page 59 of the GEDCOM 
+#' Specification for more examples.
+#' 
 #' @param gedcom A tidyged object.
 #' @param type A (case-insensitive) three-letter code giving the type of event. See Details.
 #' @param descriptor A short description of an 'other' event.
 #' @param classification A descriptive word or phrase used to further classify this 
 #' event. This should be used whenever the 'other' event is used (but can also be used
-#' with others).
+#' with others). Recommended values for non-marriage relationships can be found in Details.
 #' @param date A date_calendar(), date_approximated(), date_period(), or date_range() 
 #' object giving the timing of the event..
 #' @param husband_age A character string that indicates the age in years, months, and days 

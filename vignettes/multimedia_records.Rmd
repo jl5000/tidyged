@@ -14,8 +14,19 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+Multimedia records are used to define a single multimedia object such as a document or a photo.
+
+```{r}
 library(tidyged)
+
+gedcom() %>% 
+  add_media(file_reference = "media/1909_joe_bloggs_birt_cert.jpg",
+            format = "JPEG", source_media = "electronic",
+            title = "Joe Bloggs Birth Certificate (1909)") %>% 
+  dplyr::filter(record == "@O1@") %>% 
+  knitr::kable()
 ```
+
+As with other records, various types of user-defined references can be defined (`user_reference_number` and `user_reference_type`), as well as links to notes.
 
 <p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/note_records.html">Next article: Note records ></a></p>

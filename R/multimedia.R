@@ -2,15 +2,23 @@
 
 
 #' Add a Multimedia record to a tidyged object
+#' 
+#' @details
+#' The formats allowed are currently limited to:
+#' 
+#' "AAC", "AVI", "BMP", "ePub", "FLAC", "GIF", "JPEG", 
+#' "MKV", "mobi", "MP3", "PCX", "PDF", "PNG", "TIFF", "WAV".
+#' 
+#' The source media must be one of:
+#' 
+#' audio, book, card, electronic, fiche, film, magazine,
+#' manuscript, map, newspaper, photo, tombstone, video.
 #'
 #' @param gedcom A tidyged object.
 #' @param file_reference A reference for the file, typically a filepath or URL.
-#' @param format A string indicating the format of the multimedia file. 
-#' Currently limited to one of: "AAC", "AVI", "BMP", "ePub", "FLAC", "GIF", "JPEG", "JPG", 
-#' "MKV", "mobi", "MP3", "PCX", "PDF", "PNG", "TIFF", "TIF", "WAV".
+#' @param format A string indicating the format of the multimedia file. See Details.
 #' @param source_media A code that indicates the type of material in which the referenced 
-#' source is stored. Must be one of: audio, book, card, electronic, fiche, film, magazine,
-#' manuscript, map, newspaper, photo, tombstone, video.
+#' source is stored. See Details.
 #' @param title The title of the multimedia file.
 #' @param user_reference_number A unique user-defined number or text that the submitter 
 #' uses to identify this record. You can supply more than one in a vector.

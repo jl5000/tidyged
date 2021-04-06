@@ -145,3 +145,69 @@ name_pieces <- function(prefix = character(),
   
   names
 }
+
+
+#' Create a citation of a Source record
+#'
+#' @param gedcom A tidyged object.
+#' @param source A character string identifying the source. This can either 
+#' be an xref or term(s) to match to a source title.
+#' @param where Specific location within the information referenced. For a published work, this could include
+#' the volume of a multi-volume work and the page number(s). For a newspaper, it could include a column
+#' number and page number. A census record might have an enumerating district, page number, line number, 
+#' dwelling number, and family number. 
+#' The data in this field should be in the form of a label and value pair, such as Label1: value,
+#' Label2: value, with each pair being separated by a comma. For example, Film: 1234567,
+#' Frame: 344, Line: 28.
+#' @param entry_date A date_calendar(), date_period(), date_range(), or date_approximated() 
+#' value giving the date that this data was entered into the original source document.
+#' @param source_text A verbatim copy of any description contained within the source. 
+#' This indicates notes or text that are actually contained in the source document, 
+#' not the submitter's opinion about the source.
+#' @param certainty An evaluation of the credibility of a piece of information, based upon 
+#' its supporting evidence. Some systems use this feature to rank multiple conflicting opinions 
+#' for display of most likely information first. It is not intended to eliminate the receiver's 
+#' need to evaluate the evidence for themselves. Values allowed:
+#' "unreliable", "subjective", "secondary", "primary".
+#' @param notes A character vector of notes accompanying the citation. These could be xrefs to 
+#' existing Note records.
+#' @param multimedia_links A character vector of multimedia file references accompanying this
+#' citation. These could be xrefs to existing Multimedia records.
+#'
+#' @return A tibble describing a source citation.
+#' @export
+citation <- function(gedcom,
+                     source,
+                     where = character(),
+                     entry_date = character(),
+                     source_text = character(),
+                     certainty = character(),
+                     notes = character(),
+                     multimedia_links = character()) {
+  
+  sour <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_sour)
+
+  cit_notes <- purrr::map(notes, tidyged.internals::NOTE_STRUCTURE)
+  
+  media_links <- purrr::map_chr(multimedia_links, find_xref, 
+                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
+    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
+  
+  certainty <- dplyr::case_when(certainty == "unreliable" ~ "0",
+                                certainty == "subjective" ~ "1",
+                                certainty == "secondary" ~ "2",
+                                certainty == "primary" ~ "3",
+                                certainty == "unreliable" ~ "error")
+  
+  if(certainty == "error") stop("Invalid certainty value given")
+  
+  tidyged.internals::SOURCE_CITATION(xref_sour = sour,
+                                     where_within_source = where,
+                                     entry_recording_date = entry_date,
+                                     text_from_source = source_text,
+                                     certainty_assessment = certainty,
+                                     multimedia_links = media_links,
+                                     notes = cit_notes)
+  
+  
+}

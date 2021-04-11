@@ -48,7 +48,7 @@ null_active_record <- function(gedcom) {
 find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
   
   if(length(search_pattern) == 0) return(character())
-  if(grepl(tidyged.internals::xref_pattern(), search_pattern)) return(search_pattern)
+  if(grepl(tidyged.internals::reg_xref(), search_pattern)) return(search_pattern)
   
   #split up search pattern by spaces
   search_pattern_terms <- unlist(stringr::str_split(search_pattern, " "))

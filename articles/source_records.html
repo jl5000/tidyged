@@ -87,16 +87,67 @@
 
     
     
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p>Source records are one of the most important types of record in a GEDCOM file. They provide evidence for the assertions (facts) made in a file, and require careful management.</p>
+<p>A Source record can be created with the <code><a href="../reference/add_sour.html">add_sour()</a></code> function.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
+
+<span class="va">birth_source</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_sour.html">add_sour</a></span><span class="op">(</span>events_recorded <span class="op">=</span> <span class="st">"BIRT, MARR, DEAT"</span>,
+           date_period_covered <span class="op">=</span> <span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1900</span><span class="op">)</span>, <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">2000</span><span class="op">)</span><span class="op">)</span>,
+           jurisdiction <span class="op">=</span> <span class="st">"England and Wales"</span>,
+           originator <span class="op">=</span> <span class="st">"General Register Office"</span>,
+           title <span class="op">=</span> <span class="st">"Birth Certificate for Joe Bloggs (1956)"</span>,
+           publication_detail <span class="op">=</span> <span class="st">"something"</span>,
+           source_text <span class="op">=</span> <span class="st">"This is what is written on the certificate"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="linking-back-to-repositories" class="section level2">
+<h2 class="hasAnchor">
+<a href="#linking-back-to-repositories" class="anchor"></a>Linking back to repositories</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">birth_source</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_repo.html">add_repo</a></span><span class="op">(</span><span class="st">"General Register Office"</span>,
+           repo_address <span class="op">=</span> <span class="fu"><a href="../reference/address.html">address</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Southport"</span>, state <span class="op">=</span> <span class="st">"Merseyside"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/activate_indi.html">activate_sour</a></span><span class="op">(</span><span class="st">"Birth Certificate for Joe Bloggs (1956)"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_sour_repo_citation.html">add_sour_repo_citation</a></span><span class="op">(</span>repository <span class="op">=</span> <span class="st">"General Register Office"</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 41 x 4</span>
+<span class="co">#&gt;    level record tag   value                                     </span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                     </span>
+<span class="co">#&gt;  1     0 HD     HEAD  ""                                        </span>
+<span class="co">#&gt;  2     1 HD     GEDC  ""                                        </span>
+<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                                   </span>
+<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                          </span>
+<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                                   </span>
+<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                                   </span>
+<span class="co">#&gt;  7     1 HD     DEST  "tidyged"                                 </span>
+<span class="co">#&gt;  8     1 HD     SOUR  "tidyged"                                 </span>
+<span class="co">#&gt;  9     2 HD     VERS  "0.0.0"                                   </span>
+<span class="co">#&gt; 10     2 HD     NAME  "The 'tidyged' package for the R language"</span>
+<span class="co">#&gt; # … with 31 more rows</span></code></pre></div>
+</div>
+<div id="citing-source-records" class="section level2">
+<h2 class="hasAnchor">
+<a href="#citing-source-records" class="anchor"></a>Citing source records</h2>
+</div>
+<div id="citation-styles" class="section level2">
+<h2 class="hasAnchor">
+<a href="#citation-styles" class="anchor"></a>Citation styles</h2>
+<p>The point to recognise is that users should NOT be exclusively ‘splitters’ or ‘lumpers’. That choice depends on the Source Citation characteristics. GRO BMD Index records lend themselves to being Method 2 ‘lumper’ Sources. BMD Certificates are usually better suited to being Method 1 ‘splitter’ Sources as they often have associated Media images, Text From Source transcripts, and multiple Citations. So most users adopt a hybrid approach</p>
+<p><a href="https://fhug.org.uk/kb/kb-article/citing-sources-method-1-and-method-2/" class="uri">https://fhug.org.uk/kb/kb-article/citing-sources-method-1-and-method-2/</a></p>
 <p style="text-align: right;">
 <a href="https://jl5000.github.io/tidyged/articles/multimedia_records.html">Next article: Multimedia records &gt;</a>
 </p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

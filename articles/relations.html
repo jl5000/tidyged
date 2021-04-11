@@ -94,11 +94,6 @@
 <p>We illustrate their functionality using the family below consisting of three generations: A pair of parents who has a single child (named ‘Main Person’). This person forms two separate family groups with two spouses, each resulting in two children.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'tidyged'</span>
-<span class="co">#&gt; The following object is masked from 'package:utils':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     citation</span>
 
 <span class="va">three_gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Parent 1"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -135,7 +130,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">6 APR 2021</td>
+<td align="left">11 APR 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -145,7 +140,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">6 APR 2021</td>
+<td align="left">11 APR 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -155,7 +150,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">6 APR 2021</td>
+<td align="left">11 APR 2021</td>
 </tr>
 </tbody>
 </table>
@@ -273,7 +268,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">6 APR 2021</td>
+<td align="left">11 APR 2021</td>
 </tr></tbody>
 </table>
 <p>This combination can result in the removal of a vast amount of data. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.</p>

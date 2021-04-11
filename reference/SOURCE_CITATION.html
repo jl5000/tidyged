@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Construct the SOURCE_CITATION tibble — SOURCE_CITATION • tidygedcom</title>
+<title>Create a citation of a Source record — source_citation • tidyged</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -39,9 +46,9 @@
 
 
 
-<meta property="og:title" content="Construct the SOURCE_CITATION tibble — SOURCE_CITATION" />
-<meta property="og:description" content="This function constructs a tibble representation of the SOURCE_CITATION from the GEDCOM 5.5.5
-specification." />
+<meta property="og:title" content="Create a citation of a Source record — source_citation" />
+<meta property="og:description" content="Create a citation of a Source record" />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -72,7 +79,7 @@ specification." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidygedcom</a>
+        <a class="navbar-link" href="../index.html">tidyged</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -94,7 +101,7 @@ specification." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jl5000/tidygedcom/">
+  <a href="https://github.com/jl5000/tidyged/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -112,86 +119,82 @@ specification." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Construct the SOURCE_CITATION tibble</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidygedcom/blob/master/R/subrecords.R'><code>R/subrecords.R</code></a></small>
-    <div class="hidden name"><code>SOURCE_CITATION.Rd</code></div>
+    <h1>Create a citation of a Source record</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/structures.R'><code>R/structures.R</code></a></small>
+    <div class="hidden name"><code>source_citation.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function constructs a tibble representation of the SOURCE_CITATION from the GEDCOM 5.5.5
-specification.</p>
+    <p>Create a citation of a Source record</p>
     </div>
 
-    <pre class="usage"><span class='fu'>SOURCE_CITATION</span><span class='op'>(</span>
-  <span class='va'>xref_sour</span>,
-  where_within_source <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  event_type_cited_from <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  role_in_event <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  entry_recording_date <span class='op'>=</span> <span class='fu'><a href='date_value.html'>date_value</a></span><span class='op'>(</span><span class='op'>)</span>,
-  text_from_source <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  certainty_assessment <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  multimedia_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
-  notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>source_citation</span><span class='op'>(</span>
+  <span class='va'>gedcom</span>,
+  <span class='va'>source</span>,
+  where <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  entry_date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  source_text <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  certainty <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  multimedia_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>xref_sour</th>
-      <td><p>An xref ID of a Source record.</p></td>
+      <th>gedcom</th>
+      <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>where_within_source</th>
-      <td><p>Specific location within the information referenced.</p></td>
+      <th>source</th>
+      <td><p>A character string identifying the source. This can either
+be an xref or term(s) to match to a source title.</p></td>
     </tr>
     <tr>
-      <th>event_type_cited_from</th>
-      <td><p>A code that indicates the type of event which was responsible for the
-source entry being recorded. For example, if the entry was created to record a birth of a child,
-then the type would be BIRT regardless of the assertions made from that record, such as the mother's
-name or mother's birth date. This will allow a prioritised best view choice and a determination of
-the certainty associated with the source used in asserting the cited fact.</p></td>
+      <th>where</th>
+      <td><p>Specific location within the information referenced. For a published work, this could include
+the volume of a multi-volume work and the page number(s). For a newspaper, it could include a column
+number and page number. A census record might have an enumerating district, page number, line number,
+dwelling number, and family number.
+The data in this field should be in the form of a label and value pair, such as Label1: value,
+Label2: value, with each pair being separated by a comma. For example, Film: 1234567,
+Frame: 344, Line: 28.</p></td>
     </tr>
     <tr>
-      <th>role_in_event</th>
-      <td><p>Indicates what role this person played in the event that is being cited in this context.</p></td>
+      <th>entry_date</th>
+      <td><p>A date_calendar(), date_period(), date_range(), or date_approximated()
+value giving the date that this data was entered into the original source document.</p></td>
     </tr>
     <tr>
-      <th>entry_recording_date</th>
-      <td><p>A date_value() object giving the date that this event data
-was entered into the original source document.</p></td>
-    </tr>
-    <tr>
-      <th>text_from_source</th>
+      <th>source_text</th>
       <td><p>A verbatim copy of any description contained within the source.
-This indicates notes or text that are actually contained in the source document, not the submitter's
-opinion about the source.</p></td>
+This indicates notes or text that are actually contained in the source document,
+not the submitter's opinion about the source.</p></td>
     </tr>
     <tr>
-      <th>certainty_assessment</th>
-      <td><p>A quantitative evaluation of the credibility of a piece of
-information, based upon its supporting evidence. Some systems use this feature to rank multiple
-conflicting opinions for display of most likely information first. It is not intended to
-eliminate the receiver's need to evaluate the evidence for themselves.
-0 = unreliable/estimated data
-1 = Questionable reliability of evidence
-2 = Secondary evidence, data officially recorded sometime after event
-3 = Direct and primary evidence used, or by dominance of the evidence</p></td>
-    </tr>
-    <tr>
-      <th>multimedia_links</th>
-      <td><p>A list of MULTIMEDIA_LINK() objects</p></td>
+      <th>certainty</th>
+      <td><p>An evaluation of the credibility of a piece of information, based upon
+its supporting evidence. Some systems use this feature to rank multiple conflicting opinions
+for display of most likely information first. It is not intended to eliminate the receiver's
+need to evaluate the evidence for themselves. Values allowed:
+"unreliable", "subjective", "secondary", "primary".</p></td>
     </tr>
     <tr>
       <th>notes</th>
-      <td><p>A list of NOTE_STRUCTURE() objects.</p></td>
+      <td><p>A character vector of notes accompanying the citation. These could be xrefs to
+existing Note records.</p></td>
+    </tr>
+    <tr>
+      <th>multimedia_links</th>
+      <td><p>A character vector of multimedia file references accompanying this
+citation. These could be xrefs to existing Multimedia records.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tidy tibble containing the SOURCE_CITATION part of a GEDCOM file.</p>
+    <p>A tibble describing a source citation.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

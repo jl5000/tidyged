@@ -94,11 +94,6 @@
 <p>The family group records do not need to describe traditional marriage unions - they can describe non-marital relationships and same-sex relationships. Children also do not have to be biological. The parameter names are a legacy from previous versions of the GEDCOM specification, which have not yet been updated.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'tidyged'</span>
-<span class="co">#&gt; The following object is masked from 'package:utils':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     citation</span>
 
 <span class="va">simpson_indis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Homer Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -178,11 +173,12 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">6 APR 2021</td>
+<td align="left">11 APR 2021</td>
 </tr>
 </tbody>
 </table>
 <p>As with other records, various types of user-defined references can be defined (<code>user_reference_number</code> and <code>user_reference_type</code>), as well as links to multimedia and notes.</p>
+<p>A Family Group record can be removed using the <code><a href="../reference/remove_famg.html">remove_famg()</a></code> function.</p>
 </div>
 <div id="family-events" class="section level2">
 <h2 class="hasAnchor">
@@ -311,7 +307,7 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">6 APR 2021</td>
+<td align="left">11 APR 2021</td>
 </tr>
 </tbody>
 </table>

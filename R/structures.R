@@ -176,14 +176,14 @@ name_pieces <- function(prefix = character(),
 #'
 #' @return A tibble describing a source citation.
 #' @export
-citation <- function(gedcom,
-                     source,
-                     where = character(),
-                     entry_date = character(),
-                     source_text = character(),
-                     certainty = character(),
-                     notes = character(),
-                     multimedia_links = character()) {
+source_citation <- function(gedcom,
+                            source,
+                            where = character(),
+                            entry_date = character(),
+                            source_text = character(),
+                            certainty = character(),
+                            notes = character(),
+                            multimedia_links = character()) {
   
   sour <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_sour)
 
@@ -197,7 +197,7 @@ citation <- function(gedcom,
                                 certainty == "subjective" ~ "1",
                                 certainty == "secondary" ~ "2",
                                 certainty == "primary" ~ "3",
-                                certainty == "unreliable" ~ "error")
+                                TRUE ~ "error")
   
   if(certainty == "error") stop("Invalid certainty value given")
   

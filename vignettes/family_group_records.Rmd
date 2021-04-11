@@ -39,6 +39,8 @@ knitr::kable(dplyr::filter(simpson_famg, record == "@F1@"))
 
 As with other records, various types of user-defined references can be defined (`user_reference_number` and `user_reference_type`), as well as links to multimedia and notes.
 
+A Family Group record can be removed using the `remove_famg()` function.
+
 ## Family events
 
 Events associated with a family group, such as marriages and censuses, are created using the `add_famg_event()` function. The full list of events that can be created are given in the Details section of the function help page.
@@ -54,5 +56,7 @@ simpson_famg %>%
   dplyr::filter(record == "@F1@") %>% 
   knitr::kable()
 ```
+
+
 
 <p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/repository_records.html">Next article: Repository records ></a></p>

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Note records allow you to make notes in your file and reference them in multiple places. This is achieved using the `add_note()` record. Multi-line notes can be achieved using "\n".
+Note records allow you to make notes in your file and reference them in multiple places. This is achieved using the `add_note()` record. Multi-line notes can be achieved using backslash-n.
 
 ```{r}
 library(tidyged)

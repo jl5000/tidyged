@@ -24,6 +24,8 @@ Adding individuals to a tidyged object can be achieved with the `add_indi()` fun
 
 As with other records, various types of user-defined references can be defined (`user_reference_number` and `user_reference_type`), as well as links to multimedia and notes.
 
+Individuals can be removed with the `remove_indi()` function.
+
 ## Individual names
 
 Individuals can be given more than one name. These can be different kinds of name such as birth name or adoptive name, or if there is uncertainty, variants of these based on conflicting evidence sources. There is also the ability to provide phonetic and romanised variants of names. Given this complexity, the name is usually not immediately defined when creating an Individual record.
@@ -51,6 +53,8 @@ knitr::kable(dplyr::filter(leia, record == "@I1@") )
 
 In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes - as given in the specification). Nicknames are not included.
 
+An individual's name (and name pieces) can be removed using the `remove_indi_name()` function.
+
 ### Phonetic and romanised names
 
 Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the `add_indi_names_var()` function. As a minimum, the original name, variant name pieces, derivation method, and whether it is a phonetic or romanised variation should be given. The original name must be given exactly as it is represented in the file ("Leia Skywalker"):
@@ -63,6 +67,7 @@ leia_var <- leia %>%
 knitr::kable(dplyr::filter(leia_var, record == "@I1@"))
 ```
 
+An individual's name variation can be removed using the `remove_indi_name_var()` function.
 
 ### Name types
 

@@ -125,18 +125,13 @@ add_famg_event <- function(gedcom,
                                                          family_event_details = details2) %>% 
     tidyged.internals::add_levels(1)
   
-  if(update_date_changed) {
-    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    event_str <- dplyr::bind_rows(event_str, tidyged.internals::CHANGE_DATE() %>% 
-                                    tidyged.internals::add_levels(1))
-  }
-  
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "FAM")
-
-  gedcom %>%
-    tibble::add_row(event_str, .before = next_row) %>% 
-    tidyged.internals::finalise() %>% 
-    activate_famg(xref)
+  
+  gedcom <- tibble::add_row(gedcom, event_str, .before = next_row)
+  
+  if(update_date_changed) gedcom <- update_change_date(gedcom, xref)
+  
+  activate_famg(gedcom, xref)
   
 }
 

@@ -213,3 +213,32 @@ order_famg_children <- function(gedcom, xref) {
     tibble::add_row(chil_lines_yob, .before = next_row)
     
 }
+
+
+#' Update a record's change date
+#'
+#' @param gedcom A tidyged object.
+#' @param xref The xref of a record.
+#'
+#' @return An updated tidyged object where the specified record has a change date of today.
+update_change_date <- function(gedcom, xref) {
+  
+  gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
+  
+  rec_tag <- dplyr::case_when(is_indi(gedcom, xref) ~ .pkgenv$record_tag_indi,
+                              is_famg(gedcom, xref) ~ .pkgenv$record_tag_famg,
+                              is_sour(gedcom, xref) ~ .pkgenv$record_tag_sour,
+                              is_media(gedcom, xref) ~ .pkgenv$record_tag_obje,
+                              is_repo(gedcom, xref) ~ .pkgenv$record_tag_repo,
+                              is_note(gedcom, xref) ~ .pkgenv$record_tag_note,
+                              is_subm(gedcom, xref) ~ .pkgenv$record_tag_subm)
+  
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, rec_tag)
+  
+  chan <- tidyged.internals::CHANGE_DATE() %>% 
+    tidyged.internals::add_levels(1)
+  
+  tibble::add_row(gedcom, chan, .before = next_row) %>% 
+    tidyged.internals::finalise()
+  
+}

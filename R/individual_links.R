@@ -38,18 +38,13 @@ add_indi_association <- function(gedcom,
                                                           notes = asso_notes) %>% 
     tidyged.internals::add_levels(1)
   
-  if(update_date_changed) {
-    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    asso_str <- dplyr::bind_rows(asso_str, tidyged.internals::CHANGE_DATE() %>% 
-                                   tidyged.internals::add_levels(1))
-  }
-  
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
-  gedcom %>%
-    tibble::add_row(asso_str, .before = next_row) %>% 
-    tidyged.internals::finalise() %>% 
-    activate_indi(xref)
+  gedcom <- tibble::add_row(gedcom, asso_str, .before = next_row)
+  
+  if(update_date_changed) gedcom <- update_change_date(gedcom, xref)
+  
+  activate_indi(gedcom, xref)
   
 }
 
@@ -77,18 +72,14 @@ add_indi_family_link_as_spouse <- function(gedcom,
   link <- tidyged.internals::SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% 
     tidyged.internals::add_levels(1)
   
-  if(update_date_changed) {
-    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    link <- dplyr::bind_rows(link, tidyged.internals::CHANGE_DATE() %>% 
-                               tidyged.internals::add_levels(1))
-  }
-  
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
-  gedcom %>%
-    tibble::add_row(link, .before = next_row) %>% 
-    tidyged.internals::finalise() %>% 
-    activate_indi(xref)
+  gedcom <- tibble::add_row(gedcom, link, .before = next_row)
+  
+  if(update_date_changed) gedcom <- update_change_date(gedcom, xref)
+  
+  activate_indi(gedcom, xref)
+  
 }
 
 #' Add a family link as a child
@@ -120,18 +111,13 @@ add_indi_family_link_as_child <- function(gedcom,
                                                   notes = link_notes) %>% 
     tidyged.internals::add_levels(1)
   
-  if(update_date_changed) {
-    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    link <- dplyr::bind_rows(link, tidyged.internals::CHANGE_DATE() %>% 
-                               tidyged.internals::add_levels(1))
-  }
-  
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
-  gedcom %>%
-    tibble::add_row(link, .before = next_row) %>% 
-    tidyged.internals::finalise() %>% 
-    activate_indi(xref)
+  gedcom <- tibble::add_row(gedcom, link, .before = next_row)
+  
+  if(update_date_changed) gedcom <- update_change_date(gedcom, xref)
+  
+  activate_indi(gedcom, xref)
 }
 
 

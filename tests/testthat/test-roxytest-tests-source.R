@@ -11,7 +11,7 @@ test_that("Function add_sour_repo_citation() @ L109", {
 })
 
 
-test_that("Function remove_sour_repo_citation() @ L148", {
+test_that("Function remove_sour_repo_citation() @ L144", {
   expect_equal(gedcom(subm("Me")) %>% 
                    add_repo(name = "The library") %>% 
                    add_sour() %>%
@@ -25,7 +25,7 @@ test_that("Function remove_sour_repo_citation() @ L148", {
 })
 
 
-test_that("Function remove_sour() @ L171", {
+test_that("Function remove_sour() @ L167", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) %>% add_sour(title = "text") %>% remove_sour())
 })

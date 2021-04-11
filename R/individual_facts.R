@@ -183,18 +183,13 @@ add_indi_fact <- function(gedcom,
     
   }
   
-  if(update_date_changed) {
-    gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
-    fact_str <- dplyr::bind_rows(fact_str, tidyged.internals::CHANGE_DATE() %>% 
-                                    tidyged.internals::add_levels(1))
-  }
-  
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
-  gedcom %>%
-    tibble::add_row(fact_str, .before = next_row) %>% 
-    tidyged.internals::finalise() %>% 
-    activate_indi(xref)
+  gedcom <- tibble::add_row(gedcom, fact_str, .before = next_row)
+  
+  if(update_date_changed) gedcom <- update_change_date(gedcom, xref)
+  
+  activate_indi(gedcom, xref)
   
 }
 

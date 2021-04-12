@@ -221,6 +221,7 @@ order_famg_children <- function(gedcom, xref) {
 #' @param xref The xref of a record.
 #'
 #' @return An updated tidyged object where the specified record has a change date of today.
+#' @export
 update_change_date <- function(gedcom, xref) {
   
   gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)

@@ -140,7 +140,7 @@ remove_famg <- function(gedcom,
   
   if(remove_individuals) {
     
-    ind_xrefs <- unique(dplyr::filter(gedcom, record == xref,
+    ind_xrefs <- unique(dplyr::filter(gedcom, record == xref, level == 1,
                                       tag %in% c("HUSB", "WIFE", "CHIL"))$value)
     
     for(ind_xref in ind_xrefs) {

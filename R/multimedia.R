@@ -15,7 +15,7 @@
 #' manuscript, map, newspaper, photo, tombstone, video.
 #'
 #' @param gedcom A tidyged object.
-#' @param file_reference A reference for the file, typically a filepath or URL.
+#' @param file_reference A reference for the file, typically a filepath or URL. It is strongly recommended you do not use backslashes, only use forward slashes.
 #' @param format A string indicating the format of the multimedia file. See Details.
 #' @param source_media A code that indicates the type of material in which the referenced 
 #' source is stored. See Details.

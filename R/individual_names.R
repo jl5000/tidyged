@@ -27,7 +27,7 @@ add_indi_names <- function(gedcom,
   surname <- dplyr::filter(names, tag == "SURN")$value
   suffix <- dplyr::filter(names, tag == "NSFX")$value
   
-  name <- construct_full_name(given, surname_prefix, surname, suffix)
+  name <- tidyged.internals::construct_full_name(given, surname_prefix, surname, suffix)
   
   name_str <- tidyged.internals::PERSONAL_NAME_STRUCTURE(name_personal = name,
                                                          name_type = type,
@@ -83,7 +83,7 @@ add_indi_names_var <- function(gedcom,
   
   if(phonetic_variation) {
     
-    name_phonetic_var <- construct_full_name(given, surname_prefix, surname, suffix)
+    name_phonetic_var <- tidyged.internals::construct_full_name(given, surname_prefix, surname, suffix)
     phonetisation_method <- method
     phon_name_pieces <- list(names_var)
     name_romanised_var <- character()
@@ -92,7 +92,7 @@ add_indi_names_var <- function(gedcom,
     
   } else {
     
-    name_romanised_var <- construct_full_name(given, surname_prefix, surname, suffix)
+    name_romanised_var <- tidyged.internals::construct_full_name(given, surname_prefix, surname, suffix)
     romanisation_method <- method
     rom_name_pieces <- list(names_var)
     name_phonetic_var <- character()

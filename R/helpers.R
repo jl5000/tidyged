@@ -1,44 +1,6 @@
 
 
-#' Construct a full personal name
-#' 
-#' This function constructs a full personal name from individual name pieces.
-#'
-#' @param given The given name(s).
-#' @param surname_prefix The surname prefix.
-#' @param surname The surname.
-#' @param suffix The name suffix.
-#'
-#' @return The full name with all name pieces combined.
-#' @tests
-#' expect_error(construct_full_name(surname_prefix = "de la"))
-#' expect_equal(construct_full_name(given = "Joe"), "Joe")
-#' expect_equal(construct_full_name(given = "Joe,Adam"), "Joe Adam")
-#' expect_equal(construct_full_name(given = "Joey,Joe, Joe"), "Joey Joe Joe")
-#' expect_equal(construct_full_name(surname = "Bloggs"), "/Bloggs/")
-#' expect_equal(construct_full_name(suffix = "Jr."), "Jr.")
-#' expect_equal(construct_full_name(suffix = "Jr.,Esq."), "Jr. Esq.")
-#' expect_equal(construct_full_name(given = "Joe,Adam",
-#'                                  surname_prefix = "de la", surname = "Bloggs",
-#'                                  suffix = "Jr., Esq."),
-#'              "Joe Adam de la /Bloggs/ Jr. Esq.")
-construct_full_name <- function(given = character(), 
-                                surname_prefix = character(), 
-                                surname = character(), 
-                                suffix = character()) {
-  
-  if(length(surname_prefix) == 1 & length(surname) == 0)
-    stop("Surname prefix given without a surname")
-  
-  paste(
-    stringr::str_replace_all(given, ", ?", " "), 
-    surname_prefix, 
-    ifelse(length(surname) == 1, paste0("/", surname, "/"), ""),
-    stringr::str_replace_all(suffix, ", ?", " ")
-  ) %>% 
-    stringr::str_squish()
-  
-}
+
 
 
 #' Temporarily remove forward slashes from surnames

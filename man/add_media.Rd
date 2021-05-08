@@ -18,7 +18,7 @@ add_media(
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{file_reference}{A reference for the file, typically a filepath or URL.}
+\item{file_reference}{A reference for the file, typically a filepath or URL. It is strongly recommended you do not use backslashes, only use forward slashes.}
 
 \item{format}{A string indicating the format of the multimedia file. See Details.}
 

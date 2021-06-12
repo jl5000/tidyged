@@ -2,7 +2,7 @@
 
 # File R/individual_names.R: @tests
 
-test_that("Function add_indi_names_var() @ L69", {
+test_that("Function add_indi_names_var() @ L70", {
   expect_snapshot_value(
                  gedcom(subm("Me")) %>% 
                  add_indi() %>% 
@@ -13,7 +13,7 @@ test_that("Function add_indi_names_var() @ L69", {
 })
 
 
-test_that("Function remove_indi_name() @ L150", {
+test_that("Function remove_indi_name() @ L152", {
   expect_equal(gedcom(subm()) %>% 
                  add_indi(),
                gedcom(subm()) %>% 
@@ -23,7 +23,7 @@ test_that("Function remove_indi_name() @ L150", {
 })
 
 
-test_that("Function remove_indi_name_var() @ L185", {
+test_that("Function remove_indi_name_var() @ L187", {
   expect_equal(gedcom(subm()) %>% 
                  add_indi() %>% 
                  add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")),

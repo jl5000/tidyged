@@ -112,7 +112,7 @@ describe_indi <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   
   famc <- get_families_as_child(gedcom, xref, birth_only = TRUE)
   
-  if (famc != "") {
+  if (length(famc) > 0) {
     
     moth_xref <- tidyged.internals::gedcom_value(gedcom, famc, "WIFE", 1)
     fath_xref <- tidyged.internals::gedcom_value(gedcom, famc, "HUSB", 1)

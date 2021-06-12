@@ -171,7 +171,7 @@ get_families_as_child <- function(gedcom,
   # return all family links
   famc <- unique(dplyr::filter(gedcom, record == xref, tag == "FAMC")$value)
   
-  if(length(famc) == 0) return("")
+  if(length(famc) == 0) return(NULL)
   if(!birth_only) return(famc)
   
   # Look in birth events first

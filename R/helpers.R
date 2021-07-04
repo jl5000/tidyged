@@ -186,7 +186,7 @@ order_famg_children <- function(gedcom, xref) {
 #' @export
 update_change_date <- function(gedcom, xref) {
   
-  gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref)
+  gedcom <-  tidyged.internals::remove_section(gedcom, 1, "CHAN", "", xrefs = xref, first_only = TRUE)
   
   rec_tag <- dplyr::case_when(is_indi(gedcom, xref) ~ .pkgenv$record_tag_indi,
                               is_famg(gedcom, xref) ~ .pkgenv$record_tag_famg,

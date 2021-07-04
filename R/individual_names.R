@@ -155,7 +155,7 @@ remove_indi_name <- function(gedcom,
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
   rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
-    tidyged.internals::identify_section(1, "NAME", name, xrefs = xref)
+    tidyged.internals::identify_section(1, "NAME", name, xrefs = xref, first_only = TRUE)
   
   gedcom %>%
     dplyr::slice(-rows_to_remove) %>% 
@@ -192,7 +192,7 @@ remove_indi_name_var <- function(gedcom,
   
   rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
     tidyged.internals::identify_section(2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
-                     variation_name, xrefs = xref)
+                     variation_name, xrefs = xref, first_only = TRUE)
   
   gedcom %>%
     dplyr::slice(-rows_to_remove) %>% 
@@ -214,14 +214,14 @@ primary_indi_name <- function(gedcom, name, xref = character()) {
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   rows_to_move <- temporarily_remove_name_slashes(gedcom) %>% 
-    tidyged.internals::identify_section(1, "NAME", name)
+    tidyged.internals::identify_section(1, "NAME", name, xrefs = xref, first_only = TRUE)
   
   section <- gedcom[rows_to_move,]
   gedcom <- gedcom[-rows_to_move,]
   
-  next_row <- tidyged.internals::identify_section(gedcom, 0, "INDI", "", xrefs = xref)[2]
+  first_row <- which(gedcom$record == xref & gedcom$level == 0 & gedcom$tag == "INDI")
 
   gedcom %>%
-    tibble::add_row(section, .before = next_row) %>% 
+    tibble::add_row(section, .after = first_row) %>% 
     activate_indi(xref)
 }

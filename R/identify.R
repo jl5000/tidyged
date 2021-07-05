@@ -229,7 +229,7 @@ get_supporting_records <- function(gedcom,
   links <- unique(dplyr::filter(gedcom, 
                                 record %in% xrefs, 
                                 tag %in% tags, 
-                                stringr::str_detect(value, tidyged.internals::reg_xref()))$value)
+                                stringr::str_detect(value, tidyged.internals::reg_xref(TRUE)))$value)
   
   unique(
     c(links,

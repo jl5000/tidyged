@@ -47,7 +47,7 @@ get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_
     # xref not given explicitly, get it from active record
     xref <- get_active_record(gedcom)
     
-  } else if (grepl(tidyged.internals::reg_xref(), xref_or_descriptor)) {
+  } else if (grepl(tidyged.internals::reg_xref(TRUE), xref_or_descriptor)) {
     # xref given explicitly
     xref <- xref_or_descriptor
     

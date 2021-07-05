@@ -48,7 +48,7 @@ null_active_record <- function(gedcom) {
 find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
   
   if(length(search_pattern) == 0) return(character())
-  if(grepl(tidyged.internals::reg_xref(), search_pattern)) return(search_pattern)
+  if(grepl(tidyged.internals::reg_xref(TRUE), search_pattern)) return(search_pattern)
   
   #split up search pattern by spaces
   search_pattern_terms <- unlist(stringr::str_split(search_pattern, " "))
@@ -72,7 +72,7 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
                                          choices = describe_records(gedcom, unique(possibilities$record)),
                                          multiple = FALSE)
     
-    xref <- stringr::str_extract(choice, "@[a-zA-Z0-9]{1,20}@")
+    xref <- stringr::str_extract(choice, tidyged.internals::reg_xref(FALSE))
     
   } else if(length(unique(possibilities$record)) == 1) {
     

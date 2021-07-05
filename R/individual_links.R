@@ -181,7 +181,7 @@ add_indi_links_to_families <- function(gedcom,
                                    choices = describe_records(gedcom, xref_famc),
                                    multiple = FALSE)
       
-      xref_famc <- stringr::str_extract(choice, "@[a-zA-Z0-9]{1,20}@")
+      xref_famc <- stringr::str_extract(choice, tidyged.internals::reg_xref(FALSE))
       
       gedcom <- add_indi_family_link_as_child(gedcom, xref_famc, linkage_type,
                                               linkage_notes, update_date_changed = update_date_changed)
@@ -242,7 +242,7 @@ add_indi_links_to_families <- function(gedcom,
                                    choices = describe_records(gedcom, xref_fams),
                                    multiple = FALSE)
       
-      xref_fams <- stringr::str_extract(choice, "@[a-zA-Z0-9]{1,20}@")
+      xref_fams <- stringr::str_extract(choice, tidyged.internals::reg_xref(FALSE))
       
       gedcom <- add_indi_family_link_as_spouse(gedcom, xref_fams, update_date_changed = update_date_changed)
     }

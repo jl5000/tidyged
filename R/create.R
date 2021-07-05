@@ -24,13 +24,12 @@ gedcom <- function(submitter_details = subm(),
                    source_data_name = character(),
                    source_data_date = date_exact(),
                    source_data_copyright = character(),
-                   receiving_system = "tidyged",
+                   receiving_system = "gedcompendium",
                    language = "English") {
   
   tidyged.internals::GEDCOM_HEADER(
-    header_extension = tidyged.internals::LINEAGE_LINKED_HEADER_EXTENSION(system_id = "tidyged",
-                                                                          product_version_number = utils::packageVersion("tidyged"),
-                                                                          name_of_product = "The 'tidyged' package for the R language",
+    header_extension = tidyged.internals::LINEAGE_LINKED_HEADER_EXTENSION(system_id = "gedcompendium",
+                                                                          name_of_product = "The 'gedcompendium' ecosystem of packages for the R language",
                                                                           name_of_business = "Jamie Lendrum",
                                                                           business_address = address(email = "jalendrum@gmail.com",
                                                                                                      web_page = "https://jl5000.github.io/tidyged/"),

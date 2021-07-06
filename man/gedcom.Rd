@@ -11,7 +11,7 @@ gedcom(
   source_data_name = character(),
   source_data_date = date_exact(),
   source_data_copyright = character(),
-  receiving_system = "tidyged",
+  receiving_system = "gedcompendium",
   language = "English"
 )
 }

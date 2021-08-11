@@ -39,7 +39,7 @@ The intent is to allow the user to import GEDCOM files or create them
 from scratch using a `ggplot2` type interface; starting with a base
 GEDCOM object (with only a header and trailer section) and adding
 records as you would add layers to a ggplot object (but instead using
-the pipe operator, %\>%).
+the pipe operator, %&gt;%).
 
 An example is below:
 
@@ -78,124 +78,123 @@ tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family",
   add_media(file_reference = "XYZ", format = "JPEG")
 
 print(tg, n = Inf)
-#> # A tibble: 115 x 4
-#>     level record tag   value                                                  
-#>     <dbl> <chr>  <chr> <chr>                                                  
-#>   1     0 HD     HEAD  ""                                                     
-#>   2     1 HD     GEDC  ""                                                     
-#>   3     2 HD     VERS  "5.5.5"                                                
-#>   4     2 HD     FORM  "LINEAGE-LINKED"                                       
-#>   5     3 HD     VERS  "5.5.5"                                                
-#>   6     1 HD     CHAR  "UTF-8"                                                
-#>   7     1 HD     DEST  "tidyged"                                              
-#>   8     1 HD     SOUR  "tidyged"                                              
-#>   9     2 HD     VERS  "0.0.0"                                                
-#>  10     2 HD     NAME  "The 'tidyged' package for the R language"             
-#>  11     2 HD     CORP  "Jamie Lendrum"                                        
-#>  12     3 HD     ADDR  ""                                                     
-#>  13     3 HD     EMAIL "jalendrum@gmail.com"                                  
-#>  14     3 HD     WWW   "https://jl5000.github.io/tidyged/"                    
-#>  15     1 HD     DATE  "11 APR 2021"                                          
-#>  16     1 HD     LANG  "English"                                              
-#>  17     1 HD     SUBM  "@U1@"                                                 
-#>  18     1 HD     COPR  "None"                                                 
-#>  19     1 HD     NOTE  "The Skywalker family"                                 
-#>  20     0 @U1@   SUBM  ""                                                     
-#>  21     1 @U1@   NAME  "Jamie Lendrum"                                        
-#>  22     1 @U1@   CHAN  ""                                                     
-#>  23     2 @U1@   DATE  "11 APR 2021"                                          
-#>  24     0 @I1@   INDI  ""                                                     
-#>  25     1 @I1@   SEX   "M"                                                    
-#>  26     1 @I1@   NOTE  "The central character in the Star Wars Skywalker Saga"
-#>  27     1 @I1@   NAME  "Anakin /Skywalker/"                                   
-#>  28     2 @I1@   TYPE  "birth"                                                
-#>  29     2 @I1@   GIVN  "Anakin"                                               
-#>  30     2 @I1@   SURN  "Skywalker"                                            
-#>  31     1 @I1@   NAME  "Vader"                                                
-#>  32     2 @I1@   TYPE  "given"                                                
-#>  33     2 @I1@   NPFX  "Darth"                                                
-#>  34     2 @I1@   GIVN  "Vader"                                                
-#>  35     1 @I1@   FAMS  "@F1@"                                                 
-#>  36     1 @I1@   ASSO  "@I5@"                                                 
-#>  37     2 @I1@   RELA  "Master"                                               
-#>  38     1 @I1@   DEAT  "Y"                                                    
-#>  39     2 @I1@   PLAC  "Second Death Star"                                    
-#>  40     3 @I1@   NOTE  "Orbiting Endor System"                                
-#>  41     2 @I1@   CAUS  "Killed by son Luke"                                   
-#>  42     2 @I1@   AGE   "45y"                                                  
-#>  43     1 @I1@   RELI  "Jedi"                                                 
-#>  44     1 @I1@   PROP  "Lightsaber"                                           
-#>  45     1 @I1@   CHAN  ""                                                     
-#>  46     2 @I1@   DATE  "11 APR 2021"                                          
-#>  47     0 @I2@   INDI  ""                                                     
-#>  48     1 @I2@   SEX   "F"                                                    
-#>  49     1 @I2@   NOTE  "Queen of Naboo"                                       
-#>  50     1 @I2@   NAME  "Padme /Amidala/"                                      
-#>  51     2 @I2@   TYPE  "birth"                                                
-#>  52     2 @I2@   GIVN  "Padme"                                                
-#>  53     2 @I2@   SURN  "Amidala"                                              
-#>  54     1 @I2@   FAMS  "@F1@"                                                 
-#>  55     1 @I2@   CHAN  ""                                                     
-#>  56     2 @I2@   DATE  "11 APR 2021"                                          
-#>  57     0 @I3@   INDI  ""                                                     
-#>  58     1 @I3@   SEX   "F"                                                    
-#>  59     1 @I3@   NAME  "Leia /Skywalker/"                                     
-#>  60     2 @I3@   TYPE  "birth"                                                
-#>  61     2 @I3@   GIVN  "Leia"                                                 
-#>  62     2 @I3@   SURN  "Skywalker"                                            
-#>  63     1 @I3@   NAME  "Leia /Organa/"                                        
-#>  64     2 @I3@   TYPE  "adoptive"                                             
-#>  65     2 @I3@   NPFX  "Princess"                                             
-#>  66     2 @I3@   GIVN  "Leia"                                                 
-#>  67     2 @I3@   SURN  "Organa"                                               
-#>  68     1 @I3@   FAMC  "@F1@"                                                 
-#>  69     2 @I3@   PEDI  "birth"                                                
-#>  70     1 @I3@   CHAN  ""                                                     
-#>  71     2 @I3@   DATE  "11 APR 2021"                                          
-#>  72     0 @I4@   INDI  ""                                                     
-#>  73     1 @I4@   SEX   "M"                                                    
-#>  74     1 @I4@   NAME  "Luke /Skywalker/"                                     
-#>  75     2 @I4@   TYPE  "birth"                                                
-#>  76     2 @I4@   GIVN  "Luke"                                                 
-#>  77     2 @I4@   SURN  "Skywalker"                                            
-#>  78     1 @I4@   FAMC  "@F1@"                                                 
-#>  79     2 @I4@   PEDI  "birth"                                                
-#>  80     1 @I4@   CHAN  ""                                                     
-#>  81     2 @I4@   DATE  "11 APR 2021"                                          
-#>  82     0 @I5@   INDI  ""                                                     
-#>  83     1 @I5@   SEX   "M"                                                    
-#>  84     1 @I5@   NAME  "Obi-Wan /Kenobi/"                                     
-#>  85     2 @I5@   TYPE  "birth"                                                
-#>  86     2 @I5@   GIVN  "Obi-Wan"                                              
-#>  87     2 @I5@   NICK  "Ben"                                                  
-#>  88     2 @I5@   SURN  "Kenobi"                                               
-#>  89     1 @I5@   CHAN  ""                                                     
-#>  90     2 @I5@   DATE  "11 APR 2021"                                          
-#>  91     0 @F1@   FAM   ""                                                     
-#>  92     1 @F1@   HUSB  "@I1@"                                                 
-#>  93     1 @F1@   WIFE  "@I2@"                                                 
-#>  94     1 @F1@   CHIL  "@I4@"                                                 
-#>  95     1 @F1@   CHIL  "@I3@"                                                 
-#>  96     1 @F1@   CHAN  ""                                                     
-#>  97     2 @F1@   DATE  "11 APR 2021"                                          
-#>  98     0 @N1@   NOTE  "Based on Star Wars"                                   
-#>  99     1 @N1@   CHAN  ""                                                     
-#> 100     2 @N1@   DATE  "11 APR 2021"                                          
-#> 101     0 @S1@   SOUR  ""                                                     
-#> 102     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                     
-#> 103     1 @S1@   ABBR  "Star Wars"                                            
-#> 104     1 @S1@   CHAN  ""                                                     
-#> 105     2 @S1@   DATE  "11 APR 2021"                                          
-#> 106     0 @R1@   REPO  ""                                                     
-#> 107     1 @R1@   NAME  "The Skywalker Saga"                                   
-#> 108     1 @R1@   CHAN  ""                                                     
-#> 109     2 @R1@   DATE  "11 APR 2021"                                          
-#> 110     0 @M1@   OBJE  ""                                                     
-#> 111     1 @M1@   FILE  "XYZ"                                                  
-#> 112     2 @M1@   FORM  "JPEG"                                                 
-#> 113     1 @M1@   CHAN  ""                                                     
-#> 114     2 @M1@   DATE  "11 APR 2021"                                          
-#> 115     0 TR     TRLR  ""
+#> # A tibble: 114 × 4
+#>     level record tag   value                                                    
+#>     <dbl> <chr>  <chr> <chr>                                                    
+#>   1     0 HD     HEAD  ""                                                       
+#>   2     1 HD     GEDC  ""                                                       
+#>   3     2 HD     VERS  "5.5.5"                                                  
+#>   4     2 HD     FORM  "LINEAGE-LINKED"                                         
+#>   5     3 HD     VERS  "5.5.5"                                                  
+#>   6     1 HD     CHAR  "UTF-8"                                                  
+#>   7     1 HD     DEST  "gedcompendium"                                          
+#>   8     1 HD     SOUR  "gedcompendium"                                          
+#>   9     2 HD     NAME  "The 'gedcompendium' ecosystem of packages for the R lan…
+#>  10     2 HD     CORP  "Jamie Lendrum"                                          
+#>  11     3 HD     ADDR  ""                                                       
+#>  12     3 HD     EMAIL "jalendrum@gmail.com"                                    
+#>  13     3 HD     WWW   "https://jl5000.github.io/tidyged/"                      
+#>  14     1 HD     DATE  "11 AUG 2021"                                            
+#>  15     1 HD     LANG  "English"                                                
+#>  16     1 HD     SUBM  "@U1@"                                                   
+#>  17     1 HD     COPR  "None"                                                   
+#>  18     1 HD     NOTE  "The Skywalker family"                                   
+#>  19     0 @U1@   SUBM  ""                                                       
+#>  20     1 @U1@   NAME  "Jamie Lendrum"                                          
+#>  21     1 @U1@   CHAN  ""                                                       
+#>  22     2 @U1@   DATE  "11 AUG 2021"                                            
+#>  23     0 @I1@   INDI  ""                                                       
+#>  24     1 @I1@   SEX   "M"                                                      
+#>  25     1 @I1@   NOTE  "The central character in the Star Wars Skywalker Saga"  
+#>  26     1 @I1@   NAME  "Anakin /Skywalker/"                                     
+#>  27     2 @I1@   TYPE  "birth"                                                  
+#>  28     2 @I1@   GIVN  "Anakin"                                                 
+#>  29     2 @I1@   SURN  "Skywalker"                                              
+#>  30     1 @I1@   NAME  "Darth Vader"                                            
+#>  31     2 @I1@   TYPE  "given"                                                  
+#>  32     2 @I1@   NPFX  "Darth"                                                  
+#>  33     2 @I1@   GIVN  "Vader"                                                  
+#>  34     1 @I1@   FAMS  "@F1@"                                                   
+#>  35     1 @I1@   ASSO  "@I5@"                                                   
+#>  36     2 @I1@   RELA  "Master"                                                 
+#>  37     1 @I1@   DEAT  "Y"                                                      
+#>  38     2 @I1@   PLAC  "Second Death Star"                                      
+#>  39     3 @I1@   NOTE  "Orbiting Endor System"                                  
+#>  40     2 @I1@   CAUS  "Killed by son Luke"                                     
+#>  41     2 @I1@   AGE   "45y"                                                    
+#>  42     1 @I1@   RELI  "Jedi"                                                   
+#>  43     1 @I1@   PROP  "Lightsaber"                                             
+#>  44     1 @I1@   CHAN  ""                                                       
+#>  45     2 @I1@   DATE  "11 AUG 2021"                                            
+#>  46     0 @I2@   INDI  ""                                                       
+#>  47     1 @I2@   SEX   "F"                                                      
+#>  48     1 @I2@   NOTE  "Queen of Naboo"                                         
+#>  49     1 @I2@   NAME  "Padme /Amidala/"                                        
+#>  50     2 @I2@   TYPE  "birth"                                                  
+#>  51     2 @I2@   GIVN  "Padme"                                                  
+#>  52     2 @I2@   SURN  "Amidala"                                                
+#>  53     1 @I2@   FAMS  "@F1@"                                                   
+#>  54     1 @I2@   CHAN  ""                                                       
+#>  55     2 @I2@   DATE  "11 AUG 2021"                                            
+#>  56     0 @I3@   INDI  ""                                                       
+#>  57     1 @I3@   SEX   "F"                                                      
+#>  58     1 @I3@   NAME  "Leia /Skywalker/"                                       
+#>  59     2 @I3@   TYPE  "birth"                                                  
+#>  60     2 @I3@   GIVN  "Leia"                                                   
+#>  61     2 @I3@   SURN  "Skywalker"                                              
+#>  62     1 @I3@   NAME  "Princess Leia /Organa/"                                 
+#>  63     2 @I3@   TYPE  "adoptive"                                               
+#>  64     2 @I3@   NPFX  "Princess"                                               
+#>  65     2 @I3@   GIVN  "Leia"                                                   
+#>  66     2 @I3@   SURN  "Organa"                                                 
+#>  67     1 @I3@   FAMC  "@F1@"                                                   
+#>  68     2 @I3@   PEDI  "birth"                                                  
+#>  69     1 @I3@   CHAN  ""                                                       
+#>  70     2 @I3@   DATE  "11 AUG 2021"                                            
+#>  71     0 @I4@   INDI  ""                                                       
+#>  72     1 @I4@   SEX   "M"                                                      
+#>  73     1 @I4@   NAME  "Luke /Skywalker/"                                       
+#>  74     2 @I4@   TYPE  "birth"                                                  
+#>  75     2 @I4@   GIVN  "Luke"                                                   
+#>  76     2 @I4@   SURN  "Skywalker"                                              
+#>  77     1 @I4@   FAMC  "@F1@"                                                   
+#>  78     2 @I4@   PEDI  "birth"                                                  
+#>  79     1 @I4@   CHAN  ""                                                       
+#>  80     2 @I4@   DATE  "11 AUG 2021"                                            
+#>  81     0 @I5@   INDI  ""                                                       
+#>  82     1 @I5@   SEX   "M"                                                      
+#>  83     1 @I5@   NAME  "Obi-Wan /Kenobi/"                                       
+#>  84     2 @I5@   TYPE  "birth"                                                  
+#>  85     2 @I5@   GIVN  "Obi-Wan"                                                
+#>  86     2 @I5@   NICK  "Ben"                                                    
+#>  87     2 @I5@   SURN  "Kenobi"                                                 
+#>  88     1 @I5@   CHAN  ""                                                       
+#>  89     2 @I5@   DATE  "11 AUG 2021"                                            
+#>  90     0 @F1@   FAM   ""                                                       
+#>  91     1 @F1@   HUSB  "@I1@"                                                   
+#>  92     1 @F1@   WIFE  "@I2@"                                                   
+#>  93     1 @F1@   CHIL  "@I4@"                                                   
+#>  94     1 @F1@   CHIL  "@I3@"                                                   
+#>  95     1 @F1@   CHAN  ""                                                       
+#>  96     2 @F1@   DATE  "11 AUG 2021"                                            
+#>  97     0 @N1@   NOTE  "Based on Star Wars"                                     
+#>  98     1 @N1@   CHAN  ""                                                       
+#>  99     2 @N1@   DATE  "11 AUG 2021"                                            
+#> 100     0 @S1@   SOUR  ""                                                       
+#> 101     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                       
+#> 102     1 @S1@   ABBR  "Star Wars"                                              
+#> 103     1 @S1@   CHAN  ""                                                       
+#> 104     2 @S1@   DATE  "11 AUG 2021"                                            
+#> 105     0 @R1@   REPO  ""                                                       
+#> 106     1 @R1@   NAME  "The Skywalker Saga"                                     
+#> 107     1 @R1@   CHAN  ""                                                       
+#> 108     2 @R1@   DATE  "11 AUG 2021"                                            
+#> 109     0 @M1@   OBJE  ""                                                       
+#> 110     1 @M1@   FILE  "XYZ"                                                    
+#> 111     2 @M1@   FORM  "JPEG"                                                   
+#> 112     1 @M1@   CHAN  ""                                                       
+#> 113     2 @M1@   DATE  "11 AUG 2021"                                            
+#> 114     0 TR     TRLR  ""
 ```
 
 Just like a ggplot object requires aesthetics, a GEDCOM file requires
@@ -235,29 +234,29 @@ summary(tg)
 #>  
 #>  Copyright:               None 
 #>  
-#>  Source system:           tidyged 
-#>  Source system version:   0.0.0 
-#>  Product name:            The 'tidyged' package for the R language 
+#>  Source system:           gedcompendium 
+#>  Source system version:    
+#>  Product name:            The 'gedcompendium' ecosystem of packages for the R language 
 #>  Product source:          Jamie Lendrum
 
 df_indi(tg) %>% knitr::kable()
 ```
 
 | xref | name             | sex | date\_of\_birth | place\_of\_birth | date\_of\_death | place\_of\_death  | mother        | father           | num\_siblings | num\_children | last\_modified |
-| :--- | :--------------- | :-- | :-------------- | :--------------- | :-------------- | :---------------- | :------------ | :--------------- | :------------ | ------------: | :------------- |
-| @I1@ | Anakin Skywalker | M   |                 |                  |                 | Second Death Star |               |                  |               |             2 | 11 APR 2021    |
-| @I2@ | Padme Amidala    | F   |                 |                  |                 |                   |               |                  |               |             2 | 11 APR 2021    |
-| @I3@ | Leia Skywalker   | F   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 11 APR 2021    |
-| @I4@ | Luke Skywalker   | M   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 11 APR 2021    |
-| @I5@ | Obi-Wan Kenobi   | M   |                 |                  |                 |                   |               |                  |               |             0 | 11 APR 2021    |
+|:-----|:-----------------|:----|:----------------|:-----------------|:----------------|:------------------|:--------------|:-----------------|:--------------|--------------:|:---------------|
+| @I1@ | Anakin Skywalker | M   |                 |                  |                 | Second Death Star |               |                  |               |             2 | 11 AUG 2021    |
+| @I2@ | Padme Amidala    | F   |                 |                  |                 |                   |               |                  |               |             2 | 11 AUG 2021    |
+| @I3@ | Leia Skywalker   | F   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 11 AUG 2021    |
+| @I4@ | Luke Skywalker   | M   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 11 AUG 2021    |
+| @I5@ | Obi-Wan Kenobi   | M   |                 |                  |                 |                   |               |                  |               |             0 | 11 AUG 2021    |
 
 ``` r
 df_famg(tg) %>% knitr::kable()
 ```
 
 | xref | husband          | wife          | marriage\_date | marriage\_place | num\_children | last\_modified |
-| :--- | :--------------- | :------------ | :------------- | :-------------- | :------------ | :------------- |
-| @F1@ | Anakin Skywalker | Padme Amidala |                |                 | 2             | 11 APR 2021    |
+|:-----|:-----------------|:--------------|:---------------|:----------------|:--------------|:---------------|
+| @F1@ | Anakin Skywalker | Padme Amidala |                |                 | 2             | 11 AUG 2021    |
 
 This package allows limited editing of `tidyged` objects
 (adding/removing records, as well as the addition of some record
@@ -269,4 +268,4 @@ records can be activated through a series of `activate_*()` functions.
 
 ## References
 
-  - [The GEDCOM 5.5.5 Specification](https://www.gedcom.org/gedcom.html)
+-   [The GEDCOM 5.5.5 Specification](https://www.gedcom.org/gedcom.html)

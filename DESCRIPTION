@@ -22,6 +22,7 @@ Imports:
     stringr,
     purrr,
     tibble,
+    tidyr,
     tidyged.internals
 Suggests: 
     testthat,

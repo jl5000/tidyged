@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check whether a given record is a particular type — is_indi • tidyged</title>
+<title>Create a table summarising all individual/family facts — fact_summary_indi • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Check whether a given record is a particular type — is_indi" />
-<meta property="og:description" content="Check whether a given record is a particular type" />
+<meta property="og:title" content="Create a table summarising all individual/family facts — fact_summary_indi" />
+<meta property="og:description" content="This function creates a tidy table making it easy to extract fact details for an individual." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,28 +119,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check whether a given record is a particular type</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/interrogate.R'><code>R/interrogate.R</code></a></small>
-    <div class="hidden name"><code>is_indi.Rd</code></div>
+    <h1>Create a table summarising all individual/family facts</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/summarise.R'><code>R/summarise.R</code></a></small>
+    <div class="hidden name"><code>fact_summary_indi.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Check whether a given record is a particular type</p>
+    <p>This function creates a tidy table making it easy to extract fact details for an individual.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_indi</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>fact_summary_indi</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span>
 
-<span class='fu'>is_famg</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span>
-
-<span class='fu'>is_subm</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span>
-
-<span class='fu'>is_repo</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span>
-
-<span class='fu'>is_media</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span>
-
-<span class='fu'>is_note</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span>
-
-<span class='fu'>is_sour</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span></pre>
+<span class='fu'>fact_summary_famg</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,13 +141,17 @@
     </tr>
     <tr>
       <th>xref</th>
-      <td><p>The xref of the record.</p></td>
+      <td><p>The xref of the Individual or Family Group record.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A logical indicating whether the record is of a particular type.</p>
+    <p>A tibble containing a row for each fact. A column is created for each tag used, and
+each tag is appropriately namespaced.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Notes and source citations are not included in the summary.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -318,29 +318,49 @@ fact_summary <- function(gedcom, xref, indi) {
   
   fact_rows <- split(rows_vect, cumsum(gedcom_ns$tag[rows_vect] %in% fact_tags))
   
-  purrr::map_dfr(fact_rows, ~ gedcom_ns %>% 
+  # Tags we want for the summary
+  details_tags <- c("DATE", "PLAC", paste0("ADR", 1:3), "CITY", "STAE", "CTRY", unname(fact_tags), "TYPE")
+  if(indi) {
+    details_tags <- c(details_tags, "AGE")
+  } else {
+    details_tags <- c(details_tags, "HUSB.AGE", "WIFE.AGE")
+  }
+  
+  # loop through each fact block
+  purrr::map_dfr(fact_rows, 
+                 ~ gedcom_ns %>% 
                    dplyr::select(tag_ns, value) %>% 
                    dplyr::slice(.x) %>% 
+                   # get rid of FAM- or INDI-
                    dplyr::mutate(tag_ns = stringr::str_sub(tag_ns, ifelse(indi, 6,5), -1)) %>% 
-                   dplyr::mutate(fact = stringr::str_extract(tag_ns, "^[A-Z]+")) %>% 
+                   # extract fact type into own column
+                   dplyr::mutate(fact_type = stringr::str_extract(tag_ns, "^[A-Z]+")) %>% 
+                   # replace fact tags with names
+                   dplyr::mutate(fact_type = magrittr::extract(names(fact_tags), match(fact_type, fact_tags))) %>% 
+                   # only keep details_tags
+                   dplyr::filter(stringr::str_detect(tag_ns, paste(paste0(details_tags, "$"),collapse="|"))) %>%
+                   # remove namespace before details_tags
+                   dplyr::mutate(tag_ns = stringr::str_extract(tag_ns, 
+                                                               paste(paste0(details_tags, "$"),collapse="|"))) %>% 
                    tidyr::pivot_wider(names_from = tag_ns, values_from = value)) %>% 
     dplyr::mutate(dplyr::across(everything(), ~ ifelse(. == "", NA_character_, .))) %>% 
-    purrr::discard(~ all(is.na(.)))
-  
+    # add missing columns
+    dplyr::bind_rows(purrr::map_dfr(details_tags, ~tibble::tibble(!!.x := character() ) )) %>% 
+    # reorder columns
+    dplyr::select(fact_type, dplyr::all_of(details_tags))
   
 }
 
 #' Create a table summarising all individual/family facts
 #' 
-#' This function creates a tidy table making it easy to extract fact details for an individual.
+#' This function creates a tidy table making it easy to extract fact details for an individual or family group.
 #' 
-#' @details Notes and source citations are not included in the summary.
+#' @details Notes and source citations are not included in the summary, as well as other more obscure fields.
 #'
 #' @param gedcom A tidyged object.
 #' @param xref The xref of the Individual or Family Group record.
 #'
-#' @return A tibble containing a row for each fact. A column is created for each tag used, and 
-#' each tag is appropriately namespaced.
+#' @return A tibble containing a row for each fact.
 #' @export
 fact_summary_indi <- function(gedcom, xref) {
   fact_summary(gedcom, xref, TRUE)

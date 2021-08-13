@@ -15,12 +15,11 @@ fact_summary_famg(gedcom, xref)
 \item{xref}{The xref of the Individual or Family Group record.}
 }
 \value{
-A tibble containing a row for each fact. A column is created for each tag used, and
-each tag is appropriately namespaced.
+A tibble containing a row for each fact.
 }
 \description{
-This function creates a tidy table making it easy to extract fact details for an individual.
+This function creates a tidy table making it easy to extract fact details for an individual or family group.
 }
 \details{
-Notes and source citations are not included in the summary.
+Notes and source citations are not included in the summary, as well as other more obscure fields.
 }

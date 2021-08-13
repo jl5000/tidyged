@@ -291,3 +291,64 @@ df_note <- function(gedcom) {
   
 }
 
+
+fact_summary <- function(gedcom, xref, indi) {
+  
+  if(indi) {
+    xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  } else {
+    xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
+  }
+  
+  # Remove source citation structures and notes and add namespace
+  gedcom_ns <- tidyged.internals::remove_section(gedcom, containing_level = 2, containing_tags = "SOUR",
+                                                 xrefs = xref) %>% 
+    dplyr::filter(tag != "NOTE") %>% 
+    mutate_tag_namespace()
+  
+  if(indi) {
+    fact_tags <- c(tidyged.internals::val_individual_event_types(),
+                   tidyged.internals::val_attribute_types())
+  } else {
+    fact_tags <- tidyged.internals::val_family_event_types()
+  }
+  
+  rows_vect <- tidyged.internals::identify_section(gedcom_ns, 1, fact_tags,
+                                                   xrefs = xref)
+  
+  fact_rows <- split(rows_vect, cumsum(gedcom_ns$tag[rows_vect] %in% fact_tags))
+  
+  purrr::map_dfr(fact_rows, ~ gedcom_ns %>% 
+                   dplyr::select(tag_ns, value) %>% 
+                   dplyr::slice(.x) %>% 
+                   dplyr::mutate(tag_ns = stringr::str_sub(tag_ns, ifelse(indi, 6,5), -1)) %>% 
+                   dplyr::mutate(fact = stringr::str_extract(tag_ns, "^[A-Z]+")) %>% 
+                   tidyr::pivot_wider(names_from = tag_ns, values_from = value)) %>% 
+    dplyr::mutate(dplyr::across(everything(), ~ ifelse(. == "", NA_character_, .))) %>% 
+    purrr::discard(~ all(is.na(.)))
+  
+  
+}
+
+#' Create a table summarising all individual/family facts
+#' 
+#' This function creates a tidy table making it easy to extract fact details for an individual.
+#' 
+#' @details Notes and source citations are not included in the summary.
+#'
+#' @param gedcom A tidyged object.
+#' @param xref The xref of the Individual or Family Group record.
+#'
+#' @return A tibble containing a row for each fact. A column is created for each tag used, and 
+#' each tag is appropriately namespaced.
+#' @export
+fact_summary_indi <- function(gedcom, xref) {
+  fact_summary(gedcom, xref, TRUE)
+}
+
+#' @rdname fact_summary_indi
+#' @export
+fact_summary_famg <- function(gedcom, xref) {
+  fact_summary(gedcom, xref, FALSE)
+}
+

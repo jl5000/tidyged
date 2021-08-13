@@ -205,3 +205,17 @@ update_change_date <- function(gedcom, xref) {
     tidyged.internals::finalise()
   
 }
+
+mutate_tag_namespace <- function(gedcom){
+  
+  gedcom <- dplyr::mutate(gedcom, tag_ns = NA_character_)
+  
+  for(lv in min(gedcom$level):max(gedcom$level)) {
+    gedcom <- dplyr::mutate(gedcom, tag_ns = ifelse(level == lv, paste(tag_ns, tag, sep = "-"), tag_ns)) %>% 
+      dplyr::mutate(tag_ns = ifelse(level > lv, NA_character_, tag_ns)) %>% 
+      tidyr::fill(tag_ns)
+  }
+  
+  dplyr::mutate(gedcom, tag_ns = stringr::str_remove(tag_ns, "^NA-"))
+  
+}

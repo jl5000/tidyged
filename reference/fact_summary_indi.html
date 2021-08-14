@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Create a table summarising all individual/family facts — fact_summary_indi" />
-<meta property="og:description" content="This function creates a tidy table making it easy to extract fact details for an individual." />
+<meta property="og:description" content="This function creates a tidy table making it easy to extract fact details for an individual or family group." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.9000</span>
       </span>
     </div>
 
@@ -125,7 +125,7 @@
     </div>
 
     <div class="ref-description">
-    <p>This function creates a tidy table making it easy to extract fact details for an individual.</p>
+    <p>This function creates a tidy table making it easy to extract fact details for an individual or family group.</p>
     </div>
 
     <pre class="usage"><span class='fu'>fact_summary_indi</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span>
@@ -147,11 +147,10 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble containing a row for each fact. A column is created for each tag used, and
-each tag is appropriately namespaced.</p>
+    <p>A tibble containing a row for each fact.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Notes and source citations are not included in the summary.</p>
+    <p>Notes and source citations are not included in the summary, as well as other more obscure fields.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

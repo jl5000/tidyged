@@ -110,6 +110,7 @@ str.tidyged <- function(object, ...) {
 df_indi <- function(gedcom) {
   
   ind_xrefs <- xrefs_indi(gedcom)
+  ind_refns <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "REFN", level = 1)
   ind_names <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
   ind_sex <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "SEX", level = 1)
   ind_dobs <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
@@ -126,6 +127,7 @@ df_indi <- function(gedcom) {
   date_chan <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
   
   tibble::tibble(xref = ind_xrefs,
+                 refn = ind_refns,
                  name = stringr::str_remove_all(ind_names, "/"),
                  sex = ind_sex,
                  date_of_birth = ind_dobs,

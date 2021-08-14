@@ -319,12 +319,13 @@ fact_summary <- function(gedcom, xref, indi) {
   fact_rows <- split(rows_vect, cumsum(gedcom_ns$tag[rows_vect] %in% fact_tags))
   
   # Tags we want for the summary
-  details_tags <- c("DATE", "PLAC", paste0("ADR", 1:3), "CITY", "STAE", "CTRY", unname(fact_tags), "TYPE")
+  details_tags <- c("TYPE", "DATE", "PLAC", paste0("ADR", 1:3), "CITY", "STAE", "CTRY")
   if(indi) {
     details_tags <- c(details_tags, "AGE")
   } else {
     details_tags <- c(details_tags, "HUSB.AGE", "WIFE.AGE")
   }
+  all_tags <- c(details_tags, unname(fact_tags))
   
   # loop through each fact block
   purrr::map_dfr(fact_rows, 
@@ -337,17 +338,20 @@ fact_summary <- function(gedcom, xref, indi) {
                    dplyr::mutate(fact_type = stringr::str_extract(tag_ns, "^[A-Z]+")) %>% 
                    # replace fact tags with names
                    dplyr::mutate(fact_type = magrittr::extract(names(fact_tags), match(fact_type, fact_tags))) %>% 
-                   # only keep details_tags
-                   dplyr::filter(stringr::str_detect(tag_ns, paste(paste0(details_tags, "$"),collapse="|"))) %>%
-                   # remove namespace before details_tags
+                   # only keep required tags
+                   dplyr::filter(stringr::str_detect(tag_ns, paste(paste0(all_tags, "$"),collapse="|"))) %>%
+                   # remove namespace before all tags
                    dplyr::mutate(tag_ns = stringr::str_extract(tag_ns, 
-                                                               paste(paste0(details_tags, "$"),collapse="|"))) %>% 
+                                                               paste(paste0(all_tags, "$"),collapse="|"))) %>%
+                   # coalesce fact tags into one
+                   dplyr::mutate(tag_ns = ifelse(tag_ns %in% fact_tags, "description", tag_ns)) %>% 
                    tidyr::pivot_wider(names_from = tag_ns, values_from = value)) %>% 
     dplyr::mutate(dplyr::across(everything(), ~ ifelse(. == "", NA_character_, .))) %>% 
     # add missing columns
-    dplyr::bind_rows(purrr::map_dfr(details_tags, ~tibble::tibble(!!.x := character() ) )) %>% 
+    dplyr::bind_rows(purrr::map_dfr(c(details_tags, "fact_type", "description"), 
+                                    ~tibble::tibble(!!.x := character() ) )) %>% 
     # reorder columns
-    dplyr::select(fact_type, dplyr::all_of(details_tags))
+    dplyr::select(fact_type, description, dplyr::all_of(details_tags))
   
 }
 

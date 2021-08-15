@@ -45,8 +45,8 @@ need to evaluate the evidence for themselves. Values allowed:
 \item{notes}{A character vector of notes accompanying the citation. These could be xrefs to
 existing Note records.}
 
-\item{multimedia_links}{A character vector of multimedia file references accompanying this
-citation. These could be xrefs to existing Multimedia records.}
+\item{multimedia_links}{A character vector of Multimedia record xrefs accompanying this
+record.}
 }
 \value{
 A tibble describing a source citation.

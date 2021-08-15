@@ -32,52 +32,83 @@ null_active_record <- function(gedcom) {
 
 
 
-#' Find an xref of a record given a set of terms
+#' Find an xref of a record given a set of search terms
 #'
-#' This is a helper function to identify the xref of a record given a piece of information such
-#' as a name or reference number.
+#' @details
+#' This is a helper function to identify the xref of a record given information such
+#' as a name or reference number. You provide a named `search_patterns` vector of namespaced tag-pattern pairs,
+#' such as:
 #' 
-#' Sometimes an xref may be provided directly, in which case it's returned straight back.
-#'
+#' c(INDI.NAME = "Homer", INDI.SEX  = "M", INDI.BIRT.DATE = "JAN 1974")
+#' 
+#' If you're not sure what namespace to use, use the `mutate_tag_namespace` function.
+#' 
+#' The search patterns will be treated as regular expressions, so they will match a value if it contains
+#' the pattern provided. You can anchor your search pattern if you want an exact match, e.g. "^JAN 1974$".
+#' If you're not familiar with regular expressions, you may need to escape certain characters such as a
+#' full-stop/period (i.e. `\\.`).
+#' 
 #' @param gedcom A tidyged object.
-#' @param record_xrefs A list of potential xrefs to consider.
-#' @param tags The tags to look at when comparing values.
-#' @param search_pattern A set of terms to search for (separated by spaces).
+#' @param search_patterns A named vector of terms to search for (see Details).
+#' @param mode Whether to only return an xref if all patterns are matched ("strict"). A value of
+#' "best" will return the xref with the most matches. If either of these still result in more than
+#'  one xref it will return an error.
+#' @param multiple If more than one xref is found (according to mode), whether to return all xrefs
+#' or throw an error.
+#' @param ignore_case Should case differences be ignored in the match?
 #'
-#' @return A single xref for the given record.
-find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
+#' @return A single xref for the given record. No matches will return an empty character vector.
+#' @export
+#' @tests
+#' expect_error(find_xref(sample555, character()))
+#' expect_error(find_xref(sample555, c(INDI.NAME = "test"), mode = "foo"))
+#' expect_error(find_xref(sample555, letters[1:5]))
+#' expect_error(find_xref(sample555, c(a = "das", "sd", b = "r42")))
+#' expect_error(find_xref(sample555, c(INDI.SEX = "L")))
+#' expect_error(find_xref(sample555, c(INDI.NAME.SURN = "Williams")))
+#' expect_equal(find_xref(sample555, c(FAM.MARR.DATE = "1859")), "@F1@")
+#' expect_equal(find_xref(sample555, c(INDI.SEX = "M", INDI.NAME.SURN = "Williams", INDI.BIRT.PLAC = "Falls")), "@I3@")
+find_xref <- function(gedcom, search_patterns, mode = "strict", multiple = FALSE, ignore_case = FALSE) {
   
-  if(length(search_pattern) == 0) return(character())
-  if(grepl(tidyged.internals::reg_xref(TRUE), search_pattern)) return(search_pattern)
+  mode <- tolower(mode)
+  if(length(search_patterns) == 0) stop("At least one search pattern must be provided")
+  if(!mode %in% c("strict","best")) stop("The mode must be either 'strict' or 'best'")
+  if(is.null(names(search_patterns))) stop("The search_patterns vector must be named")
+  if(any(names(search_patterns)=="")) stop("Each search pattern must be named with a namespace value")
   
-  #split up search pattern by spaces
-  search_pattern_terms <- unlist(stringr::str_split(search_pattern, " "))
+  tags_ns <- toupper(names(search_patterns))
+  search_patterns_val <- as.character(search_patterns) #unname
   
-  matches <- gedcom$value %>% 
-    purrr::map(stringr::str_detect, pattern = search_pattern_terms) %>% 
-    purrr::map(all) %>% 
-    unlist()
+  gedcom_ns <- mutate_tag_namespace(gedcom)
+  reg_case <- purrr::partial(stringr::regex, ignore_case = ignore_case)
   
-  possibilities <- gedcom[gedcom$record %in% record_xrefs &
-                            gedcom$tag %in% tags & 
-                            matches,]
+  matches <- purrr::map2(tags_ns, search_patterns_val,
+                         ~unique(dplyr::filter(gedcom_ns, 
+                                        tag_ns == .x,
+                                        stringr::str_detect(value, reg_case(.y)))$record))
   
-  if(length(unique(possibilities$record)) == 0) {
+  if(mode == "strict") {
     
-    stop("No records found for the given terms", " (", search_pattern, "). Try supplying the xref explicitly.")
+    xref <- Reduce(intersect, matches)
     
-  } else if(length(unique(possibilities$record)) > 1) {
+    if(length(xref) == 0) stop("No records found that match all patterns.")
+    if(length(xref) > 1 & !multiple) 
+      stop("No unique records found that match all patterns. Try being more specific.")
     
-    choice <- utils::select.list(title = paste("More than one record found for the given terms:", search_pattern),
-                                         choices = describe_records(gedcom, unique(possibilities$record)),
-                                         multiple = FALSE)
+  } else { #best
     
-    xref <- stringr::str_extract(choice, tidyged.internals::reg_xref(FALSE))
+    xref <- tibble::tibble(matches = unlist(matches)) %>%
+      dplyr::count(matches) %>% 
+      dplyr::filter(n==max(n)) %>% 
+      dplyr::pull(matches)
     
-  } else if(length(unique(possibilities$record)) == 1) {
+    if(nrow(xref) == 0) stop("No records found that match any patterns.")
+    if(nrow(xref) > 1 & !multiple) stop("No unique records found that match any patterns. Try being more specific.")
     
-    xref <- unique(possibilities$record)
   }
+  
+  xref
+
   
 }
 
@@ -85,21 +116,9 @@ find_xref <- function(gedcom, record_xrefs, tags, search_pattern) {
 #' Activate a record
 #' 
 #' Set a specific record to be the active record.
-#' 
-#' @details This allows a mechanism to easily edit particular records. Either a specific record attribute can be provided
-#' (terms separated by spaces) or the xref can be provided explicitly. Providing an attribute instead of the
-#' xref can make your code more readable, provided that it returns a unique record! 
-#' 
-#' The attributes that can be provided for each type of record are:
-#' 
-#' - Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);
-#' - Multimedia: File reference (FILE);
-#' - Note: User text (NOTE);
-#' - Source: Title (TITL);
-#' - Repository: Name (NAME).
 #'
 #' @param gedcom A tidyged object. 
-#' @param record The xref or attribute of the record to be activated.
+#' @param record The xref of the record to be activated.
 #'
 #' @return The same tidyged object with "active_record" attribute set to the specific 
 #' record to allow easy editing.

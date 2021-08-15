@@ -27,7 +27,7 @@ activate_repo(gedcom, record)
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{record}{The xref or attribute of the record to be activated.}
+\item{record}{The xref of the record to be activated.}
 }
 \value{
 The same tidyged object with "active_record" attribute set to the specific
@@ -35,18 +35,4 @@ record to allow easy editing.
 }
 \description{
 Set a specific record to be the active record.
-}
-\details{
-This allows a mechanism to easily edit particular records. Either a specific record attribute can be provided
-(terms separated by spaces) or the xref can be provided explicitly. Providing an attribute instead of the
-xref can make your code more readable, provided that it returns a unique record!
-
-The attributes that can be provided for each type of record are:
-\itemize{
-\item Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);
-\item Multimedia: File reference (FILE);
-\item Note: User text (NOTE);
-\item Source: Title (TITL);
-\item Repository: Name (NAME).
-}
 }

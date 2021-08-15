@@ -21,71 +21,34 @@ temporarily_remove_name_slashes <- function(gedcom) {
 
 #' Derive a valid cross-reference identifier
 #' 
-#' Get a valid xref provided explicitly or implicitly (through an identifying attribute or
-#' active record).
+#' Validate an xref provided explicitly or implicitly (through the active record).
 #' 
 #' @details This helper function is designed to derive and run validation checks on an xref
-#' provided explicitly or implicitly. An xref is provided implicitly either through the active
-#' record of the tidyged object, or through a descriptor identifying a unique record.
-#' 
-#' The descriptors used for each record are: name (individual, repository, and submitter), 
-#' title (source), file reference (multimedia), excerpt (note). 
+#' provided explicitly or implicitly. An xref is provided implicitly through the active
+#' record of the tidyged object.
 #' 
 #' Once found, the xref is checked to ensure it is of the appropriate type.
 #'
 #' @param gedcom A tidyged object.
-#' @param xref_or_descriptor An xref or descriptor uniquely identifying the record.
+#' @param xref A record xref.
 #' @param record_type A character string describing the record type. Generally one of
 #' the global record_string_* values.
 #' @param record_type_fn A function to check the record type. Generally one of the is_*
 #' functions.
 #'
 #' @return A valid xref identifier.
-get_valid_xref <- function(gedcom, xref_or_descriptor, record_type, record_type_fn) {
+get_valid_xref <- function(gedcom, xref, record_type, record_type_fn) {
   
-  if (length(xref_or_descriptor) == 0 || xref_or_descriptor == "") {
+  if (length(xref) == 0 || xref == "") {
     # xref not given explicitly, get it from active record
     xref <- get_active_record(gedcom)
-    
-  } else if (grepl(tidyged.internals::reg_xref(TRUE), xref_or_descriptor)) {
-    # xref given explicitly
-    xref <- xref_or_descriptor
-    
-  } else {
-    # xref given by descriptor, find it
-    if (record_type == .pkgenv$record_string_indi) {
-      
-      xref <- find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), xref_or_descriptor)
-      
-    } else if(record_type == .pkgenv$record_string_famg) {
-      
-      stop("The selected family record is not valid")
-      
-    } else if(record_type == .pkgenv$record_string_repo) {
-      
-      xref <- find_xref(gedcom, xrefs_repo(gedcom), "NAME", xref_or_descriptor) 
-      
-    } else if(record_type == .pkgenv$record_string_sour) {
-      
-      xref <- find_xref(gedcom, xrefs_sour(gedcom), "TITL", xref_or_descriptor)
-      
-    } else if(record_type == .pkgenv$record_string_obje) {
-      
-      xref <- find_xref(gedcom, xrefs_media(gedcom), "FILE", xref_or_descriptor)
-      
-    } else if(record_type == .pkgenv$record_string_note) {
-      
-      xref <- find_xref(gedcom, xrefs_note(gedcom), "NOTE", xref_or_descriptor)
-      
-    } else if(record_type == .pkgenv$record_string_subm) {
-      
-      xref <- find_xref(gedcom, xrefs_subm(gedcom), "NAME", xref_or_descriptor)
-    }
-    
-  }
+  } 
 
   if(is.null(xref))
     stop("No xref is provided and no ", record_type, " record is activated.")
+  
+  if(!grepl(tidyged.internals::reg_xref(TRUE), xref))
+    stop("The provided xref is not valid")
   
   if(!record_type_fn(gedcom, xref))
     stop("The provided or active record is not a ", record_type, " record")
@@ -206,6 +169,17 @@ update_change_date <- function(gedcom, xref) {
   
 }
 
+
+#' Add a tag namespace column to a tidyged object
+#' 
+#' @details This function is useful if you want to find the namespace of a particular value
+#' for the `find_xref` function.
+#'
+#' @param gedcom A tidyged object.
+#'
+#' @return A tidyged object with an additional 'tag_ns' column containing the full namespace of
+#' the tag.
+#' @export
 mutate_tag_namespace <- function(gedcom){
   
   gedcom <- dplyr::mutate(gedcom, tag_ns = NA_character_)
@@ -216,6 +190,23 @@ mutate_tag_namespace <- function(gedcom){
       tidyr::fill(tag_ns)
   }
   
-  dplyr::mutate(gedcom, tag_ns = stringr::str_remove(tag_ns, "^NA\\."))
+  dplyr::mutate(gedcom, tag_ns = toupper(stringr::str_remove(tag_ns, "^NA\\.")))
   
+}
+
+
+create_note_structures <- function(gedcom, notes) {
+  purrr::map_chr(notes, 
+                 ~ifelse(grepl(tidyged.internals::reg_xref(TRUE), .x),
+                         get_valid_xref(gedcom, .x, .pkgenv$record_string_note, is_note),
+                         .x)) %>% 
+    purrr::map(tidyged.internals::NOTE_STRUCTURE)
+}
+
+create_multimedia_links <- function(gedcom, media_links) {
+  purrr::map_chr(media_links, get_valid_xref,
+                 gedcom = gedcom,
+                 record_type = .pkgenv$record_string_obje, 
+                 record_typ_fn = is_media) %>% 
+    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
 }

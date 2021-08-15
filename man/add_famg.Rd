@@ -11,8 +11,7 @@ add_famg(
   children = character(),
   child_linkage_types = rep("birth", length(children)),
   number_of_children = character(),
-  user_reference_number = character(),
-  user_reference_type = character(),
+  user_reference_numbers = character(),
   family_notes = character(),
   multimedia_links = character()
 )
@@ -20,15 +19,11 @@ add_famg(
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{husband}{A character string identifying the husband of this family. This can either
-be an xref or term(s) to match to an individual name.}
+\item{husband}{An xref identifying the husband of this family.}
 
-\item{wife}{A character string identifying the wife of this family. This can either
-be an xref or term(s) to match to an individual name.}
+\item{wife}{An xref identifying the wife of this family.}
 
-\item{children}{A character vector of other Individual records that are children of this
-family. Children can either be referenced by an xref or term(s)
-to match to an individual name.}
+\item{children}{A character vector of xrefs identifying the children of this family.}
 
 \item{child_linkage_types}{Codes used to indicate the child to family relationships. If defined,
 this must be a character vector the same size as children. Values must be one of:
@@ -37,17 +32,14 @@ this must be a character vector the same size as children. Values must be one of
 \item{number_of_children}{The reported number of children known to belong to this family,
 regardless of whether the associated children are represented here.}
 
-\item{user_reference_number}{A unique user-defined number or text that the submitter
-uses to identify this record. You can supply more than one in a vector.}
-
-\item{user_reference_type}{A user-defined definition of the user_reference_number(s). If this
-parameter is used, there must be a reference type for every reference number defined.}
+\item{user_reference_numbers}{A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector. You can also define a
+user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).}
 
 \item{family_notes}{A character vector of notes accompanying this Family group record. These could be
 xrefs to existing Note records.}
 
-\item{multimedia_links}{A character vector of multimedia file references accompanying this
-Family group record. These could be xrefs to existing Multimedia records.}
+\item{multimedia_links}{A character vector of Multimedia record xrefs accompanying this record.}
 }
 \value{
 An updated tidyged object including the Family group record.
@@ -57,7 +49,7 @@ Add a Family Group record to a tidyged object
 }
 \details{
 If you need to add further information about this family (e.g. events), use the
-add_family_event_*() functions.
+\code{add_famg_event()} function.
 
 The function will automatically add links to this family to the respective Individual
 records of the wife, husband, and children.

@@ -3,8 +3,7 @@
 #' Add an association with another individual
 #'
 #' @param gedcom A tidyged object.
-#' @param associated_with A character string identifying the associated individual. This can either 
-#' be an xref or term(s) to match to an individual name.
+#' @param associated_with An xref identifying the associated individual.
 #' @param association A word or phrase stating the nature of the association.
 #' @param association_notes A character vector of notes accompanying this association.
 #' These could be xrefs to existing Note records.
@@ -18,7 +17,7 @@
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'                         add_indi(qn = "Joe Bloggs") %>% 
 #'                         add_indi(qn = "Jimmy Bloggs") %>% 
-#'                         add_indi_association(associated_with = "Joe", association = "Friend") %>% 
+#'                         add_indi_association(associated_with = "@I1@", association = "Friend") %>% 
 #'                         tidyged.internals::remove_dates_for_tests(), "json2")
 add_indi_association <- function(gedcom,
                                  associated_with,
@@ -29,9 +28,9 @@ add_indi_association <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
-  indi_xref <- find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), associated_with)
+  indi_xref <- get_valid_xref(gedcom, associated_with, .pkgenv$record_string_indi, is_indi)
   
-  asso_notes <- purrr::map(association_notes, tidyged.internals::NOTE_STRUCTURE)
+  asso_notes <- create_note_structures(gedcom, association_notes)
   
   asso_str <- tidyged.internals::ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
                                                           relation_is_descriptor = association,
@@ -67,7 +66,7 @@ add_indi_family_link_as_spouse <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
-  link_notes <- purrr::map(linkage_notes, tidyged.internals::NOTE_STRUCTURE)
+  link_notes <- create_note_structures(gedcom, linkage_notes)
   
   link <- tidyged.internals::SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% 
     tidyged.internals::add_levels(1)
@@ -104,7 +103,7 @@ add_indi_family_link_as_child <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
-  link_notes <- purrr::map(linkage_notes, tidyged.internals::NOTE_STRUCTURE)
+  link_notes <- create_note_structures(gedcom, linkage_notes)
   
   link <- tidyged.internals::CHILD_TO_FAMILY_LINK(xref_fam = family_xref,
                                                   pedigree_linkage_type = linkage_type,

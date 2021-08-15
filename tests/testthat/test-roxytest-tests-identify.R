@@ -39,10 +39,10 @@ test_that("Function get_supporting_records() @ L214", {
 
 
 test_that("Function get_descendants() @ L263", {
-  expect_equal(get_descendants(sample555, "Robert"), "@I3@")
-  expect_equal(get_descendants(sample555, "Robert", TRUE), c("@I1@","@I3@"))
-  expect_equal(get_descendants(sample555, "Robert", TRUE, TRUE), c("@I2@","@I1@","@I3@"))
-  expect_equal(get_descendants(sample555, "Robert", TRUE, TRUE, TRUE), c("@F1@","@F2@","@I2@","@I1@","@I3@"))
+  expect_equal(get_descendants(sample555, "@I1@"), "@I3@")
+  expect_equal(get_descendants(sample555, "@I1@", TRUE), c("@I1@","@I3@"))
+  expect_equal(get_descendants(sample555, "@I1@", TRUE, TRUE), c("@I2@","@I1@","@I3@"))
+  expect_equal(get_descendants(sample555, "@I1@", TRUE, TRUE, TRUE), c("@F1@","@F2@","@I2@","@I1@","@I3@"))
 })
 
 

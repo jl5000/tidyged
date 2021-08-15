@@ -3,32 +3,26 @@
 #' Add a Family Group record to a tidyged object
 #' 
 #' @details If you need to add further information about this family (e.g. events), use the 
-#' add_family_event_*() functions.
+#' `add_famg_event()` function.
 #' 
 #' The function will automatically add links to this family to the respective Individual 
 #' records of the wife, husband, and children.
 #' 
 #' @param gedcom A tidyged object.
-#' @param husband A character string identifying the husband of this family. This can either 
-#' be an xref or term(s) to match to an individual name.
-#' @param wife A character string identifying the wife of this family. This can either 
-#' be an xref or term(s) to match to an individual name.
-#' @param children A character vector of other Individual records that are children of this
-#' family. Children can either be referenced by an xref or term(s) 
-#' to match to an individual name.
+#' @param husband An xref identifying the husband of this family.
+#' @param wife An xref identifying the wife of this family.
+#' @param children A character vector of xrefs identifying the children of this family.
 #' @param child_linkage_types Codes used to indicate the child to family relationships. If defined,
 #' this must be a character vector the same size as children. Values must be one of:
 #' "birth" (default), "adopted", or "foster".
 #' @param number_of_children The reported number of children known to belong to this family, 
 #' regardless of whether the associated children are represented here.
-#' @param user_reference_number A unique user-defined number or text that the submitter 
-#' uses to identify this record. You can supply more than one in a vector.
-#' @param user_reference_type A user-defined definition of the user_reference_number(s). If this
-#' parameter is used, there must be a reference type for every reference number defined.
+#' @param user_reference_numbers A unique user-defined number or text that the submitter 
+#' uses to identify this record. You can supply more than one in a vector. You can also define a
+#' user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).
 #' @param family_notes A character vector of notes accompanying this Family group record. These could be
 #' xrefs to existing Note records.
-#' @param multimedia_links A character vector of multimedia file references accompanying this 
-#' Family group record. These could be xrefs to existing Multimedia records.
+#' @param multimedia_links A character vector of Multimedia record xrefs accompanying this record.
 #'
 #' @return An updated tidyged object including the Family group record.
 #' 
@@ -39,53 +33,42 @@ add_famg <- function(gedcom,
                      children = character(),
                      child_linkage_types = rep("birth", length(children)),
                      number_of_children = character(),
-                     user_reference_number = character(),
-                     user_reference_type = character(),
+                     user_reference_numbers = character(),
                      family_notes = character(),
                      multimedia_links = character()) {
   
   xref <- tidyged.internals::assign_xref_famg(gedcom)
-  
-  xref_husb <- find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), husband)
-  xref_wife <- find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), wife)
-  xrefs_chil <- purrr::map_chr(children, find_xref,
-                               gedcom = gedcom, record_xrefs = xrefs_indi(gedcom), 
-                               tags = c("NAME", "ROMN", "FONE"))
-  
-  media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                               gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
-    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
-  
-  fam_notes <- purrr::map(family_notes, tidyged.internals::NOTE_STRUCTURE)
+
+  media_links <- create_multimedia_links(gedcom, multimedia_links)
+  fam_notes <- create_note_structures(gedcom, family_notes)
   
   fam_record <- tidyged.internals::FAMILY_GROUP_RECORD(xref_fam = xref,
-                                                       xref_husb = xref_husb,
-                                                       xref_wife = xref_wife,
-                                                       xrefs_chil = xrefs_chil,
+                                                       xref_husb = husband,
+                                                       xref_wife = wife,
+                                                       xrefs_chil = children,
                                                        count_of_children = number_of_children,
-                                                       user_reference_number = user_reference_number,
-                                                       user_reference_type = user_reference_type,
+                                                       user_reference_number = user_reference_numbers,
                                                        notes = fam_notes,
                                                        multimedia_links = media_links) 
   
   temp <- gedcom %>%
     tibble::add_row(fam_record, .before = nrow(.))
   
-  if(length(xref_husb) == 1) {
+  if(length(husband) == 1) {
     temp <- temp %>%
-      set_active_record(xref_husb) %>% 
+      set_active_record(husband) %>% 
       add_indi_family_link_as_spouse(xref)
   }
-  if(length(xref_wife) == 1) {
+  if(length(wife) == 1) {
     temp <- temp %>%
-      set_active_record(xref_wife) %>% 
+      set_active_record(wife) %>% 
       add_indi_family_link_as_spouse(xref)
   }
   
-  for(i in seq_along(xrefs_chil)) {
+  for(i in seq_along(children)) {
   
     temp <- temp %>% 
-      set_active_record(xrefs_chil[i]) %>% 
+      set_active_record(children[i]) %>% 
       add_indi_family_link_as_child(xref, linkage_type = child_linkage_types[i]) 
   
   }

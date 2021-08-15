@@ -59,8 +59,8 @@ entity that has responsibility for the event.}
 
 \item{religious_affiliation}{A name of the religion with which this event was affiliated.}
 
-\item{multimedia_links}{A character vector of multimedia file references accompanying this
-event. These could be xrefs to existing Multimedia records.}
+\item{multimedia_links}{A character vector of Multimedia record xrefs accompanying this
+record.}
 
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 

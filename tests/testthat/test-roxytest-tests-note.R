@@ -2,7 +2,7 @@
 
 # File R/note.R: @tests
 
-test_that("Function remove_note() @ L41", {
+test_that("Function remove_note() @ L38", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) %>% add_note("text") %>% remove_note())
 })

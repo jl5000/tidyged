@@ -3,24 +3,21 @@
 #'
 #' @param gedcom A tidyged object.
 #' @param text A character string containing the text of the note.
-#' @param user_reference_number A unique user-defined number or text that the submitter 
-#' uses to identify this record. You can supply more than one in a vector.
-#' @param user_reference_type A user-defined definition of the user_reference_number(s). If this
-#' parameter is used, there must be a reference type for every reference number defined.
+#' @param user_reference_numbers A unique user-defined number or text that the submitter 
+#' uses to identify this record. You can supply more than one in a vector. You can also define a
+#' user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).
 #'
 #' @return An updated tidyged object including the Note record.
 #' @export
 add_note <- function(gedcom,
                      text,
-                     user_reference_number = character(),
-                     user_reference_type = character()) {
+                     user_reference_numbers = character()) {
   
   xref <- tidyged.internals::assign_xref_note(gedcom)
   
   note_record <- tidyged.internals::NOTE_RECORD(xref_note = xref,
                                                    user_text = text,
-                                                   user_reference_number = user_reference_number,
-                                                   user_reference_type = user_reference_type)
+                                                   user_reference_number = user_reference_numbers)
   
   gedcom %>% 
     tibble::add_row(note_record, .before = nrow(.)) %>% 

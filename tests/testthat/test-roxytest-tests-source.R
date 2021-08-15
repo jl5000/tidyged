@@ -2,17 +2,17 @@
 
 # File R/source.R: @tests
 
-test_that("Function add_sour_repo_citation() @ L109", {
+test_that("Function add_sour_repo_citation() @ L101", {
   expect_snapshot_value(
                    gedcom(subm("Me")) %>% 
                    add_repo(name = "The library") %>% 
                    add_sour() %>% 
-                   add_sour_repo_citation("library") %>%
+                   add_sour_repo_citation("@R1@") %>%
                    tidyged.internals::remove_dates_for_tests(), "json2")
 })
 
 
-test_that("Function remove_sour_repo_citation() @ L144", {
+test_that("Function remove_sour_repo_citation() @ L136", {
   expect_equal(gedcom(subm("Me")) %>% 
                    add_repo(name = "The library") %>% 
                    add_sour() %>%
@@ -20,13 +20,13 @@ test_that("Function remove_sour_repo_citation() @ L144", {
                gedcom(subm("Me")) %>% 
                    add_repo(name = "The library") %>% 
                    add_sour() %>% 
-                   add_sour_repo_citation("library") %>%
-                   remove_sour_repo_citation("library") %>% 
+                   add_sour_repo_citation("@R1@") %>%
+                   remove_sour_repo_citation("@R1@") %>% 
                    tidyged.internals::remove_dates_for_tests())
 })
 
 
-test_that("Function remove_sour() @ L167", {
+test_that("Function remove_sour() @ L157", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) %>% add_sour(title = "text") %>% remove_sour())
 })

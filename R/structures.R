@@ -171,8 +171,8 @@ name_pieces <- function(prefix = character(),
 #' "unreliable", "subjective", "secondary", "primary".
 #' @param notes A character vector of notes accompanying the citation. These could be xrefs to 
 #' existing Note records.
-#' @param multimedia_links A character vector of multimedia file references accompanying this
-#' citation. These could be xrefs to existing Multimedia records.
+#' @param multimedia_links A character vector of Multimedia record xrefs accompanying this 
+#' record.
 #'
 #' @return A tibble describing a source citation.
 #' @export
@@ -187,11 +187,8 @@ source_citation <- function(gedcom,
   
   sour <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_sour)
 
-  cit_notes <- purrr::map(notes, tidyged.internals::NOTE_STRUCTURE)
-  
-  media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
-    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
+  cit_notes <- create_note_structures(gedcom, notes)
+  media_links <- create_multimedia_links(gedcom, multimedia_links)
   
   certainty <- dplyr::case_when(certainty == "unreliable" ~ "0",
                                 certainty == "subjective" ~ "1",

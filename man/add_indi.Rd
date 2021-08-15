@@ -7,8 +7,7 @@
 add_indi(
   gedcom,
   sex = "U",
-  user_reference_number = character(),
-  user_reference_type = character(),
+  user_reference_numbers = character(),
   indi_notes = character(),
   multimedia_links = character(),
   qn = character()
@@ -20,17 +19,15 @@ add_indi(
 \item{sex}{The sex of the individual. Either "M" (male), "F" (female), "U" (undetermined),
 "X" (intersex), or "N" (not recorded).}
 
-\item{user_reference_number}{A unique user-defined number or text that the submitter
-uses to identify this record. You can supply more than one in a vector.}
-
-\item{user_reference_type}{A user-defined definition of the user_reference_number(s). If this
-parameter is used, there must be a reference type for every reference number defined.}
+\item{user_reference_numbers}{A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector. You can also define a
+user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).}
 
 \item{indi_notes}{A character vector of notes accompanying this Individual record.
 These could be xrefs to existing Note records.}
 
-\item{multimedia_links}{A character vector of multimedia file references accompanying this
-Individual record. These could be xrefs to existing Multimedia records.}
+\item{multimedia_links}{A character vector of Multimedia record xrefs accompanying this
+record.}
 
 \item{qn}{A shortcut to quickly define a name for this individual. This is a shortcut for
 the add_indi_names() function (which you should really use instead), but this is useful

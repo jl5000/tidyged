@@ -2,26 +2,47 @@
 % Please edit documentation in R/activate.R
 \name{find_xref}
 \alias{find_xref}
-\title{Find an xref of a record given a set of terms}
+\title{Find an xref of a record given a set of search terms}
 \usage{
-find_xref(gedcom, record_xrefs, tags, search_pattern)
+find_xref(
+  gedcom,
+  search_patterns,
+  mode = "strict",
+  multiple = FALSE,
+  ignore_case = FALSE
+)
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{record_xrefs}{A list of potential xrefs to consider.}
+\item{search_patterns}{A named vector of terms to search for (see Details).}
 
-\item{tags}{The tags to look at when comparing values.}
+\item{mode}{Whether to only return an xref if all patterns are matched ("strict"). A value of
+"best" will return the xref with the most matches. If either of these still result in more than
+one xref it will return an error.}
 
-\item{search_pattern}{A set of terms to search for (separated by spaces).}
+\item{multiple}{If more than one xref is found (according to mode), whether to return all xrefs
+or throw an error.}
+
+\item{ignore_case}{Should case differences be ignored in the match?}
 }
 \value{
-A single xref for the given record.
+A single xref for the given record. No matches will return an empty character vector.
 }
 \description{
-This is a helper function to identify the xref of a record given a piece of information such
-as a name or reference number.
+Find an xref of a record given a set of search terms
 }
 \details{
-Sometimes an xref may be provided directly, in which case it's returned straight back.
+This is a helper function to identify the xref of a record given information such
+as a name or reference number. You provide a named \code{search_patterns} vector of namespaced tag-pattern pairs,
+such as:
+
+c(INDI.NAME = "Homer", INDI.SEX  = "M", INDI.BIRT.DATE = "JAN 1974")
+
+If you're not sure what namespace to use, use the \code{mutate_tag_namespace} function.
+
+The search patterns will be treated as regular expressions, so they will match a value if it contains
+the pattern provided. You can anchor your search pattern if you want an exact match, e.g. "^JAN 1974$".
+If you're not familiar with regular expressions, you may need to escape certain characters such as a
+full-stop/period (i.e. \verb{\\\\.}).
 }

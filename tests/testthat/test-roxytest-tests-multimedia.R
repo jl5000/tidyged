@@ -2,7 +2,7 @@
 
 # File R/multimedia.R: @tests
 
-test_that("Function remove_media() @ L72", {
+test_that("Function remove_media() @ L69", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) %>% 
                add_media("test", "BMP") %>% 

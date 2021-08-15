@@ -37,8 +37,8 @@
 #' @param responsible_agency The organisation, institution, corporation, person, or other 
 #' entity that has responsibility for the event.
 #' @param religious_affiliation A name of the religion with which this event was affiliated.
-#' @param multimedia_links A character vector of multimedia file references accompanying this
-#' event. These could be xrefs to existing Multimedia records.
+#' @param multimedia_links A character vector of Multimedia record xrefs accompanying this 
+#' record.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param update_date_changed Whether to add/update the change date for the record.
 #' 
@@ -50,7 +50,7 @@
 #'  add_indi(qn = "Joe Bloggs", sex = "M") %>% 
 #'  add_indi(qn = "Jess Bloggs", sex = "F") %>% 
 #'  add_indi(qn = "Jessie Bloggs", sex = "F") %>% 
-#'  add_famg(husband = "Joe", wife = "@I2@", children = "Jessie") %>% 
+#'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
 #'  add_famg_event(type = "rel", 
 #'                 date = date_calendar(year = 1969, month = 1, day = 30),
 #'                 event_place = place(name = "Another place")) %>% 
@@ -97,11 +97,8 @@ add_famg_event <- function(gedcom,
     descriptor == ""
   }
   
-  even_notes <- purrr::map(notes, tidyged.internals::NOTE_STRUCTURE)
-  
-  media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
-    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
+  even_notes <- create_note_structures(gedcom, notes)
+  media_links <- create_multimedia_links(gedcom, multimedia_links)
   
   if(type == "MARR" & length(classification) == 0)
     classification <- "marriage"

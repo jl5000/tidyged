@@ -71,9 +71,12 @@ tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family",
   add_indi(sex = "M") %>% 
   add_indi_names(name_pieces(given = "Obi-Wan", nickname = "Ben", surname = "Kenobi"), 
                  type = "birth") %>% 
-  add_famg(husband = "Anakin", wife = "Padme", children = c("Luke", "Leia")) %>%
-  activate_indi("Anakin") %>% 
-  add_indi_association("Obi-Wan", association = "Master") %>% 
+  add_famg(husband = find_xref(., c(INDI.NAME.GIVN = "Anakin")), 
+           wife = find_xref(., c(INDI.NAME.GIVN = "Padme")), 
+           children = find_xref(., c(INDI.NAME.GIVN = "Luke|Leia"), multiple = TRUE)) %>%
+  activate_indi(find_xref(., c(INDI.NAME.GIVN = "Anakin"))) %>% 
+  add_indi_association(find_xref(., c(INDI.NAME.GIVN = "Obi-Wan")), 
+                       association = "Master") %>% 
   add_indi_fact("death", age = "45y", cause = "Killed by son Luke",
                 fact_place = place(name = "Second Death Star", notes = "Orbiting Endor System")) %>% 
   add_indi_fact("religion", descriptor = "Jedi") %>% 

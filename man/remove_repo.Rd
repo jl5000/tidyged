@@ -9,7 +9,7 @@ remove_repo(gedcom, repository = character())
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{repository}{The xref or name of a Repository record to act on if one is
+\item{repository}{The xref of a Repository record to act on if one is
 not activated (will override active record).}
 }
 \value{

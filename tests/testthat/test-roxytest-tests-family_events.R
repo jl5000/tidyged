@@ -7,7 +7,7 @@ test_that("Function add_famg_event() @ L58", {
    add_indi(qn = "Joe Bloggs", sex = "M") %>% 
    add_indi(qn = "Jess Bloggs", sex = "F") %>% 
    add_indi(qn = "Jessie Bloggs", sex = "F") %>% 
-   add_famg(husband = "Joe", wife = "@I2@", children = "Jessie") %>% 
+   add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
    add_famg_event(type = "rel", 
                   date = date_calendar(year = 1969, month = 1, day = 30),
                   event_place = place(name = "Another place")) %>% 

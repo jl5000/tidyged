@@ -102,7 +102,7 @@ str.tidyged <- function(object, ...) {
 #'  add_indi_names(name_pieces(given = "Jessie", surname = "Bloggs")) %>% 
 #'  add_indi_fact("bir", date = date_approximated(date_calendar(year = 1970), about = TRUE),
 #'                             fact_place = place("Elsewhere")) %>%
-#'  add_famg(husband = "Joe", wife = "@I2@", children = "Jessie") %>% 
+#'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
 #'  add_famg_event("rel", date = date_calendar(year = 1969, month = 1, day = 30),
 #'                        event_place = place(name = "Another place")) %>% 
 #'  tidyged.internals::remove_dates_for_tests() %>% 
@@ -160,7 +160,7 @@ df_indi <- function(gedcom) {
 #'  add_indi_names(name_pieces(given = "Jess", surname = "Bloggs")) %>% 
 #'  add_indi(sex = "F") %>% 
 #'  add_indi_names(name_pieces(given = "Jessie", surname = "Bloggs")) %>%
-#'  add_famg(husband = "Joe", wife = "@I2@", children = "Jessie") %>% 
+#'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
 #'  add_famg_event("rel", date = date_calendar(year = 1969, month = 1, day = 30),
 #'                        event_place = place(name = "Another place")) %>% 
 #'  tidyged.internals::remove_dates_for_tests() %>% 
@@ -271,9 +271,9 @@ df_repo <- function(gedcom) {
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_note(text = "This is a note", user_reference_number = 1234) %>% 
-#'  add_note(text = "This is also a note", user_reference_number = 5678) %>% 
-#'  add_note(text = "This may be a note too", user_reference_number = 987643) %>% 
+#'  add_note(text = "This is a note", user_reference_numbers = 1234) %>% 
+#'  add_note(text = "This is also a note", user_reference_numbers = 5678) %>% 
+#'  add_note(text = "This may be a note too", user_reference_numbers = 987643) %>% 
 #'  tidyged.internals::remove_dates_for_tests() %>% 
 #'  df_note(), "json2")
 df_note <- function(gedcom) {

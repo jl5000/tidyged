@@ -28,20 +28,23 @@ gedcom <- function(submitter_details = subm(),
                    language = "English") {
   
   tidyged.internals::GEDCOM_HEADER(
-    header_extension = tidyged.internals::LINEAGE_LINKED_HEADER_EXTENSION(system_id = "gedcompendium",
-                                                                          name_of_product = "The 'gedcompendium' ecosystem of packages for the R language",
-                                                                          name_of_business = "Jamie Lendrum",
-                                                                          business_address = address(email = "jalendrum@gmail.com",
-                                                                                                     web_page = "https://jl5000.github.io/tidyged/"),
-                                                                          name_of_source_data = source_data_name,
-                                                                          publication_date = source_data_date,
-                                                                          copyright_source_data = source_data_copyright,
-                                                                          receiving_system_name = receiving_system,
-                                                                          file_creation_date = date_current(),
-                                                                          language_of_text = language,
-                                                                          xref_subm = tidyged.internals::assign_xref_subm(ref = 1),
-                                                                          copyright_gedcom_file = gedcom_copyright,
-                                                                          gedcom_content_description = gedcom_description)) %>% 
+    header_extension = tidyged.internals::LINEAGE_LINKED_HEADER_EXTENSION(
+      system_id = "gedcompendium",
+      name_of_product = "The 'gedcompendium' ecosystem of packages for the R language",
+      name_of_business = "Jamie Lendrum",
+      business_address = address(email = "jalendrum@gmail.com",
+                                 web_page = "https://jl5000.github.io/tidyged/"),
+      name_of_source_data = source_data_name,
+      publication_date = source_data_date,
+      copyright_source_data = source_data_copyright,
+      receiving_system_name = receiving_system,
+      file_creation_date = date_current(),
+      language_of_text = language,
+      xref_subm = tidyged.internals::assign_xref_subm(ref = 1),
+      copyright_gedcom_file = gedcom_copyright,
+      gedcom_content_description = gedcom_description
+    )
+  ) %>% 
     dplyr::bind_rows(submitter_details, 
                      tidyged.internals::FOOTER_SECTION()) %>%
     tidyged.internals::set_class_to_tidyged()
@@ -59,31 +62,26 @@ gedcom <- function(submitter_details = subm(),
 #' This submitter record identifies the individual or organization that contributed 
 #' information contained in the GEDCOM file.
 #' 
+#' This function deviates from the specification slightly by omitting multimedia links.
+#' The logic for this is that if the file is just being created, then there will be
+#' no multimedia records to link to.
+#' 
 #' @param name The name of the submitter.
 #' @param subm_address An address() object containing the submitter address.
 #' @param subm_notes A character vector of notes accompanying this Submitter record.
-#' These could be xrefs to existing Note records.
-#' @param multimedia_links A character vector of multimedia file references accompanying this 
-#' Submitter record. These could be xrefs to existing Multimedia records.
 #'
 #' @return A Submitter record to be incorporated into a new tidyged object.
 #' @export
 subm <- function(name = unname(Sys.info()["user"]),
                  subm_address = address(),
-                 subm_notes = character(),
-                 multimedia_links = character()) {
+                 subm_notes = character()) {
   
   sub_notes <- purrr::map(subm_notes, tidyged.internals::NOTE_STRUCTURE)
-  
-  media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
-    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
   
   tidyged.internals::SUBMITTER_RECORD(xref_subm = tidyged.internals::assign_xref_subm(ref = 1),
                                          submitter_name = name,
                                          address = subm_address,
-                                         notes = sub_notes,
-                                         multimedia_links = media_links)
+                                         notes = sub_notes)
   
 }
 

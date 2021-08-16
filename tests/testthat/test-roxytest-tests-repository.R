@@ -2,7 +2,7 @@
 
 # File R/repository.R: @tests
 
-test_that("Function remove_repo() @ L51", {
+test_that("Function remove_repo() @ L48", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) %>% add_repo("text") %>% remove_repo())
 })

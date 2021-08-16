@@ -8,8 +8,7 @@ add_repo(
   gedcom,
   name,
   repo_address = address(),
-  user_reference_number = character(),
-  user_reference_type = character(),
+  user_reference_numbers = character(),
   repo_notes = character()
 )
 }
@@ -20,11 +19,9 @@ add_repo(
 
 \item{repo_address}{An address() object giving the address of the repository.}
 
-\item{user_reference_number}{A unique user-defined number or text that the submitter
-uses to identify this record. You can supply more than one in a vector.}
-
-\item{user_reference_type}{A user-defined definition of the user_reference_number(s). If this
-parameter is used, there must be a reference type for every reference number defined.}
+\item{user_reference_numbers}{A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector. You can also define a
+user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).}
 
 \item{repo_notes}{A character vector of notes accompanying this Repository record.
 These could be xrefs to existing Note records.}

@@ -15,8 +15,7 @@ add_sour(
   short_title = character(),
   publication_detail = character(),
   source_text = character(),
-  user_reference_number = character(),
-  user_reference_type = character(),
+  user_reference_numbers = character(),
   data_notes = character(),
   sour_notes = character(),
   multimedia_links = character()
@@ -53,11 +52,9 @@ publication.}
 This indicates notes or text that are actually contained in the source document,
 not the submitter's opinion about the source.}
 
-\item{user_reference_number}{A unique user-defined number or text that the submitter
-uses to identify this record. You can supply more than one in a vector.}
-
-\item{user_reference_type}{A user-defined definition of the user_reference_number(s). If this
-parameter is used, there must be a reference type for every reference number defined.}
+\item{user_reference_numbers}{A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector. You can also define a
+user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).}
 
 \item{data_notes}{A character vector of notes associated with the data in this Source record.
 These could be xrefs to existing Note records.}
@@ -65,8 +62,8 @@ These could be xrefs to existing Note records.}
 \item{sour_notes}{A character vector of notes accompanying this Source record.
 These could be xrefs to existing Note records.}
 
-\item{multimedia_links}{A character vector of multimedia file references accompanying this
-source. These could be xrefs to existing Multimedia records.}
+\item{multimedia_links}{A character vector of Multimedia record xrefs accompanying this
+Source record.}
 }
 \value{
 An updated tidyged object including the Source record.

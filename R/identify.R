@@ -3,7 +3,7 @@
 #' Identify all spouses for an individual
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref or name of an Individual record to act on if one 
+#' @param individual The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param return_name Whether to return the spouse's name(s) instead of the xref(s).
 #'
@@ -35,7 +35,7 @@ get_spouses <- function(gedcom,
 #' Identify all children for an individual
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref or name of an Individual record to act on if one 
+#' @param individual The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param return_name Whether to return the childrens name(s) instead of the xref(s).
 #'
@@ -66,7 +66,7 @@ get_children <- function(gedcom,
 #' Identify all parents for an individual
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref or name of an Individual record to act on if one 
+#' @param individual The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param return_name Whether to return the parents name(s) instead of the xref(s).
 #'
@@ -97,7 +97,7 @@ get_parents <- function(gedcom,
 #' Identify all siblings for an individual
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref or name of an Individual record to act on if one 
+#' @param individual The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param include_half_siblings Whether to include siblings that only share one parent.
 #' @param return_name Whether to return the parents name(s) instead of the xref(s).
@@ -135,7 +135,7 @@ get_siblings <- function(gedcom,
 #' Identify all families for an individual where they are a spouse
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref or name of an Individual record to act on if one 
+#' @param individual The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #'
 #' @return A character vector of family xrefs.
@@ -154,7 +154,7 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
 #' Identify all families for an individual where they are a child
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref or name of an Individual record to act on if one 
+#' @param individual The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param birth_only Whether to only return the family containing the biological parents.
 #'
@@ -244,7 +244,7 @@ get_supporting_records <- function(gedcom,
 #' This function identifies records in an entire branch of the family tree below a certain individual.
 #' 
 #' @param gedcom A tidyged object.
-#' @param individual The xref or name of an Individual record to act on if one 
+#' @param individual The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param include_individual Whether to also include the individual themselves.
 #' @param include_spouses Whether to also include all spouses of this individual (and their descendants and
@@ -256,10 +256,10 @@ get_supporting_records <- function(gedcom,
 #' @return A vector of xrefs of descendants.
 #' @export
 #' @tests
-#' expect_equal(get_descendants(sample555, "Robert"), "@I3@")
-#' expect_equal(get_descendants(sample555, "Robert", TRUE), c("@I1@","@I3@"))
-#' expect_equal(get_descendants(sample555, "Robert", TRUE, TRUE), c("@I2@","@I1@","@I3@"))
-#' expect_equal(get_descendants(sample555, "Robert", TRUE, TRUE, TRUE), c("@F1@","@F2@","@I2@","@I1@","@I3@"))
+#' expect_equal(get_descendants(sample555, "@I1@"), "@I3@")
+#' expect_equal(get_descendants(sample555, "@I1@", TRUE), c("@I1@","@I3@"))
+#' expect_equal(get_descendants(sample555, "@I1@", TRUE, TRUE), c("@I2@","@I1@","@I3@"))
+#' expect_equal(get_descendants(sample555, "@I1@", TRUE, TRUE, TRUE), c("@F1@","@F2@","@I2@","@I1@","@I3@"))
 get_descendants <- function(gedcom,
                             individual = character(),
                             include_individual = FALSE,
@@ -312,7 +312,7 @@ get_descendants <- function(gedcom,
 #' This function identifies records in an entire branch of the family tree above a certain individual.
 #' 
 #' @param gedcom A tidyged object.
-#' @param individual The xref or name of an Individual record to act on if one 
+#' @param individual The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param include_individual Whether to also include the individual themselves.
 #' @param include_siblings Whether to also include all siblings of ancestors (siblings of this individual will only be

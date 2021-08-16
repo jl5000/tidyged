@@ -22,16 +22,15 @@
 #' @param source_text A verbatim copy of relevant text contained within the source. 
 #' This indicates notes or text that are actually contained in the source document, 
 #' not the submitter's opinion about the source.
-#' @param user_reference_number A unique user-defined number or text that the submitter 
-#' uses to identify this record. You can supply more than one in a vector.
-#' @param user_reference_type A user-defined definition of the user_reference_number(s). If this
-#' parameter is used, there must be a reference type for every reference number defined.
+#' @param user_reference_numbers A unique user-defined number or text that the submitter 
+#' uses to identify this record. You can supply more than one in a vector. You can also define a
+#' user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).
 #' @param data_notes A character vector of notes associated with the data in this Source record.
 #' These could be xrefs to existing Note records.
 #' @param sour_notes A character vector of notes accompanying this Source record.
 #' These could be xrefs to existing Note records.
-#' @param multimedia_links A character vector of multimedia file references accompanying this
-#' source. These could be xrefs to existing Multimedia records.
+#' @param multimedia_links A character vector of Multimedia record xrefs accompanying this 
+#' Source record.
 #'
 #' @return An updated tidyged object including the Source record.
 #' @export
@@ -45,21 +44,16 @@ add_sour <- function(gedcom,
                      short_title = character(),
                      publication_detail = character(),
                      source_text = character(),
-                     user_reference_number = character(),
-                     user_reference_type = character(),
+                     user_reference_numbers = character(),
                      data_notes = character(),
                      sour_notes = character(),
                      multimedia_links = character()) {
   
   xref <- tidyged.internals::assign_xref_sour(gedcom)
   
-  dat_notes <- purrr::map(data_notes, tidyged.internals::NOTE_STRUCTURE)
-  
-  source_notes <- purrr::map(sour_notes, tidyged.internals::NOTE_STRUCTURE)
-  
-  media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
-    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
+  dat_notes <- create_note_structures(gedcom, data_notes)
+  source_notes <- create_note_structures(gedcom, sour_notes)
+  media_links <- create_multimedia_links(gedcom, multimedia_links)
   
   sour_record <- tidyged.internals::SOURCE_RECORD(xref_sour = xref,
                                                   events_recorded = events_recorded,
@@ -72,8 +66,7 @@ add_sour <- function(gedcom,
                                                   source_filed_by_entry = short_title,
                                                   source_publication_facts = publication_detail,
                                                   text_from_source = source_text,
-                                                  user_reference_number = user_reference_number,
-                                                  user_reference_type = user_reference_type,
+                                                  user_reference_number = user_reference_numbers,
                                                   notes = source_notes,
                                                   multimedia_links = media_links)
   
@@ -89,8 +82,7 @@ add_sour <- function(gedcom,
 #' address record of the holder of the source document.
 #' 
 #' @param gedcom A tidyged object.
-#' @param repository A character string identifying the repository. This can either 
-#' be an xref or term(s) to match to a repository name.
+#' @param repository A character string identifying the repository xref.
 #' @param call_number An identification or reference description used to file 
 #' and retrieve items from the holdings of a repository.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
@@ -104,7 +96,7 @@ add_sour <- function(gedcom,
 #'                  gedcom(subm("Me")) %>% 
 #'                  add_repo(name = "The library") %>% 
 #'                  add_sour() %>% 
-#'                  add_sour_repo_citation("library") %>%
+#'                  add_sour_repo_citation("@R1@") %>%
 #'                  tidyged.internals::remove_dates_for_tests(), "json2")
 add_sour_repo_citation <- function(gedcom,
                                    repository,
@@ -114,7 +106,7 @@ add_sour_repo_citation <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_sour)
   
-  repo_xref <- find_xref(gedcom, xrefs_repo(gedcom), "NAME", repository)
+  repo_xref <- repository
   
   citation <- tidyged.internals::SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,
                                                                source_call_number = call_number) %>% 
@@ -138,17 +130,15 @@ add_sour_repo_citation <- function(gedcom,
 #'              gedcom(subm("Me")) %>% 
 #'                  add_repo(name = "The library") %>% 
 #'                  add_sour() %>% 
-#'                  add_sour_repo_citation("library") %>%
-#'                  remove_sour_repo_citation("library") %>% 
+#'                  add_sour_repo_citation("@R1@") %>%
+#'                  remove_sour_repo_citation("@R1@") %>% 
 #'                  tidyged.internals::remove_dates_for_tests())
 remove_sour_repo_citation <- function(gedcom,
                                       repository) {
   
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_sour, is_sour)
   
-  repo_xref <- find_xref(gedcom, xrefs_repo(gedcom), "NAME", repository)
-  
-  tidyged.internals::remove_section(gedcom, 1, "REPO", repo_xref, xrefs = xref) %>% 
+  tidyged.internals::remove_section(gedcom, 1, "REPO", repository, xrefs = xref) %>% 
     activate_sour(xref)
   
 }

@@ -9,6 +9,7 @@ articles:
   - implementation
   - gedcompendium
   - tidyged_creation
+  - cross_references
 - title: Adding records
   contents:
   - individual_records
@@ -19,8 +20,6 @@ articles:
   - note_records
 - title: Other features
   contents:
-  - cross_references
   - dates
   - summarising
-  - automation
   - relations

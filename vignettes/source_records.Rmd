@@ -39,8 +39,8 @@ birth_source <- gedcom() %>%
 birth_source %>% 
   add_repo("General Register Office",
            repo_address = address(city = "Southport", state = "Merseyside")) %>%
-  activate_sour("Birth Certificate for Joe Bloggs (1956)") %>% 
-  add_sour_repo_citation(repository = "General Register Office")
+  activate_sour(find_sour_titl(., "Birth Certificate for Joe Bloggs")) %>% 
+  add_sour_repo_citation(repository = find_repo_name(., "General Register Office"))
 ```
 
 ## Citing source records

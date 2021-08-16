@@ -9,7 +9,7 @@ remove_media(gedcom, multimedia = character())
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{multimedia}{The xref or file reference of a Multimedia record to act
+\item{multimedia}{The xref of a Multimedia record to act
 on if one is not activated (will override active record).}
 }
 \value{

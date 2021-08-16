@@ -9,7 +9,7 @@ get_spouses(gedcom, individual = character(), return_name = FALSE)
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{individual}{The xref or name of an Individual record to act on if one
+\item{individual}{The xref of an Individual record to act on if one
 is not activated (will override active record).}
 
 \item{return_name}{Whether to return the spouse's name(s) instead of the xref(s).}

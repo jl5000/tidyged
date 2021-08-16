@@ -22,7 +22,7 @@ library(tidyged)
 
 Adding individuals to a tidyged object can be achieved with the `add_indi()` function. The sex of the individual can be specified with the `sex` parameter, which is a single letter: M(ale), F(emale), (Interse)X, U(nknown), N(ot recorded). If no sex is specified, a value of "U" is used.
 
-As with other records, various types of user-defined references can be defined (`user_reference_number` and `user_reference_type`), as well as links to multimedia and notes.
+As with other records, various types of user-defined references can be defined (`user_reference_numbers`).
 
 Individuals can be removed with the `remove_indi()` function.
 
@@ -138,6 +138,12 @@ dea_rel <- gedcom(subm("Me")) %>%
 knitr::kable(dplyr::filter(dea_rel, record == "@I1@"))
 ```
 
+You can see a summary of all facts associated with an individual with the `fact_summary_indi()` function.
+
+```{r}
+fact_summary_indi(dea_rel, "@I1@") %>% knitr::kable()
+```
+
 ## Family links
 
 Typically when constructing a file, you would create all of the individuals in a family first, and then reference them when creating a Family Group record - this takes care all of the appropriate record links for you. However, sometimes you want to retrospectively add an individual to a Family Group record that already exists. In this case you use the `add_indi_links_to_families()` function.
@@ -148,10 +154,10 @@ In the example below, we create Joe Bloggs and add him as a husband to a family.
 retro <- gedcom(subm("Me")) %>% 
   add_indi("M") %>% 
   add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
-  add_famg(husband = "Joe") %>% 
+  add_famg(husband = find_indi_name(., "Joe")) %>% 
   add_indi("F") %>% 
   add_indi_names(name_pieces(given = "Jess", surname = "Bloggs")) %>% 
-  add_indi_links_to_families(spouse = "Joe")
+  add_indi_links_to_families(spouse = find_indi_name(., "Joe"))
 
 knitr::kable(dplyr::filter(retro, record %in% c("@F1@", "@I2@")))
 ```

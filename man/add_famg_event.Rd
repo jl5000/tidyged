@@ -59,8 +59,8 @@ entity that has responsibility for the event.}
 
 \item{religious_affiliation}{A name of the religion with which this event was affiliated.}
 
-\item{multimedia_links}{A character vector of multimedia file references accompanying this
-event. These could be xrefs to existing Multimedia records.}
+\item{multimedia_links}{A character vector of Multimedia record xrefs accompanying this
+record.}
 
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
@@ -71,9 +71,11 @@ An updated tidyged object with an expanded Family group record including
 this event.
 }
 \description{
-The three-letter codes used for the type parameter are:
+Add a family event to a Family Group record
 }
 \details{
+The three-letter codes used for the type parameter are:
+
 ann(ulment), cen(sus), div(orce), dif (divorce filed), eng(agement), mab (marriage banns),
 mac (marriage contract), mal (marriage license), rel(ationship), mas (marriage settlement),
 res(idence).

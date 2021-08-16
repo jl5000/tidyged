@@ -3,14 +3,12 @@
 #'
 #' @param name The jurisdictional name of the place. 
 #' Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."
-#' @param phonetic_var A character vector of phonetic variations of the place name.
-#' @param phonetisation_method A character vector giving the method used in transforming the text to 
-#' the corresponding phonetic variation. If this argument is used, it must be the same size
-#' as the phonetic_var argument.
-#' @param romanised_var A character vector of romanised variations of the place name. 
-#' @param romanisation_method A character vector giving the method used in transforming the text to 
-#' the corresponding romanised variation. If this argument is used, it must be the same size
-#' as the romanised_var argument.
+#' @param phonetic_var A named character vector of phonetic variations of the place name. Element names
+#' must give the phonetisation method used in transforming the text to the corresponding phonetic variation.
+#' i.e. c(method1 = "var1", method2 = "var2")
+#' @param romanised_var A named character vector of romanised variations of the place name. Element names
+#' must give the romanisation method used in transforming the text to the corresponding romanised variation.
+#' i.e. c(method1 = "var1", method2 = "var2")
 #' @param latitude The value specifying the latitudinal coordinate of the place. 
 #' The latitude coordinate is the direction North or South from the equator in degrees and 
 #' fraction of degrees carried out to give the desired accuracy. 
@@ -29,9 +27,7 @@
 #' expect_snapshot_value(place("A place"), "json2")
 place <- function(name = character(),
                   phonetic_var = character(),
-                  phonetisation_method = character(),
                   romanised_var = character(),
-                  romanisation_method = character(),
                   latitude = character(),
                   longitude = character(),
                   notes = character()) {
@@ -43,6 +39,22 @@ place <- function(name = character(),
     tidyged.internals::PLACE_STRUCTURE(character())
     
   } else {
+    
+    if(length(phonetic_var) == 0) {
+      phonetisation_method <- character()
+    } else {
+      if(is.null(names(phonetic_var))) stop("Elements in the phonetic_var vector must be named")
+      if(any(names(phonetic_var)=="")) stop("Every element in the phonetic_var vector must be named")
+      phonetisation_method <- names(phonetic_var)
+    }
+    
+    if(length(romanised_var) == 0) {
+      romanisation_method <- character()
+    } else {
+      if(is.null(names(romanised_var))) stop("Elements in the romanised_var vector must be named")
+      if(any(names(romanised_var)=="")) stop("Every element in the romanised_var vector must be named")
+      romanisation_method <- names(romanised_var)
+    }
     
     tidyged.internals::PLACE_STRUCTURE(place_name = name,
                                        place_phonetic = phonetic_var,
@@ -171,8 +183,8 @@ name_pieces <- function(prefix = character(),
 #' "unreliable", "subjective", "secondary", "primary".
 #' @param notes A character vector of notes accompanying the citation. These could be xrefs to 
 #' existing Note records.
-#' @param multimedia_links A character vector of multimedia file references accompanying this
-#' citation. These could be xrefs to existing Multimedia records.
+#' @param multimedia_links A character vector of Multimedia record xrefs accompanying this 
+#' record.
 #'
 #' @return A tibble describing a source citation.
 #' @export
@@ -187,11 +199,8 @@ source_citation <- function(gedcom,
   
   sour <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_sour)
 
-  cit_notes <- purrr::map(notes, tidyged.internals::NOTE_STRUCTURE)
-  
-  media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
-    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
+  cit_notes <- create_note_structures(gedcom, notes)
+  media_links <- create_multimedia_links(gedcom, multimedia_links)
   
   certainty <- dplyr::case_when(certainty == "unreliable" ~ "0",
                                 certainty == "subjective" ~ "1",

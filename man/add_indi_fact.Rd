@@ -68,8 +68,8 @@ Only used for adoption events.}
 \item{adopting_parent}{A code which shows which parent in the associated family adopted this
 individual. Either "HUSB", "WIFE", or "BOTH".}
 
-\item{multimedia_links}{A character vector of multimedia file references accompanying this
-fact. These could be xrefs to existing Multimedia records.}
+\item{multimedia_links}{A character vector of Multimedia record xrefs accompanying this
+record.}
 
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 

@@ -47,8 +47,8 @@
 #' Only used for adoption events.
 #' @param adopting_parent A code which shows which parent in the associated family adopted this 
 #' individual. Either "HUSB", "WIFE", or "BOTH".
-#' @param multimedia_links A character vector of multimedia file references accompanying this
-#' fact. These could be xrefs to existing Multimedia records.
+#' @param multimedia_links A character vector of Multimedia record xrefs accompanying this 
+#' record.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param update_date_changed Whether to add/update the change date for the record.
 #' @return An updated tidyged object with an expanded Individual record including
@@ -139,16 +139,11 @@ add_indi_fact <- function(gedcom,
     descriptor == ""
   }
     
-  
   if(length(user_reference_type) == 0 & type %in% c("IDNO","FACT"))
     stop("A user_reference_type must be defined for national ID numbers and other attributes")
   
-  
-  even_notes <- purrr::map(notes, tidyged.internals::NOTE_STRUCTURE)
-  
-  media_links <- purrr::map_chr(multimedia_links, find_xref, 
-                                gedcom = gedcom, record_xrefs = xrefs_media(gedcom), tags = "FILE") %>% 
-    purrr::map(tidyged.internals::MULTIMEDIA_LINK)
+  even_notes <- create_note_structures(gedcom, notes)
+  media_links <- create_multimedia_links(gedcom, multimedia_links)
   
   details1 <- tidyged.internals::EVENT_DETAIL(event_or_fact_classification = classification,
                                               date = date,

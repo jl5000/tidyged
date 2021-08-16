@@ -10,8 +10,7 @@ add_media(
   format,
   source_media = character(),
   title = character(),
-  user_reference_number = character(),
-  user_reference_type = character(),
+  user_reference_numbers = character(),
   media_notes = character()
 )
 }
@@ -27,11 +26,9 @@ source is stored. See Details.}
 
 \item{title}{The title of the multimedia file.}
 
-\item{user_reference_number}{A unique user-defined number or text that the submitter
-uses to identify this record. You can supply more than one in a vector.}
-
-\item{user_reference_type}{A user-defined definition of the user_reference_number(s). If this
-parameter is used, there must be a reference type for every reference number defined.}
+\item{user_reference_numbers}{A unique user-defined number or text that the submitter
+uses to identify this record. You can supply more than one in a vector. You can also define a
+user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).}
 
 \item{media_notes}{A character vector of notes accompanying this Multimedia record. These could be
 xrefs to existing Note records.}

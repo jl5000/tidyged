@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -108,7 +108,9 @@
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Bart Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi_fact.html">add_indi_fact</a></span><span class="op">(</span><span class="st">"bir"</span>, date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1982</span>, <span class="fl">3</span>, <span class="fl">16</span><span class="op">)</span>,
                 fact_place <span class="op">=</span> <span class="fu"><a href="../reference/place.html">place</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Springfield, USA"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Homer"</span>, wife <span class="op">=</span> <span class="st">"Marge"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bart"</span>, <span class="st">"Lisa"</span><span class="op">)</span>, 
+  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Homer"</span><span class="op">)</span>, 
+           wife <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Marge"</span><span class="op">)</span>, 
+           children <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name_all</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Bart|Lisa"</span><span class="op">)</span>, 
            number_of_children <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"This is a note"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"This is another note"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -214,7 +216,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">2</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -229,7 +231,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">2</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -244,7 +246,7 @@
 <td align="left">Homer Simpson</td>
 <td align="left">2</td>
 <td align="right">0</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -259,7 +261,7 @@
 <td align="left">Homer Simpson</td>
 <td align="left">2</td>
 <td align="right">0</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -283,7 +285,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">3</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr></tbody>
 </table>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -305,7 +307,7 @@
 <td align="left"></td>
 <td align="left">PDF</td>
 <td align="left"></td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -314,7 +316,7 @@
 <td align="left"></td>
 <td align="left">PDF</td>
 <td align="left"></td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -332,11 +334,11 @@
 <span class="co">#&gt; [1] FALSE</span></code></pre></div>
 <p>The <code>describe_*()</code> family of functions give a description of certain records:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/describe_famg.html">describe_indi</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"Bart"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/describe_famg.html">describe_indi</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"Bart"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I4@, Bart Simpson, child of Homer Simpson and Marge Simpson, born 16 MAR 1982 in Springfield, USA"</span>
-<span class="fu"><a href="../reference/describe_famg.html">describe_indi</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"Lisa"</span>, name_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/describe_famg.html">describe_indi</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"Lisa"</span><span class="op">)</span>, name_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Lisa Simpson"</span>
-<span class="fu"><a href="../reference/describe_famg.html">describe_indi</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"Homer"</span>, short_desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/describe_famg.html">describe_indi</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"Homer"</span><span class="op">)</span>, short_desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I1@, Homer Simpson"</span>
 <span class="fu"><a href="../reference/describe_famg.html">describe_famg</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"@F1@"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F1@, headed by Homer Simpson and Marge Simpson, and children: Bart Simpson, Lisa Simpson"</span></code></pre></div>
@@ -373,7 +375,7 @@
 <span class="co">#&gt; [12] "Source @S1@, titled A History of the Simpsons"                      </span>
 <span class="co">#&gt; [13] "Source @S2@, titled The screaming and the pain and the hoyvenglaven"</span></code></pre></div>
 <p style="text-align: right;">
-<a href="https://jl5000.github.io/tidyged/articles/automation.html">Next article: Automation &gt;</a>
+<a href="https://jl5000.github.io/tidyged/articles/relations.html">Next article: Identifying relations &gt;</a>
 </p>
 </div>
   </div>

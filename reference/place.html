@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -131,9 +131,7 @@
     <pre class="usage"><span class='fu'>place</span><span class='op'>(</span>
   name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   phonetic_var <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  phonetisation_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   romanised_var <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  romanisation_method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   latitude <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   longitude <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
@@ -149,23 +147,15 @@ Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."</p
     </tr>
     <tr>
       <th>phonetic_var</th>
-      <td><p>A character vector of phonetic variations of the place name.</p></td>
-    </tr>
-    <tr>
-      <th>phonetisation_method</th>
-      <td><p>A character vector giving the method used in transforming the text to
-the corresponding phonetic variation. If this argument is used, it must be the same size
-as the phonetic_var argument.</p></td>
+      <td><p>A named character vector of phonetic variations of the place name. Element names
+must give the phonetisation method used in transforming the text to the corresponding phonetic variation.
+i.e. c(method1 = "var1", method2 = "var2")</p></td>
     </tr>
     <tr>
       <th>romanised_var</th>
-      <td><p>A character vector of romanised variations of the place name.</p></td>
-    </tr>
-    <tr>
-      <th>romanisation_method</th>
-      <td><p>A character vector giving the method used in transforming the text to
-the corresponding romanised variation. If this argument is used, it must be the same size
-as the romanised_var argument.</p></td>
+      <td><p>A named character vector of romanised variations of the place name. Element names
+must give the romanisation method used in transforming the text to the corresponding romanised variation.
+i.e. c(method1 = "var1", method2 = "var2")</p></td>
     </tr>
     <tr>
       <th>latitude</th>

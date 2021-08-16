@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Flag a record as being active — set_active_record • tidyged</title>
+<title>Helper functions to locate record xrefs — find_indi_refn • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Flag a record as being active — set_active_record" />
-<meta property="og:description" content="This allows an easy mechanism to edit particular records without specifying them each time." />
+<meta property="og:title" content="Helper functions to locate record xrefs — find_indi_refn" />
+<meta property="og:description" content="These functions act as wrappers to the find_xref function to find one or more record xrefs." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,16 +119,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Flag a record as being active</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/activate.R'><code>R/activate.R</code></a></small>
-    <div class="hidden name"><code>set_active_record.Rd</code></div>
+    <h1>Helper functions to locate record xrefs</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/find_xref.R'><code>R/find_xref.R</code></a></small>
+    <div class="hidden name"><code>find_indi_refn.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This allows an easy mechanism to edit particular records without specifying them each time.</p>
+    <p>These functions act as wrappers to the <code>find_xref</code> function to find one or more record xrefs.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_active_record</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>find_indi_refn</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_indi_name</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_indi_name_all</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_repo_refn</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_repo_name</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_repo_name_all</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_note_refn</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_note_text</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_note_text_all</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_media_refn</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_media_fileref</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_media_fileref_all</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_sour_refn</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_sour_titl</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_sour_titl_all</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>find_famg_refn</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>pattern</span>, ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,14 +168,23 @@
       <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>xref</th>
-      <td><p>The xref of the record to activate.</p></td>
+      <th>pattern</th>
+      <td><p>The search pattern to use (regular expression).</p></td>
+    </tr>
+    <tr>
+      <th>ignore_case</th>
+      <td><p>Should case differences be ignored in the match?</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The same tidyged object with an "active_record" attribute set to the xref of the record</p>
+    <p>A character vector of xref(s).</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If you have your own specific use cases to identify records, it's easy to write your own wrapper.
+It's best to name your function <code>find_recordtype_*</code> and end it with <code>_all</code> if it can return multiple xrefs.
+If you provide more than one search pattern, you should also include the mode argument.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

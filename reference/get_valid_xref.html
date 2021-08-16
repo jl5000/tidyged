@@ -47,8 +47,7 @@
 
 
 <meta property="og:title" content="Derive a valid cross-reference identifier — get_valid_xref" />
-<meta property="og:description" content="Get a valid xref provided explicitly or implicitly (through an identifying attribute or
-active record)." />
+<meta property="og:description" content="Validate an xref provided explicitly or implicitly (through the active record)." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -81,7 +80,7 @@ active record)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -126,11 +125,10 @@ active record)." />
     </div>
 
     <div class="ref-description">
-    <p>Get a valid xref provided explicitly or implicitly (through an identifying attribute or
-active record).</p>
+    <p>Validate an xref provided explicitly or implicitly (through the active record).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_valid_xref</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref_or_descriptor</span>, <span class='va'>record_type</span>, <span class='va'>record_type_fn</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_valid_xref</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, <span class='va'>record_type</span>, <span class='va'>record_type_fn</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,8 +138,8 @@ active record).</p>
       <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>xref_or_descriptor</th>
-      <td><p>An xref or descriptor uniquely identifying the record.</p></td>
+      <th>xref</th>
+      <td><p>A record xref.</p></td>
     </tr>
     <tr>
       <th>record_type</th>
@@ -161,10 +159,8 @@ functions.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This helper function is designed to derive and run validation checks on an xref
-provided explicitly or implicitly. An xref is provided implicitly either through the active
-record of the tidyged object, or through a descriptor identifying a unique record.</p>
-<p>The descriptors used for each record are: name (individual, repository, and submitter),
-title (source), file reference (multimedia), excerpt (note).</p>
+provided explicitly or implicitly. An xref is provided implicitly through the active
+record of the tidyged object.</p>
 <p>Once found, the xref is checked to ensure it is of the appropriate type.</p>
 
   </div>

@@ -2,7 +2,6 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  automation: automation.html
   cross_references: cross_references.html
   dates: dates.html
   family_group_records: family_group_records.html
@@ -17,5 +16,5 @@ articles:
   source_records: source_records.html
   summarising: summarising.html
   tidyged_creation: tidyged_creation.html
-last_built: 2021-08-14T02:52Z
+last_built: 2021-08-16T15:10Z
 

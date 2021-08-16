@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>Adding individuals to a tidyged object can be achieved with the <code><a href="../reference/add_indi.html">add_indi()</a></code> function. The sex of the individual can be specified with the <code>sex</code> parameter, which is a single letter: M(ale), F(emale), (Interse)X, U(nknown), N(ot recorded). If no sex is specified, a value of “U” is used.</p>
-<p>As with other records, various types of user-defined references can be defined (<code>user_reference_number</code> and <code>user_reference_type</code>), as well as links to multimedia and notes.</p>
+<p>As with other records, various types of user-defined references can be defined (<code>user_reference_numbers</code>).</p>
 <p>Individuals can be removed with the <code><a href="../reference/remove_indi.html">remove_indi()</a></code> function.</p>
 </div>
 <div id="individual-names" class="section level2">
@@ -154,7 +154,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -230,7 +230,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -337,7 +337,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -470,7 +470,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -630,7 +630,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -785,7 +785,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -899,7 +899,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -1006,7 +1006,86 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
+</tr>
+</tbody>
+</table>
+<p>You can see a summary of all facts associated with an individual with the <code><a href="../reference/fact_summary_indi.html">fact_summary_indi()</a></code> function.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fact_summary_indi.html">fact_summary_indi</a></span><span class="op">(</span><span class="va">dea_rel</span>, <span class="st">"@I1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="8%">
+<col width="10%">
+<col width="7%">
+<col width="10%">
+<col width="4%">
+<col width="8%">
+<col width="13%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="3%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">fact_type</th>
+<th align="left">description</th>
+<th align="left">TYPE</th>
+<th align="left">DATE</th>
+<th align="left">AGNC</th>
+<th align="left">CAUS</th>
+<th align="left">PLAC</th>
+<th align="left">LATI</th>
+<th align="left">LONG</th>
+<th align="left">ADR1</th>
+<th align="left">ADR2</th>
+<th align="left">ADR3</th>
+<th align="left">CITY</th>
+<th align="left">STAE</th>
+<th align="left">CTRY</th>
+<th align="left">AGE</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Death</td>
+<td align="left">Y</td>
+<td align="left">NA</td>
+<td align="left">17 FEB 2006</td>
+<td align="left">NA</td>
+<td align="left">Pneumonia</td>
+<td align="left">London, England</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">68y</td>
+</tr>
+<tr class="even">
+<td align="left">Religion</td>
+<td align="left">Christian</td>
+<td align="left">Catholic</td>
+<td align="left">FROM 1978</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -1016,14 +1095,14 @@
 <a href="#family-links" class="anchor"></a>Family links</h2>
 <p>Typically when constructing a file, you would create all of the individuals in a family first, and then reference them when creating a Family Group record - this takes care all of the appropriate record links for you. However, sometimes you want to retrospectively add an individual to a Family Group record that already exists. In this case you use the <code><a href="../reference/add_indi_links_to_families.html">add_indi_links_to_families()</a></code> function.</p>
 <p>In the example below, we create Joe Bloggs and add him as a husband to a family. We then create Jess Bloggs and retrospectively add her as a wife to Joe.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">retro</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Joe"</span>, surname <span class="op">=</span> <span class="st">"Bloggs"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"Joe"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Joe"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Jess"</span>, surname <span class="op">=</span> <span class="st">"Bloggs"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi_links_to_families.html">add_indi_links_to_families</a></span><span class="op">(</span>spouse <span class="op">=</span> <span class="st">"Joe"</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/add_indi_links_to_families.html">add_indi_links_to_families</a></span><span class="op">(</span>spouse <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Joe"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">retro</span>, <span class="va">record</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"@F1@"</span>, <span class="st">"@I2@"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -1061,7 +1140,7 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 <tr class="odd">
 <td align="right">1</td>
@@ -1126,7 +1205,7 @@
 <td align="left">
 <span class="citation">@I2</span>@</td>
 <td align="left">DATE</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>

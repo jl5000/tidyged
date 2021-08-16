@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -133,10 +133,8 @@
   husband <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   wife <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   children <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  child_linkage_types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"birth"</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>children</span><span class='op'>)</span><span class='op'>)</span>,
   number_of_children <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  user_reference_number <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  user_reference_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  user_reference_numbers <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   family_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   multimedia_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
@@ -150,25 +148,19 @@
     </tr>
     <tr>
       <th>husband</th>
-      <td><p>A character string identifying the husband of this family. This can either
-be an xref or term(s) to match to an individual name.</p></td>
+      <td><p>An xref identifying the husband of this family.</p></td>
     </tr>
     <tr>
       <th>wife</th>
-      <td><p>A character string identifying the wife of this family. This can either
-be an xref or term(s) to match to an individual name.</p></td>
+      <td><p>An xref identifying the wife of this family.</p></td>
     </tr>
     <tr>
       <th>children</th>
-      <td><p>A character vector of other Individual records that are children of this
-family. Children can either be referenced by an xref or term(s)
-to match to an individual name.</p></td>
-    </tr>
-    <tr>
-      <th>child_linkage_types</th>
-      <td><p>Codes used to indicate the child to family relationships. If defined,
-this must be a character vector the same size as children. Values must be one of:
-"birth" (default), "adopted", or "foster".</p></td>
+      <td><p>A character vector of xrefs identifying the children of this family. These are
+assumed to be biological children ("birth"). If non-biological children are to be defined, use
+a named vector to define the relationships using a name of either "adopted" or "foster".
+For example: children = c("@I4@", adopted = "@I7@", adopted = "@I10@") defines a single biological
+child and two adopted children.</p></td>
     </tr>
     <tr>
       <th>number_of_children</th>
@@ -176,14 +168,10 @@ this must be a character vector the same size as children. Values must be one of
 regardless of whether the associated children are represented here.</p></td>
     </tr>
     <tr>
-      <th>user_reference_number</th>
+      <th>user_reference_numbers</th>
       <td><p>A unique user-defined number or text that the submitter
-uses to identify this record. You can supply more than one in a vector.</p></td>
-    </tr>
-    <tr>
-      <th>user_reference_type</th>
-      <td><p>A user-defined definition of the user_reference_number(s). If this
-parameter is used, there must be a reference type for every reference number defined.</p></td>
+uses to identify this record. You can supply more than one in a vector. You can also define a
+user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).</p></td>
     </tr>
     <tr>
       <th>family_notes</th>
@@ -192,8 +180,7 @@ xrefs to existing Note records.</p></td>
     </tr>
     <tr>
       <th>multimedia_links</th>
-      <td><p>A character vector of multimedia file references accompanying this
-Family group record. These could be xrefs to existing Multimedia records.</p></td>
+      <td><p>A character vector of Multimedia record xrefs accompanying this record.</p></td>
     </tr>
     </table>
 
@@ -202,8 +189,8 @@ Family group record. These could be xrefs to existing Multimedia records.</p></t
     <p>An updated tidyged object including the Family group record.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If you need to add further information about this family (e.g. events), use the
-add_family_event_*() functions.</p>
+    <p>If you need to add further information about this family (i.e. events), use the
+<code><a href='add_famg_event.html'>add_famg_event()</a></code> function.</p>
 <p>The function will automatically add links to this family to the respective Individual
 records of the wife, husband, and children.</p>
 

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -105,9 +105,15 @@
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Child 2"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Child 3"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Child 4"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="st">"Parent 1"</span>, <span class="st">"Parent 2"</span>, children <span class="op">=</span> <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="st">"Main Person"</span>, <span class="st">"Spouse 1"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 1"</span>, <span class="st">"Child 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="st">"Main Person"</span>, <span class="st">"Spouse 2"</span>, children <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Child 3"</span>, <span class="st">"Child 4"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Parent 1"</span><span class="op">)</span>, 
+           <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Parent 2"</span><span class="op">)</span>, 
+           children <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Main"</span><span class="op">)</span>, 
+           <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Spouse 1"</span><span class="op">)</span>, 
+           children <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name_all</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Child 1|Child 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Main"</span><span class="op">)</span>,  
+           <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Spouse 2"</span><span class="op">)</span>,
+           children <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name_all</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Child 3|Child 4"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="va">three_gen</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -130,7 +136,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -140,7 +146,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -150,7 +156,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -160,24 +166,24 @@
 <a href="#immediate-relations" class="anchor"></a>Immediate relations</h2>
 <p>The examples below illustrate the functions.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_spouses.html">get_spouses</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_spouses.html">get_spouses</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I4@, Spouse 1" "Individual @I5@, Spouse 2"</span>
-<span class="fu"><a href="../reference/get_parents.html">get_parents</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_parents.html">get_parents</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I1@, Parent 1" "Individual @I2@, Parent 2"</span>
-<span class="fu"><a href="../reference/get_children.html">get_children</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_children.html">get_children</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I6@, Child 1, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [2] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [3] "Individual @I8@, Child 3, child of Main Person and Spouse 2"</span>
 <span class="co">#&gt; [4] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span>
-<span class="fu"><a href="../reference/get_siblings.html">get_siblings</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Child 1"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_siblings.html">get_siblings</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Child 1"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
-<span class="fu"><a href="../reference/get_siblings.html">get_siblings</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Child 1"</span>, include_half_siblings <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_siblings.html">get_siblings</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Child 1"</span><span class="op">)</span>, include_half_siblings <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [2] "Individual @I8@, Child 3, child of Main Person and Spouse 2"</span>
 <span class="co">#&gt; [3] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span>
-<span class="fu"><a href="../reference/get_families_as_child.html">get_families_as_child</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_families_as_child.html">get_families_as_child</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F1@, headed by Parent 1 and Parent 2, and children: Main Person"</span>
-<span class="fu"><a href="../reference/get_families_as_spouse.html">get_families_as_spouse</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_families_as_spouse.html">get_families_as_spouse</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F2@, headed by Main Person and Spouse 1, and children: Child 1, Child 2"</span>
 <span class="co">#&gt; [2] "Family @F3@, headed by Main Person and Spouse 2, and children: Child 3, Child 4"</span></code></pre></div>
 </div>
@@ -190,12 +196,12 @@
 <a href="#descendants" class="anchor"></a>Descendants</h3>
 <p>We use the <code><a href="../reference/get_descendants.html">get_descendants()</a></code> function below to identify the descendants of Main Person. By default it will exclude the individual, all spouses, and all associated family groups:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main Person"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@I6@" "@I7@" "@I8@" "@I9@"</span></code></pre></div>
 <p>We can use the <code><a href="../reference/describe_records.html">describe_records()</a></code> function to see descriptions:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I6@, Child 1, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [2] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
@@ -204,7 +210,7 @@
 <p>Setting <code>include_spouses = TRUE</code> will include all spouses and their descendants, and all descendants’ spouses:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Main"</span><span class="op">)</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I4@, Spouse 1"                                  </span>
 <span class="co">#&gt; [2] "Individual @I5@, Spouse 2"                                  </span>
@@ -215,7 +221,7 @@
 <p>Setting <code>include_individual = TRUE</code> will include the individual:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Main"</span><span class="op">)</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I3@, Main Person, child of Parent 1 and Parent 2"</span>
 <span class="co">#&gt; [2] "Individual @I6@, Child 1, child of Main Person and Spouse 1" </span>
@@ -225,7 +231,7 @@
 <p>Setting <code>include_families = TRUE</code> will include the individual’s families where they are a spouse, and all descendants’ families:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Main"</span><span class="op">)</span>, include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F2@, headed by Main Person and Spouse 1, and children: Child 1, Child 2"</span>
 <span class="co">#&gt; [2] "Family @F3@, headed by Main Person and Spouse 2, and children: Child 3, Child 4"</span>
@@ -236,7 +242,7 @@
 <p>If we want to remove the individual and their spouses, all descendants and their spouses, and all families, we can remove them with <code><a href="../reference/remove_records.html">remove_records()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">three_gen</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="st">"Main Person"</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
+  <span class="fu"><a href="../reference/get_descendants.html">get_descendants</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Main"</span><span class="op">)</span>, include_individual <span class="op">=</span> <span class="cn">TRUE</span>, include_spouses <span class="op">=</span> <span class="cn">TRUE</span>,
                        include_families <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/remove_records.html">remove_records</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -268,7 +274,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr></tbody>
 </table>
 <p>This combination can result in the removal of a vast amount of data. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.</p>

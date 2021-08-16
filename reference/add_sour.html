@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -139,8 +139,7 @@
   short_title <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   publication_detail <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   source_text <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  user_reference_number <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  user_reference_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  user_reference_numbers <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   data_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   sour_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   multimedia_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>
@@ -200,14 +199,10 @@ This indicates notes or text that are actually contained in the source document,
 not the submitter's opinion about the source.</p></td>
     </tr>
     <tr>
-      <th>user_reference_number</th>
+      <th>user_reference_numbers</th>
       <td><p>A unique user-defined number or text that the submitter
-uses to identify this record. You can supply more than one in a vector.</p></td>
-    </tr>
-    <tr>
-      <th>user_reference_type</th>
-      <td><p>A user-defined definition of the user_reference_number(s). If this
-parameter is used, there must be a reference type for every reference number defined.</p></td>
+uses to identify this record. You can supply more than one in a vector. You can also define a
+user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).</p></td>
     </tr>
     <tr>
       <th>data_notes</th>
@@ -221,8 +216,8 @@ These could be xrefs to existing Note records.</p></td>
     </tr>
     <tr>
       <th>multimedia_links</th>
-      <td><p>A character vector of multimedia file references accompanying this
-source. These could be xrefs to existing Multimedia records.</p></td>
+      <td><p>A character vector of Multimedia record xrefs accompanying this
+Source record.</p></td>
     </tr>
     </table>
 

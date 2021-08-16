@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find an xref of a record given a set of terms — find_xref • tidyged</title>
+<title>Find an xref of a record given a set of search terms — find_xref • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Find an xref of a record given a set of terms — find_xref" />
-<meta property="og:description" content="This is a helper function to identify the xref of a record given a piece of information such
-as a name or reference number." />
+<meta property="og:title" content="Find an xref of a record given a set of search terms — find_xref" />
+<meta property="og:description" content="Find an xref of a record given a set of search terms" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -81,7 +80,7 @@ as a name or reference number." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -120,17 +119,22 @@ as a name or reference number." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Find an xref of a record given a set of terms</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/activate.R'><code>R/activate.R</code></a></small>
+    <h1>Find an xref of a record given a set of search terms</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/find_xref.R'><code>R/find_xref.R</code></a></small>
     <div class="hidden name"><code>find_xref.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This is a helper function to identify the xref of a record given a piece of information such
-as a name or reference number.</p>
+    <p>Find an xref of a record given a set of search terms</p>
     </div>
 
-    <pre class="usage"><span class='fu'>find_xref</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>record_xrefs</span>, <span class='va'>tags</span>, <span class='va'>search_pattern</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>find_xref</span><span class='op'>(</span>
+  <span class='va'>gedcom</span>,
+  <span class='va'>search_patterns</span>,
+  mode <span class='op'>=</span> <span class='st'>"strict"</span>,
+  multiple <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ignore_case <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,25 +144,40 @@ as a name or reference number.</p>
       <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>record_xrefs</th>
-      <td><p>A list of potential xrefs to consider.</p></td>
+      <th>search_patterns</th>
+      <td><p>A named vector of terms to search for (see Details).</p></td>
     </tr>
     <tr>
-      <th>tags</th>
-      <td><p>The tags to look at when comparing values.</p></td>
+      <th>mode</th>
+      <td><p>Whether to only return an xref if all patterns are matched ("strict"). A value of
+"best" will return the xref with the most matches. If either of these still result in more than
+one xref it will return an error unless <code>multiple</code> is TRUE.</p></td>
     </tr>
     <tr>
-      <th>search_pattern</th>
-      <td><p>A set of terms to search for (separated by spaces).</p></td>
+      <th>multiple</th>
+      <td><p>If more than one xref is found (according to <code>mode</code>), whether to return all xrefs
+or throw an error.</p></td>
+    </tr>
+    <tr>
+      <th>ignore_case</th>
+      <td><p>Should case differences be ignored in the match?</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A single xref for the given record.</p>
+    <p>A vector of one or more xrefs.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Sometimes an xref may be provided directly, in which case it's returned straight back.</p>
+    <p>This is a helper function to identify the xref of a record given information such
+as a name or reference number. You provide a named <code>search_patterns</code> vector of namespaced tag-pattern pairs,
+such as:</p>
+<p>c(INDI.NAME = "Homer", INDI.SEX  = "M", INDI.BIRT.DATE = "JAN 1974")</p>
+<p>If you're not sure what namespace to use, use the <code>mutate_tag_namespace</code> function.</p>
+<p>The search patterns will be treated as regular expressions, so they will match a value if it contains
+the pattern provided. You can anchor your search pattern if you want an exact match, e.g. "^JAN 1974$".
+If you're not familiar with regular expressions, you may need to escape certain characters such as
+brackets and a full-stop/period (i.e. <code>\\.</code>).</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

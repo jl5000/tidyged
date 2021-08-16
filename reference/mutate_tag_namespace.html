@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Flag a record as being active — set_active_record • tidyged</title>
+<title>Add a tag namespace column to a tidyged object — mutate_tag_namespace • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Flag a record as being active — set_active_record" />
-<meta property="og:description" content="This allows an easy mechanism to edit particular records without specifying them each time." />
+<meta property="og:title" content="Add a tag namespace column to a tidyged object — mutate_tag_namespace" />
+<meta property="og:description" content="Add a tag namespace column to a tidyged object" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,16 +119,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Flag a record as being active</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/activate.R'><code>R/activate.R</code></a></small>
-    <div class="hidden name"><code>set_active_record.Rd</code></div>
+    <h1>Add a tag namespace column to a tidyged object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>mutate_tag_namespace.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This allows an easy mechanism to edit particular records without specifying them each time.</p>
+    <p>Add a tag namespace column to a tidyged object</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_active_record</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>mutate_tag_namespace</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,15 +137,16 @@
       <th>gedcom</th>
       <td><p>A tidyged object.</p></td>
     </tr>
-    <tr>
-      <th>xref</th>
-      <td><p>The xref of the record to activate.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The same tidyged object with an "active_record" attribute set to the xref of the record</p>
+    <p>A tidyged object with an additional 'tag_ns' column containing the full namespace of
+the tag.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function is useful if you want to find the namespace of a particular value
+for the <code>find_xref</code> function.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
 <div id="cross-references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cross-references" class="anchor"></a>Cross references</h2>
-<p>GEDCOM records are given unique identifiers known as xrefs (cross-references) to allow other records to link to them. These are alphanumeric strings surrounded by ‘@’ symbols. The <code>tidyged</code> package creates these xrefs automatically:</p>
+<p>All GEDCOM records are given unique identifiers known as xrefs (cross-references) to allow other records to link to them. These are alphanumeric strings surrounded by ‘@’ symbols. The <code>tidyged</code> package creates these xrefs automatically:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
 
@@ -157,7 +157,7 @@
 <div id="activation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#activation" class="anchor"></a>Activation</h2>
-<p>In the above example a series of Individual records are created. After each record is created, the name(s) of the individual are defined without actually explicitly referencing the Individual record. This is because they are acting on the <em>active record</em>. A record becomes active when it is created or when it is explicitly activated.</p>
+<p>In the above example a series of records are created (which will be explained in more detail in the proceeding articles). After each record is created, the name(s) of the individual are defined without actually explicitly referencing the Individual record. This is because they are acting on the <em>active record</em>. A record becomes active when it is created or when it is explicitly activated.</p>
 <p>We can query the active record using the <code><a href="../reference/get_active_record.html">get_active_record()</a></code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span>
@@ -169,36 +169,43 @@
   <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="st">"@I2@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@I2@"</span></code></pre></div>
-<p>It can be tedious to have to manually look up these xrefs, and so <code>tidyged</code> allows the user to instead enter a term (or terms separated by spaced) uniquely identifying the record:</p>
+</div>
+<div id="finding-cross-reference-identifiers" class="section level2">
+<h2 class="hasAnchor">
+<a href="#finding-cross-reference-identifiers" class="anchor"></a>Finding cross reference identifiers</h2>
+<p>There are many other functions in the <code>gedcompendium</code> that take record xrefs as input parameters and it can be tedious to have to manually look these up. The <code>tidyged</code> package offers a number of helper functions to locate specific xrefs using pattern matching:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="st">"Marge"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] "@I2@"</span></code></pre></div>
-<p>Note that the full name does not need to be given, since the term is partially matched. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record).</p>
-<p>If no match is found, it will result in an error:</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"Bart"</span><span class="op">)</span>
+<span class="co">#&gt; [1] "@I4@"</span>
+<span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name_all</a></span><span class="op">(</span><span class="va">simpsons</span>, <span class="st">"Simpson"</span><span class="op">)</span>
+<span class="co">#&gt; [1] "@I1@" "@I2@" "@I3@" "@I4@"</span></code></pre></div>
+<p>These helper functions begin with <code>find_*</code> and act as wrappers to the more general function <code><a href="../reference/find_xref.html">find_xref()</a></code>. It’s straightforward to write your own wrapper if you’re familiar with the tags used in the GEDCOM specification.</p>
+<p>In the activation example, we would activate Marge’s record with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="st">"Simpon"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Marge"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Error in find_xref(gedcom, xrefs_indi(gedcom), c("NAME", "ROMN", "FONE"), : No records found for the given terms (Simpon). Try supplying the xref explicitly.</span></code></pre></div>
-<p>If more than one match is found, it will ask the user which match to use.</p>
-<p>This functionality can be found when referencing all records, except the Family Group record (where an xref must be provided). The following attributes are used to uniquely identify these records:</p>
-<ul>
-<li>Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);</li>
-<li>Multimedia: File reference (FILE);</li>
-<li>Note: User text (NOTE);</li>
-<li>Source: Title (TITL);</li>
-<li>Repository: Name (NAME).</li>
-</ul>
+<span class="co">#&gt; [1] "@I2@"</span></code></pre></div>
+<p>Note that the full name does not need to be given, since the term is partially matched. As long as it is detected in the name of the individual it will be found.</p>
+<p>In this use case, if no match or more than one match is found, it will result in an error:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Simpon"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; Error in find_xref(gedcom, search_patterns = c(INDI.NAME = pattern), multiple = FALSE, : No records found that match all patterns.</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Simpson"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; Error in find_xref(gedcom, search_patterns = c(INDI.NAME = pattern), multiple = FALSE, : No unique records found that match all patterns. Try being more specific.</span></code></pre></div>
 </div>
 <div id="removing-records" class="section level2">
 <h2 class="hasAnchor">
 <a href="#removing-records" class="anchor"></a>Removing records</h2>
 <p>When removing entire records, you don’t have to necessarily rely on activating them first. The same referencing techniques above can be used to remove records immediately:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/remove_indi.html">remove_indi</a></span><span class="op">(</span><span class="st">"Homer"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/remove_indi.html">remove_indi</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Homer"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/df_indi.html">df_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -244,7 +251,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">0</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -259,7 +266,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">0</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -274,7 +281,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="right">0</td>
-<td align="left">14 AUG 2021</td>
+<td align="left">16 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -286,11 +293,11 @@
 <p>A couple of other mechanisms exist for providing unique identifiers to records:</p>
 <ul>
 <li>An automated record identifier (RIN) can be used by a system to automatically assign a unique identifier. Since the most obvious way of generating this would be to base it on the xref, it would introduce unnecessary duplication and file bloat and so the <code>tidyged</code> package does not use this, nor expose it to a user;</li>
-<li>A user-defined reference number (REFN) and type can be defined by a user to uniquely identify a record. These are entirely optional, do not necessarily have to be unique, and a single record could have several defined. They are however a possible way of creating an enduring identifier between systems.</li>
+<li>A user-defined reference number (REFN) and type can be defined by a user to uniquely identify a record. These are entirely optional, do not necessarily have to be unique, and a single record could have several defined. They are however a possible way of creating an enduring identifier between systems. Helper functions exist to locate xrefs using this number (<code>find_*_refn()</code>).</li>
 </ul>
 <p>For these reasons, neither of these mechanisms are considered to be a better alternative way of selecting records.</p>
 <p style="text-align: right;">
-<a href="https://jl5000.github.io/tidyged/articles/dates.html">Next article: Date types &gt;</a>
+<a href="https://jl5000.github.io/tidyged/articles/individual_records.html">Next article: Individual records &gt;</a>
 </p>
 </div>
   </div>

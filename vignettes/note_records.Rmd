@@ -27,4 +27,5 @@ gedcom() %>%
 As with other records, various types of user-defined references can be defined (`user_reference_numbers`).
 
 
-<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/cross_references.html">Next article: Referencing records ></a></p>
+
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/dates.html">Next article: Date types ></a></p>

@@ -2,7 +2,7 @@
 
 # File R/family_events.R: @tests
 
-test_that("Function add_famg_event() @ L58", {
+test_that("Function add_famg_event() @ L59", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_indi(qn = "Joe Bloggs", sex = "M") %>% 
    add_indi(qn = "Jess Bloggs", sex = "F") %>% 

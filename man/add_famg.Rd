@@ -9,7 +9,6 @@ add_famg(
   husband = character(),
   wife = character(),
   children = character(),
-  child_linkage_types = rep("birth", length(children)),
   number_of_children = character(),
   user_reference_numbers = character(),
   family_notes = character(),
@@ -23,11 +22,11 @@ add_famg(
 
 \item{wife}{An xref identifying the wife of this family.}
 
-\item{children}{A character vector of xrefs identifying the children of this family.}
-
-\item{child_linkage_types}{Codes used to indicate the child to family relationships. If defined,
-this must be a character vector the same size as children. Values must be one of:
-"birth" (default), "adopted", or "foster".}
+\item{children}{A character vector of xrefs identifying the children of this family. These are
+assumed to be biological children ("birth"). If non-biological children are to be defined, use
+a named vector to define the relationships using a name of either "adopted" or "foster".
+For example: children = c("@I4@", adopted = "@I7@", adopted = "@I10@") defines a single biological
+child and two adopted children.}
 
 \item{number_of_children}{The reported number of children known to belong to this family,
 regardless of whether the associated children are represented here.}
@@ -48,7 +47,7 @@ An updated tidyged object including the Family group record.
 Add a Family Group record to a tidyged object
 }
 \details{
-If you need to add further information about this family (e.g. events), use the
+If you need to add further information about this family (i.e. events), use the
 \code{add_famg_event()} function.
 
 The function will automatically add links to this family to the respective Individual

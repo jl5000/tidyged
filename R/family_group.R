@@ -2,7 +2,7 @@
 
 #' Add a Family Group record to a tidyged object
 #' 
-#' @details If you need to add further information about this family (e.g. events), use the 
+#' @details If you need to add further information about this family (i.e. events), use the 
 #' `add_famg_event()` function.
 #' 
 #' The function will automatically add links to this family to the respective Individual 
@@ -11,10 +11,11 @@
 #' @param gedcom A tidyged object.
 #' @param husband An xref identifying the husband of this family.
 #' @param wife An xref identifying the wife of this family.
-#' @param children A character vector of xrefs identifying the children of this family.
-#' @param child_linkage_types Codes used to indicate the child to family relationships. If defined,
-#' this must be a character vector the same size as children. Values must be one of:
-#' "birth" (default), "adopted", or "foster".
+#' @param children A character vector of xrefs identifying the children of this family. These are
+#' assumed to be biological children ("birth"). If non-biological children are to be defined, use
+#' a named vector to define the relationships using a name of either "adopted" or "foster".
+#' For example: children = c("@I4@", adopted = "@I7@", adopted = "@I10@") defines a single biological
+#' child and two adopted children.
 #' @param number_of_children The reported number of children known to belong to this family, 
 #' regardless of whether the associated children are represented here.
 #' @param user_reference_numbers A unique user-defined number or text that the submitter 
@@ -31,7 +32,6 @@ add_famg <- function(gedcom,
                      husband = character(),
                      wife = character(),
                      children = character(),
-                     child_linkage_types = rep("birth", length(children)),
                      number_of_children = character(),
                      user_reference_numbers = character(),
                      family_notes = character(),
@@ -39,6 +39,14 @@ add_famg <- function(gedcom,
   
   xref <- tidyged.internals::assign_xref_famg(gedcom)
 
+  if(is.null(names(children))) {
+    child_linkage_types <- rep("birth", length(children))
+  } else {
+    child_linkage_types <- names(children)
+  }
+  child_linkage_types[child_linkage_types == ""] <- "birth"
+  children <- as.character(children)
+    
   media_links <- create_multimedia_links(gedcom, multimedia_links)
   fam_notes <- create_note_structures(gedcom, family_notes)
   

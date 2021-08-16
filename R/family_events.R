@@ -2,6 +2,7 @@
 
 #' Add a family event to a Family Group record
 #'
+#' @details
 #' The three-letter codes used for the type parameter are:
 #' 
 #' ann(ulment), cen(sus), div(orce), dif (divorce filed), eng(agement), mab (marriage banns),

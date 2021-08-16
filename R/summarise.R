@@ -319,7 +319,8 @@ fact_summary <- function(gedcom, xref, indi) {
   fact_rows <- split(rows_vect, cumsum(gedcom_ns$tag[rows_vect] %in% fact_tags))
   
   # Tags we want for the summary
-  details_tags <- c("TYPE", "DATE", "PLAC", paste0("ADR", 1:3), "CITY", "STAE", "CTRY")
+  details_tags <- c("TYPE", "DATE", "AGNC", "CAUS", "PLAC", "LATI", "LONG", 
+                    paste0("ADR", 1:3), "CITY", "STAE", "CTRY")
   if(indi) {
     details_tags <- c(details_tags, "AGE")
   } else {

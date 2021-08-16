@@ -7,9 +7,7 @@
 place(
   name = character(),
   phonetic_var = character(),
-  phonetisation_method = character(),
   romanised_var = character(),
-  romanisation_method = character(),
   latitude = character(),
   longitude = character(),
   notes = character()
@@ -19,17 +17,13 @@ place(
 \item{name}{The jurisdictional name of the place.
 Jurisdictions are separated by commas, for example, "Cove, Cache, Utah, USA."}
 
-\item{phonetic_var}{A character vector of phonetic variations of the place name.}
+\item{phonetic_var}{A named character vector of phonetic variations of the place name. Element names
+must give the phonetisation method used in transforming the text to the corresponding phonetic variation.
+i.e. c(method1 = "var1", method2 = "var2")}
 
-\item{phonetisation_method}{A character vector giving the method used in transforming the text to
-the corresponding phonetic variation. If this argument is used, it must be the same size
-as the phonetic_var argument.}
-
-\item{romanised_var}{A character vector of romanised variations of the place name.}
-
-\item{romanisation_method}{A character vector giving the method used in transforming the text to
-the corresponding romanised variation. If this argument is used, it must be the same size
-as the romanised_var argument.}
+\item{romanised_var}{A named character vector of romanised variations of the place name. Element names
+must give the romanisation method used in transforming the text to the corresponding romanised variation.
+i.e. c(method1 = "var1", method2 = "var2")}
 
 \item{latitude}{The value specifying the latitudinal coordinate of the place.
 The latitude coordinate is the direction North or South from the equator in degrees and

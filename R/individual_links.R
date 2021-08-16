@@ -133,9 +133,9 @@ add_indi_family_link_as_child <- function(gedcom,
 #' "birth" (default), "foster", or "adopted".
 #' @param linkage_notes A character vector of notes accompanying this linkage.
 #' These could be xrefs to existing Note records.
-#' @param spouse A character vector (of length 1) of the spouse so that this person can be linked to 
+#' @param spouse The xref of the spouse so that this person can be linked to 
 #' a Family Group record as a spouse.
-#' @param children A character vector of children so that this person can be linked to a Family Group
+#' @param children A character vector of children xrefs so that this person can be linked to a Family Group
 #' record as a spouse.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
 #' @param update_date_changed Whether to add/update the change date for the record.

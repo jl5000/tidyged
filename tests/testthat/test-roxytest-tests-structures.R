@@ -2,13 +2,13 @@
 
 # File R/structures.R: @tests
 
-test_that("Function place() @ L30", {
+test_that("Function place() @ L28", {
   expect_equal(place(), tibble::tibble())
   expect_snapshot_value(place("A place"), "json2")
 })
 
 
-test_that("Function address() @ L78", {
+test_that("Function address() @ L90", {
   expect_equal(address(), tibble::tibble())
   expect_snapshot_value(address("A place"), "json2")
 })

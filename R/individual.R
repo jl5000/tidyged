@@ -18,7 +18,7 @@
 #' record.
 #' @param qn A shortcut to quickly define a name for this individual. This is a shortcut for
 #' the add_indi_names() function (which you should really use instead), but this is useful
-#' for quick demonstrations.
+#' for quick demonstrations or tests.
 #'
 #' @return An updated tidyged object including the Individual record.
 #' @export

@@ -62,33 +62,26 @@ gedcom <- function(submitter_details = subm(),
 #' This submitter record identifies the individual or organization that contributed 
 #' information contained in the GEDCOM file.
 #' 
+#' This function deviates from the specification slightly by omitting multimedia links.
+#' The logic for this is that if the file is just being created, then there will be
+#' no multimedia records to link to.
+#' 
 #' @param name The name of the submitter.
 #' @param subm_address An address() object containing the submitter address.
 #' @param subm_notes A character vector of notes accompanying this Submitter record.
-#' These could be xrefs to existing Note records.
-#' @param multimedia_links A character vector of Multimedia record xrefs accompanying this 
-#' record.
 #'
 #' @return A Submitter record to be incorporated into a new tidyged object.
 #' @export
 subm <- function(name = unname(Sys.info()["user"]),
                  subm_address = address(),
-                 subm_notes = character(),
-                 multimedia_links = character()) {
+                 subm_notes = character()) {
   
   sub_notes <- purrr::map(subm_notes, tidyged.internals::NOTE_STRUCTURE)
-  
-  multimedia_links <- purrr::map_chr(multimedia_links, get_valid_xref,
-                                     record_type = .pkgenv$record_string_obje, 
-                                     record_typ_fn = is_media)
-  
-  media_links <- purrr::map(multimedia_links, tidyged.internals::MULTIMEDIA_LINK)
   
   tidyged.internals::SUBMITTER_RECORD(xref_subm = tidyged.internals::assign_xref_subm(ref = 1),
                                          submitter_name = name,
                                          address = subm_address,
-                                         notes = sub_notes,
-                                         multimedia_links = media_links)
+                                         notes = sub_notes)
   
 }
 

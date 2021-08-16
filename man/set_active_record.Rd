@@ -7,9 +7,9 @@
 set_active_record(gedcom, xref)
 }
 \arguments{
-\item{gedcom}{A tidyged object}
+\item{gedcom}{A tidyged object.}
 
-\item{xref}{The xref of the record to activate}
+\item{xref}{The xref of the record to activate.}
 }
 \value{
 The same tidyged object with an "active_record" attribute set to the xref of the record

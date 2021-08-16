@@ -35,7 +35,9 @@ simpsons <- gedcom(subm("Me"), gedcom_description = "Some of the Simpsons",
   add_indi(qn = "Bart Simpson", sex = "M") %>% 
   add_indi_fact("bir", date = date_calendar(1982, 3, 16),
                 fact_place = place(name = "Springfield, USA")) %>% 
-  add_famg(husband = "Homer", wife = "Marge", children = c("Bart", "Lisa"), 
+  add_famg(husband = find_indi_name(., "Homer"), 
+           wife = find_indi_name(., "Marge"), 
+           children = find_indi_name_all(., "Bart|Lisa"), 
            number_of_children = 3) %>% 
   add_note("This is a note") %>% 
   add_note("This is another note") %>% 
@@ -97,9 +99,9 @@ is_repo(simpsons, "@N1@")
 The `describe_*()` family of functions give a description of certain records:
 
 ```{r}
-describe_indi(simpsons, "Bart")
-describe_indi(simpsons, "Lisa", name_only = TRUE)
-describe_indi(simpsons, "Homer", short_desc = TRUE)
+describe_indi(simpsons, find_indi_name(simpsons, "Bart"))
+describe_indi(simpsons, find_indi_name(simpsons, "Lisa"), name_only = TRUE)
+describe_indi(simpsons, find_indi_name(simpsons, "Homer"), short_desc = TRUE)
 describe_famg(simpsons, "@F1@")
 ```
 
@@ -115,4 +117,4 @@ As with the record-specific functions, setting `short_desc = TRUE` gives a short
 describe_records(simpsons, simpsons$record, short_desc = TRUE)
 ```
 
-<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/automation.html">Next article: Automation ></a></p>
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/relations.html">Next article: Identifying relations ></a></p>

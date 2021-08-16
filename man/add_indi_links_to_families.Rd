@@ -27,10 +27,10 @@ record as a child.}
 \item{linkage_notes}{A character vector of notes accompanying this linkage.
 These could be xrefs to existing Note records.}
 
-\item{spouse}{A character vector (of length 1) of the spouse so that this person can be linked to
+\item{spouse}{The xref of the spouse so that this person can be linked to
 a Family Group record as a spouse.}
 
-\item{children}{A character vector of children so that this person can be linked to a Family Group
+\item{children}{A character vector of children xrefs so that this person can be linked to a Family Group
 record as a spouse.}
 
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}

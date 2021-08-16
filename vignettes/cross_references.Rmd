@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Cross references
 
-GEDCOM records are given unique identifiers known as xrefs (cross-references) to allow other records to link to them. These are alphanumeric strings surrounded by '@' symbols. The `tidyged` package creates these xrefs automatically:
+All GEDCOM records are given unique identifiers known as xrefs (cross-references) to allow other records to link to them. These are alphanumeric strings surrounded by '@' symbols. The `tidyged` package creates these xrefs automatically:
 
 ```{r}
 library(tidyged)
@@ -40,7 +40,7 @@ Note the unique xrefs in the record column.
 
 ## Activation
 
-In the above example a series of Individual records are created. After each record is created, the name(s) of the individual are defined without actually explicitly referencing the Individual record. This is because they are acting on the *active record*. A record becomes active when it is created or when it is explicitly activated.
+In the above example a series of records are created (which will be explained in more detail in the proceeding articles). After each record is created, the name(s) of the individual are defined without actually explicitly referencing the Individual record. This is because they are acting on the *active record*. A record becomes active when it is created or when it is explicitly activated.
 
 We can query the active record using the `get_active_record()` function:
 
@@ -58,33 +58,40 @@ simpsons %>%
   get_active_record()
 ```
 
-It can be tedious to have to manually look up these xrefs, and so `tidyged` allows the user to instead enter a term (or terms separated by spaced) uniquely identifying the record:
+## Finding cross reference identifiers
+
+There are many other functions in the `gedcompendium` that take record xrefs as input parameters and it can be tedious to have to manually look these up. The `tidyged` package offers a number of helper functions to locate specific xrefs using pattern matching:
+
+```{r}
+find_indi_name(simpsons, "Bart")
+find_indi_name_all(simpsons, "Simpson")
+```
+
+These helper functions begin with `find_*` and act as wrappers to the more general function `find_xref()`. It's straightforward to write your own wrapper if you're familiar with the tags used in the GEDCOM specification.
+
+In the activation example, we would activate Marge's record with:
 
 ```{r}
 simpsons %>% 
-  activate_indi("Marge") %>% 
+  activate_indi(find_indi_name(., "Marge")) %>% 
   get_active_record()
 ```
 
-Note that the full name does not need to be given, since the term is partially matched. As long as it is detected in the name of the individual it will be found (romanised and phonetic variants of the name are also searched, if they are provided in the record).
+Note that the full name does not need to be given, since the term is partially matched. As long as it is detected in the name of the individual it will be found.
 
-If no match is found, it will result in an error:
+In this use case, if no match or more than one match is found, it will result in an error:
 
 ```{r, error = TRUE}
 simpsons %>% 
-  activate_indi("Simpon") %>% 
+  activate_indi(find_indi_name(., "Simpon")) %>% 
   get_active_record()
 ```
 
-If more than one match is found, it will ask the user which match to use.
-
-This functionality can be found when referencing all records, except the Family Group record (where an xref must be provided). The following attributes are used to uniquely identify these records:
-
-* Individuals: Full name (NAME tag), phonetic variation (FONE), romanised variation (ROMN);
-* Multimedia: File reference (FILE);
-* Note: User text (NOTE);
-* Source: Title (TITL);
-* Repository: Name (NAME).
+```{r, error = TRUE}
+simpsons %>% 
+  activate_indi(find_indi_name(., "Simpson")) %>% 
+  get_active_record()
+```
 
 ## Removing records
 
@@ -92,7 +99,7 @@ When removing entire records, you don't have to necessarily rely on activating t
 
 ```{r}
 simpsons %>% 
-  remove_indi("Homer") %>% 
+  remove_indi(find_indi_name(., "Homer")) %>% 
   df_indi() %>% 
   knitr::kable()
 ```
@@ -104,8 +111,8 @@ Record identifiers have been a topic of much discussion in the GEDCOM user commu
 A couple of other mechanisms exist for providing unique identifiers to records:
 
 * An automated record identifier (RIN) can be used by a system to automatically assign a unique identifier. Since the most obvious way of generating this would be to base it on the xref, it would introduce unnecessary duplication and file bloat and so the `tidyged` package does not use this, nor expose it to a user;
-* A user-defined reference number (REFN) and type can be defined by a user to uniquely identify a record. These are entirely optional, do not necessarily have to be unique, and a single record could have several defined. They are however a possible way of creating an enduring identifier between systems.
+* A user-defined reference number (REFN) and type can be defined by a user to uniquely identify a record. These are entirely optional, do not necessarily have to be unique, and a single record could have several defined. They are however a possible way of creating an enduring identifier between systems. Helper functions exist to locate xrefs using this number (`find_*_refn()`).
 
 For these reasons, neither of these mechanisms are considered to be a better alternative way of selecting records.
 
-<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/dates.html">Next article: Date types ></a></p>
+<p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/individual_records.html">Next article: Individual records ></a></p>

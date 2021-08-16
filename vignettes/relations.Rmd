@@ -33,9 +33,15 @@ three_gen <- gedcom(subm("Me")) %>%
   add_indi(qn = "Child 2") %>% 
   add_indi(qn = "Child 3") %>% 
   add_indi(qn = "Child 4") %>% 
-  add_famg("Parent 1", "Parent 2", children = "Main Person") %>% 
-  add_famg("Main Person", "Spouse 1", children = c("Child 1", "Child 2")) %>%
-  add_famg("Main Person", "Spouse 2", children = c("Child 3", "Child 4"))
+  add_famg(find_indi_name(., "Parent 1"), 
+           find_indi_name(., "Parent 2"), 
+           children = find_indi_name(., "Main")) %>% 
+  add_famg(find_indi_name(., "Main"), 
+           find_indi_name(., "Spouse 1"), 
+           children = find_indi_name_all(., "Child 1|Child 2")) %>%
+  add_famg(find_indi_name(., "Main"),  
+           find_indi_name(., "Spouse 2"),
+           children = find_indi_name_all(., "Child 3|Child 4"))
 
 df_famg(three_gen) %>% 
   knitr::kable()
@@ -46,13 +52,13 @@ df_famg(three_gen) %>%
 The examples below illustrate the functions.
 
 ```{r}
-get_spouses(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
-get_parents(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
-get_children(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
-get_siblings(three_gen, "Child 1") %>% describe_records(gedcom = three_gen)
-get_siblings(three_gen, "Child 1", include_half_siblings = TRUE) %>% describe_records(gedcom = three_gen)
-get_families_as_child(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
-get_families_as_spouse(three_gen, "Main Person") %>% describe_records(gedcom = three_gen)
+get_spouses(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
+get_parents(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
+get_children(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
+get_siblings(three_gen, find_indi_name(three_gen, "Child 1")) %>% describe_records(gedcom = three_gen)
+get_siblings(three_gen, find_indi_name(three_gen, "Child 1"), include_half_siblings = TRUE) %>% describe_records(gedcom = three_gen)
+get_families_as_child(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
+get_families_as_spouse(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
 ```
 
 ## Branches
@@ -64,14 +70,14 @@ One of the more sophisticated features of `tidyged` is the ability to manipulate
 We use the `get_descendants()` function below to identify the descendants of Main Person. By default it will exclude the individual, all spouses, and all associated family groups:
 
 ```{r}
-get_descendants(three_gen, "Main Person")
+get_descendants(three_gen, find_indi_name(three_gen, "Main"))
 ```
 
 We can use the `describe_records()` function to see descriptions:
 
 ```{r}
 three_gen %>% 
-  get_descendants("Main Person") %>% 
+  get_descendants(find_indi_name(., "Main")) %>% 
   describe_records(three_gen, .)
 ```
 
@@ -79,7 +85,7 @@ Setting `include_spouses = TRUE` will include all spouses and their descendants,
 
 ```{r}
 three_gen %>% 
-  get_descendants("Main Person", include_spouses = TRUE) %>% 
+  get_descendants(find_indi_name(., "Main"), include_spouses = TRUE) %>% 
   describe_records(three_gen, .)
 ```
 
@@ -87,7 +93,7 @@ Setting `include_individual = TRUE` will include the individual:
 
 ```{r}
 three_gen %>% 
-  get_descendants("Main Person", include_individual = TRUE) %>% 
+  get_descendants(find_indi_name(., "Main"), include_individual = TRUE) %>% 
   describe_records(three_gen, .)
 ```
 
@@ -95,7 +101,7 @@ Setting `include_families = TRUE` will include the individual's families where t
 
 ```{r}
 three_gen %>% 
-  get_descendants("Main Person", include_families = TRUE) %>% 
+  get_descendants(find_indi_name(., "Main"), include_families = TRUE) %>% 
   describe_records(three_gen, .)
 ```
 
@@ -103,7 +109,7 @@ If we want to remove the individual and their spouses, all descendants and their
 
 ```{r}
 three_gen %>% 
-  get_descendants("Main Person", include_individual = TRUE, include_spouses = TRUE,
+  get_descendants(find_indi_name(., "Main"), include_individual = TRUE, include_spouses = TRUE,
                        include_families = TRUE) %>% 
   remove_records(three_gen, .) %>% 
   df_famg() %>% 

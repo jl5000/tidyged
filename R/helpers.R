@@ -120,6 +120,7 @@ order_famg_children <- function(gedcom, xref) {
     if(dob == "") return(4000L)
     years <- unlist(stringr::str_extract_all(dob, "\\d{3,4}")) 
     if(length(years) == 1 && years == "") return(4000L)
+    if(length(years) == 0) return(4000L)
     min(as.integer(years))
   }
   

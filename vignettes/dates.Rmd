@@ -25,9 +25,9 @@ Dates that occur on a specific defined date are defined using the `date_exact()`
 ```{r}
 library(tidyged)
 
-date_exact(5, 7, 1999)
-date_exact(8, 12, 1956)
-date_exact(1, 4, 2008)
+date_exact(1999, 7, 5)
+date_exact(1956, 12, 8)
+date_exact(2008, 4, 1)
 ```
 
 ## Calendar dates

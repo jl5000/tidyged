@@ -127,7 +127,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">105</span>, year_is_bce <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [1] "105 BCE"</span></code></pre></div>
-<p>Note that only the Gregorian calendar is currently implemented.</p>
+<p>Note that only the Gregorian calendar is currently supported.</p>
 </div>
 <div id="approximate-dates" class="section level2">
 <h2 class="hasAnchor">
@@ -167,6 +167,7 @@
 <span class="co">#&gt; [1] "AFT 26 JUL 1956"</span>
 <span class="fu"><a href="../reference/date_range.html">date_range</a></span><span class="op">(</span>end_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">9</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "BEF 15 SEP 1956"</span></code></pre></div>
+<p>It’s important to note that approximate dates cannot be used in date ranges or date periods. The GEDCOM specification does allow arbitrary “date phrases” enclosed in parentheses, but recommends these are added as notes instead. The <code>tidyged</code> package doesn’t allow you to create date phrases (only as notes) but will accept them from imported files.</p>
 <p style="text-align: right;">
 <a href="https://jl5000.github.io/tidyged/articles/summarising.html">Next article: Summarising tidyged objects &gt;</a>
 </p>

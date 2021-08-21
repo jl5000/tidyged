@@ -59,7 +59,7 @@ simpson_famg %>%
 
 The `descriptor` parameter is used only for miscellaneous other events ("eve").
 
-You can see a summary of all events associated with a family group with the `fact_summary_famg()` function.
+You can see a summary of all events associated with a family group with the `df_famg_facts()` function.
 
 ## Family links
 

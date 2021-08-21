@@ -76,8 +76,7 @@ reference:
 - title: "Summarising record types"
 - contents:
   - matches("^df_")
-  - matches("^fact_summary_")
-- title: "Summarising specific records"
+- title: "Describing specific records"
 - contents:
   - matches("^is_")
   - matches("^describe_")

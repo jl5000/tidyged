@@ -367,13 +367,13 @@ fact_summary <- function(gedcom, xref, indi) {
 #'
 #' @return A tibble containing a row for each fact.
 #' @export
-fact_summary_indi <- function(gedcom, xref) {
+df_indi_facts <- function(gedcom, xref) {
   fact_summary(gedcom, xref, TRUE)
 }
 
-#' @rdname fact_summary_indi
+#' @rdname df_indi_facts
 #' @export
-fact_summary_famg <- function(gedcom, xref) {
+df_famg_facts <- function(gedcom, xref) {
   fact_summary(gedcom, xref, FALSE)
 }
 

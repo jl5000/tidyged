@@ -145,10 +145,10 @@ dea_rel <- gedcom(subm("Me")) %>%
 knitr::kable(dplyr::filter(dea_rel, record == "@I1@"))
 ```
 
-You can see a summary of all facts associated with an individual with the `fact_summary_indi()` function.
+You can see a summary of all facts associated with an individual with the `df_indi_facts()` function.
 
 ```{r}
-fact_summary_indi(dea_rel, "@I1@") %>% knitr::kable()
+df_indi_facts(dea_rel, "@I1@") %>% knitr::kable()
 ```
 
 ## Family links

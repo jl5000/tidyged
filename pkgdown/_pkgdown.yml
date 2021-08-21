@@ -23,3 +23,71 @@ articles:
   - dates
   - summarising
   - relations
+reference:
+- title: "Creating tidyged objects"
+- contents: 
+  - gedcom
+  - subm
+- title: "Adding and removing records"
+- contents: 
+  - add_indi
+  - remove_indi
+  - add_famg
+  - remove_famg
+  - add_sour
+  - remove_sour
+  - add_repo
+  - remove_repo
+  - add_media
+  - remove_media
+  - add_note
+  - remove_note
+  - remove_records
+- title: "Adding data to and removing data from records"
+- contents: 
+  - matches("^add_indi_")
+  - matches("^remove_indi_")
+  - matches("^add_famg_")
+  - matches("^remove_famg_")
+  - matches("^add_sour_")
+  - matches("^remove_sour_")
+- title: "Date objects"
+- contents:
+  - matches("^date_")
+- title: "Other objects"
+- contents:
+  - address
+  - place
+  - name_pieces
+  - source_citation
+- title: "Finding cross reference identifiers"
+- contents: 
+  - matches("^find_")
+  - matches("^xrefs_")
+  - matches("^get_")
+- title: "Record activation"
+- contents:
+  - matches("activ")
+- title: "Summarising tidyged objects"
+- contents:
+  - str
+  - summary
+  - matches("^num_")
+- title: "Summarising record types"
+- contents:
+  - matches("^df_")
+  - matches("^fact_summary_")
+- title: "Summarising specific records"
+- contents:
+  - matches("^is_")
+  - matches("^describe_")
+- title: "Utilities"
+- contents:
+  - mutate_tag_namespace
+  - order_famg_children
+  - primary_indi_name
+  - temporarily_remove_name_slashes
+  - update_change_date
+- title: "Sample data"
+- contents:
+  - sample555

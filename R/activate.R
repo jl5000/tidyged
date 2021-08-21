@@ -19,7 +19,7 @@ set_active_record <- function(gedcom, xref) {
 #' @return The xref of the active record.
 #'
 #' @export
-get_active_record <- function(gedcom) {
+active_record <- function(gedcom) {
   attr(gedcom, "active_record")
 }
 

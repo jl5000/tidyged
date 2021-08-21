@@ -42,10 +42,10 @@ Note the unique xrefs in the record column.
 
 In the above example a series of records are created (which will be explained in more detail in the proceeding articles). After each record is created, the name(s) of the individual are defined without actually explicitly referencing the Individual record. This is because they are acting on the *active record*. A record becomes active when it is created or when it is explicitly activated.
 
-We can query the active record using the `get_active_record()` function:
+We can query the active record using the `active_record()` function:
 
 ```{r}
-get_active_record(simpsons)
+active_record(simpsons)
 ```
 
 Since the last record to be created was the Note record, it is the active record. The active record is stored as an attribute of the tibble.
@@ -55,7 +55,7 @@ We can use activation to add to existing records. If we want to activate another
 ```{r}
 simpsons %>% 
   activate_indi("@I2@") %>% 
-  get_active_record()
+  active_record()
 ```
 
 ## Finding cross reference identifiers
@@ -74,7 +74,7 @@ In the activation example, we would activate Marge's record with:
 ```{r}
 simpsons %>% 
   activate_indi(find_indi_name(., "Marge")) %>% 
-  get_active_record()
+  active_record()
 ```
 
 Note that the full name does not need to be given, since the term is partially matched. As long as it is detected in the name of the individual it will be found.
@@ -84,13 +84,13 @@ In this use case, if no match or more than one match is found, it will result in
 ```{r, error = TRUE}
 simpsons %>% 
   activate_indi(find_indi_name(., "Simpon")) %>% 
-  get_active_record()
+  active_record()
 ```
 
 ```{r, error = TRUE}
 simpsons %>% 
   activate_indi(find_indi_name(., "Simpson")) %>% 
-  get_active_record()
+  active_record()
 ```
 
 ## Removing records

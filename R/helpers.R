@@ -41,7 +41,7 @@ get_valid_xref <- function(gedcom, xref, record_type, record_type_fn) {
   
   if (length(xref) == 0 || xref == "") {
     # xref not given explicitly, get it from active record
-    xref <- get_active_record(gedcom)
+    xref <- active_record(gedcom)
   } 
 
   if(is.null(xref))

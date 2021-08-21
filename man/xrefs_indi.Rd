@@ -33,3 +33,10 @@ A vector of xrefs of records of the relevant type.
 \description{
 These functions return the xrefs of all records of a particular type in a tidyged object.
 }
+\examples{
+xrefs_indi(sample555)
+xrefs_famg(sample555)
+xrefs_note(sample555)
+xrefs_repo(sample555)
+xrefs_sour(sample555)
+}

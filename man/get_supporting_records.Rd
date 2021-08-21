@@ -33,3 +33,7 @@ A character vector of supporting record xrefs.
 This function gets all supporting records (and onwards dependencies) for a set of records. Supporting records
 are note, multimedia, source, and repository records, i.e. those providing supporting evidence and comments.
 }
+\examples{
+get_supporting_records(sample555, "@I1@")
+get_supporting_records(sample555, "@F1@")
+}

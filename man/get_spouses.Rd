@@ -20,3 +20,8 @@ A character vector of spouse xrefs or names.
 \description{
 Identify all spouses for an individual
 }
+\examples{
+get_spouses(sample555, "@I1@")
+get_spouses(sample555, "@I1@", return_name = TRUE)
+get_spouses(sample555, "@I3@")
+}

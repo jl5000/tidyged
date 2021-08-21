@@ -20,3 +20,6 @@ A character vector of family xrefs.
 \description{
 Identify all families for an individual where they are a child
 }
+\examples{
+get_families_as_child(sample555, "@I3@")
+}

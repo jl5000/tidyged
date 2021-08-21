@@ -35,3 +35,9 @@ A logical indicating whether the record is of a particular type.
 \description{
 Check whether a given record is a particular type
 }
+\examples{
+is_indi(sample555, "@I1@")
+is_note(sample555, "@I1@")
+is_famg(sample555, "@F2@")
+is_repo(sample555, "@R1@")
+}

@@ -20,3 +20,6 @@ A vector of record descriptions.
 \description{
 Get descriptions for records
 }
+\examples{
+describe_records(sample555, sample555$record)
+}

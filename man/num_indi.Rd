@@ -33,3 +33,8 @@ The number of records of the relevant type.
 \description{
 These functions return the number of records of a particular type in a tidyged object.
 }
+\examples{
+num_indi(sample555)
+num_famg(sample555)
+num_repo(sample555)
+}

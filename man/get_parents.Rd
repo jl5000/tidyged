@@ -20,3 +20,8 @@ A character vector of parent xrefs or names.
 \description{
 Identify all parents for an individual
 }
+\examples{
+get_parents(sample555, "@I2@")
+get_parents(sample555, "@I3@")
+get_parents(sample555, "@I3@", return_name = TRUE)
+}

@@ -2,7 +2,7 @@
 
 # File R/describe.R: @tests
 
-test_that("Function describe_records() @ L15", {
+test_that("Function describe_records() @ L17", {
   expect_snapshot_value(describe_records(sample555, sample555$record, TRUE), "json2")
   expect_snapshot_value(describe_records(sample555, sample555$record), "json2")
 })

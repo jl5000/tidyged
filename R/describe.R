@@ -8,6 +8,8 @@
 #' @param short_desc Whether to return a shorter description.
 #'
 #' @return A vector of record descriptions.
+#' @examples 
+#' describe_records(sample555, sample555$record)
 #' @export
 #' @tests
 #' expect_snapshot_value(describe_records(sample555, sample555$record, TRUE), "json2")
@@ -59,7 +61,9 @@ describe_records <- function(gedcom, xrefs, short_desc = FALSE) {
 #' is returned.
 #' @param file_ref_only Whether to return the multimedia file reference only. If none is found, the xref
 #' is returned.
-#'
+#' @examples 
+#' describe_famg(sample555, "@F1@")
+#' describe_famg(sample555, "@F1@", short_desc  = TRUE)
 #' @return A character string describing the record.
 #' @export
 describe_famg <- function(gedcom, xref, short_desc = FALSE) {
@@ -94,6 +98,10 @@ describe_famg <- function(gedcom, xref, short_desc = FALSE) {
 }
 
 #' @rdname describe_famg
+#' @examples 
+#' describe_indi(sample555, "@I1@")
+#' describe_indi(sample555, "@I1@", short_desc = TRUE)
+#' describe_indi(sample555, "@I1@", name_only = TRUE)
 #' @export
 describe_indi <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   # Individual @I1@, Name/Unnamed, [child of x and y, born on x/x/x in place, died on x/x/x in place]

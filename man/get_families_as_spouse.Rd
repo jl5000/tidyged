@@ -18,3 +18,6 @@ A character vector of family xrefs.
 \description{
 Identify all families for an individual where they are a spouse
 }
+\examples{
+get_families_as_spouse(sample555, "@I2@")
+}

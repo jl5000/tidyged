@@ -20,3 +20,7 @@ A character vector of children xrefs or names.
 \description{
 Identify all children for an individual
 }
+\examples{
+get_children(sample555, "@I2@")
+get_children(sample555, "@I2@", return_name = TRUE)
+}

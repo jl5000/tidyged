@@ -53,3 +53,10 @@ This function offers three levels of detail. For example, individual records can
 "Individual @I1@, Joe Bloggs" (short_desc = TRUE)
 "Individual @I1@, Joe Bloggs, child of X and Y, born on x/x/x in place, died on x/x/x in place" (short_desc = FALSE)
 }
+\examples{
+describe_famg(sample555, "@F1@")
+describe_famg(sample555, "@F1@", short_desc  = TRUE)
+describe_indi(sample555, "@I1@")
+describe_indi(sample555, "@I1@", short_desc = TRUE)
+describe_indi(sample555, "@I1@", name_only = TRUE)
+}

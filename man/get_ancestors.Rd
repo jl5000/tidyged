@@ -35,3 +35,8 @@ A vector of xrefs of ancestors.
 \description{
 This function identifies records in an entire branch of the family tree above a certain individual.
 }
+\examples{
+get_ancestors(sample555, "@I3@")
+get_ancestors(sample555, "@I3@", include_individual = TRUE)
+get_ancestors(sample555, "@I3@", include_individual = TRUE, include_families = TRUE)
+}

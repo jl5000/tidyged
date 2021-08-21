@@ -69,3 +69,9 @@ If you have your own specific use cases to identify records, it's easy to write 
 It's best to name your function \verb{find_recordtype_*} and end it with \verb{_all} if it can return multiple xrefs.
 If you provide more than one search pattern, you should also include the mode argument.
 }
+\examples{
+find_indi_name(sample555, "Mary")
+find_indi_name_all(sample555, "Williams")
+find_repo_name(sample555, "library", ignore_case = TRUE)
+find_sour_titl(sample555, "Madison.+Records")
+}

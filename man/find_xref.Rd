@@ -46,3 +46,11 @@ the pattern provided. You can anchor your search pattern if you want an exact ma
 If you're not familiar with regular expressions, you may need to escape certain characters such as
 brackets and a full-stop/period (i.e. \verb{\\\\.}).
 }
+\examples{
+find_xref(sample555, c(INDI.BURI.PLAC = "Spring Hill"), multiple = FALSE)
+find_xref(sample555, c(INDI.SEX = "M"), multiple = TRUE)
+find_xref(sample555, c(FAM.MARR.DATE = "1859"), multiple = FALSE)
+find_xref(sample555, c(REPO.ADDR.CITY = "Salt Lake"), multiple = TRUE)
+find_xref(sample555, c(INDI.NAME.SURN = "Williams", INDI.ADOP.DATE = "Never"), 
+mode = "best", multiple = TRUE)
+}

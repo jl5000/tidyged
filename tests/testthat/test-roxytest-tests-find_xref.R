@@ -2,7 +2,7 @@
 
 # File R/find_xref.R: @tests
 
-test_that("Function find_xref() @ L39", {
+test_that("Function find_xref() @ L46", {
   expect_error(find_xref(sample555, character()))
   expect_error(find_xref(sample555, c(INDI.NAME = "test"), mode = "foo"))
   expect_error(find_xref(sample555, letters[1:5]))

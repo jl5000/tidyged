@@ -26,6 +26,13 @@
 #' @param ignore_case Should case differences be ignored in the match?
 #'
 #' @return A vector of one or more xrefs.
+#' @examples 
+#' find_xref(sample555, c(INDI.BURI.PLAC = "Spring Hill"), multiple = FALSE)
+#' find_xref(sample555, c(INDI.SEX = "M"), multiple = TRUE)
+#' find_xref(sample555, c(FAM.MARR.DATE = "1859"), multiple = FALSE)
+#' find_xref(sample555, c(REPO.ADDR.CITY = "Salt Lake"), multiple = TRUE)
+#' find_xref(sample555, c(INDI.NAME.SURN = "Williams", INDI.ADOP.DATE = "Never"), 
+#' mode = "best", multiple = TRUE)
 #' @export
 #' @tests
 #' expect_error(find_xref(sample555, character()))
@@ -70,8 +77,8 @@ find_xref <- function(gedcom, search_patterns, mode = "strict", multiple = FALSE
       dplyr::filter(n==max(n)) %>% 
       dplyr::pull(matches)
     
-    if(nrow(xref) == 0) stop("No records found that match any patterns.")
-    if(nrow(xref) > 1 & !multiple) stop("No unique records found that match any patterns. Try being more specific.")
+    if(length(xref) == 0) stop("No records found that match any patterns.")
+    if(length(xref) > 1 & !multiple) stop("No unique records found that match any patterns. Try being more specific.")
     
   }
   
@@ -94,6 +101,11 @@ find_xref <- function(gedcom, search_patterns, mode = "strict", multiple = FALSE
 #' @param ignore_case Should case differences be ignored in the match?
 #'
 #' @return A character vector of xref(s).
+#' @examples 
+#' find_indi_name(sample555, "Mary")
+#' find_indi_name_all(sample555, "Williams")
+#' find_repo_name(sample555, "library", ignore_case = TRUE)
+#' find_sour_titl(sample555, "Madison.+Records")
 #' @export
 find_indi_refn <- function(gedcom, pattern, ignore_case = FALSE) {
   find_xref(gedcom, search_patterns = c(INDI.REFN = pattern), multiple = FALSE, ignore_case = ignore_case)

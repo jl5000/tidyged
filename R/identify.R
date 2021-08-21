@@ -9,6 +9,10 @@
 #'
 #' @return A character vector of spouse xrefs or names.
 #' @export
+#' @examples
+#' get_spouses(sample555, "@I1@")
+#' get_spouses(sample555, "@I1@", return_name = TRUE)
+#' get_spouses(sample555, "@I3@")
 #' @tests
 #' expect_equal(get_spouses(sample555, "@I1@"), "@I2@")
 #' expect_equal(get_spouses(sample555, "@I2@", TRUE), "Robert Eugene Williams")
@@ -41,6 +45,9 @@ get_spouses <- function(gedcom,
 #'
 #' @return A character vector of children xrefs or names.
 #' @export
+#' @examples 
+#' get_children(sample555, "@I2@")
+#' get_children(sample555, "@I2@", return_name = TRUE)
 #' @tests
 #' expect_error(get_children(sample555, "@I4@"))
 #' expect_equal(get_children(sample555, "@I1@"), "@I3@")
@@ -72,6 +79,10 @@ get_children <- function(gedcom,
 #'
 #' @return A character vector of parent xrefs or names.
 #' @export
+#' @examples
+#' get_parents(sample555, "@I2@")
+#' get_parents(sample555, "@I3@")
+#' get_parents(sample555, "@I3@", return_name = TRUE)
 #' @tests
 #' expect_equal(get_parents(sample555, "@I3@"), c("@I1@", "@I2@"))
 #' expect_equal(get_parents(sample555, "@I3@", TRUE), c("Robert Eugene Williams", "Mary Ann Wilson"))
@@ -140,6 +151,8 @@ get_siblings <- function(gedcom,
 #'
 #' @return A character vector of family xrefs.
 #' @export
+#' @examples 
+#' get_families_as_spouse(sample555, "@I2@")
 #' @tests
 #' expect_equal(get_families_as_spouse(sample555, "@I1@"), c("@F1@", "@F2@"))
 #' expect_equal(get_families_as_spouse(sample555, "@I2@"), "@F1@")
@@ -159,6 +172,8 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
 #' @param birth_only Whether to only return the family containing the biological parents.
 #'
 #' @return A character vector of family xrefs.
+#' @examples 
+#' get_families_as_child(sample555, "@I3@")
 #' @export
 #' @tests
 #' expect_equal(get_families_as_child(sample555, "@I3@"), c("@F1@", "@F2@"))
@@ -209,6 +224,9 @@ get_families_as_child <- function(gedcom,
 #'
 #' @return A character vector of supporting record xrefs.
 #' @export
+#' @examples 
+#' get_supporting_records(sample555, "@I1@")
+#' get_supporting_records(sample555, "@F1@")
 #' @tests
 #' expect_equal(get_supporting_records(sample555, "@I1@"), c("@S1@", "@R1@"))
 get_supporting_records <- function(gedcom,
@@ -322,6 +340,10 @@ get_descendants <- function(gedcom,
 #' @param include_supp_records Whether to also include all supporting records (Note, Source, Repository, Multimedia).
 #'
 #' @return A vector of xrefs of ancestors.
+#' @examples 
+#' get_ancestors(sample555, "@I3@")
+#' get_ancestors(sample555, "@I3@", include_individual = TRUE)
+#' get_ancestors(sample555, "@I3@", include_individual = TRUE, include_families = TRUE)
 #' @export
 get_ancestors <- function(gedcom,
                           individual = character(),
@@ -379,6 +401,12 @@ xrefs_record_type <- function(gedcom, record_tag) {
 #'
 #' @return A vector of xrefs of records of the relevant type.
 #' @export
+#' @examples 
+#' xrefs_indi(sample555)
+#' xrefs_famg(sample555)
+#' xrefs_note(sample555)
+#' xrefs_repo(sample555)
+#' xrefs_sour(sample555)
 #' @tests
 #' expect_equal(xrefs_indi(sample555), paste0("@I", 1:3, "@"))
 xrefs_indi <- function(gedcom) {  xrefs_record_type(gedcom, .pkgenv$record_tag_indi) }

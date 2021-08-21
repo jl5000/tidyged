@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get descriptions for records — describe_records • tidyged</title>
+<title>Create a table summarising all individual/family facts — df_indi_facts • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get descriptions for records — describe_records" />
-<meta property="og:description" content="Get descriptions for records" />
+<meta property="og:title" content="Create a table summarising all individual/family facts — df_indi_facts" />
+<meta property="og:description" content="This function creates a tidy table making it easy to extract fact details for an individual or family group." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,16 +119,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get descriptions for records</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/describe.R'><code>R/describe.R</code></a></small>
-    <div class="hidden name"><code>describe_records.Rd</code></div>
+    <h1>Create a table summarising all individual/family facts</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/summarise.R'><code>R/summarise.R</code></a></small>
+    <div class="hidden name"><code>df_indi_facts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get descriptions for records</p>
+    <p>This function creates a tidy table making it easy to extract fact details for an individual or family group.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>describe_records</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xrefs</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>df_indi_facts</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span>
+
+<span class='fu'>df_famg_facts</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,19 +140,17 @@
       <td><p>A tidyged object.</p></td>
     </tr>
     <tr>
-      <th>xrefs</th>
-      <td><p>A vector of record xrefs. Only unique records are used. Header and trailer records
-are ignored.</p></td>
-    </tr>
-    <tr>
-      <th>short_desc</th>
-      <td><p>Whether to return a shorter description.</p></td>
+      <th>xref</th>
+      <td><p>The xref of the Individual or Family Group record.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vector of record descriptions.</p>
+    <p>A tibble containing a row for each fact.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Notes and source citations are not included in the summary, as well as other more obscure fields.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

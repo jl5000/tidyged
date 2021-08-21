@@ -7,7 +7,7 @@
 \alias{df_sour}
 \alias{df_repo}
 \alias{df_note}
-\title{Summarise records in a GEDCOM file}
+\title{Summarise records in a tidyged object}
 \usage{
 df_indi(gedcom)
 
@@ -29,5 +29,10 @@ A tibble summarising records where every row is a record.
 }
 \description{
 These functions give a summary of key information of individuals/families/notes etc.
-in the GEDCOM file.
+}
+\examples{
+df_indi(sample555)
+df_famg(sample555)
+df_sour(sample555)
+df_repo(sample555)
 }

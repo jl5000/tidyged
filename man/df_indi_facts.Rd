@@ -23,3 +23,7 @@ This function creates a tidy table making it easy to extract fact details for an
 \details{
 Notes and source citations are not included in the summary, as well as other more obscure fields.
 }
+\examples{
+df_indi_facts(sample555, "@I1@")
+df_famg_facts(sample555, "@F1@")
+}

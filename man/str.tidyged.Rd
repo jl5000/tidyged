@@ -17,3 +17,6 @@ A printed summary of records in the tidyged object.
 \description{
 This function gives a breakdown of record counts in the GEDCOM file.
 }
+\examples{
+str(sample555)
+}

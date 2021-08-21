@@ -2,7 +2,7 @@
 
 # File R/summarise.R: @tests
 
-test_that("Function summary.tidyged() @ L18", {
+test_that("Function summary.tidyged() @ L19", {
   expect_snapshot_value(
                  gedcom(subm("Me"), gedcom_description = "descrip", language = "English",
                         gedcom_copyright = "copyright statement") %>% 
@@ -10,7 +10,7 @@ test_that("Function summary.tidyged() @ L18", {
 })
 
 
-test_that("Function str.tidyged() @ L64", {
+test_that("Function str.tidyged() @ L66", {
   expect_snapshot_value(
    gedcom(subm("Me")) %>% 
     add_indi() %>% 
@@ -28,7 +28,7 @@ test_that("Function str.tidyged() @ L64", {
 })
 
 
-test_that("Function df_indi() @ L110", {
+test_that("Function df_indi() @ L112", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_indi(sex = "M") %>% 
    add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
@@ -52,7 +52,7 @@ test_that("Function df_indi() @ L110", {
 })
 
 
-test_that("Function df_famg() @ L168", {
+test_that("Function df_famg() @ L171", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_indi(sex = "M") %>% 
    add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
@@ -68,7 +68,7 @@ test_that("Function df_famg() @ L168", {
 })
 
 
-test_that("Function df_media() @ L202", {
+test_that("Function df_media() @ L205", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_media(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") %>% 
    add_media(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") %>% 
@@ -78,7 +78,7 @@ test_that("Function df_media() @ L202", {
 })
 
 
-test_that("Function df_sour() @ L229", {
+test_that("Function df_sour() @ L233", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_sour(originator = "author1", title = "book1") %>% 
    add_sour(originator = "author2", title = "book2") %>% 
@@ -88,7 +88,7 @@ test_that("Function df_sour() @ L229", {
 })
 
 
-test_that("Function df_repo() @ L252", {
+test_that("Function df_repo() @ L257", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_repo(name = "repo1", repo_address = address(city = "Brighton", state = "E. Sussex", country = "UK")) %>% 
    add_repo(name = "repo2", repo_address = address(city = "Orlando", state = "Florida", country = "USA")) %>% 
@@ -98,7 +98,7 @@ test_that("Function df_repo() @ L252", {
 })
 
 
-test_that("Function df_note() @ L279", {
+test_that("Function df_note() @ L284", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_note(text = "This is a note", user_reference_numbers = 1234) %>% 
    add_note(text = "This is also a note", user_reference_numbers = 5678) %>% 

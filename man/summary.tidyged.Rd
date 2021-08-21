@@ -18,3 +18,6 @@ A printed summary of the tidyged object.
 This function shows key information from the header of a tidyged object, including submitter
 and description.
 }
+\examples{
+summary(sample555)
+}

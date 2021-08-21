@@ -10,6 +10,7 @@
 #'
 #' @return A printed summary of the tidyged object.
 #' @export
+#' @examples summary(sample555)
 #' @tests
 #' expect_snapshot_value(
 #'                gedcom(subm("Me"), gedcom_description = "descrip", language = "English",
@@ -46,6 +47,7 @@ summary.tidyged <- function(object, ...) {
 #'
 #' @return A printed summary of records in the tidyged object.
 #' @export
+#' @examples str(sample555)
 #' @tests
 #' expect_snapshot_value(
 #'  gedcom(subm("Me")) %>% 
@@ -77,14 +79,14 @@ str.tidyged <- function(object, ...) {
   ) %>% cat()
 }
 
-#' Summarise records in a GEDCOM file
+#' Summarise records in a tidyged object
 #'
 #' These functions give a summary of key information of individuals/families/notes etc. 
-#' in the GEDCOM file.
 #'
 #' @param gedcom A tidyged object.
 #'
 #' @return A tibble summarising records where every row is a record.
+#' @examples df_indi(sample555)
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
@@ -151,6 +153,7 @@ df_indi <- function(gedcom) {
 
 
 #' @rdname df_indi
+#' @examples df_famg(sample555)
 #' @export
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
@@ -219,6 +222,7 @@ df_media <- function(gedcom) {
 
 #' @rdname df_indi
 #' @export
+#' @examples df_sour(sample555)
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'  add_sour(originator = "author1", title = "book1") %>% 
@@ -242,6 +246,7 @@ df_sour <- function(gedcom) {
 
 #' @rdname df_indi
 #' @export
+#' @examples df_repo(sample555)
 #' @tests
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'  add_repo(name = "repo1", repo_address = address(city = "Brighton", state = "E. Sussex", country = "UK")) %>% 
@@ -366,12 +371,14 @@ fact_summary <- function(gedcom, xref, indi) {
 #' @param xref The xref of the Individual or Family Group record.
 #'
 #' @return A tibble containing a row for each fact.
+#' @examples df_indi_facts(sample555, "@I1@")
 #' @export
 df_indi_facts <- function(gedcom, xref) {
   fact_summary(gedcom, xref, TRUE)
 }
 
 #' @rdname df_indi_facts
+#' @examples df_famg_facts(sample555, "@F1@")
 #' @export
 df_famg_facts <- function(gedcom, xref) {
   fact_summary(gedcom, xref, FALSE)

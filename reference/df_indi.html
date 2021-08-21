@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summarise records in a GEDCOM file — df_indi • tidyged</title>
+<title>Summarise records in a tidyged object — df_indi • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Summarise records in a GEDCOM file — df_indi" />
-<meta property="og:description" content="These functions give a summary of key information of individuals/families/notes etc.
-in the GEDCOM file." />
+<meta property="og:title" content="Summarise records in a tidyged object — df_indi" />
+<meta property="og:description" content="These functions give a summary of key information of individuals/families/notes etc." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -81,7 +80,7 @@ in the GEDCOM file." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.1.9000</span>
       </span>
     </div>
 
@@ -120,14 +119,13 @@ in the GEDCOM file." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summarise records in a GEDCOM file</h1>
+    <h1>Summarise records in a tidyged object</h1>
     <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/summarise.R'><code>R/summarise.R</code></a></small>
     <div class="hidden name"><code>df_indi.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These functions give a summary of key information of individuals/families/notes etc.
-in the GEDCOM file.</p>
+    <p>These functions give a summary of key information of individuals/families/notes etc.</p>
     </div>
 
     <pre class="usage"><span class='fu'>df_indi</span><span class='op'>(</span><span class='va'>gedcom</span><span class='op'>)</span>
@@ -155,6 +153,29 @@ in the GEDCOM file.</p>
 
     <p>A tibble summarising records where every row is a record.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>df_indi</span><span class='op'>(</span><span class='va'>sample555</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 × 12</span>
+#&gt;   xref  name   sex   date_of_birth place_of_birth  date_of_death place_of_death 
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
+#&gt; <span style='color: #BCBCBC;'>1</span> @I1@  Rober… M     2 OCT 1822    Weston, Madiso… <span style='color: #949494;'>"</span>14 APR 1905<span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>Stamford, Fai…
+#&gt; <span style='color: #BCBCBC;'>2</span> @I2@  Mary … F     BEF 1828      Connecticut, U… <span style='color: #949494;'>""</span>            <span style='color: #949494;'>""</span>             
+#&gt; <span style='color: #BCBCBC;'>3</span> @I3@  Joe W… M     11 JUN 1861   Idaho Falls, B… <span style='color: #949494;'>""</span>            <span style='color: #949494;'>""</span>             
+#&gt; <span style='color: #949494;'># … with 5 more variables: mother &lt;chr&gt;, father &lt;chr&gt;, num_siblings &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   num_children &lt;int&gt;, last_modified &lt;chr&gt;</span></div><div class='input'><span class='fu'>df_famg</span><span class='op'>(</span><span class='va'>sample555</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 7</span>
+#&gt;   xref  husband  wife   marriage_date marriage_place  num_children last_modified
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        
+#&gt; <span style='color: #BCBCBC;'>1</span> @F1@  Robert … <span style='color: #949494;'>"</span>Mary… <span style='color: #949494;'>"</span>DEC 1859<span style='color: #949494;'>"</span>    <span style='color: #949494;'>"</span>Rapid City, P… 1            <span style='color: #949494;'>""</span>           
+#&gt; <span style='color: #BCBCBC;'>2</span> @F2@  Robert … <span style='color: #949494;'>""</span>     <span style='color: #949494;'>""</span>            <span style='color: #949494;'>""</span>              1            <span style='color: #949494;'>""</span>           </div><div class='input'><span class='fu'>df_sour</span><span class='op'>(</span><span class='va'>sample555</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 4</span>
+#&gt;   xref  originator title                                             last_modified
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        
+#&gt; <span style='color: #BCBCBC;'>1</span> @S1@  <span style='color: #949494;'>""</span>         Madison County Birth, Death, and Marriage Records <span style='color: #949494;'>""</span>           </div><div class='input'><span class='fu'>df_repo</span><span class='op'>(</span><span class='va'>sample555</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 6</span>
+#&gt;   xref  name                   city           state country        last_modified
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        
+#&gt; <span style='color: #BCBCBC;'>1</span> @R1@  Family History Library Salt Lake City Utah  United States… <span style='color: #949494;'>""</span>           </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

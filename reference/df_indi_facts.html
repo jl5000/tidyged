@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.1.9000</span>
       </span>
     </div>
 
@@ -152,6 +152,23 @@
 
     <p>Notes and source citations are not included in the summary, as well as other more obscure fields.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>df_indi_facts</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"@I1@"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 16</span>
+#&gt;   fact_type description TYPE  DATE   AGNC  CAUS  PLAC    LATI  LONG  ADR1  ADR2 
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> Birth     <span style='color: #BB0000;'>NA</span>          <span style='color: #BB0000;'>NA</span>    2 OCT… <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    Weston… <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'>2</span> Death     <span style='color: #BB0000;'>NA</span>          <span style='color: #BB0000;'>NA</span>    14 AP… <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    Stamfo… <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'>3</span> Burial    <span style='color: #BB0000;'>NA</span>          <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>     <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    Spring… <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'>4</span> Residence <span style='color: #BB0000;'>NA</span>          <span style='color: #BB0000;'>NA</span>    FROM … <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #949494;'># … with 5 more variables: ADR3 &lt;chr&gt;, CITY &lt;chr&gt;, STAE &lt;chr&gt;, CTRY &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   AGE &lt;chr&gt;</span></div><div class='input'><span class='fu'>df_famg_facts</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"@F1@"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 17</span>
+#&gt;   fact_type    description TYPE  DATE  AGNC  CAUS  PLAC  LATI  LONG  ADR1  ADR2 
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> Relationship <span style='color: #BB0000;'>NA</span>          <span style='color: #BB0000;'>NA</span>    DEC … <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    Rapi… <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #949494;'># … with 6 more variables: ADR3 &lt;chr&gt;, CITY &lt;chr&gt;, STAE &lt;chr&gt;, CTRY &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   HUSB.AGE &lt;chr&gt;, WIFE.AGE &lt;chr&gt;</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

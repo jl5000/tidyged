@@ -14,15 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(tidyged)
-```
-
 ## Introduction
 
 Adding individuals to a tidyged object can be achieved with the `add_indi()` function. The sex of the individual can be specified with the `sex` parameter, which is a single letter: M(ale), F(emale), (Interse)X, U(nknown), N(ot recorded). If no sex is specified, a value of "U" is used.
 
-As with other records, various types of user-defined references can be defined (`user_reference_numbers`).
+As with other records, various types of user-defined references can be defined (`user_reference_numbers()`).
 
 Individuals can be removed with the `remove_indi()` function.
 
@@ -33,6 +29,8 @@ Individuals can be given more than one name. These can be different kinds of nam
 There is a quick and dirty way of adding a name with the `qn` parameter, but this is just for use in quick demonstrations and should not be used for serious genealogical recording. The function will crudely place the entire string as the given name of the individual:
 
 ```{r}
+library(tidyged)
+
 gedcom(subm("Me")) %>% 
   add_indi(qn = "Leia Skywalker") %>% 
   dplyr::filter(record == "@I1@") %>% 
@@ -53,11 +51,20 @@ knitr::kable(dplyr::filter(leia, record == "@I1@") )
 
 In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes - as given in the specification). Nicknames are not included.
 
-An individual's name (and name pieces) can be removed using the `remove_indi_name()` function.
+An individual's name (and name pieces) can be removed using the `remove_indi_name()` function. Even though the `add_indi_names()` function surrounds the surname with forward slashes, these are not required to specify the name to remove:
+
+```{r}
+leia %>% 
+  remove_indi_name("Leia Skywalker") %>% 
+  dplyr::filter(record == "@I1@") %>% 
+  knitr::kable()
+```
+
+This name needs to match exactly to the one to remove.
 
 ### Phonetic and romanised names
 
-Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the `add_indi_names_var()` function. As a minimum, the original name, variant name pieces, derivation method, and whether it is a phonetic or romanised variation should be given. The original name must be given exactly as it is represented in the file ("Leia Skywalker"):
+Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the `add_indi_names_var()` function. As a minimum, the original name, variant name pieces, derivation method, and whether it is a phonetic or romanised variation should be given. The original name must be given exactly as it is represented in the file without forward slashes ("Leia Skywalker"):
 
 ```{r}
 leia_var <- leia %>% 
@@ -91,7 +98,7 @@ leia_conf <- leia_adop %>%
 knitr::kable(dplyr::filter(leia_conf, record == "@I1@"))
 ```
 
-Generally conflicting names are arranged in order of confidence; the first name is more likely to be correct. If you want to promote a name to occur first in the record, you can use the `primary_indi_name()` function:
+Generally, conflicting names are arranged in order of confidence; the first name is more likely to be correct. If you want to promote a name to occur first in the record, you can use the `primary_indi_name()` function:
 
 ```{r}
 leia_conf_first <- primary_indi_name(leia_conf, "Leia Skywaker")
@@ -146,7 +153,7 @@ fact_summary_indi(dea_rel, "@I1@") %>% knitr::kable()
 
 ## Family links
 
-Typically when constructing a file, you would create all of the individuals in a family first, and then reference them when creating a Family Group record - this takes care all of the appropriate record links for you. However, sometimes you want to retrospectively add an individual to a Family Group record that already exists. In this case you use the `add_indi_links_to_families()` function.
+Typically when constructing a file, you would create all of the individuals in a family first, and then reference them when creating a Family Group record - this takes care of all of the appropriate record links for you. However, sometimes you want to retrospectively add an individual to a Family Group record that already exists. In this case you use the `add_indi_links_to_families()` function.
 
 In the example below, we create Joe Bloggs and add him as a husband to a family. We then create Jess Bloggs and retrospectively add her as a wife to Joe. 
 

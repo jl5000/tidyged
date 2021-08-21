@@ -27,6 +27,6 @@ gedcom() %>%
   knitr::kable()
 ```
 
-As with other records, various types of user-defined references can be defined (`user_reference_numbers`), as well as links to notes.
+As with other records, various types of user-defined references can be defined (`user_reference_numbers()`), as well as links to notes.
 
 <p style="text-align: right;"><a href="https://jl5000.github.io/tidyged/articles/note_records.html">Next article: Note records ></a></p>

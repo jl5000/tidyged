@@ -14,6 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+*WORK IN PROGRESS*
+
 ## Introduction
 
 Source records are one of the most important types of record in a GEDCOM file. They provide evidence for the assertions (facts) made in a file, and require careful management.

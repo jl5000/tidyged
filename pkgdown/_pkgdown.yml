@@ -70,8 +70,8 @@ reference:
   - matches("activ")
 - title: "Summarising tidyged objects"
 - contents:
-  - str
-  - summary
+  - matches("^str")
+  - matches("^summary")
   - matches("^num_")
 - title: "Summarising record types"
 - contents:

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9000</span>
       </span>
     </div>
 
@@ -158,16 +158,16 @@
 <h2 class="hasAnchor">
 <a href="#activation" class="anchor"></a>Activation</h2>
 <p>In the above example a series of records are created (which will be explained in more detail in the proceeding articles). After each record is created, the name(s) of the individual are defined without actually explicitly referencing the Individual record. This is because they are acting on the <em>active record</em>. A record becomes active when it is created or when it is explicitly activated.</p>
-<p>We can query the active record using the <code><a href="../reference/get_active_record.html">get_active_record()</a></code> function:</p>
+<p>We can query the active record using the <code><a href="../reference/active_record.html">active_record()</a></code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/active_record.html">active_record</a></span><span class="op">(</span><span class="va">simpsons</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@N1@"</span></code></pre></div>
 <p>Since the last record to be created was the Note record, it is the active record. The active record is stored as an attribute of the tibble.</p>
 <p>We can use activation to add to existing records. If we want to activate another record, we can activate it using the <code>activate_*()</code> family of functions together with its xref:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="st">"@I2@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/active_record.html">active_record</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@I2@"</span></code></pre></div>
 </div>
 <div id="finding-cross-reference-identifiers" class="section level2">
@@ -184,19 +184,19 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Marge"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/active_record.html">active_record</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "@I2@"</span></code></pre></div>
 <p>Note that the full name does not need to be given, since the term is partially matched. As long as it is detected in the name of the individual it will be found.</p>
 <p>In this use case, if no match or more than one match is found, it will result in an error:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Simpon"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/active_record.html">active_record</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Error in find_xref(gedcom, search_patterns = c(INDI.NAME = pattern), multiple = FALSE, : No records found that match all patterns.</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpsons</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Simpson"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/get_active_record.html">get_active_record</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/active_record.html">active_record</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Error in find_xref(gedcom, search_patterns = c(INDI.NAME = pattern), multiple = FALSE, : No unique records found that match all patterns. Try being more specific.</span></code></pre></div>
 </div>
 <div id="removing-records" class="section level2">

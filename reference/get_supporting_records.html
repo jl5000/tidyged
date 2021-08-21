@@ -81,7 +81,7 @@ are note, multimedia, source, and repository records, i.e. those providing suppo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.2.9000</span>
       </span>
     </div>
 
@@ -172,6 +172,10 @@ are note, multimedia, source, and repository records, i.e. those providing suppo
 
     <p>A character vector of supporting record xrefs.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>get_supporting_records</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"@I1@"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "@S1@" "@R1@"</div><div class='input'><span class='fu'>get_supporting_records</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"@F1@"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; character(0)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

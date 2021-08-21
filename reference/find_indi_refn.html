@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.2.9000</span>
       </span>
     </div>
 
@@ -186,6 +186,12 @@
 It's best to name your function <code>find_recordtype_*</code> and end it with <code>_all</code> if it can return multiple xrefs.
 If you provide more than one search pattern, you should also include the mode argument.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>find_indi_name</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"Mary"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "@I2@"</div><div class='input'><span class='fu'>find_indi_name_all</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"Williams"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "@I1@" "@I3@"</div><div class='input'><span class='fu'>find_repo_name</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"library"</span>, ignore_case <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "@R1@"</div><div class='input'><span class='fu'>find_sour_titl</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"Madison.+Records"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "@S1@"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

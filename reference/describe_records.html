@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.2.9000</span>
       </span>
     </div>
 
@@ -152,6 +152,16 @@ are ignored.</p></td>
 
     <p>A vector of record descriptions.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>describe_records</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='va'>sample555</span><span class='op'>$</span><span class='va'>record</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "Submitter @U1@, Reldon Poulson"                                                                                                                                                                    
+#&gt; [2] "Individual @I1@, Robert Eugene Williams, born 2 OCT 1822 in Weston, Madison, Connecticut, United States of America, died 14 APR 1905 in Stamford, Fairfield, Connecticut, United States of America"
+#&gt; [3] "Individual @I2@, Mary Ann Wilson, born BEF 1828 in Connecticut, United States of America"                                                                                                          
+#&gt; [4] "Individual @I3@, Joe Williams, child of Robert Eugene Williams and Mary Ann Wilson, born 11 JUN 1861 in Idaho Falls, Bonneville, Idaho, United States of America"                                  
+#&gt; [5] "Family @F1@, headed by Robert Eugene Williams and Mary Ann Wilson, and children: Joe Williams"                                                                                                     
+#&gt; [6] "Family @F2@, headed by Robert Eugene Williams, and children: Joe Williams"                                                                                                                         
+#&gt; [7] "Source @S1@, titled Madison County Birth, Death, and Marriage Records"                                                                                                                             
+#&gt; [8] "Repository @R1@, Family History Library"                                                                                                                                                           </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

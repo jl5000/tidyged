@@ -7,6 +7,6 @@ test_that("Function add_indi_association() @ L22", {
                           add_indi(qn = "Joe Bloggs") %>% 
                           add_indi(qn = "Jimmy Bloggs") %>% 
                           add_indi_association(associated_with = "@I1@", association = "Friend") %>% 
-                          tidyged.internals::remove_dates_for_tests(), "json2")
+                          remove_dates_for_tests(), "json2")
 })
 

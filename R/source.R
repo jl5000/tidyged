@@ -97,7 +97,7 @@ add_sour <- function(gedcom,
 #'                  add_repo(name = "The library") %>% 
 #'                  add_sour() %>% 
 #'                  add_sour_repo_citation("@R1@") %>%
-#'                  tidyged.internals::remove_dates_for_tests(), "json2")
+#'                  remove_dates_for_tests(), "json2")
 add_sour_repo_citation <- function(gedcom,
                                    repository,
                                    call_number = character(),
@@ -126,13 +126,13 @@ add_sour_repo_citation <- function(gedcom,
 #' expect_equal(gedcom(subm("Me")) %>% 
 #'                  add_repo(name = "The library") %>% 
 #'                  add_sour() %>%
-#'                  tidyged.internals::remove_dates_for_tests(),
+#'                  remove_dates_for_tests(),
 #'              gedcom(subm("Me")) %>% 
 #'                  add_repo(name = "The library") %>% 
 #'                  add_sour() %>% 
 #'                  add_sour_repo_citation("@R1@") %>%
 #'                  remove_sour_repo_citation("@R1@") %>% 
-#'                  tidyged.internals::remove_dates_for_tests())
+#'                  remove_dates_for_tests())
 remove_sour_repo_citation <- function(gedcom,
                                       repository) {
   

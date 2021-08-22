@@ -18,7 +18,7 @@
 #'                         add_indi(qn = "Joe Bloggs") %>% 
 #'                         add_indi(qn = "Jimmy Bloggs") %>% 
 #'                         add_indi_association(associated_with = "@I1@", association = "Friend") %>% 
-#'                         tidyged.internals::remove_dates_for_tests(), "json2")
+#'                         remove_dates_for_tests(), "json2")
 add_indi_association <- function(gedcom,
                                  associated_with,
                                  association,

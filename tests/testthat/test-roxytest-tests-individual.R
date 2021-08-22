@@ -6,7 +6,7 @@ test_that("Function add_indi() @ L30", {
   expect_snapshot_value(add_indi(gedcom(subm("Me")),
                                        sex = "M", user_reference_number = c(something = 1234),
                                        indi_notes = c("Note1", "Note 2")) %>% 
-                         tidyged.internals::remove_dates_for_tests(), "json2")
+                         remove_dates_for_tests(), "json2")
 })
 
 

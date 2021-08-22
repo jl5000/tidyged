@@ -47,7 +47,7 @@ test_that("Function df_indi() @ L112", {
    add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
    add_famg_event("rel", date = date_calendar(year = 1969, month = 1, day = 30),
                          event_place = place(name = "Another place")) %>% 
-   tidyged.internals::remove_dates_for_tests() %>% 
+   remove_dates_for_tests() %>% 
    df_indi(), "json2")
 })
 
@@ -63,47 +63,47 @@ test_that("Function df_famg() @ L171", {
    add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
    add_famg_event("rel", date = date_calendar(year = 1969, month = 1, day = 30),
                          event_place = place(name = "Another place")) %>% 
-   tidyged.internals::remove_dates_for_tests() %>% 
+   remove_dates_for_tests() %>% 
    df_famg(), "json2")
 })
 
 
-test_that("Function df_media() @ L205", {
+test_that("Function df_media() @ L207", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_media(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") %>% 
    add_media(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") %>% 
    add_media(file_reference = "ref3", format = "PNG", source_media = "photo", title = "photo2") %>% 
-   tidyged.internals::remove_dates_for_tests() %>% 
+   remove_dates_for_tests() %>% 
    df_media(), "json2")
 })
 
 
-test_that("Function df_sour() @ L233", {
+test_that("Function df_sour() @ L235", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_sour(originator = "author1", title = "book1") %>% 
    add_sour(originator = "author2", title = "book2") %>% 
    add_sour(originator = "author3", title = "book3") %>% 
-   tidyged.internals::remove_dates_for_tests() %>% 
+   remove_dates_for_tests() %>% 
    df_sour(), "json2")
 })
 
 
-test_that("Function df_repo() @ L257", {
+test_that("Function df_repo() @ L259", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_repo(name = "repo1", repo_address = address(city = "Brighton", state = "E. Sussex", country = "UK")) %>% 
    add_repo(name = "repo2", repo_address = address(city = "Orlando", state = "Florida", country = "USA")) %>% 
    add_repo(name = "repo3", repo_address = address(city = "Yokohama", country = "Japan")) %>% 
-   tidyged.internals::remove_dates_for_tests() %>% 
+   remove_dates_for_tests() %>% 
    df_repo(), "json2")
 })
 
 
-test_that("Function df_note() @ L284", {
+test_that("Function df_note() @ L286", {
   expect_snapshot_value(gedcom(subm("Me")) %>% 
    add_note(text = "This is a note", user_reference_numbers = 1234) %>% 
    add_note(text = "This is also a note", user_reference_numbers = 5678) %>% 
    add_note(text = "This may be a note too", user_reference_numbers = 987643) %>% 
-   tidyged.internals::remove_dates_for_tests() %>% 
+   remove_dates_for_tests() %>% 
    df_note(), "json2")
 })
 

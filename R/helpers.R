@@ -170,6 +170,21 @@ update_change_date <- function(gedcom, xref) {
   
 }
 
+#' Remove all creation dates from a tidyged object
+#' 
+#' @details This is a function used in tests so that the objects created do not
+#' change every time.
+#'
+#' @param gedcom A tidyged object.
+#'
+#' @return The tidyged object with creation dates removed.
+remove_dates_for_tests <- function(gedcom) {
+  
+  gedcom %>% 
+    tidyged.internals::remove_section(1, "CHAN", "") %>% 
+    dplyr::filter(!(level == 1 & record == "HD" & tag == "DATE"))
+  
+}
 
 #' Add a tag namespace column to a tidyged object
 #' 

@@ -103,7 +103,7 @@
         "names": {
           "type": "character",
           "attributes": {},
-          "value": ["xref", "husband", "wife", "marriage_date", "marriage_place", "num_children", "last_modified"]
+          "value": ["xref", "husband", "wife", "relationship_type", "relationship_date", "relationship_place", "num_children", "last_modified"]
         },
         "row.names": {
           "type": "integer",
@@ -135,6 +135,11 @@
         {
           "type": "character",
           "attributes": {},
+          "value": ["marriage"]
+        },
+        {
+          "type": "character",
+          "attributes": {},
           "value": ["30 JAN 1969"]
         },
         {
@@ -155,7 +160,7 @@
       ]
     }
 
-# Function df_media() @ L205
+# Function df_media() @ L207
 
     {
       "type": "list",
@@ -210,7 +215,7 @@
       ]
     }
 
-# Function df_sour() @ L233
+# Function df_sour() @ L235
 
     {
       "type": "list",
@@ -255,7 +260,7 @@
       ]
     }
 
-# Function df_repo() @ L257
+# Function df_repo() @ L259
 
     {
       "type": "list",
@@ -310,7 +315,7 @@
       ]
     }
 
-# Function df_note() @ L284
+# Function df_note() @ L286
 
     {
       "type": "list",

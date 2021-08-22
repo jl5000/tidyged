@@ -63,7 +63,7 @@
 #'                                       fact_address = address(c("line1","line2","line3","line4")),
 #'                                       fact_place = place("There",
 #'                                                     notes = "Place note")) %>% 
-#'                        tidyged.internals::remove_dates_for_tests(), "json2")
+#'                        remove_dates_for_tests(), "json2")
 #' expect_snapshot_value(gedcom(subm("Me")) %>% 
 #'                        add_indi(sex = "M") %>% 
 #'                        add_indi_fact(type = "occ",
@@ -71,7 +71,7 @@
 #'                                      fact_address = address(c("line1","line2","line3","line4")),
 #'                                      fact_place = place("There",
 #'                                                    notes = "Place note")) %>% 
-#'                        tidyged.internals::remove_dates_for_tests(), "json2")
+#'                        remove_dates_for_tests(), "json2")
 add_indi_fact <- function(gedcom,
                           type,
                           descriptor = "",

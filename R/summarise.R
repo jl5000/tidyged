@@ -107,7 +107,7 @@ str.tidyged <- function(object, ...) {
 #'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
 #'  add_famg_event("rel", date = date_calendar(year = 1969, month = 1, day = 30),
 #'                        event_place = place(name = "Another place")) %>% 
-#'  tidyged.internals::remove_dates_for_tests() %>% 
+#'  remove_dates_for_tests() %>% 
 #'  df_indi(), "json2")
 df_indi <- function(gedcom) {
   
@@ -166,7 +166,7 @@ df_indi <- function(gedcom) {
 #'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
 #'  add_famg_event("rel", date = date_calendar(year = 1969, month = 1, day = 30),
 #'                        event_place = place(name = "Another place")) %>% 
-#'  tidyged.internals::remove_dates_for_tests() %>% 
+#'  remove_dates_for_tests() %>% 
 #'  df_famg(), "json2")
 df_famg <- function(gedcom) {
   
@@ -175,6 +175,7 @@ df_famg <- function(gedcom) {
   wife_xrefs <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1)
   husb_names <- purrr::map_chr(husb_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
   wife_names <- purrr::map_chr(wife_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  rels <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "TYPE", level = 2, after_tag = "MARR")
   marr_dates <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "MARR")
   marr_places <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "MARR")
   num_chil <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NCHI", level = 1)
@@ -183,8 +184,9 @@ df_famg <- function(gedcom) {
   tibble::tibble(xref = fam_xrefs,
                  husband = stringr::str_remove_all(husb_names, "/"),
                  wife = stringr::str_remove_all(wife_names, "/"),
-                 marriage_date = marr_dates,
-                 marriage_place = marr_places,
+                 relationship_type = rels,
+                 relationship_date = marr_dates,
+                 relationship_place = marr_places,
                  num_children = num_chil) %>% 
     dplyr::mutate(num_children = ifelse(num_children == "",
                                         purrr::map_chr(xref, ~sum(dplyr::filter(gedcom, record == .x)$tag == "CHIL")),
@@ -200,7 +202,7 @@ df_famg <- function(gedcom) {
 #'  add_media(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") %>% 
 #'  add_media(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") %>% 
 #'  add_media(file_reference = "ref3", format = "PNG", source_media = "photo", title = "photo2") %>% 
-#'  tidyged.internals::remove_dates_for_tests() %>% 
+#'  remove_dates_for_tests() %>% 
 #'  df_media(), "json2")
 df_media <- function(gedcom) {
   
@@ -228,7 +230,7 @@ df_media <- function(gedcom) {
 #'  add_sour(originator = "author1", title = "book1") %>% 
 #'  add_sour(originator = "author2", title = "book2") %>% 
 #'  add_sour(originator = "author3", title = "book3") %>% 
-#'  tidyged.internals::remove_dates_for_tests() %>% 
+#'  remove_dates_for_tests() %>% 
 #'  df_sour(), "json2")
 df_sour <- function(gedcom) {
   
@@ -252,7 +254,7 @@ df_sour <- function(gedcom) {
 #'  add_repo(name = "repo1", repo_address = address(city = "Brighton", state = "E. Sussex", country = "UK")) %>% 
 #'  add_repo(name = "repo2", repo_address = address(city = "Orlando", state = "Florida", country = "USA")) %>% 
 #'  add_repo(name = "repo3", repo_address = address(city = "Yokohama", country = "Japan")) %>% 
-#'  tidyged.internals::remove_dates_for_tests() %>% 
+#'  remove_dates_for_tests() %>% 
 #'  df_repo(), "json2")
 df_repo <- function(gedcom) {
   
@@ -279,7 +281,7 @@ df_repo <- function(gedcom) {
 #'  add_note(text = "This is a note", user_reference_numbers = 1234) %>% 
 #'  add_note(text = "This is also a note", user_reference_numbers = 5678) %>% 
 #'  add_note(text = "This may be a note too", user_reference_numbers = 987643) %>% 
-#'  tidyged.internals::remove_dates_for_tests() %>% 
+#'  remove_dates_for_tests() %>% 
 #'  df_note(), "json2")
 df_note <- function(gedcom) {
   

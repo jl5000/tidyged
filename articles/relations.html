@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0.9000</span>
       </span>
     </div>
 
@@ -118,12 +118,23 @@
 <span class="fu"><a href="../reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="va">three_gen</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
+<colgroup>
+<col width="4%">
+<col width="11%">
+<col width="8%">
+<col width="16%">
+<col width="16%">
+<col width="17%">
+<col width="12%">
+<col width="12%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">xref</th>
 <th align="left">husband</th>
 <th align="left">wife</th>
-<th align="left">marriage_date</th>
-<th align="left">marriage_place</th>
+<th align="left">relationship_type</th>
+<th align="left">relationship_date</th>
+<th align="left">relationship_place</th>
 <th align="left">num_children</th>
 <th align="left">last_modified</th>
 </tr></thead>
@@ -135,8 +146,9 @@
 <td align="left">Parent 2</td>
 <td align="left"></td>
 <td align="left"></td>
+<td align="left"></td>
 <td align="left">1</td>
-<td align="left">21 AUG 2021</td>
+<td align="left">22 AUG 2021</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -145,8 +157,9 @@
 <td align="left">Spouse 1</td>
 <td align="left"></td>
 <td align="left"></td>
+<td align="left"></td>
 <td align="left">2</td>
-<td align="left">21 AUG 2021</td>
+<td align="left">22 AUG 2021</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -155,8 +168,9 @@
 <td align="left">Spouse 2</td>
 <td align="left"></td>
 <td align="left"></td>
+<td align="left"></td>
 <td align="left">2</td>
-<td align="left">21 AUG 2021</td>
+<td align="left">22 AUG 2021</td>
 </tr>
 </tbody>
 </table>
@@ -257,12 +271,23 @@
 <span class="co">#&gt; Individual @I8@, Child 3 removed</span>
 <span class="co">#&gt; Individual @I9@, Child 4 removed</span></code></pre></div>
 <table class="table">
+<colgroup>
+<col width="4%">
+<col width="8%">
+<col width="8%">
+<col width="17%">
+<col width="17%">
+<col width="18%">
+<col width="12%">
+<col width="13%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">xref</th>
 <th align="left">husband</th>
 <th align="left">wife</th>
-<th align="left">marriage_date</th>
-<th align="left">marriage_place</th>
+<th align="left">relationship_type</th>
+<th align="left">relationship_date</th>
+<th align="left">relationship_place</th>
 <th align="left">num_children</th>
 <th align="left">last_modified</th>
 </tr></thead>
@@ -273,8 +298,9 @@
 <td align="left">Parent 2</td>
 <td align="left"></td>
 <td align="left"></td>
+<td align="left"></td>
 <td align="left">0</td>
-<td align="left">21 AUG 2021</td>
+<td align="left">22 AUG 2021</td>
 </tr></tbody>
 </table>
 <p>This combination can result in the removal of a vast amount of data. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.</p>

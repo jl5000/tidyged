@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0.9000</span>
       </span>
     </div>
 
@@ -163,11 +163,12 @@
 #&gt; <span style='color: #BCBCBC;'>3</span> @I3@  Joe W… M     11 JUN 1861   Idaho Falls, B… <span style='color: #949494;'>""</span>            <span style='color: #949494;'>""</span>             
 #&gt; <span style='color: #949494;'># … with 5 more variables: mother &lt;chr&gt;, father &lt;chr&gt;, num_siblings &lt;chr&gt;,</span>
 #&gt; <span style='color: #949494;'>#   num_children &lt;int&gt;, last_modified &lt;chr&gt;</span></div><div class='input'><span class='fu'>df_famg</span><span class='op'>(</span><span class='va'>sample555</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 7</span>
-#&gt;   xref  husband  wife   marriage_date marriage_place  num_children last_modified
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        
-#&gt; <span style='color: #BCBCBC;'>1</span> @F1@  Robert … <span style='color: #949494;'>"</span>Mary… <span style='color: #949494;'>"</span>DEC 1859<span style='color: #949494;'>"</span>    <span style='color: #949494;'>"</span>Rapid City, P… 1            <span style='color: #949494;'>""</span>           
-#&gt; <span style='color: #BCBCBC;'>2</span> @F2@  Robert … <span style='color: #949494;'>""</span>     <span style='color: #949494;'>""</span>            <span style='color: #949494;'>""</span>              1            <span style='color: #949494;'>""</span>           </div><div class='input'><span class='fu'>df_sour</span><span class='op'>(</span><span class='va'>sample555</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 8</span>
+#&gt;   xref  husband                wife  relationship_ty… relationship_da… relationship_pl…
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
+#&gt; <span style='color: #BCBCBC;'>1</span> @F1@  Robert Eugene Williams <span style='color: #949494;'>"</span>Mar… <span style='color: #949494;'>""</span>               <span style='color: #949494;'>"</span>DEC 1859<span style='color: #949494;'>"</span>       <span style='color: #949494;'>"</span>Rapid City, Pe…
+#&gt; <span style='color: #BCBCBC;'>2</span> @F2@  Robert Eugene Williams <span style='color: #949494;'>""</span>    <span style='color: #949494;'>""</span>               <span style='color: #949494;'>""</span>               <span style='color: #949494;'>""</span>              
+#&gt; <span style='color: #949494;'># … with 2 more variables: num_children &lt;chr&gt;, last_modified &lt;chr&gt;</span></div><div class='input'><span class='fu'>df_sour</span><span class='op'>(</span><span class='va'>sample555</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 × 4</span>
 #&gt;   xref  originator title                                             last_modified
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        

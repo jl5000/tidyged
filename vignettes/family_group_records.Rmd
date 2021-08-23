@@ -37,7 +37,7 @@ simpson_famg <- simpson_indis %>%
 knitr::kable(dplyr::filter(simpson_famg, record == "@F1@"))
 ```
 
-As with other records, various types of user-defined references can be defined (`user_reference_numbers()`), as well as links to multimedia and notes.
+As with other records, various types of user-defined references can be defined (`user_reference_numbers`), as well as links to multimedia and notes.
 
 A Family Group record can be removed using the `remove_famg()` function.
 

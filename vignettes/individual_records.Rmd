@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 Adding individuals to a tidyged object can be achieved with the `add_indi()` function. The sex of the individual can be specified with the `sex` parameter, which is a single letter: M(ale), F(emale), (Interse)X, U(nknown), N(ot recorded). If no sex is specified, a value of "U" is used.
 
-As with other records, various types of user-defined references can be defined (`user_reference_numbers()`).
+As with other records, various types of user-defined references can be defined (`user_reference_numbers`).
 
 Individuals can be removed with the `remove_indi()` function.
 

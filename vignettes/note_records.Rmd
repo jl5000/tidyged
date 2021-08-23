@@ -24,7 +24,7 @@ gedcom() %>%
   dplyr::filter(record == "@N1@")
 ```
 
-As with other records, various types of user-defined references can be defined (`user_reference_numbers()`).
+As with other records, various types of user-defined references can be defined (`user_reference_numbers`).
 
 
 

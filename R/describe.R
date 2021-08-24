@@ -90,8 +90,11 @@ describe_famg <- function(gedcom, xref, short_desc = FALSE) {
   
   chil_names <- purrr::map_chr(chil, describe_indi, gedcom=gedcom, name_only = TRUE)
   
-  chil_str <- ifelse(length(chil) == 0, ", and no children", 
-                     paste0(", and children: ", paste(chil_names, collapse = ", ")))
+  if(length(chil) == 0) {
+    chil_str <- ", and no children"
+  } else {
+    chil_str <- paste0(", and children: ", paste(chil_names, collapse = ", "))
+  }
   
   paste0(fam_str, chil_str)
   
@@ -110,9 +113,9 @@ describe_indi <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   name <- tidyged.internals::gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
     stringr::str_remove_all("/")
   
-  if(name_only) return(ifelse(name == "", xref, name))
+  if(name_only) return(dplyr::if_else(name == "", xref, name))
   
-  name_str <- ifelse(name == "", "Unnamed individual", name)
+  name_str <- dplyr::if_else(name == "", "Unnamed individual", name)
   
   ind_str <- paste0("Individual ", xref, ", ", name_str)
   
@@ -125,15 +128,23 @@ describe_indi <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
     moth_xref <- tidyged.internals::gedcom_value(gedcom, famc, "WIFE", 1)
     fath_xref <- tidyged.internals::gedcom_value(gedcom, famc, "HUSB", 1)
     
-    moth_name <- ifelse(moth_xref == "", "", describe_indi(gedcom, moth_xref, name_only = TRUE))
-    fath_name <- ifelse(fath_xref == "", "", describe_indi(gedcom, fath_xref, name_only = TRUE))
+    if(moth_xref == ""){
+      moth_name <- ""
+    } else {
+      moth_name <- describe_indi(gedcom, moth_xref, name_only = TRUE)
+    } 
+    if(fath_xref == ""){
+      fath_name <- ""
+    } else {
+      fath_name <- describe_indi(gedcom, fath_xref, name_only = TRUE)
+    }                       
     
     par_str <- dplyr::case_when(fath_name != "" & moth_name != "" ~ paste(fath_name,"and",moth_name),
                                 fath_name != "" & moth_name == "" ~ fath_name,
                                 fath_name == "" & moth_name != "" ~ moth_name,
                                 TRUE ~ "")
     
-    ind_str <- ifelse(par_str == "", ind_str, paste0(ind_str, ", child of ", par_str))
+    ind_str <- dplyr::if_else(par_str == "", ind_str, paste0(ind_str, ", child of ", par_str))
   }
   
   dob <- tidyged.internals::gedcom_value(gedcom, xref, "DATE", level = 2, after_tag = "BIRT")
@@ -169,20 +180,28 @@ describe_media <- function(gedcom, xref, file_ref_only = FALSE, short_desc = FAL
   
   file_ref <- tidyged.internals::gedcom_value(gedcom, xref, "FILE", 1)
   
-  if (file_ref_only) return(ifelse(file_ref == "", xref, file_ref))
+  if (file_ref_only) return(dplyr::if_else(file_ref == "", xref, file_ref))
   
   media_str <- paste0("Multimedia ", xref)
   
-  if(short_desc) return(ifelse(file_ref == "", media_str, paste0(media_str, ", with file reference ", file_ref)))
+  if(short_desc) return(dplyr::if_else(file_ref == "", 
+                                       media_str, 
+                                       paste0(media_str, ", with file reference ", file_ref)))
   
   titl <- tidyged.internals::gedcom_value(gedcom, xref, "TITL", 2)
   
-  media_str <- ifelse(titl == "", media_str, paste0(media_str, ", titled ", titl))
+  media_str <- dplyr::if_else(titl == "", 
+                              media_str, 
+                              paste0(media_str, ", titled ", titl))
   
   form <- tidyged.internals::gedcom_value(gedcom, xref, "FORM", 2)
   
-  media_str <- ifelse(form == "", media_str, paste0(media_str, ", format ", form))
-  media_str <- ifelse(file_ref == "", media_str, paste0(media_str, ", with file reference ", file_ref))
+  media_str <- dplyr::if_else(form == "", 
+                              media_str, 
+                              paste0(media_str, ", format ", form))
+  media_str <- dplyr::if_else(file_ref == "", 
+                              media_str, 
+                              paste0(media_str, ", with file reference ", file_ref))
   media_str
   
 }
@@ -195,16 +214,16 @@ describe_sour <- function(gedcom, xref, title_only = FALSE, short_desc = FALSE) 
   
   titl <- tidyged.internals::gedcom_value(gedcom, xref, "TITL", 1)
   
-  if (title_only) return(ifelse(titl == "", xref, titl))
+  if (title_only) return(dplyr::if_else(titl == "", xref, titl))
   
   sour_str <- paste0("Source ", xref)
-  sour_str <- ifelse(titl == "", sour_str, paste0(sour_str, ", titled ", titl))
+  sour_str <- dplyr::if_else(titl == "", sour_str, paste0(sour_str, ", titled ", titl))
   
   if (short_desc) return(sour_str)
   
   orig <- tidyged.internals::gedcom_value(gedcom, xref, "AUTH", 1)
   
-  ifelse(orig == "", sour_str, paste0(sour_str, ", by ", orig))
+  dplyr::if_else(orig == "", sour_str, paste0(sour_str, ", by ", orig))
 }
 
 #' @rdname describe_famg
@@ -215,7 +234,7 @@ describe_repo <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   
   name <- tidyged.internals::gedcom_value(gedcom, xref, "NAME", 1)
   
-  if(name_only) return(ifelse(name == "", xref, name))
+  if(name_only) return(dplyr::if_else(name == "", xref, name))
   
   paste0("Repository ", xref, ", ", name)
   
@@ -231,8 +250,8 @@ describe_note <- function(gedcom, xref, short_desc = FALSE) {
   
   text <- tidyged.internals::gedcom_value(gedcom, xref, "NOTE", 0)
   
-  ifelse(short_desc, paste0(note_str, stringr::str_sub(text, 1, 30), "..."), 
-         paste0(note_str, text))
+  dplyr::if_else(short_desc, paste0(note_str, stringr::str_sub(text, 1, 30), "..."), 
+                 paste0(note_str, text))
   
 }
 
@@ -244,10 +263,10 @@ describe_subm <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   
   name <- tidyged.internals::gedcom_value(gedcom, xref, "NAME", 1)
   
-  if (name_only) return(ifelse(name == "", xref, name))
+  if (name_only) return(dplyr::if_else(name == "", xref, name))
   
   subm_str <- paste0("Submitter ", xref)
   
-  ifelse(name == "", subm_str, paste0(subm_str, ", ", name))
+  dplyr::if_else(name == "", subm_str, paste0(subm_str, ", ", name))
   
 }

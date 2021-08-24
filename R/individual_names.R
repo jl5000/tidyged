@@ -192,7 +192,7 @@ remove_indi_name_var <- function(gedcom,
   
   rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
     tidyged.internals::identify_section(2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
-                     variation_name, xrefs = xref, first_only = TRUE)
+                                        variation_name, xrefs = xref, first_only = TRUE)
   
   gedcom %>%
     dplyr::slice(-rows_to_remove) %>% 

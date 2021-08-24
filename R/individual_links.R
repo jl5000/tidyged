@@ -252,11 +252,14 @@ add_indi_links_to_families <- function(gedcom,
     sex <- tidyged.internals::gedcom_value(gedcom, xref, "SEX", 1)
     if(!sex %in% c("M", "F")) {
       other_sex <- dplyr::filter(gedcom, record == xref_fams, level == 1, tag %in% c("HUSB","WIFE"))$tag
-      sex <- ifelse(length(other_sex) == 0 || other_sex == "WIFE", "M", "F")
+      sex <- dplyr::if_else(length(other_sex) == 0 || other_sex == "WIFE", "M", "F")
     }
     gedcom <- tibble::add_row(gedcom,
-                            tibble::tibble(record = xref_fams, level = 1, tag = ifelse(sex == "M", "HUSB", "WIFE"), value = xref), 
-                            .before = next_row)
+                              tibble::tibble(record = xref_fams, 
+                                             level = 1, 
+                                             tag = dplyr::if_else(sex == "M", "HUSB", "WIFE"), 
+                                             value = xref), 
+                              .before = next_row)
   }
   
   gedcom

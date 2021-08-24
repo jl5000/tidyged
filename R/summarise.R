@@ -140,11 +140,11 @@ df_indi <- function(gedcom) {
                  father = stringr::str_remove_all(ind_fath, "/"),
                  num_siblings = ind_sibl) %>% 
     dplyr::add_count(mother_xref, father_xref, name = "full") %>%
-    dplyr::mutate(num_siblings = ifelse(num_siblings == "", 
-                                        as.character(full - 1),
-                                        as.character(as.integer(num_siblings) - 1)),
-                  num_siblings = ifelse(mother_xref == "" | father_xref == "",
-                                        "", num_siblings)) %>% 
+    dplyr::mutate(num_siblings = dplyr::if_else(num_siblings == "", 
+                                                as.character(full - 1),
+                                                as.character(as.integer(num_siblings) - 1)),
+                  num_siblings = dplyr::if_else(mother_xref == "" | father_xref == "",
+                                                "", num_siblings)) %>% 
     dplyr::mutate(num_children = stringr::str_count(paste(moth_xref,collapse = "|"), xref) +
                     stringr::str_count(paste(fath_xref,collapse = "|"), xref),
                   last_modified = date_chan) %>% 
@@ -188,9 +188,10 @@ df_famg <- function(gedcom) {
                  relationship_date = marr_dates,
                  relationship_place = marr_places,
                  num_children = num_chil) %>% 
-    dplyr::mutate(num_children = ifelse(num_children == "",
-                                        purrr::map_chr(xref, ~sum(dplyr::filter(gedcom, record == .x)$tag == "CHIL")),
-                                        num_children),
+    dplyr::mutate(num_children = dplyr::if_else(num_children == "",
+                                                purrr::map_chr(xref, 
+                                                               ~sum(dplyr::filter(gedcom, record == .x)$tag == "CHIL")),
+                                                num_children),
                   last_modified = date_chan)
   
 }
@@ -341,7 +342,7 @@ fact_summary <- function(gedcom, xref, indi) {
                    dplyr::select(tag_ns, value) %>% 
                    dplyr::slice(.x) %>% 
                    # get rid of FAM- or INDI-
-                   dplyr::mutate(tag_ns = stringr::str_sub(tag_ns, ifelse(indi, 6,5), -1)) %>% 
+                   dplyr::mutate(tag_ns = stringr::str_sub(tag_ns, dplyr::if_else(indi, 6,5), -1)) %>% 
                    # extract fact type into own column
                    dplyr::mutate(fact_type = stringr::str_extract(tag_ns, "^[A-Z]+")) %>% 
                    # replace fact tags with names
@@ -352,9 +353,9 @@ fact_summary <- function(gedcom, xref, indi) {
                    dplyr::mutate(tag_ns = stringr::str_extract(tag_ns, 
                                                                paste(paste0(all_tags, "$"),collapse="|"))) %>%
                    # coalesce fact tags into one
-                   dplyr::mutate(tag_ns = ifelse(tag_ns %in% fact_tags, "description", tag_ns)) %>% 
+                   dplyr::mutate(tag_ns = dplyr::if_else(tag_ns %in% fact_tags, "description", tag_ns)) %>% 
                    tidyr::pivot_wider(names_from = tag_ns, values_from = value)) %>% 
-    dplyr::mutate(dplyr::across(everything(), ~ ifelse(. == "", NA_character_, .))) %>% 
+    dplyr::mutate(dplyr::across(everything(), ~ dplyr::if_else(. == "", NA_character_, .))) %>% 
     # add missing columns
     dplyr::bind_rows(purrr::map_dfr(c(details_tags, "fact_type", "description"), 
                                     ~tibble::tibble(!!.x := character() ) )) %>% 

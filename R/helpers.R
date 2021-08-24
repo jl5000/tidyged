@@ -201,8 +201,11 @@ mutate_tag_namespace <- function(gedcom){
   gedcom <- dplyr::mutate(gedcom, tag_ns = NA_character_)
   
   for(lv in min(gedcom$level):max(gedcom$level)) {
-    gedcom <- dplyr::mutate(gedcom, tag_ns = ifelse(level == lv, paste(tag_ns, tag, sep = "."), tag_ns)) %>% 
-      dplyr::mutate(tag_ns = ifelse(level > lv, NA_character_, tag_ns)) %>% 
+    gedcom <- dplyr::mutate(gedcom, 
+                            tag_ns = dplyr::if_else(level == lv, 
+                                                    paste(tag_ns, tag, sep = "."), 
+                                                    tag_ns)) %>% 
+      dplyr::mutate(tag_ns = dplyr::if_else(level > lv, NA_character_, tag_ns)) %>% 
       tidyr::fill(tag_ns)
   }
   
@@ -213,9 +216,12 @@ mutate_tag_namespace <- function(gedcom){
 
 create_note_structures <- function(gedcom, notes) {
   purrr::map_chr(notes, 
-                 ~ifelse(grepl(tidyged.internals::reg_xref(TRUE), .x),
-                         get_valid_xref(gedcom, .x, .pkgenv$record_string_note, is_note),
-                         .x)) %>% 
+                 ~if(grepl(tidyged.internals::reg_xref(TRUE), .x)){
+                   get_valid_xref(gedcom, .x, .pkgenv$record_string_note, is_note)
+                 } else {
+                   .x
+                 }
+  ) %>% 
     purrr::map(tidyged.internals::NOTE_STRUCTURE)
 }
 

@@ -332,7 +332,7 @@ fact_summary <- function(gedcom, xref, indi) {
   if(indi) {
     details_tags <- c(details_tags, "AGE")
   } else {
-    details_tags <- c(details_tags, "HUSB.AGE", "WIFE.AGE")
+    details_tags <- c(details_tags, "HUSB_AGE", "WIFE_AGE")
   }
   all_tags <- c(details_tags, unname(fact_tags))
   

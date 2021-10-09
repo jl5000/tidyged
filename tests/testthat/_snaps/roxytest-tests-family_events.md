@@ -43,7 +43,7 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "gedcompendium", "gedcompendium", "The 'gedcompendium' ecosystem of packages for the R language", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "M", "Joe Bloggs", "Joe Bloggs", "@F1@", "", "F", "Jess Bloggs", "Jess Bloggs", "@F1@", "", "F", "Jessie Bloggs", "Jessie Bloggs", "@F1@", "birth", "", "@I1@", "@I2@", "@I3@", "Y", "marriage", "30 JAN 1969", "Another place", ""]
+          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "gedcompendium", "gedcompendium", "The 'gedcompendium' ecosystem of packages for the R language", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "M", "Joe Bloggs", "Joe Bloggs", "@F1@", "", "F", "Jess Bloggs", "Jess Bloggs", "@F1@", "", "F", "Jessie Bloggs", "Jessie Bloggs", "@F1@", "birth", "", "@I1@", "@I2@", "@I3@", "", "marriage", "30 JAN 1969", "Another place", ""]
         }
       ]
     }

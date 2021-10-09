@@ -47,7 +47,7 @@ Events associated with a family group, such as marriages and censuses, are creat
 
 There are some types of event; census and residence, that can apply for Individuals and Family Groups. It is highly recommended you do not use these events for family groups, only for individuals. It may intuitively be more efficient to define an event for an entire family group, but other GEDCOM parsers can have difficulty with this, and defining these events for each individual separately is recommended. Despite the name, Family Group records are actually more about the union of two people, rather than the family unit as a whole, and so the remaining events are related to marriages and divorces.
 
-In the example below, a relationship is added. The default type of relationship is a marriage, but this can be changed using the `classification` parameter. Ages of the couple when they got married can be defined used the `husband_age` and `wife_age` parameters.
+In the example below, a relationship is added. The default type of relationship is a marriage, but this can be changed using the `classification` parameter. Ages of the couple when they got married can be defined used the `husband_age` and `wife_age` parameters. Unlike the GEDCOM specification, in a tidyged object these ages are given on single lines instead of being split across multiple lines; however they do revert to the specification on export.
 
 ```{r}
 simpson_famg %>% 

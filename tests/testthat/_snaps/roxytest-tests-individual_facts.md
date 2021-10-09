@@ -43,7 +43,7 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "gedcompendium", "gedcompendium", "The 'gedcompendium' ecosystem of packages for the R language", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "M", "Y", "1956", "There", "Place note", "", "line1", "line2", "line3", "1y", ""]
+          "value": ["", "", "5.5.5", "LINEAGE-LINKED", "5.5.5", "UTF-8", "gedcompendium", "gedcompendium", "The 'gedcompendium' ecosystem of packages for the R language", "Jamie Lendrum", "", "jalendrum@gmail.com", "https://jl5000.github.io/tidyged/", "English", "@U1@", "", "Me", "", "M", "", "1956", "There", "Place note", "", "line1", "line2", "line3", "1y", ""]
         }
       ]
     }

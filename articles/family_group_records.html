@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9000</span>
       </span>
     </div>
 
@@ -173,7 +173,7 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">24 AUG 2021</td>
+<td align="left">9 OCT 2021</td>
 </tr>
 </tbody>
 </table>
@@ -185,7 +185,7 @@
 <a href="#family-events" class="anchor"></a>Family events</h2>
 <p>Events associated with a family group, such as marriages and censuses, are created using the <code><a href="../reference/add_famg_event.html">add_famg_event()</a></code> function. The full list of events that can be created are given in the Details section of the function help page.</p>
 <p>There are some types of event; census and residence, that can apply for Individuals and Family Groups. It is highly recommended you do not use these events for family groups, only for individuals. It may intuitively be more efficient to define an event for an entire family group, but other GEDCOM parsers can have difficulty with this, and defining these events for each individual separately is recommended. Despite the name, Family Group records are actually more about the union of two people, rather than the family unit as a whole, and so the remaining events are related to marriages and divorces.</p>
-<p>In the example below, a relationship is added. The default type of relationship is a marriage, but this can be changed using the <code>classification</code> parameter. Ages of the couple when they got married can be defined used the <code>husband_age</code> and <code>wife_age</code> parameters.</p>
+<p>In the example below, a relationship is added. The default type of relationship is a marriage, but this can be changed using the <code>classification</code> parameter. Ages of the couple when they got married can be defined used the <code>husband_age</code> and <code>wife_age</code> parameters. Unlike the GEDCOM specification, in a tidyged object these ages are given on single lines instead of being split across multiple lines; however they do revert to the specification on export.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simpson_famg</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_famg_event.html">add_famg_event</a></span><span class="op">(</span><span class="st">"rel"</span>, date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1986</span>, <span class="fl">5</span>, <span class="fl">11</span><span class="op">)</span>,
@@ -251,34 +251,20 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">MARR</td>
-<td align="left">Y</td>
+<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="right">2</td>
 <td align="left">
 <span class="citation">@F1</span>@</td>
-<td align="left">HUSB</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-<td align="left">AGE</td>
+<td align="left">HUSB_AGE</td>
 <td align="left">20y</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">2</td>
 <td align="left">
 <span class="citation">@F1</span>@</td>
-<td align="left">WIFE</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">
-<span class="citation">@F1</span>@</td>
-<td align="left">AGE</td>
+<td align="left">WIFE_AGE</td>
 <td align="left">19y</td>
 </tr>
 <tr class="even">
@@ -307,7 +293,7 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">24 AUG 2021</td>
+<td align="left">9 OCT 2021</td>
 </tr>
 </tbody>
 </table>

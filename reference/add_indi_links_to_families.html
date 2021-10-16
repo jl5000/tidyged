@@ -82,7 +82,7 @@ to this individual." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9000</span>
       </span>
     </div>
 
@@ -135,11 +135,14 @@ to this individual.</p>
     <pre class="usage"><span class='fu'>add_indi_links_to_families</span><span class='op'>(</span>
   <span class='va'>gedcom</span>,
   parents <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
-  linkage_type <span class='op'>=</span> <span class='st'>"birth"</span>,
-  linkage_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  child_linkage_type <span class='op'>=</span> <span class='st'>"birth"</span>,
+  child_linkage_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   spouse <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   children <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  spouse_linkage_notes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   xref <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  famg_xref_chil <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  famg_xref_spou <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   update_date_changed <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
@@ -152,17 +155,17 @@ to this individual.</p>
     </tr>
     <tr>
       <th>parents</th>
-      <td><p>A character vector of parents so that this person can be linked to a Family Group
+      <td><p>A character vector of parent xrefs so that this person can be linked to a Family Group
 record as a child.</p></td>
     </tr>
     <tr>
-      <th>linkage_type</th>
+      <th>child_linkage_type</th>
       <td><p>A code used to indicate the relationship with the parent(s). Either,
 "birth" (default), "foster", or "adopted".</p></td>
     </tr>
     <tr>
-      <th>linkage_notes</th>
-      <td><p>A character vector of notes accompanying this linkage.
+      <th>child_linkage_notes</th>
+      <td><p>A character vector of notes accompanying the family linkage as a child.
 These could be xrefs to existing Note records.</p></td>
     </tr>
     <tr>
@@ -176,12 +179,27 @@ a Family Group record as a spouse.</p></td>
 record as a spouse.</p></td>
     </tr>
     <tr>
+      <th>spouse_linkage_notes</th>
+      <td><p>A character vector of notes accompanying the family linkage as a spouse
+These could be xrefs to existing Note records.</p></td>
+    </tr>
+    <tr>
       <th>xref</th>
       <td><p>The xref of a record to act on if one is not activated (will override active record).</p></td>
     </tr>
     <tr>
+      <th>famg_xref_chil</th>
+      <td><p>The xref of a Family Group record to be added to as a child. This is not required
+if any parents are given, but if it is provided, it will override any parents given.</p></td>
+    </tr>
+    <tr>
+      <th>famg_xref_spou</th>
+      <td><p>The xref of a Family Group record to be added to as a spouse. This is not required
+if the spouse or children are given, but if it is provided, it will override any spouses or children given.</p></td>
+    </tr>
+    <tr>
       <th>update_date_changed</th>
-      <td><p>Whether to add/update the change date for the record.</p></td>
+      <td><p>Whether to add/update the change date for the records.</p></td>
     </tr>
     </table>
 
@@ -189,6 +207,10 @@ record as a spouse.</p></td>
 
     <p>An updated tidyged object with an expanded Individual record including
 the family link(s) and expanded Family Group record(s) linking to this individual.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The function will only add one link to a Family Group record as a child, and one link
+to a Family Group record as a spouse.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

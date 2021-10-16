@@ -35,3 +35,6 @@ this family link.
 \description{
 Add a family link as a child
 }
+\details{
+These are only to be used by the add_famg function. The child is added separately.
+}

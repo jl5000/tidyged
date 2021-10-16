@@ -31,3 +31,6 @@ this family link.
 \description{
 Add a family link as a spouse
 }
+\details{
+These are only to be used by the add_famg function. The spouse is added separately.
+}

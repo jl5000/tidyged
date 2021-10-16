@@ -33,8 +33,8 @@ add_indi_association <- function(gedcom,
   asso_notes <- create_note_structures(gedcom, association_notes)
   
   asso_str <- tidyged.internals::ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
-                                                          relation_is_descriptor = association,
-                                                          notes = asso_notes) %>% 
+                                                       relation_is_descriptor = association,
+                                                       notes = asso_notes) %>% 
     tidyged.internals::add_levels(1)
   
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
@@ -48,6 +48,8 @@ add_indi_association <- function(gedcom,
 }
 
 #' Add a family link as a spouse
+#' 
+#' @details These are only to be used by the add_famg function. The spouse is added separately.
 #'
 #' @param gedcom A tidyged object.
 #' @param family_xref The xref of the family associated of which this individual is a spouse.
@@ -82,6 +84,8 @@ add_indi_family_link_as_spouse <- function(gedcom,
 }
 
 #' Add a family link as a child
+#' 
+#' @details These are only to be used by the add_famg function. The child is added separately.
 #'
 #' @param gedcom A tidyged object.
 #' @param family_xref The xref of the family associated of which this individual is a child.
@@ -95,11 +99,11 @@ add_indi_family_link_as_spouse <- function(gedcom,
 #' @return An updated tidyged object with an expanded Individual record including
 #' this family link.
 add_indi_family_link_as_child <- function(gedcom, 
-                                                family_xref,
-                                                linkage_type = "birth",
-                                                linkage_notes = character(),
-                                                xref = character(),
-                                                update_date_changed = TRUE) {
+                                          family_xref,
+                                          linkage_type = "birth",
+                                          linkage_notes = character(),
+                                          xref = character(),
+                                          update_date_changed = TRUE) {
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
@@ -125,77 +129,97 @@ add_indi_family_link_as_child <- function(gedcom,
 #' This function adds links connecting an Individual record to existing Family Group records. Family 
 #' links will be added to the Individual record, and the Family Group records will be updated to link
 #' to this individual.
+#' 
+#' @details The function will only add one link to a Family Group record as a child, and one link
+#' to a Family Group record as a spouse.
 #'
 #' @param gedcom A tidyged object.
-#' @param parents A character vector of parents so that this person can be linked to a Family Group
+#' @param parents A character vector of parent xrefs so that this person can be linked to a Family Group
 #' record as a child. 
-#' @param linkage_type A code used to indicate the relationship with the parent(s). Either, 
+#' @param child_linkage_type A code used to indicate the relationship with the parent(s). Either, 
 #' "birth" (default), "foster", or "adopted".
-#' @param linkage_notes A character vector of notes accompanying this linkage.
+#' @param child_linkage_notes A character vector of notes accompanying the family linkage as a child.
 #' These could be xrefs to existing Note records.
 #' @param spouse The xref of the spouse so that this person can be linked to 
 #' a Family Group record as a spouse.
 #' @param children A character vector of children xrefs so that this person can be linked to a Family Group
 #' record as a spouse.
+#' @param spouse_linkage_notes A character vector of notes accompanying the family linkage as a spouse
+#' These could be xrefs to existing Note records.
 #' @param xref The xref of a record to act on if one is not activated (will override active record).
-#' @param update_date_changed Whether to add/update the change date for the record.
+#' @param famg_xref_chil The xref of a Family Group record to be added to as a child. This is not required
+#' if any parents are given, but if it is provided, it will override any parents given.
+#' @param famg_xref_spou The xref of a Family Group record to be added to as a spouse. This is not required
+#' if the spouse or children are given, but if it is provided, it will override any spouses or children given.
+#' @param update_date_changed Whether to add/update the change date for the records.
 #'
 #' @return An updated tidyged object with an expanded Individual record including
 #' the family link(s) and expanded Family Group record(s) linking to this individual.
 #' @export
 add_indi_links_to_families <- function(gedcom,
                                        parents = character(),
-                                       linkage_type = "birth",
-                                       linkage_notes = character(),
+                                       child_linkage_type = "birth",
+                                       child_linkage_notes = character(),
                                        spouse = character(),
                                        children = character(),
+                                       spouse_linkage_notes = character(),
                                        xref = character(),
+                                       famg_xref_chil = character(),
+                                       famg_xref_spou = character(),
                                        update_date_changed = TRUE) {
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   if(length(spouse) > 1) stop("Only one spouse should be provided")
   
-  if(length(parents) > 0) {
+  # Get famg_xref_chil
+  if(length(famg_xref_chil) == 1){
+    famg_xref_chil <- get_valid_xref(gedcom, famg_xref_chil, .pkgenv$record_string_famg, is_famg)
+  } else if(length(parents) > 0) {
+    
     parents <- purrr::map_chr(parents, get_valid_xref, 
                               gedcom = gedcom,
                               record_type = .pkgenv$record_string_indi, 
                               record_type_fn = is_indi)
     
-    xref_famc <- dplyr::filter(gedcom, level == 1, tag %in% c("HUSB","WIFE"), value %in% parents) %>% 
+    famg_xref_chil <- dplyr::filter(gedcom, level == 1, tag %in% c("HUSB","WIFE"), value %in% parents) %>% 
       dplyr::count(record) %>% 
       dplyr::filter(n == max(n)) %>% 
       dplyr::pull(record)
     
-    if(length(xref_famc) == 0) stop("An existing family could not be found with this parent.
-                                    This function is only to be used to add individuals to an existing Family Group record.")
+    if(length(famg_xref_chil) == 0) 
+      stop("An existing family could not be found with this parent.
+            This function is only to be used to add individuals to an existing Family Group record.")
     
-    if(length(xref_famc) == 1) {
-      gedcom <- add_indi_family_link_as_child(gedcom, xref_famc, linkage_type,
-                                              linkage_notes, update_date_changed = update_date_changed)
-    } else {
-      choice <- utils::select.list(title = paste0("In which Family Group is ",
-                                                  describe_indi(gedcom, xref, name_only = TRUE),
-                                                  " a child?"),
-                                   choices = describe_records(gedcom, xref_famc),
-                                   multiple = FALSE)
-      
-      xref_famc <- stringr::str_extract(choice, tidyged.internals::reg_xref(FALSE))
-      
-      gedcom <- add_indi_family_link_as_child(gedcom, xref_famc, linkage_type,
-                                              linkage_notes, update_date_changed = update_date_changed)
-    }
+    if(length(famg_xref_chil) > 1) 
+      stop("More than one Family Group record was found with this parent.
+            Try specifying an additional parent or provide the Family Group record xref directly (with the famg_xref_chil parameter).")
+    
+  }
+  
+  # Use famg_xref_chil to add to records
+  if(length(famg_xref_chil) == 1){
+    
+    # add link to indi record
+    gedcom <- add_indi_family_link_as_child(gedcom, famg_xref_chil, child_linkage_type, child_linkage_notes,
+                                            xref, update_date_changed)
     
     # add child to family record
-    next_row <- tidyged.internals::find_insertion_point(gedcom, xref_famc, 0, "FAM")
+    next_row <- tidyged.internals::find_insertion_point(gedcom, famg_xref_chil, 0, "FAM")
     gedcom <- tibble::add_row(gedcom,
-                              tibble::tibble(record = xref_famc, level = 1, tag = "CHIL", value = xref), 
+                              tibble::tibble(record = famg_xref_chil, level = 1, tag = "CHIL", value = xref), 
                               .before = next_row) %>% 
-      order_famg_children(xref_famc)
+      order_famg_children(famg_xref_chil)
+    
+    if(update_date_changed) gedcom <- update_change_date(gedcom, famg_xref_chil)
+    
   }
   
   
-  if(length(children) > 0 | length(spouse) > 0) {
+  # Get xref_fams
+  if(length(famg_xref_spou) == 1){
+    famg_xref_spou <- get_valid_xref(gedcom, famg_xref_spou, .pkgenv$record_string_famg, is_famg)
+  } else if(length(children) > 0 | length(spouse) > 0){
     
     xref_fams1 <- NULL
     xref_fams2 <- NULL
@@ -227,39 +251,38 @@ add_indi_links_to_families <- function(gedcom,
         dplyr::pull(record)
     }
     
-    xref_fams <- unique(c(xref_fams1, xref_fams2))
+    famg_xref_spou <- unique(c(xref_fams1, xref_fams2))
     
-    if(length(xref_fams) == 0) stop("An existing family could not be found with this spouse/children.
+    if(length(famg_xref_spou) == 0) stop("An existing family could not be found with this spouse/children.
                                     This function is only to be used to add individuals to an existing Family Group record.")
     
-    if(length(xref_fams) == 1) {
-      gedcom <- add_indi_family_link_as_spouse(gedcom, xref_fams, update_date_changed = update_date_changed)
-    } else {
-      choice <- utils::select.list(title = paste0("In which Family Group is ",
-                                                  describe_indi(gedcom, xref, name_only = TRUE),
-                                                  " a spouse?"),
-                                   choices = describe_records(gedcom, xref_fams),
-                                   multiple = FALSE)
-      
-      xref_fams <- stringr::str_extract(choice, tidyged.internals::reg_xref(FALSE))
-      
-      gedcom <- add_indi_family_link_as_spouse(gedcom, xref_fams, update_date_changed = update_date_changed)
-    }
+    if(length(famg_xref_spou) > 1) 
+      stop("More than one Family Group record was found with this spouse/children.
+            Try specifying additional children or provide the Family Group record xref directly (with the famg_xref_spou parameter).")
+  }
+  
+  # Use famg_xref_spou to add to records
+  if(length(famg_xref_spou) == 1){
+    
+    # add link to indi record
+    gedcom <- add_indi_family_link_as_spouse(gedcom, famg_xref_spou, spouse_linkage_notes, xref, update_date_changed)
     
     # add spouse to family record
-    next_row <- tidyged.internals::find_insertion_point(gedcom, xref_fams, 0, "FAM")
+    next_row <- tidyged.internals::find_insertion_point(gedcom, famg_xref_spou, 0, "FAM")
     # determine whether to use HUSB or WIFE tag - look at sex first, then look at other tag
     sex <- tidyged.internals::gedcom_value(gedcom, xref, "SEX", 1)
     if(!sex %in% c("M", "F")) {
-      other_sex <- dplyr::filter(gedcom, record == xref_fams, level == 1, tag %in% c("HUSB","WIFE"))$tag
+      other_sex <- dplyr::filter(gedcom, record == famg_xref_spou, level == 1, tag %in% c("HUSB","WIFE"))$tag
       sex <- dplyr::if_else(length(other_sex) == 0 || other_sex == "WIFE", "M", "F")
     }
     gedcom <- tibble::add_row(gedcom,
-                              tibble::tibble(record = xref_fams, 
+                              tibble::tibble(record = famg_xref_spou, 
                                              level = 1, 
                                              tag = dplyr::if_else(sex == "M", "HUSB", "WIFE"), 
                                              value = xref), 
                               .before = next_row)
+    
+    if(update_date_changed) gedcom <- update_change_date(gedcom, famg_xref_spou)
   }
   
   gedcom

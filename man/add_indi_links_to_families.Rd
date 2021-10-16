@@ -7,24 +7,27 @@
 add_indi_links_to_families(
   gedcom,
   parents = character(),
-  linkage_type = "birth",
-  linkage_notes = character(),
+  child_linkage_type = "birth",
+  child_linkage_notes = character(),
   spouse = character(),
   children = character(),
+  spouse_linkage_notes = character(),
   xref = character(),
+  famg_xref_chil = character(),
+  famg_xref_spou = character(),
   update_date_changed = TRUE
 )
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{parents}{A character vector of parents so that this person can be linked to a Family Group
+\item{parents}{A character vector of parent xrefs so that this person can be linked to a Family Group
 record as a child.}
 
-\item{linkage_type}{A code used to indicate the relationship with the parent(s). Either,
+\item{child_linkage_type}{A code used to indicate the relationship with the parent(s). Either,
 "birth" (default), "foster", or "adopted".}
 
-\item{linkage_notes}{A character vector of notes accompanying this linkage.
+\item{child_linkage_notes}{A character vector of notes accompanying the family linkage as a child.
 These could be xrefs to existing Note records.}
 
 \item{spouse}{The xref of the spouse so that this person can be linked to
@@ -33,9 +36,18 @@ a Family Group record as a spouse.}
 \item{children}{A character vector of children xrefs so that this person can be linked to a Family Group
 record as a spouse.}
 
+\item{spouse_linkage_notes}{A character vector of notes accompanying the family linkage as a spouse
+These could be xrefs to existing Note records.}
+
 \item{xref}{The xref of a record to act on if one is not activated (will override active record).}
 
-\item{update_date_changed}{Whether to add/update the change date for the record.}
+\item{famg_xref_chil}{The xref of a Family Group record to be added to as a child. This is not required
+if any parents are given, but if it is provided, it will override any parents given.}
+
+\item{famg_xref_spou}{The xref of a Family Group record to be added to as a spouse. This is not required
+if the spouse or children are given, but if it is provided, it will override any spouses or children given.}
+
+\item{update_date_changed}{Whether to add/update the change date for the records.}
 }
 \value{
 An updated tidyged object with an expanded Individual record including
@@ -45,4 +57,8 @@ the family link(s) and expanded Family Group record(s) linking to this individua
 This function adds links connecting an Individual record to existing Family Group records. Family
 links will be added to the Individual record, and the Family Group records will be updated to link
 to this individual.
+}
+\details{
+The function will only add one link to a Family Group record as a child, and one link
+to a Family Group record as a spouse.
 }

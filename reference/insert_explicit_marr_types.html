@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a description of a record — describe_famg • tidyged</title>
+<title>Insert explicit marriage subrecords for a Family Group record — insert_explicit_marr_types • tidyged</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get a description of a record — describe_famg" />
-<meta property="og:description" content="Get descriptions of a record at various degrees of detail." />
+<meta property="og:title" content="Insert explicit marriage subrecords for a Family Group record — insert_explicit_marr_types" />
+<meta property="og:description" content="Insert explicit marriage subrecords for a Family Group record" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,28 +119,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a description of a record</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/describe.R'><code>R/describe.R</code></a></small>
-    <div class="hidden name"><code>describe_famg.Rd</code></div>
+    <h1>Insert explicit marriage subrecords for a Family Group record</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jl5000/tidyged/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>insert_explicit_marr_types.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get descriptions of a record at various degrees of detail.</p>
+    <p>Insert explicit marriage subrecords for a Family Group record</p>
     </div>
 
-    <pre class="usage"><span class='fu'>describe_famg</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_indi</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, name_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_media</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, file_ref_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_sour</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, title_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_repo</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, name_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_note</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>describe_subm</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span>, name_only <span class='op'>=</span> <span class='cn'>FALSE</span>, short_desc <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>insert_explicit_marr_types</span><span class='op'>(</span><span class='va'>gedcom</span>, <span class='va'>xref</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,46 +139,14 @@
     </tr>
     <tr>
       <th>xref</th>
-      <td><p>An xref of a record.</p></td>
-    </tr>
-    <tr>
-      <th>short_desc</th>
-      <td><p>Whether to return a shorter description.</p></td>
-    </tr>
-    <tr>
-      <th>name_only</th>
-      <td><p>Whether to return the individual/repository name only. If none is found, the xref
-is returned.</p></td>
-    </tr>
-    <tr>
-      <th>file_ref_only</th>
-      <td><p>Whether to return the multimedia file reference only. If none is found, the xref
-is returned.</p></td>
-    </tr>
-    <tr>
-      <th>title_only</th>
-      <td><p>Whether to return the source title only. If none is found, the xref
-is returned.</p></td>
+      <td><p>The xref of a Family Group record.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character string describing the record.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <p>The same tidyged object with explicit marriage subrecords in the Family Group record.</p>
 
-    <p>This function offers three levels of detail. For example, individual records can be:</p>
-<p>"Joe Bloggs" (name_only = TRUE)
-"Individual @I1@, Joe Bloggs" (short_desc = TRUE)
-"Individual @I1@, Joe Bloggs, child of X and Y, born on x/x/x in place, died on x/x/x in place" (short_desc = FALSE)</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>describe_famg</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"@F1@"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "Family @F1@, headed by Robert Eugene Williams and Mary Ann Wilson, and children: Joe Williams"</div><div class='input'><span class='fu'>describe_famg</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"@F1@"</span>, short_desc  <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "Family @F1@, headed by Robert Eugene Williams and Mary Ann Wilson"</div><div class='input'><span class='fu'>describe_indi</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"@I1@"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "Individual @I1@, Robert Eugene Williams, born 2 OCT 1822 in Weston, Madison, Connecticut, United States of America, died 14 APR 1905 in Stamford, Fairfield, Connecticut, United States of America"</div><div class='input'><span class='fu'>describe_indi</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"@I1@"</span>, short_desc <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "Individual @I1@, Robert Eugene Williams"</div><div class='input'><span class='fu'>describe_indi</span><span class='op'>(</span><span class='va'>sample555</span>, <span class='st'>"@I1@"</span>, name_only <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "Robert Eugene Williams"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

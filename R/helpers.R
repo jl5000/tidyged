@@ -140,6 +140,33 @@ order_famg_children <- function(gedcom, xref) {
     
 }
 
+#' Insert explicit marriage subrecords for a Family Group record
+#'
+#' @param gedcom A tidyged object.
+#' @param xref The xref of a Family Group record.
+#'
+#' @return The same tidyged object with explicit marriage subrecords in the Family Group record.
+#' @export
+insert_explicit_marr_types <- function(gedcom, xref){
+  
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
+  
+  marr_rows <- tidyged.internals::identify_section(gedcom, 1, "MARR", xrefs = xref)
+  
+  marr_type <- tibble::tibble(record = xref, level = 2, tag = "TYPE", value = "marriage")
+  
+  has_type <- FALSE
+  for(row in rev(marr_rows)){
+    if(!has_type) has_type <- gedcom$tag[row] == "TYPE"
+    if(gedcom$tag[row] == "MARR"){
+      if(!has_type) gedcom <- dplyr::add_row(gedcom, marr_type, .after = row)
+      has_type <- FALSE
+    }
+  }
+  
+  gedcom
+  
+}
 
 #' Update a record's change date
 #'

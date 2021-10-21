@@ -37,7 +37,7 @@ add_indi_association <- function(gedcom,
                                                        notes = asso_notes) %>% 
     tidyged.internals::add_levels(1)
   
-  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom <- tibble::add_row(gedcom, asso_str, .before = next_row)
   
@@ -73,7 +73,7 @@ add_indi_family_link_as_spouse <- function(gedcom,
   link <- tidyged.internals::SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% 
     tidyged.internals::add_levels(1)
   
-  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom <- tibble::add_row(gedcom, link, .before = next_row)
   
@@ -114,7 +114,7 @@ add_indi_family_link_as_child <- function(gedcom,
                                                   notes = link_notes) %>% 
     tidyged.internals::add_levels(1)
   
-  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom <- tibble::add_row(gedcom, link, .before = next_row)
   
@@ -205,7 +205,7 @@ add_indi_links_to_families <- function(gedcom,
                                             xref, update_date_changed)
     
     # add child to family record
-    next_row <- tidyged.internals::find_insertion_point(gedcom, famg_xref_chil, 0, "FAM")
+    next_row <- queryged::find_insertion_point(gedcom, famg_xref_chil, 0, "FAM")
     gedcom <- tibble::add_row(gedcom,
                               tibble::tibble(record = famg_xref_chil, level = 1, tag = "CHIL", value = xref), 
                               .before = next_row) %>% 
@@ -268,7 +268,7 @@ add_indi_links_to_families <- function(gedcom,
     gedcom <- add_indi_family_link_as_spouse(gedcom, famg_xref_spou, spouse_linkage_notes, xref, update_date_changed)
     
     # add spouse to family record
-    next_row <- tidyged.internals::find_insertion_point(gedcom, famg_xref_spou, 0, "FAM")
+    next_row <- queryged::find_insertion_point(gedcom, famg_xref_spou, 0, "FAM")
     # determine whether to use HUSB or WIFE tag - look at sex first, then look at other tag
     sex <- queryged::gedcom_value(gedcom, xref, "SEX", 1)
     if(!sex %in% c("M", "F")) {

@@ -74,7 +74,7 @@ order_famg_children <- function(gedcom, xref) {
   gedcom <- dplyr::anti_join(gedcom, chil_lines_yob,
                              by = c("level", "record", "tag", "value"))
   
-  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "FAM")
+  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "FAM")
   
   gedcom %>%
     tibble::add_row(chil_lines_yob, .before = next_row)
@@ -128,7 +128,7 @@ update_change_date <- function(gedcom, xref) {
                               is_note(gedcom, xref) ~ .pkgenv$record_tag_note,
                               is_subm(gedcom, xref) ~ .pkgenv$record_tag_subm)
   
-  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, rec_tag)
+  next_row <- queryged::find_insertion_point(gedcom, xref, 0, rec_tag)
   
   chan <- tidyged.internals::CHANGE_DATE() %>% 
     tidyged.internals::add_levels(1)

@@ -112,7 +112,7 @@ add_sour_repo_citation <- function(gedcom,
                                                                source_call_number = call_number) %>% 
     tidyged.internals::add_levels(1)
   
-  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "SOUR")
+  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "SOUR")
   
   gedcom <- tibble::add_row(gedcom, citation, .before = next_row)
   

@@ -178,7 +178,7 @@ add_indi_fact <- function(gedcom,
     
   }
   
-  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom <- tibble::add_row(gedcom, fact_str, .before = next_row)
   

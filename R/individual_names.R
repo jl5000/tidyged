@@ -35,7 +35,7 @@ add_indi_names <- function(gedcom,
                                                          name_pieces = names) %>% 
     tidyged.internals::add_levels(1)
   
-  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom <- tibble::add_row(gedcom, name_str, .before = next_row)
   
@@ -123,7 +123,7 @@ add_indi_names_var <- function(gedcom,
   
   next_row <- gedcom %>% 
     queryged::clean_indi_names() %>% 
-    tidyged.internals::find_insertion_point(xref, 1, "NAME", primary_name)
+    queryged::find_insertion_point(xref, 1, "NAME", primary_name)
   
   gedcom <- tibble::add_row(gedcom, name_str, .before = next_row)
   

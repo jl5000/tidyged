@@ -60,9 +60,11 @@ simpsons %>%
 
 ## Finding cross reference identifiers
 
-There are many other functions in the `gedcompendium` that take record xrefs as input parameters and it can be tedious to have to manually look these up. The `tidyged` package offers a number of helper functions to locate specific xrefs using pattern matching:
+There are many other functions in the `gedcompendium` that take record xrefs as input parameters and it can be tedious to have to manually look these up. The `queryged` package offers a number of helper functions to locate specific xrefs using pattern matching:
 
 ```{r}
+library(queryged)
+
 find_indi_name(simpsons, "Bart")
 find_indi_name_all(simpsons, "Simpson")
 ```

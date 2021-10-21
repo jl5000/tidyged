@@ -68,7 +68,7 @@ add_media <- function(gedcom,
 #'              remove_media())
 remove_media <- function(gedcom, multimedia = character()) {
   
-  xref <- get_valid_xref(gedcom, multimedia, .pkgenv$record_string_obje, is_media)
+  xref <- queryged::get_valid_xref(gedcom, multimedia, .pkgenv$record_string_obje, is_media)
   
   gedcom %>% 
     dplyr::filter(record != xref, value != xref) %>% 

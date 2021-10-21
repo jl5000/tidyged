@@ -22,6 +22,7 @@ The family group records do not need to describe traditional marriage unions - t
 
 ```{r}
 library(tidyged)
+library(queryged)
 
 simpson_indis <- gedcom(subm("Me")) %>% 
   add_indi(qn = "Homer Simpson", sex = "M") %>% 

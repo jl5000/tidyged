@@ -12,7 +12,7 @@
 \usage{
 describe_famg(gedcom, xref, short_desc = FALSE)
 
-describe_indi(gedcom, xref, name_only = FALSE, short_desc = FALSE)
+describe_indi(gedcom, xref, short_desc = FALSE)
 
 describe_media(gedcom, xref, file_ref_only = FALSE, short_desc = FALSE)
 
@@ -31,14 +31,13 @@ describe_subm(gedcom, xref, name_only = FALSE, short_desc = FALSE)
 
 \item{short_desc}{Whether to return a shorter description.}
 
-\item{name_only}{Whether to return the individual/repository name only. If none is found, the xref
-is returned.}
-
 \item{file_ref_only}{Whether to return the multimedia file reference only. If none is found, the xref
 is returned.}
 
 \item{title_only}{Whether to return the source title only. If none is found, the xref
 is returned.}
+
+\item{name_only}{Whether to return the name of the repository only.}
 }
 \value{
 A character string describing the record.
@@ -46,17 +45,9 @@ A character string describing the record.
 \description{
 Get descriptions of a record at various degrees of detail.
 }
-\details{
-This function offers three levels of detail. For example, individual records can be:
-
-"Joe Bloggs" (name_only = TRUE)
-"Individual @I1@, Joe Bloggs" (short_desc = TRUE)
-"Individual @I1@, Joe Bloggs, child of X and Y, born on x/x/x in place, died on x/x/x in place" (short_desc = FALSE)
-}
 \examples{
 describe_famg(sample555, "@F1@")
 describe_famg(sample555, "@F1@", short_desc  = TRUE)
 describe_indi(sample555, "@I1@")
 describe_indi(sample555, "@I1@", short_desc = TRUE)
-describe_indi(sample555, "@I1@", name_only = TRUE)
 }

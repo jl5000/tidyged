@@ -73,7 +73,7 @@ add_famg_event <- function(gedcom,
                            xref = character(),
                            update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
+  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
   
   type <- tolower(stringr::str_sub(type, 1, 3))
   type <- dplyr::case_when(type == "ann" ~ "ANUL",

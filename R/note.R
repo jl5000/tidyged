@@ -38,7 +38,7 @@ add_note <- function(gedcom,
 remove_note <- function(gedcom,
                         note = character()) {
   
-  xref <- get_valid_xref(gedcom, note, .pkgenv$record_string_note, is_note)
+  xref <- queryged::get_valid_xref(gedcom, note, .pkgenv$record_string_note, is_note)
   
   gedcom %>% 
     dplyr::filter(record != xref, value != xref) %>% 

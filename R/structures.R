@@ -197,7 +197,7 @@ source_citation <- function(gedcom,
                             notes = character(),
                             multimedia_links = character()) {
   
-  sour <- get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_sour)
+  sour <- queryged::get_valid_xref(gedcom, source, .pkgenv$record_string_sour, is_sour)
 
   cit_notes <- create_note_structures(gedcom, notes)
   media_links <- create_multimedia_links(gedcom, multimedia_links)

@@ -91,7 +91,7 @@ add_indi_fact <- function(gedcom,
                           xref = character(),
                           update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   type <- tolower(stringr::str_sub(type, 1, 3))
   type <- dplyr::case_when(type == "bir" ~ "BIRT",

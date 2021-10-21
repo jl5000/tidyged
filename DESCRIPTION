@@ -1,6 +1,6 @@
 Package: tidyged
 Title: Handle GEDCOM Files Using Tidyverse Principles
-Version: 0.12.0.9000
+Version: 0.13.0.9000
 Authors@R: 
     person(given = "Jamie",
            family = "Lendrum",
@@ -23,7 +23,8 @@ Imports:
     purrr,
     tibble,
     tidyr,
-    tidyged.internals
+    tidyged.internals,
+    queryged
 Suggests: 
     testthat,
     roxytest,
@@ -35,6 +36,7 @@ Suggests:
     visged
 Remotes: 
     jl5000/tidyged.internals,
+    jl5000/queryged,
     jl5000/tidyged.utils,
     jl5000/tidyged.io,
     jl5000/visged

@@ -104,7 +104,7 @@ add_sour_repo_citation <- function(gedcom,
                                    xref = character(),
                                    update_date_changed = TRUE) {
   
-  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_sour)
+  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_sour)
   
   repo_xref <- repository
   
@@ -136,7 +136,7 @@ add_sour_repo_citation <- function(gedcom,
 remove_sour_repo_citation <- function(gedcom,
                                       repository) {
   
-  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_sour, is_sour)
+  xref <- queryged::get_valid_xref(gedcom, character(), .pkgenv$record_string_sour, is_sour)
   
   tidyged.internals::remove_section(gedcom, 1, "REPO", repository, xrefs = xref) %>% 
     activate_sour(xref)
@@ -157,7 +157,7 @@ remove_sour_repo_citation <- function(gedcom,
 remove_sour <- function(gedcom,
                         sour = character()) {
   
-  xref <- get_valid_xref(gedcom, sour, .pkgenv$record_string_sour, is_sour)
+  xref <- queryged::get_valid_xref(gedcom, sour, .pkgenv$record_string_sour, is_sour)
   
   gedcom %>% 
     tidyged.internals::remove_section(1, "SOUR", xref) %>% 

@@ -26,9 +26,9 @@ add_indi_association <- function(gedcom,
                                  xref = character(),
                                  update_date_changed = TRUE) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
-  indi_xref <- queryged::get_valid_xref(gedcom, associated_with, .pkgenv$record_string_indi, is_indi)
+  indi_xref <- get_valid_xref(gedcom, associated_with, .pkgenv$record_string_indi, is_indi)
   
   asso_notes <- create_note_structures(gedcom, association_notes)
   
@@ -37,7 +37,7 @@ add_indi_association <- function(gedcom,
                                                        notes = asso_notes) %>% 
     tidyged.internals::add_levels(1)
   
-  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom <- tibble::add_row(gedcom, asso_str, .before = next_row)
   
@@ -66,14 +66,14 @@ add_indi_family_link_as_spouse <- function(gedcom,
                                            xref = character(),
                                            update_date_changed = TRUE) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   link_notes <- create_note_structures(gedcom, linkage_notes)
   
   link <- tidyged.internals::SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% 
     tidyged.internals::add_levels(1)
   
-  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom <- tibble::add_row(gedcom, link, .before = next_row)
   
@@ -105,7 +105,7 @@ add_indi_family_link_as_child <- function(gedcom,
                                           xref = character(),
                                           update_date_changed = TRUE) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   link_notes <- create_note_structures(gedcom, linkage_notes)
   
@@ -114,7 +114,7 @@ add_indi_family_link_as_child <- function(gedcom,
                                                   notes = link_notes) %>% 
     tidyged.internals::add_levels(1)
   
-  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom <- tibble::add_row(gedcom, link, .before = next_row)
   
@@ -168,16 +168,16 @@ add_indi_links_to_families <- function(gedcom,
                                        famg_xref_spou = character(),
                                        update_date_changed = TRUE) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   if(length(spouse) > 1) stop("Only one spouse should be provided")
   
   # Get famg_xref_chil
   if(length(famg_xref_chil) == 1){
-    famg_xref_chil <- queryged::get_valid_xref(gedcom, famg_xref_chil, .pkgenv$record_string_famg, is_famg)
+    famg_xref_chil <- get_valid_xref(gedcom, famg_xref_chil, .pkgenv$record_string_famg, is_famg)
   } else if(length(parents) > 0) {
     
-    parents <- purrr::map_chr(parents, queryged::get_valid_xref, 
+    parents <- purrr::map_chr(parents, get_valid_xref, 
                               gedcom = gedcom,
                               record_type = .pkgenv$record_string_indi, 
                               record_type_fn = is_indi)
@@ -205,7 +205,7 @@ add_indi_links_to_families <- function(gedcom,
                                             xref, update_date_changed)
     
     # add child to family record
-    next_row <- queryged::find_insertion_point(gedcom, famg_xref_chil, 0, "FAM")
+    next_row <- tidyged.internals::find_insertion_point(gedcom, famg_xref_chil, 0, "FAM")
     gedcom <- tibble::add_row(gedcom,
                               tibble::tibble(record = famg_xref_chil, level = 1, tag = "CHIL", value = xref), 
                               .before = next_row) %>% 
@@ -218,14 +218,14 @@ add_indi_links_to_families <- function(gedcom,
   
   # Get xref_fams
   if(length(famg_xref_spou) == 1){
-    famg_xref_spou <- queryged::get_valid_xref(gedcom, famg_xref_spou, .pkgenv$record_string_famg, is_famg)
+    famg_xref_spou <- get_valid_xref(gedcom, famg_xref_spou, .pkgenv$record_string_famg, is_famg)
   } else if(length(children) > 0 | length(spouse) > 0){
     
     xref_fams1 <- NULL
     xref_fams2 <- NULL
     
     if(length(spouse) > 0) {
-      spouse <- queryged::get_valid_xref(gedcom, spouse, .pkgenv$record_string_indi, is_indi)
+      spouse <- get_valid_xref(gedcom, spouse, .pkgenv$record_string_indi, is_indi)
       
       xref_fams1 <- dplyr::filter(gedcom, level == 1, tag %in% c("HUSB","WIFE"), value == spouse) %>% 
         dplyr::count(record) %>% 
@@ -240,7 +240,7 @@ add_indi_links_to_families <- function(gedcom,
     }
     
     if(length(children) > 0) {
-      children <- purrr::map_chr(children, queryged::get_valid_xref, 
+      children <- purrr::map_chr(children, get_valid_xref, 
                                  gedcom = gedcom,
                                  record_type = .pkgenv$record_string_indi, 
                                  record_type_fn = is_indi)
@@ -268,9 +268,9 @@ add_indi_links_to_families <- function(gedcom,
     gedcom <- add_indi_family_link_as_spouse(gedcom, famg_xref_spou, spouse_linkage_notes, xref, update_date_changed)
     
     # add spouse to family record
-    next_row <- queryged::find_insertion_point(gedcom, famg_xref_spou, 0, "FAM")
+    next_row <- tidyged.internals::find_insertion_point(gedcom, famg_xref_spou, 0, "FAM")
     # determine whether to use HUSB or WIFE tag - look at sex first, then look at other tag
-    sex <- queryged::gedcom_value(gedcom, xref, "SEX", 1)
+    sex <- tidyged.internals::gedcom_value(gedcom, xref, "SEX", 1)
     if(!sex %in% c("M", "F")) {
       other_sex <- dplyr::filter(gedcom, record == famg_xref_spou, level == 1, tag %in% c("HUSB","WIFE"))$tag
       sex <- dplyr::if_else(length(other_sex) == 0 || other_sex == "WIFE", "M", "F")

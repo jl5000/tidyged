@@ -81,7 +81,7 @@ remove_indi <- function(gedcom,
                         individual = character(),
                         remove_associations = TRUE) {
   
-  xref <- queryged::get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
   
   if(remove_associations) gedcom <- tidyged.internals::remove_section(gedcom, 1, "ASSO", xref)
 

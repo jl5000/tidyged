@@ -16,13 +16,12 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-We identify relations to an individual using the family of `get_*()` functions in the `queryged` package.
+We identify relations to an individual using the family of `get_*()` functions.
 
 We illustrate their functionality using the family below consisting of three generations: A pair of parents who has a single child (named 'Main Person'). This person forms two separate family groups with two spouses, each resulting in two children.
 
 ```{r}
 library(tidyged)
-library(queryged)
 
 three_gen <- gedcom(subm("Me")) %>% 
   add_indi(qn = "Parent 1") %>% 

@@ -158,8 +158,6 @@ Typically when constructing a file, you would create all of the individuals in a
 In the example below, we create Joe Bloggs and add him as a husband to a family. We then create Jess Bloggs and retrospectively add her as a wife to Joe. 
 
 ```{r}
-library(queryged)
-
 retro <- gedcom(subm("Me")) %>% 
   add_indi("M") %>% 
   add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 

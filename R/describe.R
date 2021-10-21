@@ -21,7 +21,7 @@ describe_records <- function(gedcom, xrefs, short_desc = FALSE) {
   descriptions <- NULL
   for (xref in xrefs) {
     if (is_indi(gedcom, xref)) {
-      descriptions <- c(descriptions, describe_indi(gedcom, xref, short_desc))
+      descriptions <- c(descriptions, describe_indi(gedcom, xref, FALSE, short_desc))
     } else if(is_famg(gedcom, xref)) {
       descriptions <- c(descriptions, describe_famg(gedcom, xref, short_desc))
     } else if(is_sour(gedcom, xref)) {
@@ -46,10 +46,17 @@ describe_records <- function(gedcom, xrefs, short_desc = FALSE) {
 #' 
 #' Get descriptions of a record at various degrees of detail.
 #' 
+#' @details This function offers three levels of detail. For example, individual records can be:
+#' 
+#' "Joe Bloggs" (name_only = TRUE)
+#' "Individual @I1@, Joe Bloggs" (short_desc = TRUE)
+#' "Individual @I1@, Joe Bloggs, child of X and Y, born on x/x/x in place, died on x/x/x in place" (short_desc = FALSE)
+#'
 #' @param gedcom A tidyged object.
 #' @param xref An xref of a record.
-#' @param name_only Whether to return the name of the repository only.
 #' @param short_desc Whether to return a shorter description.
+#' @param name_only Whether to return the individual/repository name only. If none is found, the xref
+#' is returned.
 #' @param title_only Whether to return the source title only. If none is found, the xref
 #' is returned.
 #' @param file_ref_only Whether to return the multimedia file reference only. If none is found, the xref
@@ -61,7 +68,7 @@ describe_records <- function(gedcom, xrefs, short_desc = FALSE) {
 #' @export
 describe_famg <- function(gedcom, xref, short_desc = FALSE) {
   # Family @F1@, headed by x and y, [and (no) children x, y, z]
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
   
   husb <- dplyr::filter(gedcom, record == xref, level == 1, tag == "HUSB")$value
   wife <- dplyr::filter(gedcom, record == xref, level == 1, tag == "WIFE")$value
@@ -69,19 +76,19 @@ describe_famg <- function(gedcom, xref, short_desc = FALSE) {
   
   fam_str <- paste0("Family ", xref, ", headed by ")
   if(length(husb) + length(wife) == 2) {
-    fam_str <- paste0(fam_str, queryged::indi_name(gedcom, husb),
-                      " and ", queryged::indi_name(gedcom, wife))
+    fam_str <- paste0(fam_str, describe_indi(gedcom, husb, name_only = TRUE),
+                      " and ", describe_indi(gedcom, wife, name_only = TRUE))
   } else if(length(husb) == 1) {
-    fam_str <- paste0(fam_str, queryged::indi_name(gedcom, husb))
+    fam_str <- paste0(fam_str, describe_indi(gedcom, husb, name_only = TRUE))
   } else if(length(wife) == 1) {
-    fam_str <- paste0(fam_str, queryged::indi_name(gedcom, wife))
+    fam_str <- paste0(fam_str, describe_indi(gedcom, wife, name_only = TRUE))
   } else {
     fam_str <- paste0(fam_str, "no individuals")
   }
   
   if(short_desc) return(fam_str)
   
-  chil_names <- purrr::map_chr(chil, queryged::indi_name, gedcom=gedcom)
+  chil_names <- purrr::map_chr(chil, describe_indi, gedcom=gedcom, name_only = TRUE)
   
   if(length(chil) == 0) {
     chil_str <- ", and no children"
@@ -97,35 +104,39 @@ describe_famg <- function(gedcom, xref, short_desc = FALSE) {
 #' @examples 
 #' describe_indi(sample555, "@I1@")
 #' describe_indi(sample555, "@I1@", short_desc = TRUE)
+#' describe_indi(sample555, "@I1@", name_only = TRUE)
 #' @export
-describe_indi <- function(gedcom, xref, short_desc = FALSE) {
+describe_indi <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   # Individual @I1@, Name/Unnamed, [child of x and y, born on x/x/x in place, died on x/x/x in place]
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
-  name <- queryged::indi_name(gedcom, xref)
+  name <- tidyged.internals::gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
+    stringr::str_remove_all("/")
   
-  name_str <- dplyr::if_else(name == xref, "Unnamed individual", name)
+  if(name_only) return(dplyr::if_else(name == "", xref, name))
+  
+  name_str <- dplyr::if_else(name == "", "Unnamed individual", name)
   
   ind_str <- paste0("Individual ", xref, ", ", name_str)
   
   if(short_desc) return(ind_str)
   
-  famc <- queryged::get_families_as_child(gedcom, xref, birth_only = TRUE)
+  famc <- get_families_as_child(gedcom, xref, birth_only = TRUE)
   
   if (length(famc) > 0) {
     
-    moth_xref <- queryged::gedcom_value(gedcom, famc, "WIFE", 1)
-    fath_xref <- queryged::gedcom_value(gedcom, famc, "HUSB", 1)
+    moth_xref <- tidyged.internals::gedcom_value(gedcom, famc, "WIFE", 1)
+    fath_xref <- tidyged.internals::gedcom_value(gedcom, famc, "HUSB", 1)
     
     if(moth_xref == ""){
       moth_name <- ""
     } else {
-      moth_name <- queryged::indi_name(gedcom, moth_xref)
+      moth_name <- describe_indi(gedcom, moth_xref, name_only = TRUE)
     } 
     if(fath_xref == ""){
       fath_name <- ""
     } else {
-      fath_name <- queryged::indi_name(gedcom, fath_xref)
+      fath_name <- describe_indi(gedcom, fath_xref, name_only = TRUE)
     }                       
     
     par_str <- dplyr::case_when(fath_name != "" & moth_name != "" ~ paste(fath_name,"and",moth_name),
@@ -136,8 +147,8 @@ describe_indi <- function(gedcom, xref, short_desc = FALSE) {
     ind_str <- dplyr::if_else(par_str == "", ind_str, paste0(ind_str, ", child of ", par_str))
   }
   
-  dob <- queryged::gedcom_value(gedcom, xref, "DATE", level = 2, after_tag = "BIRT")
-  pob <- queryged::gedcom_value(gedcom, xref, "PLAC", level = 2, after_tag = "BIRT")
+  dob <- tidyged.internals::gedcom_value(gedcom, xref, "DATE", level = 2, after_tag = "BIRT")
+  pob <- tidyged.internals::gedcom_value(gedcom, xref, "PLAC", level = 2, after_tag = "BIRT")
   
   if(dob != "" & pob != "") {
     ind_str <- paste0(ind_str, ", born ", dob, " in ", pob)
@@ -147,8 +158,8 @@ describe_indi <- function(gedcom, xref, short_desc = FALSE) {
     ind_str <- paste0(ind_str, ", born in ", pob)
   } 
   
-  dod <- queryged::gedcom_value(gedcom, xref, "DATE", level = 2, after_tag = "DEAT")
-  pod <- queryged::gedcom_value(gedcom, xref, "PLAC", level = 2, after_tag = "DEAT")
+  dod <- tidyged.internals::gedcom_value(gedcom, xref, "DATE", level = 2, after_tag = "DEAT")
+  pod <- tidyged.internals::gedcom_value(gedcom, xref, "PLAC", level = 2, after_tag = "DEAT")
   
   if(dod != "" & pod != "") {
     ind_str <- paste0(ind_str, ", died ", dod, " in ", pod)
@@ -165,9 +176,9 @@ describe_indi <- function(gedcom, xref, short_desc = FALSE) {
 #' @export
 describe_media <- function(gedcom, xref, file_ref_only = FALSE, short_desc = FALSE) {
   # Multimedia @M1@, [titled abc, format jpeg], with file reference xyz
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_obje, is_media)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_obje, is_media)
   
-  file_ref <- queryged::gedcom_value(gedcom, xref, "FILE", 1)
+  file_ref <- tidyged.internals::gedcom_value(gedcom, xref, "FILE", 1)
   
   if (file_ref_only) return(dplyr::if_else(file_ref == "", xref, file_ref))
   
@@ -177,13 +188,13 @@ describe_media <- function(gedcom, xref, file_ref_only = FALSE, short_desc = FAL
                                        media_str, 
                                        paste0(media_str, ", with file reference ", file_ref)))
   
-  titl <- queryged::gedcom_value(gedcom, xref, "TITL", 2)
+  titl <- tidyged.internals::gedcom_value(gedcom, xref, "TITL", 2)
   
   media_str <- dplyr::if_else(titl == "", 
                               media_str, 
                               paste0(media_str, ", titled ", titl))
   
-  form <- queryged::gedcom_value(gedcom, xref, "FORM", 2)
+  form <- tidyged.internals::gedcom_value(gedcom, xref, "FORM", 2)
   
   media_str <- dplyr::if_else(form == "", 
                               media_str, 
@@ -199,9 +210,9 @@ describe_media <- function(gedcom, xref, file_ref_only = FALSE, short_desc = FAL
 #' @export
 describe_sour <- function(gedcom, xref, title_only = FALSE, short_desc = FALSE) {
   # Source @S1@, titled abc, [by x]
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_sour)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_sour, is_sour)
   
-  titl <- queryged::gedcom_value(gedcom, xref, "TITL", 1)
+  titl <- tidyged.internals::gedcom_value(gedcom, xref, "TITL", 1)
   
   if (title_only) return(dplyr::if_else(titl == "", xref, titl))
   
@@ -210,7 +221,7 @@ describe_sour <- function(gedcom, xref, title_only = FALSE, short_desc = FALSE) 
   
   if (short_desc) return(sour_str)
   
-  orig <- queryged::gedcom_value(gedcom, xref, "AUTH", 1)
+  orig <- tidyged.internals::gedcom_value(gedcom, xref, "AUTH", 1)
   
   dplyr::if_else(orig == "", sour_str, paste0(sour_str, ", by ", orig))
 }
@@ -219,9 +230,9 @@ describe_sour <- function(gedcom, xref, title_only = FALSE, short_desc = FALSE) 
 #' @export
 describe_repo <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   # Repository @R1@, name
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_repo, is_repo)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_repo, is_repo)
   
-  name <- queryged::gedcom_value(gedcom, xref, "NAME", 1)
+  name <- tidyged.internals::gedcom_value(gedcom, xref, "NAME", 1)
   
   if(name_only) return(dplyr::if_else(name == "", xref, name))
   
@@ -233,11 +244,11 @@ describe_repo <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
 #' @export
 describe_note <- function(gedcom, xref, short_desc = FALSE) {
   # Note @N1@ with the following text: xyz [excerpt or not]
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_note, is_note)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_note, is_note)
   
   note_str <- paste0("Note ", xref, ", with the following text: ")
   
-  text <- queryged::gedcom_value(gedcom, xref, "NOTE", 0)
+  text <- tidyged.internals::gedcom_value(gedcom, xref, "NOTE", 0)
   
   dplyr::if_else(short_desc, paste0(note_str, stringr::str_sub(text, 1, 30), "..."), 
                  paste0(note_str, text))
@@ -248,9 +259,9 @@ describe_note <- function(gedcom, xref, short_desc = FALSE) {
 #' @export
 describe_subm <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_subm, is_subm)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_subm, is_subm)
   
-  name <- queryged::gedcom_value(gedcom, xref, "NAME", 1)
+  name <- tidyged.internals::gedcom_value(gedcom, xref, "NAME", 1)
   
   if (name_only) return(dplyr::if_else(name == "", xref, name))
   

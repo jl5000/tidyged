@@ -73,7 +73,7 @@ add_famg_event <- function(gedcom,
                            xref = character(),
                            update_date_changed = TRUE) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
   
   type <- tolower(stringr::str_sub(type, 1, 3))
   type <- dplyr::case_when(type == "ann" ~ "ANUL",
@@ -123,7 +123,7 @@ add_famg_event <- function(gedcom,
                                                          family_event_details = details2) %>% 
     tidyged.internals::add_levels(1)
   
-  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "FAM")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "FAM")
   
   gedcom <- tibble::add_row(gedcom, event_str, .before = next_row)
   

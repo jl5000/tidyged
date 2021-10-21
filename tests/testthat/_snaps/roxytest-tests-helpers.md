@@ -1,4 +1,4 @@
-# Function remove_records() @ L13
+# Function remove_records() @ L72
 
     {
       "type": "list",

@@ -20,7 +20,7 @@ add_indi_names <- function(gedcom,
                            xref = character(),
                            update_date_changed = TRUE) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   prefix <- dplyr::filter(names, tag == "NPFX")$value
   given <- dplyr::filter(names, tag == "GIVN")$value
@@ -35,7 +35,7 @@ add_indi_names <- function(gedcom,
                                                          name_pieces = names) %>% 
     tidyged.internals::add_levels(1)
   
-  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom <- tibble::add_row(gedcom, name_str, .before = next_row)
   
@@ -75,7 +75,7 @@ add_indi_names_var <- function(gedcom,
                                xref = character(),
                                update_date_changed = TRUE) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   prefix <- dplyr::filter(names_var, tag == "NPFX")$value
   given <- dplyr::filter(names_var, tag == "GIVN")$value
@@ -122,8 +122,8 @@ add_indi_names_var <- function(gedcom,
     tidyged.internals::add_levels(1)
   
   next_row <- gedcom %>% 
-    queryged::clean_indi_names() %>% 
-    queryged::find_insertion_point(xref, 1, "NAME", primary_name)
+    temporarily_remove_name_slashes() %>% 
+    tidyged.internals::find_insertion_point(xref, 1, "NAME", primary_name)
   
   gedcom <- tibble::add_row(gedcom, name_str, .before = next_row)
   
@@ -152,10 +152,10 @@ add_indi_names_var <- function(gedcom,
 remove_indi_name <- function(gedcom,
                               name) {
   
-  xref <- queryged::get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
-  rows_to_remove <- queryged::clean_indi_names(gedcom) %>% 
-    queryged::identify_section(1, "NAME", name, xrefs = xref, first_only = TRUE)
+  rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
+    tidyged.internals::identify_section(1, "NAME", name, xrefs = xref, first_only = TRUE)
   
   gedcom %>%
     dplyr::slice(-rows_to_remove) %>% 
@@ -188,10 +188,10 @@ remove_indi_name_var <- function(gedcom,
                                        variation_name,
                                        phonetic_variation = TRUE) {
   
-  xref <- queryged::get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
-  rows_to_remove <- queryged::clean_indi_names(gedcom) %>% 
-    queryged::identify_section(2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
+  rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
+    tidyged.internals::identify_section(2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
                                         variation_name, xrefs = xref, first_only = TRUE)
   
   gedcom %>%
@@ -211,10 +211,10 @@ remove_indi_name_var <- function(gedcom,
 #' @export
 primary_indi_name <- function(gedcom, name, xref = character()) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
-  rows_to_move <- queryged::clean_indi_names(gedcom) %>% 
-    queryged::identify_section(1, "NAME", name, xrefs = xref, first_only = TRUE)
+  rows_to_move <- temporarily_remove_name_slashes(gedcom) %>% 
+    tidyged.internals::identify_section(1, "NAME", name, xrefs = xref, first_only = TRUE)
   
   section <- gedcom[rows_to_move,]
   gedcom <- gedcom[-rows_to_move,]

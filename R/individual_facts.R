@@ -91,7 +91,7 @@ add_indi_fact <- function(gedcom,
                           xref = character(),
                           update_date_changed = TRUE) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
   type <- tolower(stringr::str_sub(type, 1, 3))
   type <- dplyr::case_when(type == "bir" ~ "BIRT",
@@ -178,7 +178,7 @@ add_indi_fact <- function(gedcom,
     
   }
   
-  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "INDI")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
   
   gedcom <- tibble::add_row(gedcom, fact_str, .before = next_row)
   

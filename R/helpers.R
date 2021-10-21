@@ -1,4 +1,63 @@
 
+
+
+
+
+#' Temporarily remove forward slashes from surnames
+#'
+#' @param gedcom A tidyged object.
+#'
+#' @return A tidyged object with all forward slashes removed from surnames.
+temporarily_remove_name_slashes <- function(gedcom) {
+  
+  gedcom %>% 
+    dplyr::mutate(value = dplyr::if_else(purrr::map_lgl(record, is_indi, gedcom=gedcom) &
+                                           tag %in% c("NAME", "FONE", "ROMN"),
+                                         stringr::str_remove_all(value, "/"),
+                                         value))
+  
+}
+
+
+#' Derive a valid cross-reference identifier
+#' 
+#' Validate an xref provided explicitly or implicitly (through the active record).
+#' 
+#' @details This helper function is designed to derive and run validation checks on an xref
+#' provided explicitly or implicitly. An xref is provided implicitly through the active
+#' record of the tidyged object.
+#' 
+#' Once found, the xref is checked to ensure it is of the appropriate type.
+#'
+#' @param gedcom A tidyged object.
+#' @param xref A record xref.
+#' @param record_type A character string describing the record type. Generally one of
+#' the global record_string_* values.
+#' @param record_type_fn A function to check the record type. Generally one of the is_*
+#' functions.
+#'
+#' @return A valid xref identifier.
+get_valid_xref <- function(gedcom, xref, record_type, record_type_fn) {
+  
+  if (length(xref) == 0 || xref == "") {
+    # xref not given explicitly, get it from active record
+    xref <- active_record(gedcom)
+  } 
+
+  if(is.null(xref))
+    stop("No xref is provided and no ", record_type, " record is activated.")
+  
+  if(!grepl(tidyged.internals::reg_xref(TRUE), xref))
+    stop("The provided xref is not valid")
+  
+  if(!record_type_fn(gedcom, xref))
+    stop("The provided or active record is not a ", record_type, " record")
+  
+  xref
+}
+
+
+
 #' Remove multiple records at once
 #'
 #' @param gedcom A tidyged object.
@@ -46,13 +105,13 @@ remove_records <- function(gedcom, xrefs) {
 #' @export
 order_famg_children <- function(gedcom, xref) {
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
   
   chil_lines <- dplyr::filter(gedcom, record == xref, tag == "CHIL")
   
   if(nrow(chil_lines) <= 1) return(gedcom)
   
-  dob <- purrr::map_chr(chil_lines$value, queryged::gedcom_value, 
+  dob <- purrr::map_chr(chil_lines$value, tidyged.internals::gedcom_value, 
                                     gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
 
   if(all(dob == "")) return(gedcom)
@@ -74,7 +133,7 @@ order_famg_children <- function(gedcom, xref) {
   gedcom <- dplyr::anti_join(gedcom, chil_lines_yob,
                              by = c("level", "record", "tag", "value"))
   
-  next_row <- queryged::find_insertion_point(gedcom, xref, 0, "FAM")
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "FAM")
   
   gedcom %>%
     tibble::add_row(chil_lines_yob, .before = next_row)
@@ -90,9 +149,9 @@ order_famg_children <- function(gedcom, xref) {
 #' @export
 insert_explicit_marr_types <- function(gedcom, xref){
   
-  xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
+  xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
   
-  marr_rows <- queryged::identify_section(gedcom, 1, "MARR", xrefs = xref)
+  marr_rows <- tidyged.internals::identify_section(gedcom, 1, "MARR", xrefs = xref)
   
   marr_type <- tibble::tibble(record = xref, level = 2, tag = "TYPE", value = "marriage")
   
@@ -128,7 +187,7 @@ update_change_date <- function(gedcom, xref) {
                               is_note(gedcom, xref) ~ .pkgenv$record_tag_note,
                               is_subm(gedcom, xref) ~ .pkgenv$record_tag_subm)
   
-  next_row <- queryged::find_insertion_point(gedcom, xref, 0, rec_tag)
+  next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, rec_tag)
   
   chan <- tidyged.internals::CHANGE_DATE() %>% 
     tidyged.internals::add_levels(1)
@@ -154,11 +213,38 @@ remove_dates_for_tests <- function(gedcom) {
   
 }
 
+#' Add a tag namespace column to a tidyged object
+#' 
+#' @details This function is useful if you want to find the namespace of a particular value
+#' for the `find_xref` function.
+#'
+#' @param gedcom A tidyged object.
+#'
+#' @return A tidyged object with an additional 'tag_ns' column containing the full namespace of
+#' the tag.
+#' @export
+mutate_tag_namespace <- function(gedcom){
+  
+  gedcom <- dplyr::mutate(gedcom, tag_ns = NA_character_)
+  
+  for(lv in min(gedcom$level):max(gedcom$level)) {
+    gedcom <- dplyr::mutate(gedcom, 
+                            tag_ns = dplyr::if_else(level == lv, 
+                                                    paste(tag_ns, tag, sep = "."), 
+                                                    tag_ns)) %>% 
+      dplyr::mutate(tag_ns = dplyr::if_else(level > lv, NA_character_, tag_ns)) %>% 
+      tidyr::fill(tag_ns)
+  }
+  
+  dplyr::mutate(gedcom, tag_ns = toupper(stringr::str_remove(tag_ns, "^NA\\.")))
+  
+}
+
 
 create_note_structures <- function(gedcom, notes) {
   purrr::map_chr(notes, 
                  ~if(grepl(tidyged.internals::reg_xref(TRUE), .x)){
-                   queryged::get_valid_xref(gedcom, .x, .pkgenv$record_string_note, is_note)
+                   get_valid_xref(gedcom, .x, .pkgenv$record_string_note, is_note)
                  } else {
                    .x
                  }
@@ -167,7 +253,7 @@ create_note_structures <- function(gedcom, notes) {
 }
 
 create_multimedia_links <- function(gedcom, media_links) {
-  purrr::map_chr(media_links, queryged::get_valid_xref,
+  purrr::map_chr(media_links, get_valid_xref,
                  gedcom = gedcom,
                  record_type = .pkgenv$record_string_obje, 
                  record_typ_fn = is_media) %>% 

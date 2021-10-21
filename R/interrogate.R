@@ -85,5 +85,3 @@ is_note <- function(gedcom, xref)       { is_record_type(gedcom, xref, .pkgenv$r
 #' @export
 #' @rdname is_indi
 is_sour <- function(gedcom, xref)     { is_record_type(gedcom, xref, .pkgenv$record_tag_sour) }
-
-

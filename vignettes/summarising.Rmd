@@ -20,7 +20,6 @@ The `tidyged` package comes with several functions for summarising and querying 
 
 ```{r}
 library(tidyged)
-library(queryged)
 
 simpsons <- gedcom(subm("Me"), gedcom_description = "Some of the Simpsons",
                    gedcom_copyright = "No copyright") %>% 
@@ -101,6 +100,7 @@ The `describe_*()` family of functions give a description of certain records:
 
 ```{r}
 describe_indi(simpsons, find_indi_name(simpsons, "Bart"))
+describe_indi(simpsons, find_indi_name(simpsons, "Lisa"), name_only = TRUE)
 describe_indi(simpsons, find_indi_name(simpsons, "Homer"), short_desc = TRUE)
 describe_famg(simpsons, "@F1@")
 ```

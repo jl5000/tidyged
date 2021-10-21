@@ -47,7 +47,7 @@ add_repo <- function(gedcom,
 #'              gedcom(subm()) %>% add_repo("text") %>% remove_repo())
 remove_repo <- function(gedcom, repository = character()) {
   
-  xref <- queryged::get_valid_xref(gedcom, repository, .pkgenv$record_string_repo, is_repo)
+  xref <- get_valid_xref(gedcom, repository, .pkgenv$record_string_repo, is_repo)
   
   gedcom %>% 
     tidyged.internals::remove_section(1, "REPO", xref) %>% 

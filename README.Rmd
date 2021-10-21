@@ -51,7 +51,6 @@ An example is below:
 
 ```{r example}
 library(tidyged)
-library(queryged)
 
 tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family", gedcom_copyright = "None") %>%
   add_indi(sex = "M", indi_notes = "The central character in the Star Wars Skywalker Saga") %>%

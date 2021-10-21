@@ -42,7 +42,7 @@ null_active_record <- function(gedcom) {
 #' @export
 activate_indi <- function(gedcom, record) {
   
-  xref <- queryged::get_valid_xref(gedcom, record, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_indi, is_indi)
   set_active_record(gedcom, xref)
 }
 
@@ -51,7 +51,7 @@ activate_indi <- function(gedcom, record) {
 #' @export
 activate_famg <- function(gedcom, record) {
   
-  xref <- queryged::get_valid_xref(gedcom, record, .pkgenv$record_string_famg, is_famg)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_famg, is_famg)
   set_active_record(gedcom, xref)
 }
 
@@ -60,7 +60,7 @@ activate_famg <- function(gedcom, record) {
 #' @export
 activate_subm <- function(gedcom, record) {
   
-  xref <- queryged::get_valid_xref(gedcom, record, .pkgenv$record_string_subm, is_subm)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_subm, is_subm)
   set_active_record(gedcom, xref)
 }
 
@@ -69,7 +69,7 @@ activate_subm <- function(gedcom, record) {
 #' @export
 activate_media <- function(gedcom, record) {
   
-  xref <- queryged::get_valid_xref(gedcom, record, .pkgenv$record_string_obje, is_media)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_obje, is_media)
   set_active_record(gedcom, xref)
 }
 
@@ -78,7 +78,7 @@ activate_media <- function(gedcom, record) {
 #' @export
 activate_note <- function(gedcom, record) {
   
-  xref <- queryged::get_valid_xref(gedcom, record, .pkgenv$record_string_note, is_note)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_note, is_note)
   set_active_record(gedcom, xref)
 }
 
@@ -87,7 +87,7 @@ activate_note <- function(gedcom, record) {
 #' @export
 activate_sour <- function(gedcom, record) {
   
-  xref <- queryged::get_valid_xref(gedcom, record, .pkgenv$record_string_sour, is_sour)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_sour, is_sour)
   set_active_record(gedcom, xref)
 }
 
@@ -96,7 +96,7 @@ activate_sour <- function(gedcom, record) {
 #' @export
 activate_repo <- function(gedcom, record) {
   
-  xref <- queryged::get_valid_xref(gedcom, record, .pkgenv$record_string_repo, is_repo)
+  xref <- get_valid_xref(gedcom, record, .pkgenv$record_string_repo, is_repo)
   set_active_record(gedcom, xref)
   
 }

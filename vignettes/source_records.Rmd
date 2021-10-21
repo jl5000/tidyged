@@ -24,7 +24,6 @@ A Source record can be created with the `add_sour()` function.
 
 ```{r}
 library(tidyged)
-library(queryged)
 
 birth_source <- gedcom() %>% 
   add_sour(events_recorded = "BIRT, MARR, DEAT",

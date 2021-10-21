@@ -127,7 +127,7 @@ remove_famg <- function(gedcom,
                         family_xref = character(),
                         remove_individuals = FALSE) {
   
-  xref <- queryged::get_valid_xref(gedcom, family_xref, .pkgenv$record_string_famg, is_famg)
+  xref <- get_valid_xref(gedcom, family_xref, .pkgenv$record_string_famg, is_famg)
   
   if(remove_individuals) {
     

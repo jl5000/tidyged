@@ -18,22 +18,22 @@
 #'                 summary(), "json2")
 summary.tidyged <- function(object, ...) {
   eol <- "\n"
-  subm_name <- queryged::gedcom_value(object, "HD", "SUBM", 1)
+  subm_name <- tidyged.internals::gedcom_value(object, "HD", "SUBM", 1)
   # this is the longest string
   title_width <- nchar("Source system version:") + 2
   
   paste("GEDCOM file summary:", eol, eol,
-        stringr::str_pad("Submitter:", title_width, "right"), queryged::gedcom_value(object, subm_name, "NAME", 1), eol, 
-        stringr::str_pad("Description:", title_width, "right"), queryged::gedcom_value(object, "HD", "NOTE", 1), eol,
-        stringr::str_pad("Language:", title_width, "right"), queryged::gedcom_value(object, "HD", "LANG", 1), eol,
-        stringr::str_pad("Character set:", title_width, "right"), queryged::gedcom_value(object, "HD", "CHAR", 1), eol, eol,
+        stringr::str_pad("Submitter:", title_width, "right"), tidyged.internals::gedcom_value(object, subm_name, "NAME", 1), eol, 
+        stringr::str_pad("Description:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "NOTE", 1), eol,
+        stringr::str_pad("Language:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "LANG", 1), eol,
+        stringr::str_pad("Character set:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "CHAR", 1), eol, eol,
         
-        stringr::str_pad("Copyright:", title_width, "right"), queryged::gedcom_value(object, "HD", "COPR", 1), eol, eol,
+        stringr::str_pad("Copyright:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "COPR", 1), eol, eol,
         
-        stringr::str_pad("Source system:", title_width, "right"), queryged::gedcom_value(object, "HD", "SOUR", 1), eol,
-        stringr::str_pad("Source system version:", title_width, "right"), queryged::gedcom_value(object, "HD", "VERS", 2, "SOUR"), eol,
-        stringr::str_pad("Product name:", title_width, "right"), queryged::gedcom_value(object, "HD", "NAME", 2), eol,
-        stringr::str_pad("Product source:", title_width, "right"), queryged::gedcom_value(object, "HD", "CORP", 2), eol
+        stringr::str_pad("Source system:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "SOUR", 1), eol,
+        stringr::str_pad("Source system version:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "VERS", 2, "SOUR"), eol,
+        stringr::str_pad("Product name:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "NAME", 2), eol,
+        stringr::str_pad("Product source:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "CORP", 2), eol
   ) %>% cat()
 }
 
@@ -111,21 +111,21 @@ str.tidyged <- function(object, ...) {
 #'  df_indi(), "json2")
 df_indi <- function(gedcom) {
   
-  ind_xrefs <- queryged::xrefs_indi(gedcom)
-  ind_names <- purrr::map_chr(ind_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
-  ind_sex <- purrr::map_chr(ind_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "SEX", level = 1)
-  ind_dobs <- purrr::map_chr(ind_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
-  ind_pobs <- purrr::map_chr(ind_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "BIRT")
-  ind_dods <- purrr::map_chr(ind_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "DEAT")
-  ind_pods <- purrr::map_chr(ind_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "DEAT")
-  ind_famc <- purrr::map_chr(ind_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "FAMC", level = 1)
-  #ind_fams <- purrr::map_chr(ind_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "FAMS", level = 1)
-  moth_xref <- purrr::map_chr(ind_famc, queryged::gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1) 
-  ind_moth <- purrr::map_chr(moth_xref, queryged::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
-  fath_xref <- purrr::map_chr(ind_famc, queryged::gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1) 
-  ind_fath <- purrr::map_chr(fath_xref, queryged::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
-  ind_sibl <- purrr::map_chr(ind_famc, queryged::gedcom_value, gedcom = gedcom, tag = "NCHI", level = 1)
-  date_chan <- purrr::map_chr(ind_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
+  ind_xrefs <- xrefs_indi(gedcom)
+  ind_names <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  ind_sex <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "SEX", level = 1)
+  ind_dobs <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "BIRT")
+  ind_pobs <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "BIRT")
+  ind_dods <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "DEAT")
+  ind_pods <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "DEAT")
+  ind_famc <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "FAMC", level = 1)
+  #ind_fams <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "FAMS", level = 1)
+  moth_xref <- purrr::map_chr(ind_famc, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1) 
+  ind_moth <- purrr::map_chr(moth_xref, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  fath_xref <- purrr::map_chr(ind_famc, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1) 
+  ind_fath <- purrr::map_chr(fath_xref, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  ind_sibl <- purrr::map_chr(ind_famc, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NCHI", level = 1)
+  date_chan <- purrr::map_chr(ind_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
   
   tibble::tibble(xref = ind_xrefs,
                  name = stringr::str_remove_all(ind_names, "/"),
@@ -170,16 +170,16 @@ df_indi <- function(gedcom) {
 #'  df_famg(), "json2")
 df_famg <- function(gedcom) {
   
-  fam_xrefs <- queryged::xrefs_famg(gedcom)
-  husb_xrefs <- purrr::map_chr(fam_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1)
-  wife_xrefs <- purrr::map_chr(fam_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1)
-  husb_names <- purrr::map_chr(husb_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
-  wife_names <- purrr::map_chr(wife_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
-  rels <- purrr::map_chr(fam_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "TYPE", level = 2, after_tag = "MARR")
-  marr_dates <- purrr::map_chr(fam_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "MARR")
-  marr_places <- purrr::map_chr(fam_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "MARR")
-  num_chil <- purrr::map_chr(fam_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "NCHI", level = 1)
-  date_chan <- purrr::map_chr(fam_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
+  fam_xrefs <- xrefs_famg(gedcom)
+  husb_xrefs <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "HUSB", level = 1)
+  wife_xrefs <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "WIFE", level = 1)
+  husb_names <- purrr::map_chr(husb_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  wife_names <- purrr::map_chr(wife_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  rels <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "TYPE", level = 2, after_tag = "MARR")
+  marr_dates <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "MARR")
+  marr_places <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "PLAC", level = 2, after_tag = "MARR")
+  num_chil <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NCHI", level = 1)
+  date_chan <- purrr::map_chr(fam_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
   
   tibble::tibble(xref = fam_xrefs,
                  husband = stringr::str_remove_all(husb_names, "/"),
@@ -207,12 +207,12 @@ df_famg <- function(gedcom) {
 #'  df_media(), "json2")
 df_media <- function(gedcom) {
   
-  obje_xrefs <- queryged::xrefs_media(gedcom)
-  file_refs <- purrr::map_chr(obje_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "FILE", level = 1)
-  file_titles <- purrr::map_chr(obje_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "TITL", level = 2)
-  file_forms <- purrr::map_chr(obje_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "FORM", level = 2)
-  file_sour <- purrr::map_chr(obje_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "TYPE", level = 3)
-  date_chan <- purrr::map_chr(obje_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
+  obje_xrefs <- xrefs_media(gedcom)
+  file_refs <- purrr::map_chr(obje_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "FILE", level = 1)
+  file_titles <- purrr::map_chr(obje_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "TITL", level = 2)
+  file_forms <- purrr::map_chr(obje_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "FORM", level = 2)
+  file_sour <- purrr::map_chr(obje_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "TYPE", level = 3)
+  date_chan <- purrr::map_chr(obje_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
   
   tibble::tibble(xref = obje_xrefs,
                  file_ref = file_refs,
@@ -235,10 +235,10 @@ df_media <- function(gedcom) {
 #'  df_sour(), "json2")
 df_sour <- function(gedcom) {
   
-  sour_xrefs <- queryged::xrefs_sour(gedcom)
-  origs <- purrr::map_chr(sour_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "AUTH", level = 1)
-  titles <- purrr::map_chr(sour_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "TITL", level = 1)
-  date_chan <- purrr::map_chr(sour_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
+  sour_xrefs <- xrefs_sour(gedcom)
+  origs <- purrr::map_chr(sour_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "AUTH", level = 1)
+  titles <- purrr::map_chr(sour_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "TITL", level = 1)
+  date_chan <- purrr::map_chr(sour_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
   
   tibble::tibble(xref = sour_xrefs,
                  originator = origs,
@@ -259,12 +259,12 @@ df_sour <- function(gedcom) {
 #'  df_repo(), "json2")
 df_repo <- function(gedcom) {
   
-  repo_xrefs <- queryged::xrefs_repo(gedcom)
-  repo_names <- purrr::map_chr(repo_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
-  repo_cits <- purrr::map_chr(repo_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "CITY", level = 2)
-  repo_stae <- purrr::map_chr(repo_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "STAE", level = 2)
-  repo_coun <- purrr::map_chr(repo_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "CTRY", level = 2)
-  date_chan <- purrr::map_chr(repo_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
+  repo_xrefs <- xrefs_repo(gedcom)
+  repo_names <- purrr::map_chr(repo_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NAME", level = 1)
+  repo_cits <- purrr::map_chr(repo_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "CITY", level = 2)
+  repo_stae <- purrr::map_chr(repo_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "STAE", level = 2)
+  repo_coun <- purrr::map_chr(repo_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "CTRY", level = 2)
+  date_chan <- purrr::map_chr(repo_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
   
   tibble::tibble(xref = repo_xrefs,
                  name = repo_names,
@@ -286,10 +286,10 @@ df_repo <- function(gedcom) {
 #'  df_note(), "json2")
 df_note <- function(gedcom) {
   
-  note_xrefs <- queryged::xrefs_note(gedcom)
-  ref_nos <- purrr::map_chr(note_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "REFN", level = 1)
-  note_txts <- purrr::map_chr(note_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "NOTE", level = 0)
-  date_chan <- purrr::map_chr(note_xrefs, queryged::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
+  note_xrefs <- xrefs_note(gedcom)
+  ref_nos <- purrr::map_chr(note_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "REFN", level = 1)
+  note_txts <- purrr::map_chr(note_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "NOTE", level = 0)
+  date_chan <- purrr::map_chr(note_xrefs, tidyged.internals::gedcom_value, gedcom = gedcom, tag = "DATE", level = 2, after_tag = "CHAN")
   
   tibble::tibble(xref = note_xrefs,
                  ref = ref_nos,
@@ -303,16 +303,16 @@ df_note <- function(gedcom) {
 fact_summary <- function(gedcom, xref, indi) {
   
   if(indi) {
-    xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
+    xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   } else {
-    xref <- queryged::get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
+    xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
   }
   
   # Remove source citation structures and notes and add namespace
   gedcom_ns <- tidyged.internals::remove_section(gedcom, containing_level = 2, containing_tags = "SOUR",
                                                  xrefs = xref) %>% 
     dplyr::filter(tag != "NOTE") %>% 
-    queryged::mutate_tag_namespace()
+    mutate_tag_namespace()
   
   if(indi) {
     fact_tags <- c(tidyged.internals::val_individual_event_types(),
@@ -321,7 +321,7 @@ fact_summary <- function(gedcom, xref, indi) {
     fact_tags <- tidyged.internals::val_family_event_types()
   }
   
-  rows_vect <- queryged::identify_section(gedcom_ns, 1, fact_tags,
+  rows_vect <- tidyged.internals::identify_section(gedcom_ns, 1, fact_tags,
                                                    xrefs = xref)
   
   fact_rows <- split(rows_vect, cumsum(gedcom_ns$tag[rows_vect] %in% fact_tags))

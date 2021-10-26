@@ -202,13 +202,15 @@ source_citation <- function(gedcom,
   cit_notes <- create_note_structures(gedcom, notes)
   media_links <- create_multimedia_links(gedcom, multimedia_links)
   
-  certainty <- dplyr::case_when(certainty == "unreliable" ~ "0",
-                                certainty == "subjective" ~ "1",
-                                certainty == "secondary" ~ "2",
-                                certainty == "primary" ~ "3",
-                                TRUE ~ "error")
-  
-  if(certainty == "error") stop("Invalid certainty value given")
+  if(length(certainty) > 0) {
+    certainty <- dplyr::case_when(certainty == "unreliable" ~ "0",
+                                  certainty == "subjective" ~ "1",
+                                  certainty == "secondary" ~ "2",
+                                  certainty == "primary" ~ "3",
+                                  TRUE ~ "error")
+    
+    if(certainty == "error") stop("Invalid certainty value given")
+  }
   
   tidyged.internals::SOURCE_CITATION(xref_sour = sour,
                                      where_within_source = where,

@@ -256,6 +256,6 @@ create_multimedia_links <- function(gedcom, media_links) {
   purrr::map_chr(media_links, get_valid_xref,
                  gedcom = gedcom,
                  record_type = .pkgenv$record_string_obje, 
-                 record_typ_fn = is_media) %>% 
+                 record_type_fn = is_media) %>% 
     purrr::map(tidyged.internals::MULTIMEDIA_LINK)
 }

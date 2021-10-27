@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.12.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.13.0.9000</span>
       </span>
     </div>
 
@@ -132,6 +132,8 @@
   <span class='va'>gedcom</span>,
   <span class='va'>source</span>,
   where <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  event <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  role <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   entry_date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   source_text <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
   certainty <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
@@ -160,6 +162,18 @@ dwelling number, and family number.
 The data in this field should be in the form of a label and value pair, such as Label1: value,
 Label2: value, with each pair being separated by a comma. For example, Film: 1234567,
 Frame: 344, Line: 28.</p></td>
+    </tr>
+    <tr>
+      <th>event</th>
+      <td><p>A code that indicates the type of event which was responsible for the source entry being recorded.
+For example, if the entry was created to record a birth of a child, then the type would be BIRT regardless of
+the assertions made from that record, such as the mother's name or mother's birth date. This will allow a
+prioritised best view choice and a determination of the certainty associated with the source used in asserting
+the cited fact.</p></td>
+    </tr>
+    <tr>
+      <th>role</th>
+      <td><p>Indicates what role this person played in the event that is being cited in this context.</p></td>
     </tr>
     <tr>
       <th>entry_date</th>

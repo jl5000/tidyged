@@ -171,6 +171,12 @@ name_pieces <- function(prefix = character(),
 #' The data in this field should be in the form of a label and value pair, such as Label1: value,
 #' Label2: value, with each pair being separated by a comma. For example, Film: 1234567,
 #' Frame: 344, Line: 28.
+#' @param event A code that indicates the type of event which was responsible for the source entry being recorded. 
+#' For example, if the entry was created to record a birth of a child, then the type would be BIRT regardless of 
+#' the assertions made from that record, such as the mother's name or mother's birth date. This will allow a 
+#' prioritised best view choice and a determination of the certainty associated with the source used in asserting 
+#' the cited fact.
+#' @param role Indicates what role this person played in the event that is being cited in this context.
 #' @param entry_date A date_calendar(), date_period(), date_range(), or date_approximated() 
 #' value giving the date that this data was entered into the original source document.
 #' @param source_text A verbatim copy of any description contained within the source. 
@@ -191,6 +197,8 @@ name_pieces <- function(prefix = character(),
 source_citation <- function(gedcom,
                             source,
                             where = character(),
+                            event = character(),
+                            role = character(),
                             entry_date = character(),
                             source_text = character(),
                             certainty = character(),
@@ -214,6 +222,8 @@ source_citation <- function(gedcom,
   
   tidyged.internals::SOURCE_CITATION(xref_sour = sour,
                                      where_within_source = where,
+                                     event_type_cited_from = event,
+                                     role_in_event = role,
                                      entry_recording_date = entry_date,
                                      text_from_source = source_text,
                                      certainty_assessment = certainty,

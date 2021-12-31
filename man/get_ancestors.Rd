@@ -6,28 +6,28 @@
 \usage{
 get_ancestors(
   gedcom,
-  individual = character(),
-  include_individual = FALSE,
-  include_siblings = FALSE,
-  include_families = FALSE,
-  include_supp_records = FALSE
+  indi_xref = character(),
+  inc_indi = FALSE,
+  inc_sibs = FALSE,
+  inc_famg = FALSE,
+  inc_supp = FALSE
 )
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{individual}{The xref of an Individual record to act on if one
+\item{indi_xref}{The xref of an Individual record to act on if one
 is not activated (will override active record).}
 
-\item{include_individual}{Whether to also include the individual themselves.}
+\item{inc_indi}{Whether to also include the individual themselves.}
 
-\item{include_siblings}{Whether to also include all siblings of ancestors (siblings of this individual will only be
+\item{inc_sibs}{Whether to also include all siblings of ancestors (siblings of this individual will only be
 included if the individual is included).}
 
-\item{include_families}{Whether to also include all Family Group records where this individual is a child
+\item{inc_famg}{Whether to also include all Family Group records where this individual is a child
 (and all ancestors' Family Group records).}
 
-\item{include_supp_records}{Whether to also include all supporting records (Note, Source, Repository, Multimedia).}
+\item{inc_supp}{Whether to also include all supporting records (Note, Source, Repository, Multimedia).}
 }
 \value{
 A vector of xrefs of ancestors.
@@ -37,6 +37,6 @@ This function identifies records in an entire branch of the family tree above a 
 }
 \examples{
 get_ancestors(sample555, "@I3@")
-get_ancestors(sample555, "@I3@", include_individual = TRUE)
-get_ancestors(sample555, "@I3@", include_individual = TRUE, include_families = TRUE)
+get_ancestors(sample555, "@I3@", inc_indi = TRUE)
+get_ancestors(sample555, "@I3@", inc_indi = TRUE, inc_famg = TRUE)
 }

@@ -7,10 +7,10 @@
 get_supporting_records(
   gedcom,
   xrefs,
-  include_note = TRUE,
-  include_media = TRUE,
-  include_sour = TRUE,
-  include_repo = TRUE
+  inc_note = TRUE,
+  inc_media = TRUE,
+  inc_sour = TRUE,
+  inc_repo = TRUE
 )
 }
 \arguments{
@@ -18,13 +18,13 @@ get_supporting_records(
 
 \item{xrefs}{The xrefs of records to get supporting records for.}
 
-\item{include_note}{Whether to include Note records.}
+\item{inc_note}{Whether to include Note records.}
 
-\item{include_media}{Whether to include Multimedia records.}
+\item{inc_media}{Whether to include Multimedia records.}
 
-\item{include_sour}{Whether to include Source records.}
+\item{inc_sour}{Whether to include Source records.}
 
-\item{include_repo}{Whether to include Repository records.}
+\item{inc_repo}{Whether to include Repository records.}
 }
 \value{
 A character vector of supporting record xrefs.

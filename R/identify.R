@@ -3,7 +3,7 @@
 #' Identify all spouses for an individual
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref of an Individual record to act on if one 
+#' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param return_name Whether to return the spouse's name(s) instead of the xref(s).
 #'
@@ -18,10 +18,10 @@
 #' expect_equal(get_spouses(sample555, "@I2@", TRUE), "Robert Eugene Williams")
 #' expect_equal(get_spouses(sample555, "@I3@"), character(0))
 get_spouses <- function(gedcom,
-                        individual = character(),
+                        indi_xref = character(),
                         return_name = FALSE) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
   fams_xref <- get_families_as_spouse(gedcom, xref)
   
@@ -39,7 +39,7 @@ get_spouses <- function(gedcom,
 #' Identify all children for an individual
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref of an Individual record to act on if one 
+#' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param return_name Whether to return the childrens name(s) instead of the xref(s).
 #'
@@ -53,10 +53,10 @@ get_spouses <- function(gedcom,
 #' expect_equal(get_children(sample555, "@I1@"), "@I3@")
 #' expect_equal(get_children(sample555, "@I2@", TRUE), "Joe Williams")
 get_children <- function(gedcom,
-                         individual = character(),
+                         indi_xref = character(),
                          return_name = FALSE) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
   fams_xref <- get_families_as_spouse(gedcom, xref)
   
@@ -73,7 +73,7 @@ get_children <- function(gedcom,
 #' Identify all parents for an individual
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref of an Individual record to act on if one 
+#' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param return_name Whether to return the parents name(s) instead of the xref(s).
 #'
@@ -87,10 +87,10 @@ get_children <- function(gedcom,
 #' expect_equal(get_parents(sample555, "@I3@"), c("@I1@", "@I2@"))
 #' expect_equal(get_parents(sample555, "@I3@", TRUE), c("Robert Eugene Williams", "Mary Ann Wilson"))
 get_parents <- function(gedcom,
-                        individual = character(),
+                        indi_xref = character(),
                         return_name = FALSE) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
   famc_xref <- get_families_as_child(gedcom, xref)
   
@@ -108,21 +108,21 @@ get_parents <- function(gedcom,
 #' Identify all siblings for an individual
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref of an Individual record to act on if one 
+#' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
-#' @param include_half_siblings Whether to include siblings that only share one parent.
+#' @param inc_half_sibs Whether to include siblings that only share one parent.
 #' @param return_name Whether to return the parents name(s) instead of the xref(s).
 #'
 #' @return A character vector of sibling xrefs or names.
 #' @export
 get_siblings <- function(gedcom,
-                        individual = character(),
-                        include_half_siblings = FALSE,
-                        return_name = FALSE) {
+                         indi_xref = character(),
+                         inc_half_sibs = FALSE,
+                         return_name = FALSE) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
-  if (include_half_siblings) {
+  if (inc_half_sibs) {
     par_xref <- get_parents(gedcom, xref)
     
     sib_xref <- purrr::map(par_xref, get_children, gedcom = gedcom) %>% 
@@ -146,7 +146,7 @@ get_siblings <- function(gedcom,
 #' Identify all families for an individual where they are a spouse
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref of an Individual record to act on if one 
+#' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #'
 #' @return A character vector of family xrefs.
@@ -156,9 +156,9 @@ get_siblings <- function(gedcom,
 #' @tests
 #' expect_equal(get_families_as_spouse(sample555, "@I1@"), c("@F1@", "@F2@"))
 #' expect_equal(get_families_as_spouse(sample555, "@I2@"), "@F1@")
-get_families_as_spouse <- function(gedcom, individual = character()) {
+get_families_as_spouse <- function(gedcom, indi_xref = character()) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
   unique(dplyr::filter(gedcom, record == xref, level == 1, tag == "FAMS")$value) 
   
@@ -167,7 +167,7 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
 #' Identify all families for an individual where they are a child
 #'
 #' @param gedcom A tidyged object.
-#' @param individual The xref of an Individual record to act on if one 
+#' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param birth_only Whether to only return the family containing the biological parents.
 #'
@@ -178,10 +178,10 @@ get_families_as_spouse <- function(gedcom, individual = character()) {
 #' @tests
 #' expect_equal(get_families_as_child(sample555, "@I3@"), c("@F1@", "@F2@"))
 get_families_as_child <- function(gedcom,
-                                  individual = character(),
+                                  indi_xref = character(),
                                   birth_only = FALSE) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
   # return all family links
   famc <- unique(dplyr::filter(gedcom, record == xref, tag == "FAMC")$value)
@@ -217,10 +217,10 @@ get_families_as_child <- function(gedcom,
 #'
 #' @param gedcom A tidyged object.
 #' @param xrefs The xrefs of records to get supporting records for.
-#' @param include_note Whether to include Note records.
-#' @param include_media Whether to include Multimedia records.
-#' @param include_sour Whether to include Source records.
-#' @param include_repo Whether to include Repository records.
+#' @param inc_note Whether to include Note records.
+#' @param inc_media Whether to include Multimedia records.
+#' @param inc_sour Whether to include Source records.
+#' @param inc_repo Whether to include Repository records.
 #'
 #' @return A character vector of supporting record xrefs.
 #' @export
@@ -231,18 +231,18 @@ get_families_as_child <- function(gedcom,
 #' expect_equal(get_supporting_records(sample555, "@I1@"), c("@S1@", "@R1@"))
 get_supporting_records <- function(gedcom,
                                    xrefs,
-                                   include_note = TRUE,
-                                   include_media = TRUE,
-                                   include_sour = TRUE,
-                                   include_repo = TRUE) {
+                                   inc_note = TRUE,
+                                   inc_media = TRUE,
+                                   inc_sour = TRUE,
+                                   inc_repo = TRUE) {
   
   if (length(xrefs) == 0) return(NULL)
   
   tags <- NULL
-  if (include_note) tags <- c(tags, "NOTE")
-  if (include_media) tags <- c(tags, "OBJE")
-  if (include_sour) tags <- c(tags, "SOUR")
-  if (include_repo) tags <- c(tags, "REPO")
+  if (inc_note) tags <- c(tags, "NOTE")
+  if (inc_media) tags <- c(tags, "OBJE")
+  if (inc_sour) tags <- c(tags, "SOUR")
+  if (inc_repo) tags <- c(tags, "REPO")
   
   links <- unique(dplyr::filter(gedcom, 
                                 record %in% xrefs, 
@@ -251,7 +251,7 @@ get_supporting_records <- function(gedcom,
   
   unique(
     c(links,
-    get_supporting_records(gedcom, links, include_note, include_media, include_sour, include_repo))
+    get_supporting_records(gedcom, links, inc_note, inc_media, inc_sour, inc_repo))
   )
   
 }
@@ -262,14 +262,14 @@ get_supporting_records <- function(gedcom,
 #' This function identifies records in an entire branch of the family tree below a certain individual.
 #' 
 #' @param gedcom A tidyged object.
-#' @param individual The xref of an Individual record to act on if one 
+#' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
-#' @param include_individual Whether to also include the individual themselves.
-#' @param include_spouses Whether to also include all spouses of this individual (and their descendants and
+#' @param inc_indi Whether to also include the individual themselves.
+#' @param inc_spou Whether to also include all spouses of this individual (and their descendants and
 #' descendants' spouses).
-#' @param include_families Whether to also include all Family Group records where this individual is a spouse 
+#' @param inc_famg Whether to also include all Family Group records where this individual is a spouse 
 #' (and all descendants' Family Group records).
-#' @param include_supp_records Whether to also include all supporting records (Note, Source, Repository, Multimedia).
+#' @param inc_supp Whether to also include all supporting records (Note, Source, Repository, Multimedia).
 #'
 #' @return A vector of xrefs of descendants.
 #' @export
@@ -279,13 +279,13 @@ get_supporting_records <- function(gedcom,
 #' expect_equal(get_descendants(sample555, "@I1@", TRUE, TRUE), c("@I2@","@I1@","@I3@"))
 #' expect_equal(get_descendants(sample555, "@I1@", TRUE, TRUE, TRUE), c("@F1@","@F2@","@I2@","@I1@","@I3@"))
 get_descendants <- function(gedcom,
-                            individual = character(),
-                            include_individual = FALSE,
-                            include_spouses = FALSE,
-                            include_families = FALSE,
-                            include_supp_records = FALSE) {
+                            indi_xref = character(),
+                            inc_indi = FALSE,
+                            inc_spou = FALSE,
+                            inc_famg = FALSE,
+                            inc_supp = FALSE) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
   return_xrefs <- NULL
   
@@ -294,27 +294,27 @@ get_descendants <- function(gedcom,
   fams_xref <- get_families_as_spouse(gedcom, xref)
   
   # if spouse is to be included, add their children to be included
-  if (include_spouses) {
+  if (inc_spou) {
     spou_chil <- unlist(purrr::map(spou_xref, get_children, gedcom=gedcom))
 
     chil_xref <- unique(c(chil_xref, spou_chil))
   }
   
   #deal with family groups first (while the individuals are still in them)
-  if (include_families) return_xrefs <- c(return_xrefs, fams_xref)
-  if (include_spouses) return_xrefs <- c(return_xrefs, spou_xref)
-  if (include_individual) return_xrefs <- c(return_xrefs, xref)
+  if (inc_famg) return_xrefs <- c(return_xrefs, fams_xref)
+  if (inc_spou) return_xrefs <- c(return_xrefs, spou_xref)
+  if (inc_indi) return_xrefs <- c(return_xrefs, xref)
   
   # identify children
   for(i in seq_along(chil_xref)) {
     return_xrefs <- c(return_xrefs,
-                      get_descendants(gedcom, chil_xref[i], TRUE, include_spouses, include_families, FALSE))
+                      get_descendants(gedcom, chil_xref[i], TRUE, inc_spou, inc_famg, FALSE))
   }
   
   # only get supporting records if this is the top level call
-  if (include_supp_records && length(as.character(sys.call())) == 7 && 
+  if (inc_supp && length(as.character(sys.call())) == 7 && 
       any(as.character(sys.call()) != c("get_descendants","gedcom","chil_xref[i]",
-                                        "TRUE","include_spouses","include_families","FALSE"))){
+                                        "TRUE","inc_spou","inc_famg","FALSE"))){
     
     c(return_xrefs,
       get_supporting_records(gedcom, return_xrefs))
@@ -330,29 +330,29 @@ get_descendants <- function(gedcom,
 #' This function identifies records in an entire branch of the family tree above a certain individual.
 #' 
 #' @param gedcom A tidyged object.
-#' @param individual The xref of an Individual record to act on if one 
+#' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
-#' @param include_individual Whether to also include the individual themselves.
-#' @param include_siblings Whether to also include all siblings of ancestors (siblings of this individual will only be
+#' @param inc_indi Whether to also include the individual themselves.
+#' @param inc_sibs Whether to also include all siblings of ancestors (siblings of this individual will only be
 #' included if the individual is included).
-#' @param include_families Whether to also include all Family Group records where this individual is a child 
+#' @param inc_famg Whether to also include all Family Group records where this individual is a child 
 #' (and all ancestors' Family Group records).
-#' @param include_supp_records Whether to also include all supporting records (Note, Source, Repository, Multimedia).
+#' @param inc_supp Whether to also include all supporting records (Note, Source, Repository, Multimedia).
 #'
 #' @return A vector of xrefs of ancestors.
 #' @examples 
 #' get_ancestors(sample555, "@I3@")
-#' get_ancestors(sample555, "@I3@", include_individual = TRUE)
-#' get_ancestors(sample555, "@I3@", include_individual = TRUE, include_families = TRUE)
+#' get_ancestors(sample555, "@I3@", inc_indi = TRUE)
+#' get_ancestors(sample555, "@I3@", inc_indi = TRUE, inc_famg = TRUE)
 #' @export
 get_ancestors <- function(gedcom,
-                          individual = character(),
-                          include_individual = FALSE,
-                          include_siblings = FALSE,
-                          include_families = FALSE,
-                          include_supp_records = FALSE) {
+                          indi_xref = character(),
+                          inc_indi = FALSE,
+                          inc_sibs = FALSE,
+                          inc_famg = FALSE,
+                          inc_supp = FALSE) {
   
-  xref <- get_valid_xref(gedcom, individual, .pkgenv$record_string_indi, is_indi)
+  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
   return_xrefs <- NULL
 
@@ -360,25 +360,25 @@ get_ancestors <- function(gedcom,
   par_xref <- get_parents(gedcom, xref)
   famc_xref <- get_families_as_child(gedcom, xref)
   
-  if (include_individual & include_siblings) {
+  if (inc_indi & inc_sibs) {
     sib_par <- unlist(purrr::map(sib_xref, get_parents, gedcom=gedcom))
     
     par_xref <- unique(c(par_xref, sib_par))
   }
   
-  if (include_families) return_xrefs <- c(return_xrefs, famc_xref)
-  if (include_individual & include_siblings) return_xrefs <- c(return_xrefs, sib_xref)
-  if (include_individual) return_xrefs <- c(return_xrefs, xref)
+  if (inc_famg) return_xrefs <- c(return_xrefs, famc_xref)
+  if (inc_indi & inc_sibs) return_xrefs <- c(return_xrefs, sib_xref)
+  if (inc_indi) return_xrefs <- c(return_xrefs, xref)
   
   for(i in seq_along(par_xref)) {
     return_xrefs <- c(return_xrefs,
-                      get_ancestors(gedcom, par_xref[i], TRUE, include_siblings, include_families, FALSE))
+                      get_ancestors(gedcom, par_xref[i], TRUE, inc_sibs, inc_famg, FALSE))
   }
   
   # only get supporting records if this is the top level call
-  if (include_supp_records && length(as.character(sys.call())) == 7 && 
+  if (inc_supp && length(as.character(sys.call())) == 7 && 
       any(as.character(sys.call()) != c("get_ancestors","gedcom","par_xref[i]",
-                                        "TRUE","include_siblings","include_families","FALSE"))) {
+                                        "TRUE","inc_sibs","inc_famg","FALSE"))) {
     
     c(return_xrefs,
       get_supporting_records(gedcom, return_xrefs))

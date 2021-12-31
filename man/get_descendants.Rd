@@ -6,28 +6,28 @@
 \usage{
 get_descendants(
   gedcom,
-  individual = character(),
-  include_individual = FALSE,
-  include_spouses = FALSE,
-  include_families = FALSE,
-  include_supp_records = FALSE
+  indi_xref = character(),
+  inc_indi = FALSE,
+  inc_spou = FALSE,
+  inc_famg = FALSE,
+  inc_supp = FALSE
 )
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{individual}{The xref of an Individual record to act on if one
+\item{indi_xref}{The xref of an Individual record to act on if one
 is not activated (will override active record).}
 
-\item{include_individual}{Whether to also include the individual themselves.}
+\item{inc_indi}{Whether to also include the individual themselves.}
 
-\item{include_spouses}{Whether to also include all spouses of this individual (and their descendants and
+\item{inc_spou}{Whether to also include all spouses of this individual (and their descendants and
 descendants' spouses).}
 
-\item{include_families}{Whether to also include all Family Group records where this individual is a spouse
+\item{inc_famg}{Whether to also include all Family Group records where this individual is a spouse
 (and all descendants' Family Group records).}
 
-\item{include_supp_records}{Whether to also include all supporting records (Note, Source, Repository, Multimedia).}
+\item{inc_supp}{Whether to also include all supporting records (Note, Source, Repository, Multimedia).}
 }
 \value{
 A vector of xrefs of descendants.

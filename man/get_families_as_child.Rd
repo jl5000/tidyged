@@ -4,12 +4,12 @@
 \alias{get_families_as_child}
 \title{Identify all families for an individual where they are a child}
 \usage{
-get_families_as_child(gedcom, individual = character(), birth_only = FALSE)
+get_families_as_child(gedcom, indi_xref = character(), birth_only = FALSE)
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{individual}{The xref of an Individual record to act on if one
+\item{indi_xref}{The xref of an Individual record to act on if one
 is not activated (will override active record).}
 
 \item{birth_only}{Whether to only return the family containing the biological parents.}

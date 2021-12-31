@@ -4,12 +4,12 @@
 \alias{get_children}
 \title{Identify all children for an individual}
 \usage{
-get_children(gedcom, individual = character(), return_name = FALSE)
+get_children(gedcom, indi_xref = character(), return_name = FALSE)
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{individual}{The xref of an Individual record to act on if one
+\item{indi_xref}{The xref of an Individual record to act on if one
 is not activated (will override active record).}
 
 \item{return_name}{Whether to return the childrens name(s) instead of the xref(s).}

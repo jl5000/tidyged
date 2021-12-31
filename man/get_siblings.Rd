@@ -6,18 +6,18 @@
 \usage{
 get_siblings(
   gedcom,
-  individual = character(),
-  include_half_siblings = FALSE,
+  indi_xref = character(),
+  inc_half_sibs = FALSE,
   return_name = FALSE
 )
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{individual}{The xref of an Individual record to act on if one
+\item{indi_xref}{The xref of an Individual record to act on if one
 is not activated (will override active record).}
 
-\item{include_half_siblings}{Whether to include siblings that only share one parent.}
+\item{inc_half_sibs}{Whether to include siblings that only share one parent.}
 
 \item{return_name}{Whether to return the parents name(s) instead of the xref(s).}
 }

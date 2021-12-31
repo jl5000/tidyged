@@ -4,12 +4,12 @@
 \alias{get_families_as_spouse}
 \title{Identify all families for an individual where they are a spouse}
 \usage{
-get_families_as_spouse(gedcom, individual = character())
+get_families_as_spouse(gedcom, indi_xref = character())
 }
 \arguments{
 \item{gedcom}{A tidyged object.}
 
-\item{individual}{The xref of an Individual record to act on if one
+\item{indi_xref}{The xref of an Individual record to act on if one
 is not activated (will override active record).}
 }
 \value{

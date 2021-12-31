@@ -86,7 +86,9 @@ reference:
   - order_famg_children
   - primary_indi_name
   - temporarily_remove_name_slashes
+  - insert_explicit_marr_types
   - update_change_date
+  - remove_dates_for_tests
 - title: "Sample data"
 - contents:
   - sample555

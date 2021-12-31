@@ -139,8 +139,8 @@ add_indi_fact <- function(gedcom,
     descriptor == ""
   }
     
-  if(length(user_reference_type) == 0 & type %in% c("IDNO","FACT"))
-    stop("A user_reference_type must be defined for national ID numbers and other attributes")
+  if(length(classification) == 0 & type %in% c("IDNO","FACT","EVEN"))
+    stop("A classification must be defined for national ID numbers and 'other' facts")
   
   even_notes <- create_note_structures(gedcom, notes)
   media_links <- create_multimedia_links(gedcom, multimedia_links)
@@ -163,8 +163,7 @@ add_indi_fact <- function(gedcom,
     
     fact_str <- tidyged.internals::INDIVIDUAL_ATTRIBUTE_STRUCTURE(attribute_type = type,
                                                                   attribute_descriptor = descriptor,
-                                                                  individual_event_details = details2,
-                                                                  user_reference_type = user_reference_type) %>% 
+                                                                  individual_event_details = details2) %>% 
       tidyged.internals::add_levels(1)
     
   } else {

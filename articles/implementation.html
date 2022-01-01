@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.13.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.14.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -59,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jl5000/tidyged/">
+  <a href="https://github.com/jl5000/tidyged/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -80,32 +76,32 @@
       <h1 data-toc-skip>Implementation of tidyged</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/master/vignettes/implementation.Rmd"><code>vignettes/implementation.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/HEAD/vignettes/implementation.Rmd" class="external-link"><code>vignettes/implementation.Rmd</code></a></small>
       <div class="hidden name"><code>implementation.Rmd</code></div>
 
     </div>
 
     
     
-<div id="why-tidyged" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-tidyged" class="anchor"></a>Why tidyged?</h2>
+<div class="section level2">
+<h2 id="why-tidyged">Why tidyged?<a class="anchor" aria-label="anchor" href="#why-tidyged"></a>
+</h2>
 <p>One of the main characteristics I wanted for this package was to hide the complexity of the GEDCOM specification. I began with what I wanted the user interface to look like and worked backwards from there. I felt that adopting a <code>tidyverse</code> feel to the package would enhance readability and would significantly flatten the learning curve for those who are familiar with <code>ggplot2</code>.</p>
 </div>
-<div id="data-structures" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-structures" class="anchor"></a>Data structures</h2>
-<p>I spent a significant amount of time before writing any code considering my options for how the data would be stored under the hood. In <a href="https://r-house.netlify.com/2019/12/30/can-genealogical-data-be-tidy/">one blog post</a> I considered storing genealogical data in a relational table format as it is easier to deal with, but discounted it very quickly as it is not well suited to nested data (list columns are not ideal for this application).</p>
-<p>I toyed with the idea of using an off-the-shelf open source product like <a href="https://gramps-project.org/blog/">GRAMPS</a> but I found it awkward to use and wanted something where I was in complete control, taking full advantage of the strengths of R.</p>
+<div class="section level2">
+<h2 id="data-structures">Data structures<a class="anchor" aria-label="anchor" href="#data-structures"></a>
+</h2>
+<p>I spent a significant amount of time before writing any code considering my options for how the data would be stored under the hood. In <a href="https://r-house.netlify.com/2019/12/30/can-genealogical-data-be-tidy/" class="external-link">one blog post</a> I considered storing genealogical data in a relational table format as it is easier to deal with, but discounted it very quickly as it is not well suited to nested data (list columns are not ideal for this application).</p>
+<p>I toyed with the idea of using an off-the-shelf open source product like <a href="https://gramps-project.org/blog/" class="external-link">GRAMPS</a> but I found it awkward to use and wanted something where I was in complete control, taking full advantage of the strengths of R.</p>
 <p>I also considered using data structures more suited to this type of data, such as JSON or graphs (using the <code>igraph</code> or <code>data.tree</code> package). However, I discovered it would be quite difficult representing some of the structures in the GEDCOM specification to my satisfaction.</p>
 <p>It was some time before a better solution occurred to me, and that was to store the GEDCOM file almost as is, and just to split out the components of each line into their own columns, creating a tidy version of a GEDCOM file (hence the name <code>tidyged</code>). This would allow easy manipulation using existing <code>tidyverse</code> infrastructure, and some additional processing would be needed to deal with the ordered and nested nature of the file. Ironically, I had returned to the idea of a tidy dataframe that I had dismissed early on.</p>
 </div>
-<div id="the-tidyged-object" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-tidyged-object" class="anchor"></a>The tidyged object</h2>
+<div class="section level2">
+<h2 id="the-tidyged-object">The tidyged object<a class="anchor" aria-label="anchor" href="#the-tidyged-object"></a>
+</h2>
 <p>The <code>tidyged</code> object is a tibble representation of a GEDCOM file. Before we see how this is structured, let’s see an example of a GEDCOM file:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"555SAMPLE.GED"</span>, package <span class="op">=</span> <span class="st">"tidyged.io"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"555SAMPLE.GED"</span>, package <span class="op">=</span> <span class="st">"tidyged.io"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "0 HEAD"                                                                                 </span>
 <span class="co">#&gt;  [2] "1 GEDC"                                                                                 </span>
 <span class="co">#&gt;  [3] "2 VERS 5.5.5"                                                                           </span>
@@ -219,7 +215,7 @@
 <p>There will not be any lines that have all of these components. For example, the first line of records do not contain a line value. Also, a line will never have a cross-reference pointer and a line value defined. For this reason, the <code>tidyged</code> object treats cross-reference pointers as just another line value.</p>
 <p>The <code>tidyged</code> representation of the above GEDCOM file is given below, using a sample dataset built into the package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu">tidyged</span><span class="fu">::</span><span class="va"><a href="../reference/sample555.html">sample555</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">tidyged</span><span class="fu">::</span><span class="va"><a href="../reference/sample555.html">sample555</a></span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="6%">
@@ -913,7 +909,7 @@
 <p>GEDCOM files can be imported and exported using the <code>tidyged.io</code> package. Many GEDCOM processors modify the data on import, perhaps ignoring custom tags. This package reads the file as-is, and the only modification of the file is in line with that recommended in the GEDCOM 5.5.5 specification, specifically; replacing double ‘@’ symbols with single ones, merging CONC/CONT lines, and ensuring appropriate capitalisation of certain values. In general, the package sticks rigidly to the GEDCOM specification and does not use custom tags. There is a real issue with other desktop applications creating their own flavours of file and diverging from the specification; <code>tidyged</code> does not and will never do this.</p>
 <p>If you want to modify single values in a GEDCOM or do a simple Find/Replace, then this is straightforward to achieve with a simple text editor.</p>
 <p style="text-align: right;">
-<a href="https://jl5000.github.io/tidyged/articles/gedcompendium.html">Next article: The gedcompendium &gt;</a>
+<a href="https://jl5000.github.io/tidyged/articles/gedcompendium.html" class="external-link">Next article: The gedcompendium &gt;</a>
 </p>
 </div>
   </div>
@@ -929,11 +925,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Jamie Lendrum.</p>
+  <p></p>
+<p>Developed by Jamie Lendrum.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -941,6 +939,8 @@
 
   
 
+
+  
 
   </body>
 </html>

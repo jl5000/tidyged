@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.13.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.14.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -59,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jl5000/tidyged/">
+  <a href="https://github.com/jl5000/tidyged/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -76,9 +72,8 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="tidyged-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#tidyged-" class="anchor"></a>tidyged <img src="reference/figures/logo.png" align="right" height="138">
+<div class="section level1">
+<div class="page-header"><h1 id="tidyged-">tidyged <img src="reference/figures/logo.png" align="right" height="138"><a class="anchor" aria-label="anchor" href="#tidyged-"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -86,59 +81,59 @@
 <p>Families can be difficult - but the data describing them doesn’t need to be</p>
 </blockquote>
 <p>Create and summarise family tree GEDCOM files using tidy dataframes.</p>
-<p>The package is part of the <code>gedcompendium</code> ecosystem of packages. This ecosystem enables the handling of <code>tidyged</code> objects (tibble representations of GEDCOM files), and the main package of this ecosystem is <a href="https://jl5000.github.io/tidyged/"><code>tidyged</code></a>.</p>
+<p>The package is part of the <code>gedcompendium</code> ecosystem of packages. This ecosystem enables the handling of <code>tidyged</code> objects (tibble representations of GEDCOM files), and the main package of this ecosystem is <a href="https://jl5000.github.io/tidyged/" class="external-link"><code>tidyged</code></a>.</p>
 <p><img src="reference/figures/allhex.png" width="65%" style="display: block; margin: auto;"></p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"jl5000/tidyged"</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jl5000/tidyged"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <p>The intent is to allow the user to import GEDCOM files or create them from scratch using a <code>ggplot2</code> type interface; starting with a base GEDCOM object (with only a header and trailer section) and adding records as you would add layers to a ggplot object (but instead using the pipe operator, %&gt;%).</p>
 <p>An example is below:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/" class="external-link">tidyged</a></span><span class="op">)</span>
 
-<span class="va">tg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Jamie Lendrum"</span><span class="op">)</span>, gedcom_description <span class="op">=</span> <span class="st">"The Skywalker family"</span>, gedcom_copyright <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span>, indi_notes <span class="op">=</span> <span class="st">"The central character in the Star Wars Skywalker Saga"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Anakin"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">tg</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Jamie Lendrum"</span><span class="op">)</span>, gedcom_description <span class="op">=</span> <span class="st">"The Skywalker family"</span>, gedcom_copyright <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span>, indi_notes <span class="op">=</span> <span class="st">"The central character in the Star Wars Skywalker Saga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Anakin"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"Darth"</span>, given <span class="op">=</span> <span class="st">"Vader"</span><span class="op">)</span>, 
-                 type <span class="op">=</span> <span class="st">"given"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span>, indi_notes <span class="op">=</span> <span class="st">"Queen of Naboo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+                 type <span class="op">=</span> <span class="st">"given"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span>, indi_notes <span class="op">=</span> <span class="st">"Queen of Naboo"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Padme"</span>, surname <span class="op">=</span> <span class="st">"Amidala"</span><span class="op">)</span>, 
-                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, 
-                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"Princess"</span>, given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span><span class="op">)</span>, 
-                 type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+                 type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Luke"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, 
-                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Obi-Wan"</span>, nickname <span class="op">=</span> <span class="st">"Ben"</span>, surname <span class="op">=</span> <span class="st">"Kenobi"</span><span class="op">)</span>, 
-                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+                 type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="fu"><a href="reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Anakin"</span><span class="op">)</span>, 
            wife <span class="op">=</span> <span class="fu"><a href="reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Padme"</span><span class="op">)</span>, 
-           children <span class="op">=</span> <span class="fu"><a href="reference/find_indi_refn.html">find_indi_name_all</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Luke|Leia"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="fu"><a href="reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Anakin"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+           children <span class="op">=</span> <span class="fu"><a href="reference/find_indi_refn.html">find_indi_name_all</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Luke|Leia"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="reference/activate_indi.html">activate_indi</a></span><span class="op">(</span><span class="fu"><a href="reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Anakin"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/add_indi_association.html">add_indi_association</a></span><span class="op">(</span><span class="fu"><a href="reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Obi-Wan"</span><span class="op">)</span>, 
-                       association <span class="op">=</span> <span class="st">"Master"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+                       association <span class="op">=</span> <span class="st">"Master"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/add_indi_fact.html">add_indi_fact</a></span><span class="op">(</span><span class="st">"death"</span>, age <span class="op">=</span> <span class="st">"45y"</span>, cause <span class="op">=</span> <span class="st">"Killed by son Luke"</span>,
-                fact_place <span class="op">=</span> <span class="fu"><a href="reference/place.html">place</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Second Death Star"</span>, notes <span class="op">=</span> <span class="st">"Orbiting Endor System"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_indi_fact.html">add_indi_fact</a></span><span class="op">(</span><span class="st">"religion"</span>, descriptor <span class="op">=</span> <span class="st">"Jedi"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_indi_fact.html">add_indi_fact</a></span><span class="op">(</span><span class="st">"possession"</span>, descriptor <span class="op">=</span> <span class="st">"Lightsaber"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"Based on Star Wars"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_sour.html">add_sour</a></span><span class="op">(</span>short_title <span class="op">=</span> <span class="st">"Star Wars"</span>, title <span class="op">=</span> <span class="st">"Star Wars Episode IV: A New Hope"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/add_repo.html">add_repo</a></span><span class="op">(</span><span class="st">"The Skywalker Saga"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+                fact_place <span class="op">=</span> <span class="fu"><a href="reference/place.html">place</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Second Death Star"</span>, notes <span class="op">=</span> <span class="st">"Orbiting Endor System"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="reference/add_indi_fact.html">add_indi_fact</a></span><span class="op">(</span><span class="st">"religion"</span>, descriptor <span class="op">=</span> <span class="st">"Jedi"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="reference/add_indi_fact.html">add_indi_fact</a></span><span class="op">(</span><span class="st">"possession"</span>, descriptor <span class="op">=</span> <span class="st">"Lightsaber"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"Based on Star Wars"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="reference/add_sour.html">add_sour</a></span><span class="op">(</span>short_title <span class="op">=</span> <span class="st">"Star Wars"</span>, title <span class="op">=</span> <span class="st">"Star Wars Episode IV: A New Hope"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="reference/add_repo.html">add_repo</a></span><span class="op">(</span><span class="st">"The Skywalker Saga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/add_media.html">add_media</a></span><span class="op">(</span>file_reference <span class="op">=</span> <span class="st">"XYZ"</span>, format <span class="op">=</span> <span class="st">"JPEG"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tg</span>, n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">tg</span>, n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 114 × 4</span>
 <span class="co">#&gt;     level record tag   value                                                    </span>
 <span class="co">#&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                                    </span>
@@ -265,7 +260,7 @@
 <span class="fu"><a href="reference/num_indi.html">num_famg</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span>
 <span class="co">#&gt; [1] 1</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span>
 <span class="co">#&gt; GEDCOM version 5.5.5 (LINEAGE-LINKED)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Individuals:         5</span>
@@ -275,7 +270,7 @@
 <span class="co">#&gt; Notes:               1</span>
 <span class="co">#&gt; Sources:             1</span>
 <span class="co">#&gt; Repositories:        1</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span>
 <span class="co">#&gt; GEDCOM file summary: </span>
 <span class="co">#&gt;  </span>
 <span class="co">#&gt;  Submitter:               Jamie Lendrum </span>
@@ -290,7 +285,7 @@
 <span class="co">#&gt;  Product name:            The 'gedcompendium' ecosystem of packages for the R language </span>
 <span class="co">#&gt;  Product source:          Jamie Lendrum</span>
 
-<span class="fu"><a href="reference/df_indi.html">df_indi</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="reference/df_indi.html">df_indi</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="3%">
@@ -394,8 +389,8 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<table class="table">
+<code class="sourceCode R"><span class="fu"><a href="reference/df_indi.html">df_famg</a></span><span class="op">(</span><span class="va">tg</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="4%">
 <col width="13%">
@@ -429,11 +424,11 @@
 </table>
 <p>This package allows limited editing of <code>tidyged</code> objects (adding/removing records, as well as the addition of some record substructures). Editing of existing records is made possible through ‘activation’ (much like the <code>tidygraph</code> package). When a record is created, it automatically becomes the active record, through an object attribute. Record editing functions then act on this record. Other records can be activated through a series of <code>activate_*()</code> functions.</p>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <ul>
-<li><a href="https://www.gedcom.org/gedcom.html">The GEDCOM 5.5.5 Specification</a></li>
+<li><a href="https://www.gedcom.org/gedcom.html" class="external-link">The GEDCOM 5.5.5 Specification</a></li>
 </ul>
 </div>
 </div>
@@ -441,45 +436,57 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/jl5000/tidyged/">https://​github.com/​jl5000/​tidyged/​</a>
-</li>
+<li><a href="https://github.com/jl5000/tidyged/" class="external-link">Browse source code</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small>GPL (&gt;= 2)</small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing tidyged</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Jamie Lendrum <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/jl5000/tidyged/actions"><img src="https://github.com/jl5000/tidyged/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/jl5000/tidyged"><img src="https://codecov.io/gh/jl5000/tidyged/branch/master/graph/badge.svg"></a></li>
-<li><a href="https://www.codefactor.io/repository/github/jl5000/tidyged"><img src="https://www.codefactor.io/repository/github/jl5000/tidyged/badge" alt="CodeFactor"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg"></a></li>
+<li><a href="https://github.com/jl5000/tidyged/actions" class="external-link"><img src="https://github.com/jl5000/tidyged/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/jl5000/tidyged" class="external-link"><img src="https://codecov.io/gh/jl5000/tidyged/branch/master/graph/badge.svg"></a></li>
+<li><a href="https://www.codefactor.io/repository/github/jl5000/tidyged" class="external-link"><img src="https://www.codefactor.io/repository/github/jl5000/tidyged/badge" alt="CodeFactor"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Jamie Lendrum.</p>
+  <p></p>
+<p>Developed by Jamie Lendrum.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -487,6 +494,8 @@
 
   
 
+
+  
 
   </body>
 </html>

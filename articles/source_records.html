@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.13.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.14.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -59,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jl5000/tidyged/">
+  <a href="https://github.com/jl5000/tidyged/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -80,7 +76,7 @@
       <h1 data-toc-skip>Source records</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/master/vignettes/source_records.Rmd"><code>vignettes/source_records.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/HEAD/vignettes/source_records.Rmd" class="external-link"><code>vignettes/source_records.Rmd</code></a></small>
       <div class="hidden name"><code>source_records.Rmd</code></div>
 
     </div>
@@ -88,15 +84,15 @@
     
     
 <p><em>WORK IN PROGRESS</em></p>
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>Source records are one of the most important types of record in a GEDCOM file. They provide evidence for the assertions (facts) made in a file, and require careful management.</p>
 <p>A Source record can be created with the <code><a href="../reference/add_sour.html">add_sour()</a></code> function.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/" class="external-link">tidyged</a></span><span class="op">)</span>
 
-<span class="va">birth_source</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">birth_source</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/add_sour.html">add_sour</a></span><span class="op">(</span>events_recorded <span class="op">=</span> <span class="st">"BIRT, MARR, DEAT"</span>,
            date_period_covered <span class="op">=</span> <span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1900</span><span class="op">)</span>, <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">2000</span><span class="op">)</span><span class="op">)</span>,
            jurisdiction <span class="op">=</span> <span class="st">"England and Wales"</span>,
@@ -105,41 +101,41 @@
            publication_detail <span class="op">=</span> <span class="st">"something"</span>,
            source_text <span class="op">=</span> <span class="st">"This is what is written on the certificate"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="linking-back-to-repositories" class="section level2">
-<h2 class="hasAnchor">
-<a href="#linking-back-to-repositories" class="anchor"></a>Linking back to repositories</h2>
+<div class="section level2">
+<h2 id="linking-back-to-repositories">Linking back to repositories<a class="anchor" aria-label="anchor" href="#linking-back-to-repositories"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">birth_source</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">birth_source</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/add_repo.html">add_repo</a></span><span class="op">(</span><span class="st">"General Register Office"</span>,
-           repo_address <span class="op">=</span> <span class="fu"><a href="../reference/address.html">address</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Southport"</span>, state <span class="op">=</span> <span class="st">"Merseyside"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/activate_indi.html">activate_sour</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_sour_titl</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Birth Certificate for Joe Bloggs"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+           repo_address <span class="op">=</span> <span class="fu"><a href="../reference/address.html">address</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Southport"</span>, state <span class="op">=</span> <span class="st">"Merseyside"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/activate_indi.html">activate_sour</a></span><span class="op">(</span><span class="fu"><a href="../reference/find_indi_refn.html">find_sour_titl</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Birth Certificate for Joe Bloggs"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/add_sour_repo_citation.html">add_sour_repo_citation</a></span><span class="op">(</span>repository <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_repo_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"General Register Office"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 40 × 4</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 40 × 4</span></span>
 <span class="co">#&gt;    level record tag   value                                                     </span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                                     </span>
-<span class="co">#&gt;  1     0 HD     HEAD  ""                                                        </span>
-<span class="co">#&gt;  2     1 HD     GEDC  ""                                                        </span>
-<span class="co">#&gt;  3     2 HD     VERS  "5.5.5"                                                   </span>
-<span class="co">#&gt;  4     2 HD     FORM  "LINEAGE-LINKED"                                          </span>
-<span class="co">#&gt;  5     3 HD     VERS  "5.5.5"                                                   </span>
-<span class="co">#&gt;  6     1 HD     CHAR  "UTF-8"                                                   </span>
-<span class="co">#&gt;  7     1 HD     DEST  "gedcompendium"                                           </span>
-<span class="co">#&gt;  8     1 HD     SOUR  "gedcompendium"                                           </span>
-<span class="co">#&gt;  9     2 HD     NAME  "The 'gedcompendium' ecosystem of packages for the R lang…</span>
-<span class="co">#&gt; 10     2 HD     CORP  "Jamie Lendrum"                                           </span>
-<span class="co">#&gt; # … with 30 more rows</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     0 HD     HEAD  <span style="color: #949494;">""</span>                                                        </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     1 HD     GEDC  <span style="color: #949494;">""</span>                                                        </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     2 HD     VERS  <span style="color: #949494;">"</span>5.5.5<span style="color: #949494;">"</span>                                                   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     2 HD     FORM  <span style="color: #949494;">"</span>LINEAGE-LINKED<span style="color: #949494;">"</span>                                          </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     3 HD     VERS  <span style="color: #949494;">"</span>5.5.5<span style="color: #949494;">"</span>                                                   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     1 HD     CHAR  <span style="color: #949494;">"</span>UTF-8<span style="color: #949494;">"</span>                                                   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     1 HD     DEST  <span style="color: #949494;">"</span>gedcompendium<span style="color: #949494;">"</span>                                           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     1 HD     SOUR  <span style="color: #949494;">"</span>gedcompendium<span style="color: #949494;">"</span>                                           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     2 HD     NAME  <span style="color: #949494;">"</span>The 'gedcompendium' ecosystem of packages for the R lang…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     2 HD     CORP  <span style="color: #949494;">"</span>Jamie Lendrum<span style="color: #949494;">"</span>                                           </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 30 more rows</span></span></code></pre></div>
 </div>
-<div id="citing-source-records" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citing-source-records" class="anchor"></a>Citing source records</h2>
+<div class="section level2">
+<h2 id="citing-source-records">Citing source records<a class="anchor" aria-label="anchor" href="#citing-source-records"></a>
+</h2>
 </div>
-<div id="citation-styles" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citation-styles" class="anchor"></a>Citation styles</h2>
+<div class="section level2">
+<h2 id="citation-styles">Citation styles<a class="anchor" aria-label="anchor" href="#citation-styles"></a>
+</h2>
 <p>The point to recognise is that users should NOT be exclusively ‘splitters’ or ‘lumpers’. That choice depends on the Source Citation characteristics. GRO BMD Index records lend themselves to being Method 2 ‘lumper’ Sources. BMD Certificates are usually better suited to being Method 1 ‘splitter’ Sources as they often have associated Media images, Text From Source transcripts, and multiple Citations. So most users adopt a hybrid approach</p>
-<p><a href="https://fhug.org.uk/kb/kb-article/citing-sources-method-1-and-method-2/" class="uri">https://fhug.org.uk/kb/kb-article/citing-sources-method-1-and-method-2/</a></p>
+<p><a href="https://fhug.org.uk/kb/kb-article/citing-sources-method-1-and-method-2/" class="external-link uri">https://fhug.org.uk/kb/kb-article/citing-sources-method-1-and-method-2/</a></p>
 <p style="text-align: right;">
-<a href="https://jl5000.github.io/tidyged/articles/multimedia_records.html">Next article: Multimedia records &gt;</a>
+<a href="https://jl5000.github.io/tidyged/articles/multimedia_records.html" class="external-link">Next article: Multimedia records &gt;</a>
 </p>
 </div>
   </div>
@@ -155,11 +151,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Jamie Lendrum.</p>
+  <p></p>
+<p>Developed by Jamie Lendrum.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -167,6 +165,8 @@
 
   
 
+
+  
 
   </body>
 </html>

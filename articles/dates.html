@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.13.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.14.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -59,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jl5000/tidyged/">
+  <a href="https://github.com/jl5000/tidyged/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -80,24 +76,24 @@
       <h1 data-toc-skip>Date types</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/master/vignettes/dates.Rmd"><code>vignettes/dates.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/HEAD/vignettes/dates.Rmd" class="external-link"><code>vignettes/dates.Rmd</code></a></small>
       <div class="hidden name"><code>dates.Rmd</code></div>
 
     </div>
 
     
     
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>As you would expect with a genealogical data format, dates form a major part of information contained within it. Within <code>tidyged</code> there are a number of different date types that can be defined, and there is a helper function for each type to ensure it is formatted correctly.</p>
 </div>
-<div id="exact-dates" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exact-dates" class="anchor"></a>Exact dates</h2>
+<div class="section level2">
+<h2 id="exact-dates">Exact dates<a class="anchor" aria-label="anchor" href="#exact-dates"></a>
+</h2>
 <p>Dates that occur on a specific defined date are defined using the <code><a href="../reference/date_exact.html">date_exact()</a></code> function:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/" class="external-link">tidyged</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/date_exact.html">date_exact</a></span><span class="op">(</span><span class="fl">1999</span>, <span class="fl">7</span>, <span class="fl">5</span><span class="op">)</span>
 <span class="co">#&gt; [1] "5 JUL 1999"</span>
@@ -106,9 +102,9 @@
 <span class="fu"><a href="../reference/date_exact.html">date_exact</a></span><span class="op">(</span><span class="fl">2008</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; [1] "1 APR 2008"</span></code></pre></div>
 </div>
-<div id="calendar-dates" class="section level2">
-<h2 class="hasAnchor">
-<a href="#calendar-dates" class="anchor"></a>Calendar dates</h2>
+<div class="section level2">
+<h2 id="calendar-dates">Calendar dates<a class="anchor" aria-label="anchor" href="#calendar-dates"></a>
+</h2>
 <p>Calendar dates are the most common type of date used. They can not only be used to create specific dates like <code><a href="../reference/date_exact.html">date_exact()</a></code>, they underpin the other date types described below. They can be created using the <code><a href="../reference/date_calendar.html">date_calendar()</a></code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
@@ -129,21 +125,21 @@
 <span class="co">#&gt; [1] "105 BCE"</span></code></pre></div>
 <p>Note that only the Gregorian calendar is currently supported.</p>
 </div>
-<div id="approximate-dates" class="section level2">
-<h2 class="hasAnchor">
-<a href="#approximate-dates" class="anchor"></a>Approximate dates</h2>
+<div class="section level2">
+<h2 id="approximate-dates">Approximate dates<a class="anchor" aria-label="anchor" href="#approximate-dates"></a>
+</h2>
 <p>Approximate dates (i.e. those expressing uncertainty) use the qualifiers ‘about’, ‘calculated’, or ‘estimated’ in conjunction with a <code><a href="../reference/date_calendar.html">date_calendar()</a></code> object:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>about <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>about <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [1] "ABT 5 APR 1999"</span>
-<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>calc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>calc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [1] "CAL 5 APR 1999"</span>
-<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>est <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>est <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [1] "EST 5 APR 1999"</span></code></pre></div>
 </div>
-<div id="date-periods" class="section level2">
-<h2 class="hasAnchor">
-<a href="#date-periods" class="anchor"></a>Date periods</h2>
+<div class="section level2">
+<h2 id="date-periods">Date periods<a class="anchor" aria-label="anchor" href="#date-periods"></a>
+</h2>
 <p>Date periods can take one or two <code><a href="../reference/date_calendar.html">date_calendar()</a></code> objects:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">7</span>, <span class="fl">26</span><span class="op">)</span>,
@@ -155,9 +151,9 @@
 <span class="co">#&gt; [1] "TO 15 SEP 1956"</span></code></pre></div>
 <p>Providing only one date gives a semi-infinite period.</p>
 </div>
-<div id="date-ranges" class="section level2">
-<h2 class="hasAnchor">
-<a href="#date-ranges" class="anchor"></a>Date ranges</h2>
+<div class="section level2">
+<h2 id="date-ranges">Date ranges<a class="anchor" aria-label="anchor" href="#date-ranges"></a>
+</h2>
 <p>Date ranges can be defined using <code><a href="../reference/date_range.html">date_range()</a></code>. Unlike <code><a href="../reference/date_period.html">date_period()</a></code>, they describe when an event occurred rather than a duration.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/date_range.html">date_range</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1956</span>, <span class="fl">7</span>, <span class="fl">26</span><span class="op">)</span>,
@@ -169,7 +165,7 @@
 <span class="co">#&gt; [1] "BEF 15 SEP 1956"</span></code></pre></div>
 <p>It’s important to note that approximate dates cannot be used in date ranges or date periods. The GEDCOM specification does allow arbitrary “date phrases” enclosed in parentheses, but recommends these are added as notes instead. The <code>tidyged</code> package doesn’t allow you to create date phrases (only as notes) but will accept them from imported files.</p>
 <p style="text-align: right;">
-<a href="https://jl5000.github.io/tidyged/articles/summarising.html">Next article: Summarising tidyged objects &gt;</a>
+<a href="https://jl5000.github.io/tidyged/articles/summarising.html" class="external-link">Next article: Summarising tidyged objects &gt;</a>
 </p>
 </div>
   </div>
@@ -185,11 +181,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Jamie Lendrum.</p>
+  <p></p>
+<p>Developed by Jamie Lendrum.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -197,6 +195,8 @@
 
   
 
+
+  
 
   </body>
 </html>

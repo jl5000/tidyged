@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.13.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.14.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -59,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jl5000/tidyged/">
+  <a href="https://github.com/jl5000/tidyged/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -80,33 +76,33 @@
       <h1 data-toc-skip>Family group records</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/master/vignettes/family_group_records.Rmd"><code>vignettes/family_group_records.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jl5000/tidyged/blob/HEAD/vignettes/family_group_records.Rmd" class="external-link"><code>vignettes/family_group_records.Rmd</code></a></small>
       <div class="hidden name"><code>family_group_records.Rmd</code></div>
 
     </div>
 
     
     
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>Adding family groups to a tidyged object can be achieved with the <code><a href="../reference/add_famg.html">add_famg()</a></code> function. The main arguments are about defining the members of the family group. The <code>husband</code>, <code>wife</code>, and <code>children</code> parameters can be xrefs to other Individual records, or calls to the <code>find_indi_*()</code> family of functions (see <code><a href="../articles/cross_references.html">vignette("cross_references")</a></code>). The <code>number_of_children</code> parameter describes the total number of known children in this family, regardless of whether they are defined.</p>
 <p>The family group records do not need to describe traditional marriage unions - they can describe non-marital relationships and same-sex relationships. Children also do not have to be biological. The parameter names are a legacy from previous versions of the GEDCOM specification, which have not yet been updated.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/">tidyged</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/" class="external-link">tidyged</a></span><span class="op">)</span>
 
-<span class="va">simpson_indis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Homer Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Marge Simpson"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Lisa Simpson"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Bart Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">simpson_indis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Homer Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Marge Simpson"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Lisa Simpson"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Bart Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"These records have not yet been joined in a family group record"</span><span class="op">)</span>
 
-<span class="va">simpson_famg</span> <span class="op">&lt;-</span> <span class="va">simpson_indis</span> <span class="op">%&gt;%</span> 
+<span class="va">simpson_famg</span> <span class="op">&lt;-</span> <span class="va">simpson_indis</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"@I1@"</span>, wife <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Marge"</span><span class="op">)</span>, 
            children <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name_all</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Bart|Lisa"</span><span class="op">)</span>, number_of_children <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">simpson_famg</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">simpson_famg</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">level</th>
@@ -173,25 +169,25 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">27 OCT 2021</td>
+<td align="left">1 JAN 2022</td>
 </tr>
 </tbody>
 </table>
 <p>As with other records, various types of user-defined references can be defined (<code>user_reference_numbers</code>), as well as links to multimedia and notes.</p>
 <p>A Family Group record can be removed using the <code><a href="../reference/remove_famg.html">remove_famg()</a></code> function.</p>
 </div>
-<div id="family-events" class="section level2">
-<h2 class="hasAnchor">
-<a href="#family-events" class="anchor"></a>Family events</h2>
+<div class="section level2">
+<h2 id="family-events">Family events<a class="anchor" aria-label="anchor" href="#family-events"></a>
+</h2>
 <p>Events associated with a family group, such as marriages and censuses, are created using the <code><a href="../reference/add_famg_event.html">add_famg_event()</a></code> function. The full list of events that can be created are given in the Details section of the function help page.</p>
 <p>There are some types of event; census and residence, that can apply for Individuals and Family Groups. It is highly recommended you do not use these events for family groups, only for individuals. It may intuitively be more efficient to define an event for an entire family group, but other GEDCOM parsers can have difficulty with this, and defining these events for each individual separately is recommended. Despite the name, Family Group records are actually more about the union of two people, rather than the family unit as a whole, and so the remaining events are related to marriages and divorces.</p>
 <p>In the example below, a relationship is added. The default type of relationship is a marriage, but this can be changed using the <code>classification</code> parameter. Ages of the couple when they got married can be defined used the <code>husband_age</code> and <code>wife_age</code> parameters. Unlike the GEDCOM specification, in a tidyged object these ages are given on single lines instead of being split across multiple lines; however they do revert to the specification on export.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">simpson_famg</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">simpson_famg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/add_famg_event.html">add_famg_event</a></span><span class="op">(</span><span class="st">"rel"</span>, date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1986</span>, <span class="fl">5</span>, <span class="fl">11</span><span class="op">)</span>,
-                 husband_age <span class="op">=</span> <span class="st">"20y"</span>, wife_age <span class="op">=</span> <span class="st">"19y"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+                 husband_age <span class="op">=</span> <span class="st">"20y"</span>, wife_age <span class="op">=</span> <span class="st">"19y"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">level</th>
@@ -293,20 +289,20 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">27 OCT 2021</td>
+<td align="left">1 JAN 2022</td>
 </tr>
 </tbody>
 </table>
 <p>The <code>descriptor</code> parameter is used only for miscellaneous other events (“eve”).</p>
 <p>You can see a summary of all events associated with a family group with the <code><a href="../reference/df_indi_facts.html">df_famg_facts()</a></code> function.</p>
 </div>
-<div id="family-links" class="section level2">
-<h2 class="hasAnchor">
-<a href="#family-links" class="anchor"></a>Family links</h2>
+<div class="section level2">
+<h2 id="family-links">Family links<a class="anchor" aria-label="anchor" href="#family-links"></a>
+</h2>
 <p>The <code>tidyged</code> package seeks to make cross-referencing as painless and automated as possible. When adding a Family Group record, as well as creating the record, it will also create the relevant links to the family group in the Individual record for each member of the family:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">simpson_famg</span>, <span class="va">tag</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FAMS"</span>, <span class="st">"FAMC"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">simpson_famg</span>, <span class="va">tag</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FAMS"</span>, <span class="st">"FAMC"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">level</th>
@@ -352,21 +348,21 @@
 <p>The lines above show particular lines in the Individual records where they are linked to the Family Group record either as a spouse (FAMS) or as a child (FAMC).</p>
 <p>If the Family Group record is subsequently removed, then these links will also be removed:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">simpsons_no_fam</span> <span class="op">&lt;-</span> <span class="va">simpson_famg</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">simpsons_no_fam</span> <span class="op">&lt;-</span> <span class="va">simpson_famg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/remove_famg.html">remove_famg</a></span><span class="op">(</span><span class="op">)</span> 
 
-<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">simpsons_no_fam</span>, <span class="va">tag</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FAMS"</span>, <span class="st">"FAMC"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 0 × 4</span>
-<span class="co">#&gt; # … with 4 variables: level &lt;dbl&gt;, record &lt;chr&gt;, tag &lt;chr&gt;, value &lt;chr&gt;</span>
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">simpsons_no_fam</span>, <span class="va">tag</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FAMS"</span>, <span class="st">"FAMC"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 4</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 4 variables: level &lt;dbl&gt;, record &lt;chr&gt;, tag &lt;chr&gt;, value &lt;chr&gt;</span></span>
 
-<span class="fu">waldo</span><span class="fu">::</span><span class="fu"><a href="https://waldo.r-lib.org/reference/compare.html">compare</a></span><span class="op">(</span><span class="va">simpson_indis</span>, <span class="va">simpsons_no_fam</span>, ignore_attr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; ✔ No differences</span></code></pre></div>
+<span class="fu">waldo</span><span class="fu">::</span><span class="fu"><a href="https://waldo.r-lib.org/reference/compare.html" class="external-link">compare</a></span><span class="op">(</span><span class="va">simpson_indis</span>, <span class="va">simpsons_no_fam</span>, ignore_attr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #00BB00;">✔</span> No differences</span></code></pre></div>
 <p>When removing a Family Group record, the user also has the option of removing all trace of the individuals within the family group as well:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">simpsons_no_fam_purge</span> <span class="op">&lt;-</span> <span class="va">simpson_famg</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">simpsons_no_fam_purge</span> <span class="op">&lt;-</span> <span class="va">simpson_famg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/remove_famg.html">remove_famg</a></span><span class="op">(</span>remove_individuals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
 
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">simpsons_no_fam_purge</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">simpsons_no_fam_purge</span><span class="op">)</span>
 <span class="co">#&gt; GEDCOM version 5.5.5 (LINEAGE-LINKED)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Individuals:         0</span>
@@ -378,7 +374,7 @@
 <span class="co">#&gt; Repositories:        0</span></code></pre></div>
 <p>Note that as well as having no families defined, we also now have no individuals.</p>
 <p style="text-align: right;">
-<a href="https://jl5000.github.io/tidyged/articles/repository_records.html">Next article: Repository records &gt;</a>
+<a href="https://jl5000.github.io/tidyged/articles/repository_records.html" class="external-link">Next article: Repository records &gt;</a>
 </p>
 </div>
   </div>
@@ -394,11 +390,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Jamie Lendrum.</p>
+  <p></p>
+<p>Developed by Jamie Lendrum.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -406,6 +404,8 @@
 
   
 
+
+  
 
   </body>
 </html>

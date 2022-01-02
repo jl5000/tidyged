@@ -1,37 +1,103 @@
 
+#' Identify all families for an individual where they are a partner
+#' 
+#' @param gedcom A tidyged object.
+#' @param indi_xref The xref of an Individual record to act on if one 
+#' is not activated (will override active record).
+#'
+#' @return A character vector of family xrefs.
+#' @export
+#' @examples 
+#' get_families_as_partner(sample555, "@I2@")
+#' @tests
+#' expect_equal(get_families_as_partner(sample555, "@I1@"), c("@F1@", "@F2@"))
+#' expect_equal(get_families_as_partner(sample555, "@I2@"), "@F1@")
+get_families_as_partner <- function(gedcom, 
+                                   indi_xref = character()) {
+  
+  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
+  
+  unique(dplyr::filter(gedcom, record == xref, level == 1, tag == "FAMS")$value) 
+  
+}
 
-#' Identify all spouses for an individual
+#' Identify all families for an individual where they are a child
 #'
 #' @param gedcom A tidyged object.
 #' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
-#' @param return_name Whether to return the spouse's name(s) instead of the xref(s).
+#' @param birth_only Whether to only return the family containing the biological parents.
 #'
-#' @return A character vector of spouse xrefs or names.
+#' @return A character vector of family xrefs.
+#' @examples 
+#' get_families_as_child(sample555, "@I3@")
+#' @export
+#' @tests
+#' expect_equal(get_families_as_child(sample555, "@I3@"), c("@F1@", "@F2@"))
+get_families_as_child <- function(gedcom,
+                                  indi_xref = character(),
+                                  birth_only = FALSE) {
+  
+  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
+  
+  # return all family links
+  famc <- unique(dplyr::filter(gedcom, record == xref, tag == "FAMC")$value)
+  
+  if(length(famc) == 0) return(NULL)
+  if(!birth_only) return(famc)
+  
+  # Look in birth events first
+  famc_evt <- tidyged.internals::gedcom_value(gedcom, xref, "FAMC", 2, "BIRT")
+  if(famc_evt != "") return(famc_evt)
+  
+  # Look at pedigrees
+  if(length(famc) == 1) {
+    if(tolower(tidyged.internals::gedcom_value(gedcom, xref, "PEDI", 2, "FAMC")) == "birth") 
+      return(famc)
+  } else {
+    famcs <- dplyr::filter(gedcom, record == xref, tag %in% c("FAMC","PEDI"))
+    
+    row <- which(famcs$value == "birth")
+    if(length(row) == 1) return(famcs$value[row - 1])
+  }
+  
+  # assume first family is birth family
+  tidyged.internals::gedcom_value(gedcom, xref, "FAMC", 1, "INDI")
+  
+}
+
+#' Identify all partners for an individual
+#'
+#' @param gedcom A tidyged object.
+#' @param indi_xref The xref of an Individual record to act on if one 
+#' is not activated (will override active record).
+#' @param return_name Whether to return the partner's name(s) instead of the xref(s).
+#'
+#' @return A character vector of partner xrefs or names.
 #' @export
 #' @examples
-#' get_spouses(sample555, "@I1@")
-#' get_spouses(sample555, "@I1@", return_name = TRUE)
-#' get_spouses(sample555, "@I3@")
+#' get_partners(sample555, "@I1@")
+#' get_partners(sample555, "@I1@", return_name = TRUE)
+#' get_partners(sample555, "@I3@")
 #' @tests
-#' expect_equal(get_spouses(sample555, "@I1@"), "@I2@")
-#' expect_equal(get_spouses(sample555, "@I2@", TRUE), "Robert Eugene Williams")
-#' expect_equal(get_spouses(sample555, "@I3@"), character(0))
-get_spouses <- function(gedcom,
+#' expect_equal(get_partners(sample555, "@I1@"), "@I2@")
+#' expect_equal(get_partners(sample555, "@I2@", TRUE), "Robert Eugene Williams")
+#' expect_equal(get_partners(sample555, "@I3@"), character(0))
+get_partners <- function(gedcom,
                         indi_xref = character(),
                         return_name = FALSE) {
   
   xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
-  fams_xref <- get_families_as_spouse(gedcom, xref)
+  fams_xref <- get_families_as_partner(gedcom, xref)
   
-  spou_xref <- dplyr::filter(gedcom, level == 1, record %in% fams_xref, tag %in% c("HUSB","WIFE"),
+  part_xref <- dplyr::filter(gedcom, level == 1, record %in% fams_xref, tag %in% c("HUSB","WIFE"),
                               value != xref)$value
     
   if (return_name) {
-    purrr::map_chr(spou_xref, describe_indi, gedcom=gedcom, name_only = TRUE)
+    purrr::map_chr(part_xref, describe_indi, gedcom=gedcom, name_only = TRUE)
   } else {
-    spou_xref
+    part_xref
   }
 }
 
@@ -58,7 +124,7 @@ get_children <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
-  fams_xref <- get_families_as_spouse(gedcom, xref)
+  fams_xref <- get_families_as_partner(gedcom, xref)
   
   chil_xref <- unique(dplyr::filter(gedcom, level == 1, record %in% fams_xref, tag == "CHIL")$value)
   
@@ -143,72 +209,46 @@ get_siblings <- function(gedcom,
   
 }
 
-#' Identify all families for an individual where they are a spouse
+#' Identify all cousins for an individual
 #'
 #' @param gedcom A tidyged object.
 #' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
+#' @param n Whether to return first cousins (n = 1), second cousins (n = 2), etc.
+#' @param inc_half_cous Whether to include half cousins.
+#' @param return_name Whether to return the parents name(s) instead of the xref(s).
 #'
-#' @return A character vector of family xrefs.
+#' @return A character vector of cousin xrefs or names.
 #' @export
-#' @examples 
-#' get_families_as_spouse(sample555, "@I2@")
-#' @tests
-#' expect_equal(get_families_as_spouse(sample555, "@I1@"), c("@F1@", "@F2@"))
-#' expect_equal(get_families_as_spouse(sample555, "@I2@"), "@F1@")
-get_families_as_spouse <- function(gedcom, indi_xref = character()) {
+get_cousins <- function(gedcom,
+                        indi_xref = character(),
+                        n = 1,
+                        inc_half_cous = FALSE,
+                        return_name = FALSE){
   
   xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
-  unique(dplyr::filter(gedcom, record == xref, level == 1, tag == "FAMS")$value) 
-  
-}
-
-#' Identify all families for an individual where they are a child
-#'
-#' @param gedcom A tidyged object.
-#' @param indi_xref The xref of an Individual record to act on if one 
-#' is not activated (will override active record).
-#' @param birth_only Whether to only return the family containing the biological parents.
-#'
-#' @return A character vector of family xrefs.
-#' @examples 
-#' get_families_as_child(sample555, "@I3@")
-#' @export
-#' @tests
-#' expect_equal(get_families_as_child(sample555, "@I3@"), c("@F1@", "@F2@"))
-get_families_as_child <- function(gedcom,
-                                  indi_xref = character(),
-                                  birth_only = FALSE) {
-  
-  xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
-  
-  # return all family links
-  famc <- unique(dplyr::filter(gedcom, record == xref, tag == "FAMC")$value)
-  
-  if(length(famc) == 0) return(NULL)
-  if(!birth_only) return(famc)
-  
-  # Look in birth events first
-  famc_evt <- tidyged.internals::gedcom_value(gedcom, xref, "FAMC", 2, "BIRT")
-  if(famc_evt != "") return(famc_evt)
-  
-  # Look at pedigrees
-  if(length(famc) == 1) {
-    if(tolower(tidyged.internals::gedcom_value(gedcom, xref, "PEDI", 2, "FAMC")) == "birth") 
-      return(famc)
-  } else {
-    famcs <- dplyr::filter(gedcom, record == xref, tag %in% c("FAMC","PEDI"))
-    
-    row <- which(famcs$value == "birth")
-    if(length(row) == 1) return(famcs$value[row - 1])
+  par_xref = xref
+  for(i in seq_len(n)){
+    par_xref <- unlist(purrr::map(par_xref, get_parents, gedcom=gedcom))
   }
-    
-  # assume first family is birth family
-  tidyged.internals::gedcom_value(gedcom, xref, "FAMC", 1, "INDI")
+  
+  sib_xref <- unlist(purrr::map(par_xref, get_siblings, 
+                                gedcom=gedcom, 
+                                inc_half_sibs=inc_half_cous))
+  
+  cou_xref <- sib_xref
+  for(i in seq_len(n)){
+    cou_xref <- unlist(purrr::map(cou_xref, get_children, gedcom=gedcom))
+  }
+  
+  if (return_name) {
+    purrr::map_chr(cou_xref, describe_indi, gedcom=gedcom, name_only = TRUE)
+  } else {
+    cou_xref
+  }
   
 }
-
 
 #' Identify all supporting records for a set of records
 #' 
@@ -265,9 +305,9 @@ get_supporting_records <- function(gedcom,
 #' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
 #' @param inc_indi Whether to also include the individual themselves.
-#' @param inc_spou Whether to also include all spouses of this individual (and their descendants and
-#' descendants' spouses).
-#' @param inc_famg Whether to also include all Family Group records where this individual is a spouse 
+#' @param inc_part Whether to also include all partners of this individual (and their descendants and
+#' descendants' partners).
+#' @param inc_famg Whether to also include all Family Group records where this individual is a partner 
 #' (and all descendants' Family Group records).
 #' @param inc_supp Whether to also include all supporting records (Note, Source, Repository, Multimedia).
 #'
@@ -281,7 +321,7 @@ get_supporting_records <- function(gedcom,
 get_descendants <- function(gedcom,
                             indi_xref = character(),
                             inc_indi = FALSE,
-                            inc_spou = FALSE,
+                            inc_part = FALSE,
                             inc_famg = FALSE,
                             inc_supp = FALSE) {
   
@@ -289,32 +329,32 @@ get_descendants <- function(gedcom,
   
   return_xrefs <- NULL
   
-  spou_xref <- get_spouses(gedcom, xref)
+  part_xref <- get_partners(gedcom, xref)
   chil_xref <- get_children(gedcom, xref)
-  fams_xref <- get_families_as_spouse(gedcom, xref)
+  fams_xref <- get_families_as_partner(gedcom, xref)
   
-  # if spouse is to be included, add their children to be included
-  if (inc_spou) {
-    spou_chil <- unlist(purrr::map(spou_xref, get_children, gedcom=gedcom))
+  # if partner is to be included, add their children to be included
+  if (inc_part) {
+    part_chil <- unlist(purrr::map(part_xref, get_children, gedcom=gedcom))
 
-    chil_xref <- unique(c(chil_xref, spou_chil))
+    chil_xref <- unique(c(chil_xref, part_chil))
   }
   
   #deal with family groups first (while the individuals are still in them)
   if (inc_famg) return_xrefs <- c(return_xrefs, fams_xref)
-  if (inc_spou) return_xrefs <- c(return_xrefs, spou_xref)
+  if (inc_part) return_xrefs <- c(return_xrefs, part_xref)
   if (inc_indi) return_xrefs <- c(return_xrefs, xref)
   
   # identify children
   for(i in seq_along(chil_xref)) {
     return_xrefs <- c(return_xrefs,
-                      get_descendants(gedcom, chil_xref[i], TRUE, inc_spou, inc_famg, FALSE))
+                      get_descendants(gedcom, chil_xref[i], TRUE, inc_part, inc_famg, FALSE))
   }
   
   # only get supporting records if this is the top level call
   if (inc_supp && length(as.character(sys.call())) == 7 && 
       any(as.character(sys.call()) != c("get_descendants","gedcom","chil_xref[i]",
-                                        "TRUE","inc_spou","inc_famg","FALSE"))){
+                                        "TRUE","inc_part","inc_famg","FALSE"))){
     
     c(return_xrefs,
       get_supporting_records(gedcom, return_xrefs))

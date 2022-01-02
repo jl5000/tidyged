@@ -52,13 +52,13 @@ df_famg(three_gen) %>%
 The examples below illustrate the functions.
 
 ```{r}
-get_spouses(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
+get_partners(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
 get_parents(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
 get_children(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
 get_siblings(three_gen, find_indi_name(three_gen, "Child 1")) %>% describe_records(gedcom = three_gen)
 get_siblings(three_gen, find_indi_name(three_gen, "Child 1"), inc_half_sibs = TRUE) %>% describe_records(gedcom = three_gen)
 get_families_as_child(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
-get_families_as_spouse(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
+get_families_as_partner(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
 ```
 
 ## Branches
@@ -81,11 +81,11 @@ three_gen %>%
   describe_records(three_gen, .)
 ```
 
-Setting `inc_spou = TRUE` will include all spouses and their descendants, and all descendants' spouses:
+Setting `inc_part = TRUE` will include all partners and their descendants, and all descendants' partners:
 
 ```{r}
 three_gen %>% 
-  get_descendants(find_indi_name(., "Main"), inc_spou = TRUE) %>% 
+  get_descendants(find_indi_name(., "Main"), inc_part = TRUE) %>% 
   describe_records(three_gen, .)
 ```
 
@@ -97,7 +97,7 @@ three_gen %>%
   describe_records(three_gen, .)
 ```
 
-Setting `inc_famg = TRUE` will include the individual's families where they are a spouse, and all descendants' families:
+Setting `inc_famg = TRUE` will include the individual's families where they are a partner, and all descendants' families:
 
 ```{r}
 three_gen %>% 
@@ -105,11 +105,11 @@ three_gen %>%
   describe_records(three_gen, .)
 ```
 
-If we want to remove the individual and their spouses, all descendants and their spouses, and all families, we can remove them with `remove_records()`:
+If we want to remove the individual and their partners, all descendants and their partners, and all families, we can remove them with `remove_records()`:
 
 ```{r}
 three_gen %>% 
-  get_descendants(find_indi_name(., "Main"), inc_indi = TRUE, inc_spou = TRUE,
+  get_descendants(find_indi_name(., "Main"), inc_indi = TRUE, inc_part = TRUE,
                        inc_famg = TRUE) %>% 
   remove_records(three_gen, .) %>% 
   df_famg() %>% 

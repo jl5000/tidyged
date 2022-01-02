@@ -8,7 +8,7 @@ get_descendants(
   gedcom,
   indi_xref = character(),
   inc_indi = FALSE,
-  inc_spou = FALSE,
+  inc_part = FALSE,
   inc_famg = FALSE,
   inc_supp = FALSE
 )
@@ -21,10 +21,10 @@ is not activated (will override active record).}
 
 \item{inc_indi}{Whether to also include the individual themselves.}
 
-\item{inc_spou}{Whether to also include all spouses of this individual (and their descendants and
-descendants' spouses).}
+\item{inc_part}{Whether to also include all partners of this individual (and their descendants and
+descendants' partners).}
 
-\item{inc_famg}{Whether to also include all Family Group records where this individual is a spouse
+\item{inc_famg}{Whether to also include all Family Group records where this individual is a partner
 (and all descendants' Family Group records).}
 
 \item{inc_supp}{Whether to also include all supporting records (Note, Source, Repository, Multimedia).}

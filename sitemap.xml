@@ -157,22 +157,25 @@
     <loc>/reference/get_children.html</loc>
   </url>
   <url>
+    <loc>/reference/get_cousins.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_descendants.html</loc>
   </url>
   <url>
     <loc>/reference/get_families_as_child.html</loc>
   </url>
   <url>
-    <loc>/reference/get_families_as_spouse.html</loc>
+    <loc>/reference/get_families_as_partner.html</loc>
   </url>
   <url>
     <loc>/reference/get_parents.html</loc>
   </url>
   <url>
-    <loc>/reference/get_siblings.html</loc>
+    <loc>/reference/get_partners.html</loc>
   </url>
   <url>
-    <loc>/reference/get_spouses.html</loc>
+    <loc>/reference/get_siblings.html</loc>
   </url>
   <url>
     <loc>/reference/get_supporting_records.html</loc>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.14.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0.9000</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
   <span class="va">gedcom</span>,
   indi_xref <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,
   inc_indi <span class="op">=</span> <span class="cn">FALSE</span>,
-  inc_spou <span class="op">=</span> <span class="cn">FALSE</span>,
+  inc_part <span class="op">=</span> <span class="cn">FALSE</span>,
   inc_famg <span class="op">=</span> <span class="cn">FALSE</span>,
   inc_supp <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
@@ -72,11 +72,11 @@
 is not activated (will override active record).</p></dd>
 <dt>inc_indi</dt>
 <dd><p>Whether to also include the individual themselves.</p></dd>
-<dt>inc_spou</dt>
-<dd><p>Whether to also include all spouses of this individual (and their descendants and
-descendants' spouses).</p></dd>
+<dt>inc_part</dt>
+<dd><p>Whether to also include all partners of this individual (and their descendants and
+descendants' partners).</p></dd>
 <dt>inc_famg</dt>
-<dd><p>Whether to also include all Family Group records where this individual is a spouse
+<dd><p>Whether to also include all Family Group records where this individual is a partner
 (and all descendants' Family Group records).</p></dd>
 <dt>inc_supp</dt>
 <dd><p>Whether to also include all supporting records (Note, Source, Repository, Multimedia).</p></dd>

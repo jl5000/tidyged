@@ -7,7 +7,7 @@
 get_cousins(
   gedcom,
   indi_xref = character(),
-  n = 1,
+  degree = 1,
   inc_half_cous = FALSE,
   return_name = FALSE
 )
@@ -18,7 +18,7 @@ get_cousins(
 \item{indi_xref}{The xref of an Individual record to act on if one
 is not activated (will override active record).}
 
-\item{n}{Whether to return first cousins (n = 1), second cousins (n = 2), etc.}
+\item{degree}{Whether to return first cousins (degree = 1), second cousins (degree = 2), etc.}
 
 \item{inc_half_cous}{Whether to include half cousins.}
 

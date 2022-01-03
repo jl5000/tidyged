@@ -214,7 +214,7 @@ get_siblings <- function(gedcom,
 #' @param gedcom A tidyged object.
 #' @param indi_xref The xref of an Individual record to act on if one 
 #' is not activated (will override active record).
-#' @param n Whether to return first cousins (n = 1), second cousins (n = 2), etc.
+#' @param degree Whether to return first cousins (degree = 1), second cousins (degree = 2), etc.
 #' @param inc_half_cous Whether to include half cousins.
 #' @param return_name Whether to return the parents name(s) instead of the xref(s).
 #'
@@ -222,14 +222,14 @@ get_siblings <- function(gedcom,
 #' @export
 get_cousins <- function(gedcom,
                         indi_xref = character(),
-                        n = 1,
+                        degree = 1,
                         inc_half_cous = FALSE,
                         return_name = FALSE){
   
   xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
   par_xref = xref
-  for(i in seq_len(n)){
+  for(i in seq_len(degree)){
     par_xref <- unlist(purrr::map(par_xref, get_parents, gedcom=gedcom))
   }
   
@@ -238,7 +238,7 @@ get_cousins <- function(gedcom,
                                 inc_half_sibs=inc_half_cous))
   
   cou_xref <- sib_xref
-  for(i in seq_len(n)){
+  for(i in seq_len(degree)){
     cou_xref <- unlist(purrr::map(cou_xref, get_children, gedcom=gedcom))
   }
   

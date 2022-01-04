@@ -10,7 +10,8 @@ get_ancestors(
   inc_indi = FALSE,
   inc_sibs = FALSE,
   inc_famg = FALSE,
-  inc_supp = FALSE
+  inc_supp = FALSE,
+  birth_only = TRUE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ included if the individual is included).}
 (and all ancestors' Family Group records).}
 
 \item{inc_supp}{Whether to also include all supporting records (Note, Source, Repository, Multimedia).}
+
+\item{birth_only}{Whether to only include biological ancestors.}
 }
 \value{
 A vector of xrefs of ancestors.

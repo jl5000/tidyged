@@ -52,14 +52,18 @@ df_famg(three_gen) %>%
 The examples below illustrate the functions.
 
 ```{r}
-get_partners(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
-get_parents(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
-get_children(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
-get_siblings(three_gen, find_indi_name(three_gen, "Child 1")) %>% describe_records(gedcom = three_gen)
-get_siblings(three_gen, find_indi_name(three_gen, "Child 1"), inc_half_sibs = TRUE) %>% describe_records(gedcom = three_gen)
+get_indi_partners(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
+get_indi_parents(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
+get_indi_children(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
+get_indi_siblings(three_gen, find_indi_name(three_gen, "Child 1")) %>% describe_records(gedcom = three_gen)
+get_indi_siblings(three_gen, find_indi_name(three_gen, "Child 1"), inc_half_sibs = TRUE, return_name = TRUE)
 get_families_as_child(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
 get_families_as_partner(three_gen, find_indi_name(three_gen, "Main")) %>% describe_records(gedcom = three_gen)
+get_famg_partners(three_gen, "@F1@") %>% describe_records(gedcom = three_gen)
+get_famg_children(three_gen, "@F2@", return_name = TRUE)
 ```
+
+Many functions include a `birth_only` parameter which allows you to focus on purely biological relationships and/or a `return_name` parameter which allows you to return individual's names instead.
 
 ## Branches
 

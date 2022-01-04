@@ -154,13 +154,13 @@
     <loc>/reference/get_ancestors.html</loc>
   </url>
   <url>
-    <loc>/reference/get_children.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_cousins.html</loc>
-  </url>
-  <url>
     <loc>/reference/get_descendants.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_famg_children.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_famg_partners.html</loc>
   </url>
   <url>
     <loc>/reference/get_families_as_child.html</loc>
@@ -169,13 +169,19 @@
     <loc>/reference/get_families_as_partner.html</loc>
   </url>
   <url>
-    <loc>/reference/get_parents.html</loc>
+    <loc>/reference/get_indi_children.html</loc>
   </url>
   <url>
-    <loc>/reference/get_partners.html</loc>
+    <loc>/reference/get_indi_cousins.html</loc>
   </url>
   <url>
-    <loc>/reference/get_siblings.html</loc>
+    <loc>/reference/get_indi_parents.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_indi_partners.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_indi_siblings.html</loc>
   </url>
   <url>
     <loc>/reference/get_supporting_records.html</loc>
@@ -188,6 +194,9 @@
   </url>
   <url>
     <loc>/reference/insert_explicit_marr_types.html</loc>
+  </url>
+  <url>
+    <loc>/reference/is_famg_birth_child.html</loc>
   </url>
   <url>
     <loc>/reference/is_indi.html</loc>

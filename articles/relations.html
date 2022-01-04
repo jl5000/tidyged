@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.1.9000</span>
       </span>
     </div>
 
@@ -144,7 +144,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">1</td>
-<td align="left">2 JAN 2022</td>
+<td align="left">4 JAN 2022</td>
 </tr>
 <tr class="even">
 <td align="left">
@@ -155,7 +155,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">2 JAN 2022</td>
+<td align="left">4 JAN 2022</td>
 </tr>
 <tr class="odd">
 <td align="left">
@@ -166,7 +166,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">2</td>
-<td align="left">2 JAN 2022</td>
+<td align="left">4 JAN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -176,26 +176,29 @@
 </h2>
 <p>The examples below illustrate the functions.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_partners.html">get_partners</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_indi_partners.html">get_indi_partners</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I4@, Spouse 1" "Individual @I5@, Spouse 2"</span>
-<span class="fu"><a href="../reference/get_parents.html">get_parents</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_indi_parents.html">get_indi_parents</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I1@, Parent 1" "Individual @I2@, Parent 2"</span>
-<span class="fu"><a href="../reference/get_children.html">get_children</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_indi_children.html">get_indi_children</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I6@, Child 1, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [2] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
 <span class="co">#&gt; [3] "Individual @I8@, Child 3, child of Main Person and Spouse 2"</span>
 <span class="co">#&gt; [4] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span>
-<span class="fu"><a href="../reference/get_siblings.html">get_siblings</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Child 1"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_indi_siblings.html">get_indi_siblings</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Child 1"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
-<span class="fu"><a href="../reference/get_siblings.html">get_siblings</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Child 1"</span><span class="op">)</span>, inc_half_sibs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Individual @I7@, Child 2, child of Main Person and Spouse 1"</span>
-<span class="co">#&gt; [2] "Individual @I8@, Child 3, child of Main Person and Spouse 2"</span>
-<span class="co">#&gt; [3] "Individual @I9@, Child 4, child of Main Person and Spouse 2"</span>
+<span class="fu"><a href="../reference/get_indi_siblings.html">get_indi_siblings</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Child 1"</span><span class="op">)</span>, inc_half_sibs <span class="op">=</span> <span class="cn">TRUE</span>, return_name <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Child 2" "Child 3" "Child 4"</span>
 <span class="fu"><a href="../reference/get_families_as_child.html">get_families_as_child</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F1@, headed by Parent 1 and Parent 2, and children: Main Person"</span>
 <span class="fu"><a href="../reference/get_families_as_partner.html">get_families_as_partner</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Family @F2@, headed by Main Person and Spouse 1, and children: Child 1, Child 2"</span>
-<span class="co">#&gt; [2] "Family @F3@, headed by Main Person and Spouse 2, and children: Child 3, Child 4"</span></code></pre></div>
+<span class="co">#&gt; [2] "Family @F3@, headed by Main Person and Spouse 2, and children: Child 3, Child 4"</span>
+<span class="fu"><a href="../reference/get_famg_partners.html">get_famg_partners</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"@F1@"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/describe_records.html">describe_records</a></span><span class="op">(</span>gedcom <span class="op">=</span> <span class="va">three_gen</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Individual @I1@, Parent 1" "Individual @I2@, Parent 2"</span>
+<span class="fu"><a href="../reference/get_famg_children.html">get_famg_children</a></span><span class="op">(</span><span class="va">three_gen</span>, <span class="st">"@F2@"</span>, return_name <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Child 1" "Child 2"</span></code></pre></div>
+<p>Many functions include a <code>birth_only</code> parameter which allows you to focus on purely biological relationships and/or a <code>return_name</code> parameter which allows you to return individual’s names instead.</p>
 </div>
 <div class="section level2">
 <h2 id="branches">Branches<a class="anchor" aria-label="anchor" href="#branches"></a>
@@ -296,7 +299,7 @@
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">0</td>
-<td align="left">2 JAN 2022</td>
+<td align="left">4 JAN 2022</td>
 </tr></tbody>
 </table>
 <p>This combination can result in the removal of a vast amount of data. It will tell the user precisely what it is removing. Be sure the function has done what you expect before accepting the results. It is recommended that you use this function with extreme caution if you think a descendant (or their spouse) may be connected to an individual on another branch of your tree.</p>

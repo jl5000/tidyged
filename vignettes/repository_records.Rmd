@@ -19,7 +19,7 @@ A repository is an archive (such as a library) containing source documents. Addi
 ```{r}
 library(tidyged)
 
-gedcom(subm("Me")) %>% 
+gedcom(subm("Me")) |> 
   add_repo(name = "A library",
            repo_address = address(local_address_lines = c("123 Library Road", "Turin Village"),
                                   city = "Manchester",
@@ -29,8 +29,8 @@ gedcom(subm("Me")) %>%
                                   phone_number = c("645-618-6578", "645-618-6570", "645-618-6577"),
                                   email = c("enquiries@alibrary.com", "enquiries2@alibrary.com"),
                                   fax = "0947393",
-                                  web_page = "www.alibrary.com")) %>% 
-  dplyr::filter(record == "@R1@") %>% 
+                                  web_page = "www.alibrary.com")) |> 
+  dplyr::filter(record == "@R1@") |> 
   knitr::kable()
 ```
 

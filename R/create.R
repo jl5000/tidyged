@@ -44,9 +44,9 @@ gedcom <- function(submitter_details = subm(),
       copyright_gedcom_file = gedcom_copyright,
       gedcom_content_description = gedcom_description
     )
-  ) %>% 
+  ) |> 
     dplyr::bind_rows(submitter_details, 
-                     tidyged.internals::FOOTER_SECTION()) %>%
+                     tidyged.internals::FOOTER_SECTION()) |>
     tidyged.internals::set_class_to_tidyged()
   
 }

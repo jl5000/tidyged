@@ -3,20 +3,20 @@
 # File R/family_group.R: @tests
 
 test_that("Function remove_famg() @ L126", {
-  expect_equal(gedcom(subm()) %>% 
-                 add_indi() %>% 
-                 add_indi() %>% 
+  expect_equal(gedcom(subm()) |> 
+                 add_indi() |> 
+                 add_indi() |> 
                  null_active_record(),
-               gedcom(subm()) %>% 
-                 add_indi() %>% 
-                 add_indi() %>% 
-                 add_famg(husband = "@I1@", wife = "@I2@") %>% 
+               gedcom(subm()) |> 
+                 add_indi() |> 
+                 add_indi() |> 
+                 add_famg(husband = "@I1@", wife = "@I2@") |> 
                  remove_famg())
   expect_equal(gedcom(subm()),
-               gedcom(subm()) %>% 
-                 add_indi() %>% 
-                 add_indi() %>% 
-                 add_famg(husband = "@I1@", wife = "@I2@") %>% 
+               gedcom(subm()) |> 
+                 add_indi() |> 
+                 add_indi() |> 
+                 add_famg(husband = "@I1@", wife = "@I2@") |> 
                  remove_famg(remove_individuals = TRUE))
 })
 

@@ -10,7 +10,7 @@
 #' @return The same tidyged object with an "active_record" attribute set to the xref of the record
 set_active_record <- function(gedcom, xref) {
   if(length(xref) > 0) attr(gedcom, "active_record") <- xref 
-  return(gedcom)
+  gedcom
 }
 
 #' Get the active record in a tidyged object
@@ -26,7 +26,7 @@ active_record <- function(gedcom) {
 
 null_active_record <- function(gedcom) {
   attr(gedcom, "active_record") <- NULL
-  return(gedcom)
+  gedcom
 }
 
 

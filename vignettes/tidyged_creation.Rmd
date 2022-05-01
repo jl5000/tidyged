@@ -23,7 +23,7 @@ A minimal `tidyged` object can be created using an empty `gedcom()` call:
 ```{r}
 library(tidyged)
 
-gedcom() %>% 
+gedcom() |> 
   knitr::kable()
 ```
 
@@ -46,7 +46,7 @@ submitter <- subm(name = "The name of the submitter",
                                          web_page = "http://www.whousesfaxanymore.com"),
                   subm_notes = "The information given above is dummy data")
 
-gedcom(submitter) %>% 
+gedcom(submitter) |> 
   knitr::kable()
 ```
 
@@ -62,7 +62,7 @@ gedcom(submitter_details = subm(),
        source_data_date = date_exact(2009, 5, 12),
        source_data_copyright = "No data copyright",
        receiving_system = "tidyged",
-       language = "English") %>% 
+       language = "English") |> 
   knitr::kable()
 ```
 

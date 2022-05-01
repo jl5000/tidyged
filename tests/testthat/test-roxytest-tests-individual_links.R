@@ -3,10 +3,10 @@
 # File R/individual_links.R: @tests
 
 test_that("Function add_indi_association() @ L22", {
-  expect_snapshot_value(gedcom(subm("Me")) %>% 
-                          add_indi(qn = "Joe Bloggs") %>% 
-                          add_indi(qn = "Jimmy Bloggs") %>% 
-                          add_indi_association(associated_with = "@I1@", association = "Friend") %>% 
+  expect_snapshot_value(gedcom(subm("Me")) |> 
+                          add_indi(qn = "Joe Bloggs") |> 
+                          add_indi(qn = "Jimmy Bloggs") |> 
+                          add_indi_association(associated_with = "@I1@", association = "Friend") |> 
                           remove_dates_for_tests(), "json2")
 })
 

@@ -31,9 +31,9 @@ There is a quick and dirty way of adding a name with the `qn` parameter, but thi
 ```{r}
 library(tidyged)
 
-gedcom(subm("Me")) %>% 
-  add_indi(qn = "Leia Skywalker") %>% 
-  dplyr::filter(record == "@I1@") %>% 
+gedcom(subm("Me")) |> 
+  add_indi(qn = "Leia Skywalker") |> 
+  dplyr::filter(record == "@I1@") |> 
   knitr::kable()
 ```
 
@@ -42,8 +42,8 @@ gedcom(subm("Me")) %>%
 The main function for providing names for an individual is `add_indi_names()`. The main argument is a `name_pieces()` object giving the components of the name. If you're going to add a name, at least provide a given name or surname:
 
 ```{r}
-leia <- gedcom(subm("Me")) %>% 
-  add_indi() %>% 
+leia <- gedcom(subm("Me")) |> 
+  add_indi() |> 
   add_indi_names(name_pieces(given = "Leia", surname = "Skywalker"), type = "birth")
 
 knitr::kable(dplyr::filter(leia, record == "@I1@") )
@@ -54,9 +54,9 @@ In the GEDCOM specification, all names should be provided by a set of name piece
 An individual's name (and name pieces) can be removed using the `remove_indi_name()` function. Even though the `add_indi_names()` function surrounds the surname with forward slashes, these are not required to specify the name to remove:
 
 ```{r}
-leia %>% 
-  remove_indi_name("Leia Skywalker") %>% 
-  dplyr::filter(record == "@I1@") %>% 
+leia |> 
+  remove_indi_name("Leia Skywalker") |> 
+  dplyr::filter(record == "@I1@") |> 
   knitr::kable()
 ```
 
@@ -67,7 +67,7 @@ This name needs to match exactly to the one to remove.
 Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the `add_indi_names_var()` function. As a minimum, the original name, variant name pieces, derivation method, and whether it is a phonetic or romanised variation should be given. The original name must be given exactly as it is represented in the file without forward slashes ("Leia Skywalker"):
 
 ```{r}
-leia_var <- leia %>% 
+leia_var <- leia |> 
   add_indi_names_var("Leia Skywalker", method = "As spoken",
                      name_pieces(given = "Laya", surname = "Skywalker"), phonetic_variation = TRUE) 
 
@@ -81,7 +81,7 @@ An individual's name variation can be removed using the `remove_indi_name_var()`
 The `type` parameter can also define different names for the individual. Below we add a line to define an adoptive name (the parameter can take any value):
 
 ```{r}
-leia_adop <- leia_var %>% 
+leia_adop <- leia_var |> 
   add_indi_names(name_pieces(given = "Leia", surname = "Organa"), type = "adoptive") 
 
 knitr::kable(dplyr::filter(leia_adop, record == "@I1@"))
@@ -92,7 +92,7 @@ knitr::kable(dplyr::filter(leia_adop, record == "@I1@"))
 GEDCOM files can also record different names *of the same type*, perhaps due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:
 
 ```{r}
-leia_conf <- leia_adop %>% 
+leia_conf <- leia_adop |> 
   add_indi_names(name_pieces(given = "Leia", surname = "Skywaker"), type = "birth")
 
 knitr::kable(dplyr::filter(leia_conf, record == "@I1@"))
@@ -115,8 +115,8 @@ Attributes and events associated with an individual, such as birth and death, ar
 This function allows you to define a fact, together with associated date, cause, place/address, and the age of the individual when the fact applied (among other aspects). In the example below, we add a residence for an individual. The first argument is given as "residence" for readability even though only the first 3 letters are used:
 
 ```{r}
-res <- gedcom(subm("Me")) %>% 
-  add_indi(sex = "M") %>% 
+res <- gedcom(subm("Me")) |> 
+  add_indi(sex = "M") |> 
   add_indi_fact("residence", date = date_period(start_date = date_calendar(2000, 5, 7),
                                                 end_date = date_calendar(2004, 5, 6)),
                 fact_address = address(local_address_lines = "23 Penny Lane",
@@ -133,12 +133,12 @@ If the full address is not known, a more general `place` argument can be used wh
 The example below defines a death event (in 2006) and a religion attribute (from 1978):
 
 ```{r}
-dea_rel <- gedcom(subm("Me")) %>% 
-  add_indi(sex = "M") %>% 
+dea_rel <- gedcom(subm("Me")) |> 
+  add_indi(sex = "M") |> 
   add_indi_fact("death", date = date_calendar(2006, 2, 17),
                 fact_place = place(name = "London, England"),
                 cause = "Pneumonia",
-                age = "68y") %>% 
+                age = "68y") |> 
   add_indi_fact("religion", descriptor = "Christian", classification = "Catholic",
                 date = date_period(start_date = date_calendar(1978)))
 
@@ -148,7 +148,7 @@ knitr::kable(dplyr::filter(dea_rel, record == "@I1@"))
 You can see a summary of all facts associated with an individual with the `df_indi_facts()` function.
 
 ```{r}
-df_indi_facts(dea_rel, "@I1@") %>% knitr::kable()
+df_indi_facts(dea_rel, "@I1@") |> knitr::kable()
 ```
 
 ## Family links
@@ -158,15 +158,23 @@ Typically when constructing a file, you would create all of the individuals in a
 In the example below, we create Joe Bloggs and add him as a husband to a family. We then create Jess Bloggs and retrospectively add her as a wife to Joe. 
 
 ```{r}
-retro <- gedcom(subm("Me")) %>% 
-  add_indi("M") %>% 
-  add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
-  add_famg(husband = find_indi_name(., "Joe")) %>% 
-  add_indi("F") %>% 
-  add_indi_names(name_pieces(given = "Jess", surname = "Bloggs")) %>% 
-  add_indi_links_to_families(spouse = find_indi_name(., "Joe"))
+ged_with_joe <- gedcom(subm("Me")) |> 
+  add_indi("M") |> 
+  add_indi_names(name_pieces(given = "Joe", surname = "Bloggs"))
 
-knitr::kable(dplyr::filter(retro, record %in% c("@F1@", "@I2@")))
+joe_xref <- find_indi_name(ged_with_joe, "Joe")
+
+ged_with_husb <- add_famg(ged_with_joe, husband = joe_xref)
+
+ged_with_jess <- ged_with_husb |>
+  add_indi("F") |> 
+  add_indi_names(name_pieces(given = "Jess", surname = "Bloggs"))
+
+jess_xref <- find_indi_name(ged_with_jess, "Jess")
+  
+both <- add_indi_links_to_families(ged_with_jess, spouse = joe_xref)
+
+knitr::kable(dplyr::filter(both, record %in% c("@F1@", "@I2@")))
 ```
 
 Notice that Jess (@I2@) has now been defined as a wife in the Family Group record, and her record is linked to the Family Group record as a spouse (FAMS).

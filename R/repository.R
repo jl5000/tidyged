@@ -29,8 +29,8 @@ add_repo <- function(gedcom,
                                                       user_reference_number = user_reference_numbers,
                                                       notes = repos_notes)
   
-  gedcom %>% 
-    tibble::add_row(repo_record, .before = nrow(.)) %>% 
+  gedcom |> 
+    tibble::add_row(repo_record, .before = nrow(gedcom)) |> 
     set_active_record(xref)
 }
 
@@ -44,13 +44,13 @@ add_repo <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
-#'              gedcom(subm()) %>% add_repo("text") %>% remove_repo())
+#'              gedcom(subm()) |> add_repo("text") |> remove_repo())
 remove_repo <- function(gedcom, repository = character()) {
   
   xref <- get_valid_xref(gedcom, repository, .pkgenv$record_string_repo, is_repo)
   
-  gedcom %>% 
-    tidyged.internals::remove_section(1, "REPO", xref) %>% 
-    dplyr::filter(record != xref, value != xref) %>% 
+  gedcom |> 
+    tidyged.internals::remove_section(1, "REPO", xref) |> 
+    dplyr::filter(record != xref, value != xref) |> 
     null_active_record()
 }

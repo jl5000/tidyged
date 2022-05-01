@@ -19,8 +19,8 @@ add_note <- function(gedcom,
                                                    user_text = text,
                                                    user_reference_number = user_reference_numbers)
   
-  gedcom %>% 
-    tibble::add_row(note_record, .before = nrow(.)) %>% 
+  gedcom |> 
+    tibble::add_row(note_record, .before = nrow(gedcom)) |> 
     set_active_record(xref)
 }
 
@@ -34,14 +34,14 @@ add_note <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
-#'              gedcom(subm()) %>% add_note("text") %>% remove_note())
+#'              gedcom(subm()) |> add_note("text") |> remove_note())
 remove_note <- function(gedcom,
                         note = character()) {
   
   xref <- get_valid_xref(gedcom, note, .pkgenv$record_string_note, is_note)
   
-  gedcom %>% 
-    dplyr::filter(record != xref, value != xref) %>% 
+  gedcom |> 
+    dplyr::filter(record != xref, value != xref) |> 
     null_active_record()
 }
 

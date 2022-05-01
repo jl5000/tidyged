@@ -4,34 +4,34 @@
 
 test_that("Function add_indi_names_var() @ L70", {
   expect_snapshot_value(
-                 gedcom(subm("Me")) %>% 
-                 add_indi() %>% 
-                 add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
+                 gedcom(subm("Me")) |> 
+                 add_indi() |> 
+                 add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) |> 
                  add_indi_names_var("Joe Bloggs", names_var = name_pieces(given = "JB"), 
-                                    method = "tests", phonetic_variation = FALSE) %>% 
+                                    method = "tests", phonetic_variation = FALSE) |> 
                  remove_dates_for_tests(), "json2")
 })
 
 
 test_that("Function remove_indi_name() @ L152", {
-  expect_equal(gedcom(subm()) %>% 
+  expect_equal(gedcom(subm()) |> 
                  add_indi(),
-               gedcom(subm()) %>% 
-                 add_indi() %>% 
-                 add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
+               gedcom(subm()) |> 
+                 add_indi() |> 
+                 add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) |> 
                  remove_indi_name("Joe Bloggs"))
 })
 
 
 test_that("Function remove_indi_name_var() @ L187", {
-  expect_equal(gedcom(subm()) %>% 
-                 add_indi() %>% 
+  expect_equal(gedcom(subm()) |> 
+                 add_indi() |> 
                  add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")),
-               gedcom(subm()) %>% 
-                 add_indi() %>% 
-                 add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
+               gedcom(subm()) |> 
+                 add_indi() |> 
+                 add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) |> 
                  add_indi_names_var("Joe Bloggs", names_var = name_pieces(given = "Jo", surname = "Blogs"), 
-                                    method = "spelling error") %>% 
+                                    method = "spelling error") |> 
                  remove_indi_name_var("Jo Blogs"))
 })
 

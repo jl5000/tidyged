@@ -4,30 +4,30 @@
 
 test_that("Function add_sour_repo_citation() @ L101", {
   expect_snapshot_value(
-                   gedcom(subm("Me")) %>% 
-                   add_repo(name = "The library") %>% 
-                   add_sour() %>% 
-                   add_sour_repo_citation("@R1@") %>%
+                   gedcom(subm("Me")) |> 
+                   add_repo(name = "The library") |> 
+                   add_sour() |> 
+                   add_sour_repo_citation("@R1@") |>
                    remove_dates_for_tests(), "json2")
 })
 
 
 test_that("Function remove_sour_repo_citation() @ L136", {
-  expect_equal(gedcom(subm("Me")) %>% 
-                   add_repo(name = "The library") %>% 
-                   add_sour() %>%
+  expect_equal(gedcom(subm("Me")) |> 
+                   add_repo(name = "The library") |> 
+                   add_sour() |>
                    remove_dates_for_tests(),
-               gedcom(subm("Me")) %>% 
-                   add_repo(name = "The library") %>% 
-                   add_sour() %>% 
-                   add_sour_repo_citation("@R1@") %>%
-                   remove_sour_repo_citation("@R1@") %>% 
+               gedcom(subm("Me")) |> 
+                   add_repo(name = "The library") |> 
+                   add_sour() |> 
+                   add_sour_repo_citation("@R1@") |>
+                   remove_sour_repo_citation("@R1@") |> 
                    remove_dates_for_tests())
 })
 
 
 test_that("Function remove_sour() @ L157", {
   expect_equal(gedcom(subm()),
-               gedcom(subm()) %>% add_sour(title = "text") %>% remove_sour())
+               gedcom(subm()) |> add_sour(title = "text") |> remove_sour())
 })
 

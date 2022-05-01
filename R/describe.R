@@ -110,7 +110,7 @@ describe_indi <- function(gedcom, xref, name_only = FALSE, short_desc = FALSE) {
   # Individual @I1@, Name/Unnamed, [child of x and y, born on x/x/x in place, died on x/x/x in place]
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
-  name <- tidyged.internals::gedcom_value(gedcom, xref, "NAME", 1, "INDI") %>% 
+  name <- tidyged.internals::gedcom_value(gedcom, xref, "NAME", 1, "INDI") |> 
     stringr::str_remove_all("/")
   
   if(name_only) return(dplyr::if_else(name == "", xref, name))

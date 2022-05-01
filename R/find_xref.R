@@ -54,7 +54,7 @@ find_xref <- function(gedcom, search_patterns, mode = "strict", multiple = FALSE
   tags_ns <- toupper(names(search_patterns))
   search_patterns_val <- as.character(search_patterns) #unname
   
-  gedcom_ns <- mutate_tag_namespace(gedcom) %>% 
+  gedcom_ns <- mutate_tag_namespace(gedcom) |> 
     temporarily_remove_name_slashes()
   reg_case <- purrr::partial(stringr::regex, ignore_case = ignore_case)
   
@@ -73,9 +73,9 @@ find_xref <- function(gedcom, search_patterns, mode = "strict", multiple = FALSE
     
   } else { #best
     
-    xref <- tibble::tibble(matches = unlist(matches)) %>%
-      dplyr::count(matches) %>% 
-      dplyr::filter(n==max(n)) %>% 
+    xref <- tibble::tibble(matches = unlist(matches)) |>
+      dplyr::count(matches) |> 
+      dplyr::filter(n==max(n)) |> 
       dplyr::pull(matches)
     
     if(length(xref) == 0) stop("No records found that match any patterns.")

@@ -59,30 +59,30 @@ add_famg <- function(gedcom,
                                                        notes = fam_notes,
                                                        multimedia_links = media_links) 
   
-  temp <- gedcom %>%
-    tibble::add_row(fam_record, .before = nrow(.))
+  temp <- gedcom |>
+    tibble::add_row(fam_record, .before = nrow(gedcom))
   
   if(length(husband) == 1) {
-    temp <- temp %>%
-      set_active_record(husband) %>% 
+    temp <- temp |>
+      set_active_record(husband) |> 
       add_indi_family_link_as_spouse(xref)
   }
   if(length(wife) == 1) {
-    temp <- temp %>%
-      set_active_record(wife) %>% 
+    temp <- temp |>
+      set_active_record(wife) |> 
       add_indi_family_link_as_spouse(xref)
   }
   
   for(i in seq_along(children)) {
   
-    temp <- temp %>% 
-      set_active_record(children[i]) %>% 
+    temp <- temp |> 
+      set_active_record(children[i]) |> 
       add_indi_family_link_as_child(xref, linkage_type = child_linkage_types[i]) 
   
   }
   
-  temp %>% 
-    order_famg_children(xref) %>% 
+  temp |> 
+    order_famg_children(xref) |> 
     set_active_record(xref)
 }
 
@@ -108,20 +108,20 @@ add_famg <- function(gedcom,
 #' (and potentially the individuals within it).
 #' @export
 #' @tests
-#' expect_equal(gedcom(subm()) %>% 
-#'                add_indi() %>% 
-#'                add_indi() %>% 
+#' expect_equal(gedcom(subm()) |> 
+#'                add_indi() |> 
+#'                add_indi() |> 
 #'                null_active_record(),
-#'              gedcom(subm()) %>% 
-#'                add_indi() %>% 
-#'                add_indi() %>% 
-#'                add_famg(husband = "@I1@", wife = "@I2@") %>% 
+#'              gedcom(subm()) |> 
+#'                add_indi() |> 
+#'                add_indi() |> 
+#'                add_famg(husband = "@I1@", wife = "@I2@") |> 
 #'                remove_famg())
 #' expect_equal(gedcom(subm()),
-#'              gedcom(subm()) %>% 
-#'                add_indi() %>% 
-#'                add_indi() %>% 
-#'                add_famg(husband = "@I1@", wife = "@I2@") %>% 
+#'              gedcom(subm()) |> 
+#'                add_indi() |> 
+#'                add_indi() |> 
+#'                add_famg(husband = "@I1@", wife = "@I2@") |> 
 #'                remove_famg(remove_individuals = TRUE))
 remove_famg <- function(gedcom, 
                         family_xref = character(),
@@ -141,12 +141,12 @@ remove_famg <- function(gedcom,
     }
   }
   
-  gedcom %>% 
-    tidyged.internals::remove_section(1, "FAMC", xref) %>% 
-    tidyged.internals::remove_section(2, "FAMC", xref) %>% 
-    tidyged.internals::remove_section(1, "FAMS", xref) %>% 
-    #tidyged.internals::remove_section(2, "FAMS", xref) %>% 
-    dplyr::filter(record != xref, value != xref) %>%
+  gedcom |> 
+    tidyged.internals::remove_section(1, "FAMC", xref) |> 
+    tidyged.internals::remove_section(2, "FAMC", xref) |> 
+    tidyged.internals::remove_section(1, "FAMS", xref) |> 
+    #tidyged.internals::remove_section(2, "FAMS", xref) |> 
+    dplyr::filter(record != xref, value != xref) |>
     null_active_record()  
 }
 

@@ -1,6 +1,6 @@
 Package: tidyged
 Title: Handle GEDCOM Files Using Tidyverse Principles
-Version: 0.15.1.9000
+Version: 0.15.2.9000
 Authors@R: 
     person(given = "Jamie",
            family = "Lendrum",
@@ -15,10 +15,9 @@ LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("namespace", "rd", "roxytest::testthat_roclet"))
 RoxygenNote: 7.1.2
 Depends: 
-    R (>= 2.10)
+    R (>= 4.2.0)
 Imports: 
     dplyr,
-    magrittr,
     stringr,
     purrr,
     tibble,

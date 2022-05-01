@@ -23,16 +23,16 @@ The family group records do not need to describe traditional marriage unions - t
 ```{r}
 library(tidyged)
 
-simpson_indis <- gedcom(subm("Me")) %>% 
-  add_indi(qn = "Homer Simpson", sex = "M") %>% 
-  add_indi(qn = "Marge Simpson", sex = "F") %>% 
-  add_indi(qn = "Lisa Simpson", sex = "F") %>% 
-  add_indi(qn = "Bart Simpson", sex = "M") %>% 
+simpson_indis <- gedcom(subm("Me")) |> 
+  add_indi(qn = "Homer Simpson", sex = "M") |> 
+  add_indi(qn = "Marge Simpson", sex = "F") |> 
+  add_indi(qn = "Lisa Simpson", sex = "F") |> 
+  add_indi(qn = "Bart Simpson", sex = "M") |> 
   add_note("These records have not yet been joined in a family group record")
 
-simpson_famg <- simpson_indis %>% 
-  add_famg(husband = "@I1@", wife = find_indi_name(., "Marge"), 
-           children = find_indi_name_all(., "Bart|Lisa"), number_of_children = 3)
+simpson_famg <- simpson_indis |> 
+  add_famg(husband = "@I1@", wife = find_indi_name(simpson_indis, "Marge"), 
+           children = find_indi_name_all(simpson_indis, "Bart|Lisa"), number_of_children = 3)
 
 knitr::kable(dplyr::filter(simpson_famg, record == "@F1@"))
 ```
@@ -50,10 +50,10 @@ There are some types of event; census and residence, that can apply for Individu
 In the example below, a relationship is added. The default type of relationship is a marriage, but this can be changed using the `classification` parameter. Ages of the couple when they got married can be defined used the `husband_age` and `wife_age` parameters. Unlike the GEDCOM specification, in a tidyged object these ages are given on single lines instead of being split across multiple lines; however they do revert to the specification on export.
 
 ```{r}
-simpson_famg %>% 
+simpson_famg |> 
   add_famg_event("rel", date = date_calendar(1986, 5, 11),
-                 husband_age = "20y", wife_age = "19y") %>% 
-  dplyr::filter(record == "@F1@") %>% 
+                 husband_age = "20y", wife_age = "19y") |> 
+  dplyr::filter(record == "@F1@") |> 
   knitr::kable()
 ```
 
@@ -66,7 +66,7 @@ You can see a summary of all events associated with a family group with the `df_
 The `tidyged` package seeks to make cross-referencing as painless and automated as possible. When adding a Family Group record, as well as creating the record, it will also create the relevant links to the family group in the Individual record for each member of the family:
 
 ```{r}
-dplyr::filter(simpson_famg, tag %in% c("FAMS", "FAMC")) %>% 
+dplyr::filter(simpson_famg, tag %in% c("FAMS", "FAMC")) |> 
   knitr::kable()
 ```
 
@@ -75,7 +75,7 @@ The lines above show particular lines in the Individual records where they are l
 If the Family Group record is subsequently removed, then these links will also be removed:
 
 ```{r}
-simpsons_no_fam <- simpson_famg %>% 
+simpsons_no_fam <- simpson_famg |> 
   remove_famg() 
 
 dplyr::filter(simpsons_no_fam, tag %in% c("FAMS", "FAMC"))
@@ -87,7 +87,7 @@ waldo::compare(simpson_indis, simpsons_no_fam, ignore_attr = TRUE)
 When removing a Family Group record, the user also has the option of removing all trace of the individuals within the family group as well:
 
 ```{r}
-simpsons_no_fam_purge <- simpson_famg %>% 
+simpsons_no_fam_purge <- simpson_famg |> 
   remove_famg(remove_individuals = TRUE) 
 
 str(simpsons_no_fam_purge)

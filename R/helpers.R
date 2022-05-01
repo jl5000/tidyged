@@ -10,7 +10,7 @@
 #' @return A tidyged object with all forward slashes removed from surnames.
 temporarily_remove_name_slashes <- function(gedcom) {
   
-  gedcom %>% 
+  gedcom |> 
     dplyr::mutate(value = dplyr::if_else(purrr::map_lgl(record, is_indi, gedcom=gedcom) &
                                            tag %in% c("NAME", "FONE", "ROMN"),
                                          stringr::str_remove_all(value, "/"),
@@ -126,8 +126,8 @@ order_famg_children <- function(gedcom, xref) {
   
   yob <- purrr::map_int(dob, extract_min_year)
   
-  chil_lines_yob <- dplyr::mutate(chil_lines, yob = yob) %>% 
-    dplyr::arrange(yob) %>% 
+  chil_lines_yob <- dplyr::mutate(chil_lines, yob = yob) |> 
+    dplyr::arrange(yob) |> 
     dplyr::select(-yob)
   
   gedcom <- dplyr::anti_join(gedcom, chil_lines_yob,
@@ -135,7 +135,7 @@ order_famg_children <- function(gedcom, xref) {
   
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "FAM")
   
-  gedcom %>%
+  gedcom |>
     tibble::add_row(chil_lines_yob, .before = next_row)
     
 }
@@ -189,10 +189,10 @@ update_change_date <- function(gedcom, xref) {
   
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, rec_tag)
   
-  chan <- tidyged.internals::CHANGE_DATE() %>% 
+  chan <- tidyged.internals::CHANGE_DATE() |> 
     tidyged.internals::add_levels(1)
   
-  tibble::add_row(gedcom, chan, .before = next_row) %>% 
+  tibble::add_row(gedcom, chan, .before = next_row) |> 
     tidyged.internals::finalise()
   
 }
@@ -207,8 +207,8 @@ update_change_date <- function(gedcom, xref) {
 #' @return The tidyged object with creation dates removed.
 remove_dates_for_tests <- function(gedcom) {
   
-  gedcom %>% 
-    tidyged.internals::remove_section(1, "CHAN", "") %>% 
+  gedcom |> 
+    tidyged.internals::remove_section(1, "CHAN", "") |> 
     dplyr::filter(!(level == 1 & record == "HD" & tag == "DATE"))
   
 }
@@ -231,8 +231,8 @@ mutate_tag_namespace <- function(gedcom){
     gedcom <- dplyr::mutate(gedcom, 
                             tag_ns = dplyr::if_else(level == lv, 
                                                     paste(tag_ns, tag, sep = "."), 
-                                                    tag_ns)) %>% 
-      dplyr::mutate(tag_ns = dplyr::if_else(level > lv, NA_character_, tag_ns)) %>% 
+                                                    tag_ns)) |> 
+      dplyr::mutate(tag_ns = dplyr::if_else(level > lv, NA_character_, tag_ns)) |> 
       tidyr::fill(tag_ns)
   }
   
@@ -248,7 +248,7 @@ create_note_structures <- function(gedcom, notes) {
                  } else {
                    .x
                  }
-  ) %>% 
+  ) |> 
     purrr::map(tidyged.internals::NOTE_STRUCTURE)
 }
 
@@ -256,6 +256,6 @@ create_multimedia_links <- function(gedcom, media_links) {
   purrr::map_chr(media_links, get_valid_xref,
                  gedcom = gedcom,
                  record_type = .pkgenv$record_string_obje, 
-                 record_type_fn = is_media) %>% 
+                 record_type_fn = is_media) |> 
     purrr::map(tidyged.internals::MULTIMEDIA_LINK)
 }

@@ -48,8 +48,8 @@ add_media <- function(gedcom,
                                                        user_reference_number = user_reference_numbers,
                                                        notes = mmedia_notes)
   
-  gedcom %>% 
-    tibble::add_row(media_record, .before = nrow(.)) %>% 
+  gedcom |> 
+    tibble::add_row(media_record, .before = nrow(gedcom)) |> 
     set_active_record(xref)
 }
 
@@ -63,14 +63,14 @@ add_media <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
-#'              gedcom(subm()) %>% 
-#'              add_media("test", "BMP") %>% 
+#'              gedcom(subm()) |> 
+#'              add_media("test", "BMP") |> 
 #'              remove_media())
 remove_media <- function(gedcom, multimedia = character()) {
   
   xref <- get_valid_xref(gedcom, multimedia, .pkgenv$record_string_obje, is_media)
   
-  gedcom %>% 
-    dplyr::filter(record != xref, value != xref) %>% 
+  gedcom |> 
+    dplyr::filter(record != xref, value != xref) |> 
     null_active_record()
 }

@@ -21,18 +21,18 @@ All GEDCOM records are given unique identifiers known as xrefs (cross-references
 ```{r}
 library(tidyged)
 
-simpsons <- gedcom(subm("Me")) %>% 
-  add_indi(sex = "M") %>% 
-  add_indi_names(name_pieces(given = "Homer", surname = "Simpson")) %>% 
-  add_indi(sex = "F") %>% 
-  add_indi_names(name_pieces(given = "Marge", surname = "Simpson")) %>% 
-  add_indi(sex = "F") %>% 
-  add_indi_names(name_pieces(given = "Lisa", surname = "Simpson")) %>% 
-  add_indi(sex = "M") %>%  
-  add_indi_names(name_pieces(given = "Bart", surname = "Simpson")) %>% 
+simpsons <- gedcom(subm("Me")) |> 
+  add_indi(sex = "M") |> 
+  add_indi_names(name_pieces(given = "Homer", surname = "Simpson")) |> 
+  add_indi(sex = "F") |> 
+  add_indi_names(name_pieces(given = "Marge", surname = "Simpson")) |> 
+  add_indi(sex = "F") |> 
+  add_indi_names(name_pieces(given = "Lisa", surname = "Simpson")) |> 
+  add_indi(sex = "M") |>  
+  add_indi_names(name_pieces(given = "Bart", surname = "Simpson")) |> 
   add_note("This is a note")
 
-dplyr::filter(simpsons, tag %in% c("INDI", "NOTE")) %>% 
+dplyr::filter(simpsons, tag %in% c("INDI", "NOTE")) |> 
   knitr::kable()
 ```
 
@@ -53,8 +53,8 @@ Since the last record to be created was the Note record, it is the active record
 We can use activation to add to existing records. If we want to activate another record, we can activate it using the `activate_*()` family of functions together with its xref:
 
 ```{r}
-simpsons %>% 
-  activate_indi("@I2@") %>% 
+simpsons |> 
+  activate_indi("@I2@") |> 
   active_record()
 ```
 
@@ -72,8 +72,8 @@ These helper functions begin with `find_*` and act as wrappers to the more gener
 In the activation example, we would activate Marge's record with:
 
 ```{r}
-simpsons %>% 
-  activate_indi(find_indi_name(., "Marge")) %>% 
+simpsons |> 
+  activate_indi(find_indi_name(simpsons, "Marge")) |> 
   active_record()
 ```
 
@@ -82,14 +82,14 @@ Note that the full name does not need to be given, since the term is partially m
 In this use case, if no match or more than one match is found, it will result in an error:
 
 ```{r, error = TRUE}
-simpsons %>% 
-  activate_indi(find_indi_name(., "Simpon")) %>% 
+simpsons |> 
+  activate_indi(find_indi_name(simpsons, "Simpon")) |> 
   active_record()
 ```
 
 ```{r, error = TRUE}
-simpsons %>% 
-  activate_indi(find_indi_name(., "Simpson")) %>% 
+simpsons |> 
+  activate_indi(find_indi_name(simpsons, "Simpson")) |> 
   active_record()
 ```
 
@@ -98,9 +98,9 @@ simpsons %>%
 When removing entire records, you don't have to necessarily rely on activating them first. The same referencing techniques above can be used to remove records immediately:
 
 ```{r}
-simpsons %>% 
-  remove_indi(find_indi_name(., "Homer")) %>% 
-  df_indi() %>% 
+simpsons |> 
+  remove_indi(find_indi_name(simpsons, "Homer")) |> 
+  df_indi() |> 
   knitr::kable()
 ```
 

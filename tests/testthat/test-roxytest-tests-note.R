@@ -4,6 +4,6 @@
 
 test_that("Function remove_note() @ L38", {
   expect_equal(gedcom(subm()),
-               gedcom(subm()) %>% add_note("text") %>% remove_note())
+               gedcom(subm()) |> add_note("text") |> remove_note())
 })
 

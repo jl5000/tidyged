@@ -25,7 +25,7 @@
 #' @tests
 #' expect_snapshot_value(add_indi(gedcom(subm("Me")),
 #'                                      sex = "M", user_reference_number = c(something = 1234),
-#'                                      indi_notes = c("Note1", "Note 2")) %>% 
+#'                                      indi_notes = c("Note1", "Note 2")) |> 
 #'                        remove_dates_for_tests(), "json2")
 add_indi <- function(gedcom,
                      sex = "U",
@@ -45,8 +45,8 @@ add_indi <- function(gedcom,
                                                      notes = indiv_notes,
                                                      multimedia_links = media_links) 
   
-  temp <- gedcom %>%
-    tibble::add_row(ind_record, .before = nrow(.)) %>% 
+  temp <- gedcom |>
+    tibble::add_row(ind_record, .before = nrow(gedcom)) |> 
     set_active_record(xref)
   
   if (length(qn) > 0) 
@@ -76,7 +76,7 @@ add_indi <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
-#'              gedcom(subm()) %>% add_indi() %>% remove_indi())
+#'              gedcom(subm()) |> add_indi() |> remove_indi())
 remove_indi <- function(gedcom, 
                         individual = character(),
                         remove_associations = TRUE) {
@@ -85,8 +85,8 @@ remove_indi <- function(gedcom,
   
   if(remove_associations) gedcom <- tidyged.internals::remove_section(gedcom, 1, "ASSO", xref)
 
-  gedcom %>% 
-    dplyr::filter(record != xref, !(value == xref & tag != "ASSO")) %>%
+  gedcom |> 
+    dplyr::filter(record != xref, !(value == xref & tag != "ASSO")) |>
     null_active_record()
 }
 

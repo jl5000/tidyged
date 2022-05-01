@@ -14,10 +14,10 @@
 #' this association.
 #' @export
 #' @tests
-#' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'                         add_indi(qn = "Joe Bloggs") %>% 
-#'                         add_indi(qn = "Jimmy Bloggs") %>% 
-#'                         add_indi_association(associated_with = "@I1@", association = "Friend") %>% 
+#' expect_snapshot_value(gedcom(subm("Me")) |> 
+#'                         add_indi(qn = "Joe Bloggs") |> 
+#'                         add_indi(qn = "Jimmy Bloggs") |> 
+#'                         add_indi_association(associated_with = "@I1@", association = "Friend") |> 
 #'                         remove_dates_for_tests(), "json2")
 add_indi_association <- function(gedcom,
                                  associated_with,
@@ -34,7 +34,7 @@ add_indi_association <- function(gedcom,
   
   asso_str <- tidyged.internals::ASSOCIATION_STRUCTURE(xref_indi = indi_xref,
                                                        relation_is_descriptor = association,
-                                                       notes = asso_notes) %>% 
+                                                       notes = asso_notes) |> 
     tidyged.internals::add_levels(1)
   
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
@@ -70,7 +70,7 @@ add_indi_family_link_as_spouse <- function(gedcom,
   
   link_notes <- create_note_structures(gedcom, linkage_notes)
   
-  link <- tidyged.internals::SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) %>% 
+  link <- tidyged.internals::SPOUSE_TO_FAMILY_LINK(xref_fam = family_xref, notes = link_notes) |> 
     tidyged.internals::add_levels(1)
   
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
@@ -111,7 +111,7 @@ add_indi_family_link_as_child <- function(gedcom,
   
   link <- tidyged.internals::CHILD_TO_FAMILY_LINK(xref_fam = family_xref,
                                                   pedigree_linkage_type = linkage_type,
-                                                  notes = link_notes) %>% 
+                                                  notes = link_notes) |> 
     tidyged.internals::add_levels(1)
   
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
@@ -182,9 +182,9 @@ add_indi_links_to_families <- function(gedcom,
                               record_type = .pkgenv$record_string_indi, 
                               record_type_fn = is_indi)
     
-    famg_xref_chil <- dplyr::filter(gedcom, level == 1, tag %in% c("HUSB","WIFE"), value %in% parents) %>% 
-      dplyr::count(record) %>% 
-      dplyr::filter(n == max(n)) %>% 
+    famg_xref_chil <- dplyr::filter(gedcom, level == 1, tag %in% c("HUSB","WIFE"), value %in% parents) |> 
+      dplyr::count(record) |> 
+      dplyr::filter(n == max(n)) |> 
       dplyr::pull(record)
     
     if(length(famg_xref_chil) == 0) 
@@ -208,7 +208,7 @@ add_indi_links_to_families <- function(gedcom,
     next_row <- tidyged.internals::find_insertion_point(gedcom, famg_xref_chil, 0, "FAM")
     gedcom <- tibble::add_row(gedcom,
                               tibble::tibble(record = famg_xref_chil, level = 1, tag = "CHIL", value = xref), 
-                              .before = next_row) %>% 
+                              .before = next_row) |> 
       order_famg_children(famg_xref_chil)
     
     if(update_date_changed) gedcom <- update_change_date(gedcom, famg_xref_chil)
@@ -227,15 +227,15 @@ add_indi_links_to_families <- function(gedcom,
     if(length(spouse) > 0) {
       spouse <- get_valid_xref(gedcom, spouse, .pkgenv$record_string_indi, is_indi)
       
-      xref_fams1 <- dplyr::filter(gedcom, level == 1, tag %in% c("HUSB","WIFE"), value == spouse) %>% 
-        dplyr::count(record) %>% 
-        dplyr::filter(n == max(n)) %>% 
+      xref_fams1 <- dplyr::filter(gedcom, level == 1, tag %in% c("HUSB","WIFE"), value == spouse) |> 
+        dplyr::count(record) |> 
+        dplyr::filter(n == max(n)) |> 
         dplyr::pull(record)
       
       # remove those which have 2 spouses already
-      xref_fams1 <- dplyr::filter(gedcom, record %in% xref_fams1, level == 1, tag %in% c("HUSB","WIFE")) %>% 
-        dplyr::count(record) %>% 
-        dplyr::filter(n < 2) %>% 
+      xref_fams1 <- dplyr::filter(gedcom, record %in% xref_fams1, level == 1, tag %in% c("HUSB","WIFE")) |> 
+        dplyr::count(record) |> 
+        dplyr::filter(n < 2) |> 
         dplyr::pull(record)
     }
     
@@ -245,9 +245,9 @@ add_indi_links_to_families <- function(gedcom,
                                  record_type = .pkgenv$record_string_indi, 
                                  record_type_fn = is_indi)
       
-      xref_fams2 <- dplyr::filter(gedcom, level == 1, tag == "CHIL", value %in% children) %>% 
-        dplyr::count(record) %>% 
-        dplyr::filter(n == max(n)) %>% 
+      xref_fams2 <- dplyr::filter(gedcom, level == 1, tag == "CHIL", value %in% children) |> 
+        dplyr::count(record) |> 
+        dplyr::filter(n == max(n)) |> 
         dplyr::pull(record)
     }
     

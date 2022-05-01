@@ -132,10 +132,11 @@ get_indi_partners <- function(gedcom,
   
   fams_xref <- get_families_as_partner(gedcom, xref)
   
-  part_xref <- purrr::map(fams_xref, get_famg_partners, gedcom=gedcom) %>% 
-    purrr::flatten_chr() %>%
-    purrr::discard(. == xref) %>% 
+  part_xref <- purrr::map(fams_xref, get_famg_partners, gedcom=gedcom) |> 
+    purrr::flatten_chr() |>
     unique()
+  
+  part_xref <- part_xref[part_xref != xref]
   
   if (return_name) {
     purrr::map_chr(part_xref, describe_indi, gedcom=gedcom, name_only = TRUE)
@@ -173,8 +174,8 @@ get_indi_children <- function(gedcom,
   fams_xref <- get_families_as_partner(gedcom, xref)
   
   chil_xref <- purrr::map(fams_xref, get_famg_children, gedcom=gedcom,
-                          birth_only=birth_only, return_name=FALSE) %>% 
-    purrr::flatten_chr() %>% 
+                          birth_only=birth_only, return_name=FALSE) |> 
+    purrr::flatten_chr() |> 
     unique()
   
   if (return_name) {
@@ -213,8 +214,8 @@ get_indi_parents <- function(gedcom,
   famc_xref <- get_families_as_child(gedcom, xref, birth_only)
   
   par_xref <- purrr::map(famc_xref, get_famg_partners, gedcom=gedcom,
-                          return_name=FALSE) %>% 
-    purrr::flatten_chr() %>% 
+                          return_name=FALSE) |> 
+    purrr::flatten_chr() |> 
     unique()
 
   if (return_name) {
@@ -259,10 +260,11 @@ get_indi_siblings <- function(gedcom,
                             birth_only=birth_only, return_name=FALSE)
   }
   
-  sib_xref <- sib_xref %>% 
-    purrr::flatten_chr() %>% 
-    purrr::discard(. == xref) %>% 
+  sib_xref <- sib_xref |> 
+    purrr::flatten_chr() |> 
     unique()
+  
+  sib_xref <- sib_xref[sib_xref != xref]
   
   if (return_name) {
     purrr::map_chr(sib_xref, describe_indi, gedcom=gedcom, name_only = TRUE)
@@ -294,20 +296,20 @@ get_indi_cousins <- function(gedcom,
   par_xref = xref
   for(i in seq_len(degree)){
     par_xref <- purrr::map(par_xref, get_indi_parents, gedcom=gedcom,
-                           birth_only=TRUE) %>% 
+                           birth_only=TRUE) |> 
       purrr::flatten_chr()
   }
   
   sib_xref <- purrr::map(par_xref, get_indi_siblings, 
                          gedcom=gedcom, 
                          birth_only=TRUE,
-                         inc_half_sibs=inc_half_cous) %>% 
+                         inc_half_sibs=inc_half_cous) |> 
     purrr::flatten_chr()
   
   cou_xref <- sib_xref
   for(i in seq_len(degree)){
     cou_xref <- purrr::map(cou_xref, get_indi_children, gedcom=gedcom,
-                           birth_only=TRUE) %>% 
+                           birth_only=TRUE) |> 
       purrr::flatten_chr()
   }
   

@@ -3,22 +3,22 @@
 # File R/individual_facts.R: @tests
 
 test_that("Function add_indi_fact() @ L75", {
-  expect_snapshot_value(gedcom(subm("Me")) %>% 
-                         add_indi(sex = "M") %>% 
+  expect_snapshot_value(gedcom(subm("Me")) |> 
+                         add_indi(sex = "M") |> 
                          add_indi_fact(type = "chr",
                                         date = date_calendar(year = 1956),
                                         age = "1y",
                                         fact_address = address(c("line1","line2","line3","line4")),
                                         fact_place = place("There",
-                                                      notes = "Place note")) %>% 
+                                                      notes = "Place note")) |> 
                          remove_dates_for_tests(), "json2")
-  expect_snapshot_value(gedcom(subm("Me")) %>% 
-                         add_indi(sex = "M") %>% 
+  expect_snapshot_value(gedcom(subm("Me")) |> 
+                         add_indi(sex = "M") |> 
                          add_indi_fact(type = "occ",
                                        descriptor = "Jedi",
                                        fact_address = address(c("line1","line2","line3","line4")),
                                        fact_place = place("There",
-                                                     notes = "Place note")) %>% 
+                                                     notes = "Place note")) |> 
                          remove_dates_for_tests(), "json2")
 })
 

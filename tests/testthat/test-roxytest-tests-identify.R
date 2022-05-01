@@ -29,7 +29,7 @@ test_that("Function get_indi_partners() @ L127", {
 })
 
 
-test_that("Function get_indi_children() @ L166", {
+test_that("Function get_indi_children() @ L167", {
   expect_error(get_indi_children(sample555, "@I4@"))
   expect_equal(get_indi_children(sample555, "@I1@"), "@I3@")
   expect_equal(get_indi_children(sample555, "@I2@", FALSE, TRUE), "Joe Williams")
@@ -37,24 +37,24 @@ test_that("Function get_indi_children() @ L166", {
 })
 
 
-test_that("Function get_indi_parents() @ L206", {
+test_that("Function get_indi_parents() @ L207", {
   expect_equal(get_indi_parents(sample555, "@I3@"), c("@I1@", "@I2@"))
   expect_equal(get_indi_parents(sample555, "@I3@", FALSE, TRUE), c("Robert Eugene Williams", "Mary Ann Wilson"))
   expect_equal(get_indi_parents(sample555, "@I1@"), character())
 })
 
 
-test_that("Function get_indi_siblings() @ L242", {
+test_that("Function get_indi_siblings() @ L243", {
   expect_equal(get_indi_siblings(sample555, "@I3@"), character())
 })
 
 
-test_that("Function get_famg_partners() @ L333", {
+test_that("Function get_famg_partners() @ L335", {
   expect_equal(get_famg_partners(sample555, "@F1@"), c("@I1@", "@I2@"))
 })
 
 
-test_that("Function get_famg_children() @ L363", {
+test_that("Function get_famg_children() @ L365", {
   expect_equal(get_famg_children(sample555, "@F1@"), "@I3@")
   expect_equal(get_famg_children(sample555, "@F2@"), "@I3@")
   expect_equal(get_famg_children(sample555, "@F2@", birth_only = TRUE), character())
@@ -62,12 +62,12 @@ test_that("Function get_famg_children() @ L363", {
 })
 
 
-test_that("Function get_supporting_records() @ L407", {
+test_that("Function get_supporting_records() @ L409", {
   expect_equal(get_supporting_records(sample555, "@I1@"), c("@S1@", "@R1@"))
 })
 
 
-test_that("Function get_descendants() @ L458", {
+test_that("Function get_descendants() @ L460", {
   expect_equal(get_descendants(sample555, "@I3@"), character())
   expect_equal(get_descendants(sample555, "@I1@"), "@I3@")
   expect_equal(get_descendants(sample555, "@I1@", TRUE), c("@I1@","@I3@"))
@@ -76,27 +76,27 @@ test_that("Function get_descendants() @ L458", {
 })
 
 
-test_that("Function get_ancestors() @ L530", {
+test_that("Function get_ancestors() @ L532", {
   expect_equal(get_ancestors(sample555, "@I1@"), character())
 })
 
 
-test_that("Function xrefs_indi() @ L596", {
+test_that("Function xrefs_indi() @ L598", {
   expect_equal(xrefs_indi(sample555), paste0("@I", 1:3, "@"))
 })
 
 
-test_that("Function xrefs_famg() @ L602", {
+test_that("Function xrefs_famg() @ L604", {
   expect_equal(xrefs_famg(sample555), paste0("@F", 1:2, "@"))
 })
 
 
-test_that("Function xrefs_subm() @ L608", {
+test_that("Function xrefs_subm() @ L610", {
   expect_equal(xrefs_subm(sample555), paste0("@U", 1, "@"))
 })
 
 
-test_that("Function xrefs_sour() @ L614", {
+test_that("Function xrefs_sour() @ L616", {
   expect_equal(xrefs_sour(sample555), paste0("@S", 1, "@"))
 })
 

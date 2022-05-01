@@ -70,8 +70,8 @@ add_sour <- function(gedcom,
                                                   notes = source_notes,
                                                   multimedia_links = media_links)
   
-  gedcom %>% 
-    tibble::add_row(sour_record, .before = nrow(.)) %>% 
+  gedcom |> 
+    tibble::add_row(sour_record, .before = nrow(gedcom)) |> 
     set_active_record(xref)
 }
 
@@ -93,10 +93,10 @@ add_sour <- function(gedcom,
 #' @export
 #' @tests
 #' expect_snapshot_value(
-#'                  gedcom(subm("Me")) %>% 
-#'                  add_repo(name = "The library") %>% 
-#'                  add_sour() %>% 
-#'                  add_sour_repo_citation("@R1@") %>%
+#'                  gedcom(subm("Me")) |> 
+#'                  add_repo(name = "The library") |> 
+#'                  add_sour() |> 
+#'                  add_sour_repo_citation("@R1@") |>
 #'                  remove_dates_for_tests(), "json2")
 add_sour_repo_citation <- function(gedcom,
                                    repository,
@@ -109,7 +109,7 @@ add_sour_repo_citation <- function(gedcom,
   repo_xref <- repository
   
   citation <- tidyged.internals::SOURCE_REPOSITORY_CITATION(xref_repo = repo_xref,
-                                                               source_call_number = call_number) %>% 
+                                                               source_call_number = call_number) |> 
     tidyged.internals::add_levels(1)
   
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "SOUR")
@@ -123,22 +123,22 @@ add_sour_repo_citation <- function(gedcom,
 }
 
 #' @tests
-#' expect_equal(gedcom(subm("Me")) %>% 
-#'                  add_repo(name = "The library") %>% 
-#'                  add_sour() %>%
+#' expect_equal(gedcom(subm("Me")) |> 
+#'                  add_repo(name = "The library") |> 
+#'                  add_sour() |>
 #'                  remove_dates_for_tests(),
-#'              gedcom(subm("Me")) %>% 
-#'                  add_repo(name = "The library") %>% 
-#'                  add_sour() %>% 
-#'                  add_sour_repo_citation("@R1@") %>%
-#'                  remove_sour_repo_citation("@R1@") %>% 
+#'              gedcom(subm("Me")) |> 
+#'                  add_repo(name = "The library") |> 
+#'                  add_sour() |> 
+#'                  add_sour_repo_citation("@R1@") |>
+#'                  remove_sour_repo_citation("@R1@") |> 
 #'                  remove_dates_for_tests())
 remove_sour_repo_citation <- function(gedcom,
                                       repository) {
   
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_sour, is_sour)
   
-  tidyged.internals::remove_section(gedcom, 1, "REPO", repository, xrefs = xref) %>% 
+  tidyged.internals::remove_section(gedcom, 1, "REPO", repository, xrefs = xref) |> 
     activate_sour(xref)
   
 }
@@ -153,15 +153,15 @@ remove_sour_repo_citation <- function(gedcom,
 #' @export
 #' @tests
 #' expect_equal(gedcom(subm()),
-#'              gedcom(subm()) %>% add_sour(title = "text") %>% remove_sour())
+#'              gedcom(subm()) |> add_sour(title = "text") |> remove_sour())
 remove_sour <- function(gedcom,
                         sour = character()) {
   
   xref <- get_valid_xref(gedcom, sour, .pkgenv$record_string_sour, is_sour)
   
-  gedcom %>% 
-    tidyged.internals::remove_section(1, "SOUR", xref) %>% 
-    tidyged.internals::remove_section(2, "SOUR", xref) %>%
-    dplyr::filter(record != xref, value != xref) %>% 
+  gedcom |> 
+    tidyged.internals::remove_section(1, "SOUR", xref) |> 
+    tidyged.internals::remove_section(2, "SOUR", xref) |>
+    dplyr::filter(record != xref, value != xref) |> 
     null_active_record()
 }

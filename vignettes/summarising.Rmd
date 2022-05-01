@@ -22,29 +22,34 @@ The `tidyged` package comes with several functions for summarising and querying 
 library(tidyged)
 
 simpsons <- gedcom(subm("Me"), gedcom_description = "Some of the Simpsons",
-                   gedcom_copyright = "No copyright") %>% 
-  add_indi(qn = "Homer Simpson", sex = "M") %>% 
+                   gedcom_copyright = "No copyright") |> 
+  add_indi(qn = "Homer Simpson", sex = "M") |> 
   add_indi_fact("bir", date = date_calendar(1960, 5, 14),
-                fact_place = place(name = "Springfield, USA")) %>% 
-  add_indi(qn = "Marge Simpson", sex = "F") %>% 
+                fact_place = place(name = "Springfield, USA")) |> 
+  add_indi(qn = "Marge Simpson", sex = "F") |> 
   add_indi_fact("bir", date = date_calendar(1960, 8, 24),
-                fact_place = place(name = "Springfield, USA")) %>% 
-  add_indi(qn = "Lisa Simpson", sex = "F") %>% 
+                fact_place = place(name = "Springfield, USA")) |> 
+  add_indi(qn = "Lisa Simpson", sex = "F") |> 
   add_indi_fact("bir", date = date_calendar(1984, 12, 3),
-                fact_place = place(name = "Springfield, USA")) %>% 
-  add_indi(qn = "Bart Simpson", sex = "M") %>% 
+                fact_place = place(name = "Springfield, USA")) |> 
+  add_indi(qn = "Bart Simpson", sex = "M") |> 
   add_indi_fact("bir", date = date_calendar(1982, 3, 16),
-                fact_place = place(name = "Springfield, USA")) %>% 
-  add_famg(husband = find_indi_name(., "Homer"), 
-           wife = find_indi_name(., "Marge"), 
-           children = find_indi_name_all(., "Bart|Lisa"), 
-           number_of_children = 3) %>% 
-  add_note("This is a note") %>% 
-  add_note("This is another note") %>% 
-  add_media("123", "PDF") %>% 
-  add_media("456", "PDF") %>%
-  add_repo("A library") %>% 
-  add_sour(originator = "J.R. Hartley", title = "A History of the Simpsons") %>%
+                fact_place = place(name = "Springfield, USA"))
+
+homer_xref <- find_indi_name(simpsons, "Homer")
+marge_xref <- find_indi_name(simpsons, "Marge")
+bart_lisa_xref <- find_indi_name_all(simpsons, "Bart|Lisa")
+
+simpsons <- simpsons |>
+  add_famg(husband = homer_xref, wife = marge_xref, 
+           children = bart_lisa_xref, 
+           number_of_children = 3) |> 
+  add_note("This is a note") |> 
+  add_note("This is another note") |> 
+  add_media("123", "PDF") |> 
+  add_media("456", "PDF") |>
+  add_repo("A library") |> 
+  add_sour(originator = "J.R. Hartley", title = "A History of the Simpsons") |>
   add_sour(originator = "Prof. J Frink", title = "The screaming and the pain and the hoyvenglaven")
 ```
 
@@ -80,9 +85,9 @@ These functions are the workhorse of the `str()` function.
 The `df_*()` family of functions provide a tabular summary of all records of a particular type:
 
 ```{r}
-df_indi(simpsons) %>% knitr::kable()
-df_famg(simpsons) %>% knitr::kable()
-df_media(simpsons) %>% knitr::kable()
+df_indi(simpsons) |> knitr::kable()
+df_famg(simpsons) |> knitr::kable()
+df_media(simpsons) |> knitr::kable()
 ```
 
 

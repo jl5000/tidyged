@@ -32,7 +32,7 @@ add_indi_names <- function(gedcom,
   
   name_str <- tidyged.internals::PERSONAL_NAME_STRUCTURE(name_personal = name,
                                                          name_type = type,
-                                                         name_pieces = names) %>% 
+                                                         name_pieces = names) |> 
     tidyged.internals::add_levels(1)
   
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "INDI")
@@ -61,11 +61,11 @@ add_indi_names <- function(gedcom,
 #' @export
 #' @tests
 #' expect_snapshot_value(
-#'                gedcom(subm("Me")) %>% 
-#'                add_indi() %>% 
-#'                add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
+#'                gedcom(subm("Me")) |> 
+#'                add_indi() |> 
+#'                add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) |> 
 #'                add_indi_names_var("Joe Bloggs", names_var = name_pieces(given = "JB"), 
-#'                                   method = "tests", phonetic_variation = FALSE) %>% 
+#'                                   method = "tests", phonetic_variation = FALSE) |> 
 #'                remove_dates_for_tests(), "json2")
 add_indi_names_var <- function(gedcom,
                                primary_name,
@@ -116,13 +116,13 @@ add_indi_names_var <- function(gedcom,
                                       phonetic_name_pieces = phon_name_pieces,
                                       name_romanised = name_romanised_var,
                                       romanisation_method = romanisation_method,
-                                      romanised_name_pieces = rom_name_pieces) %>% 
-    dplyr::filter(tag != "NAME") %>%
-    dplyr::filter(!(tag == "SURN" & value == "filtered out")) %>% 
+                                      romanised_name_pieces = rom_name_pieces) |> 
+    dplyr::filter(tag != "NAME") |>
+    dplyr::filter(!(tag == "SURN" & value == "filtered out")) |> 
     tidyged.internals::add_levels(1)
   
-  next_row <- gedcom %>% 
-    temporarily_remove_name_slashes() %>% 
+  next_row <- gedcom |> 
+    temporarily_remove_name_slashes() |> 
     tidyged.internals::find_insertion_point(xref, 1, "NAME", primary_name)
   
   gedcom <- tibble::add_row(gedcom, name_str, .before = next_row)
@@ -143,22 +143,22 @@ add_indi_names_var <- function(gedcom,
 #' this personal name (and components).
 #' @export
 #' @tests
-#' expect_equal(gedcom(subm()) %>% 
+#' expect_equal(gedcom(subm()) |> 
 #'                add_indi(),
-#'              gedcom(subm()) %>% 
-#'                add_indi() %>% 
-#'                add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
+#'              gedcom(subm()) |> 
+#'                add_indi() |> 
+#'                add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) |> 
 #'                remove_indi_name("Joe Bloggs"))  
 remove_indi_name <- function(gedcom,
                               name) {
   
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
-  rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
+  rows_to_remove <- temporarily_remove_name_slashes(gedcom) |> 
     tidyged.internals::identify_section(1, "NAME", name, xrefs = xref, first_only = TRUE)
   
-  gedcom %>%
-    dplyr::slice(-rows_to_remove) %>% 
+  gedcom |>
+    dplyr::slice(-rows_to_remove) |> 
     activate_indi(xref)
   
 }
@@ -175,14 +175,14 @@ remove_indi_name <- function(gedcom,
 #' this personal name variation (and components).
 #' @export
 #' @tests
-#' expect_equal(gedcom(subm()) %>% 
-#'                add_indi() %>% 
+#' expect_equal(gedcom(subm()) |> 
+#'                add_indi() |> 
 #'                add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")),
-#'              gedcom(subm()) %>% 
-#'                add_indi() %>% 
-#'                add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
+#'              gedcom(subm()) |> 
+#'                add_indi() |> 
+#'                add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) |> 
 #'                add_indi_names_var("Joe Bloggs", names_var = name_pieces(given = "Jo", surname = "Blogs"), 
-#'                                   method = "spelling error") %>% 
+#'                                   method = "spelling error") |> 
 #'                remove_indi_name_var("Jo Blogs"))
 remove_indi_name_var <- function(gedcom,
                                        variation_name,
@@ -190,12 +190,12 @@ remove_indi_name_var <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, character(), .pkgenv$record_string_indi, is_indi)
   
-  rows_to_remove <- temporarily_remove_name_slashes(gedcom) %>% 
+  rows_to_remove <- temporarily_remove_name_slashes(gedcom) |> 
     tidyged.internals::identify_section(2, dplyr::if_else(phonetic_variation, "FONE", "ROMN"), 
                                         variation_name, xrefs = xref, first_only = TRUE)
   
-  gedcom %>%
-    dplyr::slice(-rows_to_remove) %>% 
+  gedcom |>
+    dplyr::slice(-rows_to_remove) |> 
     activate_indi(xref)
   
 }
@@ -213,7 +213,7 @@ primary_indi_name <- function(gedcom, name, xref = character()) {
   
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_indi, is_indi)
   
-  rows_to_move <- temporarily_remove_name_slashes(gedcom) %>% 
+  rows_to_move <- temporarily_remove_name_slashes(gedcom) |> 
     tidyged.internals::identify_section(1, "NAME", name, xrefs = xref, first_only = TRUE)
   
   section <- gedcom[rows_to_move,]
@@ -221,7 +221,7 @@ primary_indi_name <- function(gedcom, name, xref = character()) {
   
   first_row <- which(gedcom$record == xref & gedcom$level == 0 & gedcom$tag == "INDI")
 
-  gedcom %>%
-    tibble::add_row(section, .after = first_row) %>% 
+  gedcom |>
+    tibble::add_row(section, .after = first_row) |> 
     activate_indi(xref)
 }

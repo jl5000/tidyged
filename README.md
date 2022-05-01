@@ -39,45 +39,51 @@ The intent is to allow the user to import GEDCOM files or create them
 from scratch using a `ggplot2` type interface; starting with a base
 GEDCOM object (with only a header and trailer section) and adding
 records as you would add layers to a ggplot object (but instead using
-the pipe operator, %&gt;%).
+the pipe operator, \|\>).
 
 An example is below:
 
 ``` r
 library(tidyged)
 
-tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family", gedcom_copyright = "None") %>%
-  add_indi(sex = "M", indi_notes = "The central character in the Star Wars Skywalker Saga") %>%
-  add_indi_names(name_pieces(given = "Anakin", surname = "Skywalker"), type = "birth") %>%
+tg <- gedcom(subm("Jamie Lendrum"), gedcom_description = "The Skywalker family", gedcom_copyright = "None") |>
+  add_indi(sex = "M", indi_notes = "The central character in the Star Wars Skywalker Saga") |>
+  add_indi_names(name_pieces(given = "Anakin", surname = "Skywalker"), type = "birth") |>
   add_indi_names(name_pieces(prefix = "Darth", given = "Vader"), 
-                 type = "given") %>%
-  add_indi(sex = "F", indi_notes = "Queen of Naboo") %>%
+                 type = "given") |>
+  add_indi(sex = "F", indi_notes = "Queen of Naboo") |>
   add_indi_names(name_pieces(given = "Padme", surname = "Amidala"), 
-                 type = "birth") %>% 
-  add_indi(sex = "F") %>% 
+                 type = "birth") |> 
+  add_indi(sex = "F") |> 
   add_indi_names(name_pieces(given = "Leia", surname = "Skywalker"), 
-                 type = "birth") %>%
+                 type = "birth") |>
   add_indi_names(name_pieces(prefix = "Princess", given = "Leia", surname = "Organa"), 
-                 type = "adoptive") %>% 
-  add_indi(sex = "M") %>%
+                 type = "adoptive") |> 
+  add_indi(sex = "M") |>
   add_indi_names(name_pieces(given = "Luke", surname = "Skywalker"), 
-                 type = "birth") %>% 
-  add_indi(sex = "M") %>% 
+                 type = "birth") |> 
+  add_indi(sex = "M") |> 
   add_indi_names(name_pieces(given = "Obi-Wan", nickname = "Ben", surname = "Kenobi"), 
-                 type = "birth") %>% 
-  add_famg(husband = find_indi_name(., "Anakin"), 
-           wife = find_indi_name(., "Padme"), 
-           children = find_indi_name_all(., "Luke|Leia")) %>%
-  activate_indi(find_indi_name(., "Anakin")) %>% 
-  add_indi_association(find_indi_name(., "Obi-Wan"), 
-                       association = "Master") %>% 
+                 type = "birth")
+
+anakin_xref <-find_indi_name(tg, "Anakin")
+padme_xref <-find_indi_name(tg, "Padme")
+luke_leia_xref <-find_indi_name_all(tg, "Luke|Leia")
+obiwan_xref <-find_indi_name(tg, "Obi-Wan")
+
+tg <- tg |>
+  add_famg(husband = anakin_xref, 
+           wife = padme_xref, 
+           children = luke_leia_xref) |>
+  activate_indi(anakin_xref) |> 
+  add_indi_association(obiwan_xref, association = "Master") |> 
   add_indi_fact("death", age = "45y", cause = "Killed by son Luke",
-                fact_place = place(name = "Second Death Star", notes = "Orbiting Endor System")) %>% 
-  add_indi_fact("religion", descriptor = "Jedi") %>% 
-  add_indi_fact("possession", descriptor = "Lightsaber") %>%
-  add_note("Based on Star Wars") %>% 
-  add_sour(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") %>% 
-  add_repo("The Skywalker Saga") %>% 
+                fact_place = place(name = "Second Death Star", notes = "Orbiting Endor System")) |> 
+  add_indi_fact("religion", descriptor = "Jedi") |> 
+  add_indi_fact("possession", descriptor = "Lightsaber") |>
+  add_note("Based on Star Wars") |> 
+  add_sour(short_title = "Star Wars", title = "Star Wars Episode IV: A New Hope") |> 
+  add_repo("The Skywalker Saga") |> 
   add_media(file_reference = "XYZ", format = "JPEG")
 
 print(tg, n = Inf)
@@ -97,7 +103,7 @@ print(tg, n = Inf)
 #>  11     3 HD     ADDR  ""                                                       
 #>  12     3 HD     EMAIL "jalendrum@gmail.com"                                    
 #>  13     3 HD     WWW   "https://jl5000.github.io/tidyged/"                      
-#>  14     1 HD     DATE  "23 AUG 2021"                                            
+#>  14     1 HD     DATE  "1 MAY 2022"                                             
 #>  15     1 HD     LANG  "English"                                                
 #>  16     1 HD     SUBM  "@U1@"                                                   
 #>  17     1 HD     COPR  "None"                                                   
@@ -105,7 +111,7 @@ print(tg, n = Inf)
 #>  19     0 @U1@   SUBM  ""                                                       
 #>  20     1 @U1@   NAME  "Jamie Lendrum"                                          
 #>  21     1 @U1@   CHAN  ""                                                       
-#>  22     2 @U1@   DATE  "23 AUG 2021"                                            
+#>  22     2 @U1@   DATE  "1 MAY 2022"                                             
 #>  23     0 @I1@   INDI  ""                                                       
 #>  24     1 @I1@   SEX   "M"                                                      
 #>  25     1 @I1@   NOTE  "The central character in the Star Wars Skywalker Saga"  
@@ -120,7 +126,7 @@ print(tg, n = Inf)
 #>  34     1 @I1@   FAMS  "@F1@"                                                   
 #>  35     1 @I1@   ASSO  "@I5@"                                                   
 #>  36     2 @I1@   RELA  "Master"                                                 
-#>  37     1 @I1@   DEAT  "Y"                                                      
+#>  37     1 @I1@   DEAT  ""                                                       
 #>  38     2 @I1@   PLAC  "Second Death Star"                                      
 #>  39     3 @I1@   NOTE  "Orbiting Endor System"                                  
 #>  40     2 @I1@   CAUS  "Killed by son Luke"                                     
@@ -128,7 +134,7 @@ print(tg, n = Inf)
 #>  42     1 @I1@   RELI  "Jedi"                                                   
 #>  43     1 @I1@   PROP  "Lightsaber"                                             
 #>  44     1 @I1@   CHAN  ""                                                       
-#>  45     2 @I1@   DATE  "23 AUG 2021"                                            
+#>  45     2 @I1@   DATE  "1 MAY 2022"                                             
 #>  46     0 @I2@   INDI  ""                                                       
 #>  47     1 @I2@   SEX   "F"                                                      
 #>  48     1 @I2@   NOTE  "Queen of Naboo"                                         
@@ -138,7 +144,7 @@ print(tg, n = Inf)
 #>  52     2 @I2@   SURN  "Amidala"                                                
 #>  53     1 @I2@   FAMS  "@F1@"                                                   
 #>  54     1 @I2@   CHAN  ""                                                       
-#>  55     2 @I2@   DATE  "23 AUG 2021"                                            
+#>  55     2 @I2@   DATE  "1 MAY 2022"                                             
 #>  56     0 @I3@   INDI  ""                                                       
 #>  57     1 @I3@   SEX   "F"                                                      
 #>  58     1 @I3@   NAME  "Leia /Skywalker/"                                       
@@ -153,7 +159,7 @@ print(tg, n = Inf)
 #>  67     1 @I3@   FAMC  "@F1@"                                                   
 #>  68     2 @I3@   PEDI  "birth"                                                  
 #>  69     1 @I3@   CHAN  ""                                                       
-#>  70     2 @I3@   DATE  "23 AUG 2021"                                            
+#>  70     2 @I3@   DATE  "1 MAY 2022"                                             
 #>  71     0 @I4@   INDI  ""                                                       
 #>  72     1 @I4@   SEX   "M"                                                      
 #>  73     1 @I4@   NAME  "Luke /Skywalker/"                                       
@@ -163,7 +169,7 @@ print(tg, n = Inf)
 #>  77     1 @I4@   FAMC  "@F1@"                                                   
 #>  78     2 @I4@   PEDI  "birth"                                                  
 #>  79     1 @I4@   CHAN  ""                                                       
-#>  80     2 @I4@   DATE  "23 AUG 2021"                                            
+#>  80     2 @I4@   DATE  "1 MAY 2022"                                             
 #>  81     0 @I5@   INDI  ""                                                       
 #>  82     1 @I5@   SEX   "M"                                                      
 #>  83     1 @I5@   NAME  "Obi-Wan /Kenobi/"                                       
@@ -172,31 +178,31 @@ print(tg, n = Inf)
 #>  86     2 @I5@   NICK  "Ben"                                                    
 #>  87     2 @I5@   SURN  "Kenobi"                                                 
 #>  88     1 @I5@   CHAN  ""                                                       
-#>  89     2 @I5@   DATE  "23 AUG 2021"                                            
+#>  89     2 @I5@   DATE  "1 MAY 2022"                                             
 #>  90     0 @F1@   FAM   ""                                                       
 #>  91     1 @F1@   HUSB  "@I1@"                                                   
 #>  92     1 @F1@   WIFE  "@I2@"                                                   
 #>  93     1 @F1@   CHIL  "@I3@"                                                   
 #>  94     1 @F1@   CHIL  "@I4@"                                                   
 #>  95     1 @F1@   CHAN  ""                                                       
-#>  96     2 @F1@   DATE  "23 AUG 2021"                                            
+#>  96     2 @F1@   DATE  "1 MAY 2022"                                             
 #>  97     0 @N1@   NOTE  "Based on Star Wars"                                     
 #>  98     1 @N1@   CHAN  ""                                                       
-#>  99     2 @N1@   DATE  "23 AUG 2021"                                            
+#>  99     2 @N1@   DATE  "1 MAY 2022"                                             
 #> 100     0 @S1@   SOUR  ""                                                       
 #> 101     1 @S1@   TITL  "Star Wars Episode IV: A New Hope"                       
 #> 102     1 @S1@   ABBR  "Star Wars"                                              
 #> 103     1 @S1@   CHAN  ""                                                       
-#> 104     2 @S1@   DATE  "23 AUG 2021"                                            
+#> 104     2 @S1@   DATE  "1 MAY 2022"                                             
 #> 105     0 @R1@   REPO  ""                                                       
 #> 106     1 @R1@   NAME  "The Skywalker Saga"                                     
 #> 107     1 @R1@   CHAN  ""                                                       
-#> 108     2 @R1@   DATE  "23 AUG 2021"                                            
+#> 108     2 @R1@   DATE  "1 MAY 2022"                                             
 #> 109     0 @M1@   OBJE  ""                                                       
 #> 110     1 @M1@   FILE  "XYZ"                                                    
 #> 111     2 @M1@   FORM  "JPEG"                                                   
 #> 112     1 @M1@   CHAN  ""                                                       
-#> 113     2 @M1@   DATE  "23 AUG 2021"                                            
+#> 113     2 @M1@   DATE  "1 MAY 2022"                                             
 #> 114     0 TR     TRLR  ""
 ```
 
@@ -242,24 +248,24 @@ summary(tg)
 #>  Product name:            The 'gedcompendium' ecosystem of packages for the R language 
 #>  Product source:          Jamie Lendrum
 
-df_indi(tg) %>% knitr::kable()
+df_indi(tg) |> knitr::kable()
 ```
 
-| xref | name             | sex | date\_of\_birth | place\_of\_birth | date\_of\_death | place\_of\_death  | mother        | father           | num\_siblings | num\_children | last\_modified |
-|:-----|:-----------------|:----|:----------------|:-----------------|:----------------|:------------------|:--------------|:-----------------|:--------------|--------------:|:---------------|
-| @I1@ | Anakin Skywalker | M   |                 |                  |                 | Second Death Star |               |                  |               |             2 | 23 AUG 2021    |
-| @I2@ | Padme Amidala    | F   |                 |                  |                 |                   |               |                  |               |             2 | 23 AUG 2021    |
-| @I3@ | Leia Skywalker   | F   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 23 AUG 2021    |
-| @I4@ | Luke Skywalker   | M   |                 |                  |                 |                   | Padme Amidala | Anakin Skywalker | 1             |             0 | 23 AUG 2021    |
-| @I5@ | Obi-Wan Kenobi   | M   |                 |                  |                 |                   |               |                  |               |             0 | 23 AUG 2021    |
+| xref | name             | sex | date_of_birth | place_of_birth | date_of_death | place_of_death    | mother        | father           | num_siblings | num_children | last_modified |
+|:-----|:-----------------|:----|:--------------|:---------------|:--------------|:------------------|:--------------|:-----------------|:-------------|-------------:|:--------------|
+| @I1@ | Anakin Skywalker | M   |               |                |               | Second Death Star |               |                  |              |            2 | 1 MAY 2022    |
+| @I2@ | Padme Amidala    | F   |               |                |               |                   |               |                  |              |            2 | 1 MAY 2022    |
+| @I3@ | Leia Skywalker   | F   |               |                |               |                   | Padme Amidala | Anakin Skywalker | 1            |            0 | 1 MAY 2022    |
+| @I4@ | Luke Skywalker   | M   |               |                |               |                   | Padme Amidala | Anakin Skywalker | 1            |            0 | 1 MAY 2022    |
+| @I5@ | Obi-Wan Kenobi   | M   |               |                |               |                   |               |                  |              |            0 | 1 MAY 2022    |
 
 ``` r
-df_famg(tg) %>% knitr::kable()
+df_famg(tg) |> knitr::kable()
 ```
 
-| xref | husband          | wife          | relationship\_type | relationship\_date | relationship\_place | num\_children | last\_modified |
-|:-----|:-----------------|:--------------|:-------------------|:-------------------|:--------------------|:--------------|:---------------|
-| @F1@ | Anakin Skywalker | Padme Amidala |                    |                    |                     | 2             | 23 AUG 2021    |
+| xref | husband          | wife          | relationship_type | relationship_date | relationship_place | num_children | last_modified |
+|:-----|:-----------------|:--------------|:------------------|:------------------|:-------------------|:-------------|:--------------|
+| @F1@ | Anakin Skywalker | Padme Amidala |                   |                   |                    | 2            | 1 MAY 2022    |
 
 This package allows limited editing of `tidyged` objects
 (adding/removing records, as well as the addition of some record

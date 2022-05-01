@@ -5,13 +5,13 @@
 test_that("Function add_indi() @ L30", {
   expect_snapshot_value(add_indi(gedcom(subm("Me")),
                                        sex = "M", user_reference_number = c(something = 1234),
-                                       indi_notes = c("Note1", "Note 2")) %>% 
+                                       indi_notes = c("Note1", "Note 2")) |> 
                          remove_dates_for_tests(), "json2")
 })
 
 
 test_that("Function remove_indi() @ L80", {
   expect_equal(gedcom(subm()),
-               gedcom(subm()) %>% add_indi() %>% remove_indi())
+               gedcom(subm()) |> add_indi() |> remove_indi())
 })
 

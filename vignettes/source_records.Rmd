@@ -25,7 +25,7 @@ A Source record can be created with the `add_sour()` function.
 ```{r}
 library(tidyged)
 
-birth_source <- gedcom() %>% 
+birth_source <- gedcom() |> 
   add_sour(events_recorded = "BIRT, MARR, DEAT",
            date_period_covered = date_period(date_calendar(1900), date_calendar(2000)),
            jurisdiction = "England and Wales",
@@ -38,11 +38,16 @@ birth_source <- gedcom() %>%
 ## Linking back to repositories
 
 ```{r}
-birth_source %>% 
+birth_repo <- birth_source |> 
   add_repo("General Register Office",
-           repo_address = address(city = "Southport", state = "Merseyside")) %>%
-  activate_sour(find_sour_titl(., "Birth Certificate for Joe Bloggs")) %>% 
-  add_sour_repo_citation(repository = find_repo_name(., "General Register Office"))
+           repo_address = address(city = "Southport", state = "Merseyside"))
+
+sour_xref <- find_sour_titl(birth_repo, "Birth Certificate for Joe Bloggs")
+repo_xref <- find_repo_name(birth_repo, "General Register Office")
+
+birth_repo |>
+  activate_sour(sour_xref) |> 
+  add_sour_repo_citation(repo_xref)
 ```
 
 ## Citing source records

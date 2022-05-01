@@ -14,7 +14,7 @@
 #' @tests
 #' expect_snapshot_value(
 #'                gedcom(subm("Me"), gedcom_description = "descrip", language = "English",
-#'                       gedcom_copyright = "copyright statement") %>% 
+#'                       gedcom_copyright = "copyright statement") |> 
 #'                 summary(), "json2")
 summary.tidyged <- function(object, ...) {
   eol <- "\n"
@@ -34,7 +34,7 @@ summary.tidyged <- function(object, ...) {
         stringr::str_pad("Source system version:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "VERS", 2, "SOUR"), eol,
         stringr::str_pad("Product name:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "NAME", 2), eol,
         stringr::str_pad("Product source:", title_width, "right"), tidyged.internals::gedcom_value(object, "HD", "CORP", 2), eol
-  ) %>% cat()
+  ) |> cat()
 }
 
 
@@ -50,18 +50,18 @@ summary.tidyged <- function(object, ...) {
 #' @examples str(sample555)
 #' @tests
 #' expect_snapshot_value(
-#'  gedcom(subm("Me")) %>% 
-#'   add_indi() %>% 
-#'   add_indi() %>% 
-#'   add_indi() %>% 
-#'   add_famg() %>% 
-#'   add_famg() %>% 
-#'   add_media("ref1", "AAC") %>% 
-#'   add_media("ref1", "AAC") %>% 
-#'   add_sour() %>% 
-#'   add_repo("repo") %>% 
-#'   add_note("note1") %>% 
-#'   add_note("note2") %>% 
+#'  gedcom(subm("Me")) |> 
+#'   add_indi() |> 
+#'   add_indi() |> 
+#'   add_indi() |> 
+#'   add_famg() |> 
+#'   add_famg() |> 
+#'   add_media("ref1", "AAC") |> 
+#'   add_media("ref1", "AAC") |> 
+#'   add_sour() |> 
+#'   add_repo("repo") |> 
+#'   add_note("note1") |> 
+#'   add_note("note2") |> 
 #'   str(), "json2")
 str.tidyged <- function(object, ...) {
   eol <- "\n"
@@ -76,7 +76,7 @@ str.tidyged <- function(object, ...) {
          stringr::str_pad("Notes:", title_width, "right"), num_note(object), eol,
          stringr::str_pad("Sources:", title_width, "right"), num_sour(object), eol,
          stringr::str_pad("Repositories:", title_width, "right"), num_repo(object), eol 
-  ) %>% cat()
+  ) |> cat()
 }
 
 #' Summarise records in a tidyged object
@@ -89,25 +89,25 @@ str.tidyged <- function(object, ...) {
 #' @examples df_indi(sample555)
 #' @export
 #' @tests
-#' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_indi(sex = "M") %>% 
-#'  add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
+#' expect_snapshot_value(gedcom(subm("Me")) |> 
+#'  add_indi(sex = "M") |> 
+#'  add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) |> 
 #'  add_indi_fact("bir", date = date_calendar(year = 1950, month = 5, day = 7),
-#'                             fact_place = place("Somewhere")) %>% 
+#'                             fact_place = place("Somewhere")) |> 
 #'  add_indi_fact("dea", date = date_calendar(year = 2000, month = 12, day = 1),
-#'                             fact_place = place("Somewhere else")) %>% 
-#'  add_indi(sex = "F") %>% 
-#'  add_indi_names(name_pieces(given = "Jess", surname = "Bloggs")) %>% 
+#'                             fact_place = place("Somewhere else")) |> 
+#'  add_indi(sex = "F") |> 
+#'  add_indi_names(name_pieces(given = "Jess", surname = "Bloggs")) |> 
 #'  add_indi_fact("bir", date = date_calendar(year = 1948, month = 1, day = 15),
-#'                             fact_place = place("Somewhere")) %>% 
-#'  add_indi(sex = "F") %>% 
-#'  add_indi_names(name_pieces(given = "Jessie", surname = "Bloggs")) %>% 
+#'                             fact_place = place("Somewhere")) |> 
+#'  add_indi(sex = "F") |> 
+#'  add_indi_names(name_pieces(given = "Jessie", surname = "Bloggs")) |> 
 #'  add_indi_fact("bir", date = date_approximated(date_calendar(year = 1970), about = TRUE),
-#'                             fact_place = place("Elsewhere")) %>%
-#'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
+#'                             fact_place = place("Elsewhere")) |>
+#'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") |> 
 #'  add_famg_event("rel", date = date_calendar(year = 1969, month = 1, day = 30),
-#'                        event_place = place(name = "Another place")) %>% 
-#'  remove_dates_for_tests() %>% 
+#'                        event_place = place(name = "Another place")) |> 
+#'  remove_dates_for_tests() |> 
 #'  df_indi(), "json2")
 df_indi <- function(gedcom) {
   
@@ -138,16 +138,16 @@ df_indi <- function(gedcom) {
                  mother = stringr::str_remove_all(ind_moth, "/"),
                  father_xref = fath_xref,
                  father = stringr::str_remove_all(ind_fath, "/"),
-                 num_siblings = ind_sibl) %>% 
-    dplyr::add_count(mother_xref, father_xref, name = "full") %>%
+                 num_siblings = ind_sibl) |> 
+    dplyr::add_count(mother_xref, father_xref, name = "full") |>
     dplyr::mutate(num_siblings = dplyr::if_else(num_siblings == "", 
                                                 as.character(full - 1),
                                                 as.character(as.integer(num_siblings) - 1)),
                   num_siblings = dplyr::if_else(mother_xref == "" | father_xref == "",
-                                                "", num_siblings)) %>% 
+                                                "", num_siblings)) |> 
     dplyr::mutate(num_children = stringr::str_count(paste(moth_xref,collapse = "|"), xref) +
                     stringr::str_count(paste(fath_xref,collapse = "|"), xref),
-                  last_modified = date_chan) %>% 
+                  last_modified = date_chan) |> 
     dplyr::select(-full, -mother_xref, -father_xref)
 }
 
@@ -156,17 +156,17 @@ df_indi <- function(gedcom) {
 #' @examples df_famg(sample555)
 #' @export
 #' @tests
-#' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_indi(sex = "M") %>% 
-#'  add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) %>% 
-#'  add_indi(sex = "F") %>% 
-#'  add_indi_names(name_pieces(given = "Jess", surname = "Bloggs")) %>% 
-#'  add_indi(sex = "F") %>% 
-#'  add_indi_names(name_pieces(given = "Jessie", surname = "Bloggs")) %>%
-#'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
+#' expect_snapshot_value(gedcom(subm("Me")) |> 
+#'  add_indi(sex = "M") |> 
+#'  add_indi_names(name_pieces(given = "Joe", surname = "Bloggs")) |> 
+#'  add_indi(sex = "F") |> 
+#'  add_indi_names(name_pieces(given = "Jess", surname = "Bloggs")) |> 
+#'  add_indi(sex = "F") |> 
+#'  add_indi_names(name_pieces(given = "Jessie", surname = "Bloggs")) |>
+#'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") |> 
 #'  add_famg_event("rel", date = date_calendar(year = 1969, month = 1, day = 30),
-#'                        event_place = place(name = "Another place")) %>% 
-#'  remove_dates_for_tests() %>% 
+#'                        event_place = place(name = "Another place")) |> 
+#'  remove_dates_for_tests() |> 
 #'  df_famg(), "json2")
 df_famg <- function(gedcom) {
   
@@ -187,7 +187,7 @@ df_famg <- function(gedcom) {
                  relationship_type = rels,
                  relationship_date = marr_dates,
                  relationship_place = marr_places,
-                 num_children = num_chil) %>% 
+                 num_children = num_chil) |> 
     dplyr::mutate(num_children = dplyr::if_else(num_children == "",
                                                 purrr::map_chr(xref, 
                                                                ~sum(dplyr::filter(gedcom, record == .x)$tag == "CHIL")),
@@ -199,11 +199,11 @@ df_famg <- function(gedcom) {
 #' @rdname df_indi
 #' @export
 #' @tests
-#' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_media(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") %>% 
-#'  add_media(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") %>% 
-#'  add_media(file_reference = "ref3", format = "PNG", source_media = "photo", title = "photo2") %>% 
-#'  remove_dates_for_tests() %>% 
+#' expect_snapshot_value(gedcom(subm("Me")) |> 
+#'  add_media(file_reference = "ref1", format = "WAV", source_media = "audio", title = "sounds") |> 
+#'  add_media(file_reference = "ref2", format = "JPEG", source_media = "photo", title = "photo1") |> 
+#'  add_media(file_reference = "ref3", format = "PNG", source_media = "photo", title = "photo2") |> 
+#'  remove_dates_for_tests() |> 
 #'  df_media(), "json2")
 df_media <- function(gedcom) {
   
@@ -227,11 +227,11 @@ df_media <- function(gedcom) {
 #' @export
 #' @examples df_sour(sample555)
 #' @tests
-#' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_sour(originator = "author1", title = "book1") %>% 
-#'  add_sour(originator = "author2", title = "book2") %>% 
-#'  add_sour(originator = "author3", title = "book3") %>% 
-#'  remove_dates_for_tests() %>% 
+#' expect_snapshot_value(gedcom(subm("Me")) |> 
+#'  add_sour(originator = "author1", title = "book1") |> 
+#'  add_sour(originator = "author2", title = "book2") |> 
+#'  add_sour(originator = "author3", title = "book3") |> 
+#'  remove_dates_for_tests() |> 
 #'  df_sour(), "json2")
 df_sour <- function(gedcom) {
   
@@ -251,11 +251,11 @@ df_sour <- function(gedcom) {
 #' @export
 #' @examples df_repo(sample555)
 #' @tests
-#' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_repo(name = "repo1", repo_address = address(city = "Brighton", state = "E. Sussex", country = "UK")) %>% 
-#'  add_repo(name = "repo2", repo_address = address(city = "Orlando", state = "Florida", country = "USA")) %>% 
-#'  add_repo(name = "repo3", repo_address = address(city = "Yokohama", country = "Japan")) %>% 
-#'  remove_dates_for_tests() %>% 
+#' expect_snapshot_value(gedcom(subm("Me")) |> 
+#'  add_repo(name = "repo1", repo_address = address(city = "Brighton", state = "E. Sussex", country = "UK")) |> 
+#'  add_repo(name = "repo2", repo_address = address(city = "Orlando", state = "Florida", country = "USA")) |> 
+#'  add_repo(name = "repo3", repo_address = address(city = "Yokohama", country = "Japan")) |> 
+#'  remove_dates_for_tests() |> 
 #'  df_repo(), "json2")
 df_repo <- function(gedcom) {
   
@@ -278,11 +278,11 @@ df_repo <- function(gedcom) {
 #' @rdname df_indi
 #' @export
 #' @tests
-#' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_note(text = "This is a note", user_reference_numbers = 1234) %>% 
-#'  add_note(text = "This is also a note", user_reference_numbers = 5678) %>% 
-#'  add_note(text = "This may be a note too", user_reference_numbers = 987643) %>% 
-#'  remove_dates_for_tests() %>% 
+#' expect_snapshot_value(gedcom(subm("Me")) |> 
+#'  add_note(text = "This is a note", user_reference_numbers = 1234) |> 
+#'  add_note(text = "This is also a note", user_reference_numbers = 5678) |> 
+#'  add_note(text = "This may be a note too", user_reference_numbers = 987643) |> 
+#'  remove_dates_for_tests() |> 
 #'  df_note(), "json2")
 df_note <- function(gedcom) {
   
@@ -310,8 +310,8 @@ fact_summary <- function(gedcom, xref, indi) {
   
   # Remove source citation structures and notes and add namespace
   gedcom_ns <- tidyged.internals::remove_section(gedcom, containing_level = 2, containing_tags = "SOUR",
-                                                 xrefs = xref) %>% 
-    dplyr::filter(tag != "NOTE") %>% 
+                                                 xrefs = xref) |> 
+    dplyr::filter(tag != "NOTE") |> 
     mutate_tag_namespace()
   
   if(indi) {
@@ -338,27 +338,27 @@ fact_summary <- function(gedcom, xref, indi) {
   
   # loop through each fact block
   purrr::map_dfr(fact_rows, 
-                 ~ gedcom_ns %>% 
-                   dplyr::select(tag_ns, value) %>% 
-                   dplyr::slice(.x) %>% 
+                 ~ gedcom_ns |> 
+                   dplyr::select(tag_ns, value) |> 
+                   dplyr::slice(.x) |> 
                    # get rid of FAM- or INDI-
-                   dplyr::mutate(tag_ns = stringr::str_sub(tag_ns, dplyr::if_else(indi, 6,5), -1)) %>% 
+                   dplyr::mutate(tag_ns = stringr::str_sub(tag_ns, dplyr::if_else(indi, 6,5), -1)) |> 
                    # extract fact type into own column
-                   dplyr::mutate(fact_type = stringr::str_extract(tag_ns, "^[A-Z]+")) %>% 
+                   dplyr::mutate(fact_type = stringr::str_extract(tag_ns, "^[A-Z]+")) |> 
                    # replace fact tags with names
-                   dplyr::mutate(fact_type = magrittr::extract(names(fact_tags), match(fact_type, fact_tags))) %>% 
+                   dplyr::mutate(fact_type = `[`(names(fact_tags), match(fact_type, fact_tags))) |> 
                    # only keep required tags
-                   dplyr::filter(stringr::str_detect(tag_ns, paste(paste0(all_tags, "$"),collapse="|"))) %>%
+                   dplyr::filter(stringr::str_detect(tag_ns, paste(paste0(all_tags, "$"),collapse="|"))) |>
                    # remove namespace before all tags
                    dplyr::mutate(tag_ns = stringr::str_extract(tag_ns, 
-                                                               paste(paste0(all_tags, "$"),collapse="|"))) %>%
+                                                               paste(paste0(all_tags, "$"),collapse="|"))) |>
                    # coalesce fact tags into one
-                   dplyr::mutate(tag_ns = dplyr::if_else(tag_ns %in% fact_tags, "description", tag_ns)) %>% 
-                   tidyr::pivot_wider(names_from = tag_ns, values_from = value)) %>% 
-    dplyr::mutate(dplyr::across(everything(), ~ dplyr::if_else(. == "", NA_character_, .))) %>% 
+                   dplyr::mutate(tag_ns = dplyr::if_else(tag_ns %in% fact_tags, "description", tag_ns)) |> 
+                   tidyr::pivot_wider(names_from = tag_ns, values_from = value)) |> 
+    dplyr::mutate(dplyr::across(everything(), ~ dplyr::if_else(. == "", NA_character_, .))) |> 
     # add missing columns
     dplyr::bind_rows(purrr::map_dfr(c(details_tags, "fact_type", "description"), 
-                                    ~tibble::tibble(!!.x := character() ) )) %>% 
+                                    ~tibble::tibble(!!.x := character() ) )) |> 
     # reorder columns
     dplyr::select(fact_type, description, dplyr::all_of(details_tags))
   

@@ -4,8 +4,8 @@
 
 test_that("Function remove_media() @ L69", {
   expect_equal(gedcom(subm()),
-               gedcom(subm()) %>% 
-               add_media("test", "BMP") %>% 
+               gedcom(subm()) |> 
+               add_media("test", "BMP") |> 
                remove_media())
 })
 

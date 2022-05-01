@@ -4,6 +4,6 @@
 
 test_that("Function remove_repo() @ L48", {
   expect_equal(gedcom(subm()),
-               gedcom(subm()) %>% add_repo("text") %>% remove_repo())
+               gedcom(subm()) |> add_repo("text") |> remove_repo())
 })
 

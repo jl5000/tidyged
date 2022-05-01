@@ -60,9 +60,9 @@ Note that only the Gregorian calendar is currently supported.
 Approximate dates (i.e. those expressing uncertainty) use the qualifiers 'about', 'calculated', or 'estimated' in conjunction with a `date_calendar()` object:
 
 ```{r}
-date_calendar(year = 1999, month = 4, day = 5) %>% date_approximated(about = TRUE)
-date_calendar(year = 1999, month = 4, day = 5) %>% date_approximated(calc = TRUE)
-date_calendar(year = 1999, month = 4, day = 5) %>% date_approximated(est = TRUE)
+date_calendar(year = 1999, month = 4, day = 5) |> date_approximated(about = TRUE)
+date_calendar(year = 1999, month = 4, day = 5) |> date_approximated(calc = TRUE)
+date_calendar(year = 1999, month = 4, day = 5) |> date_approximated(est = TRUE)
 ```
 
 

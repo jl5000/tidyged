@@ -55,22 +55,22 @@
 #' this fact.
 #' @export
 #' @tests
-#' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'                        add_indi(sex = "M") %>% 
+#' expect_snapshot_value(gedcom(subm("Me")) |> 
+#'                        add_indi(sex = "M") |> 
 #'                        add_indi_fact(type = "chr",
 #'                                       date = date_calendar(year = 1956),
 #'                                       age = "1y",
 #'                                       fact_address = address(c("line1","line2","line3","line4")),
 #'                                       fact_place = place("There",
-#'                                                     notes = "Place note")) %>% 
+#'                                                     notes = "Place note")) |> 
 #'                        remove_dates_for_tests(), "json2")
-#' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'                        add_indi(sex = "M") %>% 
+#' expect_snapshot_value(gedcom(subm("Me")) |> 
+#'                        add_indi(sex = "M") |> 
 #'                        add_indi_fact(type = "occ",
 #'                                      descriptor = "Jedi",
 #'                                      fact_address = address(c("line1","line2","line3","line4")),
 #'                                      fact_place = place("There",
-#'                                                    notes = "Place note")) %>% 
+#'                                                    notes = "Place note")) |> 
 #'                        remove_dates_for_tests(), "json2")
 add_indi_fact <- function(gedcom,
                           type,
@@ -163,7 +163,7 @@ add_indi_fact <- function(gedcom,
     
     fact_str <- tidyged.internals::INDIVIDUAL_ATTRIBUTE_STRUCTURE(attribute_type = type,
                                                                   attribute_descriptor = descriptor,
-                                                                  individual_event_details = details2) %>% 
+                                                                  individual_event_details = details2) |> 
       tidyged.internals::add_levels(1)
     
   } else {
@@ -172,7 +172,7 @@ add_indi_fact <- function(gedcom,
                                                               event_descriptor = descriptor,
                                                               individual_event_details = details2,
                                                               xref_fam = adoptive_family_xref,
-                                                              adopted_by_which_parent = adopting_parent) %>% 
+                                                              adopted_by_which_parent = adopting_parent) |> 
       tidyged.internals::add_levels(1)
     
   }

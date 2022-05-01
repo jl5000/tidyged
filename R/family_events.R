@@ -47,14 +47,14 @@
 #' this event.
 #' @export
 #' @tests
-#' expect_snapshot_value(gedcom(subm("Me")) %>% 
-#'  add_indi(qn = "Joe Bloggs", sex = "M") %>% 
-#'  add_indi(qn = "Jess Bloggs", sex = "F") %>% 
-#'  add_indi(qn = "Jessie Bloggs", sex = "F") %>% 
-#'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") %>% 
+#' expect_snapshot_value(gedcom(subm("Me")) |> 
+#'  add_indi(qn = "Joe Bloggs", sex = "M") |> 
+#'  add_indi(qn = "Jess Bloggs", sex = "F") |> 
+#'  add_indi(qn = "Jessie Bloggs", sex = "F") |> 
+#'  add_famg(husband = "@I1@", wife = "@I2@", children = "@I3@") |> 
 #'  add_famg_event(type = "rel", 
 #'                 date = date_calendar(year = 1969, month = 1, day = 30),
-#'                 event_place = place(name = "Another place")) %>% 
+#'                 event_place = place(name = "Another place")) |> 
 #'  remove_dates_for_tests(), "json2")
 add_famg_event <- function(gedcom,
                            type,
@@ -120,7 +120,7 @@ add_famg_event <- function(gedcom,
   
   event_str <- tidyged.internals::FAMILY_EVENT_STRUCTURE(event_type_family = type,
                                                          event_descriptor = descriptor,
-                                                         family_event_details = details2) %>% 
+                                                         family_event_details = details2) |> 
     tidyged.internals::add_levels(1)
   
   next_row <- tidyged.internals::find_insertion_point(gedcom, xref, 0, "FAM")

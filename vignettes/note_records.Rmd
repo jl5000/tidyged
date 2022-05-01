@@ -19,8 +19,8 @@ Note records allow you to make notes in your file and reference them in multiple
 ```{r}
 library(tidyged)
 
-gedcom() %>% 
-  add_note("This is a random note used for demonstration purposes\nThis is a new line.") %>% 
+gedcom() |> 
+  add_note("This is a random note used for demonstration purposes\nThis is a new line.") |> 
   dplyr::filter(record == "@N1@")
 ```
 

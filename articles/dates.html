@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.2.9000</span>
       </span>
     </div>
 
@@ -130,11 +130,11 @@
 </h2>
 <p>Approximate dates (i.e. those expressing uncertainty) use the qualifiers ‘about’, ‘calculated’, or ‘estimated’ in conjunction with a <code><a href="../reference/date_calendar.html">date_calendar()</a></code> object:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>about <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> |&gt; <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>about <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [1] "ABT 5 APR 1999"</span>
-<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>calc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> |&gt; <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>calc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [1] "CAL 5 APR 1999"</span>
-<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>est <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">1999</span>, month <span class="op">=</span> <span class="fl">4</span>, day <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> |&gt; <span class="fu"><a href="../reference/date_approximated.html">date_approximated</a></span><span class="op">(</span>est <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [1] "EST 5 APR 1999"</span></code></pre></div>
 </div>
 <div class="section level2">
@@ -187,7 +187,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

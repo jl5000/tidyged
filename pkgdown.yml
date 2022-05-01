@@ -1,5 +1,5 @@
 pandoc: 2.7.3
-pkgdown: 2.0.1
+pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   cross_references: cross_references.html
@@ -16,5 +16,5 @@ articles:
   source_records: source_records.html
   summarising: summarising.html
   tidyged_creation: tidyged_creation.html
-last_built: 2022-01-04T20:05Z
+last_built: 2022-05-01T18:55Z
 

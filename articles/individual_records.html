@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.2.9000</span>
       </span>
     </div>
 
@@ -98,9 +98,9 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jl5000.github.io/tidyged/" class="external-link">tidyged</a></span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Leia Skywalker"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Leia Skywalker"</span><span class="op">)</span> |&gt; 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> |&gt; 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -150,7 +150,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 </tbody>
 </table>
@@ -159,8 +159,8 @@
 </h3>
 <p>The main function for providing names for an individual is <code><a href="../reference/add_indi_names.html">add_indi_names()</a></code>. The main argument is a <code><a href="../reference/name_pieces.html">name_pieces()</a></code> object giving the components of the name. If you’re going to add a name, at least provide a given name or surname:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">leia</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">leia</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">leia</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> <span class="op">)</span></code></pre></div>
@@ -226,16 +226,16 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 </tbody>
 </table>
 <p>In the GEDCOM specification, all names should be provided by a set of name pieces, specifying the given name, surname, nickname, etc. The function will then automatically construct a formatted full name from this information (surrounding surnames with forward slashes - as given in the specification). Nicknames are not included.</p>
 <p>An individual’s name (and name pieces) can be removed using the <code><a href="../reference/remove_indi_name.html">remove_indi_name()</a></code> function. Even though the <code><a href="../reference/add_indi_names.html">add_indi_names()</a></code> function surrounds the surname with forward slashes, these are not required to specify the name to remove:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">leia</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/remove_indi_name.html">remove_indi_name</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">leia</span> |&gt; 
+  <span class="fu"><a href="../reference/remove_indi_name.html">remove_indi_name</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span><span class="op">)</span> |&gt; 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> |&gt; 
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -271,7 +271,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 </tbody>
 </table>
@@ -282,7 +282,7 @@
 </h3>
 <p>Once we have defined a name for an individual, we can also define phonetic and romanised versions of the name. For this, we use the <code><a href="../reference/add_indi_names_var.html">add_indi_names_var()</a></code> function. As a minimum, the original name, variant name pieces, derivation method, and whether it is a phonetic or romanised variation should be given. The original name must be given exactly as it is represented in the file without forward slashes (“Leia Skywalker”):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">leia_var</span> <span class="op">&lt;-</span> <span class="va">leia</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">leia_var</span> <span class="op">&lt;-</span> <span class="va">leia</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_names_var.html">add_indi_names_var</a></span><span class="op">(</span><span class="st">"Leia Skywalker"</span>, method <span class="op">=</span> <span class="st">"As spoken"</span>,
                      <span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Laya"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, phonetic_variation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
 
@@ -377,7 +377,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 </tbody>
 </table>
@@ -388,7 +388,7 @@
 </h3>
 <p>The <code>type</code> parameter can also define different names for the individual. Below we add a line to define an adoptive name (the parameter can take any value):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">leia_adop</span> <span class="op">&lt;-</span> <span class="va">leia_var</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">leia_adop</span> <span class="op">&lt;-</span> <span class="va">leia_var</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Organa"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"adoptive"</span><span class="op">)</span> 
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">leia_adop</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -510,7 +510,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 </tbody>
 </table>
@@ -520,7 +520,7 @@
 </h3>
 <p>GEDCOM files can also record different names <em>of the same type</em>, perhaps due to conflicting evidence. Below we define a name of Leia Skywaker (with no l) indicating some kind of transcription error:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">leia_conf</span> <span class="op">&lt;-</span> <span class="va">leia_adop</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">leia_conf</span> <span class="op">&lt;-</span> <span class="va">leia_adop</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywaker"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">leia_conf</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -670,7 +670,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 </tbody>
 </table>
@@ -825,7 +825,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 </tbody>
 </table>
@@ -838,8 +838,8 @@
 <p>Attributes and events associated with an individual, such as birth and death, are created using the <code><a href="../reference/add_indi_fact.html">add_indi_fact()</a></code> function. The full list of facts that can be created are given in the Details section of the function help page.</p>
 <p>This function allows you to define a fact, together with associated date, cause, place/address, and the age of the individual when the fact applied (among other aspects). In the example below, we add a residence for an individual. The first argument is given as “residence” for readability even though only the first 3 letters are used:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_fact.html">add_indi_fact</a></span><span class="op">(</span><span class="st">"residence"</span>, date <span class="op">=</span> <span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span>,
                                                 end_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">2004</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span>,
                 fact_address <span class="op">=</span> <span class="fu"><a href="../reference/address.html">address</a></span><span class="op">(</span>local_address_lines <span class="op">=</span> <span class="st">"23 Penny Lane"</span>,
@@ -939,19 +939,19 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 </tbody>
 </table>
 <p>If the full address is not known, a more general <code>place</code> argument can be used which uses a <code><a href="../reference/place.html">place()</a></code> object.</p>
 <p>The example below defines a death event (in 2006) and a religion attribute (from 1978):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dea_rel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">dea_rel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_fact.html">add_indi_fact</a></span><span class="op">(</span><span class="st">"death"</span>, date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">2006</span>, <span class="fl">2</span>, <span class="fl">17</span><span class="op">)</span>,
                 fact_place <span class="op">=</span> <span class="fu"><a href="../reference/place.html">place</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"London, England"</span><span class="op">)</span>,
                 cause <span class="op">=</span> <span class="st">"Pneumonia"</span>,
-                age <span class="op">=</span> <span class="st">"68y"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+                age <span class="op">=</span> <span class="st">"68y"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_fact.html">add_indi_fact</a></span><span class="op">(</span><span class="st">"religion"</span>, descriptor <span class="op">=</span> <span class="st">"Christian"</span>, classification <span class="op">=</span> <span class="st">"Catholic"</span>,
                 date <span class="op">=</span> <span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1978</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
@@ -1046,13 +1046,13 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 </tbody>
 </table>
 <p>You can see a summary of all facts associated with an individual with the <code><a href="../reference/df_indi_facts.html">df_indi_facts()</a></code> function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/df_indi_facts.html">df_indi_facts</a></span><span class="op">(</span><span class="va">dea_rel</span>, <span class="st">"@I1@"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/df_indi_facts.html">df_indi_facts</a></span><span class="op">(</span><span class="va">dea_rel</span>, <span class="st">"@I1@"</span><span class="op">)</span> |&gt; <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="8%">
@@ -1136,15 +1136,23 @@
 <p>Typically when constructing a file, you would create all of the individuals in a family first, and then reference them when creating a Family Group record - this takes care of all of the appropriate record links for you. However, sometimes you want to retrospectively add an individual to a Family Group record that already exists. In this case you use the <code><a href="../reference/add_indi_links_to_families.html">add_indi_links_to_families()</a></code> function.</p>
 <p>In the example below, we create Joe Bloggs and add him as a husband to a family. We then create Jess Bloggs and retrospectively add her as a wife to Joe.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">retro</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"M"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Joe"</span>, surname <span class="op">=</span> <span class="st">"Bloggs"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Joe"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"F"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Jess"</span>, surname <span class="op">=</span> <span class="st">"Bloggs"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/add_indi_links_to_families.html">add_indi_links_to_families</a></span><span class="op">(</span>spouse <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"Joe"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">ged_with_joe</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"M"</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Joe"</span>, surname <span class="op">=</span> <span class="st">"Bloggs"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">retro</span>, <span class="va">record</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"@F1@"</span>, <span class="st">"@I2@"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">joe_xref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">ged_with_joe</span>, <span class="st">"Joe"</span><span class="op">)</span>
+
+<span class="va">ged_with_husb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="va">ged_with_joe</span>, husband <span class="op">=</span> <span class="va">joe_xref</span><span class="op">)</span>
+
+<span class="va">ged_with_jess</span> <span class="op">&lt;-</span> <span class="va">ged_with_husb</span> |&gt;
+  <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"F"</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Jess"</span>, surname <span class="op">=</span> <span class="st">"Bloggs"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">jess_xref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">ged_with_jess</span>, <span class="st">"Jess"</span><span class="op">)</span>
+  
+<span class="va">both</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_indi_links_to_families.html">add_indi_links_to_families</a></span><span class="op">(</span><span class="va">ged_with_jess</span>, spouse <span class="op">=</span> <span class="va">joe_xref</span><span class="op">)</span>
+
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">both</span>, <span class="va">record</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"@F1@"</span>, <span class="st">"@I2@"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">level</th>
@@ -1188,7 +1196,7 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
@@ -1245,7 +1253,7 @@
 <td align="left">
 <span class="citation">@I2</span>@</td>
 <td align="left">DATE</td>
-<td align="left">4 JAN 2022</td>
+<td align="left">1 MAY 2022</td>
 </tr>
 </tbody>
 </table>
@@ -1274,7 +1282,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

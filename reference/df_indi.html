@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.2.9000</span>
       </span>
     </div>
 
@@ -80,19 +80,19 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">df_indi</span><span class="op">(</span><span class="va">sample555</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 12</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   xref  name   sex   date_of_birth place_of_birth  date_of_death place_of_death </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> @I1@  Rober… M     2 OCT 1822    Weston, Madiso… <span style="color: #949494;">"</span>14 APR 1905<span style="color: #949494;">"</span> <span style="color: #949494;">"</span>Stamford, Fai…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> @I2@  Mary … F     BEF 1828      Connecticut, U… <span style="color: #949494;">""</span>            <span style="color: #949494;">""</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> @I3@  Joe W… M     11 JUN 1861   Idaho Falls, B… <span style="color: #949494;">""</span>            <span style="color: #949494;">""</span>             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   xref  name     sex   date_of_birth place_of_birth date_of_death place_of_death</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> @I1@  Robert … M     2 OCT 1822    Weston, Madis… <span style="color: #949494;">"</span>14 APR 1905<span style="color: #949494;">"</span> <span style="color: #949494;">"</span>Stamford, Fa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> @I2@  Mary An… F     BEF 1828      Connecticut, … <span style="color: #949494;">""</span>            <span style="color: #949494;">""</span>            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> @I3@  Joe Wil… M     11 JUN 1861   Idaho Falls, … <span style="color: #949494;">""</span>            <span style="color: #949494;">""</span>            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5 more variables: mother &lt;chr&gt;, father &lt;chr&gt;, num_siblings &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   num_children &lt;int&gt;, last_modified &lt;chr&gt;</span></span>
 <span class="r-in"><span class="fu">df_famg</span><span class="op">(</span><span class="va">sample555</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   xref  husband   wife    relationship_ty… relationship_da… relationship_place  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> @F1@  Robert E… <span style="color: #949494;">"</span>Mary … <span style="color: #949494;">""</span>               <span style="color: #949494;">"</span>DEC 1859<span style="color: #949494;">"</span>       <span style="color: #949494;">"</span>Rapid City, Pennin…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> @F2@  Robert E… <span style="color: #949494;">""</span>      <span style="color: #949494;">""</span>               <span style="color: #949494;">""</span>               <span style="color: #949494;">""</span>                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   xref  husband         wife  relationship_ty… relationship_da… relationship_pl…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> @F1@  Robert Eugene … <span style="color: #949494;">"</span>Mar… <span style="color: #949494;">""</span>               <span style="color: #949494;">"</span>DEC 1859<span style="color: #949494;">"</span>       <span style="color: #949494;">"</span>Rapid City, Pe…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> @F2@  Robert Eugene … <span style="color: #949494;">""</span>    <span style="color: #949494;">""</span>               <span style="color: #949494;">""</span>               <span style="color: #949494;">""</span>              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 2 more variables: num_children &lt;chr&gt;, last_modified &lt;chr&gt;</span></span>
 <span class="r-in"><span class="fu">df_sour</span><span class="op">(</span><span class="va">sample555</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
@@ -118,7 +118,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

@@ -70,9 +70,9 @@ describe_famg <- function(gedcom, xref, short_desc = FALSE) {
   # Family @F1@, headed by x and y, [and (no) children x, y, z]
   xref <- get_valid_xref(gedcom, xref, .pkgenv$record_string_famg, is_famg)
   
-  husb <- dplyr::filter(gedcom, record == xref, level == 1, tag == "HUSB")$value
-  wife <- dplyr::filter(gedcom, record == xref, level == 1, tag == "WIFE")$value
-  chil <- dplyr::filter(gedcom, record == xref, level == 1, tag == "CHIL")$value
+  husb <- gedcom$value[gedcom$record == xref & gedcom$level == 1 & gedcom$tag == "HUSB"]
+  wife <- gedcom$value[gedcom$record == xref & gedcom$level == 1 & gedcom$tag == "WIFE"]
+  chil <- gedcom$value[gedcom$record == xref & gedcom$level == 1 & gedcom$tag == "CHIL"]
   
   fam_str <- paste0("Family ", xref, ", headed by ")
   if(length(husb) + length(wife) == 2) {

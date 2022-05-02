@@ -43,7 +43,7 @@ num_sour <- function(gedcom) { unique_record_count(gedcom, .pkgenv$record_tag_so
 
 
 is_record_type <- function(gedcom, xref, tag) {
-  record_type <- gedcom[gedcom$record == xref,]$tag[1]
+  record_type <- gedcom$tag[gedcom$record == xref][1]
   if(is.na(record_type)) stop("There is no record with xref ", xref)
   record_type == tag
 }

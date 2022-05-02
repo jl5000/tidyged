@@ -17,8 +17,9 @@ is_famg_birth_child <- function(gedcom,
   
   xref <- get_valid_xref(gedcom, indi_xref, .pkgenv$record_string_indi, is_indi)
   
-  is_child <- nrow(dplyr::filter(gedcom, record == famg_xref, level == 1,
-                            tag == "CHIL", value == xref)) >= 1
+  chil_rows <- gedcom[gedcom$record == famg_xref & gedcom$level == 1 &
+                      gedcom$tag == "CHIL" & gedcom$value == xref,]
+  is_child <- nrow(chil_rows) >= 1
   
   if(!is_child) return(FALSE)
   

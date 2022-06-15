@@ -81,6 +81,8 @@ add_famg <- function(gedcom,
   
   }
   
+  message("Added Family Group: ", xref)
+  
   temp |> 
     order_famg_children(xref) |> 
     set_active_record(xref)

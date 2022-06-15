@@ -48,6 +48,8 @@ add_media <- function(gedcom,
                                                        user_reference_number = user_reference_numbers,
                                                        notes = mmedia_notes)
   
+  message("Added Multimedia: ", xref)
+  
   gedcom |> 
     tibble::add_row(media_record, .before = nrow(gedcom)) |> 
     set_active_record(xref)

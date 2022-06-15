@@ -19,6 +19,8 @@ add_note <- function(gedcom,
                                                    user_text = text,
                                                    user_reference_number = user_reference_numbers)
   
+  message("Added Note: ", xref)
+  
   gedcom |> 
     tibble::add_row(note_record, .before = nrow(gedcom)) |> 
     set_active_record(xref)

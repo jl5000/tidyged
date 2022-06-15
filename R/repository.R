@@ -29,6 +29,8 @@ add_repo <- function(gedcom,
                                                       user_reference_number = user_reference_numbers,
                                                       notes = repos_notes)
   
+  message("Added Repository: ", xref)
+  
   gedcom |> 
     tibble::add_row(repo_record, .before = nrow(gedcom)) |> 
     set_active_record(xref)

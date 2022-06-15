@@ -52,6 +52,7 @@ add_indi <- function(gedcom,
   if (length(qn) > 0) 
     temp <- add_indi_names(temp, name_pieces(given = qn))
   
+  message("Added Individual: ", xref)
   temp
 }
 

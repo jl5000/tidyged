@@ -70,6 +70,8 @@ add_sour <- function(gedcom,
                                                   notes = source_notes,
                                                   multimedia_links = media_links)
   
+  message("Added Source: ", xref)
+  
   gedcom |> 
     tibble::add_row(sour_record, .before = nrow(gedcom)) |> 
     set_active_record(xref)

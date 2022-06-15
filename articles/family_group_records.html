@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.3.9000</span>
       </span>
     </div>
 
@@ -97,10 +97,16 @@
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Lisa Simpson"</span>, sex <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Bart Simpson"</span>, sex <span class="op">=</span> <span class="st">"M"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_note.html">add_note</a></span><span class="op">(</span><span class="st">"These records have not yet been joined in a family group record"</span><span class="op">)</span>
+<span class="co">#&gt; Added Individual: @I1@</span>
+<span class="co">#&gt; Added Individual: @I2@</span>
+<span class="co">#&gt; Added Individual: @I3@</span>
+<span class="co">#&gt; Added Individual: @I4@</span>
+<span class="co">#&gt; Added Note: @N1@</span>
 
 <span class="va">simpson_famg</span> <span class="op">&lt;-</span> <span class="va">simpson_indis</span> |&gt; 
   <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span>husband <span class="op">=</span> <span class="st">"@I1@"</span>, wife <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">simpson_indis</span>, <span class="st">"Marge"</span><span class="op">)</span>, 
            children <span class="op">=</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name_all</a></span><span class="op">(</span><span class="va">simpson_indis</span>, <span class="st">"Bart|Lisa"</span><span class="op">)</span>, number_of_children <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="co">#&gt; Added Family Group: @F1@</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">simpson_famg</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@F1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -169,7 +175,7 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -289,7 +295,7 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -396,7 +402,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>

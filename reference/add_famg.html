@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.3.9000</span>
       </span>
     </div>
 
@@ -69,32 +69,49 @@
     <h2>Arguments</h2>
     <dl><dt>gedcom</dt>
 <dd><p>A tidyged object.</p></dd>
+
+
 <dt>husband</dt>
 <dd><p>An xref identifying the husband of this family.</p></dd>
+
+
 <dt>wife</dt>
 <dd><p>An xref identifying the wife of this family.</p></dd>
+
+
 <dt>children</dt>
 <dd><p>A character vector of xrefs identifying the children of this family. These are
 assumed to be biological children ("birth"). If non-biological children are to be defined, use
 a named vector to define the relationships using a name of either "adopted" or "foster".
 For example: children = c("@I4@", adopted = "@I7@", adopted = "@I10@") defines a single biological
 child and two adopted children.</p></dd>
+
+
 <dt>number_of_children</dt>
 <dd><p>The reported number of children known to belong to this family,
 regardless of whether the associated children are represented here.</p></dd>
+
+
 <dt>user_reference_numbers</dt>
 <dd><p>A unique user-defined number or text that the submitter
 uses to identify this record. You can supply more than one in a vector. You can also define a
 user reference type by using a named vector (e.g c(id1 = "123A", id2 = "456B")).</p></dd>
+
+
 <dt>family_notes</dt>
 <dd><p>A character vector of notes accompanying this Family group record. These could be
 xrefs to existing Note records.</p></dd>
+
+
 <dt>multimedia_links</dt>
 <dd><p>A character vector of Multimedia record xrefs accompanying this record.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An updated tidyged object including the Family group record.</p>
+    
+
+<p>An updated tidyged object including the Family group record.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -116,7 +133,7 @@ records of the wife, husband, and children.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

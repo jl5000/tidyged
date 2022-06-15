@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.3.9000</span>
       </span>
     </div>
 
@@ -71,9 +71,13 @@
     <h2>Arguments</h2>
     <dl><dt>gedcom</dt>
 <dd><p>A tidyged object.</p></dd>
+
+
 <dt>source</dt>
 <dd><p>A character string identifying the source. This can either
 be an xref or term(s) to match to a source title.</p></dd>
+
+
 <dt>where</dt>
 <dd><p>Specific location within the information referenced. For a published work, this could include
 the volume of a multi-volume work and the page number(s). For a newspaper, it could include a column
@@ -82,37 +86,54 @@ dwelling number, and family number.
 The data in this field should be in the form of a label and value pair, such as Label1: value,
 Label2: value, with each pair being separated by a comma. For example, Film: 1234567,
 Frame: 344, Line: 28.</p></dd>
+
+
 <dt>event</dt>
 <dd><p>A code that indicates the type of event which was responsible for the source entry being recorded.
 For example, if the entry was created to record a birth of a child, then the type would be BIRT regardless of
 the assertions made from that record, such as the mother's name or mother's birth date. This will allow a
 prioritised best view choice and a determination of the certainty associated with the source used in asserting
 the cited fact.</p></dd>
+
+
 <dt>role</dt>
 <dd><p>Indicates what role this person played in the event that is being cited in this context.</p></dd>
+
+
 <dt>entry_date</dt>
 <dd><p>A date_calendar(), date_period(), date_range(), or date_approximated()
 value giving the date that this data was entered into the original source document.</p></dd>
+
+
 <dt>source_text</dt>
 <dd><p>A verbatim copy of any description contained within the source.
 This indicates notes or text that are actually contained in the source document,
 not the submitter's opinion about the source.</p></dd>
+
+
 <dt>certainty</dt>
 <dd><p>An evaluation of the credibility of a piece of information, based upon
 its supporting evidence. Some systems use this feature to rank multiple conflicting opinions
 for display of most likely information first. It is not intended to eliminate the receiver's
 need to evaluate the evidence for themselves. Values allowed:
 "unreliable", "subjective", "secondary", "primary".</p></dd>
+
+
 <dt>notes</dt>
 <dd><p>A character vector of notes accompanying the citation. These could be xrefs to
 existing Note records.</p></dd>
+
+
 <dt>multimedia_links</dt>
 <dd><p>A character vector of Multimedia record xrefs accompanying this
 record.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A tibble describing a source citation.</p>
+    
+
+<p>A tibble describing a source citation.</p>
     </div>
 
   </div>
@@ -127,7 +148,7 @@ record.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

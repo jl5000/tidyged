@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.3.9000</span>
       </span>
     </div>
 
@@ -101,7 +101,8 @@
 <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span>qn <span class="op">=</span> <span class="st">"Leia Skywalker"</span><span class="op">)</span> |&gt; 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> |&gt; 
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; Added Individual: @I1@</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">level</th>
@@ -150,7 +151,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -162,6 +163,7 @@
 <code class="sourceCode R"><span class="va">leia</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Leia"</span>, surname <span class="op">=</span> <span class="st">"Skywalker"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"birth"</span><span class="op">)</span>
+<span class="co">#&gt; Added Individual: @I1@</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">leia</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span> <span class="op">)</span></code></pre></div>
 <table class="table">
@@ -226,7 +228,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -271,7 +273,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -377,7 +379,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -510,7 +512,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -670,7 +672,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -825,7 +827,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -847,6 +849,7 @@
                                        state <span class="op">=</span> <span class="st">"Florida"</span>,
                                        country <span class="op">=</span> <span class="st">"United States of America"</span><span class="op">)</span>,
                 notes <span class="op">=</span> <span class="st">"Co-habited with brother Henry"</span><span class="op">)</span>
+<span class="co">#&gt; Added Individual: @I1@</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -939,7 +942,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -954,6 +957,7 @@
                 age <span class="op">=</span> <span class="st">"68y"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_fact.html">add_indi_fact</a></span><span class="op">(</span><span class="st">"religion"</span>, descriptor <span class="op">=</span> <span class="st">"Christian"</span>, classification <span class="op">=</span> <span class="st">"Catholic"</span>,
                 date <span class="op">=</span> <span class="fu"><a href="../reference/date_period.html">date_period</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="fu"><a href="../reference/date_calendar.html">date_calendar</a></span><span class="op">(</span><span class="fl">1978</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Added Individual: @I1@</span>
 
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dea_rel</span>, <span class="va">record</span> <span class="op">==</span> <span class="st">"@I1@"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -1046,7 +1050,7 @@
 <td align="left">
 <span class="citation">@I1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -1139,14 +1143,17 @@
 <code class="sourceCode R"><span class="va">ged_with_joe</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gedcom.html">gedcom</a></span><span class="op">(</span><span class="fu"><a href="../reference/subm.html">subm</a></span><span class="op">(</span><span class="st">"Me"</span><span class="op">)</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"M"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Joe"</span>, surname <span class="op">=</span> <span class="st">"Bloggs"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Added Individual: @I1@</span>
 
 <span class="va">joe_xref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">ged_with_joe</span>, <span class="st">"Joe"</span><span class="op">)</span>
 
 <span class="va">ged_with_husb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_famg.html">add_famg</a></span><span class="op">(</span><span class="va">ged_with_joe</span>, husband <span class="op">=</span> <span class="va">joe_xref</span><span class="op">)</span>
+<span class="co">#&gt; Added Family Group: @F1@</span>
 
 <span class="va">ged_with_jess</span> <span class="op">&lt;-</span> <span class="va">ged_with_husb</span> |&gt;
   <span class="fu"><a href="../reference/add_indi.html">add_indi</a></span><span class="op">(</span><span class="st">"F"</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="../reference/add_indi_names.html">add_indi_names</a></span><span class="op">(</span><span class="fu"><a href="../reference/name_pieces.html">name_pieces</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Jess"</span>, surname <span class="op">=</span> <span class="st">"Bloggs"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Added Individual: @I2@</span>
 
 <span class="va">jess_xref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_indi_name</a></span><span class="op">(</span><span class="va">ged_with_jess</span>, <span class="st">"Jess"</span><span class="op">)</span>
   
@@ -1196,7 +1203,7 @@
 <td align="left">
 <span class="citation">@F1</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
@@ -1253,7 +1260,7 @@
 <td align="left">
 <span class="citation">@I2</span>@</td>
 <td align="left">DATE</td>
-<td align="left">2 MAY 2022</td>
+<td align="left">15 JUN 2022</td>
 </tr>
 </tbody>
 </table>
@@ -1282,7 +1289,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>

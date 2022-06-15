@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.3.9000</span>
       </span>
     </div>
 
@@ -99,7 +99,8 @@
            originator <span class="op">=</span> <span class="st">"General Register Office"</span>,
            title <span class="op">=</span> <span class="st">"Birth Certificate for Joe Bloggs (1956)"</span>,
            publication_detail <span class="op">=</span> <span class="st">"something"</span>,
-           source_text <span class="op">=</span> <span class="st">"This is what is written on the certificate"</span><span class="op">)</span></code></pre></div>
+           source_text <span class="op">=</span> <span class="st">"This is what is written on the certificate"</span><span class="op">)</span>
+<span class="co">#&gt; Added Source: @S1@</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="linking-back-to-repositories">Linking back to repositories<a class="anchor" aria-label="anchor" href="#linking-back-to-repositories"></a>
@@ -108,6 +109,7 @@
 <code class="sourceCode R"><span class="va">birth_repo</span> <span class="op">&lt;-</span> <span class="va">birth_source</span> |&gt; 
   <span class="fu"><a href="../reference/add_repo.html">add_repo</a></span><span class="op">(</span><span class="st">"General Register Office"</span>,
            repo_address <span class="op">=</span> <span class="fu"><a href="../reference/address.html">address</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Southport"</span>, state <span class="op">=</span> <span class="st">"Merseyside"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Added Repository: @R1@</span>
 
 <span class="va">sour_xref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_sour_titl</a></span><span class="op">(</span><span class="va">birth_repo</span>, <span class="st">"Birth Certificate for Joe Bloggs"</span><span class="op">)</span>
 <span class="va">repo_xref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_indi_refn.html">find_repo_name</a></span><span class="op">(</span><span class="va">birth_repo</span>, <span class="st">"General Register Office"</span><span class="op">)</span>
@@ -162,7 +164,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>

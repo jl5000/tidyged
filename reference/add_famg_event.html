@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.3.9000</span>
       </span>
     </div>
 
@@ -77,50 +77,83 @@
     <h2>Arguments</h2>
     <dl><dt>gedcom</dt>
 <dd><p>A tidyged object.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>A (case-insensitive) three-letter code giving the type of event. See Details.</p></dd>
+
+
 <dt>descriptor</dt>
 <dd><p>A short description of an 'other' event.</p></dd>
+
+
 <dt>classification</dt>
 <dd><p>A descriptive word or phrase used to further classify this
 event. This should be used whenever the 'other' event is used (but can also be used
 with others). Recommended values for non-marriage relationships can be found in Details.</p></dd>
+
+
 <dt>date</dt>
 <dd><p>A date_calendar(), date_approximated(), date_period(), or date_range()
 object giving the timing of the event..</p></dd>
+
+
 <dt>husband_age</dt>
 <dd><p>A character string that indicates the age in years, months, and days
 that the husband was at the time of the event. Any combination of these is permitted.
 Any labels must come after their corresponding number, for example; "4y 8m 10d".</p></dd>
+
+
 <dt>wife_age</dt>
 <dd><p>A character string that indicates the age in years, months, and days
 that the wife was at the time of the event. Any combination of these is permitted.
 Any labels must come after their corresponding number, for example; "4y 8m 10d".</p></dd>
+
+
 <dt>cause</dt>
 <dd><p>Used in special cases to record the reasons which precipitated an event.</p></dd>
+
+
 <dt>event_place</dt>
 <dd><p>A place() object giving the place associated with this event.</p></dd>
+
+
 <dt>event_address</dt>
 <dd><p>An address() object giving the address associated with this event.</p></dd>
+
+
 <dt>notes</dt>
 <dd><p>A character vector of notes accompanying the event. These could be xrefs to
 existing Note records.</p></dd>
+
+
 <dt>responsible_agency</dt>
 <dd><p>The organisation, institution, corporation, person, or other
 entity that has responsibility for the event.</p></dd>
+
+
 <dt>religious_affiliation</dt>
 <dd><p>A name of the religion with which this event was affiliated.</p></dd>
+
+
 <dt>multimedia_links</dt>
 <dd><p>A character vector of Multimedia record xrefs accompanying this
 record.</p></dd>
+
+
 <dt>xref</dt>
 <dd><p>The xref of a record to act on if one is not activated (will override active record).</p></dd>
+
+
 <dt>update_date_changed</dt>
 <dd><p>Whether to add/update the change date for the record.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An updated tidyged object with an expanded Family group record including
+    
+
+<p>An updated tidyged object with an expanded Family group record including
 this event.</p>
     </div>
     <div id="details">
@@ -147,7 +180,7 @@ Specification for more examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

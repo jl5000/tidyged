@@ -19,7 +19,7 @@ to this individual."><meta property="og:image" content="/logo.png"><!-- mathjax 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tidyged</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.3.9000</span>
       </span>
     </div>
 
@@ -76,38 +76,61 @@ to this individual.</p>
     <h2>Arguments</h2>
     <dl><dt>gedcom</dt>
 <dd><p>A tidyged object.</p></dd>
+
+
 <dt>parents</dt>
 <dd><p>A character vector of parent xrefs so that this person can be linked to a Family Group
 record as a child.</p></dd>
+
+
 <dt>child_linkage_type</dt>
 <dd><p>A code used to indicate the relationship with the parent(s). Either,
 "birth" (default), "foster", or "adopted".</p></dd>
+
+
 <dt>child_linkage_notes</dt>
 <dd><p>A character vector of notes accompanying the family linkage as a child.
 These could be xrefs to existing Note records.</p></dd>
+
+
 <dt>spouse</dt>
 <dd><p>The xref of the spouse so that this person can be linked to
 a Family Group record as a spouse.</p></dd>
+
+
 <dt>children</dt>
 <dd><p>A character vector of children xrefs so that this person can be linked to a Family Group
 record as a spouse.</p></dd>
+
+
 <dt>spouse_linkage_notes</dt>
 <dd><p>A character vector of notes accompanying the family linkage as a spouse
 These could be xrefs to existing Note records.</p></dd>
+
+
 <dt>xref</dt>
 <dd><p>The xref of a record to act on if one is not activated (will override active record).</p></dd>
+
+
 <dt>famg_xref_chil</dt>
 <dd><p>The xref of a Family Group record to be added to as a child. This is not required
 if any parents are given, but if it is provided, it will override any parents given.</p></dd>
+
+
 <dt>famg_xref_spou</dt>
 <dd><p>The xref of a Family Group record to be added to as a spouse. This is not required
 if the spouse or children are given, but if it is provided, it will override any spouses or children given.</p></dd>
+
+
 <dt>update_date_changed</dt>
 <dd><p>Whether to add/update the change date for the records.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An updated tidyged object with an expanded Individual record including
+    
+
+<p>An updated tidyged object with an expanded Individual record including
 the family link(s) and expanded Family Group record(s) linking to this individual.</p>
     </div>
     <div id="details">
@@ -128,7 +151,7 @@ to a Family Group record as a spouse.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

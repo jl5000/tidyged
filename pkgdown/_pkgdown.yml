@@ -43,6 +43,12 @@ reference:
   - add_note
   - remove_note
   - remove_records
+- title: "Automating record creation"
+- contents:
+  - add_spouse
+  - add_parents
+  - add_siblings
+  - add_children
 - title: "Adding data to and removing data from records"
 - contents: 
   - matches("^add_indi_")

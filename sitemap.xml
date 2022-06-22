@@ -64,6 +64,9 @@
     <loc>/reference/active_record.html</loc>
   </url>
   <url>
+    <loc>/reference/add_children.html</loc>
+  </url>
+  <url>
     <loc>/reference/add_famg.html</loc>
   </url>
   <url>
@@ -100,13 +103,22 @@
     <loc>/reference/add_note.html</loc>
   </url>
   <url>
+    <loc>/reference/add_parents.html</loc>
+  </url>
+  <url>
     <loc>/reference/add_repo.html</loc>
+  </url>
+  <url>
+    <loc>/reference/add_siblings.html</loc>
   </url>
   <url>
     <loc>/reference/add_sour.html</loc>
   </url>
   <url>
     <loc>/reference/add_sour_repo_citation.html</loc>
+  </url>
+  <url>
+    <loc>/reference/add_spouse.html</loc>
   </url>
   <url>
     <loc>/reference/address.html</loc>

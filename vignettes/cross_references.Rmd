@@ -104,6 +104,44 @@ simpsons |>
   knitr::kable()
 ```
 
+
+## Automating the creation of Individuals and Family Groups
+
+In all the examples you've seen so far the approach has been to build up the tree one record at a time. There are a number of helper functions that allow you to shortcut this laborious exercise. These functions can create multiple records at once, including Family Group records, where you can go back and add more detail. The functions are:
+
+* `add_parents()`
+* `add_siblings()`
+* `add_spouse()`
+* `add_children()`
+
+They all require the xref of an Individual record (or one to be activated), except for `add_children()`, which requires the xref of a Family Group record. These functions do not change the active record. 
+
+Because of this, you cannot use `add_children()` in a single pipeline with the other functions.
+
+The feedback from these functions gives you the necessary xrefs to then add more detail.
+
+To illustrate, we can build up two families starting with a spouse:
+
+```{r}
+from_spou <- gedcom(subm("Me")) |>
+  add_indi(sex = "M") |>
+  add_parents() |>
+  add_siblings(sexes = "MMFF") |>
+  add_spouse(sex = "F") 
+```
+
+The initial individual (@I1@) gets added as a child to a family (@F1@) with two parents (@I2@ and @I3@) and 4 siblings (@I4@ to @I7@). Finally, he is given a spouse (@I8@) in his own family (@F2@).
+
+Now we have the xref of his family, we can add his two daughters:
+
+```{r}
+with_chil <- from_spou |>
+  add_children(xref = "@F2@", sexes = "FF")
+```
+Now we have the records, we can use all of these xrefs to add details like names and facts.
+
+The `tidyged.utils` package contains the function `add_ancestors()` to create Individual and Family Group records for entire generations of ancestors.
+
 ## A note about unique record identifiers
 
 Record identifiers have been a topic of much discussion in the GEDCOM user community. Even though xref identifiers will be imported unchanged in the `tidyged` package, some systems do create their own xref identifiers on import. So you cannot assume they will survive between systems. However, they should always be internally consistent.

@@ -10,7 +10,7 @@ test_that("Function add_indi() @ L30", {
 })
 
 
-test_that("Function remove_indi() @ L80", {
+test_that("Function remove_indi() @ L83", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) |> add_indi() |> remove_indi())
 })

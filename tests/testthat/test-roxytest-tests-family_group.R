@@ -2,7 +2,7 @@
 
 # File R/family_group.R: @tests
 
-test_that("Function remove_famg() @ L126", {
+test_that("Function remove_famg() @ L128", {
   expect_equal(gedcom(subm()) |> 
                  add_indi() |> 
                  add_indi() |> 

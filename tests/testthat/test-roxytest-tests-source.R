@@ -2,7 +2,7 @@
 
 # File R/source.R: @tests
 
-test_that("Function add_sour_repo_citation() @ L101", {
+test_that("Function add_sour_repo_citation() @ L103", {
   expect_snapshot_value(
                    gedcom(subm("Me")) |> 
                    add_repo(name = "The library") |> 
@@ -12,7 +12,7 @@ test_that("Function add_sour_repo_citation() @ L101", {
 })
 
 
-test_that("Function remove_sour_repo_citation() @ L136", {
+test_that("Function remove_sour_repo_citation() @ L138", {
   expect_equal(gedcom(subm("Me")) |> 
                    add_repo(name = "The library") |> 
                    add_sour() |>
@@ -26,7 +26,7 @@ test_that("Function remove_sour_repo_citation() @ L136", {
 })
 
 
-test_that("Function remove_sour() @ L157", {
+test_that("Function remove_sour() @ L159", {
   expect_equal(gedcom(subm()),
                gedcom(subm()) |> add_sour(title = "text") |> remove_sour())
 })
